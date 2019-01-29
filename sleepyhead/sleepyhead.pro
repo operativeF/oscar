@@ -168,8 +168,8 @@ macx {
             system(xcopy /y $$quote($$FILE) $$quote($$HELPDIR))
         }
     } else {
-        system(md $$quote($$HELPDIR))
-        system(md $$quote($$DDIR))
+        system(mkdir -p $$quote($$HELPDIR))
+        system(mkdir -p $$quote($$DDIR))
 
         for(FILE,TRANS_FILES_WIN) {
             system(copy $$quote($$FILE) $$quote($$DDIR))
