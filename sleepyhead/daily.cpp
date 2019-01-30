@@ -58,6 +58,7 @@ void Daily::setSidebarVisible(bool visible)
 
 
     int panel_width = visible ? AppSetting->dailyPanelWidth() : 0;
+    qDebug() << "Daily Left Panel Width is " << panel_width;
     a.push_back(panel_width);
     a.push_back(this->width() - panel_width);
     ui->splitter_2->setStretchFactor(1,1);
@@ -428,7 +429,7 @@ Daily::~Daily()
     disconnect(GraphView, SIGNAL(GraphsChanged()), this, SLOT(updateGraphCombo()));
 
     disconnect(sessionbar, SIGNAL(sessionClicked(Session*)), this, SLOT(doToggleSession(Session*)));
-    disconnect(webView,SIGNAL(linkClicked(QUrl)),this,SLOT(Link_clicked(QUrl)));
+    disconnect(webView,SIGNAL(anchorClicked(QUrl)),this,SLOT(Link_clicked(QUrl)));
 
     if (previous_date.isValid())
         Unload(previous_date);
@@ -2417,5 +2418,6 @@ void Daily::on_splitter_2_splitterMoved(int, int)
 {
     int size = ui->splitter_2->sizes()[0];
     if (size == 0) return;
+    qDebug() << "Left Panel width set to " << size;
     AppSetting->setDailyPanelWidth(size);
 }

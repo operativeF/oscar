@@ -74,7 +74,7 @@ public:
       m_scrollDampening = initPref(STR_US_ScrollDampening, (int)50).toInt();
       m_tooltipTimeout = initPref(STR_US_TooltipTimeout, (int)2500).toInt();
       m_graphHeight=initPref(STR_AS_GraphHeight, 180).toInt();
-      initPref(STR_AS_DailyPanelWidth, 350.0);
+      initPref(STR_AS_DailyPanelWidth, 250.0);
       initPref(STR_AS_RightPanelWidth, 230.0);
       m_antiAliasing=initPref(STR_AS_AntiAliasing, true).toBool();
       initPref(STR_AS_GraphSnapshots, true);
