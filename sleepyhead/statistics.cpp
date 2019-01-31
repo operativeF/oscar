@@ -985,13 +985,14 @@ QString Statistics::GenerateHTML()
 
 
     if (!havedata) {
-        html += "<div align=center><table class=curved height=100% "+table_width+">";
-        html += QString("<tr><td colspan=2 align=center>") +
-                "<img src='qrc:/icons/bob-v3.0.png' height=100px>"
-                "<p><font size=+3>" + tr("I can haz data?!?") + "</font></p>"+
-                "<p><i>"+tr("This lonely sleepy sheep has no data :(")+"</i></p>"
+//        html += "<div align=center><table class=curved height=100% "+table_width+">";
+        html += "<div align=center>";
+//        html += QString("<tr><td align=center>") +
+        html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
+                "<p><img src='qrc:/icons/bob-v3.0.png' width=\"100\" height=\"100\"></p>"
+                "<p><i>"+tr("This lonely sleepy sheep has no data :(")+"</i></p>");
 
-        "</table></div>";
+//        "</table></div>";
         html += htmlFooter(havedata);
         return html;
     }
