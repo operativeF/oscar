@@ -162,11 +162,13 @@ bool MD300W1Loader::readDATFile(const QString & path)
     
     if (!file.exists()) {
         qDebug() << "File does not exist: " << path;
+        QMessageBox::warning(nullptr, STR_MessageBox_Error, "<h2>"+tr("Could not find the oximeter file:")+"<br/><br/>"+path+"</h2>");
         return false;
     }
 
     if (!file.open(QFile::ReadOnly)) {
         qDebug() << "Can't open file R/O: " << path;
+        QMessageBox::warning(nullptr, STR_MessageBox_Error, "<h2>"+tr("Could not open the oximeter file:")+"<br/><br/>"+path+"</h2>");
         return false;
     }
 

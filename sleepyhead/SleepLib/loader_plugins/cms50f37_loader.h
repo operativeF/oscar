@@ -56,6 +56,7 @@ Q_OBJECT
     virtual QDateTime getDateTime(int session);
     virtual int getDuration(int session);
     virtual int getSessionCount();
+    virtual int getUserCount();
     virtual int getOximeterInfo();
     virtual void eraseSession(int user, int session);
 
@@ -119,6 +120,7 @@ protected:
     bool started_import;
     bool finished_import;
     bool started_reading;
+    bool cms50dplus;
 
     int cb_reset,imp_callbacks;
 
@@ -136,6 +138,9 @@ protected:
 
     volatile int session_count;
     volatile int duration;
+    volatile int userCount;
+    volatile int userIdx;
+    volatile int protocolVersion;
     int device_info;
     QString model;
     QString vendor;

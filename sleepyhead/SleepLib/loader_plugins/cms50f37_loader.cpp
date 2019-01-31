@@ -40,6 +40,7 @@ CMS50F37Loader::CMS50F37Loader()
     m_streaming = false;
     m_importing = false;
     started_reading = false;
+    cms50dplus = false;
 
     imp_callbacks = 0;
 
@@ -166,18 +167,20 @@ unsigned char cms50_sequence[] = { 0xa7, 0xa2, 0xa0, 0xb0, 0xac, 0xb3, 0xad, 0xa
 const int TIMEOUT = 2000;
 
 
-const quint8 COMMAND_CMS50_HELLO1 = 0xa7;
-const quint8 COMMAND_CMS50_HELLO2 = 0xa2;
+const quint8 COMMAND_GET_VERSION = 0xa0;  // not entirely sure of this one
+const quint8 COMMAND_CMS50_HELLO2 = 0xa2; // stop live data stream
 const quint8 COMMAND_GET_SESSION_COUNT = 0xA3;
-const quint8 COMMAND_GET_SESSION_TIME = 0xA5;
 const quint8 COMMAND_GET_SESSION_DURATION = 0xA4;
-const quint8 COMMAND_GET_USER_INFO = 0xAB;
+const quint8 COMMAND_GET_SESSION_TIME = 0xA5;
 const quint8 COMMAND_GET_SESSION_DATA = 0xA6;
-const quint8 COMMAND_GET_OXIMETER_DEVICEID = 0xAA;
-const quint8 COMMAND_GET_OXIMETER_INFO = 0xb0;
+const quint8 COMMAND_CMS50_HELLO1 = 0xa7; // stop stored data stream
 const quint8 COMMAND_GET_OXIMETER_MODEL = 0xA8;
 const quint8 COMMAND_GET_OXIMETER_VENDOR = 0xA9;
+const quint8 COMMAND_GET_OXIMETER_DEVICEID = 0xAA;
+const quint8 COMMAND_GET_USER_INFO = 0xAB;
+const quint8 COMMAND_GET_USER_COUNT = 0xAD; // for future check and use
 const quint8 COMMAND_SESSION_ERASE = 0xAE;
+const quint8 COMMAND_GET_OXIMETER_INFO = 0xb0;
 
 
 int cms50_seqlength = sizeof(cms50_sequence);
@@ -195,7 +198,7 @@ QString CMS50F37Loader::getUser()
         QApplication::processEvents();
     } while (user.isEmpty() && (time.elapsed() < TIMEOUT));
     
-	qDebug() << "User = " << user;
+    qDebug() << "User 0 is " << user;
     return user;
 }
 
@@ -244,7 +247,9 @@ QString CMS50F37Loader::getModel()
 
 QString CMS50F37Loader::getDeviceString()
 {
-    return QString("%1 %2").arg(getVendor()).arg(getModel());
+     QString VendDev = QString("%1 %2").arg(getVendor()).arg(getModel());
+     qDebug() << "USB Device String is " << VendDev;
+     return VendDev;
 }
 
 QString CMS50F37Loader::getDeviceID()
@@ -263,6 +268,21 @@ QString CMS50F37Loader::getDeviceID()
     return devid;
 }
 
+int CMS50F37Loader::getUserCount()  // for future use, check, then add select user if > 1
+{
+    userCount = -1;
+    sendCommand(COMMAND_GET_USER_COUNT);
+
+    QTime time;
+    time.start();
+    do {
+        QApplication::processEvents();
+    } while ((userCount < 0) && (time.elapsed() < TIMEOUT));
+
+    qDebug() << "User count is " << userCount;
+    return userCount;
+}
+
 int CMS50F37Loader::getSessionCount()
 {
     session_count = -1;
@@ -274,7 +294,7 @@ int CMS50F37Loader::getSessionCount()
         QApplication::processEvents();
     } while ((session_count < 0) && (time.elapsed() < TIMEOUT));
 
-	qDebug() << "Session count is " << session_count;
+    qDebug() << "Session count is " << session_count;
     return session_count;
 }
 
@@ -322,12 +342,16 @@ QDateTime CMS50F37Loader::getDateTime(int session)
         QApplication::processEvents();
     } while ((imp_date.isNull() || imp_time.isNull()) && (time.elapsed() < TIMEOUT));
 
-    if (imp_date.isNull() || imp_time.isNull())
-        datetime = QDateTime();
+    if (imp_date.isNull() && imp_time.isNull())
+        datetime = QDateTime(QDate::currentDate(), QTime(0,0,0));
+    else if ( imp_date.isNull() )
+        datetime = QDateTime(QDate::currentDate(), imp_time);
+    else if ( imp_time.isNull() )
+        datetime = QDateTime(imp_date, QTime(0,0,0));
     else
     	datetime = QDateTime(imp_date, imp_time);
 
-	qDebug() << "Oximeter DateTime is " << datetime.toString("yyyy-MMM-dd HH:mm:ss");
+    qDebug() << "Oximeter DateTime is " << datetime.toString("yyyy-MMM-dd HH:mm:ssap");
     return datetime;
 }
 
@@ -378,13 +402,15 @@ void CMS50F37Loader::processBytes(QByteArray bytes)
             }
             continue;
         }
-        for (int i = 1; i < len; i++) {
-            buffer[idx+i] = buffer[idx+i] ^ 0x80;
+
+        // always copy the high bits into the following bytes
+        for (int i = 2, msb = buffer.at(idx+1); i < len; i++, msb>>= 1) {
+            buffer[idx+i] = (buffer[idx+i] & 0x7f) | (msb & 0x01 ? 0x80 : 0);
         }
 
         if (!started_reading) switch(res) {
         case 0x02: // Model name string (there are two in sequnce.. second might be the next chunk!)
-            data = buffer.at(idx+1);
+            data = buffer.at(idx+2);
             if (data == 0) {
                 model = QString(buffer.mid(idx+3, 6));
                 modelsegments++;
@@ -396,59 +422,55 @@ void CMS50F37Loader::processBytes(QByteArray bytes)
             }
             break;
         case 0x03: // Vendor string
-            data = buffer.at(idx+1);
-            if (data == 0) {
-                vendor = QString(buffer.mid(idx+2, 6));
-                qDebug() << "pB: Vendor:" << vendor;
-            }
+            vendor = QString(buffer.mid(idx+2, 7));
+            qDebug() << "pB: Vendor:" << vendor;
             break;
 
         case 0x04: // Device Identifiers
-            for (int i = 2, msb = buffer.at(idx+1); i < len; i++, msb>>= 1) {
-                buffer[idx+i] = (buffer[idx+i] & 0x7f) | (msb & 0x01 ? 0x80 : 0);
-            }
-
             devid = QString(buffer.mid(idx+2, 7));
             qDebug() << "pB: Device ID:" << devid;
             break;
 
             // COMMAND_GET_USER_INFO
         case 0x05: // 5,80,80,f5,f3,e5,f2,80,80
-            // User
+            userIdx = buffer.at(idx+2);  // for future use
             user = QString(buffer.mid(idx+3).trimmed());
             qDebug() << "pB: 0x05:" << user;
-
             break;
+
+            // Command GET_VERSION
         case 0x6: // 6,80,80,87
-           // data = buffer.at(idx+3) ^ 0x80;
+            protocolVersion = buffer.at(idx+3) | (buffer.at(idx+2)<<8);
             break;
 
-            // COMMAND_GET_SESSION_TIME
+            // COMMAND_GET_SESSION_TIME --- the date part
         case 0x07: // 7,80,80,80,94,8e,88,92
-
-            for (int i = 2, msb = buffer.at(idx+1); i < len; i++, msb>>= 1) {
-                buffer[idx+i] = (buffer[idx+i] & 0x7f) | (msb & 0x01 ? 0x80 : 0);
-            }
 
             year = QString().sprintf("%02i%02i",buffer.at(idx+4), buffer.at(idx+5)).toInt();
             month = QString().sprintf("%02i", buffer.at(idx+6)).toInt();
             day = QString().sprintf("%02i", buffer.at(idx+7)).toInt();
 
-            imp_date = QDate(year,month,day);
+            if ( year == 0 ) {
+                imp_date = QDate::currentDate();
+                cms50dplus = true;
+            }
+            else
+                imp_date = QDate(year,month,day);
             qDebug() << "pB: ymd " << year << month << day << " impDate " << imp_date;
             break;
 
             // COMMAND_GET_SESSION_DURATION
         case 0x08: // 8,80,80,80,a4,81,80,80  // 00, 00, 24, 01, 00, 00
 
-            duration = ((buffer.at(idx+1) & 0x4) << 5);
-            duration |= buffer.at(idx+4);
-            duration |= (buffer.at(idx+5) | ((buffer.at(idx+1) & 0x8) << 4)) << 8;
-            duration |= (buffer.at(idx+6) | ((buffer.at(idx+1) & 0x10) << 3)) << 16;
+            duration = buffer.at(idx+4);
+            duration |= (buffer.at(idx+5) << 8);
+            duration |= (buffer.at(idx+6) << 16);
+            duration |= (buffer.at(idx+7) << 24);
             break;
 
             // COMMAND_GET_SESSION_COUNT
         case 0x0a: // a,80,80,81
+            userIdx = buffer.at(idx+2);
             session_count = buffer.at(idx+3);
             break;
 
@@ -460,10 +482,15 @@ void CMS50F37Loader::processBytes(QByteArray bytes)
         case 0xc: // a7 & a2  // responds with: c,80
             //data = buffer.at(idx+1);
             break;
+
+            // Query Perfusion Index available (0 is yes, 1 is no)
         case 0x0e: // e,80,81
-            break;
-        case 0x10: // 10,80,81
             //data = buffer.at(idx+2);
+            break;
+
+            // Get User Count
+        case 0x10: // 10,80,81
+            userCount = buffer.at(idx+2);
             break;
 
             // COMMAND_GET_OXIMETER_INFO
@@ -518,25 +545,14 @@ void CMS50F37Loader::processBytes(QByteArray bytes)
         if (res == 0x09) {
             // 9,80,e1,c4,ce,82  // cms50i data
 
-            quint8 * buf = &((quint8 *)buffer.data())[idx];
-
-            quint8 msb = buf[1];
-            for (int i = 2; i < len-1; i++, msb >>= 1) {
-                buf[i] = (buf[i] & 0x7f) | ((msb & 0x01) ? 0x80 : 0);
-            }
-
-            pi = buf[4] | buf[5] << 8;
-            pulse = buf[3];
-            spo2 = buf[2] & 0x7f;
+            pi = buffer.at(idx+4) | (buffer.at(idx+5) << 8);
+            pulse = buffer.at(idx+3);
+            spo2 = buffer.at(idx+2);
             qDebug() << "pB: Pulse=" << pulse << "SPO2=" << spo2 << "PI=" << pi;
 
             oxirec->append(((spo2 == 0) || (pulse == 0)) ? OxiRecord(0,0,0) : OxiRecord(pulse, spo2, pi));
         } else if (res == 0x0f) {
             // f,80,de,c2,de,c2,de,c2  cms50F data...
-
-            for (int i = 2, msb = buffer.at(idx+1); i < len; i++, msb>>= 1) {
-                buffer[idx+i] = (buffer[idx+i] & 0x7f) | (msb & 0x01 ? 0x80 : 0);
-            }
 
             pulse = buffer.at(idx+3);
             spo2 = buffer.at(idx+2);
@@ -653,10 +669,10 @@ void CMS50F37Loader::eraseSession(int user, int session)
     QString out;
     for (int i=0; i < 9; ++i) 
     	out += QString().sprintf("%02X ",cmd[i]);
-    qDebug() << "Write:" << out;
+    qDebug() << "Erase Session: Write:" << out;
 
     if (serial.write((char *)cmd, 9) == -1) {
-        qDebug() << "Couldn't write data bytes to CMS50F";
+        qDebug() << "Couldn't write Erase session bytes to CMS50F";
     }
 
     int z = timectr;
@@ -691,10 +707,10 @@ void CMS50F37Loader::setDeviceID(const QString & newid)
     QString out;
     for (int i=0; i < 9; ++i) 
     	out += QString().sprintf("%02X ",cmd[i]);
-    qDebug() << "Write:" << out;
+    qDebug() << "setDeviceID: Write:" << out;
 
     if (serial.write((char *)cmd, 9) == -1) {
-        qDebug() << "Couldn't write data bytes to CMS50F";
+        qDebug() << "Couldn't write DeviceID data bytes to CMS50F";
     }
 
     // Supposed to return 0x04 command, so reset devid..
@@ -721,7 +737,7 @@ void CMS50F37Loader::syncClock()
 
     timectr = 0;
     if (serial.write((char *)datecmd, 9) == -1) {
-        qDebug() << "Couldn't write data bytes to CMS50F";
+        qDebug() << "Couldn't write date bytes to CMS50F";
     }
 
     QTime time;
@@ -743,7 +759,7 @@ void CMS50F37Loader::syncClock()
 
     timectr = 0;
     if (serial.write((char *)timecmd, 9) == -1) {
-        qDebug() << "Couldn't write data bytes to CMS50F";
+        qDebug() << "Couldn't write time bytes to CMS50F";
     }
 
     time.start();
@@ -854,11 +870,13 @@ bool CMS50F37Loader::readSpoRFile(const QString & path)
     QFile file(path);
     if (!file.exists()) {
     	qWarning() << "Can't find the oximeter file: " << path;
+        QMessageBox::warning(nullptr, STR_MessageBox_Error, "<h2>"+tr("Could not find the oximeter file:")+"<br/><br/>"+path+"</h2>");
         return false;
     }
 
     if (!file.open(QFile::ReadOnly)) {
     	qWarning() << "Can't open the oximeter file: " << path;
+        QMessageBox::warning(nullptr, STR_MessageBox_Error, "<h2>"+tr("Could not open the oximeter file:")+"<br/><br/>"+path+"</h2>");
         return false;
     }
 
@@ -902,9 +920,10 @@ bool CMS50F37Loader::readSpoRFile(const QString & path)
             m_startTime = QDateTime::fromString(dstr, "MM/dd/yy HH:mm:ss");
             if (m_startTime.date().year() < 2000) { m_startTime = m_startTime.addYears(100); }
         } else {  // this should probaly find the most recent SH data day
-            m_startTime = QDateTime(QDate::currentDate(), QTime(0,0,0));
+            m_startTime = QDateTime(QDate::currentDate(), QTime(0,0,0));  // make it today at midnight
+            cms50dplus = true;
         }
-    } else { // !spo2header
+    } else { // it is an spo2header
 
         quint32 samples = 0; // number of samples
 
@@ -921,7 +940,12 @@ bool CMS50F37Loader::readSpoRFile(const QString & path)
         in >> year >> month >> day;
         in >> hour >> minute >> second;
 
-        m_startTime = QDateTime(QDate(year, month, day), QTime(hour, minute, second));
+        if ( year+month+day == 0 ) {
+            m_startTime = QDateTime(QDate::currentDate(), QTime(0,0,0));
+            cms50dplus = true;
+        }
+        else
+            m_startTime = QDateTime(QDate(year, month, day), QTime(hour, minute, second));
 
         // ignoring it for now
         pos += 0x1c + 200;
