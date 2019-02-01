@@ -137,12 +137,12 @@ for(file, TRANSLATIONS) {
 }
 
 #copy the Translation and Help files to where the test binary wants them
+message("Setting up Translations & Help Transfers")
 macx {
     HelpFiles.files = $$files($$PWD/help/*.qch)
     HelpFiles.path = Contents/Resources/Help
     QMAKE_BUNDLE_DATA += TransFiles
     QMAKE_BUNDLE_DATA += HelpFiles
-    message("Setting up Translations & Help Transfers")
 } else {
     DDIR = $$OUT_PWD/Translations
     HELPDIR = $$OUT_PWD/Help
@@ -171,11 +171,11 @@ macx {
         system(mkdir -p $$quote($$HELPDIR))
         system(mkdir -p $$quote($$DDIR))
 
-        for(FILE,TRANS_FILES_WIN) {
-            system(copy $$quote($$FILE) $$quote($$DDIR))
+        for(FILE,TRANS_FILES) {
+            system(cp $$quote($$FILE) $$quote($$DDIR))
         }
-        for(FILE,HELP_FILES_WIN) {
-            system(copy $$quote($$FILE) $$quote($$HELPDIR))
+        for(FILE,HELP_FILES) {
+            system(cp $$quote($$FILE) $$quote($$HELPDIR))
         }
     }
 }
