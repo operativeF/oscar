@@ -121,7 +121,7 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     GraphView->resetLayout();
     GraphView->LoadSettings("Overview"); //no trans
 
-    GraphView->setEmptyImage(QPixmap(":/docs/sheep.png"));
+    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
 
     connect(GraphView, SIGNAL(updateCurrentTime(double)), this, SLOT(on_LineCursorUpdate(double)));
     connect(GraphView, SIGNAL(updateRange(double,double)), this, SLOT(on_RangeUpdate(double,double)));

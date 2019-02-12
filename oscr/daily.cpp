@@ -419,7 +419,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     connect(GraphView, SIGNAL(updateRange(double,double)), this, SLOT(on_RangeUpdate(double,double)));
     connect(GraphView, SIGNAL(GraphsChanged()), this, SLOT(updateGraphCombo()));
 
-    GraphView->setEmptyImage(QPixmap(":/docs/sheep.png"));
+    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
 }
 
 Daily::~Daily()
@@ -1363,7 +1363,7 @@ void Daily::Load(QDate date)
     }
 
     if (!cpap) {
-        GraphView->setEmptyImage(QPixmap(":/docs/sheep.png"));
+        GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
     }
     if (cpap) {
         float hours=day->hours(MT_CPAP);
@@ -1374,7 +1374,7 @@ void Daily::Load(QDate date)
                 GraphView->setEmptyImage(QPixmap(":/icons/sadface.png"));
                 isBrick=true;
             } else {
-                GraphView->setEmptyImage(QPixmap(":/docs/sheep.png"));
+                GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
             }
         }
 
@@ -1480,7 +1480,7 @@ void Daily::Load(QDate date)
                 html+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
                 if (day->size()>0) {
                     html+="<tr><td colspan=5 align='center'><font size='+3'>"+tr("Sessions all off!")+"</font></td></tr>";
-                    html+="<tr><td colspan=5 align='center><img src='qrc:/docs/sheep.png'></td></tr>";
+                    html+="<tr><td colspan=5 align='center><img src='qrc:/icons/logo.png'></td></tr>";
                     html+="<tr bgcolor='#89abcd'><td colspan=5 align='center'><i><font color=white size=+1>"+tr("Sessions exist for this day but are switched off.")+"</font></i></td></tr>\n";
                     GraphView->setEmptyText(STR_Empty_NoSessions);
                 } else {
@@ -1509,7 +1509,7 @@ void Daily::Load(QDate date)
             html+="<table cellspacing=0 cellpadding=0 border=0 height=100% width=100%>";
             html+="<tr height=25%><td align=center></td></tr>";
             html+="<tr><td align=center><font size='+3'>"+tr("\"Nothing's here!\"")+"</font></td></tr>";
-            html+="<tr><td align=center><img src='qrc:/docs/sheep.png'></td></tr>";
+            html+="<tr><td align=center><img src='qrc:/icons/logo.png'></td></tr>";
             html+="<tr height=5px><td align=center></td></tr>";
             html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("Bob is bored with this days lack of data.")+"</font></i></td></tr>";
             html+="<tr height=25%><td align=center></td></tr>";

@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Nifty Notification popups in System Tray (uses Growl on Mac)
     if (QSystemTrayIcon::isSystemTrayAvailable() && QSystemTrayIcon::supportsMessages()) {
-        systray = new QSystemTrayIcon(QIcon(":/icons/bob-v3.0.png"), this);
+        systray = new QSystemTrayIcon(QIcon(":/icons/logo.png"), this);
         systray->show();
         systraymenu = new QMenu(this);
         systray->setContextMenu(systraymenu);
@@ -217,9 +217,10 @@ void MainWindow::SetupGUI()
 
     QTimer::singleShot(50, this, SLOT(Startup()));
 
+#ifndef helpless
     help = new Help(this);
-
     ui->tabWidget->addTab(help, tr("Help Browser"));
+#endif
 }
 
 void MainWindow::logMessage(QString msg)
@@ -447,9 +448,9 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     p_profile->LoadMachineData(progress);
     progress->setMessage(tr("Loading profile \"%1\"").arg(profileName));
 
-    // Show the sheep?
-//    QPixmap sheep=QPixmap(":/docs/sheep.png").scaled(64,64);
-//    progress->setPixmap(sheep);
+    // Show the logo?
+//    QPixmap logo=QPixmap(":/icons/logo.png").scaled(64,64);
+//    progress->setPixmap(logo);
 
     QApplication::processEvents();
 
@@ -1075,7 +1076,7 @@ QString MainWindow::getWelcomeHTML()
            tr("<a href='http://www.cpaptalk.com'>CPAPTalk Forum</a>,") +
            tr("<a href='http://www.apneaboard.com/forums/'>Apnea Board</a>") + "</p>"
            "</td>"
-           "<td><image src='qrc:/icons/bob-v3.0.png' width=220 height=220><br/>"
+           "<td><image src='qrc:/icons/logo.png' width=220 height=220><br/>"
            "</td>"
            "</tr>"
            "<tr>"
@@ -1394,8 +1395,10 @@ void MainWindow::on_actionPrint_Report_triggered()
                 b.render(&painter, QPoint(0,0));
                 painter.end();
 
+#ifndef helpless
             } else if (ui->tabWidget->currentWidget() == help) {
                 help->print(&printer);
+#endif
             }
 
         }
@@ -1980,7 +1983,13 @@ void MainWindow::on_action_Sidebar_Toggle_toggled(bool visible)
 
 void MainWindow::on_helpButton_clicked()
 {
+#ifndef helpless
     ui->tabWidget->setCurrentWidget(help);
+#else
+QMessageBox msgBox;
+    msgBox.setText("No help is available.");
+    msgBox.exec();
+#endif
 }
 
 void MainWindow::on_actionView_Statistics_triggered()
@@ -2056,7 +2065,7 @@ void MainWindow::doRecompressEvents()
     ProgressDialog progress(this);
     progress.setMessage("Recompressing Session Files");
     progress.setProgressMax(p_profile->daylist.size());
-    QPixmap icon = QPixmap(":/docs/sheep.png").scaled(64,64);
+    QPixmap icon = QPixmap(":/icons/logo.png").scaled(64,64);
     progress.setPixmap(icon);
     progress.open();
 
@@ -2087,7 +2096,7 @@ void MainWindow::doReprocessEvents()
     ProgressDialog progress(this);
     progress.setMessage("Recalculating summaries");
     progress.setProgressMax(p_profile->daylist.size());
-    QPixmap icon = QPixmap(":/docs/sheep.png").scaled(64,64);
+    QPixmap icon = QPixmap(":/icons/logo.png").scaled(64,64);
     progress.setPixmap(icon);
     progress.open();
 

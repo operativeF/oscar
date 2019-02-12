@@ -200,7 +200,7 @@ p, li { white-space: pre-wrap; }
         <string notr="true"/>
        </property>
        <property name="pixmap">
-        <pixmap resource="Resources.qrc">:/icons/bob-v3.0.png</pixmap>
+        <pixmap resource="Resources.qrc">:/icons/logo.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>

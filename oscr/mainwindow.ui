@@ -442,7 +442,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
-    <normaloff>:/icons/bob-v3.0.png</normaloff>:/icons/bob-v3.0.png</iconset>
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -1314,7 +1314,7 @@ QToolBox::tab:selected  {
         </property>
         <attribute name="icon">
          <iconset resource="Resources.qrc">
-          <normaloff>:/icons/bob-v3.0.png</normaloff>:/icons/bob-v3.0.png</iconset>
+          <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
         </attribute>
         <attribute name="label">
          <string>Navigation</string>

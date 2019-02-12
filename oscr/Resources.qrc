@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
+        <file>docs/0.0.gif</file>
+        <file>docs/GPLv3-en_US</file>
+        <file>docs/script.js</file>
+        <file>docs/tooltips.css</file>
+        <file>docs/countries.txt</file>
+        <file>docs/tz.txt</file>
+        <file>docs/release_notes.html</file>
+        <file>docs/schema.xml</file>
+        <file>docs/channels.xml</file>
+        <file>fonts/FreeSans.ttf</file>
         <file>icons/sdcard.png</file>
         <file>icons/preferences.png</file>
         <file>icons/overview.png</file>
@@ -8,17 +18,10 @@
         <file>icons/forward.png</file>
         <file>icons/edit-find.png</file>
         <file>icons/back.png</file>
-        <file>fonts/FreeSans.ttf</file>
         <file>icons/refresh.png</file>
         <file>icons/oximeter.png</file>
-        <file>docs/0.0.gif</file>
-        <file>docs/schema.xml</file>
-        <file>docs/channels.xml</file>
         <file>icons/last.png</file>
-        <file>docs/release_notes.html</file>
         <file>icons/save.png</file>
-        <file>docs/countries.txt</file>
-        <file>docs/tz.txt</file>
         <file>icons/arrow-end.png</file>
         <file>icons/arrow-left.png</file>
         <file>icons/arrow-right.png</file>
@@ -29,13 +32,9 @@
         <file>icons/trophy.png</file>
         <file>icons/bookmark.png</file>
         <file>icons/help.png</file>
-        <file>docs/tooltips.css</file>
         <file>icons/session-off.png</file>
         <file>icons/session-on.png</file>
-        <file>icons/bob-v3.0.png</file>
-        <file>docs/script.js</file>
-        <file>docs/sheep.png</file>
-        <file>icons/Jedimark.png</file>
+        <file>icons/logo.png</file>
         <file>icons/sdcard-lock.png</file>
         <file>icons/statistics.png</file>
         <file>icons/prs1.png</file>
@@ -52,7 +51,6 @@
         <file>icons/daily.png</file>
         <file>icons/dv64.png</file>
         <file>icons/overview-page.png</file>
-        <file>docs/GPLv3-en_US</file>
         <file>icons/fp_icon.png</file>
         <file>translations/Afrikaans.af.qm</file>
         <file>translations/Arabic.ar.qm</file>

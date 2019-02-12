@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>:/images/sheep.png</normaloff>:/images/sheep.png</iconset>
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -75,7 +75,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="Resources.qrc">:/docs/sheep.png</pixmap>
+             <pixmap resource="Resources.qrc">:/icons/logo.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>

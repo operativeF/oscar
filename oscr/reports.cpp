@@ -96,7 +96,7 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
 
     ProgressDialog progress(mainwin);
     progress.setMessage(QObject::tr("Printing %1 Report").arg(name));
-    QPixmap icon = QPixmap(":/docs/sheep.png").scaled(64,64);
+    QPixmap icon = QPixmap(":/icons/logo.png").scaled(64,64);
     progress.setPixmap(icon);
     progress.open();
 

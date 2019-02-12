@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
-    <normaloff>:/icons/bob-v3.0.png</normaloff>:/icons/bob-v3.0.png</iconset>
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="leftMargin">
@@ -850,7 +850,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="Resources.qrc">:/docs/sheep.png</pixmap>
+          <pixmap resource="Resources.qrc">:/icons/logo.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

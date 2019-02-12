@@ -97,7 +97,7 @@ bool InitGraphGlobals()
     images["smiley"] = new QImage(":/icons/smileyface.png");
     //images["sad"] = new QImage(":/icons/sadface.png");
 
-    images["sheep"] = new QImage(":/icons/sheep.png");
+    images["logo"] = new QImage(":/icons/logo.png");
     images["brick"] = new QImage(":/icons/brick.png");
     images["nographs"] = new QImage(":/icons/nographs.png");
     images["nodata"] = new QImage(":/icons/nodata.png");

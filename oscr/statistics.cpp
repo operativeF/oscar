@@ -633,13 +633,13 @@ QString Statistics::htmlHeader(bool showheader)
     "</head>"
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
 
-    QPixmap bobPixmap(":/icons/bob-v3.0.png");
+    QPixmap logoPixmap(":/icons/logo.png");
     if (showheader) {
         html += "<div align=center>"
-        +resizeHTMLPixmap(bobPixmap,64,64)+"<br/>"
+        +resizeHTMLPixmap(logoPixmap,64,64)+"<br/>"
         "<font size='+3'>" + STR_TR_SleepyHead + "</font><br/>"
         "<font size='+2'>" + tr("Usage Statistics") + "</font><br/>"
-        "<font size='+1' title=\""+tr("This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, SleepyHead is unsuitable as a compliance/medical reporting tool.")+"\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
+        "<font size='+1' title=\""+tr("This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCR is unsuitable as a compliance/medical reporting tool.")+"\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
 
         if (!userinfo.isEmpty()) html += "<br/>"+userinfo+"<br/>";
         html += "</div><br/>";
@@ -989,8 +989,8 @@ QString Statistics::GenerateHTML()
         html += "<div align=center>";
 //        html += QString("<tr><td align=center>") +
         html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
-                "<p><img src='qrc:/icons/bob-v3.0.png' width=\"100\" height=\"100\"></p>"
-                "<p><i>"+tr("This lonely sleepy sheep has no data :(")+"</i></p>");
+                "<p><img src='qrc:/icons/logo.png' width=\"100\" height=\"100\"></p>"
+                "<p><i>"+tr("This lonely sleepy thing has no data :(")+"</i></p>");
 
 //        "</table></div>";
         html += htmlFooter(havedata);

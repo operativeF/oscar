@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
-    <normaloff>:/icons/bob-v3.0.png</normaloff>:/icons/bob-v3.0.png</iconset>
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {

@@ -97,7 +97,7 @@ Help::Help(QWidget *parent) :
 
 
     if (!helpLoaded) {
-        QString html = "<html><body><div align=\"center\" valign=\"center\"><img src=\"qrc://docs/sheep.png\"><br/><h2>"+tr("No documentation available")+"</h2></div></body></html>";
+        QString html = "<html><body><div align=\"center\" valign=\"center\"><img src=\"qrc://icons/logo.png\"><br/><h2>"+tr("No documentation available")+"</h2></div></body></html>";
         helpBrowser->setHtml(html);
         return;
     } else {
