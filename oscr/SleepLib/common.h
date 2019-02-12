@@ -164,9 +164,9 @@ const QString STR_MACH_ZEO = "Zeo";
 
 const QString STR_PREF_Language = "Language";
 
-const QString STR_AppName = "SleepyHead";
-const QString STR_DeveloperName = "Jedimark";
-const QString STR_AppRoot = "SleepyHeadData";
+const QString STR_AppName = "OSCR";
+const QString STR_DeveloperName = "NightOwl";
+const QString STR_AppRoot = "OSCR_Data";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Commonly used translatable text strings

@@ -119,7 +119,7 @@ void UpdaterWindow::checkForUpdates()
         }
     }
 
-    mainwin->Notify(tr("Checking for SleepyHead Updates"));
+    mainwin->Notify(tr("Checking for OSCR Updates"));
 
 #ifdef Q_OS_WIN
     update_url = QUrl(QString("http://sleepyhead.jedimark.net/packages/%1/Updates.xml").arg(platform));

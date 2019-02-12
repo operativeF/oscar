@@ -481,7 +481,7 @@ void ResmedLoader::ParseSTR(Machine *mach, QMap<QDate, STRFile> & STRmap)
                 if (epr >= 0) {
                     static bool warn=false;
                     if (!warn) { // just nag once
-                        qDebug() << "If you can read this, please tell Jedimark you found a ResMed with EPR but no EPR_LEVEL so he can remove this warning";
+                        qDebug() << "If you can read this, please tell the developers you found a ResMed with EPR but no EPR_LEVEL so he can remove this warning";
                         warn = true;
                     }
 

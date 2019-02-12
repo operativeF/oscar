@@ -57,7 +57,8 @@ AboutDialog::~AboutDialog()
 
 void AboutDialog::on_donateButton_clicked()
 {
-    QDesktopServices::openUrl(QUrl("http://sleepyhead.jedimark.net/donate.php"));
+//    QDesktopServices::openUrl(QUrl("http://sleepyhead.jedimark.net/donate.php"));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 QString AboutDialog::getRelnotes()

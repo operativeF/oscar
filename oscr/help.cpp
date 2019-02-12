@@ -62,7 +62,7 @@ Help::Help(QWidget *parent) :
     if (QFile::exists(helpIndex)) QFile::remove(helpIndex);
 
     helpEngine = new QHelpEngine(helpIndex);
-    helpNamespace = "jedimark.net.SleepyHeadGuide";
+    helpNamespace = "nightowlsoftware.ca.OSCR_Guide";
 
     if (!helpFile.isEmpty()) {
         if (!helpEngine->setupData()) {

@@ -1026,16 +1026,16 @@ QString MainWindow::getWelcomeHTML()
            "<body leftmargin=0 topmargin=0 rightmargin=0>"
            "<table width=\"100%\" cellspacing=0 cellpadding=4 border=0 >"
            "<tr><td bgcolor=\"#d0d0d0\" colspan=2 cellpadding=0 valign=center align=center><font color=\"black\" size=+1><b>"
-           + tr("Welcome to SleepyHead") + "</b></font></td></tr>"
+           + tr("Welcome to OSCR") + "</b></font></td></tr>"
            "<tr>"
            "<td valign=\"top\" leftmargin=0 cellpadding=6>"
-           "<h3>" + tr("About SleepyHead") + "</h3>"
+           "<h3>" + tr("About OSCR") + "</h3>"
            "<p>" + tr("This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.")
            + "</p>"
-           "<p>" + tr("SleepyHead has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.")
+           "<p>" + tr("OSCR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.")
            + "</p>"
            "<p><i><b>" + tr("This is a beta release, some features may not yet behave as expected.") +
-           "</b></i><br/>" + tr("Please report any bugs you find to SleepyHead's SourceForge page.") + "</p>"
+           "</b></i><br/>" + tr("Please report any bugs you find to the OSCR developer's group.") + "</p>"
 
            "<h3>" + tr("Currenly supported machines:") + "</h3>"
            "<b>" + tr("CPAP") + "</b>"
@@ -1053,16 +1053,16 @@ QString MainWindow::getWelcomeHTML()
            tr("(It doesn't support SSL encryption, so it's not a good idea to type your passwords or personal details anywhere.)")
            + "</p>" +
 
-           tr("SleepyHead's Online <a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide\">Users Guide</a><br/>")
-           +
-           tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions\">Frequently Asked Questions</a><br/>")
-           +
-           tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary\">Glossary of Sleep Disorder Terms</a><br/>")
-           +
-           tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page\">SleepyHead Wiki</a><br/>")
-           +
-           tr("SleepyHead's <a href='http://www.sourceforge.net/projects/sleepyhead'>Project Website</a> on SourceForge<br/>")
-           +
+//         tr("SleepyHead's Online <a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide\">Users Guide</a><br/>")
+//         +
+//         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions\">Frequently Asked Questions</a><br/>")
+//         +
+//         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary\">Glossary of Sleep Disorder Terms</a><br/>")
+//         +
+//         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page\">SleepyHead Wiki</a><br/>")
+//         +
+//         tr("SleepyHead's <a href='http://www.sourceforge.net/projects/sleepyhead'>Project Website</a> on SourceForge<br/>")
+//         +
            "<p><h3>" + tr("Further Information") + "</h3></p>"
            "<p>" +
            tr("Here are the <a href='qrc:/docs/release_notes.html'>release notes</a> for this version.") +
@@ -1082,17 +1082,17 @@ QString MainWindow::getWelcomeHTML()
            "<tr>"
            "<td colspan=2>"
            "<hr/>"
-           "<p><b>" + tr("Copyright:") + "</b> " + tr("&copy;2011-2018") +
-           " <a href=\"http://jedimark64.blogspot.com\">Mark Watkins</a> (jedimark)</p>"
+           "<p><b>" + tr("Copyright:") + "</b> " + "&copy;2011-2018" +
+           " <a href=\"http://jedimark64.blogspot.com\">Mark Watkins</a> (jedimark) and portions &copy;2019 Nightowl Software</p>"
            "<p><b>" + tr("License:") + "</b> " +
-           tr("This software is released freely under the <a href=\"qrc:/COPYING\">GNU Public License</a>.") +
+           tr("This software is released freely under the <a href=\"qrc:/COPYING\">GNU Public License version 3</a>.") +
            "</p>"
            "<hr/>"
            "<p><b>" + tr("DISCLAIMER:") + "</b></p>"
            "<b><p>" +
            tr("This is <font color='red'><u>NOT</u></font> medical software. This application is merely a data viewer, and no guarantee is made regarding accuracy or correctness of any calculations or data displayed.")
            + "</p>"
-           "<p>" + tr("The author will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.")
+           "<p>" + tr("The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.")
            + "</p>"
            "<p>" + tr("Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.")
            + "</p>"
@@ -2221,12 +2221,14 @@ void MainWindow::on_actionImport_RemStar_MSeries_Data_triggered()
 
 void MainWindow::on_actionSleep_Disorder_Terms_Glossary_triggered()
 {
-    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary"));
+//    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary"));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 void MainWindow::on_actionHelp_Support_SleepyHead_Development_triggered()
 {
-    QDesktopServices().openUrl(QUrl("https://sleepyhead.jedimark.net/donate.php"));
+//    QDesktopServices().openUrl(QUrl("https://sleepyhead.jedimark.net/donate.php"));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 void MainWindow::on_actionChange_Language_triggered()
@@ -2458,10 +2460,11 @@ void MainWindow::on_mainsplitter_splitterMoved(int, int)
 #include "translation.h"
 void MainWindow::on_actionReport_a_Bug_triggered()
 {
-    QSettings settings;
-    QString language = settings.value(LangSetting).toString();
-
-    QDesktopServices::openUrl(QUrl(QString("https://sleepyhead.jedimark.net/report_bugs.php?lang=%1&version=%2&platform=%3").arg(language).arg(VersionString).arg(PlatformString)));
+//    QSettings settings;
+//    QString language = settings.value(LangSetting).toString();
+//
+//    QDesktopServices::openUrl(QUrl(QString("https://sleepyhead.jedimark.net/report_bugs.php?lang=%1&version=%2&platform=%3").arg(language).arg(VersionString).arg(PlatformString)));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 void MainWindow::on_profilesButton_clicked()

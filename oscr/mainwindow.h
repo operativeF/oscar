@@ -19,7 +19,9 @@
 #include "daily.h"
 #include "overview.h"
 #include "welcome.h"
+#ifndef helpless
 #include "help.h"
+#endif
 
 #include "profileselector.h"
 #include "preferencesdialog.h"
@@ -36,16 +38,18 @@ class MainWindow;
 
  \section intro_sec Introduction
 
+ OpenSource CPAP Reviewer (OSCR) is a program derived from the SleepyHead program written by Mark Watkins.
+
  SleepyHead is Cross-Platform Open-Source software for reviewing data from %CPAP machines, which are used in the treatment of Sleep Disorders.
 
- SleepyHead has been created by <a href="http://jedimark64.blogspot.com">Mark Watkins</a> (JediMark), an Australian software developer.
+ SleepyHead was created by <a href="http://jedimark64.blogspot.com">Mark Watkins</a> (JediMark), an Australian software developer.
 
  This document is an attempt to provide a little technical insight into SleepyHead's program internals.
 
  \section project_info Further Information
- The project is hosted on sourceforge, and it's project page can be reached at <a href="http://sourceforge.net/projects/sleepyhead">http://sourceforge.net/projects/sleepyhead</a>.
+ The project was hosted on sourceforge, and it's original project page can be reached at <a href="http://sourceforge.net/projects/sleepyhead">http://sourceforge.net/projects/sleepyhead</a>.
 
- There is also the <a href="http://sleepyhead.sourceforge.net">SleepyHead Wiki</a> containing further information
+ There was also a <a href="http://sourceforge.net/apps/mediawiki/sleepyhead/index.php?title=Main_Page">SleepyHead Wiki</a> containing further information
 
  \section structure Program Structure
  SleepyHead is written in C++ using Qt Toolkit library, and comprises of 3 main components
@@ -334,7 +338,9 @@ private:
     Overview *overview;
     ProfileSelector *profileSelector;
     Welcome * welcome;
+#ifndef helpless
     Help * help;
+#endif
     bool first_load;
     PreferencesDialog *prefdialog;
     QTime logtime;
