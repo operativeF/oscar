@@ -106,15 +106,15 @@ QString NewProfile::getIntroHTML()
 {
     return "<html>"
            "<body>"
-           "<div align=center><h1>" + tr("Welcome to SleepyHead") + "</h1></div>"
+           "<div align=center><h1>" + tr("Welcome to Open Source CPAP Reviewer") + "</h1></div>"
 
            "<p>" + tr("This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.")
            + "</p>"
 
-           "<p>" + tr("SleepyHead has been released freely under the <a href='qrc:/COPYING'>GNU Public License</a>, and comes with no warranty, and without ANY claims to fitness for any purpose.")
+           "<p>" + tr("OSCR has been released freely under the <a href='qrc:/COPYING'>GNU Public License v3</a>, and comes with no warranty, and without ANY claims to fitness for any purpose.")
            + "</p>"
            "<div align=center><font color=\"red\"><h2>" + tr("PLEASE READ CAREFULLY") + "</h2></font></div>"
-           "<p>" + tr("SleepyHead is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.")
+           "<p>" + tr("OSCR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.")
            + "</p>"
 
            "<p>" + tr("Accuracy of any data displayed is not and can not be guaranteed.") + "</p>"
@@ -122,14 +122,14 @@ QString NewProfile::getIntroHTML()
            "<p>" + tr("Any reports generated are for PERSONAL USE ONLY, and NOT IN ANY WAY fit for compliance or medical diagnostic purposes.")
            + "</p>"
 
-           "<p>" + tr("The author will not be held liable for <u>anything</u> related to the use or misuse of this software.")
+           "<p>" + tr("The authors will not be held liable for <u>anything</u> related to the use or misuse of this software.")
            + "</p>"
 
            "<div align=center>"
            "<p><b><font size=+1>" + tr("Use of this software is entirely at your own risk.") +
            "</font></b></p>"
 
-           "<p><i>" + tr("SleepyHead is copyright &copy;2011-2018 Mark Watkins") + "<i></p>"
+           "<p><i>" + tr("OSCR is copyright &copy;2011-2018 Mark Watkins and portions &copy;2019 Nightowl Software") + "<i></p>"
            "</div>"
            "</body>"
            "</html>";

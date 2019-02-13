@@ -1,4 +1,4 @@
-/* SleepyHead Help Implementation
+/* OSCR Help Implementation
  *
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *

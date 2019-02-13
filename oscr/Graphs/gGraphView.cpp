@@ -1393,10 +1393,10 @@ void gGraphView::paintGL()
         QString txt;
         if (m_showAuthorMessage) {
             if (emptyText() == STR_Empty_Brick) {
-                txt = QObject::tr("\nI'm very sorry your machine doesn't record useful data to graph in Daily View :(");
+                txt = QObject::tr("I'm very sorry your machine doesn't record useful data to graph in Daily View :(");
             } else {
                 // not proud of telling them their machine is a Brick.. ;)
-                txt = QObject::tr("SleepyHead is proudly brought to you by JediMark.");
+                txt = QObject::tr("There is no data to graph");
             }
         }
 //        int x2, y2;

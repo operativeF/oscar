@@ -1,4 +1,4 @@
-﻿/* SleepyHead Preferences Dialog Headers
+﻿/* OSCR Preferences Dialog Headers
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -37,9 +37,9 @@ class MySortFilterProxyModel: public QSortFilterProxyModel
 };
 
 /*! \class PreferencesDialog
-    \brief SleepyHead's Main Preferences Window
+    \brief OSCR's Main Preferences Window
 
-    This provides the Preferences form and logic to alter Preferences for SleepyHead
+    This provides the Preferences form and logic to alter Preferences for OSCR
 */
 class PreferencesDialog : public QDialog
 {

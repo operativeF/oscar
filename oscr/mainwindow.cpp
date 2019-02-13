@@ -69,16 +69,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->logText->setPlainText("00000: Startup: SleepyHead Logger initialized");
+    ui->logText->setPlainText("00000: Startup: OSCR Logger initialized");
 
     if (logger) {
         connect(logger, SIGNAL(outputLog(QString)), this, SLOT(logMessage(QString)));
     }
 
-    // Initialise sleepyHead app registry stuff
+    // Initialise oscr app registry stuff
     QSettings settings;
 
-    // Load previous Window geometry (this is currently broken on Mac as of Qt5.2.1)
+    // Load previous Window geometry
     restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
 
 
@@ -88,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
         systray->show();
         systraymenu = new QMenu(this);
         systray->setContextMenu(systraymenu);
-        QAction *a = systraymenu->addAction(STR_TR_SleepyHead + " v" + VersionString);
+        QAction *a = systraymenu->addAction(STR_TR_OSCR + " v" + VersionString);
         a->setEnabled(false);
         systraymenu->addSeparator();
         systraymenu->addAction(tr("&About"), this, SLOT(on_action_About_triggered()));
@@ -105,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::SetupGUI()
 {
     QString version = getBranchVersion();
-    setWindowTitle(STR_TR_SleepyHead + QString(" %1").arg(version));
+    setWindowTitle(STR_TR_OSCR + QString(" %1").arg(version));
 
 #ifdef Q_OS_MAC
 
@@ -234,7 +234,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
     static bool runonce = false;
     if (!runonce) {
         if (AppSetting->removeCardReminder()) {
-            Notify(QObject::tr("Don't forget to place your datacard back in your CPAP machine"), QObject::tr("SleepyHead Reminder"));
+            Notify(QObject::tr("Don't forget to place your datacard back in your CPAP machine"), QObject::tr("OSCR Reminder"));
             QThread::msleep(1000);
             QApplication::processEvents();
         }
@@ -279,7 +279,7 @@ void MainWindow::log(QString text)
 void MainWindow::Notify(QString s, QString title, int ms)
 {
     if (title.isEmpty()) {
-        title = tr("%1 %2").arg(STR_TR_SleepyHead).arg(STR_TR_AppVersion);
+        title = tr("%1 %2").arg(STR_TR_OSCR).arg(STR_TR_AppVersion);
     }
     if (systray) {
         QString msg = s;
@@ -391,8 +391,8 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
         if (lockhost.compare(QHostInfo::localHostName()) != 0) {
             if (QMessageBox::warning(nullptr, STR_MessageBox_Warning,
                                   QObject::tr("There is a lockfile already present for this profile '%1', claimed on '%2'.").arg(prof->user->userName()).arg(lockhost)+"\n\n"+
-                                  QObject::tr("You can only work with one instance of an individual SleepyHead profile at a time.")+"\n\n"+
-                                  QObject::tr("If you are using cloud storage, make sure SleepyHead is closed and syncing has completed first on the other computer before proceeding."),
+                                  QObject::tr("You can only work with one instance of an individual OSCR profile at a time.")+"\n\n"+
+                                  QObject::tr("If you are using cloud storage, make sure OSCR is closed and syncing has completed first on the other computer before proceeding."),
                                   QMessageBox::Cancel |QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel) {
                 return false;
             }
@@ -413,7 +413,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     for (QList<Machine *>::iterator it = machines.begin(); it != machines.end(); ++it) {
         QString mclass=(*it)->loaderName();
         if (mclass == STR_MACH_ResMed) {
-            qDebug() << "ResMed machine found.. locking SleepyHead preferences to suit it's summary system";
+            qDebug() << "ResMed machine found.. locking OSCR preferences to suit it's summary system";
 
             // Have to sacrifice these features to get access to summary data.
             p_profile->session->setCombineCloseSessions(0);
@@ -484,7 +484,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     PopulatePurgeMenu();
 
     AppSetting->setProfileName(p_profile->user->userName());
-    setWindowTitle(STR_TR_SleepyHead + QString(" %1 (" + tr("Profile") + ": %2)").arg(getBranchVersion()).arg(AppSetting->profileName()));
+    setWindowTitle(STR_TR_OSCR + QString(" %1 (" + tr("Profile") + ": %2)").arg(getBranchVersion()).arg(AppSetting->profileName()));
 
     ui->oximetryButton->setDisabled(false);
     ui->dailyButton->setDisabled(false);
@@ -1432,12 +1432,14 @@ void MainWindow::on_action_CycleTabs_triggered()
 
 void MainWindow::on_actionOnline_Users_Guide_triggered()
 {
-    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide"));
+//    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide"));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 void MainWindow::on_action_Frequently_Asked_Questions_triggered()
 {
-    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions"));
+//    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions"));
+    QMessageBox(tr("Not yet implemented"));
 }
 
 void packEventList(EventList *el, EventDataType minval = 0)
@@ -1673,7 +1675,7 @@ void MainWindow::RestartApplication(bool force_login, QString cmdline)
     args << "-n"; // -n option is important, as it opens a new process
     args << apppath;
 
-    args << "--args"; // SleepyHead binary options after this
+    args << "--args"; // OSCR binary options after this
     args << "-p"; // -p starts with 1 second delay, to give this process time to save..
 
 
@@ -1819,25 +1821,22 @@ void MainWindow::on_actionRebuildCPAP(QAction *action)
 
     if (backups) {
         if (QMessageBox::question(this,
-                              STR_MessageBox_Question,
-                              tr("Are you sure you want to rebuild all CPAP data for the following machine:")+ "\n\n" +
-                              mach->brand() + " " + mach->model() + " " +
-                              mach->modelnumber() + " (" + mach->serial() + ")" + "\n\n"+
-                              tr("Please note, that this could result in loss of graph data if SleepyHead's internal backups have been disabled or interfered with in any way."),
-                              QMessageBox::Yes | QMessageBox::No,
-                              QMessageBox::No) == QMessageBox::No) {
+                STR_MessageBox_Question,
+                tr("Are you sure you want to rebuild all CPAP data for the following machine:\n\n" +
+                mach->brand() + " " + mach->model() + " " +
+                mach->modelnumber() + " (" + mach->serial() + ")\n\n"+
+                tr("Please note, that this could result in loss of graph data if OSCR's backups have been disabled or interfered with in any way."),
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
             return;
         }
     } else {
         if (QMessageBox::question(this,
-                              STR_MessageBox_Warning,
-                              "<p><b>"+STR_MessageBox_Warning+": </b>"+tr("For some reason, SleepyHead does not have internal backups for the following machine:")+ "</p>" +
-                              "<p>"+mach->brand() + " " + mach->model() + " " +
-                              mach->modelnumber() + " (" + mach->serial() + ")" + "</p>"+
-                              "<p>"+tr("Provided you have made <i>your <b>own</b> backups for ALL of your CPAP data</i>, you can still complete this operation, but you will have to restore from your backups manually.")+"</p>"
-                              "<p><b>"+tr("Are you really sure you want to do this?")+"</b></p>",
-                              QMessageBox::Yes | QMessageBox::No,
-                              QMessageBox::No) == QMessageBox::No) {
+                STR_MessageBox_Warning,
+                "<p><b>"+STR_MessageBox_Warning+": </b>"+tr("For some reason, OSCR does not have any backups for the following machine:")+ "</p>" +
+                "<p>"+mach->brand() + " " + mach->model() + " " + mach->modelnumber() + " (" + mach->serial() + ")</p>"+
+                "<p>"+tr("Provided you have made <i>your <b>own</b> backups for ALL of your CPAP data</i>, you can still complete this operation, but you will have to restore from your backups manually.")+"</p>"
+                "<p><b>"+tr("Are you really sure you want to do this?")+"</b></p>",
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
             return;
         }
     }
@@ -1886,12 +1885,13 @@ void MainWindow::on_actionPurgeMachine(QAction *action)
     }
     if (!mach) return;
 
-    if (QMessageBox::question(this, STR_MessageBox_Warning, "<p><b>"+STR_MessageBox_Warning+":</b> "+tr("You are about to <font size=+2>obliterate</font> SleepyHead's machine database for the following machine:")+"</p>"+
-                              "<p>"+mach->brand() + " " + mach->model() + " " +
-                              mach->modelnumber() + " (" + mach->serial() + ")" + "</p>"+
-                              "<p>"+tr("Note as a precaution, the backup folder will be left in place.")+"</p>"+
-                              "<p>"+tr("Are you <b>absolutely sure</b> you want to proceed?")+"</p>", QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
-
+    if (QMessageBox::question(this, STR_MessageBox_Warning, 
+            "<p><b>"+STR_MessageBox_Warning+":</b> "  +
+            tr("You are about to <font size=+2>obliterate</font> OSCR's machine database for the following machine:</p>") +
+            "<p>"+mach->brand() + " " + mach->model() + " " + mach->modelnumber() + " (" + mach->serial() + ")" + "</p>" +
+            "<p>"+tr("Note as a precaution, the backup folder will be left in place.")+"</p>"+
+            "<p>"+tr("Are you <b>absolutely sure</b> you want to proceed?")+"</p>", 
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
         purgeMachine(mach);
     }
 
@@ -2225,7 +2225,7 @@ void MainWindow::on_actionSleep_Disorder_Terms_Glossary_triggered()
     QMessageBox(tr("Not yet implemented"));
 }
 
-void MainWindow::on_actionHelp_Support_SleepyHead_Development_triggered()
+void MainWindow::on_actionHelp_Support_OSCR_Development_triggered()
 {
 //    QDesktopServices().openUrl(QUrl("https://sleepyhead.jedimark.net/donate.php"));
     QMessageBox(tr("Not yet implemented"));

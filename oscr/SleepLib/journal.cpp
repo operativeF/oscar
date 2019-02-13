@@ -22,7 +22,7 @@ JournalEntry::JournalEntry(QDate date)
 {
     Machine * jmach = p_profile->GetMachine(MT_JOURNAL);
     if (jmach == nullptr) { // Create Journal machine record if it doesn't already exist
-        MachineInfo info(MT_JOURNAL,0, "Journal", QObject::tr("Journal Data"), QString(), QString(), QString(), QObject::tr("SleepyHead"), QDateTime::currentDateTime(), journal_data_version);
+        MachineInfo info(MT_JOURNAL,0, "Journal", QObject::tr("Journal Data"), QString(), QString(), QString(), QObject::tr("OSCR"), QDateTime::currentDateTime(), journal_data_version);
 
         // Using machine ID 1 rather than a random number, so in future, if profile.xml gets screwed up they'll get their data back..
         // TODO: Perhaps search for unlinked journal folders here to save some anger and frustration? :P
@@ -40,18 +40,18 @@ JournalEntry::JournalEntry(QDate date)
             machid = tmp.toUInt(&ok, 16);
             if (!ok) {
                 QMessageBox::warning(nullptr, STR_MessageBox_Warning,
-                    QObject::tr("SleepyHead found an old Journal folder, but it looks like it's been renamed:")+"\n\n"+
+                    QObject::tr("OSCR found an old Journal folder, but it looks like it's been renamed:")+"\n\n"+
                     QString("%1").arg(dirs[0])+
-                    QObject::tr("SleepyHead will not touch this folder, and will create a new one instead.")+"\n\n"+
-                    QObject::tr("Please be careful when playing in SleepyHead's profile folders :-P"), QMessageBox::Ok);
+                    QObject::tr("OSCR will not touch this folder, and will create a new one instead.")+"\n\n"+
+                    QObject::tr("Please be careful when playing in OSCR's profile folders :-P"), QMessageBox::Ok);
 
                 // User renamed the folder.. report this
                 machid = 1;
             }
             if (journals > 1) {
                 QMessageBox::warning(nullptr, STR_MessageBox_Warning,
-                    QObject::tr("For some reason, sleepyHead couldn't find a journal object record in your profile, but did find multiple Journal data folders.")+"\n\n"+
-                    QObject::tr("SleepyHead picked only the first one of these, and will use it in future:")+"\n\n"+
+                    QObject::tr("For some reason, OSCR couldn't find a journal object record in your profile, but did find multiple Journal data folders.\n\n")+
+                    QObject::tr("OSCR picked only the first one of these, and will use it in future:\n\n")+
                     QString("%1").arg(dirs[0])+
                     QObject::tr("If your old data is missing, copy the contents of all the other Journal_XXXXXXX folders to this one manually."), QMessageBox::Ok);
                 // more then one.. report this.
@@ -208,7 +208,7 @@ void JournalEntry::delBookmark(qint64 start, qint64 end)
 
 void BackupJournal(QString filename)
 {
-    QDomDocument doc("SleepyHead Journal");
+    QDomDocument doc("OSCR Journal");
 
     QDomElement droot = doc.createElement(STR_AppName);
     doc.appendChild(droot);

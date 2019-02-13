@@ -335,7 +335,7 @@ FORMS += \
     mainwindow.ui \
     oximetry.ui \
     preferencesdialog.ui \
-    report.ui \
+    reports.ui \
     profileselect.ui \
     newprofile.ui \
     exportcsv.ui \

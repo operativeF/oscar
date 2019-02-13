@@ -964,7 +964,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             </font>
            </property>
            <property name="text">
-            <string>CMS50E/F users, when importing directly, please don't select upload on your device until SleepyHead prompts you to.</string>
+            <string>CMS50E/F users, when importing directly, please don't select upload on your device until OSCR prompts you to.</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1001,7 +1001,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             <item>
              <widget class="QCheckBox" name="cms50SyncTime">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, SleepyHead will automatically reset your CMS50's internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, OSCR will automatically reset your CMS50's internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Set device date/time</string>
@@ -1074,7 +1074,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             <item>
              <widget class="QCheckBox" name="cms50EraseAfterwards">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before SleepyHead saves your session, you won't get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCR saves your session, you won't get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Erase session after successful upload</string>
@@ -1645,7 +1645,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Please choose which one you want to import into SleepyHead</string>
+            <string>Please choose which one you want to import into OSCR</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1822,7 +1822,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCR needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

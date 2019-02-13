@@ -874,7 +874,7 @@
           </font>
          </property>
          <property name="text">
-          <string>SleepyHead</string>
+          <string>OSCR</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignHCenter|Qt::AlignTop</set>

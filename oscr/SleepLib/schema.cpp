@@ -172,13 +172,13 @@ void init()
             QObject::tr("SensAwake"),QObject::tr("SensAwake feature will reduce pressure when waking is detected."),QObject::tr("SA"),       STR_UNIT_EventsPerHour,    DEFAULT,    COLOR_Gold));
 
     schema::channel.add(GRP_CPAP, new Channel(CPAP_UserFlag1     = 0x101e, FLAG,        MT_CPAP, SESSION, "UserFlag1",
-            QObject::tr("User Flag #1"), QObject::tr("A user definable event detected by SleepyHead's flow waveform processor."), QObject::tr("UF1"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor(0xc0,0xc0,0xe0)));
+            QObject::tr("User Flag #1"), QObject::tr("A user definable event detected by OSCR's flow waveform processor."), QObject::tr("UF1"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor(0xc0,0xc0,0xe0)));
 
     schema::channel.add(GRP_CPAP, new Channel(CPAP_UserFlag2     = 0x101f, FLAG,        MT_CPAP, SESSION, "UserFlag2",
-            QObject::tr("User Flag #2"),QObject::tr("A user definable event detected by SleepyHead's flow waveform processor."), QObject::tr("UF2"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor(0xa0,0xa0,0xc0)));
+            QObject::tr("User Flag #2"),QObject::tr("A user definable event detected by OSCR's flow waveform processor."), QObject::tr("UF2"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor(0xa0,0xa0,0xc0)));
 
     schema::channel.add(GRP_CPAP, new Channel(CPAP_UserFlag3     = 0x1024, FLAG,        MT_CPAP, SESSION, "UserFlag3",
-            QObject::tr("User Flag #3"),QObject::tr("A user definable event detected by SleepyHead's flow waveform processor."), QObject::tr("UF3"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor("dark grey")));
+            QObject::tr("User Flag #3"),QObject::tr("A user definable event detected by OSCR's flow waveform processor."), QObject::tr("UF3"),      STR_UNIT_EventsPerHour,    DEFAULT,    QColor("dark grey")));
 
     // Oximetry
     schema::channel.add(GRP_OXI, new Channel(OXI_Pulse           = 0x1800, WAVEFORM,    MT_OXIMETER, SESSION, "Pulse",

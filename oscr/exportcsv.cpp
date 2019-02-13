@@ -69,7 +69,7 @@ ExportCSV::~ExportCSV()
 
 void ExportCSV::on_filenameBrowseButton_clicked()
 {
-    QString timestamp = tr("SleepyHead_");
+    QString timestamp = tr("OSCR_");
     timestamp += p_profile->Get("Username") + "_";
 
     if (ui->rb1_details->isChecked()) { timestamp += tr("Details_"); }

@@ -21,7 +21,7 @@
 
 using namespace std;
 
-// This is the uber important database version for SleepyHeads internal storage
+// This is the uber important database version for OSCR's internal storage
 // Increment this after stuffing with Session's save & load code.
 const quint16 summary_version = 18;
 const quint16 events_version = 10;

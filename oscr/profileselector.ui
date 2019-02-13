@@ -113,7 +113,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="SleepyHeadLogo">
+           <widget class="QLabel" name="OSCR_Logo">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>1</horstretch>
@@ -159,7 +159,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="SleepyHeadLabel">
+         <widget class="QLabel" name="OSCR_Label">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -168,7 +168,7 @@
            </font>
           </property>
           <property name="text">
-           <string>SleepyHead</string>
+           <string>OSCR</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

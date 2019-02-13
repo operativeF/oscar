@@ -26,21 +26,21 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->relnotesText->setHtml(getRelnotes());
     ui->versionLabel->setText(VersionString);
 
-    QString gitrev = gitRevision();
-
-    if (!gitrev.isEmpty()) {
-        gitrev = tr("Revision: %1").arg(QString("<a href='https://gitlab.com/sleepyhead/sleepyhead-code/commit/%1'>%1</a>").arg(gitrev))+"<br/>"
-                +tr("Branch: %1").arg(QString("<a href='https://gitlab.com/sleepyhead/sleepyhead-code/commits/%1'>%1</a>").arg(gitBranch()))+"<br/>"
-                +tr("Build Date: %1").arg(__DATE__)+"<br/>"
-                +tr("Graphics Engine: %1").arg(getGraphicsEngine());
-    }
+//    QString gitrev = gitRevision();
+//
+//    if (!gitrev.isEmpty()) {
+//        gitrev = tr("Revision: %1").arg(QString("<a href='https://gitlab.com/sleepyhead/sleepyhead-code/commit/%1'>%1</a>").arg(gitrev))+"<br/>"
+//                +tr("Branch: %1").arg(QString("<a href='https://gitlab.com/sleepyhead/sleepyhead-code/commits/%1'>%1</a>").arg(gitBranch()))+"<br/>"
+//                +tr("Build Date: %1").arg(__DATE__)+"<br/>"
+//                +tr("Graphics Engine: %1").arg(getGraphicsEngine());
+//    }
 
     QString path = GetAppRoot();
-    QString text = gitrev + "<br/><br/><a href=\"file:///"+path+"\">"+tr("Show data folder")+"</a>";
+    QString text = /* gitrev + */ "<br/><br/><a href=\"file:///"+path+"\">"+tr("Show data folder")+"</a>";
     ui->infoLabel->setText(text);
 
 
-    setWindowTitle(tr("About SleepyHead"));
+    setWindowTitle(tr("About OSCR"));
     setMinimumSize(QSize(400,400));
     connect(ui->closeButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
 
@@ -74,7 +74,7 @@ QString AboutDialog::getRelnotes()
     QString text = "<html>"
     "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head>"
     "<body><span style=\" font-size:20pt;\">"+tr("Release Notes")+"</span><br/>"
-    "<span style=\" font-size:14pt;\">"+tr("SleepyHead v%1").arg(VersionString)+"</span>"
+    "<span style=\" font-size:14pt;\">"+tr("OSCR v%1").arg(VersionString)+"</span>"
     "<hr/>";
     if (ReleaseStatus != "r") {
         text += "<p><font color='red' size=+1><b>"+tr("Important:")+"</b></font> "

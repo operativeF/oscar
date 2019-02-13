@@ -89,6 +89,10 @@ QString platformStr()
 
 void UpdaterWindow::checkForUpdates()
 {
+    QMessageBox(tr("Not yet implemented"));
+    return;
+
+/********************************************
     QString platform=platformStr();
 
 #ifdef Q_OS_WIN
@@ -127,6 +131,7 @@ void UpdaterWindow::checkForUpdates()
     update_url = QUrl(QString("http://sleepyhead.jedimark.net/releases/LatestVersion-%1").arg(platform));
 #endif
     downloadUpdateXML();
+*******************************************/
 }
 
 void UpdaterWindow::downloadUpdateXML()
@@ -148,7 +153,7 @@ void UpdaterWindow::updateFinished(QNetworkReply *reply)
     if (reply->error() != QNetworkReply::NoError) {
         qDebug() << "Update Check Error: "+reply->errorString();
         disconnect(netmanager, SIGNAL(finished(QNetworkReply *)), this, SLOT(updateFinished(QNetworkReply *)));
-        mainwin->Notify(tr("SleepyHead Updates are currently unvailable for this platform"),tr("SleepyHead Updates"));
+        mainwin->Notify(tr("OSCR Updates are currently unvailable for this platform"),tr("OSCR Updates"));
     } else {
         QUrl redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
 
@@ -405,9 +410,9 @@ int compareVersion(QString version)
     return 0;
 }
 
-const QString UPDATE_SleepyHead = "com.jedimark.sleepyhead";
-const QString UPDATE_QT = "com.jedimark.sleepyhead.qtlibraries";
-const QString UPDATE_Translations = "com.jedimark.sleepyhead.translations";
+//const QString UPDATE_SleepyHead = "com.jedimark.sleepyhead";
+//const QString UPDATE_QT = "com.jedimark.sleepyhead.qtlibraries";
+//const QString UPDATE_Translations = "com.jedimark.sleepyhead.translations";
 
 bool SpawnApp(QString apppath, QStringList args = QStringList())
 {
@@ -445,10 +450,10 @@ void UpdaterWindow::ParseLatestVersion(QIODevice *file)
     int i=compareVersion(version);
 
     if (i>0) {
-        mainwin->Notify(tr("Version %1 of SleepyHead is available, opening link to download site.").arg(version), STR_TR_SleepyHead);
-        QDesktopServices::openUrl(QUrl(QString("http://sleepyhead.jedimark.net")));
+        mainwin->Notify(tr("Version %1 of OSCR is available, opening link to download site.").arg(version), STR_TR_OSCR);
+        QDesktopServices::openUrl(QUrl(QString("http://nightowlsoftware.ca/OSCR")));
     } else {
-        mainwin->Notify(tr("You are already running the latest version."), STR_TR_SleepyHead);
+        mainwin->Notify(tr("You are already running the latest version."), STR_TR_OSCR);
     }
 }
 
@@ -511,7 +516,8 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
 }
 
 // Old
-/*void UpdaterWindow::ParseUpdateXML(QIODevice *dev)
+/************************************
+void UpdaterWindow::ParseUpdateXML(QIODevice *dev)
 {
     QXmlInputSource src(dev);
     QXmlSimpleReader reader;
@@ -547,7 +553,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
         }
 
         if (!release) {
-            mainwin->Notify(tr("No updates were found for your platform."), tr("SleepyHead Updates"), 5000);
+            mainwin->Notify(tr("No updates were found for your platform."), tr("OSCR Updates"), 5000);
             PREF[STR_GEN_UpdatesLastChecked] = QDateTime::currentDateTime();
             close();
             return;
@@ -586,7 +592,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
 
         if (!upq && !upd) {
             mainwin->Notify(tr("No new updates were found for your platform."),
-                            tr("SleepyHead Updates"),
+                            tr("OSCR Updates"),
                             5000);
             PREF[STR_GEN_UpdatesLastChecked] = QDateTime::currentDateTime();
             close();
@@ -603,7 +609,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
 
 
         if (updates.size() > 0) {
-            QString html = "<html><h3>" + tr("SleepyHead v%1, codename \"%2\"").arg(release->version).
+            QString html = "<html><h3>" + tr("OSCR v%1, codename \"%2\"").arg(release->version).
                     arg(release->codename) + "</h3><p>" + release->notes[""] + "</p><b>";
             html += platform.left(1).toUpper() + platform.mid(1);
             html += " " + tr("platform notes") + "</b><p>" + release->notes[platform] + "</p></html>";
@@ -611,12 +617,12 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
             QString info;
 
             if (compareVersion(release->version)) {
-                ui->Title->setText("<font size=+1>" + tr("A new version of SleepyHead is available!") + "</font>");
+                ui->Title->setText("<font size=+1>" + tr("A new version of OSCR is available!") + "</font>");
                 info = tr("Shiny new <b>v%1</b> is available. You're running old and busted v%2").
                         arg(latestapp).arg(VersionString);
                 ui->notesTabWidget->setCurrentIndex(0);
             } else {
-                ui->Title->setText("<font size=+1>" + tr("An update for SleepyHead is available.") + "</font>");
+                ui->Title->setText("<font size=+1>" + tr("An update for OSCR is available.") + "</font>");
                 info = tr("Version <b>%1</b> is available. You're currently running v%1").
                         arg(latestapp).arg(VersionString);
                 ui->notesTabWidget->setCurrentIndex(1);
@@ -630,7 +636,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
                 update = &release->updates[platform][i];
 
                 if ((update->type == "application") && (update->version > VersionString)) {
-                    notes += "<b>" + tr("SleepyHead v%1 build notes").arg(update->version) + "</b><br/>" +
+                    notes += "<b>" + tr("OSCR v%1 build notes").arg(update->version) + "</b><br/>" +
                              update->notes.trimmed() + "<br/><br/>";
                 } else if ((update->type == "qtlibs") && (update->version > QT_VERSION_STR)) {
                     notes += "<b>" + tr("Update to QtLibs (v%1)").arg(update->version) + "</b><br/>" +
@@ -851,14 +857,16 @@ void UpdaterWindow::replyFinished(QNetworkReply *reply)
         mainwin->Notify(tr("There was an error completing a network request:\n\n(") + reply->errorString()
                         + ")");
     }
-} */
+}
+****************************************************************/
 
 void UpdaterWindow::on_CloseButton_clicked()
 {
     close();
 }
 
-/*void UpdaterWindow::upgradeNext()
+/*************************************
+void UpdaterWindow::upgradeNext()
 {
     QTableWidgetItem *item;
     bool fnd = false;
@@ -892,11 +900,11 @@ void UpdaterWindow::on_CloseButton_clicked()
 
         if (ok) {
             success = true;
-            //QMessageBox::information(this,tr("Updates Complete"),tr("SleepyHead has been updated and needs to restart."),QMessageBox::Ok);
+            //QMessageBox::information(this,tr("Updates Complete"),tr("OSCR has been updated and needs to restart."),QMessageBox::Ok);
             ui->downloadTitle->setText(tr("Update Complete!"));
             ui->FinishedButton->setVisible(true);
             ui->downloadLabel->setText(
-                tr("Updates Complete. SleepyHead needs to restart now, click Finished to do so."));
+                tr("Updates Complete. OSCR needs to restart now, click Finished to do so."));
             PREF[STR_GEN_UpdatesLastChecked] = QDateTime::currentDateTime();
         } else {
             ui->downloadTitle->setText(tr("Update Failed :("));
@@ -945,7 +953,8 @@ void UpdaterWindow::on_upgradeButton_clicked()
 
     ui->stackedWidget->setCurrentIndex(1);
     upgradeNext();
-} */
+}
+************************************************************************/
 
 void UpdaterWindow::on_FinishedButton_clicked()
 {

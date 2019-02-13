@@ -1,17 +1,22 @@
-SleepyHead v1.1 branch
+OpenSource CPAP Review - OSCR
 
-*Warning*: Backup your SleepyHeadData directory before using this branch or start a new profile
+OSCR started as a maintenance fork of SleepyHead version 1.1.0 when that was abandoned by Mark Watkins.
 
-SleepyHead is cross platform, opensource sleep tracking program for reviewing CPAP and Oximetry data, 
-which are devices used in the treatment of Sleep Disorders like Obstructive Sleep Apnea.
+SleepyHead was cross platform, opensource sleep tracking program for reviewing CPAP and Oximetry data, 
+which are devices used in the treatment of Sleep Disorders like Obstructive Sleep Apnea. It was released 
+under the GPL version 3 license. See the file COPYING for those details.
 
-SleepyHead is written by Mark Watkins (aka Jedimark), an Australian software developer afflicted with sleep apnea.
+SleepyHead was written by Mark Watkins (aka Jedimark), an Australian software developer afflicted with sleep apnea.
 
-SleepyHead is copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
+SleepyHead was copyright (C) 2011-2018 by Mark Watkins <mark@jedimark.net>
+
+Most of OSCR is copyright (c) 2011-2018 by Mark Watkins <mark@jedimark.net>
+Portions of OSCR are copyright (c) 2019 by Nightowl Software <michaelnightowl99@gmail.com>
 
 Requirements:
 -------------
-Qt5.9 SDK with webkit (Qt5.9 from http://qt.io/download-open-source recommended, and please ONLY use that if you wish to submit bug reports)
+Qt5.9 SDK with help (Qt5.9 from http://qt.io/download-open-source recommended)
+Qt5.7 SDL without help is possible (for Debian Stretch)
 Linux needs libudev-dev for qserialport to compile
 
 OSX needs Xcode and commandline tools from AppStore,
@@ -24,9 +29,9 @@ Building:
 Recommend shadow building to not cruft up the source code folder:
 
 cd ..
-mkdir build_sleepyhead
-cd build_sleepyhead
-qmake ../sleepyhead-code/SleepyHeadQT.pro 
+mkdir build
+cd build
+qmake ../oscr-code/OSCR_QT.pro 
 make
 
 You may need to add a -spec option to qmake to suit your platform. 
@@ -49,7 +54,7 @@ with
 
 Software Licensing Information
 ------------------------------
-SleepyHead is released under the GNU GPL v3 License. Please see below for a note on giving correct attribution
+OSCR is released under the GNU GPL v3 License. Please see below for a note on giving correct attribution
 in redistribution of derivatives.
 
 It is built using Qt SDK (Open Source Edition), available from http://qt.io.
@@ -57,15 +62,15 @@ It is built using Qt SDK (Open Source Edition), available from http://qt.io.
 It also uses QuaZip, by Sergey A. Tachenov, which is a C++ wrapper over Gilles Vollant's ZIP/UNZIP package
 http://sourceforge.net/projects/quazip/
 
-Redistribution of derivatives
+Redistribution of derivatives ( a note added by Mark Watins )
 -----------------------------
-I created this software to help lessen the exploitation of others. Seeing my work being used to exploit others 
-is incredibly un-motivational, and incredibly disrespectful of all the work I put into this project.
+Mark Watkins created this software to help lessen the exploitation of others. Seeing his work being used to exploit others 
+is incredibly un-motivational, and incredibly disrespectful of all the work he put into this project.
 
 If you plan on reselling any derivatives of SleepyHead, I specifically request that you give due credit and 
 link back, mentioning clearly in your advertising material, software installer and about screens that your 
 derivative "is based on the free and open-source software SleepyHead available from http://sleepyhead.jedimark.net, 
-developed and copyright by Mark Watkins (C) 2011-<current year>."
+developed and copyright by Mark Watkins (C) 2011-2018."
 
 It is not enough to reference that your derivative "is based on GPL software".
 

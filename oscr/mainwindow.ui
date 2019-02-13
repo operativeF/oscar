@@ -438,7 +438,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>SleepyHead</string>
+   <string>OSCR</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
@@ -2856,7 +2856,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionDebug"/>
     <addaction name="actionShow_Performance_Counters"/>
     <addaction name="separator"/>
-    <addaction name="actionHelp_Support_SleepyHead_Development"/>
+    <addaction name="actionHelp_Support_OSCR_Development"/>
     <addaction name="separator"/>
     <addaction name="actionCheck_for_Updates"/>
     <addaction name="separator"/>
@@ -2973,7 +2973,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_About">
    <property name="text">
-    <string>&amp;About SleepyHead</string>
+    <string>&amp;About OSCR</string>
    </property>
   </action>
   <action name="action_Fullscreen">
@@ -3097,9 +3097,9 @@ p, li { white-space: pre-wrap; }
     <string>Import RemStar &amp;MSeries Data</string>
    </property>
   </action>
-  <action name="actionHelp_Support_SleepyHead_Development">
+  <action name="actionHelp_Support_OSCR_Development">
    <property name="text">
-    <string>&amp;Support SleepyHead Development</string>
+    <string>&amp;Support OSCR Development</string>
    </property>
   </action>
   <action name="actionSleep_Disorder_Terms_Glossary">

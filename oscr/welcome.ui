@@ -125,7 +125,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Welcome To SleepyHead</string>
+        <string>Welcome To Open Source CPAP Reviewer</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

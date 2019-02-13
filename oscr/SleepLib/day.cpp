@@ -107,7 +107,7 @@ void Day::addSession(Session *s)
     auto mi = machines.find(s->type());
     if (mi != machines.end()) {
         if (mi.value() != s->machine()) {
-            qDebug() << "SleepyHead can't add session" << s->session() << "to this day record, as it already contains a different machine of the same MachineType";
+            qDebug() << "OSCR can't add session" << s->session() << "to this day record, as it already contains a different machine of the same MachineType";
             return;
         }
     } else {

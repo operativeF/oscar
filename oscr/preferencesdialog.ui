@@ -432,8 +432,8 @@ p, li { white-space: pre-wrap; }
 Backed up EDF files are stored in the .gz format, 
 which is common on Mac &amp; Linux platforms.. 
 
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</string>
+OSCR can import from this compressed backup directory natively.. 
+To use it with ResScan will require the .gz files to be uncompressed first..</string>
             </property>
             <property name="text">
              <string>Compress SD Card Backups (slower first import, but makes backups smaller)</string>
@@ -448,7 +448,7 @@ To use with ResScan will require the .gz files to be uncompressed first..</strin
              </font>
             </property>
             <property name="text">
-             <string>The following options affect the amount of disk space SleepyHead uses, and all have an effect on how long import takes.</string>
+             <string>The following options affect the amount of disk space OSCR uses, and have an effect on how long import takes.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -458,12 +458,12 @@ To use with ResScan will require the .gz files to be uncompressed first..</strin
           <item row="4" column="0">
            <widget class="QCheckBox" name="compressSessionData">
             <property name="toolTip">
-             <string>This makes SleepyHead's data take around half as much space.
+             <string>This makes OSCR's data take around half as much space.
 But it makes import and day changing take longer.. 
 If you've got a new computer with a small solid state disk, this is a good option.</string>
             </property>
             <property name="text">
-             <string>Compress Session Data (makes SleepyHead data smaller, but day changing slower.)</string>
+             <string>Compress Session Data (makes OSCR data smaller, but day changing slower.)</string>
             </property>
            </widget>
           </item>
@@ -472,10 +472,10 @@ If you've got a new computer with a small solid state disk, this is a good optio
             <property name="toolTip">
              <string>This maintains a backup of SD-card data for ResMed machines, 
 
-ResMed machines delete high resolution data older than 7 days, 
+ResMed S9 series machines delete high resolution data older than 7 days, 
 and graph data older than 30 days..
 
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
+OSCR can keep a copy of this data if you ever need to reinstall. 
 (Highly recomended, unless your short on disk space or don't care about the graph data)</string>
             </property>
             <property name="text">
@@ -603,7 +603,7 @@ SleepyHead can keep a copy of this data if you ever need to reinstall.
           <item row="0" column="0">
            <widget class="QCheckBox" name="preloadSummaries">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting SleepyHead a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn't affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting OSCR a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn't affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Pre-Load all summary data at startup</string>
@@ -994,7 +994,7 @@ This option must be enabled before import, otherwise a purge is required.</strin
             <item row="6" column="0" colspan="4">
              <widget class="QCheckBox" name="resyncMachineDetectedEvents">
               <property name="toolTip">
-               <string>This experimental option attempts to use SleepyHead's event flagging system to improve machine detected event positioning.</string>
+               <string>This experimental option attempts to use OSCR's event flagging system to improve machine detected event positioning.</string>
               </property>
               <property name="text">
                <string>Resync Machine Detected Events (Experimental)</string>
@@ -1978,7 +1978,7 @@ Mainly affects the importer.</string>
             <item row="2" column="1">
              <widget class="QCheckBox" name="removeCardNotificationCheckbox">
               <property name="text">
-               <string>Show Remove Card reminder notification on SleepyHead shutdown</string>
+               <string>Show Remove Card reminder notification on OSCR shutdown</string>
               </property>
              </widget>
             </item>
@@ -2251,7 +2251,7 @@ p, li { white-space: pre-wrap; }
             <item row="2" column="1">
              <widget class="QComboBox" name="openingTabCombo">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Which tab to open on loading a profile. (Note: It will default to Profile if SleepyHead is set to not open a profile on startup)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Which tab to open on loading a profile. (Note: It will default to Profile if OSCR is set to not open a profile on startup)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="currentText">
                <string>Profile</string>
@@ -2729,7 +2729,7 @@ this application to be unstable with this feature enabled.</string>
             <item row="0" column="0">
              <widget class="QLabel" name="label_8">
               <property name="text">
-               <string>Try changing this from the default setting (Desktop OpenGL) if you experience rendering problems with SleepyHead's graphs.</string>
+               <string>Try changing this from the default setting (Desktop OpenGL) if you experience rendering problems with OSCR's graphs.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>

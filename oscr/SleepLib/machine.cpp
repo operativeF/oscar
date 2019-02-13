@@ -1105,7 +1105,7 @@ bool Machine::SaveSummaryCache()
     qDebug() << "Saving" << info.brand << info.model <<  "Summaries";
     QString filename = getDataPath() + summaryFileName;
 
-    QDomDocument doc("SleepyHeadSessionIndex");
+    QDomDocument doc("OSCR_SessionIndex");
 
     QDomElement root = doc.createElement("sessions");
     root.setAttribute("version", summaryxml_version);

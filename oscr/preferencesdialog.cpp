@@ -61,7 +61,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
 
 #ifdef LOCK_RESMED_SESSIONS
     // Remove access to session splitting options and show ResMed users a notice instead
-    ui->ResMedWarning->setText(tr("<p><b>Please Note:</b> SleepyHead's advanced session splitting capabilities are not possible with <b>ResMed</b> machines due to a limitation in the way their settings and summary data is stored, and therefore they have been disabled for this profile.</p><p>On ResMed machines, days will <b>split at noon</b> like in ResMed's commercial software.</p>"));
+    ui->ResMedWarning->setText(tr("<p><b>Please Note:</b> OSCR's advanced session splitting capabilities are not possible with <b>ResMed</b> machines due to a limitation in the way their settings and summary data is stored, and therefore they have been disabled for this profile.</p><p>On ResMed machines, days will <b>split at noon</b> like in ResMed's commercial software.</p>"));
     ui->ResMedWarning->setVisible(haveResMed);
 
     if (haveResMed) {
@@ -1117,13 +1117,13 @@ void PreferencesDialog::on_createSDBackups_toggled(bool checked)
             }
         }
 
-        if (haveS9
-                && QMessageBox::question(this, tr("This may not be a good idea"),
-                                         tr("ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).")
-                                         + " " + tr("If you ever need to reimport this data again (whether in SleepyHead or ResScan) this data won't come back.")
-                                         + " " + tr("If you need to conserve disk space, please remember to carry out manual backups.") +
-                                         " " + tr("Are you sure you want to disable these backups?"), QMessageBox::Yes,
-                                         QMessageBox::No) == QMessageBox::No) {
+        if (haveS9 && QMessageBox::question(this,
+                tr("This may not be a good idea"),
+                tr("ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).") +
+                tr(" If you ever need to reimport this data again (whether in OSCR or ResScan) this data won't come back.") +
+                tr(" If you need to conserve disk space, please remember to carry out manual backups.") +
+                tr(" Are you sure you want to disable these backups?"),
+                QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
             ui->createSDBackups->setChecked(true);
             return;
         }
@@ -1165,8 +1165,10 @@ void PreferencesDialog::on_resetChannelDefaults_clicked()
 void PreferencesDialog::on_createSDBackups_clicked(bool checked)
 {
     if (!checked && p_profile->session->backupCardData()) {
-        if (QMessageBox::question(this, STR_MessageBox_Warning, tr("Switching off automatic backups is not a good idea, because SleepyHead needs these to rebuild the database if errors are found.")+"\n\n"+
-                              tr("Are you really sure you want to do this?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+        if (QMessageBox::question(this, 
+                STR_MessageBox_Warning, tr("Switching off backups is not a good idea, because OSCR needs these to rebuild the database if errors are found.\n\n"+
+                tr("Are you really sure you want to do this?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+            // do nothing
         } else {
             ui->createSDBackups->setChecked(true);
         }

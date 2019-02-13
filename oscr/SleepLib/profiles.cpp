@@ -493,7 +493,7 @@ void Profile::DataFormatError(Machine *m)
 {
     QString msg;
 
-    msg = "<font size=+1>"+QObject::tr("SleepyHead (%1) needs to upgrade its database for %2 %3 %4").
+    msg = "<font size=+1>"+QObject::tr("OSCT (%1) needs to upgrade its database for %2 %3 %4").
             arg(VersionString).
             arg(m->brand()).arg(m->model()).arg(m->serial())
             + "</font><br/><br/>";
@@ -506,17 +506,17 @@ void Profile::DataFormatError(Machine *m)
     }
 
     if (backups) {
-        msg = msg + QObject::tr("<b>SleepyHead maintains a backup of your devices data card that it uses for this purpose.</b>")+ "<br/><br/>";
+        msg = msg + QObject::tr("<b>OSCR maintains a backup of your devices data card that it uses for this purpose.</b>")+ "<br/><br/>";
         msg = msg + QObject::tr("<i>Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.</i>") + "<br/><br/>";
         backups = true;
     } else {
-        msg = msg + "<font size=+1>"+STR_MessageBox_Warning+":</font> "+QObject::tr("SleepyHead does not yet have any automatic card backups stored for this device.") + "<br/><br/>";
+        msg = msg + "<font size=+1>"+STR_MessageBox_Warning+":</font> "+QObject::tr("OSCR does not yet have any automatic card backups stored for this device.") + "<br/><br/>";
         msg = msg + QObject::tr("This means you will need to import this machine data again afterwards from your own backups or data card.") + "<br/><br/>";
     }
 
     msg += "<font size=+1>"+QObject::tr("Important:")+"</font> "+QObject::tr("Once you upgrade, you <font size=+1>can not</font> use this profile with the previous version anymore.")+"<br/><br/>"+
-            QObject::tr("If you are concerned, click No to exit, and backup your profile manually, before starting SleepyHead again.")+ "<br/><br/>";
-    msg = msg + "<font size=+1>"+QObject::tr("Are you ready to upgrade, so you can run the new version of SleepyHead?")+"</font>";
+            QObject::tr("If you are concerned, click No to exit, and backup your profile manually, before starting OSCR again.")+ "<br/><br/>";
+    msg = msg + "<font size=+1>"+QObject::tr("Are you ready to upgrade, so you can run the new version of OSCR?")+"</font>";
 
 
     QMessageBox * question = new QMessageBox(QMessageBox::Warning, QObject::tr("Machine Database Changes"), msg, QMessageBox::Yes | QMessageBox::No);
@@ -530,7 +530,7 @@ void Profile::DataFormatError(Machine *m)
         if (!m->Purge(3478216)) {
             // Purge failed.. probably a permissions error.. let the user deal with it.
             QMessageBox::critical(nullptr, STR_MessageBox_Error,
-                                  QObject::tr("Sorry, the purge operation failed, which means this version of SleepyHead can't start.")+"\n\n"+
+                                  QObject::tr("Sorry, the purge operation failed, which means this version of OSCR can't start.")+"\n\n"+
                                   QObject::tr("The machine data folder needs to be removed manually.")+"\n\n"+
                                   QObject::tr("This folder currently resides at the following location:")+"\n\n"+
                                   QDir::toNativeSeparators(Get(p_preferences[STR_GEN_DataFolder].toString())), QMessageBox::Ok);
@@ -543,14 +543,14 @@ void Profile::DataFormatError(Machine *m)
             if (!p_profile->session->backupCardData()) {
                 // Automatic backups not available for Intellipap users yet, so don't taunt them..
                 if (m->loaderName() != STR_MACH_Intellipap) {
-                    if (QMessageBox::question(nullptr, STR_MessageBox_Question, QObject::tr("Would you like to switch on automatic backups, so next time a new version of SleepyHead needs to do so, it can rebuild from these?"),
+                    if (QMessageBox::question(nullptr, STR_MessageBox_Question, QObject::tr("Would you like to switch on automatic backups, so next time a new version of OSCR needs to do so, it can rebuild from these?"),
                                               QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes)) {
                         p_profile->session->setBackupCardData(true);
                     }
                 }
             }
             QMessageBox::information(nullptr, STR_MessageBox_Information,
-                                     QObject::tr("SleepyHead will now start the import wizard so you can reinstall your %1 data.").arg(m->brand())
+                                     QObject::tr("OSCR will now start the import wizard so you can reinstall your %1 data.").arg(m->brand())
                                      ,QMessageBox::Ok, QMessageBox::Ok);
             mainwin->startImportDialog();
         }
@@ -560,9 +560,9 @@ void Profile::DataFormatError(Machine *m)
     } else {
         delete question;
         QMessageBox::information(nullptr, STR_MessageBox_Information,
-            QObject::tr("SleepyHead will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:")+"\n\n"+
+            QObject::tr("OSCR will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:")+"\n\n"+
             QDir::toNativeSeparators(Get(p_preferences[STR_GEN_DataFolder].toString()))+"\n\n"+
-            QObject::tr("Use your file manager to make a copy of your profile directory, then afterwards, restart Sleepyhead and complete the upgrade process.")
+            QObject::tr("Use your file manager to make a copy of your profile directory, then afterwards, restart OSCR and complete the upgrade process.")
                 , QMessageBox::Ok, QMessageBox::Ok);
 
         showInGraphicalShell(Get(p_preferences[STR_GEN_DataFolder].toString()));
@@ -990,7 +990,7 @@ Profile *Create(QString name)
 
     Machine *m = new Machine(p_profile, 0);
     m->setType(MT_JOURNAL);
-    MachineInfo info(MT_JOURNAL, 0, STR_MACH_Journal, "SleepyHead", STR_MACH_Journal, QString(), m->hexid(), QString(), QDateTime::currentDateTime(), 0);
+    MachineInfo info(MT_JOURNAL, 0, STR_MACH_Journal, "OSCR", STR_MACH_Journal, QString(), m->hexid(), QString(), QDateTime::currentDateTime(), 0);
 
     m->setInfo(info);
     p_profile->AddMachine(m);
@@ -1016,7 +1016,7 @@ void saveProfileList()
     QDomElement root = doc.createElement("profiles");
     doc.appendChild(root);
 
-    root.appendChild(doc.createComment("This file is created during Profile Scan for cloud access convenience, it's not used by Desktop version of SleepyHead."));
+    root.appendChild(doc.createComment("This file is created during Profile Scan for cloud access convenience, it's not used by Desktop version of OSCR."));
 
     for (auto it = profiles.begin(); it != profiles.end(); ++it) {
         QDomElement elem = doc.createElement("profile");
