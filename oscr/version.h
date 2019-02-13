@@ -13,9 +13,9 @@
 #include "build_number.h"
 
 const int major_version = 1;   // incompatible API changes
-const int minor_version = 1;   // new features that don't break things
-const int revision_number = 1; // bugfixes, revisions
-const QString ReleaseStatus = "testing"; // testing/nightly/unstable, beta/untamed, rc/almost, r/stable
+const int minor_version = 0;   // new features that don't break things
+const int revision_number = 0; // bugfixes, revisions
+const QString ReleaseStatus = "beta"; // testing/nightly/unstable, beta/untamed, rc/almost, r/stable
 
 const QString VersionString = QString("%1.%2.%3-%4-%5").arg(major_version).arg(minor_version).arg(revision_number).arg(ReleaseStatus).arg(build_number);
 const QString ShortVersionString = QString("%1.%2.%3").arg(major_version).arg(minor_version).arg(revision_number);
