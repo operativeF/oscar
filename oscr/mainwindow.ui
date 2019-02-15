@@ -2856,10 +2856,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionDebug"/>
     <addaction name="actionShow_Performance_Counters"/>
     <addaction name="separator"/>
-    <addaction name="actionHelp_Support_OSCR_Development"/>
-    <addaction name="separator"/>
-    <addaction name="actionCheck_for_Updates"/>
-    <addaction name="separator"/>
     <addaction name="actionReport_a_Bug"/>
     <addaction name="action_About"/>
    </widget>
@@ -3003,11 +2999,6 @@ p, li { white-space: pre-wrap; }
     <string>&amp;Reset Graph Layout</string>
    </property>
   </action>
-  <action name="actionCheck_for_Updates">
-   <property name="text">
-    <string>Check for &amp;Updates</string>
-   </property>
-  </action>
   <action name="action_Screenshot">
    <property name="text">
     <string>Take &amp;Screenshot</string>
@@ -3095,11 +3086,6 @@ p, li { white-space: pre-wrap; }
   <action name="actionImport_RemStar_MSeries_Data">
    <property name="text">
     <string>Import RemStar &amp;MSeries Data</string>
-   </property>
-  </action>
-  <action name="actionHelp_Support_OSCR_Development">
-   <property name="text">
-    <string>&amp;Support OSCR Development</string>
    </property>
   </action>
   <action name="actionSleep_Disorder_Terms_Glossary">
