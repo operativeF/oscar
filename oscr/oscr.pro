@@ -18,6 +18,7 @@ contains(DEFINES, helpless) {
 }
 
 DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += NO_UPDATER
 
 #OSRC requires OpenGL 2.0 support to run smoothly
 #On platforms where it's not available, it can still be built to work
@@ -357,6 +358,8 @@ OTHER_FILES += \
     docs/graphs.xml \
     docs/channels.xml \
     docs/release_notes.html \
+    docs/about.html \
+    docs/credits.html \
     docs/startup_tips.txt \
     docs/countries.txt \
     docs/tz.txt \

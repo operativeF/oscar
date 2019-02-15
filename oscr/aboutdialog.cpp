@@ -9,6 +9,8 @@
 
 #include <QDesktopServices>
 #include <QFile>
+#include <QDebug>
+#include <QMessageBox>
 
 #include "version.h"
 #include "SleepLib/appsettings.h"
@@ -22,6 +24,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->aboutText->setHtml(getAbout());
+    ui->creditsText->setHtml(getCredits());
     ui->licenseText->setHtml(getLicense());
     ui->relnotesText->setHtml(getRelnotes());
     ui->versionLabel->setText(VersionString);
@@ -55,10 +59,35 @@ AboutDialog::~AboutDialog()
     delete ui;
 }
 
+/***************************************************
 void AboutDialog::on_donateButton_clicked()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.jedimark.net/donate.php"));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Donations are not yet implemented"));
+}
+******************************************************/
+
+QString AboutDialog::getAbout()
+{
+    QFile clfile(":/docs/about.html");
+    QString text = tr("Sorry, could not locate About file.");
+    if (clfile.open(QIODevice::ReadOnly)) {
+        text = clfile.readAll();
+    } else
+        qDebug() << "Failed to open About file";
+
+    return text;
+}
+
+QString AboutDialog::getCredits()
+{
+    QFile clfile(":/docs/credits.html");
+    QString text = tr("Sorry, could not locate Credits file.");
+    if (clfile.open(QIODevice::ReadOnly)) {
+        text = clfile.readAll();
+    }
+
+    return text;
 }
 
 QString AboutDialog::getRelnotes()

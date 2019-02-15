@@ -155,23 +155,23 @@ int main(int argc, char *argv[])
 
     if (opengl2supported) {
         if (!settings.value(BetterBuild, false).toBool()) {
-            QMessageBox::information(nullptr, QObject::tr("A faster build of SleepyHead may be available"),
-                             QObject::tr("This build of SleepyHead is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
-                             QObject::tr("However it looks like your computer has full support for OpenGL 2.0!") + "<br/><br/>"+
-                             QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of SleepyHead will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
-                             QObject::tr("You will not be bothered with this message again."), QMessageBox::Ok, QMessageBox::Ok);
+            QMessageBox::information(nullptr, QObject::tr("A faster build of OSCR may be available"),
+                QObject::tr("This build of OSCR is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
+                QObject::tr("However it looks like your computer has full support for OpenGL 2.0!") + "<br/><br/>"+
+                QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of OSCR will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
+                QObject::tr("You will not be bothered with this message again."), QMessageBox::Ok, QMessageBox::Ok);
             settings.setValue(BetterBuild, true);
         }
     }
 #else
     if (bad_graphics) {
         QMessageBox::warning(nullptr, QObject::tr("Incompatible Graphics Hardware"),
-                             QObject::tr("This build of SleepyHead requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
-                             QObject::tr("You may need to update your computers graphics drivers from the GPU makers website. %1").
-                                arg(intel_graphics ? QObject::tr("(<a href='http://intel.com/support'>Intel's support site</a>)") : "")+"<br/><br/>"+
-                             QObject::tr("Because graphs will not render correctly, and it may cause crashes, this build will now exit.")+"<br/><br/>"+
-                             QObject::tr("There is another build available tagged \"<b>-BrokenGL</b>\" that should work on your computer.")
-                             ,QMessageBox::Ok, QMessageBox::Ok);
+            QObject::tr("This build of OSCR requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
+            QObject::tr("You may need to update your computers graphics drivers from the GPU makers website. %1").
+                arg(intel_graphics ? QObject::tr("(<a href='http://intel.com/support'>Intel's support site</a>)") : "")+"<br/><br/>"+
+            QObject::tr("Because graphs will not render correctly, and it may cause crashes, this build will now exit.")+"<br/><br/>"+
+            QObject::tr("There is another build available tagged \"<b>-BrokenGL</b>\" that should work on your computer."),
+            QMessageBox::Ok, QMessageBox::Ok);
         exit(1);
     }
 #endif
@@ -195,10 +195,10 @@ int main(int argc, char *argv[])
 
     if (!havefolder && !force_data_dir) {
         if (QMessageBox::question(nullptr, STR_MessageBox_Question,
-                QObject::tr("Would you like SleepyHead to use this location for storing its data?")+"\n\n"+
+                QObject::tr("Would you like OSCR to use this location for storing its data?")+"\n\n"+
                 QDir::toNativeSeparators(GetAppRoot())+"\n\n"+
-                QObject::tr("If you are upgrading, don't panic, you just need to make sure this is pointed at your old SleepyHead data folder.")+"\n\n"+
-                QObject::tr("(If you have no idea what to do here, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
+                QObject::tr("If you are upgrading, don't panic, you just need to make sure this is pointed at your old OSCR data folder.")+"\n\n"+
+                QObject::tr("(If you are unsure, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
             settings.setValue("Settings/AppRoot", GetAppRoot());
             change_data_dir = false;
         }
@@ -208,18 +208,18 @@ retry_directory:
 
     if (change_data_dir) {
         QString datadir = QFileDialog::getExistingDirectory(nullptr,
-                          QObject::tr("Choose or create new folder for SleepyHead data"), GetAppRoot(),
+                          QObject::tr("Choose or create new folder for OSCR data"), GetAppRoot(),
                           QFileDialog::ShowDirsOnly);
 
         if (datadir.isEmpty()) {
             if (!havefolder) {
                 QMessageBox::information(nullptr, QObject::tr("Exiting"),
-                                         QObject::tr("As you did not select a data folder, SleepyHead will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
+                    QObject::tr("As you did not select a data folder, OSCR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
                 return 0;
             } else {
                 QMessageBox::information(nullptr, STR_MessageBox_Warning,
-                                         QObject::tr("You did not select a directory.")+"\n\n"+QObject::tr("SleepyHead will now start with your old one.")+"\n\n"+
-                                         QDir::toNativeSeparators(GetAppRoot()), QMessageBox::Ok);
+                    QObject::tr("You did not select a directory.")+"\n\n"+QObject::tr("OSCR will now start with your old one.")+"\n\n"+
+                    QDir::toNativeSeparators(GetAppRoot()), QMessageBox::Ok);
             }
         } else {
             QDir dir(datadir);
@@ -229,9 +229,9 @@ retry_directory:
                 if (dir.count() > 2) {
                     // Not a new directory.. nag the user.
                     if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
-                                              QObject::tr("The folder you chose is not empty, nor does it already contain valid SleepyHead data.")
-                                              + "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n"
-                                              + datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
+                            QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCR data.") +
+                            "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
+                            datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
                         goto retry_directory;
                     }
                 }
@@ -253,14 +253,15 @@ retry_directory:
     AppSetting->setLanguage(language);
 
     // Clean up some legacy crap
-    QFile lf(PREF.Get("{home}/Layout.xml"));
-    if (lf.exists()) {
-        lf.remove();
-    }
+//    QFile lf(PREF.Get("{home}/Layout.xml"));
+//    if (lf.exists()) {
+//        lf.remove();
+//    }
 
     PREF.Erase(STR_AppName);
     PREF.Erase(STR_GEN_SkipLogin);
 
+#ifndef NO_UPDATER
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Check when last checked for updates..
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,16 +283,17 @@ retry_directory:
             check_updates = true;
         }
     }
+#endif
 
     int vc = compareVersion(AppSetting->versionString());
     if (vc < 0) {
         AppSetting->setShowAboutDialog(1);
         //release_notes();
 
-        check_updates = false;
+//        check_updates = false;
     } else if (vc > 0) {
         if (QMessageBox::warning(nullptr, STR_MessageBox_Error,
-            QObject::tr("The version of SleepyHead you just ran is OLDER than the one used to create this data (%1).").
+            QObject::tr("The version of OSCR you just ran is OLDER than the one used to create this data (%1).").
                         arg(AppSetting->versionString()) +"\n\n"+
             QObject::tr("It is likely that doing this will cause data corruption, are you sure you want to do this?"),
             QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
@@ -353,8 +355,9 @@ retry_directory:
     Q_UNUSED(changing_language)
     Q_UNUSED(dont_load_profile)
 
-
+#ifndef NO_UPDATER
     if (check_updates) { mainwin->CheckForUpdates(); }
+#endif
 
     mainwin->SetupGUI();
     mainwin->show();

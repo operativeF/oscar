@@ -326,7 +326,7 @@ extern QString STR_TR_PrRelief; // Pressure Relief
 extern QString STR_TR_SensAwake;
 
 extern QString STR_TR_Bookmarks;
-extern QString STR_TR_SleepyHead;
+extern QString STR_TR_OSCR;
 extern QString STR_TR_AppVersion;
 
 extern QString STR_TR_Mode;

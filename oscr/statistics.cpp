@@ -637,7 +637,7 @@ QString Statistics::htmlHeader(bool showheader)
     if (showheader) {
         html += "<div align=center>"
         +resizeHTMLPixmap(logoPixmap,64,64)+"<br/>"
-        "<font size='+3'>" + STR_TR_SleepyHead + "</font><br/>"
+        "<font size='+3'>" + STR_TR_OSCR + "</font><br/>"
         "<font size='+2'>" + tr("Usage Statistics") + "</font><br/>"
         "<font size='+1' title=\""+tr("This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCR is unsuitable as a compliance/medical reporting tool.")+"\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
 
@@ -1424,7 +1424,7 @@ void Statistics::UpdateRecordsBox()
 
         } else {
             html += "<br/><b>"+tr("Want more information?")+"</b><br/>";
-            html += "<i>"+tr("SleepyHead needs all summary data loaded to calculate best/worst data for individual days.")+"</i><br/><br/>";
+            html += "<i>"+tr("OSCR needs all summary data loaded to calculate best/worst data for individual days.")+"</i><br/><br/>";
             html += "<i>"+tr("Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.")+"</i><br/><br/>";
         }
 

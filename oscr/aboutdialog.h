@@ -22,10 +22,13 @@ public:
     explicit AboutDialog(QWidget *parent = 0);
     ~AboutDialog();
 
+/****************************************************
 private slots:
     void on_donateButton_clicked();
-
+***************************************************/
 private:
+    QString getAbout();
+    QString getCredits();
     QString getLicense();
     QString getRelnotes();
 

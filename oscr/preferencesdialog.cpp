@@ -1165,8 +1165,8 @@ void PreferencesDialog::on_resetChannelDefaults_clicked()
 void PreferencesDialog::on_createSDBackups_clicked(bool checked)
 {
     if (!checked && p_profile->session->backupCardData()) {
-        if (QMessageBox::question(this, 
-                STR_MessageBox_Warning, tr("Switching off backups is not a good idea, because OSCR needs these to rebuild the database if errors are found.\n\n"+
+        if (QMessageBox::question(this,
+                STR_MessageBox_Warning, tr("Switching off backups is not a good idea, because OSCR needs these to rebuild the database if errors are found.\n\n") +
                 tr("Are you really sure you want to do this?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
             // do nothing
         } else {

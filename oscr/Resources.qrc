@@ -7,6 +7,8 @@
         <file>docs/countries.txt</file>
         <file>docs/tz.txt</file>
         <file>docs/release_notes.html</file>
+        <file>docs/about.html</file>
+        <file>docs/credits.html</file>
         <file>docs/schema.xml</file>
         <file>docs/channels.xml</file>
         <file>fonts/FreeSans.ttf</file>

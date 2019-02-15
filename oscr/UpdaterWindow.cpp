@@ -89,10 +89,11 @@ QString platformStr()
 
 void UpdaterWindow::checkForUpdates()
 {
-    QMessageBox(tr("Not yet implemented"));
+#ifdef NO_UPDATER
+    QMessageBox::information(nullptr,STR_MessageBox_Information, tr("Updates are not yet implemented"));
     return;
+#else
 
-/********************************************
     QString platform=platformStr();
 
 #ifdef Q_OS_WIN
@@ -131,9 +132,10 @@ void UpdaterWindow::checkForUpdates()
     update_url = QUrl(QString("http://sleepyhead.jedimark.net/releases/LatestVersion-%1").arg(platform));
 #endif
     downloadUpdateXML();
-*******************************************/
+#endif // NO_UPDATER
 }
 
+#ifndef NO_UPDATER
 void UpdaterWindow::downloadUpdateXML()
 {
     requestmode = RM_CheckUpdates;
@@ -267,7 +269,9 @@ void UpdaterWindow::requestFile()
     connect(reply, SIGNAL(readyRead()), this, SLOT(dataReceived()));
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64,
             qint64)));
-} */
+} 
+************************************************************/
+#endif
 
 int checkVersionStatus(QString statusstr)
 {
@@ -410,9 +414,11 @@ int compareVersion(QString version)
     return 0;
 }
 
-//const QString UPDATE_SleepyHead = "com.jedimark.sleepyhead";
-//const QString UPDATE_QT = "com.jedimark.sleepyhead.qtlibraries";
-//const QString UPDATE_Translations = "com.jedimark.sleepyhead.translations";
+#ifndef NO_UPDATER
+
+const QString UPDATE_ROSCR = "com.jedimark.sleepyhead";
+const QString UPDATE_QT = "com.jedimark.sleepyhead.qtlibraries";
+const QString UPDATE_Translations = "com.jedimark.sleepyhead.translations";
 
 bool SpawnApp(QString apppath, QStringList args = QStringList())
 {
@@ -464,7 +470,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
         qDebug() << " XML update structure parsed cleanly";
         QHash<QString, QString> CurrentVersion;
 
-        CurrentVersion[UPDATE_SleepyHead] = VersionString;
+        CurrentVersion[UPDATE_OSCR] = VersionString;
         CurrentVersion[UPDATE_QT] = QT_VERSION_STR;
         CurrentVersion[UPDATE_Translations] = VersionString;
 
@@ -514,6 +520,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
         qDebug() << "Couldn't parse Updates.xml file";
     }
 }
+#endif
 
 // Old
 /************************************
@@ -859,11 +866,13 @@ void UpdaterWindow::replyFinished(QNetworkReply *reply)
     }
 }
 ****************************************************************/
+#ifndef NO_UPDATER
 
 void UpdaterWindow::on_CloseButton_clicked()
 {
     close();
 }
+#endif
 
 /*************************************
 void UpdaterWindow::upgradeNext()
@@ -956,9 +965,11 @@ void UpdaterWindow::on_upgradeButton_clicked()
 }
 ************************************************************************/
 
+#ifndef NO_UPDATER
 void UpdaterWindow::on_FinishedButton_clicked()
 {
     if (success) {
         mainwin->RestartApplication();
     } else { close(); }
 }
+#endif

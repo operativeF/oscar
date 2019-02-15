@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent) :
         a->setEnabled(false);
         systraymenu->addSeparator();
         systraymenu->addAction(tr("&About"), this, SLOT(on_action_About_triggered()));
-        systraymenu->addAction(tr("Check for &Updates"), this, SLOT(on_actionCheck_for_Updates_triggered()));
+//        systraymenu->addAction(tr("Check for &Updates"), this, SLOT(on_actionCheck_for_Updates_triggered()));
         systraymenu->addSeparator();
         systraymenu->addAction(tr("E&xit"), this, SLOT(close()));
     } else { // if not available, the messages will popup in the taskbar
@@ -390,10 +390,10 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     if (!lockhost.isEmpty()) {
         if (lockhost.compare(QHostInfo::localHostName()) != 0) {
             if (QMessageBox::warning(nullptr, STR_MessageBox_Warning,
-                                  QObject::tr("There is a lockfile already present for this profile '%1', claimed on '%2'.").arg(prof->user->userName()).arg(lockhost)+"\n\n"+
-                                  QObject::tr("You can only work with one instance of an individual OSCR profile at a time.")+"\n\n"+
-                                  QObject::tr("If you are using cloud storage, make sure OSCR is closed and syncing has completed first on the other computer before proceeding."),
-                                  QMessageBox::Cancel |QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel) {
+                    QObject::tr("There is a lockfile already present for this profile '%1', claimed on '%2'.").arg(prof->user->userName()).arg(lockhost)+"\n\n"+
+                    QObject::tr("You can only work with one instance of an individual OSCR profile at a time.")+"\n\n"+
+                    QObject::tr("If you are using cloud storage, make sure OSCR is closed and syncing has completed first on the other computer before proceeding."),
+                    QMessageBox::Cancel |QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Cancel) {
                 return false;
             }
         } // not worried about localhost locks anymore, just silently drop it.
@@ -845,11 +845,9 @@ void MainWindow::on_action_Import_Data_triggered()
 
         if (!p_profile->cpap->autoImport()) {
             QMessageBox mbox(QMessageBox::NoIcon,
-                             tr("CPAP Data Located"),
-                             infostr+"\n\n"+QDir::toNativeSeparators(datacards[0].path)+"\n\n"+
-                             tr("Would you like to import from this location?"),
-                             QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
-                             this);
+                tr("CPAP Data Located"), infostr+"\n\n"+QDir::toNativeSeparators(datacards[0].path)+"\n\n"+
+                tr("Would you like to import from this location?"),
+                QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this);
             mbox.setDefaultButton(QMessageBox::Yes);
             mbox.setButtonText(QMessageBox::No, tr("Specify"));
 
@@ -1260,13 +1258,19 @@ void MainWindow::on_oximetryButton_clicked()
 
 void MainWindow::CheckForUpdates()
 {
+    qDebug() << "procedure <CheckForUpdates> called";
     on_actionCheck_for_Updates_triggered();
 }
 
 void MainWindow::on_actionCheck_for_Updates_triggered()
 {
+#ifdef NO_UPDATER
+    qDebug() << "procedure <on_actionCheck_for_Updates_triggered> called";
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Updates are not yet implemented"));
+#else
     UpdaterWindow *w = new UpdaterWindow(this);
     w->checkForUpdates();
+#endif
 }
 
 bool toolbox_visible = false;
@@ -1433,13 +1437,13 @@ void MainWindow::on_action_CycleTabs_triggered()
 void MainWindow::on_actionOnline_Users_Guide_triggered()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide"));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The User's Guide is not yet implemented"));
 }
 
 void MainWindow::on_action_Frequently_Asked_Questions_triggered()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions"));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The FAQ is not yet implemented"));
 }
 
 void packEventList(EventList *el, EventDataType minval = 0)
@@ -1685,7 +1689,10 @@ void MainWindow::RestartApplication(bool force_login, QString cmdline)
 
     if (QProcess::startDetached("/usr/bin/open", args)) {
         QApplication::instance()->exit();
-    } else { QMessageBox::warning(nullptr, tr("Gah!"), tr("If you can read this, the restart command didn't work. Your going to have to do it yourself manually."), QMessageBox::Ok); }
+    } else { 
+        QMessageBox::warning(nullptr, tr("Gah!"), 
+            tr("If you can read this, the restart command didn't work. You will have to do it yourself manually."), QMessageBox::Ok);
+    }
 
 #else
     apppath = QApplication::instance()->applicationFilePath();
@@ -1709,7 +1716,10 @@ void MainWindow::RestartApplication(bool force_login, QString cmdline)
         QApplication::instance()->exit();
 
 //        ::exit(0);
-    } else { QMessageBox::warning(nullptr, tr("Gah!"), tr("If you can read this, the restart command didn't work. Your going to have to do it yourself manually."), QMessageBox::Ok); }
+    } else { 
+        QMessageBox::warning(nullptr, tr("Gah!"), 
+            tr("If you can read this, the restart command didn't work. You will have to do it yourself manually."), QMessageBox::Ok);
+    }
 
 #endif
 }
@@ -1822,9 +1832,9 @@ void MainWindow::on_actionRebuildCPAP(QAction *action)
     if (backups) {
         if (QMessageBox::question(this,
                 STR_MessageBox_Question,
-                tr("Are you sure you want to rebuild all CPAP data for the following machine:\n\n" +
+                tr("Are you sure you want to rebuild all CPAP data for the following machine:\n\n") +
                 mach->brand() + " " + mach->model() + " " +
-                mach->modelnumber() + " (" + mach->serial() + ")\n\n"+
+                mach->modelnumber() + " (" + mach->serial() + ")\n\n" +
                 tr("Please note, that this could result in loss of graph data if OSCR's backups have been disabled or interfered with in any way."),
                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
             return;
@@ -1834,7 +1844,7 @@ void MainWindow::on_actionRebuildCPAP(QAction *action)
                 STR_MessageBox_Warning,
                 "<p><b>"+STR_MessageBox_Warning+": </b>"+tr("For some reason, OSCR does not have any backups for the following machine:")+ "</p>" +
                 "<p>"+mach->brand() + " " + mach->model() + " " + mach->modelnumber() + " (" + mach->serial() + ")</p>"+
-                "<p>"+tr("Provided you have made <i>your <b>own</b> backups for ALL of your CPAP data</i>, you can still complete this operation, but you will have to restore from your backups manually.")+"</p>"
+                "<p>"+tr("Provided you have made <i>your <b>own</b> backups for ALL of your CPAP data</i>, you can still complete this operation, but you will have to restore from your backups manually.")+"</p>" +
                 "<p><b>"+tr("Are you really sure you want to do this?")+"</b></p>",
                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
             return;
@@ -1850,9 +1860,9 @@ void MainWindow::on_actionRebuildCPAP(QAction *action)
         importCPAP(ImportPath(path, loader), tr("Please wait, importing from backup folder(s)..."));
     } else {
         if (QMessageBox::information(this, STR_MessageBox_Warning,
-                                 tr("Because there are no internal backups to rebuild from, you will have to restore from your own.")+"\n\n"+
-                                 tr("Would you like to import from your own backups now? (you will have no data visible for this machine until you do)"),
-                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
+                tr("Because there are no internal backups to rebuild from, you will have to restore from your own.")+"\n\n"+
+                tr("Would you like to import from your own backups now? (you will have no data visible for this machine until you do)"),
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
             on_action_Import_Data_triggered();
         } else {
         }
@@ -1940,23 +1950,26 @@ void MainWindow::purgeMachine(Machine * mach)
         p_profile->StoreMachines();
     } else {
         QMessageBox::warning(this, STR_MessageBox_Error,
-                             tr("A file permission error or simillar screwed up the purge process, you will have to delete the following folder manually:")
-                             +"\n\n"+
-                             QDir::toNativeSeparators(mach->getDataPath()), QMessageBox::Ok, QMessageBox::Ok);
-        if (overview) overview->ReloadGraphs();
+            tr("A file permission error casued the purge process to fail; you will have to delete the following folder manually:") +
+            "\n\n" + QDir::toNativeSeparators(mach->getDataPath()), QMessageBox::Ok, QMessageBox::Ok);
+
+        if (overview) 
+            overview->ReloadGraphs();
 
         if (daily) {
             daily->clearLastDay(); // otherwise Daily will crash
             daily->ReloadGraphs();
         }
-        if (welcome) welcome->refreshPage();
+        if (welcome) 
+            welcome->refreshPage();
 
         //GenerateStatistics();
         return;
     }
 
 
-    if (overview) overview->ReloadGraphs();
+    if (overview) 
+        overview->ReloadGraphs();
     QFile rxcache(p_profile->Get("{" + STR_GEN_DataFolder + "}/RXChanges.cache" ));
     rxcache.remove();
 
@@ -1986,9 +1999,7 @@ void MainWindow::on_helpButton_clicked()
 #ifndef helpless
     ui->tabWidget->setCurrentWidget(help);
 #else
-QMessageBox msgBox;
-    msgBox.setText("No help is available.");
-    msgBox.exec();
+    QMessageBox::information(nullptr, STR_MessageBox_Error, tr("No help is available."));
 #endif
 }
 
@@ -2222,13 +2233,13 @@ void MainWindow::on_actionImport_RemStar_MSeries_Data_triggered()
 void MainWindow::on_actionSleep_Disorder_Terms_Glossary_triggered()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary"));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The Glossary is not yet implemented"));
 }
 
 void MainWindow::on_actionHelp_Support_OSCR_Development_triggered()
 {
 //    QDesktopServices().openUrl(QUrl("https://sleepyhead.jedimark.net/donate.php"));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Donations are not yet implemented"));
 }
 
 void MainWindow::on_actionChange_Language_triggered()
@@ -2449,7 +2460,7 @@ void MainWindow::on_actionExport_CSV_triggered()
 
 void MainWindow::on_actionExport_Review_triggered()
 {
-    QMessageBox::information(nullptr, STR_MessageBox_Information, QObject::tr("Sorry, this feature is not implemented yet"), QMessageBox::Ok);
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Export review is not yet implemented"));
 }
 
 void MainWindow::on_mainsplitter_splitterMoved(int, int)
@@ -2464,7 +2475,7 @@ void MainWindow::on_actionReport_a_Bug_triggered()
 //    QString language = settings.value(LangSetting).toString();
 //
 //    QDesktopServices::openUrl(QUrl(QString("https://sleepyhead.jedimark.net/report_bugs.php?lang=%1&version=%2&platform=%3").arg(language).arg(VersionString).arg(PlatformString)));
-    QMessageBox(tr("Not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Error, tr("Bug reports are not yet implemented"));
 }
 
 void MainWindow::on_profilesButton_clicked()

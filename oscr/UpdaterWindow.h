@@ -47,6 +47,8 @@ class UpdaterWindow : public QMainWindow
     //! Start the
     void checkForUpdates();
 
+#ifndef NO_UPDATER
+
     /*! \fn ParseUpdateXML(QIODevice * dev)
         \brief Parses the update.xml from either QFile or QNetworkReply source
         */
@@ -84,29 +86,32 @@ class UpdaterWindow : public QMainWindow
 
     //! \brief Click on finished, restart if app has been upgraded, otherwise just close the window.
     void on_FinishedButton_clicked();
+#endif
 
   private:
 
+    Ui::UpdaterWindow *ui;
+    RequestMode requestmode;
+    QNetworkAccessManager *netmanager;
+    Update *update;
+
+#ifndef NO_UPDATER
     //! \brief Holds the results of parsing the update.xml file
     UpdateParser updateparser;
 
     // new parser
     UpdatesParser updatesparser;
 
-    Ui::UpdaterWindow *ui;
-
-    RequestMode requestmode;
     QTime dltime;
+    QList<Update *> updates;
 
-    Update *update;
     Release *release;
     QFile file;
-    QNetworkAccessManager *netmanager;
     QNetworkReply *reply;
-    QList<Update *> updates;
     int current_row;
     bool success;
     QUrl update_url; // for update.xml redirects..
+#endif
 };
 
 #endif // UPDATEWINDOW_H
