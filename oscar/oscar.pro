@@ -5,11 +5,11 @@
 #-------------------------------------------------
 
 lessThan(QT_MAJOR_VERSION,5)|lessThan(QT_MINOR_VERSION,9) {
-    message("You need Qt 5.9 to build OSCR with Help Pages")
+    message("You need Qt 5.9 to build OSCAR with Help Pages")
     DEFINES += helpless
 }
 lessThan(QT_MAJOR_VERSION,5)|lessThan(QT_MINOR_VERSION,7) {
-    error("You need Qt 5.7 or newer to build OSCR");
+    error("You need Qt 5.7 or newer to build OSCAR");
 }
 
 QT += core gui network xml printsupport serialport widgets help
@@ -20,9 +20,9 @@ contains(DEFINES, helpless) {
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += NO_UPDATER
 
-#OSRC requires OpenGL 2.0 support to run smoothly
+#OSCAR requires OpenGL 2.0 support to run smoothly
 #On platforms where it's not available, it can still be built to work
-#provided the BrokenGL DEFINES flag is passed to qmake (eg, qmake [specs] /path/to/OSCR_QT.pro DEFINES+=BrokenGL) (hint, Projects button on the left)
+#provided the BrokenGL DEFINES flag is passed to qmake (eg, qmake [specs] /path/to/OSCAR_QT.pro DEFINES+=BrokenGL) (hint, Projects button on the left)
 contains(DEFINES, NoGL) {
     message("Building with QWidget gGraphView to support systems without ANY OpenGL")
     DEFINES += BROKEN_OPENGL_BUILD
@@ -51,7 +51,7 @@ contains(DEFINES, STATIC) {
     }
 }
 
-TARGET = Oscr
+TARGET = Oscar
 unix:!macx:!haiku {
     TARGET.path=/usr/bin
 }
@@ -82,6 +82,13 @@ QMAKE_EXTRA_TARGETS += gitinfotarget
     message("Finished generating help files");
 }
 
+QMAKE_TARGET_PRODUCT = Oscar
+QMAKE_TARGET_COMPANY = Nightowl Software
+QMAKE_TARGET_COPYRIGHT = Copyright (c)2011-2018 Mark Watkins & (c) 2019 Nightowl Software
+QMAKE_TARGET_DESCRIPTION = "OpenSource CPAP Analysis Reporter"
+VERSION = 1.0.0
+#    RC_ICONS = ./icons/logo-v3.0.ico
+
 macx {
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS             += -lz
@@ -95,13 +102,6 @@ macx {
 } else:win32 {
     DEFINES          += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
     LIBS             += -lsetupapi
-
-    QMAKE_TARGET_PRODUCT = Oscr
-    QMAKE_TARGET_COMPANY = Nightowl Software
-    QMAKE_TARGET_COPYRIGHT = Copyright (c)2011-2018 Mark Watkins & (c) 2019 Nightowl Software
-    QMAKE_TARGET_DESCRIPTION = "OpenSource CPAP Review"
-    VERSION = 1.0.0
-    RC_ICONS = ./icons/logo-v3.0.ico
 
     INCLUDEPATH += $$PWD
     INCLUDEPATH += $$[QT_INSTALL_PREFIX]/../src/qtbase/src/3rdparty/zlib
@@ -401,7 +401,7 @@ DISTFILES += help/default.css \
     help/help_nl/tipsntricks.html \
     help/help_en/reportingbugs.html \
     win_icon.rc \
-    help/help_nl/OSCR_Guide_nl.qhp \
-    help/help_en/OSCR_Guide_en.qhp \
+    help/help_nl/OSCAR_Guide_nl.qhp \
+    help/help_en/OSCAR_Guide_en.qhp \
     help/index.qhcp
 }
