@@ -201,7 +201,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
     ui->allowYAxisScaling->setChecked(AppSetting->allowYAxisScaling());
 
     ui->autoLaunchImporter->setChecked(AppSetting->autoLaunchImport());
+#ifndef NO_UPDATER
     ui->allowEarlyUpdates->setChecked(AppSetting->allowEarlyUpdates());
+#else
+    ui->automaticallyCheckUpdates->setVisible(false);
+#endif
 
     int s = profile->cpap->clockDrift();
     int m = (s / 60) % 60;
@@ -243,14 +247,15 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
 
     ui->graphHeight->setValue(AppSetting->graphHeight());
 
+#ifndef NO_UPDATER
     ui->automaticallyCheckUpdates->setChecked(AppSetting->updatesAutoCheck());
-
     ui->updateCheckEvery->setValue(AppSetting->updateCheckFrequency());
-
-
     if (AppSetting->updatesLastChecked().isValid()) {
         RefreshLastChecked();
-    } else { ui->updateLastChecked->setText(tr("Never")); }
+    } else { 
+        ui->updateLastChecked->setText(tr("Never"));
+    }
+#endif
 
     ui->overlayFlagsCombo->setCurrentIndex(AppSetting->overlayType());
     ui->overviewLinecharts->setCurrentIndex(AppSetting->overviewLinechartMode());
@@ -873,9 +878,11 @@ bool PreferencesDialog::Save()
 
     AppSetting->setAutoLaunchImport(ui->autoLaunchImporter->isChecked());
 
+#ifndef NO_UPDATER
     AppSetting->setUpdatesAutoCheck(ui->automaticallyCheckUpdates->isChecked());
     AppSetting->setUpdateCheckFrequency(ui->updateCheckEvery->value());
     AppSetting->setAllowEarlyUpdates(ui->allowEarlyUpdates->isChecked());
+#endif
 
 
     PREF["Fonts_Application_Name"] = ui->applicationFont->currentText();
@@ -1032,6 +1039,7 @@ void PreferencesDialog::on_IgnoreSlider_valueChanged(int position)
     } else { ui->IgnoreLCD->display(STR_TR_Off); }
 }
 
+#ifndef NO_UPDATER
 #include "mainwindow.h"
 extern MainWindow *mainwin;
 void PreferencesDialog::RefreshLastChecked()
@@ -1043,6 +1051,7 @@ void PreferencesDialog::on_checkForUpdatesButton_clicked()
 {
     mainwin->CheckForUpdates();
 }
+#endif
 
 MySortFilterProxyModel::MySortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)

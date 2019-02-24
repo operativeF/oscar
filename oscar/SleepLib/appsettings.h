@@ -52,13 +52,15 @@ const QString STR_US_RemoveCardReminder = "RemoveCardReminder";
 const QString STR_IS_CacheSessions = "MemoryHog";
 
 const QString STR_GEN_AutoOpenLastUsed = "AutoOpenLastUsed";
+const QString STR_GEN_Language = "Language";
+const QString STR_PREF_VersionString = "VersionString";
+const QString STR_GEN_ShowAboutDialog = "ShowAboutDialog";
+#ifndef NO_UPDATER
 const QString STR_GEN_UpdatesLastChecked = "UpdatesLastChecked";
 const QString STR_GEN_UpdatesAutoCheck = "Updates_AutoCheck";
 const QString STR_GEN_UpdateCheckFrequency = "Updates_CheckFrequency";
-const QString STR_GEN_Language = "Language";
 const QString STR_PREF_AllowEarlyUpdates = "AllowEarlyUpdates";
-const QString STR_PREF_VersionString = "VersionString";
-const QString STR_GEN_ShowAboutDialog = "ShowAboutDialog";
+#endif
 
 
 class AppWideSetting: public PrefSettings
@@ -98,10 +100,12 @@ public:
       m_profileName = initPref(STR_GEN_Profile, "").toString();
       initPref(STR_GEN_AutoOpenLastUsed, true);
 
+#ifndef NO_UPDATER
       initPref(STR_GEN_UpdatesAutoCheck, true);
       initPref(STR_GEN_UpdateCheckFrequency, 7);
       initPref(STR_PREF_AllowEarlyUpdates, false);
       initPref(STR_GEN_UpdatesLastChecked, QDateTime());
+#endif
       initPref(STR_PREF_VersionString, VersionString);
       m_language = initPref(STR_GEN_Language, "en_US").toString();
       initPref(STR_GEN_ShowAboutDialog, 0);  // default to about screen, set to -1 afterwards
@@ -118,10 +122,12 @@ public:
   QString m_profileName, m_language;
 
   QString versionString() const { return getPref(STR_PREF_VersionString).toString(); }
+#ifndef NO_UPDATER
   bool updatesAutoCheck() const { return getPref(STR_GEN_UpdatesAutoCheck).toBool(); }
   bool allowEarlyUpdates() const { return getPref(STR_PREF_AllowEarlyUpdates).toBool(); }
   QDateTime updatesLastChecked() const { return getPref(STR_GEN_UpdatesLastChecked).toDateTime(); }
   int updateCheckFrequency() const { return getPref(STR_GEN_UpdateCheckFrequency).toInt(); }
+#endif
   int showAboutDialog() const { return getPref(STR_GEN_ShowAboutDialog).toInt(); }
   void setShowAboutDialog(int tab) {setPref(STR_GEN_ShowAboutDialog, tab); }
 
@@ -220,10 +226,12 @@ public:
   void setRemoveCardReminder(bool b) { setPref(STR_US_RemoveCardReminder, b); }
 
   void setVersionString(QString version) { setPref(STR_PREF_VersionString, version); }
+#ifndef NO_UPDATER
   void setUpdatesAutoCheck(bool b) { setPref(STR_GEN_UpdatesAutoCheck, b); }
   void setAllowEarlyUpdates(bool b)  { setPref(STR_PREF_AllowEarlyUpdates, b); }
   void setUpdatesLastChecked(QDateTime datetime) { setPref(STR_GEN_UpdatesLastChecked, datetime); }
   void setUpdateCheckFrequency(int freq) { setPref(STR_GEN_UpdateCheckFrequency,freq); }
+#endif
   void setAutoOpenLastUsed(bool b) { setPref(STR_GEN_AutoOpenLastUsed , b); }
   void setLanguage(QString language) { setPref(STR_GEN_Language, m_language=language); }
 

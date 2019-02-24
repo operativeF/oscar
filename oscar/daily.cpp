@@ -1511,7 +1511,7 @@ void Daily::Load(QDate date)
             html+="<tr><td align=center><font size='+3'>"+tr("\"Nothing's here!\"")+"</font></td></tr>";
             html+="<tr><td align=center><img src='qrc:/icons/logo.png'></td></tr>";
             html+="<tr height=5px><td align=center></td></tr>";
-            html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("Bob is bored with this days lack of data.")+"</font></i></td></tr>";
+            html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("Oscar is bored with this days lack of data.")+"</font></i></td></tr>";
             html+="<tr height=25%><td align=center></td></tr>";
             html+="</table>\n";
         }

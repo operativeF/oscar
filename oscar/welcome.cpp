@@ -125,7 +125,9 @@ QString Welcome::GenerateCPAPHTML()
 
     Machine * cpap = nullptr;
     if (!havecpapdata && !haveoximeterdata) {
-        html += "<p>" + tr("It might be a good idea to check preferences first,</br>as there are some options that affect import.")+"</p>"
+        html += "<p>" + tr("It would be a good idea to check File->Preferences first,") + "</br>" +
+                        tr("as there are some options that affect import.")+"</p>" +
+        "<p>" + tr("Note that some preferences are forced when a ResMed machine is detected") + "</p>" +
         "<p>" + tr("First import can take a few minutes.") + "</p>";
     } else {
         QDate date = p_profile->LastDay(MT_CPAP);

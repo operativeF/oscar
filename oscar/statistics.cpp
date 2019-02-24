@@ -990,7 +990,7 @@ QString Statistics::GenerateHTML()
 //        html += QString("<tr><td align=center>") +
         html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
                 "<p><img src='qrc:/icons/logo.png' width=\"100\" height=\"100\"></p>"
-                "<p><i>"+tr("This lonely sleepy thing has no data :(")+"</i></p>");
+                "<p><i>"+tr("Oscar has to data to report :(")+"</i></p>");
 
 //        "</table></div>";
         html += htmlFooter(havedata);
