@@ -3,16 +3,16 @@
     <docFiles>
         <generate>
             <file>
-                <input>help_en/SleepyHeadGuide_en.qhp</input>
-                <output>SleepyHeadGuide.en_US.qch</output>
+                <input>help_en/OSCAR_Guide_en.qhp</input>
+                <output>OSCAR_Guide.en_US.qch</output>
             </file>
             <file>
-                <input>help_nl/SleepyHeadGuide_nl.qhp</input>
-                <output>SleepyHeadGuide.nl.qch</output>
+                <input>help_nl/OSCAR_Guide_nl.qhp</input>
+                <output>OSCAR_Guide.nl.qch</output>
             </file>
         </generate>
         <register>
-          <file>SleepyHeadGuide.en_US.qch</file>
+          <file>OSCAR_Guide.en_US.qch</file>
         </register>
     </docFiles>
 </QHelpCollectionProject>

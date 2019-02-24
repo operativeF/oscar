@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <QtHelpProject version="1.0">
-    <namespace>jedimark.net.SleepyHeadGuide</namespace>
+    <namespace>nightowlsoftware.ca.OSCAR_Guide</namespace>
     <virtualFolder>doc</virtualFolder>
     <filterSection>
         <toc>
-            <section title="SleepyHead Manual" ref="index.html">
+            <section title="OSCAR Manual" ref="index.html">
                 <section title="Introduction" ref="index.html#intro"/>
                 <section title="Getting Started" ref="gettingstarted.html"/>
                 <section title="Supported Machines" ref="supported.html"/>
