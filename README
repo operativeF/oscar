@@ -1,6 +1,6 @@
-OpenSource CPAP Review - OSCR
+OpenSource CPAP Analysis Reporter - OSCAR
 
-OSCR started as a maintenance fork of SleepyHead version 1.1.0 when that was abandoned by Mark Watkins.
+OSCAR started as a maintenance fork of SleepyHead version 1.1.0 when that was abandoned by Mark Watkins.
 
 SleepyHead was cross platform, opensource sleep tracking program for reviewing CPAP and Oximetry data, 
 which are devices used in the treatment of Sleep Disorders like Obstructive Sleep Apnea. It was released 
@@ -10,8 +10,8 @@ SleepyHead was written by Mark Watkins (aka Jedimark), an Australian software de
 
 SleepyHead was copyright (C) 2011-2018 by Mark Watkins <mark@jedimark.net>
 
-Most of OSCR is copyright (c) 2011-2018 by Mark Watkins <mark@jedimark.net>
-Portions of OSCR are copyright (c) 2019 by Nightowl Software <michaelnightowl99@gmail.com>
+Most of OSCAR is copyright (c) 2011-2018 by Mark Watkins <mark@jedimark.net>
+Portions of OSCAR are copyright (c) 2019 by Nightowl Software <michaelnightowl99@gmail.com>
 
 Requirements:
 -------------
@@ -31,7 +31,7 @@ Recommend shadow building to not cruft up the source code folder:
 cd ..
 mkdir build
 cd build
-qmake ../oscr-code/OSCR_QT.pro 
+qmake ../oscr-code/OSCAR_QT.pro 
 make
 
 You may need to add a -spec option to qmake to suit your platform. 
@@ -54,7 +54,7 @@ with
 
 Software Licensing Information
 ------------------------------
-OSCR is released under the GNU GPL v3 License. Please see below for a note on giving correct attribution
+OSCAR is released under the GNU GPL v3 License. Please see below for a note on giving correct attribution
 in redistribution of derivatives.
 
 It is built using Qt SDK (Open Source Edition), available from http://qt.io.
