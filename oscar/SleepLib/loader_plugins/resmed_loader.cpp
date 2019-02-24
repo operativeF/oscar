@@ -1758,7 +1758,7 @@ int ResmedLoader::Open(const QString & dirpath)
         // add primary STR.edf
         strfiles.push_back(strpath);
 
-        // Just in case we are importing into a new folder, process OSCR backup structures
+        // Just in case we are importing into a new folder, process OSCAR backup structures
         dir.setPath(path + "STR_Backup");
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
         QFileInfoList flist = dir.entryInfoList();
@@ -2523,7 +2523,7 @@ bool ResmedLoader::LoadBRP(Session *sess, const QString & path)
     return true;
 }
 
-// Convert EDFSignal data to OSCR's Time-Delta Event format
+// Convert EDFSignal data to OSCAR's Time-Delta Event format
 void ResmedLoader::ToTimeDelta(Session *sess, ResMedEDFParser &edf, EDFSignal &es, ChannelID code,
                                long recs, qint64 duration, EventDataType t_min, EventDataType t_max, bool square)
 {

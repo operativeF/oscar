@@ -155,10 +155,10 @@ int main(int argc, char *argv[])
 
     if (opengl2supported) {
         if (!settings.value(BetterBuild, false).toBool()) {
-            QMessageBox::information(nullptr, QObject::tr("A faster build of OSCR may be available"),
-                QObject::tr("This build of OSCR is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
+            QMessageBox::information(nullptr, QObject::tr("A faster build of OSCAR may be available"),
+                QObject::tr("This build of OSCAR is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
                 QObject::tr("However it looks like your computer has full support for OpenGL 2.0!") + "<br/><br/>"+
-                QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of OSCR will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
+                QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of OSCAR will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
                 QObject::tr("You will not be bothered with this message again."), QMessageBox::Ok, QMessageBox::Ok);
             settings.setValue(BetterBuild, true);
         }
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
 #else
     if (bad_graphics) {
         QMessageBox::warning(nullptr, QObject::tr("Incompatible Graphics Hardware"),
-            QObject::tr("This build of OSCR requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
+            QObject::tr("This build of OSCAR requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
             QObject::tr("You may need to update your computers graphics drivers from the GPU makers website. %1").
                 arg(intel_graphics ? QObject::tr("(<a href='http://intel.com/support'>Intel's support site</a>)") : "")+"<br/><br/>"+
             QObject::tr("Because graphs will not render correctly, and it may cause crashes, this build will now exit.")+"<br/><br/>"+
@@ -195,9 +195,9 @@ int main(int argc, char *argv[])
 
     if (!havefolder && !force_data_dir) {
         if (QMessageBox::question(nullptr, STR_MessageBox_Question,
-                QObject::tr("Would you like OSCR to use this location for storing its data?")+"\n\n"+
+                QObject::tr("Would you like OSCAR to use this location for storing its data?")+"\n\n"+
                 QDir::toNativeSeparators(GetAppRoot())+"\n\n"+
-                QObject::tr("If you are upgrading, don't panic, you just need to make sure this is pointed at your old OSCR data folder.")+"\n\n"+
+                QObject::tr("If you are upgrading, don't panic, you just need to make sure this is pointed at your old OSCAR data folder.")+"\n\n"+
                 QObject::tr("(If you are unsure, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
             settings.setValue("Settings/AppRoot", GetAppRoot());
             change_data_dir = false;
@@ -208,17 +208,17 @@ retry_directory:
 
     if (change_data_dir) {
         QString datadir = QFileDialog::getExistingDirectory(nullptr,
-                          QObject::tr("Choose or create new folder for OSCR data"), GetAppRoot(),
+                          QObject::tr("Choose or create new folder for OSCAR data"), GetAppRoot(),
                           QFileDialog::ShowDirsOnly);
 
         if (datadir.isEmpty()) {
             if (!havefolder) {
                 QMessageBox::information(nullptr, QObject::tr("Exiting"),
-                    QObject::tr("As you did not select a data folder, OSCR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
+                    QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
                 return 0;
             } else {
                 QMessageBox::information(nullptr, STR_MessageBox_Warning,
-                    QObject::tr("You did not select a directory.")+"\n\n"+QObject::tr("OSCR will now start with your old one.")+"\n\n"+
+                    QObject::tr("You did not select a directory.")+"\n\n"+QObject::tr("OSCAR will now start with your old one.")+"\n\n"+
                     QDir::toNativeSeparators(GetAppRoot()), QMessageBox::Ok);
             }
         } else {
@@ -229,7 +229,7 @@ retry_directory:
                 if (dir.count() > 2) {
                     // Not a new directory.. nag the user.
                     if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
-                            QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCR data.") +
+                            QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCAR data.") +
                             "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
                             datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
                         goto retry_directory;
@@ -293,7 +293,7 @@ retry_directory:
 //        check_updates = false;
     } else if (vc > 0) {
         if (QMessageBox::warning(nullptr, STR_MessageBox_Error,
-            QObject::tr("The version of OSCR you just ran is OLDER than the one used to create this data (%1).").
+            QObject::tr("The version of OSCAR you just ran is OLDER than the one used to create this data (%1).").
                         arg(AppSetting->versionString()) +"\n\n"+
             QObject::tr("It is likely that doing this will cause data corruption, are you sure you want to do this?"),
             QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {

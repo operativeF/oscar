@@ -94,13 +94,13 @@ ProfileSelect::ProfileSelect(QWidget *parent) :
     popupMenu->addSeparator();
     popupMenu->addAction(tr("Delete Profile"), this, SLOT(deleteProfile()));
 
-    ui->labelAppName->setText(STR_TR_OSCR);
+    ui->labelAppName->setText(STR_TR_OSCAR);
     ui->labelVersion->setText(STR_TR_AppVersion);
     //    if (GIT_BRANCH!="master")
     //        ui->labelBuild->setText(GIT_BRANCH);
     //    else ui->labelBuild->setText(QString());
     ui->labelFolder->setText(GetAppRoot());
-    ui->labelFolder->setToolTip("Current OSCR data folder\n" + GetAppRoot());
+    ui->labelFolder->setToolTip("Current OSCAR data folder\n" + GetAppRoot());
 
     ui->listView->verticalScrollBar()->setStyleSheet("QScrollBar:vertical {border: 0px solid grey; background: transparent; }"
     "QScrollBar::handle:vertical {"

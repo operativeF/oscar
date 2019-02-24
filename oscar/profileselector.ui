@@ -113,7 +113,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="OSCR_Logo">
+           <widget class="QLabel" name="OSCAR_Logo">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>1</horstretch>
@@ -159,7 +159,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="OSCR_Label">
+         <widget class="QLabel" name="OSCAR_Label">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -168,7 +168,7 @@
            </font>
           </property>
           <property name="text">
-           <string>OSCR</string>
+           <string>OSCAR</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

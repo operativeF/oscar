@@ -1,4 +1,4 @@
-/* OSCR Help Implementation
+/* OSCAR Help Implementation
  *
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *
@@ -62,7 +62,7 @@ Help::Help(QWidget *parent) :
     if (QFile::exists(helpIndex)) QFile::remove(helpIndex);
 
     helpEngine = new QHelpEngine(helpIndex);
-    helpNamespace = "nightowlsoftware.ca.OSCR_Guide";
+    helpNamespace = "nightowlsoftware.ca.OSCAR_Guide";
 
     if (!helpFile.isEmpty()) {
         if (!helpEngine->setupData()) {

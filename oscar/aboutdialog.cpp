@@ -44,7 +44,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->infoLabel->setText(text);
 
 
-    setWindowTitle(tr("About OSCR"));
+    setWindowTitle(tr("About OSCAR"));
     setMinimumSize(QSize(400,400));
     connect(ui->closeButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
 
@@ -103,7 +103,7 @@ QString AboutDialog::getRelnotes()
     QString text = "<html>"
     "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head>"
     "<body><span style=\" font-size:20pt;\">"+tr("Release Notes")+"</span><br/>"
-    "<span style=\" font-size:14pt;\">"+tr("OSCR v%1").arg(VersionString)+"</span>"
+    "<span style=\" font-size:14pt;\">"+tr("OSCAR v%1").arg(VersionString)+"</span>"
     "<hr/>";
     if (ReleaseStatus != "r") {
         text += "<p><font color='red' size=+1><b>"+tr("Important:")+"</b></font> "

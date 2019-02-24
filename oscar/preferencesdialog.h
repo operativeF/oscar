@@ -1,4 +1,4 @@
-﻿/* OSCR Preferences Dialog Headers
+﻿/* OSCAR Preferences Dialog Headers
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -37,9 +37,9 @@ class MySortFilterProxyModel: public QSortFilterProxyModel
 };
 
 /*! \class PreferencesDialog
-    \brief OSCR's Main Preferences Window
+    \brief OSCAR's Main Preferences Window
 
-    This provides the Preferences form and logic to alter Preferences for OSCR
+    This provides the Preferences form and logic to alter Preferences for OSCAR
 */
 class PreferencesDialog : public QDialog
 {

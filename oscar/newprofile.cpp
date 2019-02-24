@@ -111,10 +111,10 @@ QString NewProfile::getIntroHTML()
            "<p>" + tr("This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.")
            + "</p>"
 
-           "<p>" + tr("OSCR has been released freely under the <a href='qrc:/COPYING'>GNU Public License v3</a>, and comes with no warranty, and without ANY claims to fitness for any purpose.")
+           "<p>" + tr("OSCAR has been released freely under the <a href='qrc:/COPYING'>GNU Public License v3</a>, and comes with no warranty, and without ANY claims to fitness for any purpose.")
            + "</p>"
            "<div align=center><font color=\"red\"><h2>" + tr("PLEASE READ CAREFULLY") + "</h2></font></div>"
-           "<p>" + tr("OSCR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.")
+           "<p>" + tr("OSCAR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.")
            + "</p>"
 
            "<p>" + tr("Accuracy of any data displayed is not and can not be guaranteed.") + "</p>"
@@ -129,7 +129,7 @@ QString NewProfile::getIntroHTML()
            "<p><b><font size=+1>" + tr("Use of this software is entirely at your own risk.") +
            "</font></b></p>"
 
-           "<p><i>" + tr("OSCR is copyright &copy;2011-2018 Mark Watkins and portions &copy;2019 Nightowl Software") + "<i></p>"
+           "<p><i>" + tr("OSCAR is copyright &copy;2011-2018 Mark Watkins and portions &copy;2019 Nightowl Software") + "<i></p>"
            "</div>"
            "</body>"
            "</html>";

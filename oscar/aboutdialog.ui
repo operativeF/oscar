@@ -134,7 +134,7 @@
         </font>
        </property>
        <property name="text">
-        <string notr="true">OSCR</string>
+        <string notr="true">OSCAR</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

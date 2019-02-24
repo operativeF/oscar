@@ -575,7 +575,7 @@ int PRS1Loader::OpenMachine(const QString & path)
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Non Data Capable Machine"),
                                      QString(QObject::tr("Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.")+"\n\n"+
-                                             QObject::tr("I'm sorry to report that OSCR can only track hours of use and very basic settings for this machine.")).
+                                             QObject::tr("I'm sorry to report that OSCAR can only track hours of use and very basic settings for this machine.")).
                                      arg(info.modelnumber),QMessageBox::Ok);
             p_profile->cpap->setBrickWarning(false);
 
@@ -587,7 +587,7 @@ int PRS1Loader::OpenMachine(const QString & path)
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Machine Unsupported"),
                                      QObject::tr("Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.").arg(info.modelnumber) +"\n\n"+
-                                     QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCR.")
+                                     QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
                                      ,QMessageBox::Ok);
 
             return -1;
@@ -596,8 +596,8 @@ int PRS1Loader::OpenMachine(const QString & path)
         // model number didn't parse.. Meh... Silently ignore it
 //        QMessageBox::information(QApplication::activeWindow(),
 //                                 QObject::tr("Machine Unsupported"),
-//                                 QObject::tr("OSCR could not parse the model number, this machine can not be imported..") +"\n\n"+
-//                                 QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCR.")
+//                                 QObject::tr("OSCAR could not parse the model number, this machine can not be imported..") +"\n\n"+
+//                                 QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
 //                                ,QMessageBox::Ok);
         return -1;
     }

@@ -438,7 +438,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>OSCR</string>
+   <string>OSCAR</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Resources.qrc">
@@ -2969,7 +2969,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_About">
    <property name="text">
-    <string>&amp;About OSCR</string>
+    <string>&amp;About OSCAR</string>
    </property>
   </action>
   <action name="action_Fullscreen">

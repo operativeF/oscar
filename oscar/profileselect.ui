@@ -232,7 +232,7 @@ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255,
         <item>
          <widget class="QPushButton" name="pushButton">
           <property name="toolTip">
-           <string>Choose a different OSCR data folder.</string>
+           <string>Choose a different OSCAR data folder.</string>
           </property>
           <property name="styleSheet">
            <string notr="true"/>
@@ -271,7 +271,7 @@ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255,
            <string notr="true">border: 0px;</string>
           </property>
           <property name="text">
-           <string>OSCR</string>
+           <string>OSCAR</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -307,7 +307,7 @@ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255,
         <item>
          <widget class="QPushButton" name="quitButton">
           <property name="toolTip">
-           <string>Click here if you didn't want to start OSCR.</string>
+           <string>Click here if you didn't want to start OSCAR.</string>
           </property>
           <property name="text">
            <string>&amp;Quit</string>
@@ -380,7 +380,7 @@ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255,
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>The current location of OSCR data store.</string>
+         <string>The current location of OSCAR data store.</string>
         </property>
         <property name="styleSheet">
          <string notr="true">border: 0px;</string>

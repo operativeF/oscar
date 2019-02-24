@@ -38,7 +38,7 @@ class MainWindow;
 
  \section intro_sec Introduction
 
- OpenSource CPAP Reviewer (OSCR) is a program derived from the SleepyHead program written by Mark Watkins.
+ OpenSource CPAP Reviewer (OSCAR) is a program derived from the SleepyHead program written by Mark Watkins.
 
  SleepyHead is Cross-Platform Open-Source software for reviewing data from %CPAP machines, which are used in the treatment of Sleep Disorders.
 
@@ -267,7 +267,7 @@ class MainWindow : public QMainWindow
 
     void on_actionSleep_Disorder_Terms_Glossary_triggered();
 
-    void on_actionHelp_Support_OSCR_Development_triggered();
+    void on_actionHelp_Support_OSCAR_Development_triggered();
 
     void aboutBoxLinkClicked(const QUrl &url);
 

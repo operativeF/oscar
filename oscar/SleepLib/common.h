@@ -164,9 +164,9 @@ const QString STR_MACH_ZEO = "Zeo";
 
 const QString STR_PREF_Language = "Language";
 
-const QString STR_AppName = "OSCR";
+const QString STR_AppName = "OSCAR";
 const QString STR_DeveloperName = "NightOwl";
-const QString STR_AppRoot = "OSCR_Data";
+const QString STR_AppRoot = "OSCAR_Data";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Commonly used translatable text strings
@@ -326,7 +326,7 @@ extern QString STR_TR_PrRelief; // Pressure Relief
 extern QString STR_TR_SensAwake;
 
 extern QString STR_TR_Bookmarks;
-extern QString STR_TR_OSCR;
+extern QString STR_TR_OSCAR;
 extern QString STR_TR_AppVersion;
 
 extern QString STR_TR_Mode;
