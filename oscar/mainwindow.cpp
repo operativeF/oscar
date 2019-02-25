@@ -2475,7 +2475,7 @@ void MainWindow::on_actionReport_a_Bug_triggered()
 //    QString language = settings.value(LangSetting).toString();
 //
 //    QDesktopServices::openUrl(QUrl(QString("https://sleepyhead.jedimark.net/report_bugs.php?lang=%1&version=%2&platform=%3").arg(language).arg(VersionString).arg(PlatformString)));
-    QMessageBox::information(nullptr, STR_MessageBox_Error, tr("Bug reports are not yet implemented"));
+    QMessageBox::information(nullptr, STR_MessageBox_Error, tr("Reporting issues is not yet implemented"));
 }
 
 void MainWindow::on_profilesButton_clicked()

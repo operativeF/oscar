@@ -3182,7 +3182,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionReport_a_Bug">
    <property name="text">
-    <string>Report a Bug</string>
+    <string>Report an Issue</string>
    </property>
   </action>
  </widget>
