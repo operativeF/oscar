@@ -45,9 +45,10 @@ void initTranslations()
     langNames["zh"] = "\xe6\xbc\xa2\xe8\xaa\x9e\xe7\xb9\x81\xe9\xab\x94\xe5\xad\x97";
     langNames["es"] = "Espa\xc3\xb1ol";
     langNames["bg"] = "\xd0\xb1\xd1\x8a\xd0\xbb\xd0\xb3\xd0\xb0\xd1\x80\xd1\x81\xd0\xba\xd0\xb8";
-    langNames["fr"] = "\x46\x72\x61\x6e\xc3\xa7\x61\x69\x73";
+    langNames["fr"] = "Fran\xc3\xa7ais";
     langNames["en_UK"] = "English (UK)";
     langNames["nl"] = "Nederlands";
+    langNames["pt_BR"] = "Portugues (BR)";
 
     langNames[DefaultLanguage]="English (US)";
 
