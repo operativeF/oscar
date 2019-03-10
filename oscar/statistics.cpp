@@ -639,9 +639,11 @@ QString Statistics::htmlHeader(bool showheader)
         +resizeHTMLPixmap(logoPixmap,64,64)+"<br/>"
         "<font size='+3'>" + STR_TR_OSCAR + "</font><br/>"
         "<font size='+2'>" + tr("Usage Statistics") + "</font><br/>"
-        "<font size='+1' title=\""+tr("This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.")+"\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
-
-        if (!userinfo.isEmpty()) html += "<br/>"+userinfo+"<br/>";
+//        "<font size='+1' title=\"" + 
+//            tr("For legal reasons without manufacturer documentation, OSCAR is unsuitable as a compliance/medical reporting tool.") +
+//            "\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
+        if (!userinfo.isEmpty()) 
+            html += "<br/>"+userinfo;
         html += "</div><br/>";
     }
     return html;
