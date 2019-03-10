@@ -125,7 +125,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Welcome To Open Source CPAP Reviewer</string>
+        <string>Welcome to the Open Source CPAP Analysis Reporter</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

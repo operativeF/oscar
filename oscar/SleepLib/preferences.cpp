@@ -16,6 +16,7 @@
 #include <QDesktopServices>
 #include <QDebug>
 #include <QSettings>
+#include <QMessageBox>
 
 #ifdef Q_OS_WIN
 #include "windows.h"
@@ -194,6 +195,10 @@ bool Preferences::Open(QString filename)
     QDomElement root = doc.documentElement();
 
     if (root.tagName() != STR_AppName) {
+        if (root.tagName() == "SleepyHead" ) {
+            QMessageBox::warning(nullptr, STR_MessageBox_Error, QObject::tr( "You must run the OSCAR Migration Tool"), QMessageBox::Ok);
+            exit(1);
+        }
         return false;
     }
 

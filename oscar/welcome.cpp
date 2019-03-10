@@ -45,11 +45,16 @@ void Welcome::refreshPage()
     ui->S9Warning->setVisible(showCardWarning);
 
     if (!b) {
+        qDebug() << "No machines in Profile";
+//        sleep(3);
         ui->cpapIcon->setPixmap(pixmap);
     }
     ui->dailyButton->setEnabled(b);
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
+//    ui->tabWidget->setTabEnabled(2, b);
+//    ui->tabWidget->setTabEnabled(3, b);
+//    ui->tabWidget->setTabEnabled(4, b);
 
     ui->cpapInfo->setHtml(GenerateCPAPHTML());
     ui->oxiInfo->setHtml(GenerateOxiHTML());

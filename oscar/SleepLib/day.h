@@ -267,7 +267,7 @@ class Day
         return (c * 60.0) / minutes;
     }
 
-    //! \brief SleepyyHead Events Index, AHI combined with SleepyHead detected events.. :)
+    //! \brief SleepyyHead Events Index, AHI combined with OSCAR detected events.. :)
     EventDataType calcSHEI() {
         EventDataType c = count(CPAP_Hypopnea) + count(CPAP_Obstructive) + count(CPAP_Apnea) + count(CPAP_ClearAirway) + count(CPAP_UserFlag1) + count(CPAP_UserFlag2);
         EventDataType minutes = hours(MT_CPAP) * 60.0;

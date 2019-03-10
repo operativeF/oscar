@@ -561,6 +561,7 @@ const QString Machine::getEventsPath()
 }
 const QString Machine::getBackupPath()
 {
+    qDebug() << "Backup Path is " + getDataPath() + "Backup/";
     return getDataPath() + "Backup/";
 }
 

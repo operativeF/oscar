@@ -1,4 +1,4 @@
-﻿/* SleepyHead Help Header
+﻿/* OSCAR Help Header
  *
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *

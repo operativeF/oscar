@@ -1,4 +1,4 @@
-/* SleepyHead AboutDialog Implementation
+/* OSCAR AboutDialog Implementation
  *
  * Date created: 7/5/2018
  *
@@ -93,7 +93,7 @@ QString AboutDialog::getCredits()
 QString AboutDialog::getRelnotes()
 {
     QFile clfile(":/docs/release_notes.html");
-    QString changeLog = tr("Sorry, could not locate changelog.");
+    QString changeLog = tr("Sorry, could not locate Release Notes.");
     if (clfile.open(QIODevice::ReadOnly)) {
         //Todo, write XML parser and only show the latest..
         //QTextStream ts(&clfile);

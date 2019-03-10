@@ -24,7 +24,7 @@ extern MainWindow *mainwin;
 
 
 NewProfile::NewProfile(QWidget *parent, const QString *user) :
-    QDialog(parent),
+    QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
     ui(new Ui::NewProfile)
 {
     ui->setupUi(this);
@@ -106,7 +106,7 @@ QString NewProfile::getIntroHTML()
 {
     return "<html>"
            "<body>"
-           "<div align=center><h1>" + tr("Welcome to Open Source CPAP Reviewer") + "</h1></div>"
+           "<div align=center><h1>" + tr("Welcome to the Open Source CPAP Analysis Reporter") + "</h1></div>"
 
            "<p>" + tr("This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.")
            + "</p>"

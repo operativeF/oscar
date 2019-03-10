@@ -480,7 +480,7 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
 
         for (it = updatesparser.packages.begin(); it!=updatesparser.packages.end(); ++it) {
             const PackageUpdate & update = it.value();
-            if (it.key() == UPDATE_SleepyHead) {
+            if (it.key() == UPDATE_OSCAR) {
                 if (compareVersion(update.versionString)>0) {
                     updateList.push_back(update);
                 }
@@ -501,14 +501,14 @@ void UpdaterWindow::ParseUpdatesXML(QIODevice *dev)
         }
 
         if (updateList.size()==0) {
-            mainwin->Notify(tr("No updates were found for your platform."), tr("SleepyHead Updates"), 5000);
+            mainwin->Notify(tr("No updates were found for your platform."), tr("OSCAR Updates"), 5000);
             PREF[STR_GEN_UpdatesLastChecked] = QDateTime::currentDateTime();
             close();
             return;
         } else {
 
-            if (QMessageBox::question(mainwin, tr("SleepyHead Updates"),
-                tr("New SleepyHead Updates are avilable:")+"\n\n"+
+            if (QMessageBox::question(mainwin, tr("OSCAR Updates"),
+                tr("New OSCAR Updates are avilable:")+"\n\n"+
                 tr("Would you like to download and install them now?"),
                 QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
 

@@ -1,4 +1,4 @@
-﻿/* SleepyHead Preferences Dialog Implementation
+﻿/* OSCAR Preferences Dialog Implementation
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -38,7 +38,7 @@ typedef QMessageBox::StandardButtons StandardButtons;
 QHash<schema::ChanType, QString> channeltype;
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
-    QDialog(parent),
+    QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
     ui(new Ui::PreferencesDialog),
     profile(_profile)
 {

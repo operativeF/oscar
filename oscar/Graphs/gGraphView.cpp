@@ -331,6 +331,7 @@ gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
 
     this->setMouseTracking(true);
     m_emptytext = STR_Empty_NoData;
+    this->setEmptyImage(QPixmap(":/icons/logo.png"));
     InitGraphGlobals(); // FIXME: sstangl: handle error return.
 #ifdef ENABLE_THREADED_DRAWING
     m_idealthreads = QThread::idealThreadCount();
@@ -630,7 +631,7 @@ bool gGraphView::pinchTriggered(QPinchGesture * gesture)
 
     Q_UNUSED(group)
 
-    //qDebug() << gesture << gesture->scaleFactor();
+//  qDebug() << gesture << gesture->scaleFactor();
     if (gesture->state() == Qt::GestureStarted) {
         pinch_min = m_minx;
         pinch_max = m_maxx;
@@ -1371,7 +1372,7 @@ void gGraphView::paintGL()
     if (height() <= 0) { return; }
 
 
-    // Create QPainter object, note this is only valid from paintGL events!
+// Create QPainter object, note this is only valid from paintGL events!
     QPainter painter(this);
     painter.setRenderHint(QPainter::HighQualityAntialiasing, true);
 
@@ -1387,9 +1388,18 @@ void gGraphView::paintGL()
     strings_drawn_this_frame = 0;
     strings_cached_this_frame = 0;
 
+//    qDebug() << "About to call renderGraphs from paintGL()";
+//    sleep(3);
+
     graphs_drawn = renderGraphs(painter);
 
+//    qDebug() << "Finished call renderGraphs from paintGL()";
+//    sleep(3);
+
     if (!graphs_drawn) { // No graphs drawn? show something useful :)
+        qDebug() << "No graphs drawn";
+//        sleep(3);
+
         QString txt;
         if (m_showAuthorMessage) {
             if (emptyText() == STR_Empty_Brick) {
@@ -1399,18 +1409,38 @@ void gGraphView::paintGL()
                 txt = QObject::tr("There is no data to graph");
             }
         }
+        qDebug() << txt;
+//        sleep(3);
+
 //        int x2, y2;
 //        GetTextExtent(m_emptytext, x2, y2, bigfont);
 //        int tp2, tp1;
 
-        if (!m_emptyimage.isNull()) {
-            painter.drawPixmap(width() /2 - m_emptyimage.width() /2, height() /2 - m_emptyimage.height() /2 , m_emptyimage);
+        if (this->m_emptyimage.isNull() )
+            qDebug() << "m_emptyimage is NULL";
+        else
+            qDebug() << "m_emptyimage is not NULL";
+        sleep(3);
+
+        if (! this->m_emptyimage.isNull()) {
+            int x = width()/2 - this->m_emptyimage.width()/2;
+            int y = height()/2 - this->m_emptyimage.height()/2;
+//            qDebug() << "size is " + QString::number(m_emptyimage.width()) + " by " + QString::number(m_emptyimage.height());
+//            qDebug() << "x-pos: " + QString::number(x) + " y-pos: " + QString::number(y);
+//            sleep(3);
+
+            QRectF target(QRect(x, y, this->m_emptyimage.width(), this->m_emptyimage.height()));
+            QRectF source(QRect(0, 0, this->m_emptyimage.width(), this->m_emptyimage.height()));
+
+            painter.drawPixmap(target, this->m_emptyimage, source);
+
 //            tp2 = height() /2 + m_emptyimage.height()/2  + y2;
-
         } /*else {
-
             tp2 = height() / 2 + y2;
         }*/
+//        qDebug() << "Break 9";
+//        sleep(3);
+
         QColor col = Qt::black;
         painter.setPen(col);
 
@@ -1418,12 +1448,27 @@ void gGraphView::paintGL()
 //        painter.drawText((width() / 2) - x2 / 2, tp2, m_emptytext);
 
         QRectF rec(0,0,width(),0);
+//        if (defaultfont == nullptr)
+//            qDebug() << "Default font is NULL";
+//        else
+//            qDebug() << "Default font is not NULL";
+//        sleep(3);
+
         painter.setFont(*defaultfont);
         rec = painter.boundingRect(rec, Qt::AlignHCenter | Qt::AlignBottom, txt);
         rec.moveBottom(height()-5);
 
+//        qDebug() << "Break 8";
+//        sleep(3);
+
         painter.drawText(rec, Qt::AlignHCenter | Qt::AlignBottom, txt);
+//        qDebug() << "Break 7";
+//        sleep(3);
+
     }
+//        qDebug() << "Break 1";
+//        sleep(3);
+
     if (AppSetting->lineCursorMode()) {
        emit updateCurrentTime(graphs_drawn ? m_currenttime : 0.0F);
     } else {
@@ -1431,7 +1476,13 @@ void gGraphView::paintGL()
     }
     AppSetting->usePixmapCaching() ? DrawTextQueCached(painter) :DrawTextQue(painter);
 
+//        qDebug() << "Break 2";
+//        sleep(3);
+
     m_tooltip->paint(painter);
+
+//        qDebug() << "Break 3";
+//        sleep(3);
 
 #ifdef DEBUG_EFFICIENCY
     const int rs = 20;
@@ -1482,6 +1533,9 @@ void gGraphView::paintGL()
 
     painter.end();
 
+//        qDebug() << "Break 4";
+//        sleep(3);
+
 #ifndef BROKEN_OPENGL_BUILD
 #if QT_VERSION < QT_VERSION_CHECK(5,4,0)
     swapBuffers();
@@ -1492,6 +1546,9 @@ void gGraphView::paintGL()
         redrawtimer->setSingleShot(true);
         redrawtimer->start();
     }
+
+//        qDebug() << "Break 5";
+//        sleep(3);
 
 }
 

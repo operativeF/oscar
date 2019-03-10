@@ -31,7 +31,7 @@ class BoundsError {};
 //! \brief Exception class for to trap old database versions.
 class OldDBVersion {};
 
-const quint32 magic = 0xC73216AB; // Magic number for SleepyHead Data Files.. Don't touch!
+const quint32 magic = 0xC73216AB; // Magic number for OSCAR Data Files.. Don't touch!
 
 //const int max_number_event_fields=10;
 // This should probably move somewhere else

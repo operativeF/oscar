@@ -164,7 +164,7 @@ bool Profile::OpenMachines()
     QDomElement root = doc.firstChild().toElement();
 
     if (root.tagName().toLower() != "machines") {
-        //qDebug() << "No Machines Tag in Profiles.xml";
+        qDebug() << "No Machines Tag in machines.xml";
         return false;
     }
 

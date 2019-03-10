@@ -1115,7 +1115,7 @@ void OximeterImport::setInformation()
     "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
             +tr("OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.")+"</p>"
     "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-            +tr("OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.<br/>(Note: Direct importing from bluetooth models is <span style=\" font-weight:600;\">probaby not</span> possible yet)")+"</p>"
+            +tr("OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.<br/>(Note: Direct importing from bluetooth models is <span style=\" font-weight:600;\">probably not</span> possible yet)")+"</p>"
     "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
         +tr("You may wish to note, other companies, such as Pulox, simply rebadge Contec CMS50's under new names, such as the Pulox PO-200, PO-300, PO-400. These should also work.")+"</p>"
 

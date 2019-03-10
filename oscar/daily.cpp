@@ -69,6 +69,7 @@ void Daily::setSidebarVisible(bool visible)
 Daily::Daily(QWidget *parent,gGraphView * shared)
     :QWidget(parent), ui(new Ui::Daily)
 {
+    qDebug() << "Creating new Daily object";
     ui->setupUi(this);
 
     // Remove Incomplete Extras Tab
@@ -132,7 +133,11 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     ui->graphMainArea->setAutoFillBackground(false);
 
     GraphView=new gGraphView(ui->graphFrame,shared);
+//    qDebug() << "New GraphView object created in Daily";
+//    sleep(3);
     GraphView->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+
+    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
 
     snapGV=new gGraphView(GraphView);
     snapGV->setMinimumSize(172,172);
@@ -196,6 +201,14 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
     }
 
+    if ( p_profile == nullptr ) {
+        qDebug() << "In daily, p_profile is NULL";
+        return;
+    }
+    else if (p_profile->general == nullptr ) {
+        qDebug() << "In daily, p_profile->general is NULL";
+        return;
+    }
     if (p_profile->general->calculateRDI()) {
         AHI=new gGraph("AHI", GraphView,STR_TR_RDI, channelInfo(CPAP_RDI), default_height);
     } else {
@@ -406,6 +419,8 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         ui->weightSpinBox->setDecimals(3);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
+
+    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
     GraphView->setEmptyText(STR_Empty_NoData);
     previous_date=QDate();
 
@@ -418,8 +433,8 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     connect(GraphView, SIGNAL(updateCurrentTime(double)), this, SLOT(on_LineCursorUpdate(double)));
     connect(GraphView, SIGNAL(updateRange(double,double)), this, SLOT(on_RangeUpdate(double,double)));
     connect(GraphView, SIGNAL(GraphsChanged()), this, SLOT(updateGraphCombo()));
-
-    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
+//    qDebug() << "Finished making new Daily object";
+//    sleep(3);
 }
 
 Daily::~Daily()
@@ -444,7 +459,11 @@ Daily::~Daily()
 
 void Daily::showEvent(QShowEvent *)
 {
+//    qDebug() << "Start showEvent in Daily object";
+//    sleep(3);
     RedrawGraphs();
+//    qDebug() << "Finished showEvent  Daily object";
+//    sleep(3);
 }
 
 void Daily::doToggleSession(Session * sess)
@@ -522,6 +541,8 @@ void Daily::Link_clicked(const QUrl &url)
 
 void Daily::ReloadGraphs()
 {
+//    qDebug() << "Start ReloadGraphs  Daily object";
+//    sleep(3);
     GraphView->setDay(nullptr);
 
     ui->splitter->setVisible(true);
@@ -547,6 +568,8 @@ void Daily::ReloadGraphs()
     Load(d);
     ui->calButton->setText(ui->calendar->selectedDate().toString(Qt::TextDate));
     graphView()->redraw();
+//    qDebug() << "Finished ReloadGraphs in Daily object";
+//    sleep(3);
 }
 
 void Daily::hideSpaceHogs()
@@ -1578,6 +1601,8 @@ void Daily::Load(QDate date)
     ui->BMI->display(0);
     ui->BMI->setVisible(false);
     ui->BMIlabel->setVisible(false);
+    ui->toggleGraphs->setVisible(false);
+    ui->toggleEvents->setVisible(false);
 
     BookmarksChanged=false;
     Session *journal=GetJournalSession(date);
@@ -2291,11 +2316,12 @@ void Daily::updateCube()
 {
     //brick..
     if ((GraphView->visibleGraphs()==0)) {
-        ui->toggleGraphs->setArrowType(Qt::UpArrow);
-        ui->toggleGraphs->setToolTip(tr("Show all graphs"));
-        ui->toggleGraphs->blockSignals(true);
-        ui->toggleGraphs->setChecked(true);
-        ui->toggleGraphs->blockSignals(false);
+        ui->toggleGraphs->setVisible(false);
+//        ui->toggleGraphs->setArrowType(Qt::UpArrow);
+//        ui->toggleGraphs->setToolTip(tr("Show all graphs"));
+//        ui->toggleGraphs->blockSignals(true);
+//        ui->toggleGraphs->setChecked(true);
+//        ui->toggleGraphs->blockSignals(false);
 
         if (ui->graphCombo->count() > 0) {
             GraphView->setEmptyText(STR_Empty_NoGraphs);
@@ -2312,11 +2338,12 @@ void Daily::updateCube()
             }
         }
     } else {
-        ui->toggleGraphs->setArrowType(Qt::DownArrow);
-        ui->toggleGraphs->setToolTip(tr("Hide all graphs"));
-        ui->toggleGraphs->blockSignals(true);
-        ui->toggleGraphs->setChecked(false);
-        ui->toggleGraphs->blockSignals(false);
+        ui->toggleGraphs->setVisible(false);
+//        ui->toggleGraphs->setArrowType(Qt::DownArrow);
+//        ui->toggleGraphs->setToolTip(tr("Hide all graphs"));
+//        ui->toggleGraphs->blockSignals(true);
+//        ui->toggleGraphs->setChecked(false);
+//        ui->toggleGraphs->blockSignals(false);
     }
 }
 
@@ -2325,6 +2352,12 @@ void Daily::on_toggleGraphs_clicked(bool checked)
 {
     QString s;
     QIcon *icon=checked ? icon_off : icon_on;
+    if (ui->graphCombo == nullptr )
+        qDebug() << "ToggleGraphs clicked with null graphCombo ptr";
+    else
+        qDebug() << "ToggleGraphs clicked with non-null graphCombo ptr";
+    return;
+/*
     for (int i=0;i<ui->graphCombo->count();i++) {
         s=ui->graphCombo->itemText(i);
         ui->graphCombo->setItemIcon(i,*icon);
@@ -2337,7 +2370,7 @@ void Daily::on_toggleGraphs_clicked(bool checked)
     updateCube();
     GraphView->updateScale();
     GraphView->redraw();
-
+    */
 }
 
 void Daily::updateGraphCombo()
@@ -2384,6 +2417,12 @@ void Daily::on_toggleEvents_clicked(bool checked)
     QString s;
     QIcon *icon=checked ? icon_on : icon_off;
 
+    if (ui->toggleEvents == nullptr )
+        qDebug() << "ToggleEvents clicked with null toggleEvents ptr";
+    else
+        qDebug() << "ToggleEvents clicked with non-null toggleEvents ptr";
+    return;
+/*
     ui->toggleEvents->setArrowType(checked ? Qt::DownArrow : Qt::UpArrow);
     ui->toggleEvents->setToolTip(checked ? tr("Hide all events") : tr("Show all events"));
 //    ui->toggleEvents->blockSignals(true);
@@ -2399,6 +2438,7 @@ void Daily::on_toggleEvents_clicked(bool checked)
 
     updateCube();
     GraphView->redraw();
+    */
 }
 
 //void Daily::on_sessionWidget_itemSelectionChanged()
@@ -2418,6 +2458,6 @@ void Daily::on_splitter_2_splitterMoved(int, int)
 {
     int size = ui->splitter_2->sizes()[0];
     if (size == 0) return;
-    qDebug() << "Left Panel width set to " << size;
+//  qDebug() << "Left Panel width set to " << size;
     AppSetting->setDailyPanelWidth(size);
 }

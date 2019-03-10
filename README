@@ -1,23 +1,26 @@
 OpenSource CPAP Analysis Reporter - OSCAR
 
-OSCAR started as a maintenance fork of SleepyHead version 1.1.0 when that was abandoned by Mark Watkins.
+OSCAR is a derivative of SleepyHead version 1.1.0,created when that was abandoned by Mark Watkins.
 
-SleepyHead was cross platform, opensource sleep tracking program for reviewing CPAP and Oximetry data, 
-which are devices used in the treatment of Sleep Disorders like Obstructive Sleep Apnea. It was released 
+SleepyHead was a cross platform, opensource sleep tracking program for reviewing CPAP and Oximetry data,
+which are devices used in the treatment of Sleep Disorders like Obstructive Sleep Apnea. It was released
 under the GPL version 3 license. See the file COPYING for those details.
 
 SleepyHead was written by Mark Watkins (aka Jedimark), an Australian software developer afflicted with sleep apnea.
 
 SleepyHead was copyright (C) 2011-2018 by Mark Watkins <mark@jedimark.net>
 
-Most of OSCAR is copyright (c) 2011-2018 by Mark Watkins <mark@jedimark.net>
 Portions of OSCAR are copyright (c) 2019 by Nightowl Software <michaelnightowl99@gmail.com>
 
-Requirements:
+Requirements: (Linux package names are given, Windows and Mac should be similar)
 -------------
 Qt5.9 SDK with help (Qt5.9 from http://qt.io/download-open-source recommended)
-Qt5.7 SDL without help is possible (for Debian Stretch)
-Linux needs libudev-dev for qserialport to compile
+The help modules are libqt5help5, qttools5-dev and qttools5-dev-tools
+
+Qt5.7 SDK without help is possible (for Debian Stretch)
+
+All systems need qt5-default, libqt5serialport5, libqt5serailport5-dev and libqt5opengl5-dev
+Linux also needs libudev-dev and zlib1g-dev
 
 OSX needs Xcode and commandline tools from AppStore,
 
@@ -31,7 +34,7 @@ Recommend shadow building to not cruft up the source code folder:
 cd ..
 mkdir build
 cd build
-qmake ../oscr-code/OSCAR_QT.pro 
+qmake ../oscar-code/OSCAR_QT.pro 
 make
 
 You may need to add a -spec option to qmake to suit your platform. 
@@ -59,17 +62,14 @@ in redistribution of derivatives.
 
 It is built using Qt SDK (Open Source Edition), available from http://qt.io.
 
-It also uses QuaZip, by Sergey A. Tachenov, which is a C++ wrapper over Gilles Vollant's ZIP/UNZIP package
-http://sourceforge.net/projects/quazip/
-
 Redistribution of derivatives ( a note added by Mark Watins )
 -----------------------------
-Mark Watkins created this software to help lessen the exploitation of others. Seeing his work being used to exploit others 
+Mark Watkins created this software to help lessen the exploitation of others. Seeing his work being used to exploit others
 is incredibly un-motivational, and incredibly disrespectful of all the work he put into this project.
 
-If you plan on reselling any derivatives of SleepyHead, I specifically request that you give due credit and 
-link back, mentioning clearly in your advertising material, software installer and about screens that your 
-derivative "is based on the free and open-source software SleepyHead available from http://sleepyhead.jedimark.net, 
+If you plan on reselling any derivatives of SleepyHead, I specifically request that you give due credit and
+link back, mentioning clearly in your advertising material, software installer and about screens that your
+derivative "is based on the free and open-source software SleepyHead available from http://sleepyhead.jedimark.net,
 developed and copyright by Mark Watkins (C) 2011-2018."
 
 It is not enough to reference that your derivative "is based on GPL software".

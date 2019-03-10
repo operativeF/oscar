@@ -1,4 +1,4 @@
-﻿/* SleepyHead AboutDialog Header
+﻿/* OSCAR AboutDialog Header
  *
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *

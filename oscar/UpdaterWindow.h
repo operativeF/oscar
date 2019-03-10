@@ -30,9 +30,9 @@ enum RequestMode { RM_None, RM_CheckUpdates, RM_GetFile };
 
 
 /*! \class UpdaterWindow
-    \brief Auto-Update Module for SleepyHead
+    \brief Auto-Update Module for OSCAR
 
-    This class handles the complete Auto-Update procedure for SleepyHead, it does the network checks,
+    This class handles the complete Auto-Update procedure for OSCAR, it does the network checks,
     parses the update.xml from SourceForge host, checks for any new updates, and provides the UI
     and mechanisms to download and replace the binaries according to what is specified in update.xml.
   */

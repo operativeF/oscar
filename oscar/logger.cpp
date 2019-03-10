@@ -1,4 +1,4 @@
-﻿/* SleepyHead Logger module implementation
+﻿/* OSCAR Logger module implementation
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *

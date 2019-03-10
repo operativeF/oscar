@@ -1,4 +1,4 @@
-﻿/* SleepyHead MainWindow Headers
+﻿/* OSCAR MainWindow Headers
  *
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -34,17 +34,17 @@ class MainWindow;
 }
 
 
-/*! \mainpage SleepyHead
+/*! \mainpage OSCAR
 
  \section intro_sec Introduction
 
- OpenSource CPAP Reviewer (OSCAR) is a program derived from the SleepyHead program written by Mark Watkins.
+ Open Source CPAP Analysis Reporter (OSCAR) is a program derived from the SleepyHead program written by Mark Watkins.
 
- SleepyHead is Cross-Platform Open-Source software for reviewing data from %CPAP machines, which are used in the treatment of Sleep Disorders.
+ SleepyHead was a Cross-Platform Open-Source software for reviewing data from %CPAP machines, which are used in the treatment of Sleep Disorders.
 
  SleepyHead was created by <a href="http://jedimark64.blogspot.com">Mark Watkins</a> (JediMark), an Australian software developer.
 
- This document is an attempt to provide a little technical insight into SleepyHead's program internals.
+ This document is an attempt to provide a little technical insight into OSCAR's program internals.
 
  \section project_info Further Information
  The project was hosted on sourceforge, and it's original project page can be reached at <a href="http://sourceforge.net/projects/sleepyhead">http://sourceforge.net/projects/sleepyhead</a>.
@@ -52,7 +52,7 @@ class MainWindow;
  There was also a <a href="http://sourceforge.net/apps/mediawiki/sleepyhead/index.php?title=Main_Page">SleepyHead Wiki</a> containing further information
 
  \section structure Program Structure
- SleepyHead is written in C++ using Qt Toolkit library, and comprises of 3 main components
+ OSCAR is written in C++ using Qt Toolkit library, and comprises of 3 main components
  \list
  \li The SleepLib Database, a specialized database for working with multiple sources of Sleep machine data.
  \li A custom designed, high performance and interactive OpenGL Graphing Library.
@@ -77,7 +77,7 @@ class Overview;
 
 /*! \class MainWindow
     \author Mark Watkins
-    \brief The Main Application window for SleepyHead
+    \brief The Main Application window for OSCAR
     */
 
 class MainWindow : public QMainWindow
@@ -106,7 +106,7 @@ class MainWindow : public QMainWindow
     void CloseProfile();
     bool OpenProfile(QString name, bool skippassword = false);
 
-    /*! \fn Notify(QString s,int ms=5000, QString title="SleepyHead v"+VersionString());
+    /*! \fn Notify(QString s,int ms=5000, QString title="OSCAR v"+VersionString());
         \brief Pops up a message box near the system tray
         \param QString string
         \param title
@@ -131,7 +131,7 @@ class MainWindow : public QMainWindow
     Overview *getOverview() { return overview; }
 
     /*! \fn void RestartApplication(bool force_login=false);
-        \brief Closes down SleepyHead and restarts it
+        \brief Closes down OSCAR and restarts it
         \param bool force_login
 
         If force_login is set, it will return to the login menu even if it's set to skip

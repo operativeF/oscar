@@ -38,7 +38,7 @@ class MainWindow;
 
 
 /*! \class Daily
-    \brief SleepyHead's Daily view which displays the calendar and all the graphs relative to a selected Day
+    \brief OSCAR's Daily view which displays the calendar and all the graphs relative to a selected Day
     */
 class Daily : public QWidget
 {

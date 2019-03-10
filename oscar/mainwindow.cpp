@@ -1,4 +1,4 @@
-﻿/* SleepyHead MainWindow Implementation
+﻿/* OSCAR MainWindow Implementation
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Nifty Notification popups in System Tray (uses Growl on Mac)
     if (QSystemTrayIcon::isSystemTrayAvailable() && QSystemTrayIcon::supportsMessages()) {
+        qDebug() << "Using System Tray for Menu";
         systray = new QSystemTrayIcon(QIcon(":/icons/logo.png"), this);
         systray->show();
         systraymenu = new QMenu(this);
@@ -96,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
         systraymenu->addSeparator();
         systraymenu->addAction(tr("E&xit"), this, SLOT(close()));
     } else { // if not available, the messages will popup in the taskbar
+        qDebug() << "No System Tray menues";
         systray = nullptr;
         systraymenu = nullptr;
     }
@@ -254,6 +256,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
         DestroyGraphGlobals();
 
         if (systraymenu) delete systraymenu;
+        if (systray) delete systray;
 
         disconnect(logger, SIGNAL(outputLog(QString)), this, SLOT(logMessage(QString)));
         shutdownLogger();
@@ -408,8 +411,11 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     progress->setMessage(QObject::tr("Loading profile \"%1\"...").arg(profileName));
     progress->open();
 
-#ifdef LOCK_RESMED_SESSIONS
     QList<Machine *> machines = p_profile->GetMachines(MT_CPAP);
+    if (machines.isEmpty()) {
+        qDebug() << "No machines in profile";
+    } else {
+#ifdef LOCK_RESMED_SESSIONS
     for (QList<Machine *>::iterator it = machines.begin(); it != machines.end(); ++it) {
         QString mclass=(*it)->loaderName();
         if (mclass == STR_MACH_ResMed) {
@@ -428,6 +434,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
         }
     }
 #endif
+    }
 
     // Todo: move this to AHIWIndow check to profile Load function...
     if (p_profile->cpap->AHIWindow() < 30.0) {
@@ -460,6 +467,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     // Reload everything profile related
     if (daily) {
         qCritical() << "OpenProfile called with active Daily object!";
+        qDebug() << "Abandon opening Profile";
         return false;
     }
     welcome = new Welcome(ui->tabWidget);
@@ -471,7 +479,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
 
     if (overview) {
         qCritical() << "OpenProfile called with active Overview object!";
-
+        qDebug() << "Abandon opening Profile";
         return false;
     }
     overview = new Overview(ui->tabWidget, daily->graphView());
@@ -486,14 +494,19 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     AppSetting->setProfileName(p_profile->user->userName());
     setWindowTitle(STR_TR_OSCAR + QString(" %1 (" + tr("Profile") + ": %2)").arg(getBranchVersion()).arg(AppSetting->profileName()));
 
-    ui->oximetryButton->setDisabled(false);
-    ui->dailyButton->setDisabled(false);
-    ui->overviewButton->setDisabled(false);
-    ui->statisticsButton->setDisabled(false);
+    bool noMachines = (machines.isEmpty());
     ui->importButton->setDisabled(false);
+    ui->oximetryButton->setDisabled(false);
+    ui->dailyButton->setDisabled(noMachines);
+    ui->overviewButton->setDisabled(noMachines);
+    ui->statisticsButton->setDisabled(noMachines);
+    ui->tabWidget->setTabEnabled(2, !noMachines);       // daily, STR_TR_Daily);
+    ui->tabWidget->setTabEnabled(3, !noMachines);       // overview, STR_TR_Overview);
+    ui->tabWidget->setTabEnabled(4, !noMachines);       // overview, STR_TR_Overview);
 
     progress->close();
     delete progress;
+    qDebug() << "Finished opening Profile";
 
     return true;
 }
@@ -1051,15 +1064,15 @@ QString MainWindow::getWelcomeHTML()
            tr("(It doesn't support SSL encryption, so it's not a good idea to type your passwords or personal details anywhere.)")
            + "</p>" +
 
-//         tr("SleepyHead's Online <a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide\">Users Guide</a><br/>")
+//         tr("OSCAR's Online <a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=OSCAR_Users_Guide\">Users Guide</a><br/>")
 //         +
 //         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions\">Frequently Asked Questions</a><br/>")
 //         +
 //         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary\">Glossary of Sleep Disorder Terms</a><br/>")
 //         +
-//         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page\">SleepyHead Wiki</a><br/>")
+//         tr("<a href=\"http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page\">OSCAR Wiki</a><br/>")
 //         +
-//         tr("SleepyHead's <a href='http://www.sourceforge.net/projects/sleepyhead'>Project Website</a> on SourceForge<br/>")
+//         tr("OSCAR's <a href='http://www.sourceforge.net/projects/sleepyhead'>Project Website</a> on SourceForge<br/>")
 //         +
            "<p><h3>" + tr("Further Information") + "</h3></p>"
            "<p>" +
@@ -1259,15 +1272,17 @@ void MainWindow::on_oximetryButton_clicked()
 void MainWindow::CheckForUpdates()
 {
     qDebug() << "procedure <CheckForUpdates> called";
+#ifndef NO_UPDATER
     on_actionCheck_for_Updates_triggered();
+#else
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Updates are not yet implemented"));
+#endif
 }
 
 void MainWindow::on_actionCheck_for_Updates_triggered()
 {
-#ifdef NO_UPDATER
     qDebug() << "procedure <on_actionCheck_for_Updates_triggered> called";
-    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("Updates are not yet implemented"));
-#else
+#ifndef NO_UPDATER
     UpdaterWindow *w = new UpdaterWindow(this);
     w->checkForUpdates();
 #endif
@@ -1436,8 +1451,8 @@ void MainWindow::on_action_CycleTabs_triggered()
 
 void MainWindow::on_actionOnline_Users_Guide_triggered()
 {
-//    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide"));
-    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The User's Guide is not yet implemented"));
+//    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=OSCAR_Users_Guide"));
+    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The User's Guide is not yet available"));
 }
 
 void MainWindow::on_action_Frequently_Asked_Questions_triggered()
@@ -1830,12 +1845,11 @@ void MainWindow::on_actionRebuildCPAP(QAction *action)
     bool backups = (dirCount(bpath) > 0) ? true : false;
 
     if (backups) {
-        if (QMessageBox::question(this,
-                STR_MessageBox_Question,
+        if (QMessageBox::question(this, STR_MessageBox_Question,
                 tr("Are you sure you want to rebuild all CPAP data for the following machine:\n\n") +
                 mach->brand() + " " + mach->model() + " " +
                 mach->modelnumber() + " (" + mach->serial() + ")\n\n" +
-                tr("Please note, that this could result in loss of graph data if OSCAR's backups have been disabled or interfered with in any way."),
+                tr("Please note, that this could result in loss of data if OSCAR's backups have been disabled."),
                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
             return;
         }
@@ -2311,6 +2325,8 @@ void MainWindow::GenerateStatistics()
 
 void MainWindow::JumpDaily()
 {
+    qDebug() << "Set current Widget to Daily";
+    sleep(3);
     ui->tabWidget->setCurrentWidget(daily);
 }
 void MainWindow::JumpOverview()

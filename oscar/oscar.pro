@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+message(Platform is $$QMAKESPEC )
+
 lessThan(QT_MAJOR_VERSION,5)|lessThan(QT_MINOR_VERSION,9) {
     message("You need Qt 5.9 to build OSCAR with Help Pages")
     DEFINES += helpless
@@ -51,7 +53,7 @@ contains(DEFINES, STATIC) {
     }
 }
 
-TARGET = Oscar
+TARGET = OSCAR
 unix:!macx:!haiku {
     TARGET.path=/usr/bin
 }
@@ -63,9 +65,11 @@ gitinfotarget.depends = FORCE
 
 win32 {
     system("$$_PRO_FILE_PWD_/update_gitinfo.bat");
+    message("Updating gitinfo.h for Windows build")
     gitinfotarget.commands = "$$_PRO_FILE_PWD_/update_gitinfo.bat"
 } else {
     system("/bin/bash $$_PRO_FILE_PWD_/update_gitinfo.sh");
+    message("Updating gitinfo.h for non-Windows build")
     gitinfotarget.commands = "/bin/bash $$_PRO_FILE_PWD_/update_gitinfo.sh"
 }
 
@@ -82,12 +86,12 @@ QMAKE_EXTRA_TARGETS += gitinfotarget
     message("Finished generating help files");
 }
 
-QMAKE_TARGET_PRODUCT = Oscar
+QMAKE_TARGET_PRODUCT = OSCAR
 QMAKE_TARGET_COMPANY = Nightowl Software
 QMAKE_TARGET_COPYRIGHT = Copyright (c)2011-2018 Mark Watkins & (c) 2019 Nightowl Software
 QMAKE_TARGET_DESCRIPTION = "OpenSource CPAP Analysis Reporter"
 VERSION = 1.0.0
-#    RC_ICONS = ./icons/logo-v3.0.ico
+RC_ICONS = ./icons/logo.ico
 
 macx {
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
@@ -128,6 +132,7 @@ macx {
 }
 
 TRANSLATIONS = $$files($$PWD/../Translations/*.ts)
+
 qtPrepareTool(LRELEASE, lrelease)
 
 for(file, TRANSLATIONS) {

@@ -82,7 +82,7 @@ protected:
 enum FlagType { FT_Bar, FT_Dot, FT_Span };
 
 
-void setEmptyImage(QString text, QPixmap pixmap);
+//void setEmptyImage(QString text, QPixmap pixmap);
 
 class MyLabel:public QWidget
 {

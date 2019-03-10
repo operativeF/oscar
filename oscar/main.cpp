@@ -1,4 +1,4 @@
-/* SleepyHead Main
+/* OSCAR Main
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
