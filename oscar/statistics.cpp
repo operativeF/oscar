@@ -638,7 +638,7 @@ QString Statistics::htmlHeader(bool showheader)
         html += "<div align=center>"
         +resizeHTMLPixmap(logoPixmap,64,64)+"<br/>"
         "<font size='+3'>" + STR_TR_OSCAR + "</font><br/>"
-        "<font size='+2'>" + tr("Usage Statistics") + "</font><br/>"
+        "<font size='+2'>" + tr("Usage Statistics") + "</font><br/>";
 //        "<font size='+1' title=\"" + 
 //            tr("For legal reasons without manufacturer documentation, OSCAR is unsuitable as a compliance/medical reporting tool.") +
 //            "\">" + tr("(NOT approved for compliance or medical reporting purposes)")+"</font><br/>";
