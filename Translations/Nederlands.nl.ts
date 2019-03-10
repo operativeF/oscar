@@ -6,33 +6,33 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="35"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Over</translation>
+        <translation>&amp;Over</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="49"/>
         <location filename="../oscar/aboutdialog.cpp" line="105"/>
         <source>Release Notes</source>
-        <translation type="unfinished">Versie-opmerkingen</translation>
+        <translation>Versie-opmerkingen</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="63"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Dank</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="77"/>
         <source>GPL License</source>
-        <translation type="unfinished"></translation>
+        <translation>GPL Licentie</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="239"/>
         <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
+        <translation>Sluiten</translation>
     </message>
     <message>
         <source>Build Date: %1</source>
@@ -45,47 +45,47 @@
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="43"/>
         <source>Show data folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon data map</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="47"/>
         <source>About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Over OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="73"/>
         <source>Sorry, could not locate About file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, kan het bestand &quot;Over&quot; niet vinden.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="85"/>
         <source>Sorry, could not locate Credits file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, kan het bestand &quot;Dank&quot; niet vinden.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="96"/>
         <source>Sorry, could not locate changelog.</source>
-        <translation type="unfinished">Sorry, kon geenlijst van veranderingen vinden.</translation>
+        <translation>Sorry, kan geen lijst van veranderingen vinden.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="106"/>
         <source>OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR v%1</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="109"/>
         <source>Important:</source>
-        <translation type="unfinished">Belangrijk:</translation>
+        <translation>Belangrijk:</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="110"/>
         <source>As this is a pre-release version, it is recommended that you &lt;b&gt;back up your data folder manually&lt;/b&gt; before proceding, because attempting to roll back later may break things.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is nog geen uiteindelijke versie, dus maak een backup van de map OSCAR-Data voordat U verder gaat. Dan kunt U terugvallen op een vorige versie.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="122"/>
         <source>To see if the license text is available in your language, see %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kijk bij %1 om te zien of een vertaling van de licentie in het Nederlands beschikbaar is.</translation>
     </message>
     <message>
         <source>About SleepyHead</source>
@@ -97,12 +97,12 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50f37_loader.cpp" line="873"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet vinden:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50f37_loader.cpp" line="879"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet openen:</translation>
     </message>
 </context>
 <context>
@@ -120,12 +120,12 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="546"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet vinden:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="552"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet openen:</translation>
     </message>
 </context>
 <context>
@@ -257,7 +257,7 @@ In verband met de koppeling met Bladwijzers, lijkt me &apos;Notities&apos; beter
     <message>
         <location filename="../oscar/daily.ui" line="1208"/>
         <source>I&apos;m feeling ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ik voel me ...</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1224"/>
@@ -309,7 +309,7 @@ In verband met de koppeling met Bladwijzers, lijkt me &apos;Notities&apos; beter
     <message>
         <location filename="../oscar/daily.ui" line="1579"/>
         <source>Show/hide available graphs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon/verberg grafieken.</translation>
     </message>
     <message>
         <source>Drop down this list to show/hide available graphs.</source>
@@ -343,7 +343,7 @@ AK: Wellicht &apos;beschikbare&apos; ook weglaten, is verwarrend, want de eerste
     <message>
         <location filename="../oscar/daily.cpp" line="278"/>
         <source>Time at Pressure</source>
-        <translation type="unfinished">Tijdsduur bij Druk</translation>
+        <translation>Tijdsduur bij Druk</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="514"/>
@@ -371,7 +371,7 @@ AK: Wellicht &apos;beschikbare&apos; ook weglaten, is verwarrend, want de eerste
     <message>
         <location filename="../oscar/daily.cpp" line="1122"/>
         <source>%1%2</source>
-        <translation>%1 %2</translation>
+        <translation>%1%2</translation>
     </message>
     <message>
         <source>This day just contains summary data, only limited information is available .</source>
@@ -437,7 +437,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="1493"/>
         <source>Complain to your Equipment Provider!</source>
-        <translation>Klaag bij je leverancier!</translation>
+        <translation>Klaag bij uw leverancier!</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1117"/>
@@ -481,32 +481,32 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>Click to %1 this session.</source>
-        <translation type="unfinished">Klik om deze sessie %1 te zetten.</translation>
+        <translation>Klik om deze sessie %1 te zetten.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>disable</source>
-        <translation type="unfinished">uit</translation>
+        <translation>uit</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>enable</source>
-        <translation type="unfinished">aan</translation>
+        <translation>aan</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="892"/>
         <source>%1 Session #%2</source>
-        <translation type="unfinished">%1 Sessie #%2</translation>
+        <translation>%1 Sessie #%2</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="893"/>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1u %2m %3s</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="907"/>
         <source>One or more waveform record(s) for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een of meer golfvormgegevens had foutieve brongegevens. Sommige kunnen niet goed aansluiten.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="925"/>
@@ -516,12 +516,12 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="1076"/>
         <source>PAP Mode: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort apparaat: %1</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1198"/>
         <source>TTIA</source>
-        <translation type="unfinished"></translation>
+        <translation>TTIA (Totale Tijd In Apneu)</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1213"/>
@@ -536,22 +536,22 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="1258"/>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1258"/>
         <source>End</source>
-        <translation type="unfinished">Einde</translation>
+        <translation>Einde</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1460"/>
         <source>Unable to display Pie Chart on this system</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan op dit systeem het taartdiagram niet tonen</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1492"/>
         <source>Sorry, this machine only provides compliance data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, dit apparaat geeft uitsluitend gegevens over therapietrouw.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1511"/>
@@ -561,7 +561,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="1514"/>
         <source>Oscar is bored with this days lack of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oscar verveelt zich met deze dag zonder gegevens.</translation>
     </message>
     <message>
         <source>Bob is bored with this days lack of data.</source>
@@ -603,7 +603,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="127"/>
         <source>Details</source>
-        <translation type="unfinished">Details</translation>
+        <translation>Details</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="815"/>
@@ -618,7 +618,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="838"/>
         <source>Oximetry Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxymetrie sessies</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="841"/>
@@ -633,22 +633,22 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/daily.cpp" line="923"/>
         <source>&lt;b&gt;Please Note:&lt;/b&gt; All settings shown below are based on assumptions that nothing&apos;s changed since previous days.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Let op:&lt;/b&gt; Alle onderstaande instellingen zijn gebaseerd op de aanname dat er niet is veranderd.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1071"/>
         <source>Model %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Model %1 - %2</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1080"/>
         <source>(Mode/Pressure settings are guessed on this day.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Gegevens over druk, soort PAP en instellingen ontbreken voor deze dag.)</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1188"/>
         <source>This day just contains summary data, only limited information is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Van deze dag zijn alleen overzichtsgegevens beschikbaar.</translation>
     </message>
     <message>
         <source>Sorry, your machine only provides compliance data.</source>
@@ -710,7 +710,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/exportcsv.ui" line="60"/>
         <source>Daily</source>
-        <translation>Dagelijks</translation>
+        <translation>Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.ui" line="85"/>
@@ -804,7 +804,7 @@ Oh, dat is een smiley   ;-)</translatorcomment>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="72"/>
         <source>OSCAR_</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR_</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="75"/>
@@ -899,7 +899,7 @@ Het zit in de bestandsnaam, het streepje is een spatie</translatorcomment>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="221"/>
         <source>%1% </source>
-        <translation type="unfinished">%1:  {1%?}</translation>
+        <translation>%1% </translation>
     </message>
     <message>
         <source> Avg</source>
@@ -933,12 +933,12 @@ Het zit in de bestandsnaam, het streepje is een spatie</translatorcomment>
     <message>
         <location filename="../oscar/help.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="92"/>
         <source>Hide this message</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg dit bericht</translation>
     </message>
     <message>
         <source>...</source>
@@ -947,67 +947,67 @@ Het zit in de bestandsnaam, het streepje is een spatie</translatorcomment>
     <message>
         <location filename="../oscar/help.ui" line="198"/>
         <source>Search Topic:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek onderwerp:</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="44"/>
         <source>Help Files are not yet available for %1 and will display in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help bestanden zijn niet beschikbaar voor %1 en zullen komen in %2.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="54"/>
         <source>Help files do not appear to be present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn blijkbaar geen help bestanden.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="69"/>
         <source>HelpEngine did not set up correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>Help is niet goed geinstalleerd</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="75"/>
         <source>HelpEngine could not register documentation correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help kon de documentatie niet vinden.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="85"/>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="86"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="90"/>
         <source>Search</source>
-        <translation type="unfinished">Zoeken</translation>
+        <translation>Zoeken</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="100"/>
         <source>No documentation available</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen documentatie beschikbaar</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="188"/>
         <source>Please wait a bit.. Indexing still in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Even wachten, ben nog bezig</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="214"/>
         <source>No</source>
-        <translation type="unfinished">Nee</translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="215"/>
         <source>%1 result(s) for &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 resultaten voor &quot;%2&quot;</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="216"/>
         <source>clear</source>
-        <translation type="unfinished"></translation>
+        <translation>wissen</translation>
     </message>
 </context>
 <context>
@@ -1015,12 +1015,12 @@ Het zit in de bestandsnaam, het streepje is een spatie</translatorcomment>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/md300w1_loader.cpp" line="165"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet vinden:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/md300w1_loader.cpp" line="171"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het oxymeter bestand niet openen:</translation>
     </message>
 </context>
 <context>
@@ -1082,7 +1082,7 @@ AK: klopt</translatorcomment>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1441"/>
         <source>Daily</source>
-        <translation>Dagelijks</translation>
+        <translation>Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1485"/>
@@ -1103,7 +1103,7 @@ AK: klopt</translatorcomment>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1629"/>
         <source>Help</source>
-        <translation>Over SleepyHead</translation>
+        <translation>Over OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2805"/>
@@ -1135,12 +1135,12 @@ AK: Dan zou ik het andersom doen: B&amp;ladwijzers</translatorcomment>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2872"/>
         <source>Purge Oximetry Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis oxymetrie gegevens</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3185"/>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Meld een probleem</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3175"/>
@@ -1215,7 +1215,7 @@ AK: Dan zou ik het andersom doen: B&amp;ladwijzers</translatorcomment>
         <location filename="../oscar/mainwindow.ui" line="2932"/>
         <source>View &amp;Daily</source>
         <translatorcomment>20/9 WJG: aangepast na compilatie</translatorcomment>
-        <translation>&amp;Dagweergave</translation>
+        <translation>&amp;Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2940"/>
@@ -1295,12 +1295,12 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.ui" line="1347"/>
         <source>Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Profielen</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2972"/>
         <source>&amp;About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Over OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3020"/>
@@ -1345,7 +1345,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.ui" line="3140"/>
         <source>Daily Sidebar</source>
-        <translation>Zijbalk dagoverzicht</translation>
+        <translation>Zijbalk dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3069"/>
@@ -1360,7 +1360,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.ui" line="441"/>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2746"/>
@@ -1539,7 +1539,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="941"/>
         <source>Processing import list...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importlijst verwerken...</translation>
     </message>
     <message>
         <source>Welcome to SleepyHead</source>
@@ -1692,7 +1692,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1223"/>
         <source>Please open a profile first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Open eerst een profiel.</translation>
     </message>
     <message>
         <source>Revision:</source>
@@ -1729,12 +1729,12 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1847"/>
         <source>Provided you have made &lt;i&gt;your &lt;b&gt;own&lt;/b&gt; backups for ALL of your CPAP data&lt;/i&gt;, you can still complete this operation, but you will have to restore from your backups manually.</source>
-        <translation>Mits je &lt;i&gt;je&lt;b&gt; zelf &lt;/b&gt; backups gemaakt hebt van AL JE CPAP gegevens &lt;/i&gt;, kun je dit nog steeds afronden, maar je zal deze back-ups handmatig moeten terugzetten.</translation>
+        <translation>Mits &lt;i&gt;U&lt;b&gt; zelf &lt;/b&gt; backups gemaakt hebt van AL UW CPAP gegevens &lt;/i&gt;, kunt U dit nog steeds afronden, maar U zult deze back-ups handmatig moeten terugzetten.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1848"/>
         <source>Are you really sure you want to do this?</source>
-        <translation>Weet je echt zeker dat je dit wilt?</translation>
+        <translation>Weet U echt zeker dat U dit wilt?</translation>
     </message>
     <message>
         <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; SleepyHead&apos;s machine database for the following machine:</source>
@@ -1748,7 +1748,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1903"/>
         <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
-        <translation>Weet je &lt;b&gt;absoluut zeker&lt;/b&gt; dat je wilt doorgaan?</translation>
+        <translation>Weet U &lt;b&gt;absoluut zeker&lt;/b&gt; dat U wilt doorgaan?</translation>
     </message>
     <message>
         <source>A file permission error or simillar screwed up the purge process, you will have to delete the following folder manually:</source>
@@ -1805,37 +1805,37 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1864"/>
         <source>Would you like to import from your own backups now? (you will have no data visible for this machine until you do)</source>
-        <translation>Wil je nu importeren vanuit je eigen back-ups? (je hebt geen zichtbare gegevens voor dit apparaat totdat je dit doet)</translation>
+        <translation>WilT U nu importeren vanuit uw eigen back-ups? (U heeft geen zichtbare gegevens voor dit apparaat totdat U dit doet)</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1900"/>
         <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; OSCAR&apos;s machine database for the following machine:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>U staat op het punt om alle gegevens te &lt;font size=+2&gt;vernietigen&lt;/font&gt; van het volgende apparaat:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1953"/>
         <source>A file permission error casued the purge process to fail; you will have to delete the following folder manually:</source>
-        <translation type="unfinished"></translation>
+        <translation>Het samenstellen is mislukt, U moet zelf de volgende map wissen:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2002"/>
         <source>No help is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen help bestand.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2236"/>
         <source>The Glossary is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>De woordenlijst is nog niet geinstalleerd</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2242"/>
         <source>Donations are not implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Het OSCAR project heeft geen donaties nodig</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2380"/>
         <source>Are you sure you want to delete oximetry data for %1</source>
-        <translation>Weet je zeker dat je de oxymetrie-gegevens van %1 wilt wissen</translation>
+        <translation>Weet U zeker dat U de oxymetrie-gegevens van %1 wilt wissen</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2382"/>
@@ -1845,7 +1845,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2403"/>
         <source>Select the day with valid oximetry data in daily view first.</source>
-        <translation>Selecteer eerst de dag met geldige oxymetrie-gegevens in het dagoverzicht.</translation>
+        <translation>Selecteer eerst de dag met geldige oxymetrie-gegevens in het dagrapport.</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -1951,7 +1951,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="222"/>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Handleiding</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="282"/>
@@ -1961,12 +1961,12 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="449"/>
         <source>Loading profile &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel &quot;%1&quot; laden</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="740"/>
         <source>Please insert your CPAP data card...</source>
-        <translation>Plaats je cpap gegevenskaart...</translation>
+        <translation>Plaats uw cpap gegevenskaart...</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="747"/>
@@ -1991,7 +1991,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="849"/>
         <source>Would you like to import from this location?</source>
-        <translation>Wil je vanaf deze lokatie importeren?</translation>
+        <translation>Wilt U vanaf deze lokatie importeren?</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="852"/>
@@ -2001,22 +2001,22 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1027"/>
         <source>Welcome to OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Welkom bij OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1030"/>
         <source>About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Over OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1033"/>
         <source>OSCAR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR is ontworpen door een softwareontwikkelaar met persoonlijke ervaring van een slaapstoornis en gevormd door de feedback van vele andere welwillende testers die omgaan met vergelijkbare omstandigheden.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1036"/>
         <source>Please report any bugs you find to the OSCAR developer&apos;s group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef alle problemen die U vindt op bij de ontwikkelaarsgroep van OSCAR.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1040"/>
@@ -2026,60 +2026,62 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1086"/>
         <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze software wordt vrijgegeven onder de &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1093"/>
         <source>The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation type="unfinished"></translation>
+        <translation>De auteurs accepteren GEEN ENKELE AANSPRAKELIJKHEID voor schade, in welke vorm ook, door het gebruik of misbruik van deze software.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1269"/>
         <source>Updates are not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische update is nog niet geinstalleerd</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1440"/>
         <source>The User&apos;s Guide is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>De handleiding is nog niet geimplementeerd</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1446"/>
         <source>The FAQ is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>de FAQ is nog niet geimplementeerd</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1694"/>
         <location filename="../oscar/mainwindow.cpp" line="1721"/>
         <source>If you can read this, the restart command didn&apos;t work. You will have to do it yourself manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als U dit kunt lezen, heeft het herstartcommando niet gewerkt. U zult het handmatig moeten doen.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1835"/>
         <source>Are you sure you want to rebuild all CPAP data for the following machine:
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Weet U zeker dat U alle CPAP gegevens voor het volgende apparaat wilt herstellen:
+
+</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1838"/>
         <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Houd er rekening mee, dat dit kan leiden tot verlies van grafische gegevens indien de interne back-ups van OSCAR op enige manier zijn uitgeschakeld of verstoord.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1845"/>
         <source>For some reason, OSCAR does not have any backups for the following machine:</source>
-        <translation type="unfinished"></translation>
+        <translation>Om een ​​of andere reden heeft OSCAR geen back-ups voor de volgende machine:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2463"/>
         <source>Export review is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteren is nog niet geimplementeerd</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2478"/>
         <source>Reporting issues is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Melden van problemen is nog niet geimplementeerd</translation>
     </message>
     <message>
         <source>SleepyHead&apos;s Online &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Users Guide&lt;/a&gt;&lt;br/&gt;</source>
@@ -2224,7 +2226,7 @@ AK: Waar staat dat Welkomst-/Startscherm???
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1916"/>
         <source>The Minimum Y-Axis value.. Note this can be a negative number if you wish.</source>
-        <translation>De minimale waarde. Dit mag negatief zijn als je wilt.</translation>
+        <translation>De minimale waarde. Dit mag negatief zijn als U wilt.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1917"/>
@@ -2329,7 +2331,7 @@ Dit is GEEN ECHTE BEVEILIGING.</translation>
     <message>
         <location filename="../oscar/newprofile.ui" line="364"/>
         <source>It&apos;s totally ok to fib or skip this, but your rough age is needed to enhance accuracy of certain calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het is OK om hier geen of een foute leeftijd in te vullen, maar deze is nodig om meer nauwkeurige berekeningen te kunnen doen.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.ui" line="367"/>
@@ -2339,7 +2341,7 @@ Dit is GEEN ECHTE BEVEILIGING.</translation>
     <message>
         <location filename="../oscar/newprofile.ui" line="383"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Biological (birth) gender is sometimes needed to enhance the accuracy of a few calculations, feel free to leave this blank and skip any of them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Het biologische (geboorte-)geslacht is soms nodig voor de nauwkeurigheid van berekeningen, U mag het best leeg laten of overslaan.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.ui" line="386"/>
@@ -2472,7 +2474,7 @@ AK: Ik heb het nu ook door!</translatorcomment>
     <message>
         <location filename="../oscar/newprofile.ui" line="877"/>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>SleepyHead</source>
@@ -2511,7 +2513,7 @@ AK: Ik heb het nu ook door!</translatorcomment>
     <message>
         <location filename="../oscar/newprofile.cpp" line="111"/>
         <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
-        <translation>Deze software is ontworpen om je te helpen bij het analyseren van de gegevens van je CPAP.</translation>
+        <translation>Deze software is ontworpen om U te helpen bij het analyseren van de gegevens van uw CPAP.</translation>
     </message>
     <message>
         <source>SleepyHead has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
@@ -2559,28 +2561,28 @@ AK: Ik heb het nu ook door!</translatorcomment>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
-        <translation type="unfinished"></translation>
+        <source>Welcome to Open Source CPAP Reviewer</source>
+        <translation>Welkom bij de Open Source CPAP Analysis Reporter</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="114"/>
         <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR is vrijgegeven onder de &lt;a href=&apos;qrc:/COPYING&apos;&gt; GNU Public License v3&lt;/ a&gt;, en wordt geleverd zonder garantie en zonder enige aanspraak op geschiktheid voor enig doel.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="117"/>
         <source>OSCAR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR is voornamelijk bedoeld om gegevens te bekijken en absoluut geen vervanging voor de medische begeleiding door uw arts.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="125"/>
         <source>The authors will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation type="unfinished"></translation>
+        <translation>De auteurs accepteren GEEN ENKELE AANSPRAKELIJKHEID voor schade, in welke vorm ook, door het gebruik of misbruik van deze software.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="132"/>
         <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Het auteursrecht van SleepyHead &amp;copy;2011-2018 berust bij Mark Watkins en delen &amp;copy;2019 Nightowl Software</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="155"/>
@@ -2768,7 +2770,7 @@ Index
         <location filename="../oscar/overview.cpp" line="210"/>
         <source>How you felt
 (0-10)</source>
-        <translation>Hoe je je voelde
+        <translation>Hoe U zich voelde
 (0-10)</translation>
     </message>
     <message>
@@ -2808,27 +2810,27 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="967"/>
         <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until OSCAR prompts you to.</source>
-        <translation type="unfinished"></translation>
+        <translation>CMS50E/F gebruikers die direct importeren moeten de upload pas starten als OSCAR dat aangeeft.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1004"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, OSCAR will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indien ingeschakeld, zal OSCAR de interne klok van je CMS50 instellen op de tijd van uw computer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1077"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deze optie wist de geimporteerde sessie van uw oxymeter na het importeren. &lt;/p&gt;&lt;p&gt;Wees er voorzichtig mee, want als er iets fout gaat voordat OSCAR de sessie heeft opgeslagen, bent U het voorgoed kwijt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1106"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, some oximeters will require you to do something in the devices menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deze optie geeft de mogelijkheid om de gegevens uit je oxymeter (via een kabel) te importeren.&lt;/p&gt;&lt;p&gt;Na kiezen van deze optie, moet bij sommige oxymeters de upload gestart worden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deze optie geeft de mogelijkheid om de gegevens uit uw oxymeter (via een kabel) te importeren.&lt;/p&gt;&lt;p&gt;Na kiezen van deze optie, moet bij sommige oxymeters de upload gestart worden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1148"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you don&apos;t mind a being attached to a running computer overnight, this option provide a useful plethysomogram graph, which gives an indication of heart rhythm, on top of the normal oximetry readings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als je er geen probleem mee hebt om de hele nacht aan de computer te hangen, geeft deze optie de mogelijkheid van een live &quot;plethysomogram&quot;-grafiek, met indicatie van het hartritme en natuurlijk de normale zuurstofsaturatiegrafiek.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als U er geen probleem mee hebt om de hele nacht aan de computer te hangen, geeft deze optie de mogelijkheid van een live &quot;plethysomogram&quot;-grafiek, met indicatie van het hartritme en natuurlijk de normale zuurstofsaturatiegrafiek.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1154"/>
@@ -2849,7 +2851,7 @@ Index
         <location filename="../oscar/oximeterimport.ui" line="1272"/>
         <location filename="../oscar/oximeterimport.ui" line="1319"/>
         <source>Please connect your oximeter device</source>
-        <translation>Sluit je oxymeter aan</translation>
+        <translation>Sluit uw oxymeter aan</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1345"/>
@@ -2944,7 +2946,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1998"/>
         <source>You can manually adjust the time here if required:</source>
-        <translation>Je kunt hier eventueel de tijd zelf aanpassen:</translation>
+        <translation>U kunt hier eventueel de tijd zelf aanpassen:</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="2019"/>
@@ -2964,7 +2966,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="823"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Please note: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Make sure your correct oximeter type is selected otherwise import will fail.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Let op: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Zorg dat je het juiste type van je oxymeter hebt gekozen, anders gaat het importeren fout.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Let op: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Zorg dat U het juiste type van uw oxymeter hebt gekozen, anders gaat het importeren fout.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="910"/>
@@ -2997,12 +2999,12 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1007"/>
         <source>Set device date/time</source>
-        <translation>Zet datum en tijd van je apparaat gelijk</translation>
+        <translation>Zet datum en tijd van uw apparaat gelijk</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1014"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to enable updating the device identifier next import, which is useful for those who have multiple oximeters lying around.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sla bij de volgende import de identificatie van je apparaat op. Dat is handig als je meerdere oxymeters hebt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sla bij de volgende import de identificatie van uw apparaat op. Dat is handig als U meerdere oxymeters hebt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1017"/>
@@ -3012,7 +3014,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1036"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier kun je zelf een naam van maximaal 7 karakters voor deze oxymeter opgeven.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier kunt U zelf een naam van maximaal 7 karakters voor deze oxymeter opgeven.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before SleepyHead saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3031,22 +3033,22 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1237"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Reminder for CPAP users: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Did you remember to import your CPAP sessions first?&lt;br/&gt;&lt;/span&gt;If you forget, you won&apos;t have a valid time to sync this oximetry session to.&lt;br/&gt;To a ensure good sync between devices, always try to start both at the same time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Herinnering voor CPAP gebruikers: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Ben je niet vergeten om eerst je CPAP sessies te importerent?&lt;br/&gt;&lt;/span&gt;Als je dat vergeet, heb je geen geldig tijdstip om de oxymetrie sessie mee te synchroniseren.&lt;br/&gt;Om een goede synchronisatie te waarborgen, kun je het beste proberen om beide apparaten tegelijk te starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Herinnering voor CPAP gebruikers: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Bent U niet vergeten om eerst uw CPAP sessies te importeren?&lt;br/&gt;&lt;/span&gt;Als U dat vergeet, heeft U geen geldig tijdstip om de oxymetrie sessie mee te synchroniseren.&lt;br/&gt;Om een goede synchronisatie te waarborgen, kunt U het beste proberen om beide apparaten tegelijk te starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1290"/>
         <source>If you can read this, you likely have your oximeter type set wrong in preferences.</source>
-        <translation>Als je dit leest, heb je waarschijnlijk in voorkeuren het verkeerde type oxymeter ingesteld.</translation>
+        <translation>Als U dit leest, heeft U waarschijnlijk in voorkeuren het verkeerde type oxymeter ingesteld.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1648"/>
         <source>Please choose which one you want to import into OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies welke U in OSCAR wilt importeren</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1825"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR heeft een starttijd nodig om de sessie op te kunnen slaan.&lt;/p&gt;&lt;p&gt;Kies een van de volgende opties:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="2135"/>
@@ -3101,7 +3103,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="258"/>
         <source>Oximeter name is different.. If you only have one and are sharing it between profiles, set the name to the same on both profiles.</source>
-        <translation>De naam van de oxymeter is anders dan verwacht. Als je er maar een hebt die je gebruikt met meerdere profielen, zorg dat steeds dezelfde naam wordt gebruikt.</translation>
+        <translation>De naam van de oxymeter is anders dan verwacht. Als U er maar een hebt die U gebruikt met meerdere profielen, zorg dat steeds dezelfde naam wordt gebruikt.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="298"/>
@@ -3161,62 +3163,62 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="407"/>
         <source>Oximetry Files (*.spo *.spor *.spo2 *.SpO2 *.dat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxymetrie bestanden (*.spo, *.spor, *.spo2 *.dat)</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="429"/>
         <source>No Oximetry module could parse the given file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Er was geen oxymeter die het opgegeven bestand kon lezen:</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="474"/>
         <source>Live Oximetry Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Directe oxymetrie-aansluiting</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="526"/>
         <source>Live Oximetry Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Directe oxymetrie gestopt</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="527"/>
         <source>Live Oximetry import has been stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Directe oxymetrie-import is beeindigd</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1071"/>
         <source>Oximeter Session %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxymetrie sessie %1</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1116"/>
         <source>OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR maakt het mogelijk om de gegevens van de oxymeter te vergelijken met die van de CPAP. Daarmee kunt U waardevol inzicht krijgen in de effectiviteit van de CPAP behandeling. Het werkt ook met alleen de oxymeter, U kunt gegevens opslaan, volgen en bekijken.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1118"/>
         <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR is momenteel compatibel met oxymeters van Contec, type CMS50D+, CMS50E, CMS50F en CMS50I&lt;br/&gt;(Let op: Importeren vanuit bluetooth modellen is &lt;span style=&quot; font-weight:600;&quot;&gt;waarschijnlijk nog niet&lt;/span&gt; mogelijk)</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1127"/>
         <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
-        <translation type="unfinished"></translation>
+        <translation>Als U oxymetrie en CPAP gegevens wilt synchroniseren, moet U EERST uw CPAP gegevens importeren voordat U verder gaat!</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1130"/>
         <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zorg dat U de juiste drivers hebt geinstalleerd (zoals USB naar serieel UART) om uw oxymeter te kunnen uitlezen. Voor meer informatie hierover, %1klik hier%2.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="330"/>
         <source>You need to tell your oximeter to begin sending data to the computer.</source>
-        <translation>Je moet upload op de oxymeter starten zodat gegevens naar de computer worden gezonden.</translation>
+        <translation>U moet upload op de oxymeter starten zodat gegevens naar de computer worden gezonden.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="332"/>
         <source>Please connect your oximeter, enter it&apos;s menu and select upload to commence data transfer...</source>
-        <translation>Sluit je oxymeter aan, ga naar het menu en selecteer upload om gegevensoverdracht te starten...</translation>
+        <translation>Sluit uw oxymeter aan, ga naar het menu en selecteer upload om gegevensoverdracht te starten...</translation>
     </message>
     <message>
         <source>Oximetry Files (*.spo *.spor *.spo2 *.dat)</source>
@@ -3248,7 +3250,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="478"/>
         <source>If you can still read this after a few seconds, cancel and try again</source>
-        <translation>Als je dit na enkele seconden nog ziet, druk dan op &apos;cancel&apos; en probeer het opnieuw</translation>
+        <translation>Als U dit na enkele seconden nog ziet, druk dan op &apos;cancel&apos; en probeer het opnieuw</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="525"/>
@@ -3356,7 +3358,7 @@ Index
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1132"/>
         <source>Contec CMS50D+ devices do not have an internal clock, and do not record a starting time. If you do not have a CPAP session to link a recording to, you will have to enter the start time manually after the import process is completed.</source>
-        <translation>De apparaten van Contec CMS50D hebben geen interne klok en slaan dus ook de starttijd niet op. Als je geen CPAP gegevens hebt om de opname mee te verbinden, moet je zelf de starttijd ingeven nadat het importeren is voltooid.</translation>
+        <translation>De apparaten van Contec CMS50D hebben geen interne klok en slaan dus ook de starttijd niet op. Als U geen CPAP gegevens hebt om de opname mee te verbinden, moet U zelf de starttijd ingeven nadat het importeren is voltooid.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1134"/>
@@ -3442,7 +3444,7 @@ Index
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="154"/>
         <source>Combine Close Sessions </source>
-        <translation>Combineer nabije sessies</translation>
+        <translation>Combineer nabije sessies </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="164"/>
@@ -3481,7 +3483,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="310"/>
         <source>Day Split Time</source>
-        <translation>Volgende dag start om </translation>
+        <translation>Volgende dag start om</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="320"/>
@@ -3604,8 +3606,8 @@ Doorstroombeperking</translatorcomment>
         <location filename="../oscar/preferencesdialog.ui" line="1064"/>
         <source>Percentage of restriction in airflow from the median value. 
 A value of 20% works well for detecting apneas. </source>
-        <translation>Percentage van de vermindering van de luchtstroom ten opzichte van de mediane waarde.
-Een waarde van 20% werkt goed voor het opsporen van apneus.</translation>
+        <translation>Percentage van de vermindering van de luchtstroom ten opzichte van de mediane waarde. 
+Een waarde van 20% werkt goed voor het opsporen van apneus. </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="987"/>
@@ -3671,7 +3673,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="1650"/>
         <location filename="../oscar/preferencesdialog.ui" line="1679"/>
         <source>s</source>
-        <translation> s</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1124"/>
@@ -3765,7 +3767,7 @@ anders is het geen AHI/uur meer.</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1215"/>
         <source>Whether to show the leak redline in the leak graph</source>
-        <translation>Of je de rode lijn in de lekgrafiek wilt zien</translation>
+        <translation>Of U de rode lijn in de lekgrafiek wilt zien</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1792"/>
@@ -3952,7 +3954,7 @@ Werkt vooral bij importeren.</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="596"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This setting keeps waveform and event data in memory after use to speed up revisiting days.&lt;/p&gt;&lt;p&gt;This is not really a necessary option, as your operating system caches previously used files too.&lt;/p&gt;&lt;p&gt;Recommendation is to leave it switched off, unless your computer has a ton of memory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deze instelling houdt de gegevens van golfvorm en gebeurtenissen in het geheugen, zodat het bij terugkeer naar dezelfde dag sneller gaat.&lt;/p&gt;&lt;p&gt;Het is niet echt noodzakelijk, want de computer doet dit zelf ook al.&lt;/p&gt;&lt;p&gt;Aanbevolen wordt dus om het uit te laten, tenzij je  gigantisch veel geheugen hebt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deze instelling houdt de gegevens van golfvorm en gebeurtenissen in het geheugen, zodat het bij terugkeer naar dezelfde dag sneller gaat.&lt;/p&gt;&lt;p&gt;Het is niet echt noodzakelijk, want de computer doet dit zelf ook al.&lt;/p&gt;&lt;p&gt;Aanbevolen wordt dus om het uit te laten, tenzij U gigantisch veel geheugen hebt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="599"/>
@@ -4062,7 +4064,7 @@ want dit is de enige waarde die beschikbaar is op de dagen met alleen een samenv
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2732"/>
         <source>Try changing this from the default setting (Desktop OpenGL) if you experience rendering problems with OSCAR&apos;s graphs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als U problemen hebt met grafieken, probeer dan een andere dan de standaard instelling (Desktop Open GL).</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2757"/>
@@ -4092,24 +4094,31 @@ which is common on Mac &amp; Linux platforms..
 
 OSCAR can import from this compressed backup directory natively.. 
 To use it with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimeer ResMed (EDF) back-ups om schijfruimte te besparen.
+Back-ups van EDF bestanden worden opgeslagen in het gz-formaat,
+dat veel gebruikt wordt op Mac &amp; Linux-systemen ..
+
+OSCAR kan hier rechtstreeks uit importeren,
+maar voor ResScan moeten de .gz-bestanden eerst uitgepakt worden..</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="451"/>
         <source>The following options affect the amount of disk space OSCAR uses, and have an effect on how long import takes.</source>
-        <translation type="unfinished"></translation>
+        <translation>De volgende opties hebben effect op de gebruikte schijfruimte en op de snelheid van importeren.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="461"/>
         <source>This makes OSCAR&apos;s data take around half as much space.
 But it makes import and day changing take longer.. 
 If you&apos;ve got a new computer with a small solid state disk, this is a good option.</source>
-        <translation type="unfinished"></translation>
+        <translation>De grootte van de opslag wordt gehalveerd,
+maar maakt het importeren en verwerken trager.
+Als U een nieuwe computer met SSD hebt, is dit een goede keuze.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="466"/>
         <source>Compress Session Data (makes OSCAR data smaller, but day changing slower.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimeer sessiegegevens (minder opslagruimte, maar tragere verwerking.)</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="473"/>
@@ -4120,17 +4129,23 @@ and graph data older than 30 days..
 
 OSCAR can keep a copy of this data if you ever need to reinstall. 
 (Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit zorgt voor een back-up van de SD-kaart voor ResMed-apparaten,
+
+ResMed apparaten verwijderen hoge resolutie-gegevens ouder dan 7 dagen,
+en grafiekgegevens die ouder zijn dan 30 dagen..
+
+OSCAR kan een kopie van deze gegevens bewaren voor na een herinstallatie.
+(Sterk aanbevolen, tenzij U weinig schijfruimte hebt of niets om grafiekgegevens geeft)</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="606"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting OSCAR a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn&apos;t affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maakt het opstarten van OSCAR een beetje trager door vooraf alle overzichtgegevens te laden, maar verder loopt het programma daardoor wel sneller. &lt;/p&gt;&lt;p&gt;Als U erg veel gegevens hebt, kunt U dit beter uit laten, want als U &lt;span style=&quot; font-style:italic;&quot;&gt; alle overzichten&lt;/span&gt; wilt bekijken, moeten deze gegevens toch worden opgehaald. &lt;/p&gt;&lt;p&gt;Let op: dit beinvloedt niet de gegevens van golfvorm en gebeurtenissen, want die moeten toch altijd worden geladen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="997"/>
         <source>This experimental option attempts to use OSCAR&apos;s event flagging system to improve machine detected event positioning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze experimentele optie probeert de incident-markeringen te gebruiken om een betere correlatie te kunnen zien.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1749"/>
@@ -4147,12 +4162,24 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Lucida Grande UI&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Synchroniseer oxymetrie en CPAP gegevens&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;De CMS50 gegevens, geimporteerd uit SpO2Review (uit .spoR bestanden) en de seriele import methode hebben &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;niet&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; de correcte kloktijd die nodig is voor synchronisatie.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live weergave (met een seriele/USB kabel) is een manier om een accurate synchronisatie met CMS50 oxymeters te krijgen, maar helpt ook niet tegen het verlopen van de klok van de CPAP.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Als U de opname van uw oxymeter op &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;precies &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;hetzelfde moment start met uw CPAP, kunt U ook synchroon lopen. &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Het proces van import neemt de starttijd van de eerste CPAP sessie van de vorige nacht. (Vergeet niet om eerst uw CPAP gegevens te importeren!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1981"/>
         <source>Show Remove Card reminder notification on OSCAR shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon aanwijzing om de SD-kaart te verwijderen bij afsluiten</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2013"/>
@@ -4182,7 +4209,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2141"/>
         <source>Last Checked For Updates: </source>
-        <translation>Laatste controle:</translation>
+        <translation>Laatste controle: </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2154"/>
@@ -4203,7 +4230,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Als je geïnteresseerd bent in het helpen testen van nieuwe features en bugfixes, klik hier.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Als U geïnteresseerd bent in het helpen testen van nieuwe features en bugfixes, klik hier.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Maar wees gewaarschuwd: dit zal soms vastlopers betekenen!!&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -4225,7 +4252,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2254"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Which tab to open on loading a profile. (Note: It will default to Profile if OSCAR is set to not open a profile on startup)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Welke tab openen bij het laden van een profiel. (Let op: Gaat standaard naar Profiel als is ingesteld dat geen er profiel bij de start opent)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2512"/>
@@ -4265,7 +4292,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2380"/>
         <source>The visual method of displaying waveform overlay flags.
 </source>
-        <translation>De visuele methode voor het tonen van markeringen in golfvormgrafieken.</translation>
+        <translation>De visuele methode voor het tonen van markeringen in golfvormgrafieken.
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2385"/>
@@ -4366,7 +4394,7 @@ If you use a few different masks, pick average values instead. It should still b
 
 De berekening van de onbedoelde lekkage gebeurt lineair, niet volgens de masker-curve.
 
-Als je meerdere maskers gebruikt, neem dan gemiddelde waarden, dat is voldoende nauwkeurig.</translation>
+Als U meerdere maskers gebruikt, neem dan gemiddelde waarden, dat is voldoende nauwkeurig.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="788"/>
@@ -4376,12 +4404,12 @@ Als je meerdere maskers gebruikt, neem dan gemiddelde waarden, dat is voldoende 
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="797"/>
         <source>Your masks vent rate at 20cmH2O pressure</source>
-        <translation>De bedoelde lek van je masker bij 20 cmH2O druk</translation>
+        <translation>De bedoelde lek van uw masker bij 20 cmH2O druk</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="853"/>
         <source>Your masks vent rate at 4cmH2O pressure</source>
-        <translation>De bedoelde lek van je masker bij 4  cmH2O druk</translation>
+        <translation>De bedoelde lek van uw masker bij 4  cmH2O druk</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="884"/>
@@ -4425,66 +4453,66 @@ Als je meerdere maskers gebruikt, neem dan gemiddelde waarden, dat is voldoende 
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="576"/>
         <source>Auto-Launch CPAP Importer after opening profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Start automatisch met importeren na het openen van een profiel</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="616"/>
         <source>Automatically load last used profile on start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadt automatisch het laatste profiel bij opstarten</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1456"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;Due to summary design limitations, ResMed machines do not support changing these settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;Wegens beperkingen in het ontwerp van overzichten kan dit bij ResMed apparaten niet worden gewijzigd.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1509"/>
         <source>Oximetry Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxymetrie instellingen</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2244"/>
         <source>On Opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij start</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2257"/>
         <location filename="../oscar/preferencesdialog.ui" line="2261"/>
         <source>Profile</source>
-        <translation type="unfinished">Profiel</translation>
+        <translation>Profiel</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2266"/>
         <location filename="../oscar/preferencesdialog.ui" line="2305"/>
         <source>Welcome</source>
-        <translation type="unfinished">Welkom</translation>
+        <translation>Welkom</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2271"/>
         <location filename="../oscar/preferencesdialog.ui" line="2310"/>
         <source>Daily</source>
-        <translation type="unfinished">Dagelijks</translation>
+        <translation>Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2281"/>
         <location filename="../oscar/preferencesdialog.ui" line="2320"/>
         <source>Statistics</source>
-        <translation type="unfinished">Statistieken</translation>
+        <translation>Statistiek</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2289"/>
         <source>Switch Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Wissel tabbladen</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2300"/>
         <source>No change</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelfde</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2328"/>
         <source>After Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Na import</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2626"/>
@@ -4502,7 +4530,7 @@ Try it and see if you like it.</source>
 Sommige grafieken zien er dan mooier uit.
 Dit is ook van invloed op afgedrukte rapporten.
 
-Probeer het en kijk of je het leuk vindt.</translation>
+Probeer het en kijk of U het leuk vindt.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2639"/>
@@ -4561,7 +4589,7 @@ dat hierdoor deze toepassing instabiel wordt.</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2726"/>
         <source>Graphics Engine (Requires Restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafische kaart (Herstart nodig)</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2792"/>
@@ -4576,7 +4604,7 @@ dat hierdoor deze toepassing instabiel wordt.</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2830"/>
         <source>Bold  </source>
-        <translation>Vet</translation>
+        <translation>Vet  </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2852"/>
@@ -4655,7 +4683,7 @@ dat hierdoor deze toepassing instabiel wordt.</translation>
 Are you sure you want to make these changes?</source>
         <translation>Herindexering van de gegevens is nodig. Dit kan een paar minuten duren.
 
-Weet je zeker dat je deze wijzigingen wilt doorvoeren?</translation>
+Weet U zeker dat U deze wijzigingen wilt doorvoeren?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="772"/>
@@ -4694,7 +4722,7 @@ Wil je dit nu doen?</translation>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="256"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Nooit</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="426"/>
@@ -4740,7 +4768,7 @@ Wil je dit nu doen?</translation>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="64"/>
         <source>&lt;p&gt;&lt;b&gt;Please Note:&lt;/b&gt; OSCAR&apos;s advanced session splitting capabilities are not possible with &lt;b&gt;ResMed&lt;/b&gt; machines due to a limitation in the way their settings and summary data is stored, and therefore they have been disabled for this profile.&lt;/p&gt;&lt;p&gt;On ResMed machines, days will &lt;b&gt;split at noon&lt;/b&gt; like in ResMed&apos;s commercial software.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Let op: &lt;/b&gt;de geavanceerde sessiesplitsingsmogelijkheden van OSCAR zijn niet mogelijk met &lt;b&gt;ResMed&lt;/b&gt;-apparaten vanwege een beperking in de manier waarop de instellingen en samenvattingsgegevens worden opgeslagen, en daarom zijn ze uitgeschakeld voor dit profiel. &lt;/p&gt;&lt;p&gt;Op ResMed-machines worden dagen &lt;b&gt;gesplitst tussen de middag&lt;/b&gt;, zoals in de commerciële software van ResMed.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="283"/>
@@ -4771,7 +4799,7 @@ Wil je dit nu doen?</translation>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="513"/>
         <source>Here you can change the type of flag shown for this event</source>
-        <translation>Hier kun je het soort markering van dit incident wijzigen</translation>
+        <translation>Hier kunt U het soort markering van dit incident wijzigen</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="518"/>
@@ -4823,31 +4851,35 @@ Wil je dit nu doen?</translation>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="641"/>
         <source>Here you can set the &lt;b&gt;lower&lt;/b&gt; threshold used for certain calculations on the %1 waveform</source>
-        <translation>Hier kun je de &lt;b&gt;onderste&lt;/b&gt; drempel instellen van enkele berekeningen aan de %1 grafiek</translation>
+        <translation>Hier kunt U de &lt;b&gt;onderste&lt;/b&gt; drempel instellen van enkele berekeningen aan de %1 grafiek</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="646"/>
         <source>Here you can set the &lt;b&gt;upper&lt;/b&gt; threshold used for certain calculations on the %1 waveform</source>
-        <translation>Hier kun je de &lt;b&gt;bovenste&lt;/b&gt; drempel instellen van enkele berekeningen aan de %1 grafiek</translation>
+        <translation>Hier kunt U de &lt;b&gt;bovenste&lt;/b&gt; drempel instellen van enkele berekeningen aan de %1 grafiek</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="756"/>
         <source>Data Processing Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegevens opnieuw verwerken</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="757"/>
         <source>A data re/decompression proceedure is required to apply these changes. This operation may take a couple of minutes to complete.
 
 Are you sure you want to make these changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor het toepassen van deze wijzigingen is de- en hercompressie vereist. Deze bewerking kan enkele minuten duren om te voltooien.
+
+Weet U zeker dat U deze wijzigingen wilt aanbrengen?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="773"/>
         <source>One or more of the changes you have made will require this application to be restarted, in order for these changes to come into effect.
 
 Would you like do this now?</source>
-        <translation type="unfinished"></translation>
+        <translation>De wijzigingen maken een herstart noodzakelijk.
+
+Wil tU dit nu doen?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1130"/>
@@ -4857,29 +4889,31 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1131"/>
         <source>ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).</source>
-        <translation>ResMed S9 apparaten wissen bepaalde gegevens van je SD kaart als ze ouder zijn dan 7 en 30 dagen (afhankelijk van de resolutie).</translation>
+        <translation>ResMed S9 apparaten wissen bepaalde gegevens van uw SD kaart als ze ouder zijn dan 7 en 30 dagen (afhankelijk van de resolutie).</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1132"/>
         <source> If you ever need to reimport this data again (whether in OSCAR or ResScan) this data won&apos;t come back.</source>
-        <translation type="unfinished"></translation>
+        <translation> Als U ooit gegevens opnieuw moet inlezen (in OSCAR of in ResScan), krijgt U deze gegevens niet terug.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1133"/>
         <source> If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="unfinished"></translation>
+        <translation> Als U zuinig moet zijn met schijfruimte, vergeet dan niet om zelf backups te maken.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1134"/>
         <source> Are you sure you want to disable these backups?</source>
-        <translation type="unfinished"></translation>
+        <translation> Weet U zeker dat U deze automatische backups wilt uitschakelen?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1178"/>
         <source>Switching off backups is not a good idea, because OSCAR needs these to rebuild the database if errors are found.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Het is geen goed idee om da automatische backup-functie uit te schakelen, OSCAR heeft deze nodig voor het eventuele herstellen van de database.
+
+</translation>
     </message>
     <message>
         <source>If you ever need to reimport this data again (whether in SleepyHead or ResScan) this data won&apos;t come back.</source>
@@ -4900,7 +4934,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1179"/>
         <source>Are you really sure you want to do this?</source>
-        <translation>Weet je zeker dat je dit wilt?</translation>
+        <translation>Weet U zeker dat U dit wilt?</translation>
     </message>
 </context>
 <context>
@@ -4928,22 +4962,22 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.ui" line="235"/>
         <source>Choose a different OSCAR data folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een andere map met OSCAR_Data.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="274"/>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="310"/>
         <source>Click here if you didn&apos;t want to start OSCAR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier als U OSCAR niet wilde starten.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="383"/>
         <source>The current location of OSCAR data store.</source>
-        <translation type="unfinished"></translation>
+        <translation>De huidige locatie van de map met OSCAR_Data.</translation>
     </message>
     <message>
         <source>Choose a different SleepyHead data folder.</source>
@@ -5026,7 +5060,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.cpp" line="160"/>
         <source>You entered the password wrong too many times.</source>
-        <translation>Je hebt te vaak een verkeerd wachtwoord getypt.</translation>
+        <translation>U hebt te vaak een verkeerd wachtwoord getypt.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.cpp" line="182"/>
@@ -5036,7 +5070,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.cpp" line="182"/>
         <source>You are about to destroy profile &apos;%1&apos;.</source>
-        <translation>Je wist nu het profiel &apos;%1&apos;.</translation>
+        <translation>U wist nu het profiel &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.cpp" line="201"/>
@@ -5046,7 +5080,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.cpp" line="201"/>
         <source>You need to enter DELETE in capital letters.</source>
-        <translation>Je moet het woord DELETE in HOOFDLETTERS intypen.</translation>
+        <translation>U moet het woord DELETE in HOOFDLETTERS intypen.</translation>
     </message>
     <message>
         <source>Could not open profile.. You will need to delete this profile directory manually</source>
@@ -5059,17 +5093,17 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.cpp" line="239"/>
         <source>You entered an incorrect password</source>
-        <translation>Je hebt een verkeerd wachtwoord gegeven</translation>
+        <translation>U hebt een verkeerd wachtwoord gegeven</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.cpp" line="242"/>
         <source>If you&apos;re trying to delete because you forgot the password, you need to delete it manually.</source>
-        <translation>Als je probeert om het te wissen omdat je het wachtwoord bent vergeten, moet je de directory zelf wissen.</translation>
+        <translation>Als U probeert om het te wissen omdat U het wachtwoord bent vergeten, moet U de directory zelf wissen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.cpp" line="255"/>
         <source>There was an error deleting the profile directory, you need to manually remove it.</source>
-        <translation>Er ging iets mis bij het wissen van de profieldirectory, je moet deze zelf wissen.</translation>
+        <translation>Er ging iets mis bij het wissen van de profieldirectory, U moet deze zelf wissen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.cpp" line="259"/>
@@ -5089,7 +5123,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.cpp" line="345"/>
         <source>You entered an Incorrect Password too many times. Exiting!</source>
-        <translation>Je typte te vaak een verkeerd wachtwoord.
+        <translation>U typte te vaak een verkeerd wachtwoord.
 Het programma wordt nu afgesloten!</translation>
     </message>
 </context>
@@ -5098,17 +5132,17 @@ Het programma wordt nu afgesloten!</translation>
     <message>
         <location filename="../oscar/profileselector.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="26"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="36"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>SleepyHead</source>
@@ -5117,236 +5151,236 @@ Het programma wordt nu afgesloten!</translation>
     <message>
         <location filename="../oscar/profileselector.ui" line="171"/>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="186"/>
         <source>Version</source>
-        <translation type="unfinished">Versie</translation>
+        <translation>Versie</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="203"/>
         <source>&amp;Open Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Open profiel</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="214"/>
         <source>&amp;Edit Profile</source>
-        <translation type="unfinished">Profiel &amp;aanpassen</translation>
+        <translation>Profiel &amp;aanpassen</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="228"/>
         <source>&amp;New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nieuw profiel</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="247"/>
         <source>Profile: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel: geen</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="268"/>
         <source>Please select or create a profile...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer of maak een profiel ...</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="319"/>
         <source>Destroy Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder profiel</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="86"/>
         <source>Profile</source>
-        <translation type="unfinished">Profiel</translation>
+        <translation>Profiel</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="87"/>
         <source>Ventilator Brand</source>
-        <translation type="unfinished"></translation>
+        <translation>Merk apparaat</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="88"/>
         <source>Ventilator Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Type apparaat</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="89"/>
         <source>Other Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere gegevens</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="90"/>
         <source>Last Imported</source>
-        <translation type="unfinished"></translation>
+        <translation>Laatste import</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="91"/>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="131"/>
         <location filename="../oscar/profileselector.cpp" line="307"/>
         <source>%1, %2</source>
-        <translation type="unfinished">%1: %2 {1,?}</translation>
+        <translation>%2 %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="228"/>
         <location filename="../oscar/profileselector.cpp" line="358"/>
         <source>Enter Password for %1</source>
-        <translation type="unfinished">Geef wachtwoord voor %1</translation>
+        <translation>Geef wachtwoord voor %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="248"/>
         <location filename="../oscar/profileselector.cpp" line="377"/>
         <source>You entered an incorrect password</source>
-        <translation type="unfinished">Je hebt een verkeerd wachtwoord gegeven</translation>
+        <translation>U hebt een verkeerd wachtwoord gegeven</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="251"/>
         <source>Forgot your password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord vergeten?</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="251"/>
         <source>Ask on the forums how to reset it, it&apos;s actually pretty easy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag op de forums hoe U het kunt resetten, het is eigenlijk vrij eenvoudig.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="317"/>
         <source>Select a profile first</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies eerst een profiel</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="380"/>
         <source>If you&apos;re trying to delete because you forgot the password, you need to either reset it or delete the profile folder manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als u probeert te verwijderen omdat u het wachtwoord bent vergeten, moet u het resetten of de profielmap handmatig verwijderen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="390"/>
         <source>You are about to destroy profile &apos;&lt;b&gt;%1&lt;/b&gt;&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>U staat op het punt het profiel &quot;&lt;b&gt;%1&lt;/b&gt;&quot; te wissen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="390"/>
         <source>Think carefully, as this will irretrievably delete the profile along with all &lt;b&gt;backup data&lt;/b&gt; stored under&lt;br/&gt;%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denk goed na, want hierdoor wordt het profiel onherroepelijk verwijderd, samen met alle &lt;b&gt;back-upgegevens&lt;/b&gt; opgeslagen onder &lt;br/&gt;%2.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="390"/>
         <source>Enter the word &lt;b&gt;DELETE&lt;/b&gt; below (exactly as shown) to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer het woord &lt;b&gt;VERWIJDEREN&lt;/b&gt; hieronder in (precies zoals getoond) om te bevestigen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="408"/>
         <source>DELETE</source>
-        <translation type="unfinished"></translation>
+        <translation>VERWIJDEREN</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="409"/>
         <source>Sorry</source>
-        <translation type="unfinished">Sorry</translation>
+        <translation>Sorry</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="409"/>
         <source>You need to enter DELETE in capital letters.</source>
-        <translation type="unfinished">Je moet het woord DELETE in HOOFDLETTERS intypen.</translation>
+        <translation>U moet het woord VERWIJDEREN in HOOFDLETTERS intypen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="422"/>
         <source>There was an error deleting the profile directory, you need to manually remove it.</source>
-        <translation type="unfinished">Er ging iets mis bij het wissen van de profieldirectory, je moet deze zelf wissen.</translation>
+        <translation>Er ging iets mis bij het wissen van de profielmap, U moet deze zelf wissen.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="426"/>
         <source>Profile &apos;%1&apos; was succesfully deleted</source>
-        <translation type="unfinished">Het profiel &apos;%1&apos; is succesvol gewist</translation>
+        <translation>Het profiel &apos;%1&apos; is succesvol gewist</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>kB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>MB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>GB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>TB</source>
-        <translation type="unfinished">TB</translation>
+        <translation>TB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
         <source>PB</source>
-        <translation type="unfinished">PB</translation>
+        <translation>PB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="456"/>
         <source>Summaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Overzichten:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="457"/>
         <source>Events:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebeurtenissen:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="458"/>
         <source>Backups:</source>
-        <translation type="unfinished"></translation>
+        <translation>Backups:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="470"/>
         <location filename="../oscar/profileselector.cpp" line="510"/>
         <source>Hide disk usage information</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg informatie over schijfgebruik</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="473"/>
         <source>Show disk usage information</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon informatie over schijfgebruik</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="491"/>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Naam: %2 %1</translation>
+        <translation>Naam: %2 %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="494"/>
         <source>Phone: %1</source>
-        <translation type="unfinished">Telefoon: %1</translation>
+        <translation>Telefoon: %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="497"/>
         <source>Email: &lt;a href=&apos;mailto:%1&apos;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail: &lt;a href=&apos;mailto:%1&apos;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="500"/>
         <source>Address:</source>
-        <translation type="unfinished">Adres:</translation>
+        <translation>Adres:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="503"/>
         <source>No profile information given</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen profielinformatie opgegeven</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="506"/>
         <source>Profile: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel: %1</translation>
     </message>
 </context>
 <context>
@@ -5354,7 +5388,7 @@ Het programma wordt nu afgesloten!</translation>
     <message>
         <location filename="../oscar/SleepLib/progressdialog.cpp" line="56"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbreken</translation>
     </message>
 </context>
 <context>
@@ -5371,27 +5405,27 @@ Het programma wordt nu afgesloten!</translation>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="485"/>
         <source>&quot;</source>
-        <translation> inch</translation>
+        <translation>inch</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="486"/>
         <source>ft</source>
-        <translation> ft</translation>
+        <translation>ft</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="487"/>
         <source>lb</source>
-        <translation> lb</translation>
+        <translation>lb</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="488"/>
         <source>oz</source>
-        <translation> oz</translation>
+        <translation>oz</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="489"/>
         <source>Kg</source>
-        <translation> kg</translation>
+        <translation>kg</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="490"/>
@@ -5492,7 +5526,8 @@ Start: %2
 </source>
         <translation>%1
 Tijdsduur: %3
-Start: %2</translation>
+Start: %2
+</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="902"/>
@@ -5522,7 +5557,8 @@ Start: %2</translation>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="1096"/>
         <source>
 TTIA: %1</source>
-        <translation>TTiA: %1</translation>
+        <translation>
+TTiA: %1</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="1196"/>
@@ -5680,27 +5716,27 @@ TTIA: %1</source>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="479"/>
         <source>Software Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Software Engine</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="480"/>
         <source>ANGLE / OpenGLES</source>
-        <translation type="unfinished"></translation>
+        <translation>ANGLE / OpenGLES</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="481"/>
         <source>Desktop OpenGL</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop OpenGL</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="483"/>
         <source> m</source>
-        <translation type="unfinished"></translation>
+        <translation> m</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="484"/>
         <source> cm</source>
-        <translation type="unfinished"></translation>
+        <translation> cm</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="494"/>
@@ -5758,7 +5794,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="541"/>
         <source>Profile</source>
-        <translation type="unfinished">Profiel</translation>
+        <translation>Profiel</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="545"/>
@@ -6172,7 +6208,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
         <location filename="../oscar/SleepLib/common.cpp" line="635"/>
         <location filename="../oscar/SleepLib/journal.cpp" line="25"/>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="636"/>
@@ -6382,7 +6418,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="540"/>
         <source>Daily</source>
-        <translation>Dagelijks</translation>
+        <translation>Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="542"/>
@@ -6415,7 +6451,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="510"/>
         <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
-        <translation>&lt;i&gt;Je oude gegevens moeten worden ingelezen, als de backup-functie tenminste niet is uitgeschakeld&lt;/i&gt;</translation>
+        <translation>&lt;i&gt;Uw oude gegevens moeten worden ingelezen, als de backup-functie tenminste niet is uitgeschakeld&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="443"/>
@@ -6434,22 +6470,22 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="496"/>
         <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR (%1) moet de database voor %2 %3 %4.vernieuwen</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="509"/>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;OSCAR maakt een backup van uw SD-kaart voor dit doel.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="513"/>
         <source>OSCAR does not yet have any automatic card backups stored for this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR heeft nog geen automatische backup-functie voor dit apparaat.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="514"/>
         <source>This means you will need to import this machine data again afterwards from your own backups or data card.</source>
-        <translation>Dat betekent dat je de gegevens van dit apparaat straks opnieuw van de kaart of uit een eigen backup moet inlezen.</translation>
+        <translation>Dat betekent dat U de gegevens van dit apparaat straks opnieuw van de kaart of uit een eigen backup moet inlezen.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="517"/>
@@ -6459,42 +6495,42 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="517"/>
         <source>Once you upgrade, you &lt;font size=+1&gt;can not&lt;/font&gt; use this profile with the previous version anymore.</source>
-        <translation>Na deze upgrade kun je de gegevens van dit profiel.&lt;font size=+1&gt;niet meer&lt;/font&gt; gebruiken met een eerdere versie.</translation>
+        <translation>Na deze upgrade kunt U de gegevens van dit profiel.&lt;font size=+1&gt;niet meer&lt;/font&gt; gebruiken met een eerdere versie.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="518"/>
         <source>If you are concerned, click No to exit, and backup your profile manually, before starting OSCAR again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als U zich zorgen maakt, klik dan op Nee om af te sluiten en maak eerst een backup van uw profiel voordat U OSCAR opnieuw start.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="519"/>
         <source>Are you ready to upgrade, so you can run the new version of OSCAR?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bent U er klaar voor om met de nieuwe versie te gaan werken?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="533"/>
         <source>Sorry, the purge operation failed, which means this version of OSCAR can&apos;t start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, het wissen is mislukt. Dat betekent dat deze versie van OSCAR niet kan starten.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="546"/>
         <source>Would you like to switch on automatic backups, so next time a new version of OSCAR needs to do so, it can rebuild from these?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt U de automatische backup-functie inschakelen, opdat OSCAR eventueel de database kan herstellen?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="553"/>
         <source>OSCAR will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er wordt een importhulp gestart zodat U de gegevens van uw %1 kunt inlezen.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="563"/>
         <source>OSCAR will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR sluit nu af en probeert het bestandsbeheer te starten, zodat U een backup van het profiel kunt maken:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="565"/>
         <source>Use your file manager to make a copy of your profile directory, then afterwards, restart OSCAR and complete the upgrade process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik het bestandsbeheer om een copie van het profiel te maken. Start daarna OSCAR opnieuw en maak het proces verder af.</translation>
     </message>
     <message>
         <source>If you are concerned, click No to exit, and backup your profile manually, before starting SleepyHead again.</source>
@@ -6516,7 +6552,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="534"/>
         <source>The machine data folder needs to be removed manually.</source>
-        <translation>Je moet zelf de map SleepyHeadData wissen.</translation>
+        <translation>U moet zelf de map OSCAR_Data wissen.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="535"/>
@@ -6671,52 +6707,52 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/main.cpp" line="198"/>
         <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt U dat OSCAR deze lokatie onthoudt voor opslag van gegevens?</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="200"/>
         <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als het om een update gaat, geen paniek, wijs gewoon de oude map OSCAR_data aan.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="201"/>
         <source>(If you are unsure, just click yes.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Als U geen idee hebt wat te doen, klik dan maar op Ja)</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="211"/>
         <source>Choose or create new folder for OSCAR data</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies of maak een nieuwe map voor OSCAR_Data</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="217"/>
         <source>Next time you run, you will be asked again.</source>
-        <translation>Volgende keer als je het programma start, wordt deze vraag weer gesteld.</translation>
+        <translation>Volgende keer als U het programma start, wordt deze vraag weer gesteld.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="217"/>
         <source>As you did not select a data folder, OSCAR will exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Omdat U geen map voor gegevensopslag hebt gekozen, wordt OSCAR nu afgesloten.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="221"/>
         <source>You did not select a directory.</source>
-        <translation>Je hebt geen map gekozen.</translation>
+        <translation>U hebt geen map gekozen.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="221"/>
         <source>OSCAR will now start with your old one.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR start nu met de oude map.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="232"/>
         <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
-        <translation type="unfinished"></translation>
+        <translation>De map die U koos is niet leeg, maar bevat ook geen gegevens van OSCAR.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="296"/>
         <source>The version of OSCAR you just ran is OLDER than the one used to create this data (%1).</source>
-        <translation type="unfinished"></translation>
+        <translation>De versie van OSCAR die U hiervoor gebruikte is OUDER dan degene waarmee U deze gegevens maakte (%1).</translation>
     </message>
     <message>
         <source>SleepyHead will now start with your old one.</source>
@@ -6729,7 +6765,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/main.cpp" line="298"/>
         <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
-        <translation>Dit geeft waarschijnlijk aanleiding to verminkte gegevens, weet je zeker dat je dit wilt?</translation>
+        <translation>Dit geeft waarschijnlijk aanleiding tot verminkte gegevens, weet U zeker dat U dit wilt?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="511"/>
@@ -6752,7 +6788,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/main.cpp" line="233"/>
         <source>Are you sure you want to use this folder?</source>
-        <translation>Weet je zeker dat je deze map wilt gebruiken?</translation>
+        <translation>Weet U zeker dat U deze map wilt gebruiken?</translation>
     </message>
     <message>
         <source>SleepyHead</source>
@@ -6761,12 +6797,12 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1167"/>
         <source>Are you sure you want to reset all your channel colors and settings to defaults?</source>
-        <translation>Weet je zeker dat je de kleuren en instellingen van alle grafieken wilt herstellen?</translation>
+        <translation>Weet U zeker dat U de kleuren en instellingen van alle grafieken wilt herstellen?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1220"/>
         <source>Are you sure you want to reset all your waveform channel colors and settings to defaults?</source>
-        <translation>Weet je zeker dat je alle kleuren en instellingen wilt resetten?</translation>
+        <translation>Weet U zeker dat U alle kleuren en instellingen wilt resetten?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="246"/>
@@ -6833,7 +6869,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="515"/>
         <source>Getting Ready...</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbereiden...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="576"/>
@@ -6857,7 +6893,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="589"/>
         <source>Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.</source>
-        <translation>Sorry, je Philips Respironics CPAP (Model %1) wordt nog niet ondersteund.</translation>
+        <translation>Sorry, uw Philips Respironics CPAP (Model %1) wordt nog niet ondersteund.</translation>
     </message>
     <message>
         <source>JediMark needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with SleepyHead.</source>
@@ -6866,28 +6902,28 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="578"/>
         <source>I&apos;m sorry to report that OSCAR can only track hours of use and very basic settings for this machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het spijt me dat OSCAR van dit apparaat alleen gebruiksuren en erg simpele instellingen kan verwerken.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="590"/>
         <source>The developers needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wij willen graag een .zip bestand van de SD-kaart en bijbehorende Encore .pdf rapporten om het te kunnen analyseren voor gebruik in OSCAR.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="631"/>
         <source>Scanning Files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden bekijken...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="763"/>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1980"/>
         <source>Importing Sessions...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessies importeren...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="768"/>
         <source>Finishing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Afronden...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="2240"/>
@@ -7175,17 +7211,17 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3686"/>
         <source>Breathing Not Detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen ademhaling gedetecteerd (BND)</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3687"/>
         <source>A period during a session where the machine could not detect flow.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een periode tijdens een sessie waarbij het apparaat geen flow kon detecteren.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3688"/>
         <source>BND</source>
-        <translation type="unfinished"></translation>
+        <translation>BND</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3703"/>
@@ -7205,22 +7241,22 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/mainwindow.cpp" line="237"/>
         <source>Don&apos;t forget to place your datacard back in your CPAP machine</source>
-        <translation>Vergeet niet om de SD-kaart weer in je apparaat te steken</translation>
+        <translation>Vergeet niet om de SD-kaart weer in uw apparaat te steken</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="237"/>
         <source>OSCAR Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR herinnering</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="394"/>
         <source>You can only work with one instance of an individual OSCAR profile at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>U mag in OSCAR maar met één profiel tegelijk open hebben.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="395"/>
         <source>If you are using cloud storage, make sure OSCAR is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als U cloud-opslag gebruikt, zorg dan dat OSCAR is afgesloten en de synchronisatie is afgerond voordat U verder gaat.</translation>
     </message>
     <message>
         <source>SleepyHead Reminder</source>
@@ -7229,7 +7265,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/mainwindow.cpp" line="408"/>
         <source>Loading profile &quot;%1&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Profiel &quot;%1&quot; aan het laden...</translation>
     </message>
     <message>
         <source>About SleepyHead</source>
@@ -7246,7 +7282,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2070"/>
         <source>Sorry, your %1 %2 machine is not currently supported.</source>
-        <translation>Sorry, je %1 %2 apparaat wordt nog niet ondersteund.</translation>
+        <translation>Sorry, uw %1 %2 apparaat wordt nog niet ondersteund.</translation>
     </message>
     <message>
         <source>Sorry, this feature is not implemented yet</source>
@@ -7260,7 +7296,7 @@ http://www.apneaboard.com/forums/Thread-CMS50D--3956
     <message>
         <location filename="../oscar/reports.cpp" line="55"/>
         <source>Would you like to show bookmarked areas in this report?</source>
-        <translation>Wil je gebieden met bladwijzer in dit rapport tonen?</translation>
+        <translation>Wilt U gebieden met bladwijzer in dit rapport tonen?</translation>
     </message>
     <message>
         <source>This make take some time to complete..
@@ -7342,7 +7378,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/reports.cpp" line="555"/>
         <source>OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR v%1</translation>
     </message>
     <message>
         <source>SleepyHead v%1 - http://sleepyhead.sourceforge.net</source>
@@ -7579,7 +7615,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
         <location filename="../oscar/SleepLib/schema.cpp" line="178"/>
         <location filename="../oscar/SleepLib/schema.cpp" line="181"/>
         <source>A user definable event detected by OSCAR&apos;s flow waveform processor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Door de gebruiker instelbaar incident dat door OSCAR wordt herkend.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="197"/>
@@ -7654,7 +7690,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="304"/>
         <source>How you feel (0 = like crap, 10 = unstoppable)</source>
-        <translation>Hoe voel je je (0=waardeloos, 10=fantastisch)</translation>
+        <translation>Hoe voelt U zich (0=waardeloos, 10=fantastisch)</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="305"/>
@@ -7714,7 +7750,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="319"/>
         <source>How you felt in the morning</source>
-        <translation>Hoe je je &apos;s morgens voelt</translation>
+        <translation>Hoe U zich &apos;s morgens voelt</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="320"/>
@@ -7799,28 +7835,28 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="334"/>
         <source>Debugging channel #1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaal#1 repareren</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="334"/>
         <location filename="../oscar/SleepLib/schema.cpp" line="335"/>
         <source>Top secret internal stuff you&apos;re not supposed to see ;)</source>
-        <translation type="unfinished"></translation>
+        <translation>Top secret internal stuff you&apos;re not supposed to see ;)</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="334"/>
         <source>Test #1</source>
-        <translation type="unfinished"></translation>
+        <translation>Test #1</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="335"/>
         <source>Debugging channel #2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaal #2 repareren</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="335"/>
         <source>Test #2</source>
-        <translation type="unfinished"></translation>
+        <translation>Test #2</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="730"/>
@@ -8015,7 +8051,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="169"/>
         <source>Intellipap event where you breathe out your mouth.</source>
-        <translation>Een Intellipap incident waarbij je door de mond uitademt.</translation>
+        <translation>Een Intellipap incident waarbij U door de mond uitademt.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="172"/>
@@ -8567,7 +8603,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/SleepLib/day.cpp" line="1373"/>
         <source>%1%2</source>
-        <translation>%1 %2</translation>
+        <translation>%1%2</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/day.cpp" line="1396"/>
@@ -8772,7 +8808,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/welcome.cpp" line="286"/>
         <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>Meest recente oxymetriegegevens: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="287"/>
@@ -8792,7 +8828,7 @@ Alsjeblieft niets aanraken tot ik klaar ben.</translation>
     <message>
         <location filename="../oscar/welcome.cpp" line="294"/>
         <source>No oximetry data has been imported yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn nog geen oxymetriegegevens geïmporteerd.</translation>
     </message>
     <message>
         <source>No oximetery data has been imported yet.</source>
@@ -8968,27 +9004,27 @@ Gaarne gegevens opnieuw inlezen</translation>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1644"/>
         <source>Parsing Identification File</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificatiebestand verwerken</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1743"/>
         <source>Locating STR.edf File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaliseren STR.edf bestand (en) ...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1918"/>
         <source>Cataloguing EDF Files...</source>
-        <translation type="unfinished"></translation>
+        <translation>EDF-bestanden catalogiseren ...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1929"/>
         <source>Queueing Import Tasks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importtaken in de wachtrij zetten ...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="1989"/>
         <source>Finishing Up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Afronden...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="2995"/>
@@ -9259,7 +9295,7 @@ Gaarne gegevens opnieuw inlezen</translation>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="385"/>
         <source>Pop out Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwevende grafiek</translation>
     </message>
     <message>
         <source>SleepyHead is proudly brought to you by JediMark.</source>
@@ -9268,12 +9304,12 @@ Gaarne gegevens opnieuw inlezen</translation>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1396"/>
         <source>I&apos;m very sorry your machine doesn&apos;t record useful data to graph in Daily View :(</source>
-        <translation type="unfinished"></translation>
+        <translation>Het spijt me echt dat uw apparaat geen bruikbare gegevens opslaat om hier te laten zien :(</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1399"/>
         <source>There is no data to graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens om te laten zien</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1533"/>
@@ -9307,7 +9343,7 @@ Gaarne gegevens opnieuw inlezen</translation>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="2493"/>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="2568"/>
         <source>Popout %1 Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafiek %1 zwevend maken</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="2570"/>
@@ -9342,31 +9378,35 @@ Gaarne gegevens opnieuw inlezen</translation>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="43"/>
         <source>OSCAR found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR vond een oude dagboek, maar het schijnt dat de naam is gewijzigd:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="45"/>
         <source>OSCAR will not touch this folder, and will create a new one instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR doet niets met deze map, maar zal een nieuwe maken.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="46"/>
         <source>Please be careful when playing in OSCAR&apos;s profile folders :-P</source>
-        <translation type="unfinished"></translation>
+        <translation>Weez voorzichtig met wijzigen van de profielmappen van OSCAR :-P</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="53"/>
         <source>For some reason, OSCAR couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Om de een of andere reden heeft OSCAR geen dagboekgegevens in uw profiel gevonden, maar wel meerdere mappen met dagboekgegevens.
+
+</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="54"/>
         <source>OSCAR picked only the first one of these, and will use it in future:
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR heeft de eerste gebruikt en zal deze blijven gebruiken:
+
+</translation>
     </message>
     <message>
         <source>SleepyHead found an old Journal folder, but it looks like it&apos;s been renamed:</source>
@@ -9441,37 +9481,37 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/SleepLib/machine.cpp" line="611"/>
         <source>Loading %1 data for %2...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1-gegevens voor%2 laden ...</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/machine.cpp" line="621"/>
         <source>Scanning Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden scannen</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/machine.cpp" line="657"/>
         <source>Migrating Summary File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Samenvattingsbestand verplaatsen</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/machine.cpp" line="960"/>
         <source>Loading Summaries.xml.gz</source>
-        <translation type="unfinished"></translation>
+        <translation>Summaries.xml.gz laden</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/machine.cpp" line="1087"/>
         <source>Loading Summary Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Samenvatting-gegevens laden</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/progressdialog.cpp" line="14"/>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Even wachten ...</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/MinutesAtPressure.cpp" line="312"/>
         <source>Peak %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Piek %1</translation>
     </message>
 </context>
 <context>
@@ -9499,7 +9539,7 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="246"/>
         <source>%1h %2m</source>
-        <translation type="unfinished">%1: %2m {1h?}</translation>
+        <translation>%1u: %2m</translation>
     </message>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="289"/>
@@ -9522,7 +9562,7 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/statistics.cpp" line="993"/>
         <source>Oscar has to data to report :(</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR heeft geen gegevens om te laten zien :(</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1051"/>
@@ -9628,52 +9668,52 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/statistics.cpp" line="587"/>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Naam: %2 %1</translation>
+        <translation>Naam: %2 %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="589"/>
         <source>DOB: %1</source>
-        <translation type="unfinished">Geboortedatum: %1</translation>
+        <translation>Geboortedatum: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="592"/>
         <source>Phone: %1</source>
-        <translation type="unfinished">Telefoon: %1</translation>
+        <translation>Telefoon: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="595"/>
         <source>Email: %1</source>
-        <translation type="unfinished">E-mail: %1</translation>
+        <translation>E-mail: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="598"/>
         <source>Address:</source>
-        <translation type="unfinished">Adres:</translation>
+        <translation>Adres:</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="641"/>
         <source>Usage Statistics</source>
-        <translation type="unfinished">Gebruiks-statistieken</translation>
+        <translation>Gebruiks-statistieken</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="642"/>
         <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is om juridische redenen. Sorry, het spijt me niet. Zonder ondersteuning en documentatie van de fabrikant is OSCAR ongeschikt als hulpmiddel voor compliance / medische rapportering.</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="642"/>
         <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation type="unfinished"></translation>
+        <translation>(NIET goedgekeurd voor therapietrouw of medische rapportagedoeleinden)</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="655"/>
         <source>This report was generated by OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit rapport is gegenereerd door OSCAR v%1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="656"/>
         <source>OSCAR is free open-source CPAP review software</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR is gratis open-source CPAP-beoordelingssoftware</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="991"/>
@@ -9684,147 +9724,147 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/statistics.cpp" line="1215"/>
         <source>Days Used: %1</source>
-        <translation type="unfinished">Dagen gebruikt: %1</translation>
+        <translation>Dagen gebruikt: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1216"/>
         <source>Low Use Days: %1</source>
-        <translation type="unfinished">Dagen (te) kort gebruikt: %1</translation>
+        <translation>Dagen (te) kort gebruikt: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1217"/>
         <source>Compliance: %1%</source>
-        <translation type="unfinished">Therapietrouw: %1%</translation>
+        <translation>Therapietrouw: %1%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1241"/>
         <source>Days AHI of 5 or greater: %1</source>
-        <translation type="unfinished">Dagen met AHI=5 of meer: %1</translation>
+        <translation>Dagen met AHI=5 of meer: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1248"/>
         <source>Best AHI</source>
-        <translation type="unfinished">Laagste AHI</translation>
+        <translation>Laagste AHI</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1252"/>
         <location filename="../oscar/statistics.cpp" line="1264"/>
         <source>Date: %1 AHI: %2</source>
-        <translation type="unfinished">Datum: %1 AHI: %2</translation>
+        <translation>Datum: %1 AHI: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1258"/>
         <source>Worst AHI</source>
-        <translation type="unfinished">Slechtste AHI</translation>
+        <translation>Slechtste AHI</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1295"/>
         <source>Best Flow Limitation</source>
-        <translation type="unfinished">Laagste stroombeperking</translation>
+        <translation>Laagste stroombeperking</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1299"/>
         <location filename="../oscar/statistics.cpp" line="1312"/>
         <source>Date: %1 FL: %2</source>
-        <translation type="unfinished">Datum: %1 FL: %2</translation>
+        <translation>Datum: %1 FL: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1305"/>
         <source>Worst Flow Limtation</source>
-        <translation type="unfinished">Slechtste stroombeperking</translation>
+        <translation>Slechtste stroombeperking</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1317"/>
         <source>No Flow Limitation on record</source>
-        <translation type="unfinished">Geen stroombeperking gevonden</translation>
+        <translation>Geen stroombeperking gevonden</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1338"/>
         <source>Worst Large Leaks</source>
-        <translation type="unfinished">Grootste lekkage</translation>
+        <translation>Grootste lekkage</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1346"/>
         <source>Date: %1 Leak: %2%</source>
-        <translation type="unfinished">Datum: %1 Lek: %2</translation>
+        <translation>Datum: %1 Lek: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1352"/>
         <source>No Large Leaks on record</source>
-        <translation type="unfinished">Geen grote lekkage gevonden</translation>
+        <translation>Geen grote lekkage gevonden</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1375"/>
         <source>Worst CSR</source>
-        <translation type="unfinished">Slechtste CSR</translation>
+        <translation>Slechtste CSR</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1383"/>
         <source>Date: %1 CSR: %2%</source>
-        <translation type="unfinished">Datum: %1 CSR: %2</translation>
+        <translation>Datum: %1 CSR: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1388"/>
         <source>No CSR on record</source>
-        <translation type="unfinished">Geen CSR gevonden</translation>
+        <translation>Geen CSR gevonden</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1405"/>
         <source>Worst PB</source>
-        <translation type="unfinished">Slechtste PB</translation>
+        <translation>Slechtste PB</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1413"/>
         <source>Date: %1 PB: %2%</source>
-        <translation type="unfinished">Datum: %1 PB: %2%</translation>
+        <translation>Datum: %1 PB: %2%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1418"/>
         <source>No PB on record</source>
-        <translation type="unfinished">Geen PB gemeten</translation>
+        <translation>Geen PB gemeten</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1426"/>
         <source>Want more information?</source>
-        <translation type="unfinished">Wil je meer informatie?</translation>
+        <translation>Wilt U meer informatie?</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1427"/>
         <source>OSCAR needs all summary data loaded to calculate best/worst data for individual days.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR wil alle overzichtgegevens laden om de beste/slechtste van bepaalde dagen te berekenen.</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1428"/>
         <source>Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.</source>
-        <translation type="unfinished">Zet in de instellingen de XXXXX aan om alle gegevens vooraf te laden.</translation>
+        <translation>Zet in de instellingen de keuze aan om alle gegevens vooraf te laden.</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1448"/>
         <source>Best RX Setting</source>
-        <translation type="unfinished">Beste Rx instelling</translation>
+        <translation>Beste Rx instelling</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1451"/>
         <location filename="../oscar/statistics.cpp" line="1463"/>
         <source>Date: %1 - %2</source>
-        <translation type="unfinished">Datum: %1 - %2</translation>
+        <translation>Datum: %1 - %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1454"/>
         <location filename="../oscar/statistics.cpp" line="1466"/>
         <source>Culminative AHI: %1</source>
-        <translation type="unfinished">Totale AHI: %1</translation>
+        <translation>Totale AHI: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1455"/>
         <location filename="../oscar/statistics.cpp" line="1467"/>
         <source>Culminative Hours: %1</source>
-        <translation type="unfinished">Totaal aantal uren: %1</translation>
+        <translation>Totaal aantal uren: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1460"/>
         <source>Worst RX Setting</source>
-        <translation type="unfinished">Slechtste Rx instelling</translation>
+        <translation>Slechtste Rx instelling</translation>
     </message>
     <message>
         <source>This lonely sleepy sheep has no data :(</source>
@@ -9929,7 +9969,7 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/UpdaterWindow.ui" line="14"/>
         <source>OSCAR Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR updater</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.ui" line="142"/>
@@ -10017,7 +10057,7 @@ Regel %2, kolom %3</translation>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
         <location filename="../oscar/UpdaterWindow.cpp" line="510"/>
         <source>SleepyHead Updates</source>
-        <translation>SleepyHead Updates</translation>
+        <translation>OSCAR Updates</translation>
     </message>
     <message>
         <source>No new updates were found for your platform.</source>
@@ -10071,42 +10111,42 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="93"/>
         <source>Updates are not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische update is nog niet geinstalleerd</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="127"/>
         <source>Checking for OSCAR Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken naar updates</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="158"/>
         <source>OSCAR Updates are currently unvailable for this platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor dit platform zijn de updates van OSCAR momenteel niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="158"/>
         <source>OSCAR Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR updates</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="459"/>
         <source>Version %1 of OSCAR is available, opening link to download site.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versie &lt;b&gt;%1&lt;/b&gt; van OSCAR is beschikbaar, de link naar de download wordt geopend.</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="462"/>
         <source>You are already running the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>U gebruikt al de nieuwste versie.</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="511"/>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation>Er zijn nieuwe updates voor SleepyHead beschikbaar:</translation>
+        <translation>Er zijn nieuwe updates voor OSCAR beschikbaar:</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="512"/>
         <source>Would you like to download and install them now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt U ze nu downloaden en installeren?</translation>
     </message>
     <message>
         <source>Would you like t download and install them now?</source>
@@ -10182,47 +10222,47 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/welcome.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
-        <translation type="unfinished"></translation>
+        <source>Welcome To Open Source CPAP Reviewer</source>
+        <translation>Welkom bij de Open Source CPAP Analysis Reporter</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="143"/>
         <source>What would you like to do?</source>
-        <translation type="unfinished">Wat wil je gaan doen?</translation>
+        <translation>Wat wilt U gaan doen?</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="186"/>
         <source>CPAP Importer</source>
-        <translation type="unfinished"></translation>
+        <translation>CPAP importeren</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="224"/>
         <source>Oximetry Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxymetrie wizard</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="262"/>
         <source>Daily View</source>
-        <translation type="unfinished"></translation>
+        <translation>Dagrapport</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="300"/>
         <source>Overview</source>
-        <translation type="unfinished">Overzicht</translation>
+        <translation>Overzicht</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="338"/>
         <source>Statistics</source>
-        <translation type="unfinished">Statistieken</translation>
+        <translation>Statistieken</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="581"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;need &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;to be locked &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;before &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Waarschuwing: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Een ResMed S9 SD-kaartje &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;moet &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;op slot &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;voordat &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;U hem in uw computer steekt.&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Enkele operating systemen schrijven er iets op, waardoor het bijzondere Overzicht van het bestandssystem niet meer klopt&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
@@ -10231,133 +10271,133 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/welcome.cpp" line="128"/>
         <source>It would be a good idea to check File-&gt;Preferences first,</source>
-        <translation type="unfinished"></translation>
+        <translation>Het is een goed idee eerst Bestand-&gt; Voorkeuren te selecteren,</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="129"/>
         <source>as there are some options that affect import.</source>
-        <translation type="unfinished"></translation>
+        <translation>omdat er enkele opties zijn die van invloed zijn op importeren.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="130"/>
         <source>Note that some preferences are forced when a ResMed machine is detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Merk op dat sommige voorkeuren worden geforceerd wanneer een ResMed-machine wordt gedetecteerd</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="131"/>
         <source>First import can take a few minutes.</source>
-        <translation type="unfinished">De eerste import kan enkele minuten duren.</translation>
+        <translation>De eerste import kan enkele minuten duren.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="144"/>
         <source>The last time you used your %1...</source>
-        <translation type="unfinished">De laatste keer dat je de %1 gebruikte ...</translation>
+        <translation>De laatste keer dat U de %1 gebruikte ...</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="148"/>
         <source>last night</source>
-        <translation type="unfinished">afgelopen nacht</translation>
+        <translation>afgelopen nacht</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="149"/>
         <source>yesterday</source>
-        <translation type="unfinished">gisteren</translation>
+        <translation>gisteren</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="150"/>
         <source>%2 days ago</source>
-        <translation type="unfinished">%2 dagen geleden</translation>
+        <translation>%2 dagen geleden</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="152"/>
         <source>was %1 (on %2)</source>
-        <translation type="unfinished">was %1 (op %2)</translation>
+        <translation>was %1 (op %2)</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="160"/>
         <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="unfinished">%1 uren, %2 minuten en %3 seconden</translation>
+        <translation>%1 uren, %2 minuten en %3 seconden</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="163"/>
         <source>Your machine was on for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw apparaat stond aan gedurende %1.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="164"/>
         <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;font color=red&gt;Je droeg je masker maar gedurende %1.&lt;/font&gt;</translation>
+        <translation>&lt;font color=red&gt;U droeg uw masker maar gedurende %1.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="175"/>
         <source>under</source>
-        <translation type="unfinished"></translation>
+        <translation>minder dan</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="176"/>
         <source>over</source>
-        <translation type="unfinished"></translation>
+        <translation>hoger dan</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="177"/>
         <source>reasonably close to</source>
-        <translation type="unfinished"></translation>
+        <translation>behoorlijk dicht bij</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="178"/>
         <source>equal to</source>
-        <translation type="unfinished"></translation>
+        <translation>gelijk aan</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="192"/>
         <source>You had an AHI of %1, which is %2 your %3 day average of %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>U had een AHI van %1, dat is %2 uw %3-daagse gemiddelde van %4.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="201"/>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="unfinished">Je CPAP blies met een constante %1 %2 luchtdruk</translation>
+        <translation>Uw CPAP blies met een constante %1%2 luchtdruk</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="204"/>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Je druk was %3% van de tijd beneden %1 %2 (mediaan).</translation>
+        <translation>Uw druk was %3% van de tijd beneden %1%2 (mediaan).</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="208"/>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="unfinished">Je apparaat blies met een constante %1-%2 %3 luchtdruk.</translation>
+        <translation>Uw apparaat blies met een constante %1-%2 %3 luchtdruk.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="212"/>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="unfinished">Je CPAP was beneden %1-%2 %3 gedurende %4% van de tijd.</translation>
+        <translation>Uw CPAP was beneden %1-%2 %3 gedurende %4% van de tijd.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="217"/>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="unfinished">Je EPAP druk stond vast op %1 %2.</translation>
+        <translation>Uw EPAP druk stond vast op %1%2.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="218"/>
         <location filename="../oscar/welcome.cpp" line="224"/>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Je IPAP druk was beneden %1 %2 gedurende %3% van de tijd.</translation>
+        <translation>Uw IPAP druk was beneden %1%2 gedurende %3% van de tijd.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="223"/>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Je EPAP druk was beneden %1 %2 gedurende %3% van de tijd.</translation>
+        <translation>Uw EPAP druk was beneden %1%2 gedurende %3% van de tijd.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="244"/>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
-        <translation type="unfinished"></translation>
+        <translation>De gemiddelde lek was %1 %2, dat is %3 uw %4-daags gemiddelde van %5.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="250"/>
         <source>No CPAP data has been imported yet.</source>
-        <translation type="unfinished">Er zijn nog geen CPAP gegevens geimporteerd.</translation>
+        <translation>Er zijn nog geen CPAP gegevens geimporteerd.</translation>
     </message>
 </context>
 <context>
@@ -10365,7 +10405,7 @@ Regel %2, kolom %3</translation>
     <message>
         <location filename="../oscar/Graphs/gGraph.cpp" line="793"/>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dagen</translation>
     </message>
 </context>
 <context>

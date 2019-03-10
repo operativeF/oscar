@@ -2566,7 +2566,7 @@ Om du kan läsa detta, fungerade inte kommandot omstart . Du kommer att behöva 
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3338,7 +3338,7 @@ Index</translation>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1123"/>
         <source>It also can read from ChoiceMMed MD300W1 oximeter .dat files.</source>
-        <translation>SleepyHead kan också läsa från ChoiceMMed&apos;s MD300W1 .dat filer.</translation>
+        <translation type="unfinished">OSCAR kan också läsa från ChoiceMMed&apos;s MD300W1 .dat filer.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1125"/>
@@ -10029,7 +10029,7 @@ Linje %2, kolumn %3</translation>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
         <location filename="../oscar/UpdaterWindow.cpp" line="510"/>
         <source>SleepyHead Updates</source>
-        <translation>SleepyHead-uppdateringar</translation>
+        <translation type="unfinished">OSCAR-uppdateringar</translation>
     </message>
     <message>
         <source>Version %1 of SleepyHead is available, opening link to download site.</source>
@@ -10097,7 +10097,7 @@ Linje %2, kolumn %3</translation>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="511"/>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation>Nya uppdateringar för SleepyHead är tillgängliga:</translation>
+        <translation>Nya uppdateringar för OSCAR är tillgängliga:</translation>
     </message>
     <message>
         <source>Redirected to </source>
@@ -10169,11 +10169,11 @@ Linje %2, kolumn %3</translation>
     <message>
         <location filename="../oscar/welcome.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulär</translation>
+        <translation>Formulär</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

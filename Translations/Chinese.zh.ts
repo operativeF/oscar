@@ -2157,7 +2157,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8117,7 +8117,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>SleepyHead Updates</source>
-        <translation>SLeepyHead升级</translation>
+        <translation type="unfinished">OSCAR升级</translation>
     </message>
     <message>
         <source>Component</source>
@@ -8265,7 +8265,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation>SleepyHead有更新:</translation>
+        <translation type="unfinished">OSCAR有更新:</translation>
     </message>
     <message>
         <source>Would you like t download and install them now?</source>
@@ -8435,7 +8435,7 @@ Line %2, column %3</source>
         <translation type="unfinished">未导入呼吸机数据.</translation>
     </message>
     <message>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

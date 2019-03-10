@@ -6,7 +6,7 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogue</translation>
+        <translation>Dialogue</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="35"/>
@@ -771,7 +771,7 @@
         <location filename="../oscar/exportcsv.cpp" line="206"/>
         <location filename="../oscar/exportcsv.cpp" line="209"/>
         <source>AHI</source>
-        <translation type="unfinished">Apnoea Hypopnea Index</translation>
+        <translation type="unfinished">AHI</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="213"/>
@@ -1674,7 +1674,7 @@
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1075"/>
         <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1228"/>
@@ -2040,7 +2040,7 @@
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3265,7 +3265,7 @@ If you use a few different masks, pick average values instead. It should still b
         <location filename="../oscar/preferencesdialog.ui" line="1293"/>
         <source>AHI</source>
         <extracomment>Apnea Hypopnea Index</extracomment>
-        <translation>Apnoea Hypopnoea Index</translation>
+        <translation type="unfinished">AHI</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1298"/>
@@ -5262,7 +5262,7 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/common.cpp" line="592"/>
         <location filename="../oscar/SleepLib/schema.cpp" line="256"/>
         <source>AHI</source>
-        <translation type="unfinished">Apnoea Hypopnea Index</translation>
+        <translation type="unfinished">AHI</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="593"/>
@@ -8588,7 +8588,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -6,18 +6,18 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Диалог</translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="35"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Относно</translation>
+        <translation>&amp;Относно</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="49"/>
         <location filename="../oscar/aboutdialog.cpp" line="105"/>
         <source>Release Notes</source>
-        <translation type="unfinished">Бележки по изданието</translation>
+        <translation>Бележки по изданието</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="63"/>
@@ -32,7 +32,7 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="239"/>
         <source>Close</source>
-        <translation type="unfinished">Затваряне</translation>
+        <translation>Затваряне</translation>
     </message>
     <message>
         <source>Build Date: %1</source>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="96"/>
         <source>Sorry, could not locate changelog.</source>
-        <translation type="unfinished">Съжалявам, не може да се открие дневника на промените.</translation>
+        <translation>Съжалявам, не може да се открие дневника на промените.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="106"/>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="109"/>
         <source>Important:</source>
-        <translation type="unfinished">Важно:</translation>
+        <translation>Важно:</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="110"/>
@@ -454,32 +454,32 @@
     <message>
         <location filename="../oscar/daily.cpp" line="127"/>
         <source>Details</source>
-        <translation type="unfinished">Детайли</translation>
+        <translation>Детайли</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="278"/>
         <source>Time at Pressure</source>
-        <translation type="unfinished">Време с налягане</translation>
+        <translation>Време с налягане</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>Click to %1 this session.</source>
-        <translation type="unfinished">Натисни за да се  %1 тази сесия.</translation>
+        <translation>Натисни за да се  %1 тази сесия.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>disable</source>
-        <translation type="unfinished">изключи</translation>
+        <translation>изключи</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="876"/>
         <source>enable</source>
-        <translation type="unfinished">включи</translation>
+        <translation>включи</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="892"/>
         <source>%1 Session #%2</source>
-        <translation type="unfinished">%1 Сесия #%2</translation>
+        <translation>%1 Сесия #%2</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="893"/>
@@ -514,12 +514,12 @@
     <message>
         <location filename="../oscar/daily.cpp" line="1258"/>
         <source>Start</source>
-        <translation type="unfinished">Начало</translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1258"/>
         <source>End</source>
-        <translation type="unfinished">Край</translation>
+        <translation>Край</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1514"/>
@@ -891,7 +891,7 @@
     <message>
         <location filename="../oscar/help.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Формуляр</translation>
+        <translation>Формуляр</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="92"/>
@@ -940,7 +940,7 @@
     <message>
         <location filename="../oscar/help.cpp" line="90"/>
         <source>Search</source>
-        <translation type="unfinished">Търсене</translation>
+        <translation>Търсене</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="100"/>
@@ -955,7 +955,7 @@
     <message>
         <location filename="../oscar/help.cpp" line="214"/>
         <source>No</source>
-        <translation type="unfinished">Не</translation>
+        <translation>Не</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="215"/>
@@ -2490,7 +2490,7 @@
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4389,25 +4389,25 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2257"/>
         <location filename="../oscar/preferencesdialog.ui" line="2261"/>
         <source>Profile</source>
-        <translation type="unfinished">Профил</translation>
+        <translation>Профил</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2266"/>
         <location filename="../oscar/preferencesdialog.ui" line="2305"/>
         <source>Welcome</source>
-        <translation type="unfinished">Добре дошли</translation>
+        <translation>Добре дошли</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2271"/>
         <location filename="../oscar/preferencesdialog.ui" line="2310"/>
         <source>Daily</source>
-        <translation type="unfinished">Дневна</translation>
+        <translation>Дневна</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2281"/>
         <location filename="../oscar/preferencesdialog.ui" line="2320"/>
         <source>Statistics</source>
-        <translation type="unfinished">Статистики</translation>
+        <translation>Статистики</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2289"/>
@@ -5030,7 +5030,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Формуляр</translation>
+        <translation>Формуляр</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="26"/>
@@ -5054,7 +5054,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.ui" line="186"/>
         <source>Version</source>
-        <translation type="unfinished">Версия</translation>
+        <translation>Версия</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="203"/>
@@ -5064,7 +5064,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.ui" line="214"/>
         <source>&amp;Edit Profile</source>
-        <translation type="unfinished">&amp;Редактиране на профил</translation>
+        <translation>&amp;Редактиране на профил</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="228"/>
@@ -5089,7 +5089,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="86"/>
         <source>Profile</source>
-        <translation type="unfinished">Профил</translation>
+        <translation>Профил</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="87"/>
@@ -5114,7 +5114,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="91"/>
         <source>Name</source>
-        <translation type="unfinished">Име</translation>
+        <translation>Име</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="131"/>
@@ -5126,13 +5126,13 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselector.cpp" line="228"/>
         <location filename="../oscar/profileselector.cpp" line="358"/>
         <source>Enter Password for %1</source>
-        <translation type="unfinished">Въведете парола за %1</translation>
+        <translation>Въведете парола за %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="248"/>
         <location filename="../oscar/profileselector.cpp" line="377"/>
         <source>You entered an incorrect password</source>
-        <translation type="unfinished">Въвели сте грешна парола</translation>
+        <translation>Въвели сте грешна парола</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="251"/>
@@ -5177,22 +5177,22 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="409"/>
         <source>Sorry</source>
-        <translation type="unfinished">Съжалявам</translation>
+        <translation>Съжалявам</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="409"/>
         <source>You need to enter DELETE in capital letters.</source>
-        <translation type="unfinished">Необходимо е да изпишете DELETE с главни букви.</translation>
+        <translation>Необходимо е да изпишете DELETE с главни букви.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="422"/>
         <source>There was an error deleting the profile directory, you need to manually remove it.</source>
-        <translation type="unfinished">Получи се грешка при опит за изтриване на директорията на профила, налага се да го изтриете ръчно.</translation>
+        <translation>Получи се грешка при опит за изтриване на директорията на профила, налага се да го изтриете ръчно.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="426"/>
         <source>Profile &apos;%1&apos; was succesfully deleted</source>
-        <translation type="unfinished">Профил &apos;%1&apos; бе изтрит успешно</translation>
+        <translation>Профил &apos;%1&apos; бе изтрит успешно</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="436"/>
@@ -5253,12 +5253,12 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="491"/>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Име: %1, %2</translation>
+        <translation>Име: %1, %2</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="494"/>
         <source>Phone: %1</source>
-        <translation type="unfinished">Телефон: %1</translation>
+        <translation>Телефон: %1</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="497"/>
@@ -5268,7 +5268,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="500"/>
         <source>Address:</source>
-        <translation type="unfinished">Адрес:</translation>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="503"/>
@@ -5597,7 +5597,7 @@ TTIA: %1</translation>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="541"/>
         <source>Profile</source>
-        <translation type="unfinished">Профил</translation>
+        <translation>Профил</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="542"/>
@@ -9551,32 +9551,32 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="587"/>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Име: %1, %2</translation>
+        <translation>Име: %1, %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="589"/>
         <source>DOB: %1</source>
-        <translation type="unfinished">Дата на раждане: %1</translation>
+        <translation>Дата на раждане: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="592"/>
         <source>Phone: %1</source>
-        <translation type="unfinished">Телефон: %1</translation>
+        <translation>Телефон: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="595"/>
         <source>Email: %1</source>
-        <translation type="unfinished">E-мейл: %1</translation>
+        <translation>E-мейл: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="598"/>
         <source>Address:</source>
-        <translation type="unfinished">Адрес:</translation>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="641"/>
         <source>Usage Statistics</source>
-        <translation type="unfinished">Статистики за употреба</translation>
+        <translation>Статистики за употреба</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="642"/>
@@ -9606,109 +9606,109 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="1215"/>
         <source>Days Used: %1</source>
-        <translation type="unfinished">Дни употреба: %1</translation>
+        <translation>Дни употреба: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1216"/>
         <source>Low Use Days: %1</source>
-        <translation type="unfinished">Дни с малко използване: %1</translation>
+        <translation>Дни с малко използване: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1217"/>
         <source>Compliance: %1%</source>
-        <translation type="unfinished">Спазване: %1%</translation>
+        <translation>Спазване: %1%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1241"/>
         <source>Days AHI of 5 or greater: %1</source>
-        <translation type="unfinished">Дни с AHI 5 или по-голям: %1</translation>
+        <translation>Дни с AHI 5 или по-голям: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1248"/>
         <source>Best AHI</source>
-        <translation type="unfinished">Най-добро AHI</translation>
+        <translation>Най-добро AHI</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1252"/>
         <location filename="../oscar/statistics.cpp" line="1264"/>
         <source>Date: %1 AHI: %2</source>
-        <translation type="unfinished">Дата: %1 AHI: %2</translation>
+        <translation>Дата: %1 AHI: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1258"/>
         <source>Worst AHI</source>
-        <translation type="unfinished">Най-лошо AHI</translation>
+        <translation>Най-лошо AHI</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1295"/>
         <source>Best Flow Limitation</source>
-        <translation type="unfinished">Най-добро ограничение на дебита</translation>
+        <translation>Най-добро ограничение на дебита</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1299"/>
         <location filename="../oscar/statistics.cpp" line="1312"/>
         <source>Date: %1 FL: %2</source>
-        <translation type="unfinished">Дата: %1 FL: %2</translation>
+        <translation>Дата: %1 FL: %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1305"/>
         <source>Worst Flow Limtation</source>
-        <translation type="unfinished">Най-лошо ограничение на дебита</translation>
+        <translation>Най-лошо ограничение на дебита</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1317"/>
         <source>No Flow Limitation on record</source>
-        <translation type="unfinished">Без запис за ограничение на дебита</translation>
+        <translation>Без запис за ограничение на дебита</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1338"/>
         <source>Worst Large Leaks</source>
-        <translation type="unfinished">Най-лоши големи течове</translation>
+        <translation>Най-лоши големи течове</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1346"/>
         <source>Date: %1 Leak: %2%</source>
-        <translation type="unfinished">Дата: %1 Течове: %2%</translation>
+        <translation>Дата: %1 Течове: %2%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1352"/>
         <source>No Large Leaks on record</source>
-        <translation type="unfinished">Без запис за големи течове</translation>
+        <translation>Без запис за големи течове</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1375"/>
         <source>Worst CSR</source>
-        <translation type="unfinished">Най-лошо CSR</translation>
+        <translation>Най-лошо CSR</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1383"/>
         <source>Date: %1 CSR: %2%</source>
-        <translation type="unfinished">Дата: %1 CSR: %2%</translation>
+        <translation>Дата: %1 CSR: %2%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1388"/>
         <source>No CSR on record</source>
-        <translation type="unfinished">Без запис зa CSR</translation>
+        <translation>Без запис зa CSR</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1405"/>
         <source>Worst PB</source>
-        <translation type="unfinished">Най-лошо PB</translation>
+        <translation>Най-лошо PB</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1413"/>
         <source>Date: %1 PB: %2%</source>
-        <translation type="unfinished">Дата: %1 PB: %2%</translation>
+        <translation>Дата: %1 PB: %2%</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1418"/>
         <source>No PB on record</source>
-        <translation type="unfinished">Без запис за PB</translation>
+        <translation>Без запис за PB</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1426"/>
         <source>Want more information?</source>
-        <translation type="unfinished">Желаете повече информация?</translation>
+        <translation>Желаете повече информация?</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1427"/>
@@ -9718,35 +9718,35 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="1428"/>
         <source>Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.</source>
-        <translation type="unfinished">Моля включете опцията за предварително зареждане на обща информация при старт в настройките за да се осигури наличността на тези данни.</translation>
+        <translation>Моля включете опцията за предварително зареждане на обща информация при старт в настройките за да се осигури наличността на тези данни.</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1448"/>
         <source>Best RX Setting</source>
-        <translation type="unfinished">Най-добри настройки</translation>
+        <translation>Най-добри настройки</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1451"/>
         <location filename="../oscar/statistics.cpp" line="1463"/>
         <source>Date: %1 - %2</source>
-        <translation type="unfinished">Дати: %1 - %2</translation>
+        <translation>Дати: %1 - %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1454"/>
         <location filename="../oscar/statistics.cpp" line="1466"/>
         <source>Culminative AHI: %1</source>
-        <translation type="unfinished">Кулминативен AHI: %1</translation>
+        <translation>Кулминативен AHI: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1455"/>
         <location filename="../oscar/statistics.cpp" line="1467"/>
         <source>Culminative Hours: %1</source>
-        <translation type="unfinished">Кулминативни часове: %1</translation>
+        <translation>Кулминативни часове: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1460"/>
         <source>Worst RX Setting</source>
-        <translation type="unfinished">Най-лоши настройки</translation>
+        <translation>Най-лоши настройки</translation>
     </message>
     <message>
         <source>This lonely sleepy sheep has no data :(</source>
@@ -9934,7 +9934,7 @@ Line %2, column %3</source>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
         <location filename="../oscar/UpdaterWindow.cpp" line="510"/>
         <source>SleepyHead Updates</source>
-        <translation>Обновления за SleepyHead</translation>
+        <translation type="unfinished">Обновления за OSCAR</translation>
     </message>
     <message>
         <source>No new updates were found for your platform.</source>
@@ -10018,7 +10018,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="511"/>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation>Налична е обновена версия на SleepyHead:</translation>
+        <translation type="unfinished">Налична е обновена версия на OSCAR:</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="512"/>
@@ -10099,17 +10099,17 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Формуляр</translation>
+        <translation>Формуляр</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="143"/>
         <source>What would you like to do?</source>
-        <translation type="unfinished">Какво желаете да направите?</translation>
+        <translation>Какво желаете да направите?</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="186"/>
@@ -10129,12 +10129,12 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.ui" line="300"/>
         <source>Overview</source>
-        <translation type="unfinished">Общ преглед</translation>
+        <translation>Общ преглед</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="338"/>
         <source>Statistics</source>
-        <translation type="unfinished">Статистики</translation>
+        <translation>Статистики</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="581"/>
@@ -10163,37 +10163,37 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="131"/>
         <source>First import can take a few minutes.</source>
-        <translation type="unfinished">Първият импорт може да отнеме няколко минути.</translation>
+        <translation>Първият импорт може да отнеме няколко минути.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="144"/>
         <source>The last time you used your %1...</source>
-        <translation type="unfinished">Последният път, когато сте използвали %1 апарата си...</translation>
+        <translation>Последният път, когато сте използвали %1 апарата си...</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="148"/>
         <source>last night</source>
-        <translation type="unfinished">снощи</translation>
+        <translation>снощи</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="149"/>
         <source>yesterday</source>
-        <translation type="unfinished">вчера</translation>
+        <translation>вчера</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="150"/>
         <source>%2 days ago</source>
-        <translation type="unfinished">преди %2 дни</translation>
+        <translation>преди %2 дни</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="152"/>
         <source>was %1 (on %2)</source>
-        <translation type="unfinished">е било %1 (в %2)</translation>
+        <translation>е било %1 (в %2)</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="160"/>
         <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="unfinished">%1 часа, %2 минути и %3 секунди</translation>
+        <translation>%1 часа, %2 минути и %3 секунди</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="163"/>
@@ -10203,7 +10203,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="164"/>
         <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;font color = red&gt;Използвали сте маската само %1.&lt;/font&gt;</translation>
+        <translation>&lt;font color = red&gt;Използвали сте маската само %1.&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="175"/>
@@ -10233,38 +10233,38 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="201"/>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="unfinished">Вашият CPAP апарат Ви е обдухвал с постоянно налягане %1%2</translation>
+        <translation>Вашият CPAP апарат Ви е обдухвал с постоянно налягане %1%2</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="204"/>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Налягането ви е било под %1%2 за %3% от времето.</translation>
+        <translation>Налягането ви е било под %1%2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="208"/>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="unfinished">Вашият апарат Ви е обдухвал с постоянно налягане %1-%2 %3.</translation>
+        <translation>Вашият апарат Ви е обдухвал с постоянно налягане %1-%2 %3.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="212"/>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="unfinished">Вашият апарат е бил под %1-%2 %3 за %4% от времето.</translation>
+        <translation>Вашият апарат е бил под %1-%2 %3 за %4% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="217"/>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="unfinished">Вашето EPAP налягане фиксирано на %1%2.</translation>
+        <translation>Вашето EPAP налягане фиксирано на %1%2.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="218"/>
         <location filename="../oscar/welcome.cpp" line="224"/>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Вашето IPAP налягане е било под %1%2 за %3% от времето.</translation>
+        <translation>Вашето IPAP налягане е било под %1%2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="223"/>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Вашето EPAP налягане е било под %1%2 за %3% от времето.</translation>
+        <translation>Вашето EPAP налягане е било под %1%2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="244"/>
@@ -10274,7 +10274,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="250"/>
         <source>No CPAP data has been imported yet.</source>
-        <translation type="unfinished">Няма импортирани CPAP данни засега.</translation>
+        <translation>Няма импортирани CPAP данни засега.</translation>
     </message>
 </context>
 <context>

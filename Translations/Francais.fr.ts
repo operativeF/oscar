@@ -2152,7 +2152,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2334,7 +2334,7 @@ Corporel</translation>
     </message>
     <message>
         <source>It also can read from ChoiceMMed MD300W1 oximeter .dat files.</source>
-        <translation>SleepyHead lit aussi les fichiers .dat du ChoiceMMed MD300W1.</translation>
+        <translation type="unfinished">OSCAR lit aussi les fichiers .dat du ChoiceMMed MD300W1.</translation>
     </message>
     <message>
         <source>Please wait until oximeter upload process completes. Do not unplug your oximeter.</source>
@@ -8079,7 +8079,7 @@ Heures: %1</translation>
     </message>
     <message>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation>Une mise à jour de SleepyHead est disponible.</translation>
+        <translation type="unfinished">Une mise à jour de OSCAR est disponible.</translation>
     </message>
     <message>
         <source>XML update structure parsed cleanly</source>
@@ -8103,7 +8103,7 @@ Heures: %1</translation>
     </message>
     <message>
         <source>SleepyHead Updates</source>
-        <translation>Mise à jour de SleepyHead</translation>
+        <translation type="unfinished">Mise à jour de OSCAR</translation>
     </message>
     <message>
         <source>Component</source>
@@ -8413,7 +8413,7 @@ Heures: %1</translation>
         <translation type="unfinished">Pas de données de PPC importé pour le moment.</translation>
     </message>
     <message>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

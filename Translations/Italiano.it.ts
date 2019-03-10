@@ -6,78 +6,80 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Need more context here</translatorcomment>
+        <translation>Finestra di Dialogo</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="35"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Informazioni</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="49"/>
         <location filename="../oscar/aboutdialog.cpp" line="105"/>
         <source>Release Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni sulla Versione</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="63"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Riconoscimenti</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="77"/>
         <source>GPL License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licenza GPL</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="239"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="43"/>
         <source>Show data folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Cartella Dati</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="47"/>
         <source>About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni su OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="73"/>
         <source>Sorry, could not locate About file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiacente, non trovo il file Informazioni.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="85"/>
         <source>Sorry, could not locate Credits file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiacente, non trovo il file Riconoscimenti.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="96"/>
         <source>Sorry, could not locate changelog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiacente, non trovo le informazioni sulla versione.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="106"/>
         <source>OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR v%1</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="109"/>
         <source>Important:</source>
-        <translation type="unfinished"></translation>
+        <translation>Importante:</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="110"/>
         <source>As this is a pre-release version, it is recommended that you &lt;b&gt;back up your data folder manually&lt;/b&gt; before proceding, because attempting to roll back later may break things.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Need more context on this feature</translatorcomment>
+        <translation>Dato che questa è una versione preliminare, si raccomanda di &lt;b&gt;fare una copia della vostra cartella dati&lt;/b&gt;prima di procedere, per evitare malfunzionamenti e perdite di dati.</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="122"/>
         <source>To see if the license text is available in your language, see %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per verificare se il testo della licenza sia disponibile nella vostra lingua, andate su %1.</translation>
     </message>
 </context>
 <context>
@@ -85,12 +87,14 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50f37_loader.cpp" line="873"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Is it file as in data file here?</translatorcomment>
+        <translation>Non trovo il file dati dell&apos;ossimetro:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50f37_loader.cpp" line="879"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Is it file as in data file here?</translatorcomment>
+        <translation>Non posso aprire il file dati dell&apos;ossimetro:</translation>
     </message>
 </context>
 <context>
@@ -98,22 +102,22 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="478"/>
         <source>Could not get data transmission from oximeter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ottenere dati dall&apos;ossimetro.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="478"/>
         <source>Please ensure you select &apos;upload&apos; from the oximeter devices menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per favore, assicuratevi di selezionare &apos;invio file&apos; dal menu del vostro ossimetro.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="546"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Non trovo il file dati dell&apos;ossimetro:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="552"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Non posso aprire il file dati dell&apos;ossimetro:</translation>
     </message>
 </context>
 <context>
@@ -789,17 +793,19 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/icon_loader.cpp" line="139"/>
         <source>Import Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nell&apos; Importare i Dati</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/icon_loader.cpp" line="140"/>
         <source>This Machine Record cannot be imported in this profile.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Need more context about the meaning of &quot;Machine Record&quot; in the app</translatorcomment>
+        <translation>Non è possibile importare i dati del dispositivo nel profilo.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/icon_loader.cpp" line="140"/>
         <source>The Day records overlap with already existing content.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>More context needed about the meaning of Day Records in the app; Is the overlap partial or total?</translatorcomment>
+        <translation>I dati giornalieri coincidono con contenuti già presenti.</translation>
     </message>
 </context>
 <context>
@@ -807,76 +813,78 @@
     <message>
         <location filename="../oscar/help.ui" line="20"/>
         <source>Form</source>
+        <translatorcomment>Need more context</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="92"/>
         <source>Hide this message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nascondi questo messaggio</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="198"/>
         <source>Search Topic:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca Argomento:</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="44"/>
         <source>Help Files are not yet available for %1 and will display in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>I file di aiuto non sono ancora disponibili per%1 e verranno mostrati in %2.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="54"/>
         <source>Help files do not appear to be present.</source>
-        <translation type="unfinished"></translation>
+        <translation>I file di aiuto non sembrano essere presenti.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="69"/>
         <source>HelpEngine did not set up correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>HelpEngine non è settato correttamente</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="75"/>
         <source>HelpEngine could not register documentation correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>HelpEngine non ha registrato la documentazione correttamente.</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="85"/>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenuto</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="86"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indice</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="90"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="100"/>
         <source>No documentation available</source>
-        <translation type="unfinished"></translation>
+        <translation>Documentazione non disponibile</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="188"/>
         <source>Please wait a bit.. Indexing still in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendi per favore..Creazione indice in corso</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="214"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="215"/>
         <source>%1 result(s) for &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 risultato(i) per %2</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="216"/>
         <source>clear</source>
+        <translatorcomment>Need more context</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -885,12 +893,12 @@
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/md300w1_loader.cpp" line="165"/>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile trovare il file dell&apos;ossimetro:</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/md300w1_loader.cpp" line="171"/>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire il file dell&apos;ossimetro:</translation>
     </message>
 </context>
 <context>
@@ -2032,7 +2040,7 @@
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2776,57 +2784,60 @@ Index</source>
     <message>
         <location filename="../oscar/oximetry.ui" line="89"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="102"/>
         <source>d/MM/yy h:mm:ss AP</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Maintained h in its original form</translatorcomment>
+        <translation>g/MM/aa h:mm:ss AP</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="131"/>
         <source>R&amp;eset</source>
-        <translation type="unfinished"></translation>
+        <translation>R&amp;esettare</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="160"/>
         <source>SpO2</source>
-        <translation type="unfinished"></translation>
+        <translation>SpO2</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="245"/>
         <source>Pulse</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Alternative: Polso</translatorcomment>
+        <translation>Pulsazioni</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="346"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="366"/>
         <source>&amp;Open .spo/R File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Open .spo/R File</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="385"/>
         <source>Serial &amp;Import</source>
+        <translatorcomment>Need context</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="398"/>
         <source>&amp;Start Live</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start Tempo Reale</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="421"/>
         <source>Serial Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Porta Seriale</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="450"/>
         <source>&amp;Rescan Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ricontrollare Porte</translation>
     </message>
 </context>
 <context>
@@ -4536,7 +4547,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/SleepLib/progressdialog.cpp" line="56"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminare</translation>
     </message>
 </context>
 <context>
@@ -7979,12 +7990,14 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/reports.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Need more context</translatorcomment>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <location filename="../oscar/reports.ui" line="27"/>
         <source>about:blank</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Needs to be kept in the original form</translatorcomment>
+        <translation>about:blank</translation>
     </message>
 </context>
 <context>
@@ -7992,12 +8005,13 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="246"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>H and M have an italian equivalent (O and M) but it is not commonly used. The full words are used instead</translatorcomment>
+        <translation>%1ore %2minuti</translation>
     </message>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="289"/>
         <source>No Sessions Present</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna sessione è presente</translation>
     </message>
 </context>
 <context>
@@ -8538,7 +8552,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8713,7 +8727,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/Graphs/gGraph.cpp" line="793"/>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 giorni</translation>
     </message>
 </context>
 <context>

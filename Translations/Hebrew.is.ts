@@ -2681,7 +2681,7 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
-        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <source>Welcome to Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9595,7 +9595,7 @@ Line %2, column %3</source>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
         <location filename="../oscar/UpdaterWindow.cpp" line="510"/>
         <source>SleepyHead Updates</source>
-        <translation>עדכוני SleepyHead</translation>
+        <translation type="unfinished">עדכוני OSCAR</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="511"/>
@@ -9716,7 +9716,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
-        <source>Welcome To The Open Source CPAP Analysis Reporter</source>
+        <source>Welcome To Open Source CPAP Reviewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
