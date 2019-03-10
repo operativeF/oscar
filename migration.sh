@@ -11,7 +11,7 @@ echo This will create a new folder called $DEST with a copy of the data in $SRC
 echo suitably modified to work with OSCAR
 #
 #echo Copying $SRC to $DEST may take a while if you have many months of data
-#cp -r $SRC $DEST
+cp -r $SRC $DEST
 cd $DEST
 #
 for f in *.xml ; do
