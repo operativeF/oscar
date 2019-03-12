@@ -17,6 +17,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QMessageBox>
+#include <QTranslator>
 
 #ifdef Q_OS_WIN
 #include "windows.h"
@@ -196,7 +197,9 @@ bool Preferences::Open(QString filename)
 
     if (root.tagName() != STR_AppName) {
         if (root.tagName() == "SleepyHead" ) {
-            QMessageBox::warning(nullptr, STR_MessageBox_Error, QObject::tr( "You must run the OSCAR Migration Tool"), QMessageBox::Ok);
+            QString msg = QObject::tr("Using ") + p_filename + QObject::tr(", found SleepyHead -\n") +
+                QObject::tr( "You must run the OSCAR Migration Tool");
+            QMessageBox::warning(nullptr, STR_MessageBox_Error, msg, QMessageBox::Ok);
             exit(1);
         }
         return false;
