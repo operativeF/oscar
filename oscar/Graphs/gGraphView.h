@@ -463,7 +463,7 @@ class gGraphView
     QString emptyText() { return m_emptytext; }
 
     //! \brief Sets the message displayed when there are no graphs to draw
-    void setEmptyImage(QPixmap pm) { m_emptyimage = pm; }
+    void setEmptyImage(QPixmap pm) { this->m_emptyimage = pm; }
 
     inline const float &devicePixelRatio() { return m_dpr; }
     void setDevicePixelRatio(float dpr) { m_dpr = dpr; }

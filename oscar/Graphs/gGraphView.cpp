@@ -331,7 +331,7 @@ gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
 
     this->setMouseTracking(true);
     m_emptytext = STR_Empty_NoData;
-    this->setEmptyImage(QPixmap(":/icons/logo.png"));
+    m_emptyimage = QPixmap(":/icons/logo.png");
     InitGraphGlobals(); // FIXME: sstangl: handle error return.
 #ifdef ENABLE_THREADED_DRAWING
     m_idealthreads = QThread::idealThreadCount();
@@ -1432,7 +1432,7 @@ void gGraphView::paintGL()
             QRectF target(QRect(x, y, this->m_emptyimage.width(), this->m_emptyimage.height()));
             QRectF source(QRect(0, 0, this->m_emptyimage.width(), this->m_emptyimage.height()));
 
-            painter.drawPixmap(target, this->m_emptyimage, source);
+//            painter.drawPixmap(target, this->m_emptyimage, source);   // this is segfaulting! WHY ??
 
 //            tp2 = height() /2 + m_emptyimage.height()/2  + y2;
         } /*else {
