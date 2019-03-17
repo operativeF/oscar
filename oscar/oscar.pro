@@ -341,7 +341,6 @@ FORMS += \
     mainwindow.ui \
     oximetry.ui \
     preferencesdialog.ui \
-    reports.ui \
     profileselect.ui \
     newprofile.ui \
     exportcsv.ui \
@@ -352,6 +351,9 @@ FORMS += \
     welcome.ui
 !contains(DEFINES, helpless) {
     FORMS += help.ui
+}
+equals(QT_MAJOR_VERSION,5)&lessthan(QT_MINOR_VERSION,12) {
+    FORMS += reports.ui
 }
 
 RESOURCES += \
