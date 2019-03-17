@@ -25,6 +25,7 @@ Help::Help(QWidget *parent) :
     ui->setupUi(this);
 
     QString helpRoot = appResourcePath() + "/Help/";
+    qDebug() << "Help root is " + helpRoot;
     QString helpIndex = helpRoot + "index.qhc";
 
     QDir dir(helpRoot);
@@ -67,13 +68,23 @@ Help::Help(QWidget *parent) :
     if (!helpFile.isEmpty()) {
         if (!helpEngine->setupData()) {
             ui->languageWarningMessage->setText(tr("HelpEngine did not set up correctly"));
-        } else if (helpEngine->registerDocumentation(helpFile)) {
-            qDebug() << "Registered" << helpFile;
-            helpLoaded = true;
-            ui->languageWarning->setVisible(false);
-        } else {
-            ui->languageWarningMessage->setText(tr("HelpEngine could not register documentation correctly."));
-            qDebug() << helpEngine->error();
+	    qDebug() << "Help engine Setup Failed";
+	} else for (auto const& st : helpEngine->registeredDocumentations()) {
+	    if ( st == helpNamespace ) {
+	        qDebug() << "Already Registered" << helpFile;
+	        helpLoaded = true;
+	        ui->languageWarning->setVisible(false);
+	    }
+	}
+	if ( ! helpLoaded ) {
+            if (helpEngine->registerDocumentation(helpFile)) {
+                qDebug() << "Registered" << helpFile;
+                helpLoaded = true;
+                ui->languageWarning->setVisible(false);
+            } else {
+                ui->languageWarningMessage->setText(tr("HelpEngine could not register documentation correctly."));
+                qDebug() << helpEngine->error();
+	    }
         }
     }
 
