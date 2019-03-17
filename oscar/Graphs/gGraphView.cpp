@@ -2566,7 +2566,7 @@ void gGraphView::mousePressEvent(QMouseEvent *event)
 
 
                     m_button_down = true;
-                    m_metaselect = event->modifiers() && Qt::AltModifier;
+                    m_metaselect = event->modifiers() & Qt::AltModifier;
                     m_horiz_travel = 0;
                     m_graph_index = i;
                     m_selected_graph = g;
@@ -2640,7 +2640,7 @@ void gGraphView::mousePressEvent(QMouseEvent *event)
                         m_point_clicked = QPoint(event->x(), event->y());
                         //QMouseEvent e(event->type(),m_point_clicked,event->button(),event->buttons(),event->modifiers());
                         m_button_down = true;
-                        m_metaselect = event->modifiers() && Qt::AltModifier;
+                        m_metaselect = event->modifiers() & Qt::AltModifier;
 
                         m_horiz_travel = 0;
                         m_graph_index = i;

@@ -234,7 +234,7 @@ void gDailySummary::paint(QPainter &painter, gGraph &w, const QRegion &region)
         rect1 = QRectF(xpos, ypos, 0, 0);
         QString txt = info.at(i);
 
-        rect1 = painter.boundingRect(rect1, Qt::AlignTop || Qt::AlignLeft, txt);
+        rect1 = painter.boundingRect(rect1, Qt::AlignTop | Qt::AlignLeft, txt);
         rect1.setHeight(rect1.height() * 1.25);
 
         maxwidth = qMax(rect1.width(), maxwidth);
@@ -246,7 +246,7 @@ void gDailySummary::paint(QPainter &painter, gGraph &w, const QRegion &region)
         rect1 = QRectF(xpos, tpos, 0, 0);
         QString txt = settings.at(i);
 
-        rect1 = painter.boundingRect(rect1, Qt::AlignTop || Qt::AlignLeft, txt);
+        rect1 = painter.boundingRect(rect1, Qt::AlignTop | Qt::AlignLeft, txt);
         rect1.setHeight(rect1.height() * 1.25);
 
         maxwidth = qMax(rect1.width(), maxwidth);
@@ -258,7 +258,7 @@ void gDailySummary::paint(QPainter &painter, gGraph &w, const QRegion &region)
     QRectF rect3 = QRectF(xpos, tpos, 0, 0);
     QString machinfo = QObject::tr("Machine Information");
 
-    rect3 = painter.boundingRect(rect1, Qt::AlignTop || Qt::AlignLeft, machinfo);
+    rect3 = painter.boundingRect(rect1, Qt::AlignTop | Qt::AlignLeft, machinfo);
     maxwidth = qMax(rect1.width(), maxwidth);
 
     painter.drawRect(QRect(xpos, ypos + rect3.height()+4, maxwidth, tpos-ypos));
@@ -269,7 +269,7 @@ void gDailySummary::paint(QPainter &painter, gGraph &w, const QRegion &region)
         rect1 = QRectF(xpos, ypos, 0, 0);
         QString txt = info.at(i);
 
-        rect1 = painter.boundingRect(rect1, Qt::AlignTop || Qt::AlignLeft, txt);
+        rect1 = painter.boundingRect(rect1, Qt::AlignTop | Qt::AlignLeft, txt);
         rect1.setWidth(maxwidth);
         rect1.setHeight(rect1.height() * 1.25);
         painter.fillRect(rect1, QColor(info_background.at(i)));
@@ -295,7 +295,7 @@ void gDailySummary::paint(QPainter &painter, gGraph &w, const QRegion &region)
         rect1 = QRectF(xpos, ypos, 0, 0);
         QString txt = settings.at(i);
 
-        rect1 = painter.boundingRect(rect1, Qt::AlignTop || Qt::AlignLeft, txt);
+        rect1 = painter.boundingRect(rect1, Qt::AlignTop | Qt::AlignLeft, txt);
         rect1.setWidth(maxwidth);
         rect1.setHeight(rect1.height() * 1.25);
 //        painter.fillRect(rect1, QColor("orange"));
