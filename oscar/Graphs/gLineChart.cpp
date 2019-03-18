@@ -118,7 +118,7 @@ void gLineChart::SetDay(Day *d)
             CPAPMode mode = (CPAPMode)sess->settings[CPAP_Mode].toInt();
 
             if (mode >= MODE_BILEVEL_FIXED) {
-                m_enabled[CPAP_Pressure] = false;
+                m_enabled[CPAP_Pressure] = true;    // probably a confusion of Pressure and IPAP somewhere
                 m_enabled[CPAP_IPAP] = true;
                 m_enabled[CPAP_EPAP] = true;
             }
