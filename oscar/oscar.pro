@@ -352,8 +352,10 @@ FORMS += \
 !contains(DEFINES, helpless) {
     FORMS += help.ui
 }
-equals(QT_MAJOR_VERSION,5)&lessthan(QT_MINOR_VERSION,12) {
-    FORMS += reports.ui
+equals(QT_MAJOR_VERSION,5) {
+    lessThan(QT_MINOR_VERSION,12) {
+        FORMS += reports.ui
+    }
 }
 
 RESOURCES += \
