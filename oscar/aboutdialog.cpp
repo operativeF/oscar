@@ -67,9 +67,24 @@ void AboutDialog::on_donateButton_clicked()
 }
 ******************************************************/
 
+QString AboutDialog::getFilename(QString name)
+{
+    QString filename;
+    QString language = AppSetting->language();
+    if (language == "en_US") {
+        filename = ":docs/"+name+".html";
+    } else {
+        QString docRoot = appResourcePath() + "/Html/";
+        filename = docRoot + name + language + "/Html/";
+    }
+    qDebug() << "Looking for " + filename;
+    return filename;
+}
+
 QString AboutDialog::getAbout()
 {
-    QFile clfile(":/docs/about.html");
+    QString aboutFile = getFilename("about");
+    QFile clfile(aboutFile);
     QString text = tr("Sorry, could not locate About file.");
     if (clfile.open(QIODevice::ReadOnly)) {
         text = clfile.readAll();
@@ -81,7 +96,8 @@ QString AboutDialog::getAbout()
 
 QString AboutDialog::getCredits()
 {
-    QFile clfile(":/docs/credits.html");
+    QString creditsFile = getFilename("credits");
+    QFile clfile(creditsFile);
     QString text = tr("Sorry, could not locate Credits file.");
     if (clfile.open(QIODevice::ReadOnly)) {
         text = clfile.readAll();
@@ -92,7 +108,8 @@ QString AboutDialog::getCredits()
 
 QString AboutDialog::getRelnotes()
 {
-    QFile clfile(":/docs/release_notes.html");
+    QString relNotesFile = getFilename("release_notes");
+    QFile clfile(relNotesFile);
     QString changeLog = tr("Sorry, could not locate Release Notes.");
     if (clfile.open(QIODevice::ReadOnly)) {
         //Todo, write XML parser and only show the latest..

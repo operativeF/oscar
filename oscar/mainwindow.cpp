@@ -1076,7 +1076,7 @@ QString MainWindow::getWelcomeHTML()
 //         +
            "<p><h3>" + tr("Further Information") + "</h3></p>"
            "<p>" +
-           tr("Here are the <a href='qrc:/docs/release_notes.html'>release notes</a> for this version.") +
+           tr("The release notes for this version can be found in the About OSCAR menu item.") +
            "<br/>" +
            tr("Plus a few <a href='qrc:/docs/usage.html'>usage notes</a>, and some important information for Mac users.")
            + "<br/>" +

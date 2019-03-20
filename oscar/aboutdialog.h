@@ -27,6 +27,7 @@ private slots:
     void on_donateButton_clicked();
 ***************************************************/
 private:
+    QString getFilename(QString name);
     QString getAbout();
     QString getCredits();
     QString getLicense();
