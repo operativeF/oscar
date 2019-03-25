@@ -145,9 +145,9 @@ void init()
     schema::channel.add(GRP_CPAP, new Channel(CPAP_Hypopnea      = 0x1003, FLAG,        MT_CPAP, SESSION, "Hypopnea",
             QObject::tr("Hypopnea"), QObject::tr("A partially obstructed airway"), QObject::tr("H"),        STR_UNIT_EventsPerHour,    DEFAULT,    QColor("blue")));
     schema::channel.add(GRP_CPAP, new Channel(CPAP_Apnea         = 0x1004, FLAG,        MT_CPAP, SESSION, "Apnea",
-            QObject::tr("Unclassified Apnea"), QObject::tr("an apnea that couldn't be determined as Central or Obstructive, due to excessive leakage interfering with the classification process."),QObject::tr("UA"),       STR_UNIT_EventsPerHour,    DEFAULT,    QColor("dark green")));
+            QObject::tr("Unclassified Apnea"), QObject::tr("An apnea that couldn't be determined as Central or Obstructive."),QObject::tr("UA"),       STR_UNIT_EventsPerHour,    DEFAULT,    QColor("dark green")));
     schema::channel.add(GRP_CPAP, new Channel(CPAP_FlowLimit     = 0x1005, FLAG,        MT_CPAP, SESSION, "FlowLimit",
-            QObject::tr("Flow Limitation"), QObject::tr("An restriction in breathing from normal, causing a flattening of the flow waveform."), QObject::tr("FL"), STR_UNIT_EventsPerHour,    DEFAULT,    QColor("#404040")));
+            QObject::tr("Flow Limitation"), QObject::tr("A restriction in breathing from normal, causing a flattening of the flow waveform."), QObject::tr("FL"), STR_UNIT_EventsPerHour,    DEFAULT,    QColor("#404040")));
     schema::channel.add(GRP_CPAP, new Channel(CPAP_RERA          = 0x1006, FLAG,        MT_CPAP, SESSION, "RERA",
             QObject::tr("RERA"),QObject::tr("Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance."), QObject::tr("RE"),       STR_UNIT_EventsPerHour,    DEFAULT,    COLOR_Gold));
     schema::channel.add(GRP_CPAP, new Channel(CPAP_VSnore        = 0x1007, FLAG,        MT_CPAP, SESSION, "VSnore",
