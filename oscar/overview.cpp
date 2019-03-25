@@ -42,6 +42,8 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
         shortformat.replace("yy", "yyyy");
     }
 
+    ui->toggleVisibility->setVisible(false);    /* get rid of tiny triangle that disables data display */
+
     ui->dateStart->setDisplayFormat(shortformat);
     ui->dateEnd->setDisplayFormat(shortformat);
 
