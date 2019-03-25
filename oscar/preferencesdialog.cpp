@@ -885,26 +885,26 @@ bool PreferencesDialog::Save()
 #endif
 
 
-    PREF["Fonts_Application_Name"] = ui->applicationFont->currentText();
-    PREF["Fonts_Application_Size"] = ui->applicationFontSize->value();
-    PREF["Fonts_Application_Bold"] = ui->applicationFontBold->isChecked();
-    PREF["Fonts_Application_Italic"] = ui->applicationFontItalic->isChecked();
+    (*p_pref)["Fonts_Application_Name"] = ui->applicationFont->currentText();
+    (*p_pref)["Fonts_Application_Size"] = ui->applicationFontSize->value();
+    (*p_pref)["Fonts_Application_Bold"] = ui->applicationFontBold->isChecked();
+    (*p_pref)["Fonts_Application_Italic"] = ui->applicationFontItalic->isChecked();
 
 
-    PREF["Fonts_Graph_Name"] = ui->graphFont->currentText();
-    PREF["Fonts_Graph_Size"] = ui->graphFontSize->value();
-    PREF["Fonts_Graph_Bold"] = ui->graphFontBold->isChecked();
-    PREF["Fonts_Graph_Italic"] = ui->graphFontItalic->isChecked();
+    (*p_pref)["Fonts_Graph_Name"] = ui->graphFont->currentText();
+    (*p_pref)["Fonts_Graph_Size"] = ui->graphFontSize->value();
+    (*p_pref)["Fonts_Graph_Bold"] = ui->graphFontBold->isChecked();
+    (*p_pref)["Fonts_Graph_Italic"] = ui->graphFontItalic->isChecked();
 
-    PREF["Fonts_Title_Name"] = ui->titleFont->currentText();
-    PREF["Fonts_Title_Size"] = ui->titleFontSize->value();
-    PREF["Fonts_Title_Bold"] = ui->titleFontBold->isChecked();
-    PREF["Fonts_Title_Italic"] = ui->titleFontItalic->isChecked();
+    (*p_pref)["Fonts_Title_Name"] = ui->titleFont->currentText();
+    (*p_pref)["Fonts_Title_Size"] = ui->titleFontSize->value();
+    (*p_pref)["Fonts_Title_Bold"] = ui->titleFontBold->isChecked();
+    (*p_pref)["Fonts_Title_Italic"] = ui->titleFontItalic->isChecked();
 
-    PREF["Fonts_Big_Name"] = ui->bigFont->currentText();
-    PREF["Fonts_Big_Size"] = ui->bigFontSize->value();
-    PREF["Fonts_Big_Bold"] = ui->bigFontBold->isChecked();
-    PREF["Fonts_Big_Italic"] = ui->bigFontItalic->isChecked();
+    (*p_pref)["Fonts_Big_Name"] = ui->bigFont->currentText();
+    (*p_pref)["Fonts_Big_Size"] = ui->bigFontSize->value();
+    (*p_pref)["Fonts_Big_Bold"] = ui->bigFontBold->isChecked();
+    (*p_pref)["Fonts_Big_Italic"] = ui->bigFontItalic->isChecked();
 
     QFont font = ui->applicationFont->currentFont();
     font.setPointSize(ui->applicationFontSize->value());
@@ -933,7 +933,7 @@ bool PreferencesDialog::Save()
     saveWaveInfo();
     //qDebug() << "TODO: Save channels.xml to update channel data";
 
-    PREF.Save();
+    p_pref->Save();
     profile->Save();
 
     if (recompress_events) {

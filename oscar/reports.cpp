@@ -72,7 +72,7 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
 #ifdef Q_WS_X11
     printer->setPrinterName("Print to File (PDF)");
     printer->setOutputFormat(QPrinter::PdfFormat);
-    QString filename = PREF.Get("{home}/" + name + username + date.toString(Qt::ISODate) + ".pdf");
+    QString filename = p_pref->Get("{home}/") + name + username + date.toString(Qt::ISODate) + ".pdf";
 
     printer->setOutputFileName(filename);
 #endif

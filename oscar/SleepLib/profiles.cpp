@@ -42,7 +42,7 @@ Profile::Profile(QString path)
     p_name = STR_GEN_Profile;
 
     if (path.isEmpty()) {
-        p_path = GetAppRoot();
+        p_path = GetAppData();
     } else {
         p_path = path;
     }
@@ -493,7 +493,7 @@ void Profile::DataFormatError(Machine *m)
 {
     QString msg;
 
-    msg = "<font size=+1>"+QObject::tr("OSCT (%1) needs to upgrade its database for %2 %3 %4").
+    msg = "<font size=+1>"+QObject::tr("OSCAR (%1) needs to upgrade its database for %2 %3 %4").
             arg(VersionString).
             arg(m->brand()).arg(m->model()).arg(m->serial())
             + "</font><br/><br/>";
@@ -900,10 +900,10 @@ Machine *Profile::GetMachine(MachineType t)
 //{
 //    QMap<QDate, QList<Day *> >::iterator it_end = daylist.end();
 //    QMap<QDate, QList<Day *> >::iterator it;
-
+//
 //    QList<QDate> datelist;
 //    QList<Day *> days;
-
+//
 //    for (it = daylist.begin(); it != it_end; ++it) {
 //        for (int i = 0; i< it.value().size(); ++i) {
 //            Day * day = it.value().at(i);
@@ -913,7 +913,7 @@ Machine *Profile::GetMachine(MachineType t)
 //            }
 //        }
 //    }
-
+//
 //    for (int i=0; i < datelist.size(); ++i) {
 //        Day * day = days.at(i);
 //        it = daylist.find(datelist.at(i));
@@ -925,7 +925,7 @@ Machine *Profile::GetMachine(MachineType t)
 //        }
 //        mach->unlinkDay(days.at(i));
 //    }
-
+//
 //}
 
 bool Profile::unlinkDay(Day * day)
@@ -953,7 +953,7 @@ QMap<QString, Profile *> profiles;
 
 void Done()
 {
-    PREF.Save();
+    p_pref->Save();
 
     profiles.clear();
     delete p_pref;
@@ -973,7 +973,7 @@ Profile *Get(QString name)
 
 Profile *Create(QString name)
 {
-    QString path = PREF.Get("{home}/Profiles/") + name;
+    QString path = p_pref->Get("{home}/Profiles/") + name;
     QDir dir(path);
 
     if (!dir.exists(path)) {
@@ -1009,7 +1009,7 @@ Profile *Get()
 
 void saveProfileList()
 {
-    QString filename = PREF.Get("{home}/profiles.xml");
+    QString filename = p_pref->Get("{home}/profiles.xml");
 
     QDomDocument doc("profiles");
 
@@ -1051,7 +1051,7 @@ int CleanupProfile(Profile *prof)
     for (auto & prf :migrateList) {
         if (prof->contains(prf)) {
             qDebug() << "Migrating profile preference" << prf;
-            PREF[prf] = (*prof)[prf];
+            (*p_pref)[prf] = (*prof)[prf];
             prof->Erase(prf);
             cnt++;
         }
@@ -1068,8 +1068,9 @@ int CleanupProfile(Profile *prof)
  */
 void Scan()
 {
-    QString path = PREF.Get("{home}/Profiles");
+    QString path = p_pref->Get("{home}/Profiles");
     QDir dir(path);
+    profiles.clear();
 
     if (!dir.exists(path)) {
         return;
@@ -1101,7 +1102,7 @@ void Scan()
 
     if (cleanup > 0) {
         qDebug() << "Saving preferences after migration";
-        PREF.Save();
+        p_pref->Save();
     }
     // Update profiles.xml for mobile version
     saveProfileList();

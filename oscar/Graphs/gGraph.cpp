@@ -51,41 +51,41 @@ bool InitGraphGlobals()
         return true;
     }
 
-    if (!PREF.contains("Fonts_Graph_Name")) {
-        PREF["Fonts_Graph_Name"] = "Sans Serif";
-        PREF["Fonts_Graph_Size"] = 10;
-        PREF["Fonts_Graph_Bold"] = false;
-        PREF["Fonts_Graph_Italic"] = false;
+    if (!p_pref->contains("Fonts_Graph_Name")) {
+        (*p_pref)["Fonts_Graph_Name"] = "Sans Serif";
+        (*p_pref)["Fonts_Graph_Size"] = 10;
+        (*p_pref)["Fonts_Graph_Bold"] = false;
+        (*p_pref)["Fonts_Graph_Italic"] = false;
     }
 
-    if (!PREF.contains("Fonts_Title_Name")) {
-        PREF["Fonts_Title_Name"] = "Sans Serif";
-        PREF["Fonts_Title_Size"] = 12;
-        PREF["Fonts_Title_Bold"] = true;
-        PREF["Fonts_Title_Italic"] = false;
+    if (!p_pref->contains("Fonts_Title_Name")) {
+        (*p_pref)["Fonts_Title_Name"] = "Sans Serif";
+        (*p_pref)["Fonts_Title_Size"] = 12;
+        (*p_pref)["Fonts_Title_Bold"] = true;
+        (*p_pref)["Fonts_Title_Italic"] = false;
     }
 
-    if (!PREF.contains("Fonts_Big_Name")) {
-        PREF["Fonts_Big_Name"] = "Serif";
-        PREF["Fonts_Big_Size"] = 35;
-        PREF["Fonts_Big_Bold"] = false;
-        PREF["Fonts_Big_Italic"] = false;
+    if (!p_pref->contains("Fonts_Big_Name")) {
+        (*p_pref)["Fonts_Big_Name"] = "Serif";
+        (*p_pref)["Fonts_Big_Size"] = 35;
+        (*p_pref)["Fonts_Big_Bold"] = false;
+        (*p_pref)["Fonts_Big_Italic"] = false;
     }
 
-    defaultfont = new QFont(PREF["Fonts_Graph_Name"].toString(),
-                            PREF["Fonts_Graph_Size"].toInt(),
-                            PREF["Fonts_Graph_Bold"].toBool() ? QFont::Bold : QFont::Normal,
-                            PREF["Fonts_Graph_Italic"].toBool()
+    defaultfont = new QFont((*p_pref)["Fonts_Graph_Name"].toString(),
+                            (*p_pref)["Fonts_Graph_Size"].toInt(),
+                            (*p_pref)["Fonts_Graph_Bold"].toBool() ? QFont::Bold : QFont::Normal,
+                            (*p_pref)["Fonts_Graph_Italic"].toBool()
                            );
-    mediumfont = new QFont(PREF["Fonts_Title_Name"].toString(),
-                           PREF["Fonts_Title_Size"].toInt(),
-                           PREF["Fonts_Title_Bold"].toBool() ? QFont::Bold : QFont::Normal,
-                           PREF["Fonts_Title_Italic"].toBool()
+    mediumfont = new QFont((*p_pref)["Fonts_Title_Name"].toString(),
+                           (*p_pref)["Fonts_Title_Size"].toInt(),
+                           (*p_pref)["Fonts_Title_Bold"].toBool() ? QFont::Bold : QFont::Normal,
+                           (*p_pref)["Fonts_Title_Italic"].toBool()
                           );
-    bigfont = new QFont(PREF["Fonts_Big_Name"].toString(),
-                        PREF["Fonts_Big_Size"].toInt(),
-                        PREF["Fonts_Big_Bold"].toBool() ? QFont::Bold : QFont::Normal,
-                        PREF["Fonts_Big_Italic"].toBool()
+    bigfont = new QFont((*p_pref)["Fonts_Big_Name"].toString(),
+                        (*p_pref)["Fonts_Big_Size"].toInt(),
+                        (*p_pref)["Fonts_Big_Bold"].toBool() ? QFont::Bold : QFont::Normal,
+                        (*p_pref)["Fonts_Big_Italic"].toBool()
                        );
 
     defaultfont->setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);

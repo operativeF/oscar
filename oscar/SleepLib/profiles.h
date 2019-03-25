@@ -249,7 +249,7 @@ extern Preferences *p_pref;
 extern Profile *p_profile;
 
 // these are bad and must change
-#define PREF (*p_pref)
+// #define PREF (*p_pref)
 
 
 //! \brief Returns a count of all files & directories in a supplied folder
