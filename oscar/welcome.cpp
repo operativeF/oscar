@@ -32,9 +32,14 @@ Welcome::~Welcome()
 
 void Welcome::refreshPage()
 {
-    const auto & mlist = p_profile->GetMachines(MT_CPAP);
+    bool b;
 
-    bool b = mlist.size() > 0;
+    if (p_profile != nullptr) {
+        const auto & mlist = p_profile->GetMachines(MT_CPAP);
+        b = mlist.size() > 0;
+    } else 
+        b = false;
+
     bool showCardWarning = !b;
 
 
@@ -52,9 +57,9 @@ void Welcome::refreshPage()
     ui->dailyButton->setEnabled(b);
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
-//    ui->tabWidget->setTabEnabled(2, b);
-//    ui->tabWidget->setTabEnabled(3, b);
-//    ui->tabWidget->setTabEnabled(4, b);
+    ui->tabWidget->setTabEnabled(2, b);
+    ui->tabWidget->setTabEnabled(3, b);
+    ui->tabWidget->setTabEnabled(4, b);
 
     ui->cpapInfo->setHtml(GenerateCPAPHTML());
     ui->oxiInfo->setHtml(GenerateOxiHTML());
