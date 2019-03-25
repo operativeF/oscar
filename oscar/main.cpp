@@ -13,6 +13,7 @@
 #include <QSettings>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <QStandardPaths>
 
 #include "version.h"
 #include "logger.h"
@@ -41,7 +42,130 @@ MainWindow *mainwin = nullptr;
 
 int compareVersion(QString version);
 
+bool copyRecursively(QString sourceFolder, QString destFolder)
+    {
+        bool success = false;
+        QDir sourceDir(sourceFolder);
 
+        if(!sourceDir.exists())
+            return false;
+
+        QDir destDir(destFolder);
+        if(!destDir.exists())
+            destDir.mkdir(destFolder);
+
+        QStringList files = sourceDir.entryList(QDir::Files);
+        for(int i = 0; i< files.count(); i++) {
+            QString srcName = sourceFolder + QDir::separator() + files[i];
+            QString destName = destFolder + QDir::separator() + files[i];
+            success = QFile::copy(srcName, destName);
+            if(!success)
+                return false;
+        }
+
+        files.clear();
+        files = sourceDir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
+        for(int i = 0; i< files.count(); i++)
+        {
+            QString srcName = sourceFolder + QDir::separator() + files[i];
+            QString destName = destFolder + QDir::separator() + files[i];
+//          qDebug() << "Copy from "+srcName+" to "+destName;
+            success = copyRecursively(srcName, destName);
+            if(!success)
+                return false;
+        }
+
+        return true;
+    }
+
+bool processPreferenceFile( QString path ) {
+    bool success = true;
+    QString fullpath = path + "/Preferences.xml";
+    qDebug() << "Process " + fullpath;
+    QFile fl(fullpath);
+    QFile tmp(fullpath+".tmp");
+    QString line;
+    fl.open(QIODevice::ReadOnly);
+    tmp.open(QIODevice::WriteOnly);
+    QTextStream instr(&fl);
+    QTextStream outstr(&tmp);
+    while (instr.readLineInto(&line)) {
+        line.replace("SleepyHead","OSCAR");
+        if (line.contains("VersionString")) {
+            int rtAngle = line.indexOf(">", 0);
+            int lfAngle = line.indexOf("<", rtAngle);
+            line.replace(rtAngle+1, lfAngle-rtAngle-1, "1.0.0-beta");
+        }
+        outstr << line;
+    }
+    fl.remove();
+    success = tmp.rename(fullpath);
+
+    return success;
+}
+
+bool processFile( QString fullpath ) {
+    bool success = true;
+    qDebug() << "Process " + fullpath ;
+    QFile fl(fullpath);
+    QFile tmp(fullpath+".tmp");
+    QString line;
+    fl.open(QIODevice::ReadOnly);
+    tmp.open(QIODevice::WriteOnly);
+    QTextStream instr(&fl);
+    QTextStream outstr(&tmp);
+    while (instr.readLineInto(&line)) {
+        line.replace("SleepyHead","OSCAR");
+        outstr << line;
+    }
+    fl.remove();
+    success = tmp.rename(fullpath);
+
+    return success;
+}
+
+bool process_a_Profile( QString path ) {
+    bool success = true;
+    qDebug() << "Entering profile directory " + path;
+    QDir dir(path);
+    QStringList files = dir.entryList(QStringList("*.xml"), QDir::Files);
+    for ( int i = 0; success && (i<files.count()); i++) {
+        success = processFile( path + "/" + files[i] );
+    }
+    return success;
+}
+
+bool migrateFromSH(QString destDir) {
+    QString homeDocs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/";
+    bool success = false;
+    if (destDir.isEmpty()) {
+        qDebug() << "Migration path is empty string";
+        return success;
+    }
+
+    QString datadir = QFileDialog::getExistingDirectory(nullptr,
+                      QObject::tr("Choose the SleepyHead data folder to migrate"), homeDocs, QFileDialog::ShowDirsOnly);
+    qDebug() << "Migration folder selected: " + datadir;
+    if (datadir.isEmpty()) {
+        qDebug() << "No migration source directory selected";
+        return false;
+    }
+
+    success = copyRecursively(datadir, destDir);
+    if (success) {
+        qDebug() << "Finished copying " + datadir;
+    }
+
+    success = processPreferenceFile( destDir );
+
+    QDir profDir(destDir+"/Profiles");
+    QStringList names = profDir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
+    for (int i = 0; success && (i < names.count()); i++) {
+        success = process_a_Profile( destDir+"/Profiles/"+names[i] );
+    }
+
+    return success;
+}
 
 int main(int argc, char *argv[])
 {
@@ -49,6 +173,7 @@ int main(int argc, char *argv[])
     XInitThreads();
 #endif
 
+    QString homeDocs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/";
     QCoreApplication::setApplicationName(getAppName());
     QCoreApplication::setOrganizationName(getDeveloperName());
 
@@ -82,19 +207,19 @@ int main(int argc, char *argv[])
         changing_language = true;
 
     for (int i = 1; i < args.size(); i++) {
-        if (args[i] == "-l") { dont_load_profile = true; }
-        else if (args[i] == "-d") { force_data_dir = true; }
+        if (args[i] == "-l")
+            dont_load_profile = true;
+//        else if (args[i] == "-d")
+//            force_data_dir = true;
         else if (args[i] == "--language") {
-            changing_language = true;
-
-            // reset to force language dialog
+            changing_language = true; // reset to force language dialog
             settings.setValue(LangSetting,"");
-        } else if (args[i] == "-p") {
+        } else if (args[i] == "-p")
             QThread::msleep(1000);
-        } else if (args[i] == "--profile") {
-            if ((i+1) < args.size()) {
+        else if (args[i] == "--profile") {
+            if ((i+1) < args.size())
                 load_profile = args[++i];
-            } else {
+            else {
                 fprintf(stderr, "Missing argument to --profile\n");
                 exit(1);
             }
@@ -102,13 +227,14 @@ int main(int argc, char *argv[])
             QString datadir ;
             if ((i+1) < args.size()) {
               datadir = args[++i];
-              settings.setValue("Settings/AppRoot", datadir);
+              settings.setValue("Settings/AppData", homeDocs+datadir);
+//            force_data_dir = true;
             } else {
               fprintf(stderr, "Missing argument to --datadir\n");
               exit(1);
             }
           }
-    }
+    }   // end of for args loop
 
 
     initializeLogger();
@@ -146,7 +272,7 @@ int main(int argc, char *argv[])
 
 //#endif
 
-    /*
+/*************************************************************************************
 #ifdef BROKEN_OPENGL_BUILD
     Q_UNUSED(bad_graphics)
     Q_UNUSED(intel_graphics)
@@ -175,91 +301,91 @@ int main(int argc, char *argv[])
         exit(1);
     }
 #endif
-*/
+****************************************************************************************************************/
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Datafolder location Selection
     ////////////////////////////////////////////////////////////////////////////////////////////
-    bool change_data_dir = force_data_dir;
+//  bool change_data_dir = force_data_dir;
+//
+//  bool havefolder = false;
 
-    bool havefolder = false;
-
-    if (!settings.contains("Settings/AppRoot")) {
-        change_data_dir = true;
-    } else {
-        QDir dir(GetAppRoot());
-
-        if (!dir.exists()) {
-            change_data_dir = true;
-        } else { havefolder = true; }
-    }
-
-    if (!havefolder && !force_data_dir) {
-        if (QMessageBox::question(nullptr, STR_MessageBox_Question,
-                QObject::tr("Would you like OSCAR to use this location for storing its data?")+"\n\n"+
-                QDir::toNativeSeparators(GetAppRoot())+"\n\n"+
-                QObject::tr("If you are upgrading, don't panic, you just need to make sure this is pointed at your old OSCAR data folder.")+"\n\n"+
-                QObject::tr("(If you are unsure, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
-            settings.setValue("Settings/AppRoot", GetAppRoot());
-            change_data_dir = false;
-        }
-    }
-
-retry_directory:
-
-    if (change_data_dir) {
-        QString datadir = QFileDialog::getExistingDirectory(nullptr,
-                          QObject::tr("Choose or create new folder for OSCAR data"), GetAppRoot(),
-                          QFileDialog::ShowDirsOnly);
-
-        if (datadir.isEmpty()) {
-            if (!havefolder) {
-                QMessageBox::information(nullptr, QObject::tr("Exiting"),
-                    QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
-                return 0;
-            } else {
-                QMessageBox::information(nullptr, STR_MessageBox_Warning,
-                    QObject::tr("You did not select a directory.")+"\n\n"+QObject::tr("OSCAR will now start with your old one.")+"\n\n"+
-                    QDir::toNativeSeparators(GetAppRoot()), QMessageBox::Ok);
-            }
+    if (!settings.contains("Settings/AppData")) {       // This is first time execution
+        if ( settings.contains("Settings/AppRoot") ) {  // allow for old AppRoot here - not really first time
+            settings.setValue("Settings/AppData", settings.value("Settings/AppRoot"));
         } else {
-            QDir dir(datadir);
-            QFile file(datadir + "/Preferences.xml");
-
-            if (!file.exists()) {
-                if (dir.count() > 2) {
-                    // Not a new directory.. nag the user.
-                    if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
-                            QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCAR data.") +
-                            "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
-                            datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
-                        goto retry_directory;
-                    }
-                }
-            }
-
-            settings.setValue("Settings/AppRoot", datadir);
-            qDebug() << "Changing data folder to" << datadir;
+            settings.setValue("Settings/AppData", getModifiedAppData());    // set up new data directory path
         }
     }
+
+    QDir dir(GetAppData());
+
+    if ( ! dir.exists() ) {             // directory doesn't exist, verify user's choice
+        if ( ! force_data_dir ) {       // unless they explicitly selected it by --datadir param
+            if (QMessageBox::question(nullptr, STR_MessageBox_Question,
+                    QObject::tr("Would you like OSCAR to use this location for storing its data?")+"\n\n"+
+                    QDir::toNativeSeparators(GetAppData())+"\n\n"+
+                    QObject::tr("If you are upgrading, don't panic, your old data will be migrated later.")+"\n\n"+
+                    QObject::tr("(If you are unsure, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
+            // User wants a different folder for data
+                bool change_data_dir = true;
+                while (change_data_dir) {           // Create or select an acceptable folder
+                    QString datadir = QFileDialog::getExistingDirectory(nullptr,
+                                      QObject::tr("Choose or create a new folder for OSCAR data"), homeDocs, QFileDialog::ShowDirsOnly);
+
+                    if (datadir.isEmpty()) {        // User hit Cancel instead of selecting or creating a folder
+                        QMessageBox::information(nullptr, QObject::tr("Exiting"),
+                            QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
+                        return 0;
+                    } else {                        // We have a folder, see if is already an OSCAR folder
+                        QDir dir(datadir);
+                        QFile file(datadir + "/Preferences.xml");
+
+                        if (!file.exists()) {       // It doesn't have a Preferences.xml file in it
+                            if (dir.count() > 2) {  // but it has more than dot and dotdot
+                                // Not a new directory.. nag the user.
+                                if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
+                                        QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCAR data.") +
+                                        "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
+                                        datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
+                                    continue;   // Nope, don't use it, go around the loop again
+                                }
+                            }
+                        }
+        
+                        settings.setValue("Settings/AppData", datadir);
+                        qDebug() << "Changing data folder to" << datadir;
+                        change_data_dir = false;
+                    }
+                }           // the while loop
+            }           // user wants a different folder
+        }           // user used --datadir folder to select a folder
+    }           // The folder doesn't exist
+    qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
+
+    QDir newDir(GetAppData());
+    if ( ! newDir.exists() ) {                      // directoy doesn't exist yet, try to migrate old data
+        migrateFromSH( GetAppData() );              // doesn't matter if no migration
+    }
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////
-    // Initialize preferences system (Don't use PREF before this point)
+    // Initialize preferences system (Don't use p_pref before this point)
     ///////////////////////////////////////////////////////////////////////////////////////////
     p_pref = new Preferences("Preferences");
-    PREF.Open();
+    p_pref->Open();
     AppSetting = new AppWideSetting(p_pref);
 
     QString language = settings.value(LangSetting, "").toString();
     AppSetting->setLanguage(language);
 
-    // Clean up some legacy crap
-//    QFile lf(PREF.Get("{home}/Layout.xml"));
+//    Clean up some legacy crap
+//    QFile lf(p_pref->Get("{home}/Layout.xml"));
 //    if (lf.exists()) {
 //        lf.remove();
 //    }
 
-    PREF.Erase(STR_AppName);
-    PREF.Erase(STR_GEN_SkipLogin);
+    p_pref->Erase(STR_AppName);
+    p_pref->Erase(STR_GEN_SkipLogin);
 
 #ifndef NO_UPDATER
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,9 +414,8 @@ retry_directory:
     int vc = compareVersion(AppSetting->versionString());
     if (vc < 0) {
         AppSetting->setShowAboutDialog(1);
-        //release_notes();
-
-//        check_updates = false;
+//      release_notes();
+//      check_updates = false;
     } else if (vc > 0) {
         if (QMessageBox::warning(nullptr, STR_MessageBox_Error,
             QObject::tr("The version of OSCAR you just ran is OLDER than the one used to create this data (%1).").
@@ -300,37 +425,36 @@ retry_directory:
 
             return 0;
         }
-
     }
 
     AppSetting->setVersionString(VersionString);
 
-    //    int id=QFontDatabase::addApplicationFont(":/fonts/FreeSans.ttf");
-    //    QFontDatabase fdb;
-    //    QStringList ffam=fdb.families();
-    //    for (QStringList::iterator i=ffam.begin();i!=ffam.end();i++) {
-    //        qDebug() << "Loaded Font: " << (*i);
-    //    }
+//    int id=QFontDatabase::addApplicationFont(":/fonts/FreeSans.ttf");
+//    QFontDatabase fdb;
+//    QStringList ffam=fdb.families();
+//    for (QStringList::iterator i=ffam.begin();i!=ffam.end();i++) {
+//        qDebug() << "Loaded Font: " << (*i);
+//    }
 
 
-    if (!PREF.contains("Fonts_Application_Name")) {
+    if (!p_pref->contains("Fonts_Application_Name")) {
 #ifdef Q_OS_WIN
         // Windows default Sans Serif interpretation sucks
         // Segoe UI is better, but that requires OS/font detection
-        PREF["Fonts_Application_Name"] = "Arial";
+        (*p_pref)["Fonts_Application_Name"] = "Arial";
 #else
-        PREF["Fonts_Application_Name"] = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
+        (*p_pref)["Fonts_Application_Name"] = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
 #endif
-        PREF["Fonts_Application_Size"] = 10;
-        PREF["Fonts_Application_Bold"] = false;
-        PREF["Fonts_Application_Italic"] = false;
+        (*p_pref)["Fonts_Application_Size"] = 10;
+        (*p_pref)["Fonts_Application_Bold"] = false;
+        (*p_pref)["Fonts_Application_Italic"] = false;
     }
 
 
-    QApplication::setFont(QFont(PREF["Fonts_Application_Name"].toString(),
-                                PREF["Fonts_Application_Size"].toInt(),
-                                PREF["Fonts_Application_Bold"].toBool() ? QFont::Bold : QFont::Normal,
-                                PREF["Fonts_Application_Italic"].toBool()));
+    QApplication::setFont(QFont((*p_pref)["Fonts_Application_Name"].toString(),
+                                (*p_pref)["Fonts_Application_Size"].toInt(),
+                                (*p_pref)["Fonts_Application_Bold"].toBool() ? QFont::Bold : QFont::Normal,
+                                (*p_pref)["Fonts_Application_Italic"].toBool()));
 
     qDebug() << "Selected Font" << QApplication::font().family();
 
