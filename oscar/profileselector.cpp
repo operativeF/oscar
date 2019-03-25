@@ -58,8 +58,10 @@ ProfileSelector::ProfileSelector(QWidget *parent) :
     ui->diskSpaceInfo->setVisible(false);
 
     QItemSelectionModel * sm = ui->profileView->selectionModel();
-    if (sm) connect(sm, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(on_selectionChanged(QModelIndex,QModelIndex)));
+    if (sm) 
+        connect(sm, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(on_selectionChanged(QModelIndex,QModelIndex)));
     ui->buttonEditProfile->setEnabled(false);
+    ui->buttonOpenProfile->setEnabled(false);
 }
 
 ProfileSelector::~ProfileSelector()
@@ -162,6 +164,9 @@ void ProfileSelector::updateProfileList()
     w+=20;
 //    ui->profileView->setMinimumWidth(w);
 
+    if ( row == 0 ) {
+        ui->profileInfoLabel->setText("You must create a profile");
+    }
     proxy = new MySortFilterProxyModel2(this);
     proxy->setSourceModel(model);
     proxy->setSortCaseSensitivity(Qt::CaseInsensitive);
@@ -202,13 +207,11 @@ void ProfileSelector::updateProfileHighlight(QString name)
 
             for (int i=0; i<proxy->columnCount(); i++) {
                 idx = proxy->index(row, i, QModelIndex());
-
                 proxy->setData(idx, bg, Qt::ForegroundRole);
                 proxy->setData(idx, font, Qt::FontRole);
             }
             break;
         }
-
     }
 }
 
@@ -232,14 +235,10 @@ Profile *ProfileSelector::SelectProfile(QString profname, bool skippassword=fals
             lay->addWidget(e);
             int tries = 0;
             bool succeeded = false;
-
             do {
                 e->setText("");
-
                 if (dialog.exec() != QDialog::Accepted) { break; }
-
                 tries++;
-
                 if (prof->user->checkPassword(e->text())) {
                     succeeded = true;
                     break;
@@ -248,16 +247,14 @@ Profile *ProfileSelector::SelectProfile(QString profname, bool skippassword=fals
                         QMessageBox::warning(this, STR_MessageBox_Error, tr("You entered an incorrect password"), QMessageBox::Ok);
                     } else {
                         QMessageBox::warning(this, STR_MessageBox_Error,
-                                             tr("Forgot your password?")+"\n"+tr("Ask on the forums how to reset it, it's actually pretty easy."),
-                                             QMessageBox::Ok);
+                           tr("Forgot your password?")+"\n"+tr("Ask on the forums how to reset it, it's actually pretty easy."),
+                           QMessageBox::Ok);
                     }
                 }
             } while (tries < 3);
             if (!succeeded) return nullptr;
         }
-
         // Unselect everything in ProfileView
-
         updateProfileHighlight(profname);
     }
 
@@ -377,8 +374,8 @@ void ProfileSelector::on_buttonDestroyProfile_clicked()
                         QMessageBox::warning(this, STR_MessageBox_Error, tr("You entered an incorrect password"), QMessageBox::Ok);
                     } else {
                         QMessageBox::warning(this, STR_MessageBox_Error,
-                                             tr("If you're trying to delete because you forgot the password, you need to either reset it or delete the profile folder manually."),
-                                             QMessageBox::Ok);
+                           tr("If you're trying to delete because you forgot the password, you need to either reset it or delete the profile folder manually."),
+                           QMessageBox::Ok);
                     }
                 }
             } while (tries < 3);
@@ -513,5 +510,6 @@ void ProfileSelector::on_selectionChanged(const QModelIndex &index, const QModel
            ui->diskSpaceInfo->setText("Something went wrong");
         }
     }
+    ui->buttonOpenProfile->setEnabled(enabled);
     ui->buttonEditProfile->setEnabled(enabled);
 }
