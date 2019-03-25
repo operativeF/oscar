@@ -39,7 +39,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 //                +tr("Graphics Engine: %1").arg(getGraphicsEngine());
 //    }
 
-    QString path = GetAppRoot();
+    QString path = GetAppData();
     QString text = /* gitrev + */ "<br/><br/><a href=\"file:///"+path+"\">"+tr("Show data folder")+"</a>";
     ui->infoLabel->setText(text);
 

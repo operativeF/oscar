@@ -51,19 +51,25 @@ const QString getDeveloperName()
 const QString getAppName()
 {
     QString name = STR_AppName;
-    if ((GIT_BRANCH != "master") || (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+    if ((GIT_BRANCH != "master") || 
+           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
+              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
+              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
         name += "-"+GIT_BRANCH;
     }
     return name;
 }
 
-const QString getDefaultAppRoot()
+const QString getModifiedAppData()
 {
-    QString approot = STR_AppRoot;
-    if ((GIT_BRANCH != "master") || (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
-        approot += "-"+GIT_BRANCH;
+    QString appdata = STR_AppData;
+    if ((GIT_BRANCH != "master") || 
+           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
+              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
+              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+        appdata += "-"+GIT_BRANCH;
     }
-    return approot;
+    return appdata;
 }
 
 bool gfxEgnineIsSupported(GFXEngine e)

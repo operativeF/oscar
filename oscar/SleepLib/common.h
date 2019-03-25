@@ -134,7 +134,7 @@ const QString STR_TestBuild = "";
 
 const QString getAppName();
 const QString getDeveloperName();
-const QString getDefaultAppRoot();
+const QString getModifiedAppData();
 
 void initializeStrings();
 
@@ -166,7 +166,7 @@ const QString STR_PREF_Language = "Language";
 
 const QString STR_AppName = "OSCAR";
 const QString STR_DeveloperName = "NightOwl";
-const QString STR_AppRoot = "OSCAR_Data";
+const QString STR_AppData = "OSCAR_Data";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Commonly used translatable text strings

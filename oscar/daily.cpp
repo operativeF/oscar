@@ -1569,7 +1569,7 @@ void Daily::Load(QDate date)
     //sessbar->update();
 
 #ifdef DEBUG_DAILY_HTML
-    QString name = GetAppRoot()+"/test.html";
+    QString name = GetAppData()+"/test.html";
     QFile file(name);
     if (file.open(QFile::WriteOnly)) {
         const QByteArray & b = html.toLocal8Bit();

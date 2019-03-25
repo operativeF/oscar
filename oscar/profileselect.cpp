@@ -99,8 +99,8 @@ ProfileSelect::ProfileSelect(QWidget *parent) :
     //    if (GIT_BRANCH!="master")
     //        ui->labelBuild->setText(GIT_BRANCH);
     //    else ui->labelBuild->setText(QString());
-    ui->labelFolder->setText(GetAppRoot());
-    ui->labelFolder->setToolTip("Current OSCAR data folder\n" + GetAppRoot());
+    ui->labelFolder->setText(GetAppData());
+    ui->labelFolder->setToolTip("Current OSCAR data folder\n" + GetAppData());
 
     ui->listView->verticalScrollBar()->setStyleSheet("QScrollBar:vertical {border: 0px solid grey; background: transparent; }"
     "QScrollBar::handle:vertical {"
@@ -208,7 +208,7 @@ void ProfileSelect::deleteProfile()
 //    if (!profile->Load()) {
 //        QMessageBox::warning(this, STR_MessageBox_Error,
 //            QString(tr("Could not open profile.. You will need to delete this profile directory manually")+
-//            "\n\n"+tr("You will find it under the following location:")+"\n\n%1").arg(QDir::toNativeSeparators(GetAppRoot() + "/Profiles/" + profile->user->userName())), QMessageBox::Ok);
+//            "\n\n"+tr("You will find it under the following location:")+"\n\n%1").arg(QDir::toNativeSeparators(GetAppData() + "/Profiles/" + profile->user->userName())), QMessageBox::Ok);
 //            return;
 //    }
     bool reallydelete = false;

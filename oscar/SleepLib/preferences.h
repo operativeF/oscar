@@ -18,7 +18,7 @@
 
 const QString STR_ext_XML = ".xml";
 
-extern QString GetAppRoot(); //returns app root path plus trailing path separator.
+extern QString GetAppData(); //returns app data path plus trailing path separator.
 
 inline QString PrefMacro(QString s)
 {
@@ -130,7 +130,7 @@ class Preferences
 };
 
 //! \brief Main Preferences Object used throughout the application
-extern Preferences PREF;
+// extern Preferences PREF;
 
 // Parent class for subclasses that manipulate the profile.
 class PrefSettings

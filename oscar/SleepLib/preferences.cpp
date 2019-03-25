@@ -59,24 +59,24 @@ const QString &getUserName()
 }
 
 
-QString GetAppRoot()
+QString GetAppData()
 {
     QSettings settings;
 
-    QString HomeAppRoot = settings.value("Settings/AppRoot").toString();
+    QString HomeAppData = settings.value("Settings/AppData").toString();
 
-    if (HomeAppRoot.isEmpty()) {
-        HomeAppRoot = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/"+getDefaultAppRoot();
+    if (HomeAppData.isEmpty()) {
+        HomeAppData = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/"+getModifiedAppData();
     }
 
-    return HomeAppRoot;
+    return HomeAppData;
 }
 
 
 Preferences::Preferences()
 {
     p_name = "Preferences";
-    p_path = GetAppRoot();
+    p_path = GetAppData();
 }
 
 Preferences::Preferences(QString name, QString filename)
@@ -88,10 +88,10 @@ Preferences::Preferences(QString name, QString filename)
     }
 
     if (filename.isEmpty()) {
-        p_filename = GetAppRoot() + "/" + p_name + STR_ext_XML;
+        p_filename = GetAppData() + "/" + p_name + STR_ext_XML;
     } else {
         if (!filename.contains("/")) {
-            p_filename = GetAppRoot() + "/";
+            p_filename = GetAppData() + "/";
         } else { p_filename = ""; }
 
         p_filename += filename;
@@ -147,7 +147,7 @@ const QString Preferences::Get(QString name)
         ref = a.section(cbr, 0, 0);
 
         if (ref.toLower() == "home") {
-            temp += GetAppRoot();
+            temp += GetAppData();
         } else if (ref.toLower() == "user") {
             temp += getUserName();
         } else if (ref.toLower() == "sep") { // redundant in QT
@@ -174,10 +174,10 @@ bool Preferences::Open(QString filename)
 
     QDomDocument doc(p_name);
     QFile file(p_filename);
-    qDebug() << "Reading " << p_filename.toLocal8Bit().data();
+    qDebug() << "Opening " << p_filename.toLocal8Bit().data();
 
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "Could not open" << p_filename.toLocal8Bit().data();
+        qWarning() << "Could not open" << p_filename.toLocal8Bit().data() << " Error: " << file.error();
         return false;
     }
 
