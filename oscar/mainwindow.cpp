@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "Using System Tray for Menu";
         systray = new QSystemTrayIcon(QIcon(":/icons/logo.png"), this);
         systray->show();
-        systraymenu = new QMenu(this);
+/****** systraymenu = new QMenu(this);
         systray->setContextMenu(systraymenu);
         QAction *a = systraymenu->addAction(STR_TR_OSCAR + " v" + VersionString);
         a->setEnabled(false);
@@ -96,6 +96,8 @@ MainWindow::MainWindow(QWidget *parent) :
 //        systraymenu->addAction(tr("Check for &Updates"), this, SLOT(on_actionCheck_for_Updates_triggered()));
         systraymenu->addSeparator();
         systraymenu->addAction(tr("E&xit"), this, SLOT(close()));
+*******/
+        systraymenu = nullptr;
     } else { // if not available, the messages will popup in the taskbar
         qDebug() << "No System Tray menues";
         systray = nullptr;
@@ -193,7 +195,8 @@ void MainWindow::SetupGUI()
     profileSelector->updateProfileList();
 
     // Start with the new Profile Tab
-    ui->tabWidget->setCurrentWidget(profileSelector); // setting this to daily shows the cube during loading..
+    ui->tabWidget->setCurrentWidget(profileSelector);   // setting this to daily shows the cube during loading..
+    ui->tabWidget->setTabEnabled(1, false);             // this should be the Statistics tab
 
     ui->toolBox->setCurrentIndex(0);
     bool b = AppSetting->rightSidebarVisible();
@@ -218,6 +221,8 @@ void MainWindow::SetupGUI()
     ui->mainsplitter->setStretchFactor(1,0);
 
     QTimer::singleShot(50, this, SLOT(Startup()));
+
+    ui->actionChange_Data_Folder->setVisible(false);
 
 #ifndef helpless
     help = new Help(this);
@@ -255,8 +260,14 @@ void MainWindow::closeEvent(QCloseEvent * event)
         // Trash anything allocated by the Graph objects
         DestroyGraphGlobals();
 
-        if (systraymenu) delete systraymenu;
-        if (systray) delete systray;
+        if (systraymenu) {
+            delete systraymenu;
+            systraymenu = nullptr;
+        }
+        if (systray) {
+            delete systray;
+            systray = nullptr;
+        }
 
         disconnect(logger, SIGNAL(outputLog(QString)), this, SLOT(logMessage(QString)));
         shutdownLogger();
@@ -271,6 +282,7 @@ void MainWindow::closeEvent(QCloseEvent * event)
 MainWindow::~MainWindow()
 {
     delete ui;
+    QCoreApplication::quit();
 }
 
 void MainWindow::log(QString text)
@@ -818,6 +830,10 @@ QList<ImportPath> MainWindow::detectCPAPCards()
 void MainWindow::on_action_Import_Data_triggered()
 {
     static bool in_import = false;
+    if ( p_profile == nullptr ) {
+        Notify(tr("No profile has been selected for Import."), STR_MessageBox_Busy);
+        return;
+    }
     if (m_inRecalculation) {
         Notify(tr("Access to Import has been blocked while recalculations are in progress."),STR_MessageBox_Busy);
         return;
@@ -1323,7 +1339,7 @@ void MainWindow::DelayedScreenshot()
     QPixmap pixmap = QPixmap::grabWindow(this->winId(), x(), y(), width() / pr, (height() / pr) + 10);
 #endif */
 
-    QString a = PREF.Get("{home}/Screenshots");
+    QString a = p_pref->Get("{home}/Screenshots");
     QDir dir(a);
 
     if (!dir.exists()) {
@@ -1373,7 +1389,7 @@ void MainWindow::on_actionPrint_Report_triggered()
             datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
         } else { name = "Unknown"; }
 
-        QString filename = PREF.Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
+        QString filename = p_pref->Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
 
         printer.setOutputFileName(filename);
 #endif
@@ -1680,7 +1696,7 @@ void MainWindow::reloadProfile()
 void MainWindow::RestartApplication(bool force_login, QString cmdline)
 {
     CloseProfile();
-    PREF.Save();
+    p_pref->Save();
 
     QString apppath;
 #ifdef Q_OS_MAC
@@ -2271,7 +2287,7 @@ void MainWindow::on_actionChange_Data_Folder_triggered()
         p_profile->Save();
         p_profile->removeLock();
     }
-    PREF.Save();
+    p_pref->Save();
 
     RestartApplication(false, "-d");
 }
