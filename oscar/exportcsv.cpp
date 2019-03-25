@@ -70,7 +70,7 @@ ExportCSV::~ExportCSV()
 void ExportCSV::on_filenameBrowseButton_clicked()
 {
     QString timestamp = tr("OSCAR_");
-    timestamp += p_profile->Get("Username") + "_";
+    timestamp += p_profile->Get("UserName") + "_";
 
     if (ui->rb1_details->isChecked()) { timestamp += tr("Details_"); }
 
@@ -84,7 +84,7 @@ void ExportCSV::on_filenameBrowseButton_clicked()
 
     timestamp += ".csv";
     QString name = QFileDialog::getSaveFileName(this, tr("Select file to export to"),
-                   PREF.Get("{home}/") + timestamp, tr("CSV Files (*.csv)"));
+                   p_pref->Get("{home}/") + timestamp, tr("CSV Files (*.csv)"));
 
     if (name.isEmpty()) {
         ui->exportButton->setEnabled(false);
