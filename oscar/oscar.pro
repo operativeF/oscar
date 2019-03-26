@@ -87,8 +87,8 @@ QMAKE_EXTRA_TARGETS += gitinfotarget
 }
 
 QMAKE_TARGET_PRODUCT = OSCAR
-QMAKE_TARGET_COMPANY = Nightowl Software
-QMAKE_TARGET_COPYRIGHT = Copyright (c)2011-2018 Mark Watkins & (c) 2019 Nightowl Software
+QMAKE_TARGET_COMPANY = The OSCAR Team
+QMAKE_TARGET_COPYRIGHT = © 2019 The OSCAR Team
 QMAKE_TARGET_DESCRIPTION = "OpenSource CPAP Analysis Reporter"
 VERSION = 1.0.0
 RC_ICONS = ./icons/logo.ico
@@ -96,7 +96,7 @@ RC_ICONS = ./icons/logo.ico
 macx {
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
   LIBS             += -lz
-  ICON              = icons/iconfile.icns
+  ICON              = icons/OSCAR.icns
 } else:haiku {
     LIBS            += -lz -lGLU
     DEFINES         += _TTY_POSIX_
