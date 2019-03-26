@@ -34,11 +34,11 @@ void Welcome::refreshPage()
 {
     bool b;
 
-    if (p_profile != nullptr) {
+//    if (p_profile != nullptr) {
         const auto & mlist = p_profile->GetMachines(MT_CPAP);
         b = mlist.size() > 0;
-    } else 
-        b = false;
+//    } else 
+//        b = false;
 
     bool showCardWarning = !b;
 
@@ -57,9 +57,10 @@ void Welcome::refreshPage()
     ui->dailyButton->setEnabled(b);
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
-    ui->tabWidget->setTabEnabled(2, b);
-    ui->tabWidget->setTabEnabled(3, b);
-    ui->tabWidget->setTabEnabled(4, b);
+    mainwin->EnableTabs(b);
+/** MainWindow::ui->tabWidget->setTabEnabled(2, b);********* need to find some other way
+*** MainWindow::ui->tabWidget->setTabEnabled(3, b);********* to enable these tabs ******
+*** MainWindow::ui->tabWidget->setTabEnabled(4, b);************************************/
 
     ui->cpapInfo->setHtml(GenerateCPAPHTML());
     ui->oxiInfo->setHtml(GenerateOxiHTML());

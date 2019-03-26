@@ -103,6 +103,8 @@ class MainWindow : public QMainWindow
     //! \brief Start the automatic update checker process
     void CheckForUpdates();
 
+    void EnableTabs(bool b);
+
     void CloseProfile();
     bool OpenProfile(QString name, bool skippassword = false);
 

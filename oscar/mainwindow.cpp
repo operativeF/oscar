@@ -290,6 +290,12 @@ void MainWindow::log(QString text)
     logger->appendClean(text);
 }
 
+void MainWindow::EnableTabs(bool b)
+{
+    ui->tabWidget->setTabEnabled(2, b);
+    ui->tabWidget->setTabEnabled(3, b);
+    ui->tabWidget->setTabEnabled(4, b);
+}
 
 void MainWindow::Notify(QString s, QString title, int ms)
 {
