@@ -87,7 +87,8 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "Using System Tray for Menu";
         systray = new QSystemTrayIcon(QIcon(":/icons/logo.png"), this);
         systray->show();
-/****** systraymenu = new QMenu(this);
+        // seems to need the systray menu for notifications to work
+        systraymenu = new QMenu(this);
         systray->setContextMenu(systraymenu);
         QAction *a = systraymenu->addAction(STR_TR_OSCAR + " v" + VersionString);
         a->setEnabled(false);
@@ -96,8 +97,8 @@ MainWindow::MainWindow(QWidget *parent) :
 //        systraymenu->addAction(tr("Check for &Updates"), this, SLOT(on_actionCheck_for_Updates_triggered()));
         systraymenu->addSeparator();
         systraymenu->addAction(tr("E&xit"), this, SLOT(close()));
-*******/
-        systraymenu = nullptr;
+        
+//      systraymenu = nullptr;
     } else { // if not available, the messages will popup in the taskbar
         qDebug() << "No System Tray menues";
         systray = nullptr;
