@@ -1208,7 +1208,8 @@ QString Daily::getStatisticsInfo(Day * day)
 
     if (GraphView->isEmpty() && ((ccnt>0) || (cpap && day->summaryOnly()))) {
         html+="<tr><td colspan=5>&nbsp;</td></tr>\n";
-        html+=QString("<tr><td colspan=5 align=center><i>%1</i></td></tr>").arg("<b>"+STR_MessageBox_PleaseNote+"</b> "+ tr("This day just contains summary data, only limited information is available."));
+        html+=QString("<tr><td colspan=5 align=center><i>%1</i></td></tr>").arg("<b>"+STR_MessageBox_PleaseNote+"</b> "+ 
+                    tr("This day just contains summary data, only limited information is available."));
     } else if (cpap) {
         html+="<tr><td colspan=5>&nbsp;</td></tr>";
 
@@ -1218,7 +1219,8 @@ QString Daily::getStatisticsInfo(Day * day)
             int m = ttia / 60 % 60;
             int s = ttia % 60;
             if (ttia > 0) {
-                html+="<tr><td colspan=3 align='left' bgcolor='white'><b title="+tr("Total time in apnea")+">"+tr("TTIA")+QString("</b></td><td colspan=2 bgcolor='white'>%1</td></tr>").arg(QString().sprintf("%02i:%02i:%02i",h,m,s));
+                html+="<tr><td colspan=3 align='left' bgcolor='white'><b>"+tr("Total time in apnea") +
+                       QString("</b></td><td colspan=2 bgcolor='white'>%1</td></tr>").arg(QString().sprintf("%02i:%02i:%02i",h,m,s));
             }
 
         }
