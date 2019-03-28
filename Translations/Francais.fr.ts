@@ -5,27 +5,27 @@
     <name>AboutDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Boite de dialogue</translation>
+        <translation>Boite de dialogue</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Au sujet</translation>
+        <translation>&amp;Au sujet</translation>
     </message>
     <message>
         <source>Release Notes</source>
-        <translation type="unfinished">Note de publication</translation>
+        <translation>Note de publication</translation>
     </message>
     <message>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Remerciements</translation>
     </message>
     <message>
         <source>GPL License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence GPL</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <source>Build Date: %1</source>
@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Show data folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche le répertoire des données</translation>
     </message>
     <message>
         <source>About SleepyHead</source>
@@ -45,46 +45,50 @@
     </message>
     <message>
         <source>About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos d&apos;OSCAR</translation>
     </message>
     <message>
         <source>Sorry, could not locate About file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, je ne trouve pas l&apos;apropos.</translation>
     </message>
     <message>
         <source>Sorry, could not locate Credits file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, je ne trouve pas les remerciements.</translation>
     </message>
     <message>
         <source>Sorry, could not locate changelog.</source>
-        <translation type="unfinished">Désolé, je ne trouve pas le journal des changements.</translation>
+        <translation type="obsolete">Désolé, je ne trouve pas le journal des changements.</translation>
     </message>
     <message>
         <source>OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR v%1</translation>
     </message>
     <message>
         <source>Important:</source>
-        <translation type="unfinished">Important:</translation>
+        <translation>Important:</translation>
     </message>
     <message>
         <source>As this is a pre-release version, it is recommended that you &lt;b&gt;back up your data folder manually&lt;/b&gt; before proceding, because attempting to roll back later may break things.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comme c&apos;est une préversion il est recommandé de &lt;b&gt;sauvegarder vos données a la main&lt;b&gt; avant de continuer. Car tenter un retour arrière plus tard pourrais endomager des données.</translation>
     </message>
     <message>
         <source>To see if the license text is available in your language, see %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour voir si le texte de la license est disponible dans votre langue, voyez %1.</translation>
+    </message>
+    <message>
+        <source>Sorry, could not locate Release Notes.</source>
+        <translation>Désolé, je ne trouve pas le journal des changements.</translation>
     </message>
 </context>
 <context>
     <name>CMS50F37Loader</name>
     <message>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers d&apos;Oxymétrie introuvables</translation>
     </message>
     <message>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir les fichiers d&apos;Oxymétrie.</translation>
     </message>
 </context>
 <context>
@@ -99,11 +103,11 @@
     </message>
     <message>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers d&apos;Oxymétrie introuvables:</translation>
     </message>
     <message>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir les fichiers d&apos;Oxymétrie:</translation>
     </message>
 </context>
 <context>
@@ -178,11 +182,11 @@
     </message>
     <message>
         <source>Show all events</source>
-        <translation>Afficher les évènements</translation>
+        <translation type="vanished">Afficher les évènements</translation>
     </message>
     <message>
         <source>Show all graphs</source>
-        <translation>Afficher les Graphiques</translation>
+        <translation type="vanished">Afficher les Graphiques</translation>
     </message>
     <message>
         <source>Machine Settings Unavailable</source>
@@ -394,11 +398,11 @@
     </message>
     <message>
         <source>Hide all graphs</source>
-        <translation>Cacher les Graphiques</translation>
+        <translation type="vanished">Cacher les Graphiques</translation>
     </message>
     <message>
         <source>Hide all events</source>
-        <translation>Cacher les évènements</translation>
+        <translation type="vanished">Cacher les évènements</translation>
     </message>
     <message>
         <source>Impossibly short session</source>
@@ -450,91 +454,91 @@
     </message>
     <message>
         <source>Oximetry Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessions d&apos;Oxymétrie</translation>
     </message>
     <message>
         <source>&lt;b&gt;Please Note:&lt;/b&gt; All settings shown below are based on assumptions that nothing&apos;s changed since previous days.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;veuillez noter:&lt;b&gt;les réglages affiché ci-dessous sont basé sur la supposition que rien n&apos;a changé depuis les jour précécents.</translation>
     </message>
     <message>
         <source>Model %1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Modele %1 - %2</translation>
     </message>
     <message>
         <source>(Mode/Pressure settings are guessed on this day.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(les réglages de mode et de pression sont devinés pour ce jour)</translation>
     </message>
     <message>
         <source>This day just contains summary data, only limited information is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jour avec informations limité, seulement le résumé.</translation>
     </message>
     <message>
         <source>I&apos;m feeling ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Je me sens...</translation>
     </message>
     <message>
         <source>Show/hide available graphs.</source>
-        <translation type="unfinished"></translation>
+        <translation>affiche ou cache les graphiques.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Détails</translation>
+        <translation>Détails</translation>
     </message>
     <message>
         <source>Time at Pressure</source>
-        <translation type="unfinished">Durée à cette pression</translation>
+        <translation>Durée à cette pression</translation>
     </message>
     <message>
         <source>Click to %1 this session.</source>
-        <translation type="unfinished">Cliquez pour %1 cette session</translation>
+        <translation>Cliquez pour %1 cette session</translation>
     </message>
     <message>
         <source>disable</source>
-        <translation type="unfinished">désactivé</translation>
+        <translation>désactivé</translation>
     </message>
     <message>
         <source>enable</source>
-        <translation type="unfinished">activé</translation>
+        <translation>activé</translation>
     </message>
     <message>
         <source>%1 Session #%2</source>
-        <translation type="unfinished">%1 Session #%2</translation>
+        <translation>%1 Session #%2</translation>
     </message>
     <message>
         <source>%1h %2m %3s</source>
-        <translation type="unfinished"></translation>
+        <translation>%1h %2m %3s</translation>
     </message>
     <message>
         <source>One or more waveform record(s) for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un ou plusieurs enregistrement de cette session a des données corompues. Certains points des graphiques peuvent ne pas coincider correctement.</translation>
     </message>
     <message>
         <source>PAP Mode: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode PAP :%1</translation>
     </message>
     <message>
         <source>TTIA</source>
-        <translation type="unfinished"></translation>
+        <translation>TTIA</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Début</translation>
+        <translation>Début</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished">Fin</translation>
+        <translation>Fin</translation>
     </message>
     <message>
         <source>Unable to display Pie Chart on this system</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;afficher des graphiques sur ce système.</translation>
     </message>
     <message>
         <source>Sorry, this machine only provides compliance data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé votre machine ne fournit que des donées de conformité.</translation>
     </message>
     <message>
         <source>Oscar is bored with this days lack of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>absence de donnée ce jour.</translation>
     </message>
 </context>
 <context>
@@ -701,11 +705,11 @@
     </message>
     <message>
         <source>%1% </source>
-        <translation type="unfinished">%1: {1%?}</translation>
+        <translation>%1% </translation>
     </message>
     <message>
         <source>OSCAR_</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR_</translation>
     </message>
 </context>
 <context>
@@ -727,7 +731,7 @@
     <name>Help</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>...</source>
@@ -735,70 +739,70 @@
     </message>
     <message>
         <source>Search Topic:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sujet à rechercher:</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenus</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexe</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Hide this message</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher ce message</translation>
     </message>
     <message>
         <source>Help Files are not yet available for %1 and will display in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide non disponible en %1 et sera affichée en %2.</translation>
     </message>
     <message>
         <source>HelpEngine did not set up correctly</source>
-        <translation type="unfinished"></translation>
+        <translation>Problème à l&apos;ouverture du système d&apos;aide.</translation>
     </message>
     <message>
         <source>HelpEngine could not register documentation correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Problème à l&apos;enregistrement du système d&apos;aide.</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>%1 result(s) for &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 resultat(s) pour &quot;%2&quot;</translation>
     </message>
     <message>
         <source>clear</source>
-        <translation type="unfinished"></translation>
+        <translation>effacer</translation>
     </message>
     <message>
         <source>Help files do not appear to be present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Problème à l&apos;ouverture du fichier d&apos;aide.</translation>
     </message>
     <message>
         <source>No documentation available</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune documentation disponible</translation>
     </message>
     <message>
         <source>Please wait a bit.. Indexing still in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Patientez, indexation en cours...</translation>
     </message>
 </context>
 <context>
     <name>MD300W1Loader</name>
     <message>
         <source>Could not find the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers d&apos;Oxymétrie introuvables</translation>
     </message>
     <message>
         <source>Could not open the oximeter file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir les fichiers d&apos;Oxymétrie.</translation>
     </message>
 </context>
 <context>
@@ -901,7 +905,7 @@
     </message>
     <message>
         <source>There was a problem opening Somnopose Data File: </source>
-        <translation>Problème à l&apos;ouverture du fichier Somnopose :</translation>
+        <translation>Problème à l&apos;ouverture de fichiers Somnopose suivant :</translation>
     </message>
     <message>
         <source>&amp;About SleepyHead</source>
@@ -1725,23 +1729,23 @@
     </message>
     <message>
         <source>Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Profils</translation>
     </message>
     <message>
         <source>Purge Oximetry Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Purger les données de l&apos;Oxymétrie</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>Loading profile &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement du profil &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Processing import list...</source>
-        <translation type="unfinished"></translation>
+        <translation>Traitement de la liste d&apos;import...</translation>
     </message>
     <message>
         <source>&amp;copy;2011-2018</source>
@@ -1749,101 +1753,103 @@
     </message>
     <message>
         <source>Please open a profile first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionez le profil utilisateur.</translation>
     </message>
     <message>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>&amp;About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;A propos d&apos;OSCAR</translation>
     </message>
     <message>
         <source>Report an Issue</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapporter un problème.</translation>
     </message>
     <message>
         <source>Welcome to OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenue dans OSCAR</translation>
     </message>
     <message>
         <source>About OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos d&apos;OSCAR</translation>
     </message>
     <message>
         <source>OSCAR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR a été conçus par un développeur ayant l&apos;expérience des troubles du sommeil et adapté selon les retours de nombreux testeurs également souffrant des mêmes troubles.</translation>
     </message>
     <message>
         <source>Please report any bugs you find to the OSCAR developer&apos;s group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de rapporter les erreurs sur la page web d&apos;OSCAR</translation>
     </message>
     <message>
         <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce logiciel est publié sous licence &lt;a href=&quot;qr:/COPYING&quot;&gt;GNU License Publique v3&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;auteur ne sera PAS tenu responsable si qui que ce soit se blesse ou blesse un tiers en utilisant correctement ou non ce logiciel.</translation>
     </message>
     <message>
         <source>Updates are not yet implemented</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The User&apos;s Guide is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>The FAQ is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>If you can read this, the restart command didn&apos;t work. You will have to do it yourself manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez redémmarer manuellement.</translation>
     </message>
     <message>
         <source>Are you sure you want to rebuild all CPAP data for the following machine:
 
 </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Etes-vous sûr de vouloir reconstruire toutes les données de PPC pour la machine suivante;
+
+</translation>
     </message>
     <message>
         <source>For some reason, OSCAR does not have any backups for the following machine:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour une raison quelconque, OSCAR n&apos;a pas sauvegardes internes pour la machine suivante:</translation>
     </message>
     <message>
         <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; OSCAR&apos;s machine database for the following machine:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous êtes sur le point de &lt;font size=+2&gt;détruire&lt;/font&gt; les données d&apos;OSCAR pour la machines suivante:  </translation>
     </message>
     <message>
         <source>A file permission error casued the purge process to fail; you will have to delete the following folder manually:</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur d&apos;autorisation de fichier à planté le processus de purge, vous devrez supprimer manuellement le dossier suivant :</translation>
     </message>
     <message>
         <source>No help is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune aide disponible</translation>
     </message>
     <message>
         <source>The Glossary is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>Donations are not implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>Export review is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>Reporting issues is not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide is not yet available</source>
+        <translation>Désolé, fonction non encore implémentée.</translation>
+    </message>
+    <message>
+        <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
+        <translation>S&apos;il vous plaît notez que cela pourrait entraîner la perte de données graphiques si les sauvegardes internes de OSCAR ont été désactivées.</translation>
     </message>
 </context>
 <context>
@@ -2137,11 +2143,11 @@
     </message>
     <message>
         <source>It&apos;s totally ok to fib or skip this, but your rough age is needed to enhance accuracy of certain calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre age aproximatif n&apos;est pas obligatoire mais améliorera la précision des calculs.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Biological (birth) gender is sometimes needed to enhance the accuracy of a few calculations, feel free to leave this blank and skip any of them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Votre sexe n&apos;est pas obligatoire mais améliorera la précision des calculs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>SleepyHead is copyright &amp;copy;2011-2018 Mark Watkins</source>
@@ -2149,27 +2155,27 @@
     </message>
     <message>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Welcome to Open Source CPAP Reviewer</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR est sous license &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Licence Publique V3&lt;/a&gt; et vient sans aucune garantie et sans garantie de correspondre a un usage quelconque.</translation>
     </message>
     <message>
         <source>OSCAR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR est un outil de visualisation de donnée et n&apos;est pas un substitue à la compétence de votre médecin.</translation>
     </message>
     <message>
         <source>The authors will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;auteur n&apos;est &lt;u&gt; en aucun cas &lt;/u&gt; responsable de l&apos; utilisation faites de ce logiciel.</translation>
     </message>
     <message>
         <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR copyright &amp;copy; 2011-2014 par Mark Watkins et partiellement &amp;copy; 2019 Nightowl Software</translation>
+    </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <translation>Bienvenue a O.S.C.A.R. (Open Source CPAP Analysis Reporter)</translation>
     </message>
 </context>
 <context>
@@ -2334,7 +2340,7 @@ Corporel</translation>
     </message>
     <message>
         <source>It also can read from ChoiceMMed MD300W1 oximeter .dat files.</source>
-        <translation type="unfinished">OSCAR lit aussi les fichiers .dat du ChoiceMMed MD300W1.</translation>
+        <translation>OSCAR lit aussi les fichiers .dat du ChoiceMMed MD300W1.</translation>
     </message>
     <message>
         <source>Please wait until oximeter upload process completes. Do not unplug your oximeter.</source>
@@ -2722,63 +2728,63 @@ Corporel</translation>
     </message>
     <message>
         <source>Oximetry Files (*.spo *.spor *.spo2 *.SpO2 *.dat)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers d&apos;Oxymetrie (*.spo *.spor *.spo2 *.SpO2 *.dat)</translation>
     </message>
     <message>
         <source>No Oximetry module could parse the given file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de traiter le fichier:</translation>
     </message>
     <message>
         <source>Live Oximetry Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode Oximétrie temps réel</translation>
     </message>
     <message>
         <source>Live Oximetry Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Oximétrie temps-réel stoppé</translation>
     </message>
     <message>
         <source>Live Oximetry import has been stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Import temps-réel de l&apos;Oximétrie stoppé</translation>
     </message>
     <message>
         <source>Oximeter Session %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessions d&apos;Oxymétrie %1</translation>
     </message>
     <message>
         <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous voulez synchroniser les donnees de de PPC et d&apos;oxymétrie surtout importez celles de PPC avant de procéder! </translation>
     </message>
     <message>
         <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until OSCAR prompts you to.</source>
-        <translation type="unfinished"></translation>
+        <translation>utilisateur de CMS50E/F, veuillez attendre que OSCAR vous le demande avant de lancer l&apos;import. </translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, OSCAR will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si coché, OSCAR synchronisera automtiqueement l&apos;horloge interne votre CMS50 avec l&apos;ordinateur .&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Option pour effacer la session importée de votre oxymètre en fin d&apos;import. &lt;/p&gt;&lt;p&gt;Attention, si quelquechose plante avant la sauvegarde de la session par OSCAR , tout est perdu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Please choose which one you want to import into OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de séléctionner celle que vous voulez importer</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR nécéssite un horaire de départ pour savoir où sauver sa session d&apos;oxymétrie.&lt;/p&gt;&lt;p&gt;Choisissez une des  options suivantes :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR vous permet de suivre la saturation en oxygène pendant l&apos;utilisation d&apos;une machine a pression continue, ce qui donne une visibilité sur l&apos;efficacité de ce traitement. Cela fonctionne aussi avec votre oxymètre seul et vous permet de stocker,suivre et revoir les données.</translation>
     </message>
     <message>
         <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afin qu&apos; OSCAR puisse utiliser votre oxymètre, veuillez auparavant installer les logiciels gestionnaire de votre matériel (ex USB vers série), pour plus d&apos;information a ce sujet, %1 cliquez ici %2.</translation>
+    </message>
+    <message>
+        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probably not&lt;/span&gt; possible yet)</source>
+        <translation>OSCAR est compatible avec les oxymètres Contec CMS50D+,CMS50E/F et CMS50I.&lt;br/&gt;(Note: l&apos;import en bluetooth n&apos;est &lt;span style=&quot; font-wright:600;&quot;&gt;problablement pas &lt;/span&gt; encore possible) </translation>
     </message>
 </context>
 <context>
@@ -3872,75 +3878,79 @@ Etes-vous sur de vouloir le faire ?</translation>
     </message>
     <message>
         <source>Auto-Launch CPAP Importer after opening profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancement automatique de l&apos;import après ouverture du profil utilisateur.</translation>
     </message>
     <message>
         <source>Automatically load last used profile on start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouverture automatique du dernier profil utilisé au lancement.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;Due to summary design limitations, ResMed machines do not support changing these settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;Les machines ResMEd ne prennent pas en compte ces réglages du fait de leur conception&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Oximetry Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Réglages de l&apos;oxymétrie</translation>
     </message>
     <message>
         <source>On Opening</source>
-        <translation type="unfinished"></translation>
+        <translation>A l&apos;ouverture</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished">Profil</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>Welcome</source>
-        <translation type="unfinished">Bienvenue</translation>
+        <translation>Bienvenue</translation>
     </message>
     <message>
         <source>Daily</source>
-        <translation type="unfinished">Quotidien</translation>
+        <translation>Quotidien</translation>
     </message>
     <message>
         <source>Statistics</source>
-        <translation type="unfinished">Statistiques</translation>
+        <translation>Statistiques</translation>
     </message>
     <message>
         <source>Switch Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Echanger les onglets</translation>
     </message>
     <message>
         <source>No change</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas dechangement</translation>
     </message>
     <message>
         <source>After Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Après import</translation>
     </message>
     <message>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <source>Data Processing Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Traitement des données nécéssaire</translation>
     </message>
     <message>
         <source>A data re/decompression proceedure is required to apply these changes. This operation may take a couple of minutes to complete.
 
 Are you sure you want to make these changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Il faudra re/decompresser les données ce qui prendra quelques minutes
+
+Etes-vous sur de vouloir le faire ?</translation>
     </message>
     <message>
         <source>Graphics Engine (Requires Restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteur Graphique (névessite un redémarrage)</translation>
     </message>
     <message>
         <source>One or more of the changes you have made will require this application to be restarted, in order for these changes to come into effect.
 
 Would you like do this now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces modfications vont nécésiter un redémarrage de l&apos;application pour etre effectives
+
+Voulez-vous le faire maintenant ?</translation>
     </message>
     <message>
         <source>Compress ResMed (EDF) backups to save disk space.
@@ -3949,21 +3959,23 @@ which is common on Mac &amp; Linux platforms..
 
 OSCAR can import from this compressed backup directory natively.. 
 To use it with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresse la sauvegarde des machines ResMed (fichiers EDF en .gz).
+Format courant sous Linux et Mac.</translation>
     </message>
     <message>
         <source>The following options affect the amount of disk space OSCAR uses, and have an effect on how long import takes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Options affectant l&apos;espace disque utilisé et la durée de l&apos;import.</translation>
     </message>
     <message>
         <source>This makes OSCAR&apos;s data take around half as much space.
 But it makes import and day changing take longer.. 
 If you&apos;ve got a new computer with a small solid state disk, this is a good option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réduit de moitié l&apos;occupation des donnée.
+Mais prendra plus de temps pour l&apos;import et les modifications.</translation>
     </message>
     <message>
         <source>Compress Session Data (makes OSCAR data smaller, but day changing slower.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresser les donées de Session</translation>
     </message>
     <message>
         <source>This maintains a backup of SD-card data for ResMed machines, 
@@ -3973,15 +3985,21 @@ and graph data older than 30 days..
 
 OSCAR can keep a copy of this data if you ever need to reinstall. 
 (Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ceci garde un copie de la carte SD des machines ResMes, 
+
+Les machines ResMed effacent les données précises après 7jours,
+et les graphique de plus de 30 jours..
+
+OSCAR peut garder ces donnée si vous devez réinstaller.
+(Hautement recommandé, a moins que vous n&apos;ayez pas de place disque ou que les graph ne vous intéressent pas) </translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting OSCAR a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn&apos;t affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR prechargera les informations de synthese, ce qui ameliore la vue synthetique et les autres calculs. &lt;/p&gt;&lt;p&gt;Si vous avez beaucupi de donné cela ralentira le lancement,mais si vous aimez voir &lt;span style=&quot; font-style:italic;&quot;&gt;tous&lt;/span&gt; en résumé, il faut de toutes façons tou charger. &lt;/p&gt;&lt;p&gt;N&apos;affecte pas les données d&apos;évènement qui sont chargé à la demande&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>This experimental option attempts to use OSCAR&apos;s event flagging system to improve machine detected event positioning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette option expérimentale tente d&apos;utiliser le système de repérage d&apos;OSCAR pour améliorer la détection d&apos;évènement de position.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3997,41 +4015,54 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Synchonisaiton de l&apos;Oxymétrie et des données de PPC&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Les données CMS50 importés de SpO2Review (from .spoR files) ou de l&apos;import en série n&apos;ont&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt; pas&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; de marqueur temporel pour synchroniser.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Le mode visualisaton direct (avec un cable série) est une méthode pour synchroniser les oxymètres CMS50, mais ne prend pas en compte le décalage d&apos;horloge de la PPC.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Si vous démarrez l&apos;enregistrement de votre oxymètre &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactement &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;en même temps que votre machine a PPC, vous pouvez synchroniser l&apos;ensemble &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Le processus d&apos;import série prend le temps de départ de la session de PPC des dernières nuits. (rappelez-vous d&apos;importer d&apos;abord les données de PPC!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+	</translation>
     </message>
     <message>
         <source>Show Remove Card reminder notification on OSCAR shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Rappel de retrait de la carte SD a l&apos;arret d&apos;OSCAR</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Which tab to open on loading a profile. (Note: It will default to Profile if OSCAR is set to not open a profile on startup)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;choix de l&apos;onglet a ouvrir au chargement d&apos;un profil. (Note:L&apos;onglet Profilesera affiché automatiquement si OSCAR est reglé pour ne pas ouvrir de profil au lancement)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Try changing this from the default setting (Desktop OpenGL) if you experience rendering problems with OSCAR&apos;s graphs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Essayez de changer le réglage par défaut (Desktop OpenGL) si vous rencontrez des problèmes d&apos;affichage des graphiques.</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Please Note:&lt;/b&gt; OSCAR&apos;s advanced session splitting capabilities are not possible with &lt;b&gt;ResMed&lt;/b&gt; machines due to a limitation in the way their settings and summary data is stored, and therefore they have been disabled for this profile.&lt;/p&gt;&lt;p&gt;On ResMed machines, days will &lt;b&gt;split at noon&lt;/b&gt; like in ResMed&apos;s commercial software.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Le découpage de session n&apos;est pas possible avec les machines &lt;b&gt;ResMed&lt;/b&gt; du fait de la façons dont elles sauvegardent les données et sera de ce fait désactivé.&lt;/p&gt;</translation>
     </message>
     <message>
         <source> If you ever need to reimport this data again (whether in OSCAR or ResScan) this data won&apos;t come back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous avez besoin un jour de réimporter ces données (dans OSCAR ou ResScan) ces données aurons disparues.</translation>
     </message>
     <message>
         <source> If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous avez besoin de consever de l&apos;espace disque, n&apos;oubliez pas de faire des sauvegardes manuels.</translation>
     </message>
     <message>
         <source> Are you sure you want to disable these backups?</source>
-        <translation type="unfinished"></translation>
+        <translation>Etes-vous sur de vouloire désactiver ces sauvegardes ?</translation>
     </message>
     <message>
         <source>Switching off backups is not a good idea, because OSCAR needs these to rebuild the database if errors are found.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver les sauvegardes automatiques n&apos;est pas une bonne idée, car OSCAR a besoin de reconstruire sa base de donnée si des erreurs apparaissent.</translation>
     </message>
 </context>
 <context>
@@ -4174,34 +4205,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Choose a different OSCAR data folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir un répertoire différent pour les données.</translation>
     </message>
     <message>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>Click here if you didn&apos;t want to start OSCAR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour ne pas lancer OSCAR.</translation>
     </message>
     <message>
         <source>The current location of OSCAR data store.</source>
-        <translation type="unfinished"></translation>
+        <translation>Localisation actuel des données d&apos;OSCAR.</translation>
     </message>
 </context>
 <context>
     <name>ProfileSelector</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>SleepyHead</source>
@@ -4209,194 +4240,194 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished">Version</translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>&amp;Open Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ouverture du profil</translation>
     </message>
     <message>
         <source>&amp;Edit Profile</source>
-        <translation type="unfinished">&amp;Modifier le profil utilisateur</translation>
+        <translation>&amp;Modifier le profil</translation>
     </message>
     <message>
         <source>&amp;New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nouveau profil utilisateur</translation>
     </message>
     <message>
         <source>Profile: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil: aucun</translation>
     </message>
     <message>
         <source>Please select or create a profile...</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionez ou créez le profil utilisateur.</translation>
     </message>
     <message>
         <source>Destroy Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le profil</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished">Profil</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>Ventilator Brand</source>
-        <translation type="unfinished"></translation>
+        <translation>Marque du ventilateur</translation>
     </message>
     <message>
         <source>Ventilator Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Modele du ventilateur</translation>
     </message>
     <message>
         <source>Other Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Autres données</translation>
     </message>
     <message>
         <source>Last Imported</source>
-        <translation type="unfinished"></translation>
+        <translation>Dernier import</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>%1, %2</source>
-        <translation type="unfinished">%1: %2  {1,?}</translation>
+        <translation>%1, %2</translation>
     </message>
     <message>
         <source>Enter Password for %1</source>
-        <translation type="unfinished">Mot de passe pour %1</translation>
+        <translation>Mot de passe pour %1</translation>
     </message>
     <message>
         <source>You entered an incorrect password</source>
-        <translation type="unfinished">Mot de passe incorrect</translation>
+        <translation>Mot de passe incorrect</translation>
     </message>
     <message>
         <source>Forgot your password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe oublié ?</translation>
     </message>
     <message>
         <source>Ask on the forums how to reset it, it&apos;s actually pretty easy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Demandez sur les forums comment le réinitialiser.C&apos;est facile.</translation>
     </message>
     <message>
         <source>Select a profile first</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionez le profil utilisateur</translation>
     </message>
     <message>
         <source>If you&apos;re trying to delete because you forgot the password, you need to either reset it or delete the profile folder manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sous vous tentez d&apos;effacer car vous avez oublié le mot de passe, vous dvez l&apos;effacer à la main.</translation>
     </message>
     <message>
         <source>You are about to destroy profile &apos;&lt;b&gt;%1&lt;/b&gt;&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous allez detruire le profil &apos;&lt;b&gt;%1&lt;b&gt;&apos;.</translation>
     </message>
     <message>
         <source>Think carefully, as this will irretrievably delete the profile along with all &lt;b&gt;backup data&lt;/b&gt; stored under&lt;br/&gt;%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention cela va définitvement effacer le profil et toutes les &lt;b&gt;données de sauvegarde&lt;b&gt; présentes dans &lt;br/&gt;%2.</translation>
     </message>
     <message>
         <source>Enter the word &lt;b&gt;DELETE&lt;/b&gt; below (exactly as shown) to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le mot DELETE ci-dessous pour confirmer.</translation>
     </message>
     <message>
         <source>DELETE</source>
-        <translation type="unfinished"></translation>
+        <translation>DELETE</translation>
     </message>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished">Désolé</translation>
+        <translation>Désolé</translation>
     </message>
     <message>
         <source>You need to enter DELETE in capital letters.</source>
-        <translation type="unfinished">c&apos;est DELETE en majuscule.</translation>
+        <translation>c&apos;est DELETE en majuscule.</translation>
     </message>
     <message>
         <source>There was an error deleting the profile directory, you need to manually remove it.</source>
-        <translation type="unfinished">Erreur lors de l&apos;effacement du répertoire du profil; Vous devez l&apos;effacer à la main.</translation>
+        <translation>Erreur lors de l&apos;effacement du répertoire du profil; Vous devez l&apos;effacer à la main.</translation>
     </message>
     <message>
         <source>Profile &apos;%1&apos; was succesfully deleted</source>
-        <translation type="unfinished">Profil &apos;%1&apos; effacé avec succès</translation>
+        <translation>Profil &apos;%1&apos; effacé avec succès</translation>
     </message>
     <message>
         <source>Hide disk usage information</source>
-        <translation type="unfinished"></translation>
+        <translation>Cache les informations d&apos;utilisation disque</translation>
     </message>
     <message>
         <source>Show disk usage information</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche les informations d&apos;utilisation disque</translation>
     </message>
     <message>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Nom: %1, %2</translation>
+        <translation>Nom: %1, %2</translation>
     </message>
     <message>
         <source>Phone: %1</source>
-        <translation type="unfinished">Téléphone: %1</translation>
+        <translation>Téléphone: %1</translation>
     </message>
     <message>
         <source>Email: &lt;a href=&apos;mailto:%1&apos;&gt;%1&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Email: &lt;a href=&apos;mailto:%1&apos;&gt;%1&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresse:</translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>No profile information given</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;information de profil</translation>
     </message>
     <message>
         <source>Profile: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil: %1</translation>
     </message>
     <message>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Octets</translation>
     </message>
     <message>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>Ko</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>Mo</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
     <message>
         <source>TB</source>
-        <translation type="unfinished">TB</translation>
+        <translation>To</translation>
     </message>
     <message>
         <source>PB</source>
-        <translation type="unfinished">PB</translation>
+        <translation>Po</translation>
     </message>
     <message>
         <source>Summaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Résumés:</translation>
     </message>
     <message>
         <source>Events:</source>
-        <translation type="unfinished"></translation>
+        <translation>Evènements:</translation>
     </message>
     <message>
         <source>Backups:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegardes:</translation>
     </message>
 </context>
 <context>
     <name>ProgressDialog</name>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -7264,435 +7295,445 @@ Heures: %1</translation>
     </message>
     <message>
         <source>h</source>
-        <translation type="unfinished"></translation>
+        <translation>h</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>ÇSR</source>
-        <translation type="unfinished"></translation>
+        <translation>CSR</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Physical Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille physique</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished">Notes</translation>
+        <translation>Notes</translation>
     </message>
     <message>
         <source>Bookmark Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>Body Mass Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indice
+de Masse
+Corporel</translation>
     </message>
     <message>
         <source>How you feel (0 = like crap, 10 = unstoppable)</source>
-        <translation type="unfinished"></translation>
+        <translation>Comment vous sentez vous (0=un vrai débris; 10=instoppable)</translation>
     </message>
     <message>
         <source>Bookmark Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Début des Favoris</translation>
     </message>
     <message>
         <source>Bookmark End</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin des Favoris</translation>
     </message>
     <message>
         <source>Last Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Dernière mises à jours</translation>
     </message>
     <message>
         <source>Journal Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal</translation>
     </message>
     <message>
         <source>Journal</source>
-        <translation type="unfinished">Journal</translation>
+        <translation>Journal</translation>
     </message>
     <message>
         <source>1=Awake 2=REM 3=Light Sleep 4=Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>1=Eveil 2=Endormissement 3=Someil léger 4=Someil lourd</translation>
     </message>
     <message>
         <source>Brain Wave</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondes cérébrales</translation>
     </message>
     <message>
         <source>BrainWave</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondes cérébrales</translation>
     </message>
     <message>
         <source>Awakenings</source>
-        <translation type="unfinished"></translation>
+        <translation>Réveil en cours</translation>
     </message>
     <message>
         <source>Number of Awakenings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre d&apos;éveils</translation>
     </message>
     <message>
         <source>Morning Feel</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensation du matin</translation>
     </message>
     <message>
         <source>How you felt in the morning</source>
-        <translation type="unfinished"></translation>
+        <translation>Comment vous vous sentiez le matin</translation>
     </message>
     <message>
         <source>Time Awake</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée d&apos;éveil</translation>
     </message>
     <message>
         <source>Time spent awake</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée passé en eveil</translation>
     </message>
     <message>
         <source>Time In REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en Endormissement</translation>
     </message>
     <message>
         <source>Time spent in REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée passé en endormissement</translation>
     </message>
     <message>
         <source>Time in REM Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en Endormissement</translation>
     </message>
     <message>
         <source>Time In Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Duré en sommeil léger</translation>
     </message>
     <message>
         <source>Time spent in light sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée passé en sommeil léger</translation>
     </message>
     <message>
         <source>Time in Light Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Duré en sommeil léger</translation>
     </message>
     <message>
         <source>Time In Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en sommeil profond</translation>
     </message>
     <message>
         <source>Time spent in deep sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée passée en sommeil profond</translation>
     </message>
     <message>
         <source>Time in Deep Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en sommeil profond</translation>
     </message>
     <message>
         <source>Time to Sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée d&apos;endormissement</translation>
     </message>
     <message>
         <source>Time taken to get to sleep</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée d&apos;endormissement</translation>
     </message>
     <message>
         <source>Zeo ZQ</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeo ZQ</translation>
     </message>
     <message>
         <source>Zeo sleep quality measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>mesure de qualité d&apos;endormissement ZOE</translation>
     </message>
     <message>
         <source>ZEO ZQ</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeo ZQ</translation>
     </message>
     <message>
         <source>Pop out Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graph de réveil</translation>
     </message>
     <message>
         <source>Popout %1 Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graph de réveil %1</translation>
     </message>
     <message>
         <source> m</source>
-        <translation type="unfinished"></translation>
+        <translation> m</translation>
     </message>
     <message>
         <source> cm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished">Profil</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>Getting Ready...</source>
-        <translation type="unfinished"></translation>
+        <translation>Préparation...</translation>
     </message>
     <message>
         <source>Scanning Files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture des fichiers...</translation>
     </message>
     <message>
         <source>Importing Sessions...</source>
-        <translation type="unfinished"></translation>
+        <translation>Import des sessions...</translation>
     </message>
     <message>
         <source>Finishing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalisation...</translation>
     </message>
     <message>
         <source>Breathing Not Detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de respiration</translation>
     </message>
     <message>
         <source>A period during a session where the machine could not detect flow.</source>
-        <translation type="unfinished"></translation>
+        <translation>Période pendant une sessions sans flux detecté</translation>
     </message>
     <message>
         <source>BND</source>
-        <translation type="unfinished"></translation>
+        <translation>BND</translation>
     </message>
     <message>
         <source>Parsing Identification File</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture du fichier d&apos;idenfication</translation>
     </message>
     <message>
         <source>Locating STR.edf File(s)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Localisation des fichiers STR.edf...</translation>
     </message>
     <message>
         <source>Cataloguing EDF Files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Catalogage des fichiers EDF</translation>
     </message>
     <message>
         <source>Queueing Import Tasks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise en liste de tâche d&apos;import.</translation>
     </message>
     <message>
         <source>Finishing Up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalisation...</translation>
     </message>
     <message>
         <source>Loading %1 data for %2...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des données %1 pour %2...</translation>
     </message>
     <message>
         <source>Scanning Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture des fichiers...</translation>
     </message>
     <message>
         <source>Migrating Summary File Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacement de fichiers récapitulatifs</translation>
     </message>
     <message>
         <source>Loading Summaries.xml.gz</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement de Summaries.xml.gz</translation>
     </message>
     <message>
         <source>Loading Summary Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des données</translation>
     </message>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez patienter...</translation>
     </message>
     <message>
         <source>Loading profile &quot;%1&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement du profil &quot;%1&quot;...</translation>
     </message>
     <message>
         <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>Données d&apos;Oximétrie les plus récentes:&lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
     </message>
     <message>
         <source>No oximetry data has been imported yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de données d&apos;Oximétrie importé pour le moment.</translation>
     </message>
     <message>
         <source>Software Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteur logiciel</translation>
     </message>
     <message>
         <source>ANGLE / OpenGLES</source>
-        <translation type="unfinished"></translation>
+        <translation>ANGLE / OpenGLES</translation>
     </message>
     <message>
         <source>Desktop OpenGL</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop OpenGL</translation>
     </message>
     <message>
         <source>Debugging channel #1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaine de Debug #1</translation>
     </message>
     <message>
         <source>Top secret internal stuff you&apos;re not supposed to see ;)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ca va pas etre possible, c&apos;est une soirée privée.</translation>
     </message>
     <message>
         <source>Test #1</source>
-        <translation type="unfinished"></translation>
+        <translation>Test #1</translation>
     </message>
     <message>
         <source>Debugging channel #2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaine de Debug #2</translation>
     </message>
     <message>
         <source>Test #2</source>
-        <translation type="unfinished"></translation>
+        <translation>Test #2</translation>
     </message>
     <message>
         <source>Peak %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pic %1</translation>
     </message>
     <message>
         <source>I&apos;m very sorry your machine doesn&apos;t record useful data to graph in Daily View :(</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé votre machine n&apos;a pas enregistrée de données utilisables pour la vue quotidienne .</translation>
     </message>
     <message>
         <source>There is no data to graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de donnée pour les graphiques</translation>
     </message>
     <message>
         <source>OSCAR</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR</translation>
     </message>
     <message>
         <source>OSCAR found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR a trouvé un vieux répertoire du journal, mais il semble avoir été rennomé:</translation>
     </message>
     <message>
         <source>OSCAR will not touch this folder, and will create a new one instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR ne vas pas toucher à ce répertoire et va en créer un nouveau.</translation>
     </message>
     <message>
         <source>Please be careful when playing in OSCAR&apos;s profile folders :-P</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci d&apos;etre prudent en jouant avec les répertoires de profiles :-P</translation>
     </message>
     <message>
         <source>For some reason, OSCAR couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR n&apos;a pas trouvé d&apos;eregistrement de journal dans votre profile, mais plusieurs répertoires de jounaux.
+
+</translation>
     </message>
     <message>
         <source>OSCAR picked only the first one of these, and will use it in future:
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR en a séléctionné le premier et continuera de l&apos;utiliser.
+
+</translation>
     </message>
     <message>
         <source>I&apos;m sorry to report that OSCAR can only track hours of use and very basic settings for this machine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désole, OSCAR ne peut suivre que les heures d&apos;utilisation et quelques informations de bases pour cet appareil.</translation>
     </message>
     <message>
         <source>The developers needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les développeur on besoin d&apos;une copie compressé (ZIP) de la carte SD de cet appareil et du rapport en PDF du logiciel Encore pour adapter OSCAR a cet appareil.</translation>
     </message>
     <message>
         <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCT (%1) doit mettre a jour sa base de donnée pour  %2 %3 %4</translation>
     </message>
     <message>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;OSCAR maintien une copie de la carte qu&apos;il utilise dans cette optique&lt;/b&gt;</translation>
     </message>
     <message>
         <source>OSCAR does not yet have any automatic card backups stored for this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR ne fait pas de sauvegarde automatique de la carte SD pour ce matériel.</translation>
     </message>
     <message>
         <source>If you are concerned, click No to exit, and backup your profile manually, before starting OSCAR again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si cela vous pose une souci, cliquez sur Non pour sortir, sauvegardez le profil manuellement avant de relancer OSCAR de nouveau.</translation>
     </message>
     <message>
         <source>Are you ready to upgrade, so you can run the new version of OSCAR?</source>
-        <translation type="unfinished"></translation>
+        <translation>Etes-vous prêt pour upgrader afin d&apos;utiliser la nouvelle version d&apos;OSCAR ?</translation>
     </message>
     <message>
         <source>Sorry, the purge operation failed, which means this version of OSCAR can&apos;t start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé la purge à échoué. Cette version d&apos;OSCAR ne peur démarrer.</translation>
     </message>
     <message>
         <source>Would you like to switch on automatic backups, so next time a new version of OSCAR needs to do so, it can rebuild from these?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez vous passer en sauvegarde automatique, ainsi la prochaine fois qu&apos;une nouvelle version d&apos;OSCAR doit le faire elle pourra s&apos;en servir ?</translation>
     </message>
     <message>
         <source>OSCAR will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation type="unfinished"></translation>
+        <translation>OPSCAR va lancer l&apos;assistant d&apos;import pour réinstaller les données de votre %1.</translation>
     </message>
     <message>
         <source>OSCAR will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR va quitter, ensuite lancez votre gestionnaire de fichier pour faire une copie de votre profile :</translation>
     </message>
     <message>
         <source>Use your file manager to make a copy of your profile directory, then afterwards, restart OSCAR and complete the upgrade process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisez votre gestion de fichier pour faire uen copie de votre répertoire du profil puis relancez OSCAR pour terminer la mise à jour.</translation>
     </message>
     <message>
         <source>A user definable event detected by OSCAR&apos;s flow waveform processor.</source>
-        <translation type="unfinished"></translation>
+        <translation>évènement définissable par l&apos;utilisateur détécté par le moteur d&apos;analyse de flux d&apos;OSCAR.</translation>
     </message>
     <message>
         <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous que OSCAR utilise ce répertoire  pour stocker ses données ?</translation>
     </message>
     <message>
         <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous upradez, pas d&apos;inquiétude vérifiez juste qe cela pointe sur votre ancien répertoire de donnée d&apos;OSCAR.</translation>
     </message>
     <message>
         <source>(If you are unsure, just click yes.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(si vous n&apos;en etes pas sure cliquez oui)</translation>
     </message>
     <message>
         <source>Choose or create new folder for OSCAR data</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez ou créez un nouveau répertoire pour les données de OSCAR</translation>
     </message>
     <message>
         <source>As you did not select a data folder, OSCAR will exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comme vous n&apos;avez pas sélectionné de répertoire OSCAR va quitter.</translation>
     </message>
     <message>
         <source>OSCAR will now start with your old one.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR va démarer avec l&apos;ancien</translation>
     </message>
     <message>
         <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le répertoire n&apos;est pas vide et ne contient pas de données d&apos;OSCAR valide.</translation>
     </message>
     <message>
         <source>The version of OSCAR you just ran is OLDER than the one used to create this data (%1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette version d&apos;OSCAR est antérieure à celle qui a crée ces données (%1).</translation>
     </message>
     <message>
         <source>OSCAR Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Rappel de OSCAR</translation>
     </message>
     <message>
         <source>You can only work with one instance of an individual OSCAR profile at a time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez travailler qu&apos;avec un seul profil OSCAR à la fois.</translation>
     </message>
     <message>
         <source>If you are using cloud storage, make sure OSCAR is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous utilisez un stockage en cloud, assurez-vous que OSCAR est fermé et la synchronisation est terminé sur l&apos;autre ordinateur avant de poursuivre.</translation>
     </message>
     <message>
         <source>OSCAR v%1</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR v%1</translation>
+    </message>
+    <message>
+        <source>You must run the OSCAR Migration Tool</source>
+        <translation>Vous devez utiliser l&apos;outil de migration vers OSCAR</translation>
     </message>
 </context>
 <context>
@@ -7721,7 +7762,7 @@ Heures: %1</translation>
     </message>
     <message>
         <source>%1h %2m</source>
-        <translation type="unfinished">%1: %2m  {1h?}</translation>
+        <translation>%1h %2m</translation>
     </message>
 </context>
 <context>
@@ -7880,159 +7921,151 @@ Heures: %1</translation>
     </message>
     <message>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Nom: %1, %2</translation>
+        <translation>Nom: %1, %2</translation>
     </message>
     <message>
         <source>DOB: %1</source>
-        <translation type="unfinished">Date de Naissane %1</translation>
+        <translation>Date de Naissance %1</translation>
     </message>
     <message>
         <source>Phone: %1</source>
-        <translation type="unfinished">Téléphone: %1</translation>
+        <translation>Téléphone: %1</translation>
     </message>
     <message>
         <source>Email: %1</source>
-        <translation type="unfinished">Email: %1</translation>
+        <translation>Email: %1</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresse:</translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Usage Statistics</source>
-        <translation type="unfinished">Statistiques d&apos;Usage</translation>
-    </message>
-    <message>
-        <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistiques d&apos;Usage</translation>
     </message>
     <message>
         <source>This report was generated by OSCAR v%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OSCAR is free open-source CPAP review software</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Oscar has to data to report :(</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapport généré par OSCAR V%1</translation>
     </message>
     <message>
         <source>Days Used: %1</source>
-        <translation type="unfinished">Jours d&apos;utilisation: %1</translation>
+        <translation>Jours d&apos;utilisation: %1</translation>
     </message>
     <message>
         <source>Low Use Days: %1</source>
-        <translation type="unfinished">Jours de faible usage: %1</translation>
+        <translation>Jours de faible usage: %1</translation>
     </message>
     <message>
         <source>Compliance: %1%</source>
-        <translation type="unfinished">Conformité: %1%</translation>
+        <translation>Conformité: %1%</translation>
     </message>
     <message>
         <source>Days AHI of 5 or greater: %1</source>
-        <translation type="unfinished">Jours avec plus 5 ou plus IHA: %1</translation>
+        <translation>Jours avec plus 5 ou plus IHA: %1</translation>
     </message>
     <message>
         <source>Best AHI</source>
-        <translation type="unfinished">Meilleur IAH</translation>
+        <translation>Meilleur IAH</translation>
     </message>
     <message>
         <source>Date: %1 AHI: %2</source>
-        <translation type="unfinished">Date: %1 IHA: %2</translation>
+        <translation>Date: %1 IHA: %2</translation>
     </message>
     <message>
         <source>Worst AHI</source>
-        <translation type="unfinished">Pire IAH</translation>
+        <translation>Pire IAH</translation>
     </message>
     <message>
         <source>Best Flow Limitation</source>
-        <translation type="unfinished">Meilleur limitation de flux</translation>
+        <translation>Meilleur limitation de flux</translation>
     </message>
     <message>
         <source>Date: %1 FL: %2</source>
-        <translation type="unfinished">Date: %1 FL: %2</translation>
+        <translation>Date: %1 FL: %2</translation>
     </message>
     <message>
         <source>Worst Flow Limtation</source>
-        <translation type="unfinished">Pire limitation de flux</translation>
+        <translation>Pire limitation de flux</translation>
     </message>
     <message>
         <source>No Flow Limitation on record</source>
-        <translation type="unfinished">Pas de limitation de flux enregistré</translation>
+        <translation>Pas de limitation de flux enregistré</translation>
     </message>
     <message>
         <source>Worst Large Leaks</source>
-        <translation type="unfinished">Pire fuites importantes</translation>
+        <translation>Pire fuites importantes</translation>
     </message>
     <message>
         <source>Date: %1 Leak: %2%</source>
-        <translation type="unfinished">Date: %1 Fuite: %2%</translation>
+        <translation>Date: %1 Fuite: %2%</translation>
     </message>
     <message>
         <source>No Large Leaks on record</source>
-        <translation type="unfinished">Pas de fuite importante enregistré</translation>
+        <translation>Pas de fuite importante enregistré</translation>
     </message>
     <message>
         <source>Worst CSR</source>
-        <translation type="unfinished">Pire RCS</translation>
+        <translation>Pire RCS</translation>
     </message>
     <message>
         <source>Date: %1 CSR: %2%</source>
-        <translation type="unfinished">Date: %1 RCS: %2%</translation>
+        <translation>Date: %1 RCS: %2%</translation>
     </message>
     <message>
         <source>No CSR on record</source>
-        <translation type="unfinished">Pas de RSC (Resp. Cheyene Stoke) enregisté</translation>
+        <translation>Pas de RSC (Resp. Cheyene Stoke) enregisté</translation>
     </message>
     <message>
         <source>Worst PB</source>
-        <translation type="unfinished">Pire RP (Resp. Per.)</translation>
+        <translation>Pire RP (Resp. Per.)</translation>
     </message>
     <message>
         <source>Date: %1 PB: %2%</source>
-        <translation type="unfinished">Date: %1 RP: %2</translation>
+        <translation>Date: %1 RP: %2%</translation>
     </message>
     <message>
         <source>No PB on record</source>
-        <translation type="unfinished">Pas de RP enregisté</translation>
+        <translation>Pas de RP enregisté</translation>
     </message>
     <message>
         <source>Want more information?</source>
-        <translation type="unfinished">Plus d&apos;information ?</translation>
+        <translation>Plus d&apos;information ?</translation>
     </message>
     <message>
         <source>OSCAR needs all summary data loaded to calculate best/worst data for individual days.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR a besoin de charger toutes les informations de synthèse pour calculer les meilleurs/pire donnée journalières.</translation>
     </message>
     <message>
         <source>Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.</source>
-        <translation type="unfinished">Cochez le préchargement des informations de synthèse dans les préférences pour que ces données soient disposnibles.</translation>
+        <translation>Cochez le préchargement des informations de synthèse dans les préférences pour que ces données soient disposnibles.</translation>
     </message>
     <message>
         <source>Best RX Setting</source>
-        <translation type="unfinished">Meilleur Réglages RX</translation>
+        <translation>Meilleur Réglages RX</translation>
     </message>
     <message>
         <source>Date: %1 - %2</source>
-        <translation type="unfinished">Date: %1 - %2</translation>
+        <translation>Date: %1 - %2</translation>
     </message>
     <message>
         <source>Culminative AHI: %1</source>
-        <translation type="unfinished">IHA cumulé : %1</translation>
+        <translation>IHA cumulé : %1</translation>
     </message>
     <message>
         <source>Culminative Hours: %1</source>
-        <translation type="unfinished">Heures cumulées: %1</translation>
+        <translation>Heures cumulées: %1</translation>
     </message>
     <message>
         <source>Worst RX Setting</source>
-        <translation type="unfinished">Pires Réglages RX</translation>
+        <translation>Pires Réglages RX</translation>
+    </message>
+    <message>
+        <source>OSCAR is free open-source CPAP report software</source>
+        <translation>OSCAR est un logiciel libre de création de rapport de PPC (Pression Positive Continue)</translation>
+    </message>
+    <message>
+        <source>Oscar has no data to report :(</source>
+        <translation>Pas de données pour les rapports :(</translation>
     </message>
 </context>
 <context>
@@ -8079,7 +8112,7 @@ Heures: %1</translation>
     </message>
     <message>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation type="unfinished">Une mise à jour de OSCAR est disponible.</translation>
+        <translation type="obsolete">Une mise à jour de OSCAR est disponible.</translation>
     </message>
     <message>
         <source>XML update structure parsed cleanly</source>
@@ -8103,7 +8136,7 @@ Heures: %1</translation>
     </message>
     <message>
         <source>SleepyHead Updates</source>
-        <translation type="unfinished">Mise à jour de OSCAR</translation>
+        <translation type="obsolete">Mise à jour de OSCAR</translation>
     </message>
     <message>
         <source>Component</source>
@@ -8251,70 +8284,74 @@ Heures: %1</translation>
     </message>
     <message>
         <source>You are already running the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>C&apos;est la version la plus a jour.</translation>
     </message>
     <message>
         <source>Would you like to download and install them now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez vous les télécharger et les installer maintenant ?</translation>
     </message>
     <message>
         <source>OSCAR Updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil de mise a jour d&apos;OSCAR</translation>
     </message>
     <message>
         <source>Updates are not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fonction non encore implémentée.</translation>
     </message>
     <message>
         <source>Checking for OSCAR Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérification de disponibilité de mise à jour</translation>
     </message>
     <message>
         <source>OSCAR Updates are currently unvailable for this platform</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de mise a jour disponible pour cette plateforme</translation>
     </message>
     <message>
         <source>OSCAR Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise a jour d&apos;OSCAR</translation>
     </message>
     <message>
         <source>Version %1 of OSCAR is available, opening link to download site.</source>
-        <translation type="unfinished"></translation>
+        <translation>La version &lt;b&gt;v%1&lt;/b&gt; est disponible. ouverture du lien vers le site de téléchagement.</translation>
+    </message>
+    <message>
+        <source>New OSCAR Updates are avilable:</source>
+        <translation>Une mise à jour de OSCAR est disponible.</translation>
     </message>
 </context>
 <context>
     <name>Welcome</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation>Formulaire</translation>
     </message>
     <message>
         <source>What would you like to do?</source>
-        <translation type="unfinished">Que souhaitez-vous faire?</translation>
+        <translation>Que souhaitez-vous faire?</translation>
     </message>
     <message>
         <source>CPAP Importer</source>
-        <translation type="unfinished"></translation>
+        <translation>Import de PPC</translation>
     </message>
     <message>
         <source>Oximetry Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistant d&apos;Oxymétrie</translation>
     </message>
     <message>
         <source>Daily View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue Quotidienne</translation>
     </message>
     <message>
         <source>Overview</source>
-        <translation type="unfinished">Aperçus</translation>
+        <translation>Aperçus</translation>
     </message>
     <message>
         <source>Statistics</source>
-        <translation type="unfinished">Statistiques</translation>
+        <translation>Statistiques</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;need &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;to be locked &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;before &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Attention: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;les cartes SD des machines ResMed S9 &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;doivent &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;etre vérouillés &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;avant &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;de l&apos;insérer dans votre ordinateur&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;certain système d&apos;exploitation peuvent les rendre inutilisables&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
@@ -8322,118 +8359,118 @@ Heures: %1</translation>
     </message>
     <message>
         <source>First import can take a few minutes.</source>
-        <translation type="unfinished">Le premier import peut prendre quelques minutes.</translation>
+        <translation>Le premier import peut prendre quelques minutes.</translation>
     </message>
     <message>
         <source>The last time you used your %1...</source>
-        <translation type="unfinished">La dernière fois que vous avez utilisé votre %1 ...</translation>
+        <translation>La dernière fois que vous avez utilisé votre %1 ...</translation>
     </message>
     <message>
         <source>last night</source>
-        <translation type="unfinished">la nuit dernière</translation>
+        <translation>la nuit dernière</translation>
     </message>
     <message>
         <source>yesterday</source>
-        <translation type="unfinished">hier</translation>
+        <translation>hier</translation>
     </message>
     <message>
         <source>%2 days ago</source>
-        <translation type="unfinished">il y %2 jours</translation>
+        <translation>il y %2 jours</translation>
     </message>
     <message>
         <source>was %1 (on %2)</source>
-        <translation type="unfinished">était %1 (le %2)</translation>
+        <translation>était %1 (le %2)</translation>
     </message>
     <message>
         <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="unfinished">%1 heures, %2 minutes and %3 secondes</translation>
+        <translation>%1 heures, %2 minutes and %3 secondes</translation>
     </message>
     <message>
         <source>Your machine was on for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre machine était en fonction pendant %1.</translation>
     </message>
     <message>
         <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;font color = red&gt; Vous n&apos;avez porté le masque que %1.&lt;/font&gt;</translation>
+        <translation>&lt;font color = red&gt; Vous n&apos;avez porté le masque que %1.&lt;/font&gt;</translation>
     </message>
     <message>
         <source>under</source>
-        <translation type="unfinished"></translation>
+        <translation>dessous</translation>
     </message>
     <message>
         <source>over</source>
-        <translation type="unfinished"></translation>
+        <translation>dessus</translation>
     </message>
     <message>
         <source>reasonably close to</source>
-        <translation type="unfinished"></translation>
+        <translation>raisonablement proche de</translation>
     </message>
     <message>
         <source>equal to</source>
-        <translation type="unfinished"></translation>
+        <translation>égual a</translation>
     </message>
     <message>
         <source>You had an AHI of %1, which is %2 your %3 day average of %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous aviez un IAH de %1, qui est considéré %2 de votre %3 moyenne quotidienne de %4.</translation>
     </message>
     <message>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="unfinished">Votre appareil PPC vous explose avec une pression d&apos;air constante de %1%2</translation>
+        <translation>Votre appareil PPC vous explose avec une pression d&apos;air constante de %1%2</translation>
     </message>
     <message>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Votre pression était en dessous de %1%2 pour %3% du temps.</translation>
+        <translation>Votre pression était en dessous de %1%2 pour %3% du temps.</translation>
     </message>
     <message>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="unfinished">Votre appareil vous explose avec une pression d&apos;air constante de %1-%2 %3 .</translation>
+        <translation>Votre appareil vous explose avec une pression d&apos;air constante de %1-%2 %3 .</translation>
     </message>
     <message>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="unfinished">Votre machine était en dessous de %1-%2 %3 pendant %4% du temps.</translation>
+        <translation>Votre machine était en dessous de %1-%2 %3 pendant %4% du temps.</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="unfinished">Votre pression EPAP s&apos;est fixé %1%2.</translation>
+        <translation>Votre pression EPAP s&apos;est fixé %1%2.</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Votre pression IPAP était en dessous de %1%2 pendant %3% du temps.</translation>
+        <translation>Votre pression IPAP était en dessous de %1%2 pendant %3% du temps.</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">Votre pression EPAP était en dessous de %1%2 pendant %3% du temps.</translation>
+        <translation>Votre pression EPAP était en dessous de %1%2 pendant %3% du temps.</translation>
     </message>
     <message>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vos fuites moyenne étaient de %1 %1, qui est %3 de votre %4 moyenne quotidienne de %5.</translation>
     </message>
     <message>
         <source>No CPAP data has been imported yet.</source>
-        <translation type="unfinished">Pas de données de PPC importé pour le moment.</translation>
-    </message>
-    <message>
-        <source>Welcome To Open Source CPAP Reviewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de données de PPC importé pour le moment.</translation>
     </message>
     <message>
         <source>It would be a good idea to check File-&gt;Preferences first,</source>
-        <translation type="unfinished"></translation>
+        <translation>Il est préférable de vérifier Fichier-&gt;Préférences avant toute choses.</translation>
     </message>
     <message>
         <source>as there are some options that affect import.</source>
-        <translation type="unfinished"></translation>
+        <translation>car il ya des options qui affectent l&apos;import.</translation>
     </message>
     <message>
         <source>Note that some preferences are forced when a ResMed machine is detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Certaines préférences sont forcées avec les machines ResMed.</translation>
+    </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <translation>Bienvenue a O.S.C.A.R. (Open Source CPAP Analysis Reporter)</translation>
     </message>
 </context>
 <context>
     <name>gGraph</name>
     <message>
         <source>%1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 jours</translation>
     </message>
 </context>
 <context>

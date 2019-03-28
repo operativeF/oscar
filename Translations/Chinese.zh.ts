@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Sorry, could not locate changelog.</source>
-        <translation type="unfinished">抱歉，无法定位日志.</translation>
+        <translation type="obsolete">抱歉，无法定位日志.</translation>
     </message>
     <message>
         <source>OSCAR v%1</source>
@@ -73,6 +73,10 @@
     </message>
     <message>
         <source>To see if the license text is available in your language, see %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, could not locate Release Notes.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -162,7 +166,7 @@
     </message>
     <message>
         <source>Show all graphs</source>
-        <translation>显示所有图表</translation>
+        <translation type="vanished">显示所有图表</translation>
     </message>
     <message>
         <source>Journal</source>
@@ -346,7 +350,7 @@
     </message>
     <message>
         <source>Hide all graphs</source>
-        <translation>隐藏所有图表</translation>
+        <translation type="vanished">隐藏所有图表</translation>
     </message>
     <message>
         <source>Impossibly short session</source>
@@ -422,11 +426,11 @@
     </message>
     <message>
         <source>Hide all events</source>
-        <translation>隐藏所有事件</translation>
+        <translation type="vanished">隐藏所有事件</translation>
     </message>
     <message>
         <source>Show all events</source>
-        <translation>显示所有事件</translation>
+        <translation type="vanished">显示所有事件</translation>
     </message>
     <message>
         <source>Flags</source>
@@ -1796,10 +1800,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The User&apos;s Guide is not yet implemented</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The FAQ is not yet implemented</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1811,10 +1811,6 @@
         <source>Are you sure you want to rebuild all CPAP data for the following machine:
 
 </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1847,6 +1843,14 @@
     </message>
     <message>
         <source>Reporting issues is not yet implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide is not yet available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2157,10 +2161,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to Open Source CPAP Reviewer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2174,6 +2174,10 @@
     </message>
     <message>
         <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2781,11 +2785,11 @@ Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
+        <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
+        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probably not&lt;/span&gt; possible yet)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7716,6 +7720,10 @@ Line %2, column %3</source>
         <source>OSCAR v%1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You must run the OSCAR Migration Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuaZipFilePrivate</name>
@@ -7925,23 +7933,7 @@ Line %2, column %3</source>
         <translation type="unfinished">使用统计</translation>
     </message>
     <message>
-        <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This report was generated by OSCAR v%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OSCAR is free open-source CPAP review software</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Oscar has to data to report :(</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8056,6 +8048,14 @@ Line %2, column %3</source>
         <source>Worst RX Setting</source>
         <translation type="unfinished">最差治疗方案设定</translation>
     </message>
+    <message>
+        <source>OSCAR is free open-source CPAP report software</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oscar has no data to report :(</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdaterWindow</name>
@@ -8117,7 +8117,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>SleepyHead Updates</source>
-        <translation type="unfinished">OSCAR升级</translation>
+        <translation type="obsolete">OSCAR升级</translation>
     </message>
     <message>
         <source>Component</source>
@@ -8265,7 +8265,7 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>New SleepyHead Updates are avilable:</source>
-        <translation type="unfinished">OSCAR有更新:</translation>
+        <translation type="obsolete">OSCAR有更新:</translation>
     </message>
     <message>
         <source>Would you like t download and install them now?</source>
@@ -8301,6 +8301,10 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>Version %1 of OSCAR is available, opening link to download site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New OSCAR Updates are avilable:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8435,10 +8439,6 @@ Line %2, column %3</source>
         <translation type="unfinished">未导入呼吸机数据.</translation>
     </message>
     <message>
-        <source>Welcome To Open Source CPAP Reviewer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>It would be a good idea to check File-&gt;Preferences first,</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8448,6 +8448,10 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>Note that some preferences are forced when a ResMed machine is detected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
