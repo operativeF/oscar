@@ -151,6 +151,8 @@ for(file, TRANSLATIONS) {
  TRANSLATIONS_FILES += $$qmfile
 }
 
+HTML_FILES = $$files($$PWD/../Htmldocs/*.html)
+
 #copy the Translation and Help files to where the test binary wants them
 message("Setting up Translations & Help Transfers")
 macx {
@@ -161,6 +163,7 @@ macx {
 } else {
     DDIR = $$OUT_PWD/Translations
     HELPDIR = $$OUT_PWD/Help
+    HTMLDIR = $$OUT_PWD/Html
 
     TRANS_FILES += $$PWD/translations/*.qm
     HELP_FILES += $$PWD/help/*.qch
@@ -168,13 +171,17 @@ macx {
     win32 {
         TRANS_FILES_WIN = $${TRANS_FILES}
         HELP_FILES_WIN = $${HELP_FILES}
+        HTML_FILES_WIN = $${HTML_FILES}
         TRANS_FILES_WIN ~= s,/,\\,g
         HELP_FILES_WIN ~= s,/,\\,g
+        HTML_FILES_WIN ~= s,/,\\,g
         DDIR ~= s,/,\\,g
         HELPDIR ~= s,/,\\,g
+        HTMLDIR ~= s,/,\\,g
 
         !exists($$quote($$HELPDIR)): system(mkdir $$quote($$HELPDIR))
         !exists($$quote($$DDIR)): system(mkdir $$quote($$DDIR))
+        !exists($$quote($$HTMLDIR)): system(mkdir $$quote($$HTMLDIR))
 
         for(FILE,TRANS_FILES_WIN) {
             system(xcopy /y $$quote($$FILE) $$quote($$DDIR))
@@ -182,15 +189,22 @@ macx {
         for(FILE,HELP_FILES_WIN) {
             system(xcopy /y $$quote($$FILE) $$quote($$HELPDIR))
         }
+        for(FILE,HTML_FILES_WIN) {
+            system(xcopy /y $$quote($$FILE) $$quote($$HTMLDIR))
+        }
     } else {
         system(mkdir -p $$quote($$HELPDIR))
         system(mkdir -p $$quote($$DDIR))
+        system(mkdir -p $$quote($$HTMLDIR))
 
         for(FILE,TRANS_FILES) {
             system(cp $$quote($$FILE) $$quote($$DDIR))
         }
         for(FILE,HELP_FILES) {
             system(cp $$quote($$FILE) $$quote($$HELPDIR))
+        }
+        for(FILE,HTML_FILES) {
+            system(cp $$quote($$FILE) $$quote($$HTMLDIR))
         }
     }
 }
