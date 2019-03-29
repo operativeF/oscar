@@ -137,18 +137,39 @@ bool process_a_Profile( QString path ) {
 
 bool migrateFromSH(QString destDir) {
     QString homeDocs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/";
+    QString datadir;
+    bool selectingFolder = true;
     bool success = false;
     if (destDir.isEmpty()) {
         qDebug() << "Migration path is empty string";
         return success;
     }
 
-    QString datadir = QFileDialog::getExistingDirectory(nullptr,
-                      QObject::tr("Choose the SleepyHead data folder to migrate"), homeDocs, QFileDialog::ShowDirsOnly);
-    qDebug() << "Migration folder selected: " + datadir;
-    if (datadir.isEmpty()) {
-        qDebug() << "No migration source directory selected";
-        return false;
+    while (selectingFolder) {
+        datadir = QFileDialog::getExistingDirectory(nullptr,
+                  QObject::tr("Choose the SleepyHead data folder to migrate\nor CANCEL to start OSCAR without migrating SleepyHead data."),
+                  homeDocs, QFileDialog::ShowDirsOnly);
+        qDebug() << "Migration folder selected: " + datadir;
+        if (datadir.isEmpty()) {
+            qDebug() << "No migration source directory selected";
+            return false;
+        } else {                        // We have a folder, see if is a SleepyHead folder
+            QDir dir(datadir);
+            QFile file(datadir + "/Preferences.xml");
+            QDir  dirP(datadir + "/Profiles");
+
+            if (!file.exists() || !dirP.exists()) {       // It doesn't have a Preferences.xml file or a Profiles directory in it
+                // Not a new directory.. nag the user.
+                if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
+                        QObject::tr("The folder you chose does not contain valid SleepyHead data.") +
+                        "\n\n"+QObject::tr("You cannot use this folder:")+" " + datadir )) {
+                    continue;   // Nope, don't use it, go around the loop again
+                }
+            }
+
+            qDebug() << "Migration folder is" << datadir;
+            selectingFolder = false;
+        }
     }
 
     success = copyRecursively(datadir, destDir);
@@ -339,8 +360,9 @@ int main(int argc, char *argv[])
                     } else {                        // We have a folder, see if is already an OSCAR folder
                         QDir dir(datadir);
                         QFile file(datadir + "/Preferences.xml");
+                        QDir  dirP(datadir + "/Profiles");
 
-                        if (!file.exists()) {       // It doesn't have a Preferences.xml file in it
+                        if (!file.exists() || !dirP.exists()) {       // It doesn't have a Preferences.xml file or a Profiles directory in it
                             if (dir.count() > 2) {  // but it has more than dot and dotdot
                                 // Not a new directory.. nag the user.
                                 if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
