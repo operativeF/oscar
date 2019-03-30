@@ -165,7 +165,7 @@ const QString STR_MACH_ZEO = "Zeo";
 const QString STR_PREF_Language = "Language";
 
 const QString STR_AppName = "OSCAR";
-const QString STR_DeveloperName = "NightOwl";
+const QString STR_DeveloperName = "OSCAR_Team";
 const QString STR_AppData = "OSCAR_Data";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
