@@ -26,7 +26,20 @@ Help::Help(QWidget *parent) :
 
     QString helpRoot = appResourcePath() + "/Help/";
     qDebug() << "Help root is " + helpRoot;
-    QString helpIndex = helpRoot + "index.qhc";
+    QString helpIndex;
+   // Use a path in AppData
+   QCoreApplication::setOrganizationDomain("nightowlsoftware.ca");
+
+   auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+   if (path.isEmpty())
+       qFatal("Cannot determine user data storage location");
+   QDir d{path};
+   if (d.mkpath(d.absolutePath())) {
+       qDebug() << "Help index is in" << d.absolutePath();
+       helpIndex = d.absolutePath()  + "/index.qhc";
+   } else {
+       qDebug() << "Could not create path to index directory - " + d.absolutePath();
+   }
 
     QDir dir(helpRoot);
     QStringList nameFilters = QStringList("*.qch");
@@ -60,7 +73,8 @@ Help::Help(QWidget *parent) :
 
     helpLoaded = false;
     // Delete the crappy qhc so we can generate our own.
-    if (QFile::exists(helpIndex)) QFile::remove(helpIndex);
+    if (QFile::exists(helpIndex))
+        QFile::remove(helpIndex);
 
     helpEngine = new QHelpEngine(helpIndex);
     helpNamespace = "nightowlsoftware.ca.OSCAR_Guide";
