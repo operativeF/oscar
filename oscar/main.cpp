@@ -337,6 +337,7 @@ int main(int argc, char *argv[])
         } else {
             settings.setValue("Settings/AppData", homeDocs + getModifiedAppData());    // set up new data directory path
         }
+        qDebug() << "First time: Setting " + GetAppData();
     }
 
     QDir dir(GetAppData());
@@ -383,6 +384,8 @@ int main(int argc, char *argv[])
             }           // user wants a different folder
         }           // user used --datadir folder to select a folder
     }           // The folder doesn't exist
+    else
+        qDebug() << "AppData folder already exisits, so ...";
     qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
 
     QDir newDir(GetAppData());
