@@ -335,7 +335,7 @@ int main(int argc, char *argv[])
         if ( settings.contains("Settings/AppRoot") ) {  // allow for old AppRoot here - not really first time
             settings.setValue("Settings/AppData", settings.value("Settings/AppRoot"));
         } else {
-            settings.setValue("Settings/AppData", getModifiedAppData());    // set up new data directory path
+            settings.setValue("Settings/AppData", homeDocs + "/" + getModifiedAppData());    // set up new data directory path
         }
     }
 
