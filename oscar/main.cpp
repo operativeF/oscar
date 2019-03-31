@@ -345,10 +345,11 @@ int main(int argc, char *argv[])
     if ( ! dir.exists() ) {             // directory doesn't exist, verify user's choice
         if ( ! force_data_dir ) {       // unless they explicitly selected it by --datadir param
             if (QMessageBox::question(nullptr, STR_MessageBox_Question,
-                    QObject::tr("Would you like OSCAR to use this location for storing its data?")+"\n\n"+
-                    QDir::toNativeSeparators(GetAppData())+"\n\n"+
-                    QObject::tr("If you are upgrading, don't panic, your old data will be migrated later.")+"\n\n"+
-                    QObject::tr("(If you are unsure, just click yes.)"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::No) {
+                    QObject::tr("OSCAR will set up a folder for your data.")+"\n"+
+                    QObject::tr("If you have been using SleepyHead, OSCAR can copy your old data to this folder later.")+"\n"+
+                    QObject::tr("We suggest you use this folder: ")+QDir::toNativeSeparators(GetAppData())+"\n"+
+                    QObject::tr("Click Ok to accept this, or No if you want to use a different folder."),
+                    QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok) == QMessageBox::No) {
             // User wants a different folder for data
                 bool change_data_dir = true;
                 while (change_data_dir) {           // Create or select an acceptable folder
@@ -357,7 +358,8 @@ int main(int argc, char *argv[])
 
                     if (datadir.isEmpty()) {        // User hit Cancel instead of selecting or creating a folder
                         QMessageBox::information(nullptr, QObject::tr("Exiting"),
-                            QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n\n"+QObject::tr("Next time you run, you will be asked again."));
+                            QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n"+
+                            QObject::tr("Next time you run OSCAR, you will be asked again."));
                         return 0;
                     } else {                        // We have a folder, see if is already an OSCAR folder
                         QDir dir(datadir);
@@ -385,12 +387,17 @@ int main(int argc, char *argv[])
         }           // user used --datadir folder to select a folder
     }           // The folder doesn't exist
     else
-        qDebug() << "AppData folder already exisits, so ...";
+        qDebug() << "AppData folder already exists, so ...";
     qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
 
     QDir newDir(GetAppData());
     if ( ! newDir.exists() ) {                      // directoy doesn't exist yet, try to migrate old data
-        migrateFromSH( GetAppData() );              // doesn't matter if no migration
+        if (QMessageBox::question(nullptr, QObject::tr("Migrate SleepyHead Data?"),
+                QObject::tr("On the next screen OSCAR will ask you to select a folder with SleepyHead data") +"\n" +
+                QObject::tr("Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data."),
+                QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok) {
+            migrateFromSH( GetAppData() );              // doesn't matter if no migration
+        }
     }
 
 
