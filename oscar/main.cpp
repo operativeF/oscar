@@ -14,12 +14,16 @@
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QStandardPaths>
+#include <QProgressDialog>
 
 #include "version.h"
 #include "logger.h"
 #include "mainwindow.h"
 #include "SleepLib/profiles.h"
 #include "translation.h"
+
+#include <ctime>
+#include <chrono>
 
 // Gah! I must add the real darn plugin system one day.
 #include "SleepLib/loader_plugins/prs1_loader.h"
@@ -42,41 +46,64 @@ MainWindow *mainwin = nullptr;
 
 int compareVersion(QString version);
 
-bool copyRecursively(QString sourceFolder, QString destFolder)
-    {
-        bool success = false;
-        QDir sourceDir(sourceFolder);
+int numFilesCopied = 0;
 
-        if(!sourceDir.exists())
-            return false;
+// Count the number of files in this directory and all subdirectories
+int countRecursively(QString sourceFolder) {
+    QDir sourceDir(sourceFolder);
 
-        QDir destDir(destFolder);
-        if(!destDir.exists())
-            destDir.mkdir(destFolder);
+    if(!sourceDir.exists())
+        return 0;
 
-        QStringList files = sourceDir.entryList(QDir::Files);
-        for(int i = 0; i< files.count(); i++) {
-            QString srcName = sourceFolder + QDir::separator() + files[i];
-            QString destName = destFolder + QDir::separator() + files[i];
-            success = QFile::copy(srcName, destName);
-            if(!success)
-                return false;
-        }
+    int numFiles = sourceDir.count();
 
-        files.clear();
-        files = sourceDir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
-        for(int i = 0; i< files.count(); i++)
-        {
-            QString srcName = sourceFolder + QDir::separator() + files[i];
-            QString destName = destFolder + QDir::separator() + files[i];
-//          qDebug() << "Copy from "+srcName+" to "+destName;
-            success = copyRecursively(srcName, destName);
-            if(!success)
-                return false;
-        }
-
-        return true;
+    QStringList dirs = sourceDir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
+    for(int i = 0; i< dirs.count(); i++) {
+        QString srcName = sourceFolder + QDir::separator() + dirs[i];
+        numFiles += countRecursively(srcName);
     }
+
+    return numFiles;
+}
+
+bool copyRecursively(QString sourceFolder, QString destFolder, QProgressDialog& progress) {
+    bool success = false;
+    QDir sourceDir(sourceFolder);
+
+    if(!sourceDir.exists())
+        return false;
+
+    QDir destDir(destFolder);
+    if(!destDir.exists())
+        destDir.mkdir(destFolder);
+
+    QStringList files = sourceDir.entryList(QDir::Files);
+    for(int i = 0; i< files.count(); i++) {
+        QString srcName = sourceFolder + QDir::separator() + files[i];
+        QString destName = destFolder + QDir::separator() + files[i];
+        success = QFile::copy(srcName, destName);
+        numFilesCopied++;
+        if ((numFilesCopied % 20) == 1) { // Update progress bar every 20 files
+            progress.setValue(numFilesCopied);
+            QCoreApplication::processEvents();
+        }
+        if(!success)
+            return false;
+    }
+
+    files.clear();
+    files = sourceDir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot);
+    for(int i = 0; i< files.count(); i++) {
+        QString srcName = sourceFolder + QDir::separator() + files[i];
+        QString destName = destFolder + QDir::separator() + files[i];
+//      qDebug() << "Copy from "+srcName+" to "+destName;
+        success = copyRecursively(srcName, destName, progress);
+        if(!success)
+            return false;
+    }
+
+    return true;
+}
 
 bool processPreferenceFile( QString path ) {
     bool success = true;
@@ -140,6 +167,8 @@ bool migrateFromSH(QString destDir) {
     QString datadir;
     bool selectingFolder = true;
     bool success = false;
+//  long int startTime, countDone, allDone;
+
     if (destDir.isEmpty()) {
         qDebug() << "Migration path is empty string";
         return success;
@@ -148,7 +177,7 @@ bool migrateFromSH(QString destDir) {
     while (selectingFolder) {
         datadir = QFileDialog::getExistingDirectory(nullptr,
                   QObject::tr("Choose the SleepyHead data folder to migrate")+" "+
-                        QObject::tr("or CANCEL to skip migration."),
+                  QObject::tr("or CANCEL to skip migration."),
                   homeDocs, QFileDialog::ShowDirsOnly);
         qDebug() << "Migration folder selected: " + datadir;
         if (datadir.isEmpty()) {
@@ -162,8 +191,8 @@ bool migrateFromSH(QString destDir) {
             if (!file.exists() || !dirP.exists()) {       // It doesn't have a Preferences.xml file or a Profiles directory in it
                 // Not a new directory.. nag the user.
                 if (QMessageBox::warning(nullptr, STR_MessageBox_Error,
-                        QObject::tr("The folder you chose does not contain valid SleepyHead data.") +
-                        "\n\n"+QObject::tr("You cannot use this folder:")+" " + datadir ), QMessageBox::Ok) {
+                                         QObject::tr("The folder you chose does not contain valid SleepyHead data.") +
+                                         "\n\n"+QObject::tr("You cannot use this folder:")+" " + datadir ), QMessageBox::Ok) {
                     continue;   // Nope, don't use it, go around the loop again
                 }
             }
@@ -173,7 +202,19 @@ bool migrateFromSH(QString destDir) {
         }
     }
 
-    success = copyRecursively(datadir, destDir);
+    auto startTime = std::chrono::steady_clock::now();
+    int numFiles = countRecursively(datadir);       // count number of files to be copied
+    auto countDone = std::chrono::steady_clock::now();
+    qDebug() << "Number of files to migrate: " << numFiles;
+
+    QProgressDialog progress (QObject::tr("Migrating ") + QString::number(numFiles) + QObject::tr(" files")+"\n"+
+    						  QObject::tr("from ") + QDir(datadir).dirName() + "\n"+QObject::tr("to ") + 
+    						  QDir(destDir).dirName(), QString(), 0, numFiles, 0, Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+    progress.setValue(0);
+    progress.setMinimumWidth(300);
+    progress.show();
+
+    success = copyRecursively(datadir, destDir, progress);
     if (success) {
         qDebug() << "Finished copying " + datadir;
     }
@@ -186,11 +227,17 @@ bool migrateFromSH(QString destDir) {
         success = process_a_Profile( destDir+"/Profiles/"+names[i] );
     }
 
+    progress.setValue(numFiles);
+    auto allDone = std::chrono::steady_clock::now();
+    auto elapsedCount = std::chrono::duration_cast<std::chrono::microseconds>(countDone - startTime);
+    auto elapsedCopy  = std::chrono::duration_cast<std::chrono::microseconds>(allDone - countDone);
+    qDebug() << "Counting files took " << elapsedCount.count() << " microsecs";
+    qDebug() << "Migrating files took " << elapsedCopy.count() << " microsecs";
+
     return success;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 #ifdef Q_WS_X11
     XInitThreads();
 #endif
@@ -248,14 +295,14 @@ int main(int argc, char *argv[])
         } else if (args[i] == "--datadir") { // mltam's idea
             QString datadir ;
             if ((i+1) < args.size()) {
-              datadir = args[++i];
-              settings.setValue("Settings/AppData", homeDocs+datadir);
+                datadir = args[++i];
+                settings.setValue("Settings/AppData", homeDocs+datadir);
 //            force_data_dir = true;
             } else {
-              fprintf(stderr, "Missing argument to --datadir\n");
-              exit(1);
+                fprintf(stderr, "Missing argument to --datadir\n");
+                exit(1);
             }
-          }
+        }
     }   // end of for args loop
 
 
@@ -294,36 +341,36 @@ int main(int argc, char *argv[])
 
 //#endif
 
-/*************************************************************************************
-#ifdef BROKEN_OPENGL_BUILD
-    Q_UNUSED(bad_graphics)
-    Q_UNUSED(intel_graphics)
+    /*************************************************************************************
+    #ifdef BROKEN_OPENGL_BUILD
+        Q_UNUSED(bad_graphics)
+        Q_UNUSED(intel_graphics)
 
-    const QString BetterBuild = "Settings/BetterBuild";
+        const QString BetterBuild = "Settings/BetterBuild";
 
-    if (opengl2supported) {
-        if (!settings.value(BetterBuild, false).toBool()) {
-            QMessageBox::information(nullptr, QObject::tr("A faster build of OSCAR may be available"),
-                QObject::tr("This build of OSCAR is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
-                QObject::tr("However it looks like your computer has full support for OpenGL 2.0!") + "<br/><br/>"+
-                QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of OSCAR will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
-                QObject::tr("You will not be bothered with this message again."), QMessageBox::Ok, QMessageBox::Ok);
-            settings.setValue(BetterBuild, true);
+        if (opengl2supported) {
+            if (!settings.value(BetterBuild, false).toBool()) {
+                QMessageBox::information(nullptr, QObject::tr("A faster build of OSCAR may be available"),
+                    QObject::tr("This build of OSCAR is a compatability version that also works on computers lacking OpenGL 2.0 support.")+"<br/><br/>"+
+                    QObject::tr("However it looks like your computer has full support for OpenGL 2.0!") + "<br/><br/>"+
+                    QObject::tr("This version will run fine, but a \"<b>%1</b>\" tagged build of OSCAR will likely run a bit faster on your computer.").arg("-OpenGL")+"<br/><br/>"+
+                    QObject::tr("You will not be bothered with this message again."), QMessageBox::Ok, QMessageBox::Ok);
+                settings.setValue(BetterBuild, true);
+            }
         }
-    }
-#else
-    if (bad_graphics) {
-        QMessageBox::warning(nullptr, QObject::tr("Incompatible Graphics Hardware"),
-            QObject::tr("This build of OSCAR requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
-            QObject::tr("You may need to update your computers graphics drivers from the GPU makers website. %1").
-                arg(intel_graphics ? QObject::tr("(<a href='http://intel.com/support'>Intel's support site</a>)") : "")+"<br/><br/>"+
-            QObject::tr("Because graphs will not render correctly, and it may cause crashes, this build will now exit.")+"<br/><br/>"+
-            QObject::tr("There is another build available tagged \"<b>-BrokenGL</b>\" that should work on your computer."),
-            QMessageBox::Ok, QMessageBox::Ok);
-        exit(1);
-    }
-#endif
-****************************************************************************************************************/
+    #else
+        if (bad_graphics) {
+            QMessageBox::warning(nullptr, QObject::tr("Incompatible Graphics Hardware"),
+                QObject::tr("This build of OSCAR requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.") + "<br/><br/>"+
+                QObject::tr("You may need to update your computers graphics drivers from the GPU makers website. %1").
+                    arg(intel_graphics ? QObject::tr("(<a href='http://intel.com/support'>Intel's support site</a>)") : "")+"<br/><br/>"+
+                QObject::tr("Because graphs will not render correctly, and it may cause crashes, this build will now exit.")+"<br/><br/>"+
+                QObject::tr("There is another build available tagged \"<b>-BrokenGL</b>\" that should work on your computer."),
+                QMessageBox::Ok, QMessageBox::Ok);
+            exit(1);
+        }
+    #endif
+    ****************************************************************************************************************/
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Datafolder location Selection
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -345,12 +392,12 @@ int main(int argc, char *argv[])
     if ( ! dir.exists() ) {             // directory doesn't exist, verify user's choice
         if ( ! force_data_dir ) {       // unless they explicitly selected it by --datadir param
             if (QMessageBox::question(nullptr, STR_MessageBox_Question,
-                    QObject::tr("OSCAR will set up a folder for your data.")+"\n"+
-                    QObject::tr("If you have been using SleepyHead, OSCAR can copy your old data to this folder later.")+"\n"+
-                    QObject::tr("We suggest you use this folder: ")+QDir::toNativeSeparators(GetAppData())+"\n"+
-                    QObject::tr("Click Ok to accept this, or No if you want to use a different folder."),
-                    QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok) == QMessageBox::No) {
-            // User wants a different folder for data
+                                      QObject::tr("OSCAR will set up a folder for your data.")+"\n"+
+                                      QObject::tr("If you have been using SleepyHead, OSCAR can copy your old data to this folder later.")+"\n"+
+                                      QObject::tr("We suggest you use this folder: ")+QDir::toNativeSeparators(GetAppData())+"\n"+
+                                      QObject::tr("Click Ok to accept this, or No if you want to use a different folder."),
+                                      QMessageBox::Ok | QMessageBox::No, QMessageBox::Ok) == QMessageBox::No) {
+                // User wants a different folder for data
                 bool change_data_dir = true;
                 while (change_data_dir) {           // Create or select an acceptable folder
                     QString datadir = QFileDialog::getExistingDirectory(nullptr,
@@ -358,8 +405,8 @@ int main(int argc, char *argv[])
 
                     if (datadir.isEmpty()) {        // User hit Cancel instead of selecting or creating a folder
                         QMessageBox::information(nullptr, QObject::tr("Exiting"),
-                            QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n"+
-                            QObject::tr("Next time you run OSCAR, you will be asked again."));
+                                                 QObject::tr("As you did not select a data folder, OSCAR will exit.")+"\n"+
+                                                 QObject::tr("Next time you run OSCAR, you will be asked again."));
                         return 0;
                     } else {                        // We have a folder, see if is already an OSCAR folder
                         QDir dir(datadir);
@@ -370,14 +417,14 @@ int main(int argc, char *argv[])
                             if (dir.count() > 2) {  // but it has more than dot and dotdot
                                 // Not a new directory.. nag the user.
                                 if (QMessageBox::question(nullptr, STR_MessageBox_Warning,
-                                        QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCAR data.") +
-                                        "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
-                                        datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
+                                                          QObject::tr("The folder you chose is not empty, nor does it already contain valid OSCAR data.") +
+                                                          "\n\n"+QObject::tr("Are you sure you want to use this folder?")+"\n\n" +
+                                                          datadir, QMessageBox::Yes, QMessageBox::No) == QMessageBox::No) {
                                     continue;   // Nope, don't use it, go around the loop again
                                 }
                             }
                         }
-        
+
                         settings.setValue("Settings/AppData", datadir);
                         qDebug() << "Changing data folder to" << datadir;
                         change_data_dir = false;
@@ -393,9 +440,9 @@ int main(int argc, char *argv[])
     QDir newDir(GetAppData());
     if ( ! newDir.exists() ) {                      // directoy doesn't exist yet, try to migrate old data
         if (QMessageBox::question(nullptr, QObject::tr("Migrate SleepyHead Data?"),
-                QObject::tr("On the next screen OSCAR will ask you to select a folder with SleepyHead data") +"\n" +
-                QObject::tr("Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data."),
-                QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok) {
+                                  QObject::tr("On the next screen OSCAR will ask you to select a folder with SleepyHead data") +"\n" +
+                                  QObject::tr("Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data."),
+                                  QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok) {
             migrateFromSH( GetAppData() );              // doesn't matter if no migration
         }
     }
@@ -451,10 +498,10 @@ int main(int argc, char *argv[])
 //      check_updates = false;
     } else if (vc > 0) {
         if (QMessageBox::warning(nullptr, STR_MessageBox_Error,
-            QObject::tr("The version of OSCAR you just ran is OLDER than the one used to create this data (%1).").
-                        arg(AppSetting->versionString()) +"\n\n"+
-            QObject::tr("It is likely that doing this will cause data corruption, are you sure you want to do this?"),
-            QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
+                                 QObject::tr("The version of OSCAR you just ran is OLDER than the one used to create this data (%1).").
+                                 arg(AppSetting->versionString()) +"\n\n"+
+                                 QObject::tr("It is likely that doing this will cause data corruption, are you sure you want to do this?"),
+                                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
 
             return 0;
         }
@@ -513,7 +560,9 @@ int main(int argc, char *argv[])
     Q_UNUSED(dont_load_profile)
 
 #ifndef NO_UPDATER
-    if (check_updates) { mainwin->CheckForUpdates(); }
+    if (check_updates) {
+        mainwin->CheckForUpdates();
+    }
 #endif
 
     mainwin->SetupGUI();

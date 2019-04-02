@@ -75,7 +75,11 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(logger, SIGNAL(outputLog(QString)), this, SLOT(logMessage(QString)));
     }
 
-    // Initialise oscr app registry stuff
+    // Bring window to top (useful when language is changed) - GTS 3/31/2019
+    this->activateWindow();
+    this->raise();
+
+    // Initialise oscar app registry stuff
     QSettings settings;
 
     // Load previous Window geometry
