@@ -94,7 +94,7 @@ VERSION = 1.0.0
 RC_ICONS = ./icons/logo.ico
 
 macx {
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.12
   LIBS             += -lz
   ICON              = icons/OSCAR.icns
 } else:haiku {
