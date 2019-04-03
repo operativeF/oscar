@@ -2977,7 +2977,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Fullscreen Toggle</string>
+    <string>&amp;Maximize Toggle</string>
    </property>
    <property name="shortcut">
     <string notr="true">F11</string>

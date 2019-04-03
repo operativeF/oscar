@@ -1039,7 +1039,7 @@ QMenu *MainWindow::CreateMenu(QString title)
 void MainWindow::on_action_Fullscreen_triggered()
 {
     if (ui->action_Fullscreen->isChecked()) {
-        this->showFullScreen();
+        this->showMaximized();
     } else {
         this->showNormal();
     }
