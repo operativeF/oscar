@@ -165,7 +165,7 @@ void ProfileSelector::updateProfileList()
 //    ui->profileView->setMinimumWidth(w);
 
     if ( row == 0 ) {
-        ui->profileInfoLabel->setText("You must create a profile");
+        ui->profileInfoLabel->setText(tr("You must create a profile"));
     }
     proxy = new MySortFilterProxyModel2(this);
     proxy->setSourceModel(model);
