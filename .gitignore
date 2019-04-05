@@ -11,6 +11,8 @@
 *.dylib
 *.qm
 
+build/*
+
 # Qt-es
 
 /.qmake.cache
