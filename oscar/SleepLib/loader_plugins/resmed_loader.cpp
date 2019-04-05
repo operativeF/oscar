@@ -35,7 +35,7 @@ ChannelID RMS9_EPR, RMS9_EPRLevel, RMS9_Mode, RMS9_SmartStart, RMS9_HumidStatus,
 const QString STR_ResMed_AirSense10 = "AirSense 10";
 const QString STR_ResMed_AirCurve10= "AirCurve 10";
 const QString STR_ResMed_S9 = "S9";
-const QString STR_UnknownModel = "Resmed S9 ???";
+const QString STR_UnknownModel = "Resmed ???";
 
 // Return the model name matching the supplied model number.
 const QString & lookupModel(quint16 model)
@@ -2760,7 +2760,7 @@ bool ResmedLoader::LoadPLD(Session *sess, const QString & path)
     time.start();
 #endif
 
-    // Is it save to assume the order does not change here?
+    // Is it safe to assume the order does not change here?
     enum PLDType { MaskPres = 0, TherapyPres, ExpPress, Leak, RR, Vt, Mv, SnoreIndex, FFLIndex, U1, U2 };
 
     qint64 duration = edf.GetNumDataRecords() * edf.GetDuration();
@@ -2838,6 +2838,11 @@ bool ResmedLoader::LoadPLD(Session *sess, const QString & path)
             ToTimeDelta(sess, edf, es, code, recs, duration, 0, 0);
         } else if (matchSignal(CPAP_IE, es.label)) { //I:E ratio
             code = CPAP_IE;
+//          es.gain /= 100.0;
+//          es.physical_maximum /= 100.0;
+//          es.physical_minimum /= 100.0;
+//          qDebug() << "IE Gain, Max, Min" << es.gain << es.physical_maximum << es.physical_minimum;
+//          qDebug() << "IE count, data..." << es.nr << es.data[0] << es.data[1] << es.data[2] << es.data[3] << es.data[4];
             a = sess->AddEventList(code, EVL_Waveform, es.gain, es.offset, 0, 0, rate);
             a->AddWaveform(edf.startdate, es.data, recs, duration);
             //a=ToTimeDelta(sess,edf,es, code,recs,duration,0,0);
