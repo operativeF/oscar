@@ -75,7 +75,9 @@ QString AboutDialog::getFilename(QString name)
         filename = ":docs/"+name+".html";
     } else {
         QString docRoot = appResourcePath() + "/Html/";
-        filename = docRoot + name + language + "/Html/";
+        filename = docRoot + name + "-" + language + ".html";
+        if ( ! QFile::exists(filename) )
+            filename = ":docs/"+name+".html";
     }
     qDebug() << "Looking for " + filename;
     return filename;
