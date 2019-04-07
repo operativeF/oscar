@@ -517,10 +517,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TTIA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation type="unfinished">开始</translation>
     </message>
@@ -1269,7 +1265,7 @@
     </message>
     <message>
         <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation>此&lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;版本的&lt;/a&gt; 介绍.</translation>
+        <translation type="vanished">此&lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;版本的&lt;/a&gt; 介绍.</translation>
     </message>
     <message>
         <source>This software is NOT suitable for medical diagnostics purposes, neither is it fit for CPAP complaince reporting purposes, or ANY other medical use for that matter.</source>
@@ -1373,7 +1369,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen Toggle</source>
-        <translation>&amp;全屏切换</translation>
+        <translation type="vanished">&amp;全屏切换</translation>
     </message>
     <message>
         <source>Please report any bugs you find to SleepyHead&apos;s SourceForge page.</source>
@@ -1851,6 +1847,18 @@
     </message>
     <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No profile has been selected for Import.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The release notes for this version can be found in the About OSCAR menu item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Maximize Toggle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4412,6 +4420,10 @@ p, li { white-space: pre-wrap; }
         <source>Backups:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You must create a profile</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressDialog</name>
@@ -4872,7 +4884,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation>正常的呼吸限制,导致波形呈扁平状.</translation>
+        <translation type="vanished">正常的呼吸限制,导致波形呈扁平状.</translation>
     </message>
     <message>
         <source>Pat. Trig. Breath</source>
@@ -5804,11 +5816,11 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     </message>
     <message>
         <source>Next time you run, you will be asked again.</source>
-        <translation>下次运行时,将会再次询问.</translation>
+        <translation type="vanished">下次运行时,将会再次询问.</translation>
     </message>
     <message>
         <source>You did not select a directory.</source>
-        <translation>你没有选择目录.</translation>
+        <translation type="vanished">你没有选择目录.</translation>
     </message>
     <message>
         <source>SleepyHead will now start with your old one.</source>
@@ -6888,7 +6900,7 @@ TTIA: %1</source>
     </message>
     <message>
         <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation>此呼吸暂停事件无法归类到中枢性或者阻塞性类别，因为大量的漏气干扰。</translation>
+        <translation type="vanished">此呼吸暂停事件无法归类到中枢性或者阻塞性类别，因为大量的漏气干扰。</translation>
     </message>
     <message>
         <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
@@ -7629,10 +7641,6 @@ Line %2, column %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7673,27 +7681,7 @@ Line %2, column %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(If you are unsure, just click yes.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose or create new folder for OSCAR data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>As you did not select a data folder, OSCAR will exit.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OSCAR will now start with your old one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7722,6 +7710,95 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>You must run the OSCAR Migration Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>, found SleepyHead -
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OSCAR (%1) needs to upgrade its database for %2 %3 %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An apnea that couldn&apos;t be determined as Central or Obstructive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A restriction in breathing from normal, causing a flattening of the flow waveform.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the SleepyHead data folder to migrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>or CANCEL to skip migration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The folder you chose does not contain valid SleepyHead data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot use this folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose or create a new folder for OSCAR data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrating </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OSCAR will set up a folder for your data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We suggest you use this folder: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click Ok to accept this, or No if you want to use a different folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next time you run OSCAR, you will be asked again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrate SleepyHead Data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8404,15 +8481,15 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="unfinished">呼吸机以持续的%1%2气流摧残你</translation>
+        <translation type="obsolete">呼吸机以持续的%1%2气流摧残你</translation>
     </message>
     <message>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">压力低于 %1%2 ，持续时间%3%.</translation>
+        <translation type="obsolete">压力低于 %1%2 ，持续时间%3%.</translation>
     </message>
     <message>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="unfinished">呼吸机以持续的%1-%2 %3 气流摧残你.</translation>
+        <translation type="obsolete">呼吸机以持续的%1-%2 %3 气流摧残你.</translation>
     </message>
     <message>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
@@ -8420,15 +8497,15 @@ Line %2, column %3</source>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="unfinished">呼气压力固定于 %1%2.</translation>
+        <translation type="obsolete">呼气压力固定于 %1%2.</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">吸气压力低于 %1%2 ，持续时间 %3% .</translation>
+        <translation type="obsolete">吸气压力低于 %1%2 ，持续时间 %3% .</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="unfinished">呼气压力低于 %1%2 ，持续时间 %3% .</translation>
+        <translation type="obsolete">呼气压力低于 %1%2 ，持续时间 %3% .</translation>
     </message>
     <message>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
@@ -8453,6 +8530,30 @@ Line %2, column %3</source>
     <message>
         <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your CPAP machine used a constant %1 %2 of air</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your pressure was under %1 %2 for %3% of the time.</source>
+        <translation type="unfinished">压力低于 %1%2 ，持续时间%3%. {1 %2 ?} {3%?}</translation>
+    </message>
+    <message>
+        <source>Your machine used a constant %1-%2 %3 of air.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure fixed at %1 %2.</source>
+        <translation type="unfinished">呼气压力固定于 %1%2. {1 %2.?}</translation>
+    </message>
+    <message>
+        <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation type="unfinished">吸气压力低于 %1%2 ，持续时间 %3% . {1 %2 ?} {3%?}</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation type="unfinished">呼气压力低于 %1%2 ，持续时间 %3% . {1 %2 ?} {3%?}</translation>
     </message>
 </context>
 <context>
@@ -8507,6 +8608,11 @@ Line %2, column %3</source>
     <message>
         <source>Clone %1 Graph</source>
         <translation>复制 %1 图表</translation>
+    </message>
+    <message>
+        <source>Double click title to pin / unpin
+Click and drag to reorder graphs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

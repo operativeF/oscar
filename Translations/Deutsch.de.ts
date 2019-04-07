@@ -2,342 +2,123 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>QObject</name>
+    <name>AboutDialog</name>
     <message>
-        <source>&quot;</source>
-        <translation>&quot;</translation>
+        <source>Sorry, could not locate About file.</source>
+        <translation>Leider konnte die About-Datei nicht gefunden werden.</translation>
     </message>
     <message>
-        <source>%</source>
-        <translation>%</translation>
+        <source>Close</source>
+        <translation>Beenden</translation>
     </message>
     <message>
-        <source>?</source>
-        <translation>?</translation>
+        <source>&amp;About</source>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <source>A</source>
-        <translation>A</translation>
+        <source>GPL License</source>
+        <translation>GPL License</translation>
     </message>
     <message>
-        <source>H</source>
-        <translation>H</translation>
+        <source>As this is a pre-release version, it is recommended that you &lt;b&gt;back up your data folder manually&lt;/b&gt; before proceding, because attempting to roll back later may break things.</source>
+        <translation>Da es sich um eine Vorabversion handelt, wird empfohlen, den Datenordner vor dem Vorgang manuell zu sichern&lt;/b&gt;, da der spätere Rollback-Vorgang möglicherweise zu Problemen führt.</translation>
     </message>
     <message>
-        <source>P</source>
-        <translation>P</translation>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
     </message>
     <message>
-        <source>h</source>
-        <translation>h</translation>
+        <source>About OSCAR</source>
+        <translation>Über OSCAR</translation>
     </message>
     <message>
-        <source>m</source>
-        <translation>m</translation>
+        <source>Sorry, could not locate Credits file.</source>
+        <translation>Entschuldigung, die Credits-Datei konnte nicht gefunden werden.</translation>
     </message>
     <message>
-        <source>s</source>
-        <translation>s</translation>
+        <source>Important:</source>
+        <translation>Wichtig:</translation>
     </message>
     <message>
-        <source> m</source>
-        <translation> m</translation>
+        <source>OSCAR v%1</source>
+        <translation>OSCAR v%1</translation>
     </message>
     <message>
-        <source>%1</source>
-        <translation>%1</translation>
+        <source>Sorry, could not locate changelog.</source>
+        <translation type="vanished">Leider konnte kein Änderungsprotokoll gefunden werden.</translation>
     </message>
     <message>
-        <source>??</source>
-        <translation>??</translation>
+        <source>Credits</source>
+        <translation>Verdienst</translation>
     </message>
     <message>
-        <source>AI</source>
-        <translation>AI</translation>
+        <source>To see if the license text is available in your language, see %1.</source>
+        <translation>Informationen dazu, ob der Lizenztext in Ihrer Sprache verfügbar ist, finden Sie unter %1.</translation>
     </message>
     <message>
-        <source>CA</source>
-        <translation>CA</translation>
+        <source>Release Notes</source>
+        <translation>Versionshinweise</translation>
     </message>
     <message>
-        <source>EP</source>
-        <translation>EP</translation>
+        <source>Show data folder</source>
+        <translation>Datenordner anzeigen</translation>
     </message>
     <message>
-        <source>FL</source>
-        <translation>FL</translation>
+        <source>Sorry, could not locate Release Notes.</source>
+        <translation>Sorry, konnte die Release Notes nicht finden.</translation>
     </message>
+</context>
+<context>
+    <name>CMS50F37Loader</name>
     <message>
-        <source>HI</source>
-        <translation>HI</translation>
+        <source>Could not find the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
     </message>
     <message>
-        <source>IE</source>
-        <translation>IE</translation>
+        <source>Could not open the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
     </message>
+</context>
+<context>
+    <name>CMS50Loader</name>
     <message>
-        <source>Hz</source>
-        <translation>Hz</translation>
+        <source>Could not get data transmission from oximeter.</source>
+        <translation>Keine Datenübertragung vom Oxymeter möglich.</translation>
     </message>
     <message>
-        <source>LE</source>
-        <translation>LE</translation>
+        <source>Please ensure you select &apos;upload&apos; from the oximeter devices menu.</source>
+        <translation>Bitte stellen Sie sicher, dass Sie den&apos;Upload&apos; aus dem Menü des Oxymeter Gerätes auswählt haben. Beim PO400 geht das automatisch.</translation>
     </message>
     <message>
-        <source>LF</source>
-        <translation>LF</translation>
+        <source>Could not find the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
     </message>
     <message>
-        <source>LL</source>
-        <translation>LL</translation>
+        <source>Could not open the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
     </message>
+</context>
+<context>
+    <name>Daily</name>
     <message>
-        <source>Kg</source>
-        <translation>kg</translation>
+        <source>B</source>
+        <translation>B</translation>
     </message>
     <message>
-        <source>O2</source>
-        <translation>O2</translation>
+        <source>u</source>
+        <translation>u</translation>
     </message>
     <message>
-        <source>OA</source>
-        <translation>OA</translation>
+        <source> i </source>
+        <translation> i </translation>
     </message>
     <message>
-        <source>NR</source>
-        <translation>NR</translation>
-    </message>
-    <message>
-        <source>PB</source>
-        <translation>PB</translation>
-    </message>
-    <message>
-        <source>PC</source>
-        <translation>PC</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nein</translation>
-    </message>
-    <message>
-        <source>PP</source>
-        <translation>PP</translation>
-    </message>
-    <message>
-        <source>PS</source>
-        <translation>PS</translation>
-    </message>
-    <message>
-        <source>On</source>
-        <translation>An</translation>
-    </message>
-    <message>
-        <source>RE</source>
-        <translation>RE</translation>
-    </message>
-    <message>
-        <source>S9</source>
-        <translation>S9</translation>
-    </message>
-    <message>
-        <source>SA</source>
-        <translation>SA</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation>SD</translation>
-    </message>
-    <message>
-        <source>TB</source>
-        <translation>TB</translation>
-    </message>
-    <message>
-        <source>UA</source>
-        <translation>UA</translation>
-    </message>
-    <message>
-        <source>VS</source>
-        <translation>VS</translation>
-    </message>
-    <message>
-        <source>ft</source>
-        <translation>ft</translation>
-    </message>
-    <message>
-        <source>lb</source>
-        <translation>lb</translation>
-    </message>
-    <message>
-        <source>ml</source>
-        <translation>ml</translation>
-    </message>
-    <message>
-        <source>ms</source>
-        <translation>ms</translation>
-    </message>
-    <message>
-        <source>oz</source>
-        <translation>oz</translation>
-    </message>
-    <message>
-        <source>x1</source>
-        <translation>x1</translation>
-    </message>
-    <message>
-        <source>x2</source>
-        <translation>x2</translation>
-    </message>
-    <message>
-        <source>x3</source>
-        <translation>x3</translation>
-    </message>
-    <message>
-        <source>x4</source>
-        <translation>x4</translation>
-    </message>
-    <message>
-        <source>x5</source>
-        <translation>x5</translation>
-    </message>
-    <message>
-        <source> cm</source>
-        <translation> cm</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation>&amp;Nein</translation>
-    </message>
-    <message>
-        <source>90%</source>
-        <translation>90%</translation>
-    </message>
-    <message>
-        <source>???</source>
-        <translation>???</translation>
-    </message>
-    <message>
-        <source>AHI</source>
-        <translation>AHI</translation>
-    </message>
-    <message>
-        <source>ASV</source>
-        <translation>ASV</translation>
-    </message>
-    <message>
-        <source>BMI</source>
-        <translation>BMI</translation>
-    </message>
-    <message>
-        <source>BND</source>
-        <translation>BND</translation>
-    </message>
-    <message>
-        <source>CAI</source>
-        <translation>CAI</translation>
-    </message>
-    <message>
-        <source>Apr</source>
-        <translation>Apr</translation>
-    </message>
-    <message>
-        <source>CSR</source>
-        <translation>CSR</translation>
-    </message>
-    <message>
-        <source>Aug</source>
-        <translation>Aug</translation>
-    </message>
-    <message>
-        <source>Avg</source>
-        <translation>Gem</translation>
-    </message>
-    <message>
-        <source>DOB</source>
-        <translation>Geburtsdatum</translation>
-    </message>
-    <message>
-        <source>EPI</source>
-        <translation>EPI</translation>
-    </message>
-    <message>
-        <source>EPR</source>
-        <translation>EPR</translation>
-    </message>
-    <message>
-        <source>Dec</source>
-        <translation>Dez</translation>
-    </message>
-    <message>
-        <source>FLI</source>
-        <translation>FLI</translation>
+        <source>Big</source>
+        <translation>Groß</translation>
     </message>
     <message>
         <source>End</source>
         <translation>Ende</translation>
-    </message>
-    <message>
-        <source>Feb</source>
-        <translation>Feb</translation>
-    </message>
-    <message>
-        <source>Jan</source>
-        <translation>Jan</translation>
-    </message>
-    <message>
-        <source>Jul</source>
-        <translation>Jul</translation>
-    </message>
-    <message>
-        <source>Jun</source>
-        <translation>Jun</translation>
-    </message>
-    <message>
-        <source>NRI</source>
-        <translation>NRI</translation>
-    </message>
-    <message>
-        <source>Mar</source>
-        <translation>März</translation>
-    </message>
-    <message>
-        <source>Max</source>
-        <translation>Max</translation>
-    </message>
-    <message>
-        <source>May</source>
-        <translation>Mai</translation>
-    </message>
-    <message>
-        <source>Med</source>
-        <translation>Med</translation>
-    </message>
-    <message>
-        <source>Min</source>
-        <translation>Min</translation>
-    </message>
-    <message>
-        <source>Nov</source>
-        <translation>Nov</translation>
-    </message>
-    <message>
-        <source>Oct</source>
-        <translation>Okt</translation>
-    </message>
-    <message>
-        <source>Off</source>
-        <translation>Aus</translation>
-    </message>
-    <message>
-        <source>RDI</source>
-        <translation>RDI</translation>
-    </message>
-    <message>
-        <source>REI</source>
-        <translation>REI</translation>
-    </message>
-    <message>
-        <source>UAI</source>
-        <translation>UAI</translation>
     </message>
     <message>
         <source>UF1</source>
@@ -348,56 +129,1313 @@
         <translation>UF2</translation>
     </message>
     <message>
-        <source>UF3</source>
-        <translation>UF3</translation>
-    </message>
-    <message>
-        <source>Sep</source>
-        <translation>Sep</translation>
-    </message>
-    <message>
-        <source>VS2</source>
-        <translation>VS2</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>Zeo</source>
-        <translation>Zeo</translation>
-    </message>
-    <message>
-        <source>bpm</source>
-        <translation>bpm</translation>
-    </message>
-    <message>
-        <source>v%1</source>
-        <translation>v%1</translation>
-    </message>
-    <message>
-        <source>Brain Wave</source>
-        <translation>Gehirn Wellen</translation>
-    </message>
-    <message>
         <source>%1%2</source>
         <translation>%1%2</translation>
     </message>
     <message>
-        <source>%1: </source>
-        <translation>%1: </translation>
+        <source>Form</source>
+        <translation>Form</translation>
     </message>
     <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;Ja</translation>
+        <source>TTIA</source>
+        <translation type="vanished">TTIA</translation>
     </message>
     <message>
-        <source>15mm</source>
-        <translation>15mm</translation>
+        <source>Oximetry Sessions</source>
+        <translation>Oxymeter Sitzung</translation>
     </message>
     <message>
-        <source>22mm</source>
-        <translation>22mm</translation>
+        <source>Color</source>
+        <translation>Farbe</translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation>Markierungen</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation>Aufzeichnungen</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <source>Show all events</source>
+        <translation type="vanished">Alle Ereignisse anzeigen</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <source>Show all graphs</source>
+        <translation type="vanished">Alle Diagramme zeigen</translation>
+    </message>
+    <message>
+        <source>PAP Mode: %1</source>
+        <translation>PAP Modus: %1</translation>
+    </message>
+    <message>
+        <source>Machine Settings Unavailable</source>
+        <translation>Geräteeinstellungen nicht verfügbar</translation>
+    </message>
+    <message>
+        <source>I&apos;m feeling ...</source>
+        <translation>Ich fühle mich ...</translation>
+    </message>
+    <message>
+        <source>Journal</source>
+        <translation>Journal</translation>
+    </message>
+    <message>
+        <source>Total time in apnea</source>
+        <translation>Gesamtzeit des Apnoe</translation>
+    </message>
+    <message>
+        <source>Position Sensor Sessions</source>
+        <translation>Position Sensor Sitzungen</translation>
+    </message>
+    <message>
+        <source>Add Bookmark</source>
+        <translation>Neues Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Remove Bookmark</source>
+        <translation>Lesezeichen entfernen</translation>
+    </message>
+    <message>
+        <source>Pick a Colour</source>
+        <translation>Wählen Sie eine Farbe</translation>
+    </message>
+    <message>
+        <source>Complain to your Equipment Provider!</source>
+        <translation>Beschweren Sie sich bei Ihren Anbieter!</translation>
+    </message>
+    <message>
+        <source>Session Information</source>
+        <translation>Sitzungsinformationen</translation>
+    </message>
+    <message>
+        <source>Sessions all off!</source>
+        <translation>Alle Sitzungen schließen!</translation>
+    </message>
+    <message>
+        <source>%1 event</source>
+        <translation>%1 Ereignis</translation>
+    </message>
+    <message>
+        <source>Go to the most recent day with data records</source>
+        <translation>Zum letzten Tag mit Datensätzen</translation>
+    </message>
+    <message>
+        <source>Machine Settings</source>
+        <translation>Geräteeinstellungen</translation>
+    </message>
+    <message>
+        <source>Sorry, this machine only provides compliance data.</source>
+        <translation>Tut mir leid, dieses Gerät liefert nur Compliance-Daten.</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Please Note:&lt;/b&gt; All settings shown below are based on assumptions that nothing&apos;s changed since previous days.</source>
+        <translation>&lt;b&gt;Bitte beachten Sie:&lt;/b&gt; Alle unten gezeigten Einstellungen basieren auf der Annahme, dass sich seit den letzten Tagen nichts geändert hat.</translation>
+    </message>
+    <message>
+        <source>B.M.I.</source>
+        <translation>B.M.I.</translation>
+    </message>
+    <message>
+        <source>Sleep Stage Sessions</source>
+        <translation>Schlafstadium Sitzungen</translation>
+    </message>
+    <message>
+        <source>Oximeter Information</source>
+        <translation>Oxymeter Informationen</translation>
+    </message>
+    <message>
+        <source>Events</source>
+        <translation>Ereignisse</translation>
+    </message>
+    <message>
+        <source>Graphs</source>
+        <translation>Diagramme</translation>
+    </message>
+    <message>
+        <source>CPAP Sessions</source>
+        <translation>CPAP Sitzung</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Mittel</translation>
+    </message>
+    <message>
+        <source>Starts</source>
+        <translation>Startet</translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Gewicht</translation>
+    </message>
+    <message>
+        <source>This bookmarked is in a currently disabled area..</source>
+        <translation>Dies ist ein mit Lesezeichen derzeit deaktivierter Bereich..</translation>
+    </message>
+    <message>
+        <source>Zombie</source>
+        <translation>Nicht gut</translation>
+    </message>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Session End Times</source>
+        <translation>Sitzungsendzeit</translation>
+    </message>
+    <message>
+        <source>enable</source>
+        <translation>aktivieren</translation>
+    </message>
+    <message>
+        <source>%1 events</source>
+        <translation>%1 Ereignisse</translation>
+    </message>
+    <message>
+        <source>events</source>
+        <translation>Ereignisse</translation>
+    </message>
+    <message>
+        <source>BRICK :(</source>
+        <translation>BLOCK :(</translation>
+    </message>
+    <message>
+        <source>Event Breakdown</source>
+        <translation>Ereignis Pannen</translation>
+    </message>
+    <message>
+        <source>Click to %1 this session.</source>
+        <translation>Klicken Sie auf %1 dieser Sitzung.</translation>
+    </message>
+    <message>
+        <source>SpO2 Desaturations</source>
+        <translation>SpO2 Entsättigungen</translation>
+    </message>
+    <message>
+        <source>&quot;Nothing&apos;s here!&quot;</source>
+        <translation>&quot;Hier ist nichts!&quot;</translation>
+    </message>
+    <message>
+        <source>%1h %2m %3s</source>
+        <translation>%1h %2m %3s</translation>
+    </message>
+    <message>
+        <source>Awesome</source>
+        <translation>Sehr gut</translation>
+    </message>
+    <message>
+        <source>Pulse Change events</source>
+        <translation>Pulsereignis ändern</translation>
+    </message>
+    <message>
+        <source>SpO2 Baseline Used</source>
+        <translation>SpO2-Baseline verwendet</translation>
+    </message>
+    <message>
+        <source>Zero hours??</source>
+        <translation>Null-Stunden??</translation>
+    </message>
+    <message>
+        <source>Go to the previous day</source>
+        <translation>Zum vorherigen Tag</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>Time over leak redline</source>
+        <translation>Zeit über Leck rote Linie</translation>
+    </message>
+    <message>
+        <source>disable</source>
+        <translation>deaktivieren</translation>
+    </message>
+    <message>
+        <source>Bookmark at %1</source>
+        <translation>Lesezeichen bei %1</translation>
+    </message>
+    <message>
+        <source>Statistics</source>
+        <translation>Statistiken</translation>
+    </message>
+    <message>
+        <source>Oscar is bored with this days lack of data.</source>
+        <translation>Oscar langweilt sich mit so wenig Daten.</translation>
+    </message>
+    <message>
+        <source>Breakdown</source>
+        <translation>Aufschlüsselung</translation>
+    </message>
+    <message>
+        <source>Unknown Session</source>
+        <translation>Unbekannte Sitzung</translation>
+    </message>
+    <message>
+        <source>Sessions exist for this day but are switched off.</source>
+        <translation>Sitzungen existieren heute, sind aber ausgeschaltet.</translation>
+    </message>
+    <message>
+        <source>Model %1 - %2</source>
+        <translation>Model %1 - %2</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation>Dauer</translation>
+    </message>
+    <message>
+        <source>View Size</source>
+        <translation>Größen</translation>
+    </message>
+    <message>
+        <source>Hide all graphs</source>
+        <translation type="vanished">Ausblenden aller Diagramme</translation>
+    </message>
+    <message>
+        <source>Hide all events</source>
+        <translation type="vanished">Alle Ereignisse einblenden</translation>
+    </message>
+    <message>
+        <source>Impossibly short session</source>
+        <translation>Sehr kurze Sitzung</translation>
+    </message>
+    <message>
+        <source>%1 Session #%2</source>
+        <translation>%1 Sitzung #%2</translation>
+    </message>
+    <message>
+        <source>Show/hide available graphs.</source>
+        <translation>Verfügbare Diagramme anzeigen/ausblenden.</translation>
+    </message>
+    <message>
+        <source>No %1 events are recorded this day</source>
+        <translation>Keine %1 Ereignisse werden an diesem Tag aufgezeichnet</translation>
+    </message>
+    <message>
+        <source>One or more waveform record(s) for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
+        <translation>Ein oder mehrere Waveform-Datensätze für diese Sitzung hatten fehlerhafte Quelldaten. Einige Überlagerungspunkte für Wellenformen stimmen möglicherweise nicht richtig überein.</translation>
+    </message>
+    <message>
+        <source>BRICK! :(</source>
+        <translation>ZIEGELSTEIN! :(</translation>
+    </message>
+    <message>
+        <source>Show or hide the calender</source>
+        <translation>Ein/Aus Kalender</translation>
+    </message>
+    <message>
+        <source>Time outside of ramp</source>
+        <translation>Außerhalb der Rampenzeit</translation>
+    </message>
+    <message>
+        <source>Unable to display Pie Chart on this system</source>
+        <translation>Das Kreisdiagramm kann auf diesem System nicht angezeigt werden</translation>
+    </message>
+    <message>
+        <source>Total ramp time</source>
+        <translation>Gesamte Rampenzeit</translation>
+    </message>
+    <message>
+        <source>This day just contains summary data, only limited information is available.</source>
+        <translation>Dieser Tag enthält nur zusammenfassende Daten. Es stehen nur begrenzte Informationen zur Verfügung.</translation>
+    </message>
+    <message>
+        <source>(Mode/Pressure settings are guessed on this day.)</source>
+        <translation>(Die Einstellungen für den Druckmodus werden an diesem Tag geschätzt.)</translation>
+    </message>
+    <message>
+        <source>Time at Pressure</source>
+        <translation>Zeit in Druck</translation>
+    </message>
+    <message>
+        <source>Go to the next day</source>
+        <translation>Gehen Sie auf den nächsten Tag</translation>
+    </message>
+    <message>
+        <source>Session Start Times</source>
+        <translation>Sitzungsstartzeit</translation>
+    </message>
+</context>
+<context>
+    <name>ExportCSV</name>
+    <message>
+        <source>AHI</source>
+        <translation>AHI</translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation>Ende</translation>
+    </message>
+    <message>
+        <source>%1% </source>
+        <translation>%1% </translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>End:</source>
+        <translation>Ende:</translation>
+    </message>
+    <message>
+        <source>Quick Range:</source>
+        <translation>Zeitspanne:</translation>
+    </message>
+    <message>
+        <source>Daily</source>
+        <translation>Täglich</translation>
+    </message>
+    <message>
+        <source>Event</source>
+        <translation>Ereignis</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <source>Last Fortnight</source>
+        <translation>Letzten Vierzehn Tage</translation>
+    </message>
+    <message>
+        <source>Most Recent Day</source>
+        <translation>Neuste Tag</translation>
+    </message>
+    <message>
+        <source> Count</source>
+        <translation> Land</translation>
+    </message>
+    <message>
+        <source>Filename:</source>
+        <translation>Dateiname:</translation>
+    </message>
+    <message>
+        <source>Select file to export to</source>
+        <translation>Wählen Sie die Datei, um zu Exportieren</translation>
+    </message>
+    <message>
+        <source>Resolution:</source>
+        <translation>Auflösung:</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Aufheben</translation>
+    </message>
+    <message>
+        <source>Dates:</source>
+        <translation>Termine:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>In Gebrauch</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Export</translation>
+    </message>
+    <message>
+        <source>OSCAR_</source>
+        <translation>OSCAR_</translation>
+    </message>
+    <message>
+        <source>Start:</source>
+        <translation>Start:</translation>
+    </message>
+    <message>
+        <source>Data/Duration</source>
+        <translation>Daten/Dauer</translation>
+    </message>
+    <message>
+        <source>CSV Files (*.csv)</source>
+        <translation>CSV Dateien (*.csv)</translation>
+    </message>
+    <message>
+        <source>Last Month</source>
+        <translation>Letzter Monat</translation>
+    </message>
+    <message>
+        <source>Last 6 Months</source>
+        <translation>Letzten 6 Monate</translation>
+    </message>
+    <message>
+        <source>Total Time</source>
+        <translation>Gesamte Zeit</translation>
+    </message>
+    <message>
+        <source>DateTime</source>
+        <translation>Datum-Zeit</translation>
+    </message>
+    <message>
+        <source>Session Count</source>
+        <translation>Sitzungs Anzahl</translation>
+    </message>
+    <message>
+        <source>Session</source>
+        <translation>Sitzung</translation>
+    </message>
+    <message>
+        <source>Everything</source>
+        <translation>Alles</translation>
+    </message>
+    <message>
+        <source>Last Week</source>
+        <translation>Letzte Woche</translation>
+    </message>
+    <message>
+        <source>Last Year</source>
+        <translation>Letztes Jahr</translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
+        <translation>Export in CSV Datei</translation>
+    </message>
+    <message>
+        <source>Sessions_</source>
+        <translation>Sitzungen_</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>Summary_</source>
+        <translation>Zusammenfassung_</translation>
+    </message>
+    <message>
+        <source>Details_</source>
+        <translation>Details_</translation>
+    </message>
+    <message>
+        <source>Sessions</source>
+        <translation>Sitzungen</translation>
+    </message>
+</context>
+<context>
+    <name>FPIconLoader</name>
+    <message>
+        <source>This Machine Record cannot be imported in this profile.</source>
+        <translation>Dieser Geräte-Datensatz kann in diesem Profil nicht importiert werden.</translation>
+    </message>
+    <message>
+        <source>Import Error</source>
+        <translation>Import Fehler</translation>
+    </message>
+    <message>
+        <source>The Day records overlap with already existing content.</source>
+        <translation>Die Aufzeichnungen dieses Tages überschneiden sich mit bereits vorhandenen Inhalt.</translation>
+    </message>
+</context>
+<context>
+    <name>Help</name>
+    <message>
+        <source>No</source>
+        <translation>Nein</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <source>Index</source>
+        <translation>Index</translation>
+    </message>
+    <message>
+        <source>clear</source>
+        <translation>klar</translation>
+    </message>
+    <message>
+        <source>HelpEngine did not set up correctly</source>
+        <translation>Hilfe Anwendung wurde nicht richtig eingerichtet</translation>
+    </message>
+    <message>
+        <source>Help files do not appear to be present.</source>
+        <translation>Hilfedateien scheinen nicht vorhanden zu sein.</translation>
+    </message>
+    <message>
+        <source>HelpEngine could not register documentation correctly.</source>
+        <translation>Die Hilfe Anwendung konnte die Dokumentation nicht korrekt registrieren.</translation>
+    </message>
+    <message>
+        <source>Help Files are not yet available for %1 and will display in %2.</source>
+        <translation>Hilfedateien sind noch nicht verfügbar für %1 und werden angezeigt in %2.</translation>
+    </message>
+    <message>
+        <source>Hide this message</source>
+        <translation>Verberge diese Nachricht</translation>
+    </message>
+    <message>
+        <source>Please wait a bit.. Indexing still in progress</source>
+        <translation>Bitte warten Sie etwas.. Die Indizierung läuft noch</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Suche</translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <translation>Inhalt</translation>
+    </message>
+    <message>
+        <source>%1 result(s) for &quot;%2&quot;</source>
+        <translation>%1 Resultat(e) für &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>No documentation available</source>
+        <translation>Keine Dokumentation verfügbar</translation>
+    </message>
+    <message>
+        <source>Search Topic:</source>
+        <translation>Suchthema:</translation>
+    </message>
+</context>
+<context>
+    <name>MD300W1Loader</name>
+    <message>
+        <source>Could not find the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
+    </message>
+    <message>
+        <source>Could not open the oximeter file:</source>
+        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>-</source>
+        <translation>-</translation>
+    </message>
+    <message>
+        <source>CPAP</source>
+        <translation>CPAP</translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <source>Gah!</source>
+        <translation>Bah!</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <source>Please insert your CPAP data card...</source>
+        <translation>Bitte benutzen Sie Ihre CPAP-Datenkarte...</translation>
+    </message>
+    <message>
+        <source>Donations are not implemented</source>
+        <translation>Spenden werden nicht umgesetzt</translation>
+    </message>
+    <message>
+        <source>DISCLAIMER:</source>
+        <translation>HAFTUNGSAUSSCHLUSS:</translation>
+    </message>
+    <message>
+        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
+        <translation type="vanished">Bitte beachten Sie, dass dies zum Verlust von Diagrammdaten führen kann, wenn die Sicherungen von OSCAR deaktiviert oder in irgendeiner Weise beeinträchtigt wurde.</translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <translation>%1 %2</translation>
+    </message>
+    <message>
+        <source>Daily Calendar</source>
+        <translation>Kalender täglich</translation>
+    </message>
+    <message>
+        <source>&amp;Data</source>
+        <translation>&amp;Daten</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>&amp;Datei</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Hilfe</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>&amp;Ansicht</translation>
+    </message>
+    <message>
+        <source>There was a problem opening Somnopose Data File: </source>
+        <translation>Es gab ein Problem beim Öffnen der CSV Datendatei: </translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation>&amp;Schließen</translation>
+    </message>
+    <message>
+        <source>Daily</source>
+        <translation>Täglich</translation>
+    </message>
+    <message>
+        <source>OSCAR</source>
+        <translation>OSCAR</translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation>Hinweis:</translation>
+    </message>
+    <message>
+        <source>Loading profile &quot;%1&quot;</source>
+        <translation>Profil laden &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Import &amp;ZEO Data</source>
+        <translation>Import &amp;ZEO Daten</translation>
+    </message>
+    <message>
+        <source>Copyright:</source>
+        <translation>Urheberrecht:</translation>
+    </message>
+    <message>
+        <source>MSeries Import complete</source>
+        <translation>M-Serie komplett Importiert</translation>
+    </message>
+    <message>
+        <source>There was an error saving screenshot to file &quot;%1&quot;</source>
+        <translation>Es gab einen Fehler beim Speichern des Screenshot in eine Datei &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>Wählen Sie einen Ordner</translation>
+    </message>
+    <message>
+        <source>A %1 file structure for a %2 was located at:</source>
+        <translation>Eine%1 Dateistruktur für eine %2 wurde in:</translation>
+    </message>
+    <message>
+        <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
+        <translation>Diese Software wurde entwickelt, um Sie bei der Überprüfung der Daten zu unterstützen, die von CPAP-Geräten zur Behandlung verschiedener Schlafstörungen erzeugt werden.</translation>
+    </message>
+    <message>
+        <source>Importing Data</source>
+        <translation>Importieren von Daten</translation>
+    </message>
+    <message>
+        <source>The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
+        <translation>Die Autoren übernehmen KEINE Haftung für Personen, die sich oder Anderen durch Verwendung oder Missbrauch dieser Software schaden.</translation>
+    </message>
+    <message>
+        <source>Online Users &amp;Guide</source>
+        <translation>Online &amp;Handbuch</translation>
+    </message>
+    <message>
+        <source>Online Help Resources</source>
+        <translation>Online Hilfe</translation>
+    </message>
+    <message>
+        <source>View &amp;Welcome</source>
+        <translation>&amp;Willkommensansicht</translation>
+    </message>
+    <message>
+        <source>Currenly supported machines:</source>
+        <translation>Derzeit unterstützte Geräte:</translation>
+    </message>
+    <message>
+        <source>Show Performance Information</source>
+        <translation>Anzeige der Performance- Informationen</translation>
+    </message>
+    <message>
+        <source>There was a problem opening MSeries block File: </source>
+        <translation>Es gab ein Problem beim Öffnen einer M-Serie Block-Datei: </translation>
+    </message>
+    <message>
+        <source>&lt;a href=&apos;http://www.cpaptalk.com&apos;&gt;CPAPTalk Forum&lt;/a&gt;,</source>
+        <translation>&lt;a href=&apos;http://www.apneuvereniging.nl/forum&apos;&gt;ApneuVereinigung&lt;/a&gt;,</translation>
+    </message>
+    <message>
+        <source>Current Days</source>
+        <translation>Aktueller Tag</translation>
+    </message>
+    <message>
+        <source>Contec CMS50D+, CMS50E and CMS50F (not 50FW) Oximeters</source>
+        <translation>Contec CMS50D +, CMS50E und CMS50F (nicht 50FW) Pulsoxymeter</translation>
+    </message>
+    <message>
+        <source>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV models)</source>
+        <translation>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV-Modelle)</translation>
+    </message>
+    <message>
+        <source>&amp;About</source>
+        <translation>&amp;Schließen</translation>
+    </message>
+    <message>
+        <source>Further Information</source>
+        <translation>Weitere Informationen</translation>
+    </message>
+    <message>
+        <source>View &amp;Daily</source>
+        <translation>&amp;Tagesansicht</translation>
+    </message>
+    <message>
+        <source>View &amp;Overview</source>
+        <translation>&amp;Übersichtsansicht</translation>
+    </message>
+    <message>
+        <source>Access to Preferences has been blocked until recalculation completes.</source>
+        <translation>Zugriff auf Einstellungen wurde blockiert, bis die Neuberechnung abgeschlossen ist.</translation>
+    </message>
+    <message>
+        <source>Import RemStar &amp;MSeries Data</source>
+        <translation>Import REMSTAR &amp;M-Serie Daten</translation>
+    </message>
+    <message>
+        <source>For some reason, OSCAR does not have any backups for the following machine:</source>
+        <translation>Aus irgendeinem Grund verfügt OSCAR über keine Sicherungen für das folgende Gerät:</translation>
+    </message>
+    <message>
+        <source>Daily Sidebar</source>
+        <translation>Randleiste täglich</translation>
+    </message>
+    <message>
+        <source>Note as a precaution, the backup folder will be left in place.</source>
+        <translation>Als Vorsichtsmaßnahme werden die Backup Ordner an Ort und Stelle belassen.</translation>
+    </message>
+    <message>
+        <source>A file permission error casued the purge process to fail; you will have to delete the following folder manually:</source>
+        <translation>Ein Fehler bei der Dateiberechtigung hat dazu geführt, dass der Bereinigungsprozess fehlgeschlagen ist. Sie müssen den folgenden Ordner manuell löschen:</translation>
+    </message>
+    <message>
+        <source>Change &amp;User</source>
+        <translation>&amp;Benutzer ändern</translation>
+    </message>
+    <message>
+        <source>%1&apos;s Journal</source>
+        <translation>%1&apos;s Journal</translation>
+    </message>
+    <message>
+        <source>Plus a few &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt;usage notes&lt;/a&gt;, and some important information for Mac users.</source>
+        <translation>Plus ein paar &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt; Verwendungshinweise &lt;/ a&gt;, und einige wichtige Informationen für Mac-Nutzer.</translation>
+    </message>
+    <message>
+        <source>Import Problem</source>
+        <translation>Importproblem</translation>
+    </message>
+    <message>
+        <source>Friendly forums to talk and learn about Sleep Apnea:</source>
+        <translation>Bitte sprechen Sie freundlich in den Foren um mehr über OSCAR zu erfahren:</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Please be aware you can not undo this operation!&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Bitte beachten Sie, dass Sie diesen Vorgang nicht rückgängig machen können!&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Updates are not yet implemented</source>
+        <translation>Updates sind noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>View S&amp;tatistics</source>
+        <translation>Statistik &amp;anzeigen</translation>
+    </message>
+    <message>
+        <source>Monthly</source>
+        <translation>Monatlich</translation>
+    </message>
+    <message>
+        <source>Change &amp;Language</source>
+        <translation>&amp;Sprache auswählen</translation>
+    </message>
+    <message>
+        <source>&amp;About OSCAR</source>
+        <translation>&amp;Über OSCAR</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>Import</translation>
+    </message>
+    <message>
+        <source>Because there are no internal backups to rebuild from, you will have to restore from your own.</source>
+        <translation>Es existiert keine interne Datensicherung. Sie müssen Ihre eigene verwenden.</translation>
+    </message>
+    <message>
+        <source>Would you like to import from your own backups now? (you will have no data visible for this machine until you do)</source>
+        <translation>Möchten Sie jetzt Ihr eigenes Backup importieren? (Es wird nichts angezeigt bevor Sie nicht Ihre Daten einspielen)</translation>
+    </message>
+    <message>
+        <source>Please wait, importing from backup folder(s)...</source>
+        <translation>Bitte warten, Import von Backup-Ordner (n)...</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to delete oximetry data for %1</source>
+        <translation>Sind Sie sicher, dass Sie die Oxymetriedaten löschen möchten %1</translation>
+    </message>
+    <message>
+        <source>Purge ALL CPAP Data</source>
+        <translation>Säuberung aller CPAP-Daten</translation>
+    </message>
+    <message>
+        <source>O&amp;ximetry Wizard</source>
+        <translation>O&amp;xymetrie Assistent</translation>
+    </message>
+    <message>
+        <source>ResMed S9 Oximeter Attachment</source>
+        <translation>ResMed S9 Oxymeter Adapter</translation>
+    </message>
+    <message>
+        <source>About OSCAR</source>
+        <translation>Über OSCAR</translation>
+    </message>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <source>Right &amp;Sidebar</source>
+        <translation>&amp;Seitenleiste rechts</translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide is not yet implemented</source>
+        <translation type="vanished">Das Benutzerhandbuch ist noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Rebuild CPAP Data</source>
+        <translation>Wiederherstellung der CPAP Daten</translation>
+    </message>
+    <message>
+        <source>XML Files (*.xml)</source>
+        <translation>XML Datei (*.xml)</translation>
+    </message>
+    <message>
+        <source>The FAQ is not yet implemented</source>
+        <translation>Die FAQ ist noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Export review is not yet implemented</source>
+        <translation>Die Exportprüfung ist noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to rebuild all CPAP data for the following machine:
+
+</source>
+        <translation>Sind Sie sicher, dass Sie alle CPAP-Daten für das folgende Gerät neu erstellen möchten?:
+
+</translation>
+    </message>
+    <message>
+        <source>Report an Issue</source>
+        <translation>Ein Problem melden</translation>
+    </message>
+    <message>
+        <source>Please report any bugs you find to the OSCAR developer&apos;s group.</source>
+        <translation>Bitte melden Sie alle Fehler, die Sie finden, an die OSCAR-Entwicklergruppe.</translation>
+    </message>
+    <message>
+        <source>Date Range</source>
+        <translation>Datumsbereich</translation>
+    </message>
+    <message>
+        <source>Profile</source>
+        <translation>Profile</translation>
+    </message>
+    <message>
+        <source>View Statistics</source>
+        <translation>Statistiken anzeigen</translation>
+    </message>
+    <message>
+        <source>CPAP Data Located</source>
+        <translation>CPAP-Daten liegen an</translation>
+    </message>
+    <message>
+        <source>Access to Import has been blocked while recalculations are in progress.</source>
+        <translation>Der Zugang zu Import wurde blockiert, während Neuberechnungen im Gange sind.</translation>
+    </message>
+    <message>
+        <source>Sleep Disorder Terms &amp;Glossary</source>
+        <translation>Schlafstörungen Nutzungswörterbuch &amp;Wörterverzeichnis</translation>
+    </message>
+    <message>
+        <source>This is a beta release, some features may not yet behave as expected.</source>
+        <translation>Dies ist eine Beta-Version und einige Funktionen funktionieren noch nicht wie erwartet.</translation>
+    </message>
+    <message>
+        <source>Are you really sure you want to do this?</source>
+        <translation>Sind Sie wirklich sicher, dass Sie das tun wollen?</translation>
+    </message>
+    <message>
+        <source>Select the day with valid oximetry data in daily view first.</source>
+        <translation>Wählen Sie zuerst den Tag mit gültigen Oximetriedaten in der Tagesansicht aus.</translation>
+    </message>
+    <message>
+        <source>Purge Oximetry Data</source>
+        <translation>Oxymetriedaten löschen</translation>
+    </message>
+    <message>
+        <source>*** &lt;u&gt;Use at your own risk&lt;/u&gt; ***</source>
+        <translation>*** &lt;u&gt; Benutzung auf eigene Gefahr&lt;/u&gt; ***</translation>
+    </message>
+    <message>
+        <source>Records</source>
+        <translation>Zusammenfassung</translation>
+    </message>
+    <message>
+        <source>Use &amp;AntiAliasing</source>
+        <translation>Verwenden Sie &amp;Antialiasing</translation>
+    </message>
+    <message>
+        <source>I don&apos;t recommend using this built in web browser to do any major surfing in, it will work, but it&apos;s mainly meant as a help browser.</source>
+        <translation>Ich empfehle, nicht mit diesem Browser zu Surfen. Es wird funktionieren, aber er ist vor allem als Hilfe-Browser gedacht.</translation>
+    </message>
+    <message>
+        <source>About &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt;Sleep Apnea&lt;/a&gt; on Wikipedia</source>
+        <translation>Über &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt; Schlafapnoe&lt;/a&gt; auf Wikipedia</translation>
+    </message>
+    <message>
+        <source>Would you like to import from this location?</source>
+        <translation>Möchten Sie von diesem Ort impoertieren?</translation>
+    </message>
+    <message>
+        <source>This is &lt;font color=&apos;red&apos;&gt;&lt;u&gt;NOT&lt;/u&gt;&lt;/font&gt; medical software. This application is merely a data viewer, and no guarantee is made regarding accuracy or correctness of any calculations or data displayed.</source>
+        <translation>Dies ist &lt;font color=&apos;red&apos;&gt;&lt;u&gt;KEINE&lt;/u&gt;&lt;/font&gt; medizinische Software. Bei dieser Anwendung handelt es sich lediglich um einen Datenbetrachter, und es wird keine Garantie für die Richtigkeit oder Richtigkeit der angezeigten Berechnungen oder Daten übernommen.</translation>
+    </message>
+    <message>
+        <source>Somnopause Data Import complete</source>
+        <translation>Somnopause Datenimport abgeschlossen</translation>
+    </message>
+    <message>
+        <source>Processing import list...</source>
+        <translation>Importliste wird bearbeitet...</translation>
+    </message>
+    <message>
+        <source>Report Mode</source>
+        <translation>Report Modus</translation>
+    </message>
+    <message>
+        <source>&amp;Profiles</source>
+        <translation>&amp;Profile</translation>
+    </message>
+    <message>
+        <source>Profiles</source>
+        <translation>Profile</translation>
+    </message>
+    <message>
+        <source>CSV Export Wizard</source>
+        <translation>CSV-Export-Assistent</translation>
+    </message>
+    <message>
+        <source>DeVilbiss Intellipap (Auto)</source>
+        <translation>DeVilbiss Intellipap (Auto)</translation>
+    </message>
+    <message>
+        <source>&amp;Automatic Oximetry Cleanup</source>
+        <translation>&amp;Automatische Bereinigung der Oxymetrie</translation>
+    </message>
+    <message>
+        <source>The Glossary is not yet implemented</source>
+        <translation>Das Glossar ist noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Import is already running in the background.</source>
+        <translation>Import läuft bereits im Hintergrund.</translation>
+    </message>
+    <message>
+        <source>Specify</source>
+        <translation>einzeln Ausführen</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>No help is available.</source>
+        <translation>Es ist keine Hilfe verfügbar.</translation>
+    </message>
+    <message>
+        <source>There was a problem opening ZEO File: </source>
+        <translation>Es gab ein Problem beim Öffnen der ZEO Datei: </translation>
+    </message>
+    <message>
+        <source>Statistics</source>
+        <translation>Statistiken</translation>
+    </message>
+    <message>
+        <source>Up to date</source>
+        <translation>Neuster Stand</translation>
+    </message>
+    <message>
+        <source>Please open a profile first.</source>
+        <translation>Bitte öffnen Sie zuerst ein Profil.</translation>
+    </message>
+    <message>
+        <source>&amp;Statistics</source>
+        <translation>&amp;Statistiken</translation>
+    </message>
+    <message>
+        <source>Please remember to point the importer at the root folder or drive letter of your data-card, and not a subfolder.</source>
+        <translation>Denken Sie daran, den Importer auf den Stammordner oder den Laufwerksbuchstaben Ihrer Datenkarte zu verweisen und nicht auf einen Unterordner.</translation>
+    </message>
+    <message>
+        <source>Welcome to OSCAR</source>
+        <translation>Willkommen bei OSCAR</translation>
+    </message>
+    <message>
+        <source>Backup &amp;Journal</source>
+        <translation>Sicherungskopie &amp;Journal</translation>
+    </message>
+    <message>
+        <source>Imported %1 CPAP session(s) from
+
+%2</source>
+        <translation>Importiert %1 CPAP-Sitzung(en) von
+
+%2</translation>
+    </message>
+    <message>
+        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</source>
+        <translation>Diese Software wird frei veröffentlicht unter &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <source>Reporting issues is not yet implemented</source>
+        <translation>Berichterstattungsprobleme sind noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Purge &amp;Current Selected Day</source>
+        <translation>Bereinigen, &amp;Aktualisieren des aktuell ausgewählten Tages</translation>
+    </message>
+    <message>
+        <source>Provided you have made &lt;i&gt;your &lt;b&gt;own&lt;/b&gt; backups for ALL of your CPAP data&lt;/i&gt;, you can still complete this operation, but you will have to restore from your backups manually.</source>
+        <translation>Vorausgesetzt, Sie haben &lt;i&gt;&lt;b&gt;eigene &lt;/b&gt; Backups für ALLE Ihre CPAP-Daten&lt;/i&gt;, die Sie noch vervollständigen können erstellt. Aber Sie müssen die Backups manuell wiederherstellen.</translation>
+    </message>
+    <message>
+        <source>ResMed S9 models (CPAP, Auto, VPAP)</source>
+        <translation>ResMed S9 Modellen (CPAP, AutoPAP, VPAP)</translation>
+    </message>
+    <message>
+        <source>Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.</source>
+        <translation>Ihr Arzt sollte immer die erste und beste Informationsquelle für das wichtige Management Ihrer Gesundheit sein.</translation>
+    </message>
+    <message>
+        <source>&amp;Advanced</source>
+        <translation>&amp;Fortgeschrittene</translation>
+    </message>
+    <message>
+        <source>Zeo CSV Import complete</source>
+        <translation>Zeo CSV Import abgeschlossen</translation>
+    </message>
+    <message>
+        <source>&amp;Import Data</source>
+        <translation>&amp;Daten importieren</translation>
+    </message>
+    <message>
+        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
+        <translation type="vanished">Hier sind die &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt; Release Notes&lt;/a&gt; für diese Version.</translation>
+    </message>
+    <message>
+        <source>Print &amp;Report</source>
+        <translation>&amp;Drucken</translation>
+    </message>
+    <message>
+        <source>&amp;Reset Graph Layout</source>
+        <translation>&amp;Zurücksetzen der Diagrammansicht</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t find any valid Machine Data at
+
+%1</source>
+        <translation>Hier konnten keine gültigen Gerätedaten gefunden werden
+
+%1</translation>
+    </message>
+    <message>
+        <source>Export for Review</source>
+        <translation>Export für Bewertung</translation>
+    </message>
+    <message>
+        <source>Take &amp;Screenshot</source>
+        <translation>&amp;Bildschirmverwaltung</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation>Übersicht</translation>
+    </message>
+    <message>
+        <source>Show Debug Pane</source>
+        <translation>Debug-Fenster anzeigen</translation>
+    </message>
+    <message>
+        <source>&amp;Edit Profile</source>
+        <translation>&amp;Profil bearbeiten</translation>
+    </message>
+    <message>
+        <source>Import Reminder</source>
+        <translation>Import Erinnerung</translation>
+    </message>
+    <message>
+        <source>Help Browser</source>
+        <translation>Hilfe Browser</translation>
+    </message>
+    <message>
+        <source>If you can read this, the restart command didn&apos;t work. You will have to do it yourself manually.</source>
+        <translation>Wenn Sie dies lesen können, hat der Neustartbefehl nicht funktioniert. Sie müssen es manuell tun.</translation>
+    </message>
+    <message>
+        <source>Exp&amp;ort Data</source>
+        <translation>Exp&amp;ort Daten</translation>
+    </message>
+    <message>
+        <source>Welcome</source>
+        <translation>Willkommen</translation>
+    </message>
+    <message>
+        <source>Import &amp;Somnopose Data</source>
+        <translation>Import &amp;CSV Daten</translation>
+    </message>
+    <message>
+        <source>Screenshot saved to file &quot;%1&quot;</source>
+        <translation>Screenshot Datei gespeichert &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation>&amp;Einstellungen</translation>
+    </message>
+    <message>
+        <source>Fisher &amp; Paykel ICON (CPAP, Auto)</source>
+        <translation>Fisher &amp; Paykel ICON (CPAP, Auto)</translation>
+    </message>
+    <message>
+        <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; OSCAR&apos;s machine database for the following machine:&lt;/p&gt;</source>
+        <translation>Du bist dabei &lt;font size=+2&gt;zu löschen&lt;/font&gt; OSCAR-Gerätedatenbank für folgende Geräte:&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
+        <translation>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Toggle &amp;Line Cursor</source>
+        <translation>Ein/Aus &amp;Linienbeschreibung</translation>
+    </message>
+    <message>
+        <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
+        <translation>Sind Sie &lt;b&gt;absolut sicher&lt;/b&gt; das Sie fortfahren möchten?</translation>
+    </message>
+    <message>
+        <source>&amp;Fullscreen Toggle</source>
+        <translation type="vanished">&amp;Vollbild umschalten</translation>
+    </message>
+    <message>
+        <source>Import Success</source>
+        <translation>Erfolgreicher Import</translation>
+    </message>
+    <message>
+        <source>Choose where to save journal</source>
+        <translation>Wählen, wo das Blatt gespeichert werden soll</translation>
+    </message>
+    <message>
+        <source>&amp;Frequently Asked Questions</source>
+        <translation>&amp;Häufig gestellte Fragen</translation>
+    </message>
+    <message>
+        <source>Oximetry</source>
+        <translation>Oxymetrie</translation>
+    </message>
+    <message>
+        <source>A %1 file structure was located at:</source>
+        <translation>Eine%1 Dateistruktur befindet sich unter:</translation>
+    </message>
+    <message>
+        <source>(It doesn&apos;t support SSL encryption, so it&apos;s not a good idea to type your passwords or personal details anywhere.)</source>
+        <translation>(Das Programm unterstützt keine SSL-Verschlüsselung, so dass es keine gute Idee ist, Ihre Passwörter oder persönliche Daten irgendwo einzugeben.)</translation>
+    </message>
+    <message>
+        <source>Change &amp;Data Folder</source>
+        <translation>&amp;Datenordner ändern</translation>
+    </message>
+    <message>
+        <source>License:</source>
+        <translation>Lizenz:</translation>
+    </message>
+    <message>
+        <source>OSCAR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
+        <translation>OSCAR wurde von einem Softwareentwickler mit persönlicher Erfahrung mit einer Schlafstörung entwickelt und durch das Feedback vieler anderer freiwilliger Tester geprägt, die sich mit ähnlichen Bedingungen befassen.</translation>
+    </message>
+    <message>
+        <source>Navigation</source>
+        <translation>Navigation</translation>
+    </message>
+    <message>
+        <source>Already up to date with CPAP data at
+
+%1</source>
+        <translation>Bereits aktuelle CPAP Daten
+
+%1</translation>
+    </message>
+    <message>
+        <source>No profile has been selected for Import.</source>
+        <translation>Es wurde kein Profil für den Import ausgewählt.</translation>
+    </message>
+    <message>
+        <source>The release notes for this version can be found in the About OSCAR menu item.</source>
+        <translation>Die Versionshinweise für diese Version finden Sie im Menüpunkt Über OSCAR.</translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide is not yet available</source>
+        <translation>Das Benutzerhandbuch ist noch nicht verfügbar</translation>
+    </message>
+    <message>
+        <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
+        <translation>Bitte beachten Sie, dass dies zu Datenverlust führen kann, wenn die Backups von OSCAR deaktiviert wurden.</translation>
+    </message>
+    <message>
+        <source>&amp;Maximize Toggle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MinMaxWidget</name>
+    <message>
+        <source>Scaling Mode</source>
+        <translation>Skalierungsmodus</translation>
+    </message>
+    <message>
+        <source>The Maximum Y-Axis value.. Must be greater than Minimum to work.</source>
+        <translation>Um damit zu arbeiten, muss der max. Y-Achsen Wert größer sein als der minimale Wert.</translation>
+    </message>
+    <message>
+        <source>This button resets the Min and Max to match the Auto-Fit</source>
+        <translation>Diese Schaltfläche setzt die Automatische Anpassung für Min. und Max</translation>
+    </message>
+    <message>
+        <source>The Y-Axis scaling mode, &apos;Auto-Fit&apos; for automatic scaling, &apos;Defaults&apos; for settings according to manufacturer, and &apos;Override&apos; to choose your own.</source>
+        <translation>Der Y-Achsen Skalierungsmodus &quot;Automatische Anpassung&quot;, für die automatische Skalierung, sind Vorgaben vom Hersteller. Die &quot;Übersteuerung&quot; können Sie selbst wählen.</translation>
+    </message>
+    <message>
+        <source>The Minimum Y-Axis value.. Note this can be a negative number if you wish.</source>
+        <translation>Wenn Sie es wünschen kann der Y-Achsen-Mindestwert eine negative Zahl sein.</translation>
+    </message>
+    <message>
+        <source>Defaults</source>
+        <translation>Standardwerte</translation>
+    </message>
+    <message>
+        <source>Auto-Fit</source>
+        <translation>Automatische Anpassung</translation>
+    </message>
+    <message>
+        <source>Override</source>
+        <translation>Übersteuerung</translation>
+    </message>
+</context>
+<context>
+    <name>NewProfile</name>
+    <message>
+        <source>ASV</source>
+        <translation>ASV</translation>
     </message>
     <message>
         <source>APAP</source>
@@ -408,2252 +1446,855 @@
         <translation>CPAP</translation>
     </message>
     <message>
-        <source>Auto</source>
-        <translation>Auto</translation>
+        <source>Male</source>
+        <translation>Männlich</translation>
     </message>
     <message>
-        <source>Busy</source>
-        <translation>Beschäftigt</translation>
+        <source>&amp;Back</source>
+        <translation>&amp;Zurück</translation>
     </message>
     <message>
-        <source>Min EPAP</source>
-        <translation>Min EPAP</translation>
+        <source>&amp;Next</source>
+        <translation>&amp;Weiter</translation>
     </message>
     <message>
-        <source>EPAP</source>
-        <translation>EPAP</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>ICON</source>
-        <translation>ICON</translation>
-    </message>
-    <message>
-        <source>Min IPAP</source>
-        <translation>Min IPAP</translation>
-    </message>
-    <message>
-        <source>IPAP</source>
-        <translation>IPAP</translation>
-    </message>
-    <message>
-        <source>Last</source>
-        <translation>Letzte Verwendung</translation>
-    </message>
-    <message>
-        <source>Leak</source>
-        <translation>Leck</translation>
-    </message>
-    <message>
-        <source>Mask</source>
-        <translation>Maske</translation>
-    </message>
-    <message>
-        <source>Med.</source>
-        <translation>Med.</translation>
-    </message>
-    <message>
-        <source>Mode</source>
-        <translation>Modus</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Keiner</translation>
-    </message>
-    <message>
-        <source>RERA</source>
-        <translation>RERA</translation>
-    </message>
-    <message>
-        <source>Peak</source>
-        <translation>Spitze</translation>
-    </message>
-    <message>
-        <source>Ramp</source>
-        <translation>Rampe</translation>
-    </message>
-    <message>
-        <source>SpO2</source>
-        <translation>SpO2</translation>
-    </message>
-    <message>
-        <source>Zero</source>
-        <translation>Null</translation>
-    </message>
-    <message>
-        <source>ÇSR</source>
-        <translation>CSR</translation>
-    </message>
-    <message>
-        <source>Resp. Event</source>
-        <translation>Resp. Ereignis</translation>
-    </message>
-    <message>
-        <source>Inclination</source>
-        <translation>Neigung</translation>
-    </message>
-    <message>
-        <source>Launching Windows Explorer failed</source>
-        <translation>Das Starten vom Windows Explorer ist gescheitert</translation>
-    </message>
-    <message>
-        <source>Would you like to switch on automatic backups, so next time a new version of OSCAR needs to do so, it can rebuild from these?</source>
-        <translation>Möchten Sie die automatischen Sicherungen einschalten, so dass das nächste Mal, wenn eine neue Version von OSCAR erforderlich ist, diese neu erstellt werden kann?</translation>
-    </message>
-    <message>
-        <source>%1 %2</source>
-        <translation>%1 %2</translation>
-    </message>
-    <message>
-        <source>Hose Diameter</source>
-        <translation>Schlauchdurchmesser</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
-    </message>
-    <message>
-        <source>RemStar Pro with C-Flex+</source>
-        <translation>RemStar Pro mit C-Flex+</translation>
-    </message>
-    <message>
-        <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation>OSCT (%1) muss seine Datenbank aktualisieren für %2 %3 %4</translation>
-    </message>
-    <message>
-        <source>???: </source>
-        <translation>???: </translation>
-    </message>
-    <message>
-        <source>AVAPS</source>
-        <translation>AVAPS</translation>
-    </message>
-    <message>
-        <source>CMS50</source>
-        <translation>CMS50</translation>
-    </message>
-    <message>
-        <source>Therapy Pressure</source>
-        <translation>Therapiedruck</translation>
-    </message>
-    <message>
-        <source>BiPAP</source>
-        <translation>BiPAP</translation>
-    </message>
-    <message>
-        <source>Brand</source>
-        <translation>Marke</translation>
-    </message>
-    <message>
-        <source>EPR: </source>
-        <translation>EPR: </translation>
-    </message>
-    <message>
-        <source>Daily</source>
-        <translation>Täglich</translation>
+        <source>TimeZone</source>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>Email</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>First</source>
-        <translation>Erste Verwendung</translation>
-    </message>
-    <message>
-        <source>Ramp Pressure</source>
-        <translation>Rampen Druck</translation>
-    </message>
-    <message>
-        <source>L/min</source>
-        <translation>L/min</translation>
-    </message>
-    <message>
-        <source>Hours</source>
-        <translation>Stunden</translation>
-    </message>
-    <message>
-        <source>MD300</source>
-        <translation>MD300</translation>
-    </message>
-    <message>
-        <source>Leaks</source>
-        <translation>Lecks</translation>
-    </message>
-    <message>
-        <source>Max: </source>
-        <translation>Max: </translation>
-    </message>
-    <message>
-        <source>Min: </source>
-        <translation>Min: </translation>
-    </message>
-    <message>
-        <source>Model</source>
-        <translation>Model</translation>
+        <translation>E-mail</translation>
     </message>
     <message>
         <source>OSCAR</source>
         <translation>OSCAR</translation>
     </message>
     <message>
-        <source>Nasal</source>
-        <translation>Nase</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Aufzeichnungen</translation>
-    </message>
-    <message>
         <source>Phone</source>
         <translation>Telefon</translation>
     </message>
     <message>
-        <source>Ready</source>
-        <translation>Bereit</translation>
+        <source>Any reports generated are for PERSONAL USE ONLY, and NOT IN ANY WAY fit for compliance or medical diagnostic purposes.</source>
+        <translation>Alle Berichte die erzeugt werden, sind nur zum PERSÖNLICHEN GEBRAUCH und  in keiner Weise für die Einhaltung medizinischer Diagnosezwecke geeignet.</translation>
     </message>
     <message>
-        <source>TTIA:</source>
-        <translation>TTIA:</translation>
+        <source>&amp;Close this window</source>
+        <translation>&amp;Fenster schließen</translation>
     </message>
     <message>
-        <source>W-Avg</source>
-        <translation>W-Durchschnitt</translation>
+        <source>Edit User Profile</source>
+        <translation>Benutzerprofil bearbeiten</translation>
     </message>
     <message>
-        <source>Snore</source>
-        <translation>Schnarchen</translation>
+        <source>The authors will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
+        <translation>Die Autoren haften nicht für &lt;u&gt;irgendetwas&lt;/u&gt; im Zusammenhang mit der Verwendung oder dem Missbrauch dieser Software.</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Start</translation>
+        <source>Please provide a username for this profile</source>
+        <translation>Bitte geben Sie einen Benutzernamen für dieses Profil an</translation>
     </message>
     <message>
-        <source>Usage</source>
-        <translation>Verwendung</translation>
+        <source>Welcome to Open Source CPAP Reviewer</source>
+        <translation type="vanished">Willkommen beim Open Source CPAP Reviewer</translation>
     </message>
     <message>
-        <source>Respiratory Disturbance Index</source>
-        <translation>Atem-Störungs-Verzeichnis</translation>
+        <source>CPAP Treatment Information</source>
+        <translation>CPAP-Behandlungsinformationen</translation>
     </message>
     <message>
-        <source>cmH2O</source>
-        <translation>cmH2O</translation>
+        <source>Password Protect Profile</source>
+        <translation>Profilpasswort</translation>
     </message>
     <message>
-        <source>The developers needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
-        <translation>Die Entwickler benötigen eine ZIP-Kopie der SD-Karte dieser Geräte und entsprechende Encore-PDF-Berichte, damit OSCAR verwendet werden kann.</translation>
+        <source>OSCAR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
+        <translation>OSCAR ist lediglich als Datenanzeige gedacht und ersetzt keinesfalls die kompetente medizinische Anleitung Ihres Arztes.</translation>
     </message>
     <message>
-        <source>Pressure Support</source>
-        <translation>Druckunterstützung</translation>
+        <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
+        <translation>OSCAR wurde frei veröffentlicht unter &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, und kommt ohne Gewähr und ohne irgendwelche Ansprüche auf Eignung für irgendeinen Zweck.</translation>
     </message>
     <message>
-        <source>Bedtime: %1</source>
-        <translation>Schlafenszeit: %1</translation>
+        <source>Accuracy of any data displayed is not and can not be guaranteed.</source>
+        <translation>Für die Korrektheit der Daten kann nicht garantiert werden.</translation>
     </message>
     <message>
-        <source>Hypopnea</source>
-        <translation>Hypopnoe</translation>
+        <source>D.O.B.</source>
+        <translation>Geb. Dat.</translation>
     </message>
     <message>
-        <source>ratio</source>
-        <translation>Verhältnis</translation>
+        <source>Female</source>
+        <translation>Weiblich</translation>
     </message>
     <message>
-        <source>Tidal Volume</source>
-        <translation>AZV</translation>
-    </message>
-    <message>
-        <source>Getting Ready...</source>
-        <translation>Fertig werden...</translation>
-    </message>
-    <message>
-        <source>Entire Day</source>
-        <translation>Ganzer Tag</translation>
-    </message>
-    <message>
-        <source>Intellipap pressure relief mode.</source>
-        <translation>Intellipap Druckmodus.</translation>
-    </message>
-    <message>
-        <source>Personal Sleep Coach</source>
-        <translation>Persönlichen Schlaftrainer</translation>
-    </message>
-    <message>
-        <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation>Neueste Oxymetriedaten: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
-    </message>
-    <message>
-        <source>PRS1 Humidification level</source>
-        <translation>PRS1 Befeuchtungsebene</translation>
-    </message>
-    <message>
-        <source>Scanning Files</source>
-        <translation>Scanne Dateien</translation>
-    </message>
-    <message>
-        <source>Clear Airway</source>
-        <translation>Centraler Apnoe</translation>
-    </message>
-    <message>
-        <source>Respironics</source>
-        <translation>Respironics</translation>
-    </message>
-    <message>
-        <source>Parsing Identification File</source>
-        <translation>Parsing-Identifikationsdatei</translation>
-    </message>
-    <message>
-        <source>Heart rate in beats per minute</source>
-        <translation>Die Herzfrequenz in Schlägen pro Minute</translation>
-    </message>
-    <message>
-        <source>A large mask leak affecting machine performance.</source>
-        <translation>Eine zu große Maske beeinflußt die Geräteleistung.</translation>
-    </message>
-    <message>
-        <source>Somnopose Software</source>
-        <translation>Somnopose Software</translation>
-    </message>
-    <message>
-        <source>Time spent awake</source>
-        <translation>Zeit im Wachliegen</translation>
-    </message>
-    <message>
-        <source>Temp. Enable</source>
-        <translation>Temp. aktivieren</translation>
-    </message>
-    <message>
-        <source>Timed Breath</source>
-        <translation>Zeitüberschreitung Atem</translation>
-    </message>
-    <message>
-        <source>Pop out Graph</source>
-        <translation>grafische Darstellung</translation>
-    </message>
-    <message>
-        <source>Mask On Time</source>
-        <translation>Masken-Einschaltzeit</translation>
-    </message>
-    <message>
-        <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
-        <translation>Es ist wahrscheinlich, dass dabei eine Datenbeschädigung auftreten kann. Sind Sie sicher, dass Sie das tun wollen?</translation>
-    </message>
-    <message>
-        <source>Auto BiPAP</source>
-        <translation>Auto BiPAP</translation>
-    </message>
-    <message>
-        <source>Loading profile &quot;%1&quot;...</source>
-        <translation>Profil laden &quot;%1&quot;...</translation>
-    </message>
-    <message>
-        <source>Breathing Not Detected</source>
-        <translation>Atmung nicht erkannt</translation>
-    </message>
-    <message>
-        <source>There is no data to graph</source>
-        <translation>Es gibt keine Daten zum Darstellen</translation>
-    </message>
-    <message>
-        <source>Journal</source>
-        <translation>Journal</translation>
-    </message>
-    <message>
-        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation>Eine Einschränkung bei der normalen Atmung, was zu einer Abflachung der Strömungswellenform führt.</translation>
-    </message>
-    <message>
-        <source>Locating STR.edf File(s)...</source>
-        <translation>Suche nach STR.edf-Datei (en)...</translation>
-    </message>
-    <message>
-        <source>Pat. Trig. Breath</source>
-        <translation>Pat. Trig. Atem</translation>
-    </message>
-    <message>
-        <source>(Summary Only)</source>
-        <translation>(Nur Zusammenfassung)</translation>
-    </message>
-    <message>
-        <source>Ramp Delay Period</source>
-        <translation>Rampen-Verzögerungszeit</translation>
-    </message>
-    <message>
-        <source>RemStar BiPAP Auto with Bi-Flex</source>
-        <translation>RemStar BiPAP Auto mit Bi-Flex</translation>
-    </message>
-    <message>
-        <source>Sessions Switched Off</source>
-        <translation>Ereignisse abgemeldet</translation>
-    </message>
-    <message>
-        <source>Awakenings</source>
-        <translation>Erwachen</translation>
-    </message>
-    <message>
-        <source>This folder currently resides at the following location:</source>
-        <translation>Dieser Ordner befindet sich derzeit an der folgenden Position:</translation>
-    </message>
-    <message>
-        <source>Morning Feel</source>
-        <translation>Morgen erwartet Sie</translation>
-    </message>
-    <message>
-        <source>Pulse Change</source>
-        <translation>Impulsänderung</translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
-        <translation>Getrennt</translation>
-    </message>
-    <message>
-        <source>Sleep Stage</source>
-        <translation>Schlafstadium</translation>
-    </message>
-    <message>
-        <source>Sys1 Resist. Status</source>
-        <translation>Sys1 Resistenzstatus</translation>
-    </message>
-    <message>
-        <source>BiPAP AVAPS</source>
-        <translation>BiPAP AVAPS</translation>
-    </message>
-    <message>
-        <source>Minute Vent.</source>
-        <translation>Minuten Vent.</translation>
-    </message>
-    <message>
-        <source>Heated Tubing Connected</source>
-        <translation>beheizter Schlauch angeschlossen</translation>
-    </message>
-    <message>
-        <source>You did not select a directory.</source>
-        <translation>Sie haben kein Verzeichnis ausgewählt.</translation>
-    </message>
-    <message>
-        <source>VPAP Adapt</source>
-        <translation>VPAP Anpassung</translation>
-    </message>
-    <message>
-        <source>SpO2 Drop</source>
-        <translation>SpO2-Tropfen</translation>
-    </message>
-    <message>
-        <source>Ramp Event</source>
-        <translation>Rampenereignis</translation>
-    </message>
-    <message>
-        <source>SensAwake feature will reduce pressure when waking is detected.</source>
-        <translation>SensAwake wird den Druck reduzieren, wenn die Funktion erkennt, dass Sie wachwerden.</translation>
-    </message>
-    <message>
-        <source>Show All Events</source>
-        <translation>Alle Ereignisse anzeigen</translation>
-    </message>
-    <message>
-        <source>CMS50E/F</source>
-        <translation>CMS50E/F</translation>
-    </message>
-    <message>
-        <source>Upright angle in degrees</source>
-        <translation>Bis rechten Winkel in Grad</translation>
-    </message>
-    <message>
-        <source>Importing Sessions...</source>
-        <translation>Importiere Sitzung...</translation>
-    </message>
-    <message>
-        <source>%1% %2</source>
-        <translation>%1% %2</translation>
-    </message>
-    <message>
-        <source>%1: %2</source>
-        <translation>%1: %2</translation>
-    </message>
-    <message>
-        <source>Higher Expiratory Pressure</source>
-        <translation>Höherer Expirationsdruck</translation>
-    </message>
-    <message>
-        <source>Summary Only :(</source>
-        <translation>Nur die Zusammenfassung :(</translation>
-    </message>
-    <message>
-        <source>NRI=%1 LKI=%2 EPI=%3</source>
-        <translation>NRI=%1 LKI=%2 EPI=%3</translation>
-    </message>
-    <message>
-        <source>M-Series</source>
-        <translation>M-Serie</translation>
-    </message>
-    <message>
-        <source>If you are concerned, click No to exit, and backup your profile manually, before starting OSCAR again.</source>
-        <translation>Wenn Sie betroffen sind, klicken Sie auf Nein, um den Vorgang zu beenden, und sichern Sie Ihr Profil manuell, bevor Sie OSCAR erneut starten.</translation>
-    </message>
-    <message>
-        <source>A vibratory snore</source>
-        <translation>Eine Schnarchvibration</translation>
-    </message>
-    <message>
-        <source>Vibratory Snore</source>
-        <translation>Schnarchvibration</translation>
-    </message>
-    <message>
-        <source>As you did not select a data folder, OSCAR will exit.</source>
-        <translation>Da Sie keinen Datenordner ausgewählt haben, wird OSCAR beendet.</translation>
-    </message>
-    <message>
-        <source>Lower Inspiratory Pressure</source>
-        <translation>Niedrigster Inspirationsdruck</translation>
-    </message>
-    <message>
-        <source>Humidifier Enabled Status</source>
-        <translation>Befeuchtungsstatus aktiviert</translation>
-    </message>
-    <message>
-        <source>Full Face</source>
-        <translation>Mund-Nase-Maske</translation>
-    </message>
-    <message>
-        <source>Full Time</source>
-        <translation>Volle Zeit</translation>
-    </message>
-    <message>
-        <source>SmartFlex Level</source>
-        <translation>Smartflex Ebene</translation>
-    </message>
-    <message>
-        <source>System One Resistance Status</source>
-        <translation>System One Resistenzstatus</translation>
-    </message>
-    <message>
-        <source>Journal Data</source>
-        <translation>Journal Daten</translation>
-    </message>
-    <message>
-        <source>(%1% compliant, defined as &gt; %2 hours)</source>
-        <translation>(%1% konform, definiert als &gt; %2 Stunden)</translation>
-    </message>
-    <message>
-        <source>Resp. Rate</source>
-        <translation>Resp. Rate</translation>
-    </message>
-    <message>
-        <source>Insp. Time</source>
-        <translation>Insp. Zeit</translation>
-    </message>
-    <message>
-        <source>Exp. Time</source>
-        <translation>Exp. Zeit</translation>
-    </message>
-    <message>
-        <source>OSCAR will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation>OSCAR wird nun beendet und (versucht) den Dateimanager Ihres Computers zu starten, damit Sie Ihr Profil manuell sichern können:</translation>
-    </message>
-    <message>
-        <source>ClimateLine Temperature</source>
-        <translation>Schlauchtemeratur</translation>
-    </message>
-    <message>
-        <source>Philips Respironics</source>
-        <translation>Philips Respironics</translation>
-    </message>
-    <message>
-        <source>Machine Unsupported</source>
-        <translation>Gerät wird nicht unterstützt</translation>
-    </message>
-    <message>
-        <source>0cmH2O</source>
-        <translation>0cmH2O</translation>
-    </message>
-    <message>
-        <source>SOMNOsoft2</source>
-        <translation>SOMNOsoft2</translation>
-    </message>
-    <message>
-        <source>A relative assessment of the pulse strength at the monitoring site</source>
-        <translation>Eine relative Bewertung der Pulsstärke an der Messstelle</translation>
-    </message>
-    <message>
-        <source>Machine</source>
-        <translation>Gerät</translation>
-    </message>
-    <message>
-        <source>1cmH2O</source>
-        <translation>1cmH2O</translation>
-    </message>
-    <message>
-        <source>Whether System One resistance settings are available to you.</source>
-        <translation>Die Widerstandseinstellungen von System One sind für Sie da.</translation>
-    </message>
-    <message>
-        <source>Mask On</source>
-        <translation>Maske auf</translation>
-    </message>
-    <message>
-        <source>2cmH2O</source>
-        <translation>2cmH2O</translation>
-    </message>
-    <message>
-        <source>Max: %1</source>
-        <translation>Max: %1</translation>
-    </message>
-    <message>
-        <source>Sorry, the purge operation failed, which means this version of OSCAR can&apos;t start.</source>
-        <translation>Die Bereinigungsoperation ist fehlgeschlagen, was bedeutet, dass diese Version von OSCAR nicht gestartet werden kann.</translation>
-    </message>
-    <message>
-        <source>3cmH2O</source>
-        <translation>3cmH2O</translation>
-    </message>
-    <message>
-        <source>A sudden (user definable) drop in blood oxygen saturation</source>
-        <translation>Ein plötzlicher (frei definierbarer) Abfall der Blutsauerstoffsättigung</translation>
-    </message>
-    <message>
-        <source>Time spent in deep sleep</source>
-        <translation>Zeit im Tiefschlaf</translation>
-    </message>
-    <message>
-        <source>Top secret internal stuff you&apos;re not supposed to see ;)</source>
-        <translation>Streng geheimes inneres Zeug, das Sie nicht sehen sollten ;)</translation>
-    </message>
-    <message>
-        <source>There are no graphs visible to print</source>
-        <translation>Im Druckergebnis sind keine Diagramme sichtbar</translation>
-    </message>
-    <message>
-        <source>The version of OSCAR you just ran is OLDER than the one used to create this data (%1).</source>
-        <translation>Die gerade ausgeführte Version von OSCAR ist älter als die zum Erstellen dieser Daten verwendete (%1).</translation>
-    </message>
-    <message>
-        <source>OSCAR picked only the first one of these, and will use it in future:
-
-</source>
-        <translation>OSCAR hat nur das Erste ausgewählt und wird es zukünftig verwenden:
-
-</translation>
-    </message>
-    <message>
-        <source>Target Vent.</source>
-        <translation>Ziel Vent.</translation>
-    </message>
-    <message>
-        <source>Humidification Level</source>
-        <translation>Befeuchtungsebene</translation>
-    </message>
-    <message>
-        <source>Sleep position in degrees</source>
-        <translation>Schlafposition in Grad</translation>
-    </message>
-    <message>
-        <source>Plots Disabled</source>
-        <translation>Teile deaktivieren</translation>
-    </message>
-    <message>
-        <source>Min: %1</source>
-        <translation>Min: %1</translation>
-    </message>
-    <message>
-        <source>Minutes</source>
-        <translation>Minuten</translation>
-    </message>
-    <message>
-        <source>Periodic Breathing</source>
-        <translation>periodische Atmung</translation>
-    </message>
-    <message>
-        <source>Popout %1 Graph</source>
-        <translation>Ausschalten %1 Grafik</translation>
-    </message>
-    <message>
-        <source>Ramp Only</source>
-        <translation>Nur Rampe</translation>
-    </message>
-    <message>
-        <source>Ramp Time</source>
-        <translation>Rampenzeit</translation>
-    </message>
-    <message>
-        <source>For some reason, OSCAR couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.
-
-</source>
-        <translation>Aus irgendeinem Grund konnte OSCAR keinen Journalobjektdatensatz in Ihrem Profil finden. Es wurden jedoch mehrere Journaldatenordner gefunden.
-
-</translation>
-    </message>
-    <message>
-        <source>PRS1 pressure relief mode.</source>
-        <translation>PRS1 Druckmodus.</translation>
-    </message>
-    <message>
-        <source>An abnormal period of Periodic Breathing</source>
-        <translation>Ein abnormaler Abschnitt der periodischen Atmung</translation>
-    </message>
-    <message>
-        <source>ResMed Mask Setting</source>
-        <translation>ResMed Maskeneinstellungen</translation>
-    </message>
-    <message>
-        <source>ResMed Exhale Pressure Relief</source>
-        <translation>ResMed Ausatem Druckentlastung</translation>
-    </message>
-    <message>
-        <source>A-Flex</source>
-        <translation>A-Flex</translation>
-    </message>
-    <message>
-        <source>EPR Level</source>
-        <translation>EPR Ebene</translation>
-    </message>
-    <message>
-        <source>Unintentional Leaks</source>
-        <translation>Unbeabsichtigte Lecks</translation>
-    </message>
-    <message>
-        <source>Would you like to show bookmarked areas in this report?</source>
-        <translation>Möchten Sie die Lesezeichenbereiche in diesem Bericht anzeigen?</translation>
-    </message>
-    <message>
-        <source>Somnopose</source>
-        <translation>Somnopose</translation>
-    </message>
-    <message>
-        <source>System One (60 Series)</source>
-        <translation>System One (60 Series)</translation>
-    </message>
-    <message>
-        <source>AHI %1</source>
-        <translation>AHI %1</translation>
-    </message>
-    <message>
-        <source>Next time you run, you will be asked again.</source>
-        <translation>Beim nächsten Startvorgang werden Sie wieder gefragt.</translation>
-    </message>
-    <message>
-        <source>C-Flex</source>
-        <translation>C-Flex</translation>
-    </message>
-    <message>
-        <source>BiPAP Pro</source>
-        <translation>BiPAP Pro</translation>
-    </message>
-    <message>
-        <source>CPAP Pro</source>
-        <translation>CPAP Pro</translation>
-    </message>
-    <message>
-        <source>VPAP-S/T</source>
-        <translation>VPAP-S/T</translation>
-    </message>
-    <message>
-        <source>VPAPauto</source>
-        <translation>VPAPauto</translation>
-    </message>
-    <message>
-        <source>RemStar Plus Compliance Only</source>
-        <translation>Nur RemStar Plus Therapietreue konformität</translation>
-    </message>
-    <message>
-        <source>Apnea Hypopnea Index</source>
-        <translation>Apnoe-Hypopnoe-Index</translation>
-    </message>
-    <message>
-        <source>Physical Height</source>
-        <translation>Physikalische Größe</translation>
-    </message>
-    <message>
-        <source>Pt. Access</source>
-        <translation>Pt. Zugriff</translation>
-    </message>
-    <message>
-        <source>CMS50F</source>
-        <translation>CMS50F</translation>
-    </message>
-    <message>
-        <source>ASV (Fixed EPAP)</source>
-        <translation>ASV (Fest EPAP)</translation>
-    </message>
-    <message>
-        <source>Patient Triggered Breaths</source>
-        <translation>Durch Patienten ausgelöste Atemzüge</translation>
-    </message>
-    <message>
-        <source>This means you will need to import this machine data again afterwards from your own backups or data card.</source>
-        <translation>Das heißt, Sie müssen diese Gerätedaten danach wieder von Ihren eigenen Backups oder Datenkarte importieren.</translation>
-    </message>
-    <message>
-        <source>Contec</source>
-        <translation>Contec</translation>
-    </message>
-    <message>
-        <source>Events</source>
-        <translation>Ereignisse</translation>
-    </message>
-    <message>
-        <source>Humid. Level</source>
-        <translation>Befeuchtungsebene</translation>
-    </message>
-    <message>
-        <source>AB Filter</source>
-        <translation>AB Filter</translation>
-    </message>
-    <message>
-        <source>Sys1 Resist. Lock</source>
-        <translation>Sys1 Widerst. Sperre</translation>
-    </message>
-    <message>
-        <source>%1
-Line %2, column %3</source>
-        <translation>%1
-Linie %2, Spalte %3</translation>
+        <source>Gender</source>
+        <translation>Geschlecht</translation>
     </message>
     <message>
         <source>Height</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <source>BiPAP autoSV Advanced</source>
-        <translation>BiPAP autoSV Fortgeschritten</translation>
+        <source>Contact Information</source>
+        <translation>Kontaktinformationen</translation>
     </message>
     <message>
-        <source>Ramp Enable</source>
-        <translation>Rampe aktivieren</translation>
-    </message>
-    <message>
-        <source>(% %1 in events)</source>
-        <translation>(% %1 der Ereignisse)</translation>
-    </message>
-    <message>
-        <source>RemStar BiPAP Pro with Bi-Flex</source>
-        <translation>RemStar BiPAP Pro mit Bi-Flex</translation>
-    </message>
-    <message>
-        <source>Lower Threshold</source>
-        <translation>untere Schwelle</translation>
-    </message>
-    <message>
-        <source>No Data</source>
-        <translation>Keine Daten</translation>
-    </message>
-    <message>
-        <source>Zeo sleep quality measurement</source>
-        <translation>Schlafqualitätsmessung</translation>
-    </message>
-    <message>
-        <source>Page %1 of %2</source>
-        <translation>Seite %1 von %2</translation>
-    </message>
-    <message>
-        <source>Litres</source>
-        <translation>Liter</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <translation>Handbuch</translation>
-    </message>
-    <message>
-        <source>Median</source>
-        <translation>Mittlere</translation>
-    </message>
-    <message>
-        <source>Fixed %1 (%2)</source>
-        <translation>Fest %1 (%2)</translation>
-    </message>
-    <message>
-        <source>Min %1</source>
-        <translation>Min %1</translation>
-    </message>
-    <message>
-        <source>Could not find explorer.exe in path to launch Windows Explorer.</source>
-        <translation>Explorer.exe konnte den Pfad im Windows-Explorer nicht starten.</translation>
-    </message>
-    <message>
-        <source>Machine automatically switches off</source>
-        <translation>Gerät schaltet sich automatisch aus</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation>Angeschlossen</translation>
-    </message>
-    <message>
-        <source>Low Usage Days: %1</source>
-        <translation>Tage mit zu geringer Nutzung: %1</translation>
-    </message>
-    <message>
-        <source>PS Max</source>
-        <translation>PS Max</translation>
-    </message>
-    <message>
-        <source>PS Min</source>
-        <translation>PS Min</translation>
-    </message>
-    <message>
-        <source>Database Outdated
-Please Rebuild CPAP Data</source>
-        <translation>veraltete Datenbank
-Bitte die Wiederherstellung Ihrer CPAP Daten laden</translation>
-    </message>
-    <message>
-        <source>Flow Limit.</source>
-        <translation>Fließgrenze.</translation>
-    </message>
-    <message>
-        <source>Detected mask leakage including natural Mask leakages</source>
-        <translation>Erkannte Masken Lecks einschließlich der natürlichen Maskenlecks</translation>
-    </message>
-    <message>
-        <source>Plethy</source>
-        <translation>Plethy (Ein Gerät zum Bestimmen und Registrieren der Variationen in der Größe oder des Volumens eines Schenkels, der Arm oder Bein, und somit die Variationen in der Menge des Blutes in dem Glied.)</translation>
-    </message>
-    <message>
-        <source>PRS1_%1</source>
-        <translation>PRS1_%1</translation>
-    </message>
-    <message>
-        <source>SensAwake</source>
-        <translation>Druckverminderungstechnologie während des Wachwerdens</translation>
-    </message>
-    <message>
-        <source>ST/ASV</source>
-        <translation>ST/ASV</translation>
-    </message>
-    <message>
-        <source>Median Leaks</source>
-        <translation>Mittlere Lecks</translation>
-    </message>
-    <message>
-        <source>%1 Report</source>
-        <translation>%1 Bericht</translation>
-    </message>
-    <message>
-        <source>ResMed</source>
-        <translation>ResMed</translation>
-    </message>
-    <message>
-        <source>Pr. Relief</source>
-        <translation>Druckentlastung</translation>
-    </message>
-    <message>
-        <source>Graphs Switched Off</source>
-        <translation>Diagramme abgemeldet</translation>
-    </message>
-    <message>
-        <source>Serial</source>
-        <translation>Serien</translation>
-    </message>
-    <message>
-        <source>Series</source>
-        <translation>Serie</translation>
-    </message>
-    <message>
-        <source>SpO2 %</source>
-        <translation>SpO2 %</translation>
-    </message>
-    <message>
-        <source>VPAP-S</source>
-        <translation>VPAP-S</translation>
-    </message>
-    <message>
-        <source>VPAP-T</source>
-        <translation>VPAP-T</translation>
-    </message>
-    <message>
-        <source>(last night)</source>
-        <translation>(letzte Nacht)</translation>
-    </message>
-    <message>
-        <source>AHI	%1
-</source>
-        <translation>AHI	%1
-</translation>
-    </message>
-    <message>
-        <source>Weight</source>
-        <translation>Gewicht</translation>
-    </message>
-    <message>
-        <source>Mask Pressure (High resolution)</source>
-        <translation>Maskendruck (hohe Auflösung)</translation>
-    </message>
-    <message>
-        <source>ZEO ZQ</source>
-        <translation>Schlafqualitätsmessung</translation>
-    </message>
-    <message>
-        <source>PRS1 pressure relief setting.</source>
-        <translation>PRS1 Druckeinstellung.</translation>
-    </message>
-    <message>
-        <source>Orientation</source>
-        <translation>Orientierung</translation>
-    </message>
-    <message>
-        <source>Whether or not machine shows AHI via LCD panel.</source>
-        <translation>Gerät zeigt AHI über LCD-Panel an.</translation>
-    </message>
-    <message>
-        <source>Smart Start</source>
-        <translation>Schneller Start</translation>
-    </message>
-    <message>
-        <source>Event Flags</source>
-        <translation>Ereignismarkierungen</translation>
-    </message>
-    <message>
-        <source>A few breaths automatically starts machine</source>
-        <translation>Nach ein paar Atemzügen startet das Gerät autmatisch</translation>
-    </message>
-    <message>
-        <source>Zeo ZQ</source>
-        <translation>Schlafqualitätsmessung</translation>
-    </message>
-    <message>
-        <source>Migrating Summary File Location</source>
-        <translation>Migrieren des Speicherorts der Zusammenfassungsdatei</translation>
-    </message>
-    <message>
-        <source>Zombie</source>
-        <translation>Mir geht es</translation>
-    </message>
-    <message>
-        <source>C-Flex+</source>
-        <translation>C-Flex+</translation>
-    </message>
-    <message>
-        <source>Bookmarks</source>
-        <translation>Lesezeichen</translation>
-    </message>
-    <message>
-        <source>PAP Mode</source>
-        <translation>PAP Modus</translation>
+        <source>Locale Settings</source>
+        <translation>Ländereinstellungen</translation>
     </message>
     <message>
         <source>CPAP Mode</source>
         <translation>CPAP Modus</translation>
     </message>
     <message>
-        <source>Time taken to get to sleep</source>
-        <translation>Einschlafzeit</translation>
+        <source>Select Country</source>
+        <translation>Land wählen</translation>
     </message>
     <message>
-        <source>SmartFlex Settings</source>
-        <translation>SmartFlex Einstellungen</translation>
+        <source>PLEASE READ CAREFULLY</source>
+        <translation>BITTE LESEN SIE</translation>
     </message>
     <message>
-        <source>An apnea where the airway is open</source>
-        <translation>Atemaussetzer obwohl Atemwege offen sind</translation>
+        <source>Untreated AHI</source>
+        <translation>Unbehandelter AHI</translation>
     </message>
     <message>
-        <source>Flow Limitation</source>
-        <translation>Flusslimitierung</translation>
+        <source>Keep the kids out.. Nothing more.. This isn&apos;t meant to be uber security.</source>
+        <translation>Die Software ist nichts für Kinder.</translation>
     </message>
     <message>
-        <source>Pin %1 Graph</source>
-        <translation>Anzeigen %1 Grafik</translation>
+        <source>metric</source>
+        <translation>metrisch</translation>
     </message>
     <message>
-        <source>Unpin %1 Graph</source>
-        <translation>Loslösen %1 Grafik</translation>
-    </message>
-    <message>
-        <source>Queueing Import Tasks...</source>
-        <translation>Warteschlangenimportaufgaben...</translation>
-    </message>
-    <message>
-        <source>Hours: %1h, %2m, %3s</source>
-        <translation>Stunden: %1h, %2m, %3s</translation>
-    </message>
-    <message>
-        <source>OSCAR does not yet have any automatic card backups stored for this device.</source>
-        <translation>Für OSCAR sind noch keine automatischen Kartensicherungen für dieses Gerät gespeichert.</translation>
-    </message>
-    <message>
-        <source>%1
-Length: %3
-Start: %2</source>
-        <translation>%1
-Länge: %3
-Start: %2</translation>
-    </message>
-    <message>
-        <source>CMS50F3.7</source>
-        <translation>CMS50F3.7</translation>
-    </message>
-    <message>
-        <source>RDI	%1
-</source>
-        <translation>RDI	%1
-</translation>
-    </message>
-    <message>
-        <source>ASVAuto</source>
-        <translation>ASVAuto</translation>
-    </message>
-    <message>
-        <source>PS %1 over %2-%3 (%4)</source>
-        <translation>PS %1 über %2-%3 (%4)</translation>
-    </message>
-    <message>
-        <source>Flow Rate</source>
-        <translation>Fließrate</translation>
-    </message>
-    <message>
-        <source>Time taken to breathe out</source>
-        <translation>Ausatmungszeit</translation>
-    </message>
-    <message>
-        <source>Important:</source>
-        <translation>Wichtig:</translation>
-    </message>
-    <message>
-        <source>Machine auto starts by breathing</source>
-        <translation>Wenn Sie atmen beginnt das Gerät zu arbeiten</translation>
-    </message>
-    <message>
-        <source>Peak %1</source>
-        <translation>Spitze %1</translation>
-    </message>
-    <message>
-        <source>ANGLE / OpenGLES</source>
-        <translation>ANGLE / OpenGLES</translation>
-    </message>
-    <message>
-        <source>An optical Photo-plethysomogram showing heart rhythm</source>
-        <translation>Eine optische Darstellung vom Herzrhythmus</translation>
-    </message>
-    <message>
-        <source>Loading %1 data for %2...</source>
-        <translation>Daten für %1 werden geladen %2...</translation>
-    </message>
-    <message>
-        <source>Pillows</source>
-        <translation>Kissen</translation>
-    </message>
-    <message>
-        <source>%1
-Length: %3
-Start: %2
-</source>
-        <translation>%1
-Länge: %3
-Start: %2
-</translation>
-    </message>
-    <message>
-        <source>Humid. Lvl.</source>
-        <translation>Feucht. Lvl.</translation>
-    </message>
-    <message>
-        <source>Time Awake</source>
-        <translation>Aufwachzeit</translation>
-    </message>
-    <message>
-        <source>How you felt in the morning</source>
-        <translation>Wie fühlten Sie sich am Morgen</translation>
-    </message>
-    <message>
-        <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation>Möchten Sie, dass OSCAR diesen Speicherort zum Speichern der Daten verwendet?</translation>
-    </message>
-    <message>
-        <source>I:E Ratio</source>
-        <translation>I: E-Verhältnis</translation>
-    </message>
-    <message>
-        <source>OSCAR v%1</source>
-        <translation>OSCAR v%1</translation>
-    </message>
-    <message>
-        <source>Amount of air displaced per breath</source>
-        <translation>Luftmenge pro Atemzug verdrängt</translation>
-    </message>
-    <message>
-        <source>Pat. Trig. Breaths</source>
-        <translation>Pat. Trig. Atemzüge</translation>
-    </message>
-    <message>
-        <source>% in %1</source>
-        <translation>% in %1</translation>
-    </message>
-    <message>
-        <source>Humidity Level</source>
-        <translation>Feuchtigkeitsgrad</translation>
-    </message>
-    <message>
-        <source>Profile</source>
-        <translation>Profile</translation>
+        <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
+        <translation>OSCAR ist urheberrechtlich geschützt &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nachteule Software</translation>
     </message>
     <message>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <source>Leak Flag</source>
-        <translation>Leck Markierung</translation>
+        <source>I agree to all the conditions above.</source>
+        <translation>Ich bin mit allen oben genannten Bedingungen einverstanden.</translation>
     </message>
     <message>
-        <source>Leak Rate</source>
-        <translation>Leckrate</translation>
+        <source>DST Zone</source>
+        <translation>Automatische Sommerzeit</translation>
     </message>
     <message>
-        <source>Loading Summaries.xml.gz</source>
-        <translation>Zusammenfassungsdaten xml.gz werden geladen</translation>
+        <source>about:blank</source>
+        <translation>Leere Seite</translation>
     </message>
     <message>
-        <source>ClimateLine Temperature Enable</source>
-        <translation>Schlauchtemeratur ausschalten</translation>
+        <source>archiac</source>
+        <translation>archaïsch</translation>
     </message>
     <message>
-        <source>Severity (0-1)</source>
-        <translation>Außergewöhnliche Schwere (0-1)</translation>
+        <source>RX Pressure</source>
+        <translation>RX Druck</translation>
     </message>
     <message>
-        <source>Reporting from %1 to %2</source>
-        <translation>Berichterstattung vom %1 bis %2</translation>
+        <source>Password</source>
+        <translation>Passwort</translation>
     </message>
     <message>
-        <source>Are you sure you want to reset all your channel colors and settings to defaults?</source>
-        <translation>Sind Sie sicher, dass Sie es wirklich wollen, alle Ihre Kanal-Farben und-Einstellungen auf die Standardwerte zurückzusetzen?</translation>
+        <source>Use of this software is entirely at your own risk.</source>
+        <translation>Die Nutzung der Software erfolgt auf eigene Gefahr.</translation>
     </message>
     <message>
-        <source>BrainWave</source>
-        <translation>Gehirnwellen</translation>
+        <source>Passwords don&apos;t match</source>
+        <translation>Passwörter stimmen nicht überein</translation>
     </message>
     <message>
-        <source>Inspiratory Pressure</source>
-        <translation>Einatmungsdruck</translation>
+        <source>First Name</source>
+        <translation>Vorname</translation>
     </message>
     <message>
-        <source>OSCAR will now start with your old one.</source>
-        <translation>OSCAR startet jetzt mit Ihrem alten.</translation>
+        <source>Last Name</source>
+        <translation>Nachname</translation>
     </message>
     <message>
-        <source>Whether or not machine allows Mask checking.</source>
-        <translation>Soll das Gerät die Maskenprüfung ermöglichen.</translation>
-    </message>
-    <message>
-        <source>Number of Awakenings</source>
-        <translation>Anzahl des Erwachens</translation>
-    </message>
-    <message>
-        <source>A pulse of pressure &apos;pinged&apos; to detect a closed airway.</source>
-        <translation>Ein Druckimpuls um geschlossene Atemwege zu öffnen.</translation>
-    </message>
-    <message>
-        <source>Intellipap pressure relief level.</source>
-        <translation>Intellipap Druckniveau.</translation>
-    </message>
-    <message>
-        <source>CMS50D+</source>
-        <translation>CMS50D+</translation>
-    </message>
-    <message>
-        <source>Non Responding Event</source>
-        <translation>Kein Ereignis registriert</translation>
-    </message>
-    <message>
-        <source>Median Leak Rate</source>
-        <translation>Mittlere Leckrate</translation>
-    </message>
-    <message>
-        <source> (%3 sec)</source>
-        <translation> (%3 sek)</translation>
-    </message>
-    <message>
-        <source>Rate of breaths per minute</source>
-        <translation>Bewerten der Atemzüge pro Minute</translation>
-    </message>
-    <message>
-        <source>Once you upgrade, you &lt;font size=+1&gt;can not&lt;/font&gt; use this profile with the previous version anymore.</source>
-        <translation>Wenn Sie ein Upgrade beauftragen, können Sie dieses Profil&lt;font size=+1&gt; nicht &lt;/ font&gt;mehr mit der vorherigen Version verwenden.</translation>
-    </message>
-    <message>
-        <source>Are you ready to upgrade, so you can run the new version of OSCAR?</source>
-        <translation>Sind Sie bereit für ein Upgrade, damit Sie die neue Version von OSCAR ausführen können?</translation>
-    </message>
-    <message>
-        <source>BiPAP autoSV Advanced 60 Series</source>
-        <translation>BiPAP autoSV Erweiterung 60 Series</translation>
-    </message>
-    <message>
-        <source>Perfusion Index</source>
-        <translation>Durchfluss Index</translation>
-    </message>
-    <message>
-        <source>RemStar Auto with A-Flex</source>
-        <translation>RemStar Auto mit A-Flex</translation>
-    </message>
-    <message>
-        <source>Graph displaying snore volume</source>
-        <translation>Graphische Anzeige Schnarchvolumen</translation>
-    </message>
-    <message>
-        <source>Mask Off</source>
-        <translation>Maske ab</translation>
-    </message>
-    <message>
-        <source>Max EPAP</source>
-        <translation>Max EPAP</translation>
-    </message>
-    <message>
-        <source>Max IPAP</source>
-        <translation>Max IPAP</translation>
-    </message>
-    <message>
-        <source>Bedtime</source>
-        <translation>Schlafenszeit</translation>
-    </message>
-    <message>
-        <source>Bi-Flex</source>
-        <translation>Bi-Flex</translation>
-    </message>
-    <message>
-        <source>EPAP %1 IPAP %2 (%3)</source>
-        <translation>EPAP %1 IPAP %2 (%3)</translation>
-    </message>
-    <message>
-        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation>Eine Apnoe, der nicht als Central oder atmungsbedingt ermittelt werden konnte, wegen zu hoher Leckage Störung des Klassifizierungsprozesses.</translation>
-    </message>
-    <message>
-        <source>Pressure</source>
-        <translation>Druck</translation>
-    </message>
-    <message>
-        <source>Auto On</source>
-        <translation>Automatisch ein</translation>
-    </message>
-    <message>
-        <source>Average</source>
-        <translation>Durchschnitt</translation>
-    </message>
-    <message>
-        <source>Target Minute Ventilation</source>
-        <translation>Zielminutenvolumen</translation>
-    </message>
-    <message>
-        <source>Amount of air displaced per minute</source>
-        <translation>Atemminutenvolumen</translation>
-    </message>
-    <message>
-        <source>
-TTIA: %1</source>
-        <translation>
-TTIA: %1</translation>
-    </message>
-    <message>
-        <source>Percentage of breaths triggered by patient</source>
-        <translation>Prozentualer Anteil der Atemzüge vom Patienten ausgelöst</translation>
-    </message>
-    <message>
-        <source>Non Data Capable Machine</source>
-        <translation>Gerät nicht Datenfähig</translation>
-    </message>
-    <message>
-        <source>Days: %1</source>
-        <translation>Tage: %1</translation>
-    </message>
-    <message>
-        <source>Plethysomogram</source>
-        <translation>Plethysomogramm</translation>
-    </message>
-    <message>
-        <source>Unclassified Apnea</source>
-        <translation>Apnoe ohne Zuordnung</translation>
-    </message>
-    <message>
-        <source>A user definable event detected by OSCAR&apos;s flow waveform processor.</source>
-        <translation>Ein vom Benutzer definierbares Ereignis, das vom Flow-Wave-Prozessor von OSCAR erkannt wird.</translation>
-    </message>
-    <message>
-        <source>Software Engine</source>
-        <translation>Geräte Software</translation>
-    </message>
-    <message>
-        <source>Auto Bi-Level (Fixed PS)</source>
-        <translation>Automatische Doppelebene (Fest PS)</translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation>Wenn Sie ein Upgrade durchführen, geraten Sie nicht in Panik. Sie müssen lediglich sicherstellen, dass dies auf Ihren alten OSCAR-Datenordner verweist.</translation>
-    </message>
-    <message>
-        <source>Please Note</source>
-        <translation>Bitte warten Sie</translation>
-    </message>
-    <message>
-        <source>Starting Ramp Pressure</source>
-        <translation>Anlaufdruck</translation>
-    </message>
-    <message>
-        <source>Last Updated</source>
-        <translation>Letzte Aktualisierung</translation>
-    </message>
-    <message>
-        <source>Intellipap event where you breathe out your mouth.</source>
-        <translation>Intellipap Ereignis, bei der Sie mit dem Mund ausatmen.</translation>
-    </message>
-    <message>
-        <source>ASV (Variable EPAP)</source>
-        <translation>ASV (Variabel EPAP)</translation>
-    </message>
-    <message>
-        <source>Sys1 Resist. Set</source>
-        <translation>Sys1 Resist. Einst</translation>
-    </message>
-    <message>
-        <source>Exhale Pressure Relief Level</source>
-        <translation>Ausatem Druckentlastungsebene</translation>
-    </message>
-    <message>
-        <source>Flow Limit</source>
-        <translation>Fließgrenze</translation>
-    </message>
-    <message>
-        <source>UAI=%1 </source>
-        <translation>UAI=%1 </translation>
-    </message>
-    <message>
-        <source>%1 low usage, %2 no usage, out of %3 days (%4% compliant.) Length: %5 / %6 / %7</source>
-        <translation>%1 geringer Nutzung, %2 keine Verwendung, von %3 Tage (%4% konform.) Länge: %5 / %6 / %7</translation>
-    </message>
-    <message>
-        <source>Loading Summary Data</source>
-        <translation>Zusammenfassungsdaten laden</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Information</translation>
-    </message>
-    <message>
-        <source>Pulse Rate</source>
-        <translation>Pulsrate</translation>
-    </message>
-    <message>
-        <source>Rise Time</source>
-        <translation>Anstiegszeit</translation>
-    </message>
-    <message>
-        <source>System One Resistance Lock</source>
-        <translation>System One Widerstandssperre</translation>
-    </message>
-    <message>
-        <source>Cheyne Stokes Respiration</source>
-        <translation>Cheyne-Stokes-Atmung</translation>
-    </message>
-    <message>
-        <source>SmartStart</source>
-        <translation>Schneller Start</translation>
-    </message>
-    <message>
-        <source>Graph showing running AHI for the past hour</source>
-        <translation>Diagrammanzeige des AHI der letzten Stunde</translation>
-    </message>
-    <message>
-        <source>Graph showing running RDI for the past hour</source>
-        <translation>Diagrammanzeige des RDI der letzten Stunde</translation>
-    </message>
-    <message>
-        <source>Temperature Enable</source>
-        <translation>Temperatur aktivieren</translation>
-    </message>
-    <message>
-        <source>Could not parse Updates.xml file.</source>
-        <translation>Konnte die Updates.xml Datei nicht analysieren.</translation>
-    </message>
-    <message>
-        <source>Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.</source>
-        <translation>Es tut uns leid, Ihre Philips Respironics CPAP-Gerät (Modell %1) wird noch nicht unterstützt.</translation>
-    </message>
-    <message>
-        <source>Seconds</source>
-        <translation>Sekunden</translation>
-    </message>
-    <message>
-        <source>%1 (%2 days): </source>
-        <translation>%1 (%2 Tage): </translation>
-    </message>
-    <message>
-        <source>Desktop OpenGL</source>
-        <translation>Desktop OpenGL</translation>
-    </message>
-    <message>
-        <source>Snapshot %1</source>
-        <translation>Schnappschuss %1</translation>
-    </message>
-    <message>
-        <source>Mask Time</source>
-        <translation>Maskenzeit</translation>
-    </message>
-    <message>
-        <source>How you feel (0 = like crap, 10 = unstoppable)</source>
-        <translation>Wie fühlen Sie sich (0 = nicht gut, 10 = hervorragend)</translation>
-    </message>
-    <message>
-        <source>Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.</source>
-        <translation>Ihr Philips Respironics CPAP-Gerät (Modell%1) ist leider nicht in der Lage ein Datenmodell zu erstellen.</translation>
-    </message>
-    <message>
-        <source>Time in REM Sleep</source>
-        <translation>Zeit im Traum/REM-Schlaf</translation>
-    </message>
-    <message>
-        <source>Channel</source>
-        <translation>Kanal</translation>
-    </message>
-    <message>
-        <source>Auto for Her</source>
-        <translation>Auto für Sie</translation>
-    </message>
-    <message>
-        <source>Time In Deep Sleep</source>
-        <translation>Zeit im Tiefschlaf</translation>
-    </message>
-    <message>
-        <source>Time in Deep Sleep</source>
-        <translation>Zeit im Tiefschlaf</translation>
-    </message>
-    <message>
-        <source>Obstructive</source>
-        <translation>Obstruktiver Apnoe</translation>
-    </message>
-    <message>
-        <source>Pressure Max</source>
-        <translation>Maximaler Druck</translation>
-    </message>
-    <message>
-        <source>Pressure Min</source>
-        <translation>Mindestdruck</translation>
-    </message>
-    <message>
-        <source>(%2 day ago)</source>
-        <translation>(%2 Vortag)</translation>
-    </message>
-    <message>
-        <source>Unknown PRS1 Code %1</source>
-        <translation>Unbekannt PRS1 Code %1</translation>
-    </message>
-    <message>
-        <source>Diameter of primary CPAP hose</source>
-        <translation>Durchmesser des Primär CPAP Schlauch</translation>
-    </message>
-    <message>
-        <source>I&apos;m very sorry your machine doesn&apos;t record useful data to graph in Daily View :(</source>
-        <translation>Es tut mir sehr leid, dass Ihr Gerät keine nützlichen Daten zur Darstellung der Tagesansicht aufzeichnet :(</translation>
-    </message>
-    <message>
-        <source>Max Leaks</source>
-        <translation>Max Lecks</translation>
-    </message>
-    <message>
-        <source>Flex Level</source>
-        <translation>Flex-Ebene</translation>
-    </message>
-    <message>
-        <source>Time to Sleep</source>
-        <translation>Einschlafzeit</translation>
-    </message>
-    <message>
-        <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
-        <translation>Atemanstrengungs - Verwandte Erregung: Eine Einschränkung bei der Atmung, die entweder durch ein Erwachen oder eine Schlafstörung verursacht wird.</translation>
-    </message>
-    <message>
-        <source>Humid. Status</source>
-        <translation>Feucht. Status</translation>
-    </message>
-    <message>
-        <source>(Sess: %1)</source>
-        <translation>(Sitzung: %1)</translation>
-    </message>
-    <message>
-        <source>Climate Control</source>
-        <translation>Klimakontrolle</translation>
-    </message>
-    <message>
-        <source>Perf. Index %</source>
-        <translation>Durchf. Index %</translation>
-    </message>
-    <message>
-        <source>If your old data is missing, copy the contents of all the other Journal_XXXXXXX folders to this one manually.</source>
-        <translation>Wenn Ihre alten Daten fehlen, kopieren Sie den Inhalt aller anderen Journal_XXXXXXX Ordner wie diese manuell.</translation>
+        <source>Country</source>
+        <translation>Land</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <source>Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)</source>
-        <translation>Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)</translation>
-    </message>
-    <message>
-        <source>System One</source>
-        <translation>System One</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Standard</translation>
-    </message>
-    <message>
-        <source>Breaths/min</source>
-        <translation>Atmungen/min</translation>
-    </message>
-    <message>
-        <source>Degrees</source>
-        <translation>Grad</translation>
-    </message>
-    <message>
-        <source>Test #1</source>
-        <translation>Test #1</translation>
-    </message>
-    <message>
-        <source>Test #2</source>
-        <translation>Test #2</translation>
-    </message>
-    <message>
-        <source>&amp;Destroy</source>
-        <translation>&amp;Vernichten</translation>
-    </message>
-    <message>
-        <source>%1 %2 / %3 / %4</source>
-        <translation>%1 %2 / %3 / %4</translation>
-    </message>
-    <message>
-        <source>Choose or create new folder for OSCAR data</source>
-        <translation>Wählen oder erstellen Sie einen neuen Ordner für OSCAR-Daten</translation>
-    </message>
-    <message>
-        <source>There is a lockfile already present for this profile &apos;%1&apos;, claimed on &apos;%2&apos;.</source>
-        <translation>Es ist ein bereits für dieses Profil vorhanden Sperrdatei &apos;%1&apos;, behauptete auf &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>(yesterday)</source>
-        <translation>(gestern)</translation>
-    </message>
-    <message>
-        <source>User Flag #1</source>
-        <translation>Benutzer Markierung #1</translation>
-    </message>
-    <message>
-        <source>User Flag #2</source>
-        <translation>Benutzer Markierung #2</translation>
-    </message>
-    <message>
-        <source>User Flag #3</source>
-        <translation>Benutzer Markierung #3</translation>
-    </message>
-    <message>
-        <source>A ResMed data source showing Respiratory Events</source>
-        <translation>Die ResMed Datenquelle, der Atem Ereignisse</translation>
-    </message>
-    <message>
-        <source>Heated Tubing</source>
-        <translation>beheizte Schläuche</translation>
-    </message>
-    <message>
-        <source>OSCAR will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation>OSCAR startet nun den Importassistenten, damit Sie Ihren neu installieren können %1 Daten.</translation>
-    </message>
-    <message>
-        <source>Auto CPAP</source>
-        <translation>Auto CPAP</translation>
-    </message>
-    <message>
-        <source>EPAP %1 PS %2-%3 (%6)</source>
-        <translation>EPAP %1 PS %2-%3 (%6)</translation>
-    </message>
-    <message>
-        <source>REI=%1 VSI=%2 FLI=%3 PB/CSR=%4%%</source>
-        <translation>REI=%1 VSI=%2 FLI=%3 PB/CSR=%4%%</translation>
-    </message>
-    <message>
-        <source>Median rate of detected mask leakage</source>
-        <translation>Mittlere Rate der bemerkten Masken Lecks</translation>
-    </message>
-    <message>
-        <source>Bookmark Notes</source>
-        <translation>Lesezeichen Hinweise</translation>
-    </message>
-    <message>
-        <source>Bookmark Start</source>
-        <translation>Lesezeichen Start</translation>
-    </message>
-    <message>
-        <source>PAP Device Mode</source>
-        <translation>PAP Gerätemodus</translation>
-    </message>
-    <message>
-        <source>Mask Pressure</source>
-        <translation>Maskendruck</translation>
-    </message>
-    <message>
-        <source>A vibratory snore as detcted by a System One machine</source>
-        <translation>Eine Schnarchvibration die durch ein System One endeckt wurde</translation>
-    </message>
-    <message>
-        <source>Sorry, your %1 %2 machine is not currently supported.</source>
-        <translation>Entschuldigung, Ihr %1 %2 Gerät wird derzeit nicht unterstützt.</translation>
-    </message>
-    <message>
-        <source>No oximetry data has been imported yet.</source>
-        <translation>Es wurden noch keine Oxymetriedaten importiert.</translation>
-    </message>
-    <message>
-        <source>Please be careful when playing in OSCAR&apos;s profile folders :-P</source>
-        <translation>Seien Sie vorsichtig, wenn Sie mit dem OSCAR-Profilordnern spielen :-P</translation>
-    </message>
-    <message>
-        <source>1=Awake 2=REM 3=Light Sleep 4=Deep Sleep</source>
-        <translation>1 = Wach 2 = Traum 3 = Leichter Schlaf 4 = Tiefschlaf</translation>
-    </message>
-    <message>
-        <source>Respiratory Event</source>
-        <translation>Atem Ereignis</translation>
-    </message>
-    <message>
-        <source>An abnormal period of Cheyne Stokes Respiration</source>
-        <translation>Eine abnormale Periode von Cheyne-Stokes-Atmung</translation>
-    </message>
-    <message>
-        <source>A type of respiratory event that won&apos;t respond to a pressure increase.</source>
-        <translation>Eine Art von Atem Ereignis, welches auf keinen Druckanstieg reagiert.</translation>
-    </message>
-    <message>
-        <source>Antibacterial Filter</source>
-        <translation>Antibakterienfilter</translation>
-    </message>
-    <message>
-        <source>Windows User</source>
-        <translation>Windows Benutzer</translation>
-    </message>
-    <message>
-        <source>Cataloguing EDF Files...</source>
-        <translation>EDF-Dateien werden katalogisiert...</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation>Frage</translation>
-    </message>
-    <message>
-        <source>System One Mask Resistance Setting</source>
-        <translation>System One Masken Resistenzeinstellungen</translation>
-    </message>
-    <message>
-        <source>Time spent in light sleep</source>
-        <translation>Zeit in der Leichtschlafphase</translation>
-    </message>
-    <message>
-        <source>Waketime: %1</source>
-        <translation>Aufwachzeit: %1</translation>
-    </message>
-    <message>
-        <source>Time In REM Sleep</source>
-        <translation>Zeit im Traum/REM-Schlaf</translation>
-    </message>
-    <message>
-        <source>Higher Inspiratory Pressure</source>
-        <translation>Höchster Inspirationsdruck</translation>
-    </message>
-    <message>
-        <source>Weinmann</source>
-        <translation>Weinmann</translation>
-    </message>
-    <message>
-        <source>Don&apos;t forget to place your datacard back in your CPAP machine</source>
-        <translation>Vergessen Sie nicht, Ihre Datenkarte wieder in Ihr CPAP Gerät zu stecken</translation>
-    </message>
-    <message>
-        <source>The machine data folder needs to be removed manually.</source>
-        <translation>Die Gerätedaten-Ordner müssen manuell entfernt werden.</translation>
-    </message>
-    <message>
-        <source>Summary Only</source>
-        <translation>Nur Zusammenfassung</translation>
-    </message>
-    <message>
-        <source>Bookmark End</source>
-        <translation>Lesezeichen Ende</translation>
-    </message>
-    <message>
-        <source>Unknown Model</source>
-        <translation>Unbekanntes Model</translation>
+        <source>&amp;Finish</source>
+        <translation>&amp;Ende</translation>
     </message>
     <message>
         <source>Bi-Level</source>
-        <translation>Zweite Ebene</translation>
+        <translation>Bi-Level</translation>
     </message>
     <message>
-        <source>Intellipap</source>
-        <translation>Intellipap</translation>
+        <source>Profile Changes</source>
+        <translation>Profiländerungen</translation>
     </message>
     <message>
-        <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
-        <translation>&lt;i&gt; Ihre alten Gerätedaten sollten regeneriert werden. Sie haben die Backup-Funktion während eines früheren Datenimports nicht deaktiviert.&lt;/ i&gt;</translation>
+        <source>Personal Information (for reports)</source>
+        <translation>Persönliche Informationen (für Berichte)</translation>
     </message>
     <message>
-        <source>Debugging channel #1</source>
-        <translation>Debugging von Kanal #1</translation>
+        <source>User Name</source>
+        <translation>Benutzername</translation>
     </message>
     <message>
-        <source>Debugging channel #2</source>
-        <translation>Debugging von Kanal #2</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Biological (birth) gender is sometimes needed to enhance the accuracy of a few calculations, feel free to leave this blank and skip any of them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manchmal ist ein biologisches (Geburts-) Geschlecht erforderlich, um die Genauigkeit einiger Berechnungen zu verbessern. Lassen Sie dieses Feld leer können Sie alles überspringen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation>Unbekannt</translation>
+        <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
+        <translation>Diese Software wird entwickelt, um Sie bei der Überprüfung der von Ihrem CPAP-Geräte und zugehörige Ausrüstung erzeugten Daten zu unterstützen.</translation>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
+        <source>User Information</source>
+        <translation>Benutzerinformationen</translation>
     </message>
     <message>
-        <source>Finishing Up...</source>
-        <translation>Beenden...</translation>
+        <source>...twice...</source>
+        <translation>...wiederholen...</translation>
     </message>
     <message>
-        <source>Events/hr</source>
-        <translation>Ereignisse/Stunde</translation>
+        <source>Doctors Name</source>
+        <translation>Name des Arztes</translation>
     </message>
     <message>
-        <source>PRS1 humidifier connected?</source>
-        <translation>PRS1 Luftbefeuchter angeschlossen?</translation>
+        <source>It&apos;s totally ok to fib or skip this, but your rough age is needed to enhance accuracy of certain calculations.</source>
+        <translation>Dies ist jedoch erforderlich, um die Genauigkeit bestimmter Berechnungen zu verbessern.</translation>
     </message>
     <message>
-        <source>CPAP Session contains summary data only</source>
-        <translation>CPAP Sitzung enthält nur Übersichtsdaten</translation>
+        <source>Doctors / Clinic Information</source>
+        <translation>Name des Arztes in der Klinik</translation>
     </message>
     <message>
-        <source>Finishing up...</source>
-        <translation>Beenden...</translation>
+        <source>Practice Name</source>
+        <translation>Name der Praxis</translation>
     </message>
     <message>
-        <source>Fisher &amp; Paykel</source>
-        <translation>Fisher &amp; Paykel</translation>
+        <source>Date Diagnosed</source>
+        <translation>Diagnosedatum</translation>
+    </message>
+    <message>
+        <source>Accept and save this information?</source>
+        <translation>Akzeptieren und speichern Sie diese Informationen?</translation>
+    </message>
+    <message>
+        <source>Patient ID</source>
+        <translation>Patient-ID</translation>
+    </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <translation>Willkommen beim Open Source CPAP Analysis Reporter</translation>
+    </message>
+</context>
+<context>
+    <name>Overview</name>
+    <message>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>End:</source>
+        <translation>Ende:</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <source>Usage</source>
+        <translation>Verwendung</translation>
+    </message>
+    <message>
+        <source>Respiratory
+Disturbance
+Index</source>
+        <translation>Atem-
+Störung
+Index</translation>
+    </message>
+    <message>
+        <source>Show all graphs</source>
+        <translation>Alle Diagramme zeigen</translation>
+    </message>
+    <message>
+        <source>Reset view to selected date range</source>
+        <translation>Ansicht auf den ausgewählten Datumsbereich zurücksetzen</translation>
+    </message>
+    <message>
+        <source>Total Time in Apnea</source>
+        <translation>Gesamtzeit im Apnoe</translation>
+    </message>
+    <message>
+        <source>Drop down to see list of graphs to switch on/off.</source>
+        <translation>Drop-Down-Liste, Diagramme, Ein/Ausschalten.</translation>
+    </message>
+    <message>
+        <source>Usage
+(hours)</source>
+        <translation>Verwendung
+(Stunden)</translation>
+    </message>
+    <message>
+        <source>Last Three Months</source>
+        <translation>Letzten 3 Monate</translation>
+    </message>
+    <message>
+        <source>Total Time in Apnea
+(Minutes)</source>
+        <translation>Gesamtzeit im Apnoe
+(Minuten)</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>Gebrauch</translation>
+    </message>
+    <message>
+        <source>How you felt
+(0-10)</source>
+        <translation>Wie fühlen Sie sich?
+(0-10)</translation>
+    </message>
+    <message>
+        <source>Graphs</source>
+        <translation>Diagramme</translation>
+    </message>
+    <message>
+        <source>Range:</source>
+        <translation>Zeitraum:</translation>
+    </message>
+    <message>
+        <source>Start:</source>
+        <translation>Start:</translation>
+    </message>
+    <message>
+        <source>Last Month</source>
+        <translation>Letzter Monat</translation>
+    </message>
+    <message>
+        <source>Apnea
+Hypopnea
+Index</source>
+        <translation>Apnoe
+Hypopnoe
+Index</translation>
+    </message>
+    <message>
+        <source>Last 6 Months</source>
+        <translation>Letzten 6 Monate</translation>
+    </message>
+    <message>
+        <source>Body
+Mass
+Index</source>
+        <translation>Body
+Masse
+Index</translation>
+    </message>
+    <message>
+        <source>Session Times</source>
+        <translation>Anwendungszeit</translation>
+    </message>
+    <message>
+        <source>Last Two Weeks</source>
+        <translation>Letzten zwei Wochen</translation>
+    </message>
+    <message>
+        <source>Everything</source>
+        <translation>Alles</translation>
+    </message>
+    <message>
+        <source>Last Week</source>
+        <translation>Letzte Woche</translation>
+    </message>
+    <message>
+        <source>Last Year</source>
+        <translation>Letztes Jahr</translation>
+    </message>
+    <message>
+        <source>Toggle Graph Visibility</source>
+        <translation>Umschalten Sichtbarkeit Diagramm</translation>
+    </message>
+    <message>
+        <source>Hide all graphs</source>
+        <translation>Alle Diagramme zeigen</translation>
+    </message>
+    <message>
+        <source>Last Two Months</source>
+        <translation>Letzten 2 Monate</translation>
+    </message>
+</context>
+<context>
+    <name>OximeterImport</name>
+    <message>
+        <source>%1</source>
+        <translation>%1</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to enable updating the device identifier next import, which is useful for those who have multiple oximeters lying around.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wer mehrere verschiedene Oxymeter benutzt, muss die Aktualisierung der Geräteerkennung ermöglichen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Live Oximetry import has been stopped</source>
+        <translation>Der Live-Oxymetrie-Import wurde gestoppt</translation>
+    </message>
+    <message>
+        <source>Press Start to commence recording</source>
+        <translation>Drücken Sie Start, um die Aufnahme zu beginnen</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <source>No CPAP data available on %1</source>
+        <translation>Keine CPAP Daten auf%1 verfügbar</translation>
+    </message>
+    <message>
+        <source>It also can read from ChoiceMMed MD300W1 oximeter .dat files.</source>
+        <translation>Es kann auch von Choicemmed MD300W1 Oxymeter DAT-Dateien gelesen werden.</translation>
+    </message>
+    <message>
+        <source>Please wait until oximeter upload process completes. Do not unplug your oximeter.</source>
+        <translation>Bitte warten Sie, bis der Oxymeter Upload-Vorgang abgeschlossen ist. Das Oxymeter nicht trennen.</translation>
+    </message>
+    <message>
+        <source>Finger not detected</source>
+        <translation>Kein Fingerchlip angeschlossen</translation>
+    </message>
+    <message>
+        <source>You need to tell your oximeter to begin sending data to the computer.</source>
+        <translation>Sie müssen im Menü Ihres Oxymeters den Upload starten.</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier können Sie Ihr Oxymeter bezeichnen (7 Zeichen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>No Oximetry module could parse the given file:</source>
+        <translation>Kein Oxymetriemodul kann die angegebene Datei analysieren:</translation>
+    </message>
+    <message>
+        <source>Renaming this oximeter from &apos;%1&apos; to &apos;%2&apos;</source>
+        <translation>Dieses Oxymeter umbenennen aus &apos;%1&apos; to &apos;%2&apos;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Please note: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Make sure your correct oximeter type is selected otherwise import will fail.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Bitte bachten Sie: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Bevor Sie importieren stellen Sie sicher, dass Sie Ihren Oxymeter-Typ gewählt haben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import from data files created by software that came with your Pulse Oximeter, such as SpO2Review.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option ermöglicht den Import von Dateien, welche durch Software von SpO2 Review erzeugt wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Oximeter import completed..</source>
+        <translation>Oxymeterdatenimport abgeschlossen..</translation>
+    </message>
+    <message>
+        <source>&amp;Retry</source>
+        <translation>&amp;Wiederholen</translation>
+    </message>
+    <message>
+        <source>&amp;Start</source>
+        <translation>&amp;Start</translation>
+    </message>
+    <message>
+        <source>You may wish to note, other companies, such as Pulox, simply rebadge Contec CMS50&apos;s under new names, such as the Pulox PO-200, PO-300, PO-400. These should also work.</source>
+        <translation>Sie werden darauf hingewiesen, dass andere Unternehmen, wie Pulox identisch mit dem CMS50 sind. (wie der Pulox PO-200, PO-300, PO-400). Diese sollten auch funktionieren.</translation>
+    </message>
+    <message>
+        <source>%1 session(s) on %2, starting at %3</source>
+        <translation>%1 Sitzung(en) an %2, Starten ab %3</translation>
+    </message>
+    <message>
+        <source>I need to set the time manually, because my oximeter doesn&apos;t have an internal clock.</source>
+        <translation>Ich muss die Zeit manuell einstellen, denn mein Oxymeter hat keine eigebaute Uhr.</translation>
+    </message>
+    <message>
+        <source>You can manually adjust the time here if required:</source>
+        <translation>Falls erforderlich, können Sie hier die Zeit manuell einstellen:</translation>
+    </message>
+    <message>
+        <source>OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
+        <translation>Mit OSCAR können Sie neben CPAP-Sitzungsdaten auch Oxymetriedaten nachverfolgen, wodurch Sie wertvolle Einblicke in die Wirksamkeit der CPAP-Behandlung erhalten. Es funktioniert auch eigenständig mit Ihrem Pulsoxymeter, sodass Sie Ihre aufgezeichneten Daten speichern, verfolgen und überprüfen können.</translation>
+    </message>
+    <message>
+        <source>Oximeter Session %1</source>
+        <translation>Oxymetersitzung %1</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t access oximeter</source>
+        <translation>Konnte nicht auf das Oxymeter zugreifen</translation>
+    </message>
+    <message>
+        <source>Please choose which one you want to import into OSCAR</source>
+        <translation>Bitte wählen Sie aus, welche Sie in OSCAR importieren möchten</translation>
+    </message>
+    <message>
+        <source>Please connect your oximeter device</source>
+        <translation>Bitte verbinden Sie Ihr Oxymeter-Gerät</translation>
+    </message>
+    <message>
+        <source>Important Notes:</source>
+        <translation>Wichtige Hinweise:</translation>
+    </message>
+    <message>
+        <source>Starting up...</source>
+        <translation>Sarten Sie...</translation>
+    </message>
+    <message>
+        <source>Contec CMS50D+ devices do not have an internal clock, and do not record a starting time. If you do not have a CPAP session to link a recording to, you will have to enter the start time manually after the import process is completed.</source>
+        <translation>Contec CMS50D + Geräte verfügen über keine interne Uhr und notieren keine Startzeit. Hier müssen Sie die Startzeit manuell eingeben, nachdem der Importvorgang abgeschlossen ist.</translation>
+    </message>
+    <message>
+        <source>HH:mm:ssap</source>
+        <translation>HH:mm:ssap</translation>
+    </message>
+    <message>
+        <source>Import directly from a recording on a device</source>
+        <translation>Importieren direkt aus einer Aufzeichnung auf einem Gerät</translation>
+    </message>
+    <message>
+        <source>Oximeter name is different.. If you only have one and are sharing it between profiles, set the name to the same on both profiles.</source>
+        <translation>Oxymeter Name ist anders. Wenn Sie mit mehreren Profilen arbeiten setzen Sie den Namen auf allen Profilen gleich.</translation>
+    </message>
+    <message>
+        <source>Even for devices with an internal clock, it is still recommended to get into the habit of starting oximeter records at the same time as CPAP sessions, because CPAP internal clocks tend to drift over time, and not all can be reset easily.</source>
+        <translation>Auch bei Geräten mit einer internen Uhr wird empfohlen die CPAP-Sitzung gleichzeitig mit der Oxymetrie-Sitzung zu beginnen. Manche CPAP Geräte neigen mit der Zeit dazu ungenaue Zeitdaten zu liefern.</translation>
+    </message>
+    <message>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <source>&amp;Information Page</source>
+        <translation>&amp;Informationsseite</translation>
+    </message>
+    <message>
+        <source>I want to use the time reported by my oximeter&apos;s built in clock.</source>
+        <translation>Ich will die Zeit von meiner im Oxymeter eingebauten Uhr verwenden.</translation>
+    </message>
+    <message>
+        <source>Live Oximetry Stopped</source>
+        <translation>Live-Oxymetrie gestoppt</translation>
+    </message>
+    <message>
+        <source>Waiting for %1 to start</source>
+        <translation>Warten auf %1 zu starten</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Reminder for CPAP users: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Did you remember to import your CPAP sessions first?&lt;br/&gt;&lt;/span&gt;If you forget, you won&apos;t have a valid time to sync this oximetry session to.&lt;br/&gt;To a ensure good sync between devices, always try to start both at the same time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Erinnerung für CPAP Benutzer: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Haben Sie daran gedacht erst Ihre CPAP Daten zu importieren?&lt;br/&gt;&lt;/span&gt;Bitte versuchen Sie immer die CPAP Sitzung gleichzeitig mir der Oxymetrie Sitzung zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>SpO2 %</source>
+        <translation>SpO2 %</translation>
+    </message>
+    <message>
+        <source>Select a valid oximetry data file</source>
+        <translation>Wählen Sie eine gültige Oxymetriedatendatei aus</translation>
+    </message>
+    <message>
+        <source>%1 device is uploading data...</source>
+        <translation>%1 Gerät Hochladen von Daten...</translation>
+    </message>
+    <message>
+        <source>&amp;End Recording</source>
+        <translation>&amp;Aufnahme Beenden</translation>
+    </message>
+    <message>
+        <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until OSCAR prompts you to.</source>
+        <translation>CMS50E / F-Benutzer: Wenn Sie direkt importieren, wählen Sie bitte keinen Upload auf Ihrem Gerät aus, bis Sie von OSCAR dazu aufgefordert werden.</translation>
+    </message>
+    <message>
+        <source>&amp;Choose Session</source>
+        <translation>&amp;Wählen Sie die Sitzung</translation>
+    </message>
+    <message>
+        <source>Nothing to import</source>
+        <translation>Nichts zu importieren</translation>
+    </message>
+    <message>
+        <source>Select upload option on %1</source>
+        <translation>Wählen Sie eine Uploadfunktion %1</translation>
+    </message>
+    <message>
+        <source>Select Oximeter Type:</source>
+        <translation>Wählen Sie den Oxymeter Typ:</translation>
+    </message>
+    <message>
+        <source>Waiting for the device to start the upload process...</source>
+        <translation>Warten auf das Gerät, um den Upload-Vorgang zu starten...</translation>
+    </message>
+    <message>
+        <source>Could not detect any connected oximeter devices.</source>
+        <translation>Konnte keine angeschlossenen Oxymeter Geräte erkennen.</translation>
+    </message>
+    <message>
+        <source>Oximeter Import Wizard</source>
+        <translation>Oxymeter Import-Assistent</translation>
+    </message>
+    <message>
+        <source>&amp;Save and Finish</source>
+        <translation>&amp;Speichern und Beenden</translation>
+    </message>
+    <message>
+        <source>Pulse Oximeters are medical devices used to measure blood oxygen saturation. During extended Apnea events and abnormal breathing patterns, blood oxygen saturation levels can drop significantly, and can indicate issues that need medical attention.</source>
+        <translation>Pulsoxymeter sind medizinische Geräte und werden zur Feststellung der Sauerstoffsättigung im Blut benutzt. Bei längeren Apnea Ereignissen und abnormalen Atemmustern, kann die Blutsauerstoffsättigung deutlich sinken. Dann sollten Sie Ihren Arzt informieren.</translation>
+    </message>
+    <message>
+        <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
+        <translation>Damit OSCAR direkt von Ihrem Oxymeter-Gerät aus suchen und lesen kann, müssen Sie sicherstellen, dass die richtigen Gerätetreiber (z. B. USB zu Serial UART) auf Ihrem Computer installiert sind. Weitere Informationen dazu, %1klick hier%2.</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation>Startzeit</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR benötigt eine Startzeit, um zu wissen, wo die Oxymetriesitzung gespeichert werden soll.&lt;/p&gt;&lt;p&gt;Wählen Sie eine der folgenden Optionen:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Pulse Rate</source>
+        <translation>Pulsrate</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Note: Syncing to CPAP session starting time will always be more accurate.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hinweis: Synchronisieren Sie die CPAP-Sitzungs- Startzeit. Danach wird das Ergebnis immer genauer sein.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Set device date/time</source>
+        <translation>Datum/Uhrzeit im Gerät gesetzt</translation>
+    </message>
+    <message>
+        <source>Oximetry Files (*.spo *.spor *.spo2 *.SpO2 *.dat)</source>
+        <translation>Oxymetriedateien (*.spo *.spor *.spo2 *.SpO2 *.dat)</translation>
+    </message>
+    <message>
+        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
+        <translation type="vanished">OSCAR ist derzeit mit den Serien-Oxymetern Contec CMS50D +, CMS50E, CMS50F und CMS50I kompatibel.&lt;br/&gt;(Hinweis: Direkter Import von Bluetooth-Modellen ist &lt;span style=&quot; font-weight:600;&quot;&gt;wahrscheinlich noch&lt;/span&gt; nicht möglich)</translation>
+    </message>
+    <message>
+        <source>Import Completed. When did the recording start?</source>
+        <translation>Import abgeschlossen. Wann hat die Aufnahme zu starten?</translation>
+    </message>
+    <message>
+        <source>Import from a datafile saved by another program, like SpO2Review</source>
+        <translation>Import aus einer Datendatei von einem anderen Programm, welche von SpO2Review gespeichert wurden</translation>
+    </message>
+    <message>
+        <source>Day recording (normally would of) started</source>
+        <translation>Normalerweise wird der Tag der Aufnahme gestartet</translation>
+    </message>
+    <message>
+        <source>Multiple Sessions Detected</source>
+        <translation>Mehrere Sitzungen erkannt</translation>
+    </message>
+    <message>
+        <source>I started this oximeter recording at (or near) the same time as a session on my CPAP machine.</source>
+        <translation>Ich begann diese Oxymeter Aufnahme zur gleichen Zeit (oder nahe der Zeit) wie eine Session auf meinem CPAP-Gerät.</translation>
+    </message>
+    <message>
+        <source>Record attached to computer overnight (provides plethysomogram)</source>
+        <translation>Waren Sie über Nacht an den PC angeschlossen benutzen Sie das (Plethysonogramm)</translation>
+    </message>
+    <message>
+        <source>Erase session after successful upload</source>
+        <translation>Löschen der Sitzung nach erfolgreichem Upload</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, some oximeters will require you to do something in the devices menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option ermöglicht den Import (über Kabel) aus Ihrem Oxymeter.&lt;/p&gt;&lt;p&gt;Nach der Auswahl dieser Option, werden einige Einstellungen im Oxymeter erforderlich sein um den Upload zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Live Oximetry Mode</source>
+        <translation>Live-Oxymetriemodus</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Schließen</translation>
+    </message>
+    <message>
+        <source>Set device identifier</source>
+        <translation>Geräteidentifizierung</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, OSCAR will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert, setzt OSCAR die interne Uhr des CMS50 automatisch auf die aktuelle Uhrzeit Ihres Computers zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Oximeter not detected</source>
+        <translation>Kein Oxymeter angeschlossen</translation>
+    </message>
+    <message>
+        <source>Please remember:</source>
+        <translation>Bitte beachten Sie:</translation>
+    </message>
+    <message>
+        <source>Where would you like to import from?</source>
+        <translation>Von wo wollen Sie importieren?</translation>
+    </message>
+    <message>
+        <source>If you can read this, you likely have your oximeter type set wrong in preferences.</source>
+        <translation>Wenn Sie das lesen, haben Sie nicht das richtige Oxymeter in den Einstellungen gewählt.</translation>
+    </message>
+    <message>
+        <source>I want to use the time my computer recorded for this live oximetry session.</source>
+        <translation>Ich möchte die Zeit von meinem Computer für diese Live-Oxymetrie-Sitzung benutzen.</translation>
+    </message>
+    <message>
+        <source>Scanning for compatible oximeters</source>
+        <translation>Scannen von kompatieblen Oxymetern</translation>
+    </message>
+    <message>
+        <source>Please connect your oximeter, enter it&apos;s menu and select upload to commence data transfer...</source>
+        <translation>Bitte schließen Sie Ihr Oxymeter an und wählen Sie im Menü Upload mit Datenübertragung beginnen...</translation>
+    </message>
+    <message>
+        <source>Choose CPAP session to sync to:</source>
+        <translation>Wählen Sie aus um die CPAP-Sitzung zu synchronisieren:</translation>
     </message>
     <message>
         <source>Duration</source>
         <translation>Dauer</translation>
     </message>
     <message>
-        <source>Scanning Files...</source>
-        <translation>Scanne Dateien...</translation>
+        <source>Welcome to the Oximeter Import Wizard</source>
+        <translation>Herzlich Willkommen beim Oxymeter-Import-Assistenten</translation>
     </message>
     <message>
-        <source>
-Hours: %1</source>
-        <translation>
-Stunden: %1</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you don&apos;t mind a being attached to a running computer overnight, this option provide a useful plethysomogram graph, which gives an indication of heart rhythm, on top of the normal oximetry readings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sollten Sie das Pulsoxymeter über Nacht an einem PC betreiben, kann diese Option sehr nützlich sein um Herzrhythmusstörungen zu erkennen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Flex Mode</source>
-        <translation>Flex Modus</translation>
+        <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
+        <translation>Wenn Sie versuchen, Oxymetrie- und CPAP-Daten zu synchronisieren, stellen Sie sicher, dass Sie Ihre CPAP-Sitzungen zuerst importiert haben, bevor Sie fortfahren!</translation>
     </message>
     <message>
-        <source>Sessions</source>
-        <translation>Sitzungen</translation>
+        <source>&quot;%1&quot;, session %2</source>
+        <translation>&quot;%1&quot;, Sitzung %2</translation>
     </message>
     <message>
-        <source>A period during a session where the machine could not detect flow.</source>
-        <translation>Ein Abschnitt während einer Sitzung, in der das Gerät keinen Fluss erkennen konnte.</translation>
+        <source>CMS50Fv3.7+/H/I, Pulox PO-400/500</source>
+        <translation>CMS50Fv3.7+/H/I, Pulox PO-400/500</translation>
     </message>
     <message>
-        <source>Auto Off</source>
-        <translation>Automatisch aus</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option löscht die importierte Sitzung von Ihrem Oxymeter, nachdem der Import abgeschlossen ist. &lt;/p&gt;&lt;p&gt;Seien Sie vorsichtig, denn wenn etwas nicht funktioniert, bevor OSCAR Ihre Sitzung speichert, erhalten Sie die Daten nicht zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <source>Show Live Graphs</source>
+        <translation>Live-Diagramme anzeigen</translation>
     </message>
     <message>
-        <source>Overview</source>
-        <translation>Überblick</translation>
+        <source>Live Import Stopped</source>
+        <translation>Live Import stoppen</translation>
     </message>
     <message>
-        <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
-        <translation>Der von Ihnen gewählte Ordner ist weder leer noch enthält er gültige OSCAR-Daten.</translation>
+        <source>Oximeter Starting time</source>
+        <translation>Oxymeter Startzeit</translation>
     </message>
     <message>
-        <source>Temperature</source>
-        <translation>Temperatur</translation>
+        <source>Skip this page next time.</source>
+        <translation>Überspringen Sie diese Seite das nächste Mal.</translation>
     </message>
     <message>
-        <source>Patient Access</source>
-        <translation>Patientenzugriff</translation>
+        <source>If you can still read this after a few seconds, cancel and try again</source>
+        <translation>Sollte der Vorgang zu lange dauern, starten Sie Ihn nach ein paar Sekunden erneut</translation>
     </message>
     <message>
-        <source>Entire Day&apos;s Flow Waveform</source>
-        <translation>Gesamte Tages Flusswellenform</translation>
+        <source>CMS50D+/E/F, Pulox PO-200/300</source>
+        <translation>CMS50D+/E/F, Pulox PO-200/300</translation>
     </message>
     <message>
-        <source>Exiting</source>
-        <translation>Verlassen</translation>
+        <source>&amp;Sync and Save</source>
+        <translation>&amp;Sync und Speichern</translation>
     </message>
     <message>
-        <source>DeVilbiss</source>
-        <translation>DeVilbiss</translation>
+        <source>Your oximeter did not have any valid sessions.</source>
+        <translation>Ihre Oxymeter hatten keine gültigen Sitzungen.</translation>
     </message>
     <message>
-        <source>Time in Light Sleep</source>
-        <translation>Zeit in der Leichtschlafphase</translation>
+        <source>Something went wrong getting session data</source>
+        <translation>Ein Fehler ist immer wenn Sitzungs-Daten nicht übereinstimmen</translation>
     </message>
     <message>
-        <source>Time In Light Sleep</source>
-        <translation>Zeit in der Leichtschlafphase</translation>
+        <source>Connecting to %1 Oximeter</source>
+        <translation>Anschließen an ein %1 Oxymeter</translation>
     </message>
     <message>
-        <source>Fixed Bi-Level</source>
-        <translation>Feste Doppelebene</translation>
+        <source>Recording...</source>
+        <translation>Aufnahme...</translation>
     </message>
     <message>
-        <source>Machine Information</source>
-        <translation>Geräte-Informationen</translation>
+        <source>ChoiceMMed MD300W1</source>
+        <translation>ChoiceMMed MD300W1</translation>
     </message>
     <message>
-        <source>Pressure Support Maximum</source>
-        <translation>Druckunterstützung Maximum</translation>
+        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probably not&lt;/span&gt; possible yet)</source>
+        <translation>OSCAR ist derzeit kompatibel mit den seriellen Oximetern Contec CMS50D+, CMS50E, CMS50F und CMS50I.&lt;br/&gt;(Hinweis: Der direkte Import aus Bluetooth-Modellen ist möglich. &lt;span style=&quot; font-weight:600;&quot;&gt;wahrscheinlich noch nicht&lt;/span&gt; möglich)</translation>
     </message>
+</context>
+<context>
+    <name>Oximetry</name>
     <message>
-        <source>Graph showing severity of flow limitations</source>
-        <translation>Graphische Darstellung des Schweregrades der Flusslimitierungen</translation>
+        <source>...</source>
+        <translation>...</translation>
     </message>
     <message>
-        <source>: %1 hours, %2 minutes, %3 seconds
-</source>
-        <translation>: %1 Stunden, %2 Minuten, %3 Sekunden
-</translation>
+        <source>Date</source>
+        <translation>Datum</translation>
     </message>
     <message>
-        <source>Auto Bi-Level (Variable PS)</source>
-        <translation>Automatische Doppelebene (Variable PS)</translation>
+        <source>Form</source>
+        <translation>Form</translation>
     </message>
     <message>
-        <source>Mask Alert</source>
-        <translation>Maskenalarm</translation>
+        <source>SpO2</source>
+        <translation>SpO2</translation>
     </message>
     <message>
-        <source>OSCAR Reminder</source>
-        <translation>OSCAR-Erinnerung</translation>
+        <source>Pulse</source>
+        <translation>Puls</translation>
     </message>
     <message>
-        <source>OSCAR found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation>OSCAR hat einen alten Journalordner gefunden, der jedoch umbenannt wurde:</translation>
+        <source>&amp;Open .spo/R File</source>
+        <translation>&amp;Öffnen .spo/R Datei</translation>
     </message>
     <message>
-        <source>A partially obstructed airway</source>
-        <translation>Teilweise behinderte Atemwege</translation>
+        <source>R&amp;eset</source>
+        <translation>R&amp;eset</translation>
     </message>
     <message>
-        <source>Pressure Support Minimum</source>
-        <translation>Druckunterstützung Minimum</translation>
+        <source>Serial &amp;Import</source>
+        <translation>Serien &amp;Import</translation>
     </message>
     <message>
-        <source>Large Leak</source>
-        <translation>Großes Leck</translation>
+        <source>Serial Port</source>
+        <translation>Serien Port</translation>
     </message>
     <message>
-        <source>Time started according to str.edf</source>
-        <translation>Zeit nach str.edf gestartet</translation>
+        <source>d/MM/yy h:mm:ss AP</source>
+        <translation>d/MM/yy h:mm:ss AP</translation>
     </message>
     <message>
-        <source>Wake-up</source>
-        <translation>Aufwachzeit</translation>
+        <source>&amp;Start Live</source>
+        <translation>&amp;Start-Live</translation>
     </message>
     <message>
-        <source>Warning</source>
-        <translation>Warnung</translation>
-    </message>
-    <message>
-        <source>Min Pressure</source>
-        <translation>Mindestdruck</translation>
-    </message>
-    <message>
-        <source>System One Resistance Setting</source>
-        <translation>System One Resistenzeinstellungen</translation>
-    </message>
-    <message>
-        <source>Total Leak Rate</source>
-        <translation>Gesamtleckrate</translation>
-    </message>
-    <message>
-        <source>RemStar Plus</source>
-        <translation>RemStar Plus</translation>
-    </message>
-    <message>
-        <source>d MMM [ %1 - %2 ]</source>
-        <translation>d MMM [ %1 - %2 ]</translation>
-    </message>
-    <message>
-        <source>Max Pressure</source>
-        <translation>Größter Druck</translation>
-    </message>
-    <message>
-        <source>MaskPressure</source>
-        <translation>Maskendruck</translation>
-    </message>
-    <message>
-        <source>Duration %1:%2:%3</source>
-        <translation>Dauer %1:%2:%3</translation>
-    </message>
-    <message>
-        <source>Upper Threshold</source>
-        <translation>obere Schwelle</translation>
-    </message>
-    <message>
-        <source>DreamStation</source>
-        <translation>Dream Station</translation>
-    </message>
-    <message>
-        <source>OSCAR will not touch this folder, and will create a new one instead.</source>
-        <translation>OSCAR benutzt diesen Ordner nicht und erstellt stattdessen einen neuen.</translation>
-    </message>
-    <message>
-        <source>Total Leaks</source>
-        <translation>Anzahl der Lecks</translation>
-    </message>
-    <message>
-        <source>Minute Ventilation</source>
-        <translation>Minutenvolumen</translation>
-    </message>
-    <message>
-        <source>Rate of detected mask leakage</source>
-        <translation>Anzahl erkannter Masken Lecks</translation>
-    </message>
-    <message>
-        <source>Breathing flow rate waveform</source>
-        <translation>Atemflussrate Wellenform</translation>
-    </message>
-    <message>
-        <source>Lower Expiratory Pressure</source>
-        <translation>Niedriger Exspirationsdruck</translation>
-    </message>
-    <message>
-        <source>Time spent in REM Sleep</source>
-        <translation>Die Zeit, in der REM-Schlafphase</translation>
-    </message>
-    <message>
-        <source>Min %1 Max %2 (%3)</source>
-        <translation>Min %1 Max %2 (%3)</translation>
-    </message>
-    <message>
-        <source>If you are using cloud storage, make sure OSCAR is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation>Wenn Sie Cloud-Speicher verwenden, stellen Sie sicher, dass OSCAR geschlossen ist und die Synchronisierung zuerst auf dem anderen Computer abgeschlossen ist, bevor Sie fortfahren.</translation>
-    </message>
-    <message>
-        <source>AI=%1 HI=%2 CAI=%3 </source>
-        <translation>AI=%1 HI=%2 CAI=%3 </translation>
-    </message>
-    <message>
-        <source>Time taken to breathe in</source>
-        <translation>Einatmungszeit</translation>
-    </message>
-    <message>
-        <source>Maximum Therapy Pressure</source>
-        <translation>Größter Therapiedruck</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to use this folder?</source>
-        <translation>Sind Sie sicher, dass Sie diesen Ordner nutzen möchten?</translation>
-    </message>
-    <message>
-        <source>Use your file manager to make a copy of your profile directory, then afterwards, restart OSCAR and complete the upgrade process.</source>
-        <translation>Verwenden Sie Ihren Dateimanager, um eine Kopie Ihres Profilverzeichnisses zu erstellen. Starten Sie anschließend OSCAR erneut, und schließen Sie den Aktualisierungsvorgang ab.</translation>
-    </message>
-    <message>
-        <source>I&apos;m sorry to report that OSCAR can only track hours of use and very basic settings for this machine.</source>
-        <translation>Es tut mir leid zu berichten, dass OSCAR nur Betriebsstunden und grundlegende Einstellungen für dieses System verfolgen kann.</translation>
-    </message>
-    <message>
-        <source>%1 (%2 day): </source>
-        <translation>%1 (%2 Tag): </translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t parse Channels.xml, this build is seriously borked, no choice but to abort!!</source>
-        <translation>Konnte die Kanäle.xml nicht analysieren. Bitte beenden Sie den Vorgang!!</translation>
-    </message>
-    <message>
-        <source>Current Selection</source>
-        <translation>Aktuelle Auswahl</translation>
-    </message>
-    <message>
-        <source>Blood-oxygen saturation percentage</source>
-        <translation>Blutsauerstoffsättigung in Prozent</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;OSCAR unterhält eine Sicherung Ihrer Gerätedatenkarte, die es für diesen Zweck verwendet.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Inspiratory Time</source>
-        <translation>Einatemzeit</translation>
-    </message>
-    <message>
-        <source>Respiratory Rate</source>
-        <translation>Atemfrequenz</translation>
-    </message>
-    <message>
-        <source>Hide All Events</source>
-        <translation>Alle Ereignisse verbergen</translation>
-    </message>
-    <message>
-        <source>Printing %1 Report</source>
-        <translation>Drucken %1 Bericht</translation>
-    </message>
-    <message>
-        <source>Expiratory Time</source>
-        <translation>Ausatemzeit</translation>
-    </message>
-    <message>
-        <source>Expiratory Puff</source>
-        <translation>Ausatem Hauch</translation>
-    </message>
-    <message>
-        <source>Maximum Leak</source>
-        <translation>Maximale Lecks</translation>
-    </message>
-    <message>
-        <source>Ratio between Inspiratory and Expiratory time</source>
-        <translation>Verhältnis zwischen den expiratorischen Zeiten</translation>
-    </message>
-    <message>
-        <source>APAP (Variable)</source>
-        <translation>APAP (Variable)</translation>
-    </message>
-    <message>
-        <source>Minimum Therapy Pressure</source>
-        <translation>Kleinster Theraphiedruck</translation>
-    </message>
-    <message>
-        <source>A sudden (user definable) change in heart rate</source>
-        <translation>Eine plötzliche (frei definierbare) Veränderung der Herzfrequenz</translation>
-    </message>
-    <message>
-        <source>Body Mass Index</source>
-        <translation>BMI</translation>
-    </message>
-    <message>
-        <source>Oximetry</source>
-        <translation>Oxymetrie</translation>
-    </message>
-    <message>
-        <source>Oximeter</source>
-        <translation>Oxymeter</translation>
-    </message>
-    <message>
-        <source>No Data Available</source>
-        <translation>Keine Daten verfügbar</translation>
-    </message>
-    <message>
-        <source>The maximum rate of mask leakage</source>
-        <translation>Der Höchstsatz der Maskenlecks</translation>
-    </message>
-    <message>
-        <source>Humidifier Status</source>
-        <translation>Luftbefeuchter Status</translation>
-    </message>
-    <message>
-        <source>Machine Initiated Breath</source>
-        <translation>Gerät Initiiert Atem</translation>
-    </message>
-    <message>
-        <source>Machine Database Changes</source>
-        <translation>Gerätedatenbankänderungen</translation>
-    </message>
-    <message>
-        <source>SmartFlex Mode</source>
-        <translation>Smart-Flex-Modus</translation>
-    </message>
-    <message>
-        <source>Journal Notes</source>
-        <translation>Journal Notizen</translation>
-    </message>
-    <message>
-        <source> (%2 min, %3 sec)</source>
-        <translation> (%2 min, %3 sek)</translation>
-    </message>
-    <message>
-        <source>You can only work with one instance of an individual OSCAR profile at a time.</source>
-        <translation>Sie können jeweils nur mit einer Instanz eines einzelnen OSCAR-Profils arbeiten.</translation>
-    </message>
-    <message>
-        <source>Expiratory Pressure</source>
-        <translation>Ausatmungsdruck</translation>
-    </message>
-    <message>
-        <source>Show AHI</source>
-        <translation>Zeige AHI</translation>
-    </message>
-    <message>
-        <source>Tgt. Min. Vent</source>
-        <translation>Tgt. Minute entlüften</translation>
-    </message>
-    <message>
-        <source>Rebuilding from %1 Backup</source>
-        <translation>Wiederherstellung von%1-Backup</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to reset all your waveform channel colors and settings to defaults?</source>
-        <translation>Sind Sie sicher, dass Sie alle Ihre Wellenform-Kanal Farben und Einstellungen auf die Standardwerte zurücksetzen wollen?</translation>
-    </message>
-    <message>
-        <source>Pressure Pulse</source>
-        <translation>Druckimpuls</translation>
-    </message>
-    <message>
-        <source>ChoiceMMed</source>
-        <translation>ChoiceMMed</translation>
-    </message>
-    <message>
-        <source>Sessions: %1 / %2 / %3 Length: %4 / %5 / %6 Longest: %7 / %8 / %9</source>
-        <translation>Sitzungen: %1 / %2 / %3 Länge: %4 / %5 / %6 Längste: %7 / %8 / %9</translation>
-    </message>
-    <message>
-        <source>Humidifier</source>
-        <translation>Luftbefeuchter</translation>
-    </message>
-    <message>
-        <source>Compliance Only :(</source>
-        <translation>Therapietreue einhalten :(</translation>
-    </message>
-    <message>
-        <source>Relief: %1</source>
-        <translation>Relief: %1</translation>
-    </message>
-    <message>
-        <source>Patient ID</source>
-        <translation>Patienten-ID</translation>
-    </message>
-    <message>
-        <source>Patient???</source>
-        <translation>Patient???</translation>
-    </message>
-    <message>
-        <source>An apnea caused by airway obstruction</source>
-        <translation>Eine Apnoe durch Obstruktion der Atemwege verursacht</translation>
-    </message>
-    <message>
-        <source>Vibratory Snore (VS2) </source>
-        <translation>Vibrations-Schnarchen (VS2) </translation>
-    </message>
-    <message>
-        <source>Please Wait...</source>
-        <translation>Bitte warten...</translation>
-    </message>
-    <message>
-        <source>(If you are unsure, just click yes.)</source>
-        <translation>(Wenn Sie sich nicht sicher sind, klicken Sie einfach auf Ja.)</translation>
+        <source>&amp;Rescan Ports</source>
+        <translation>&amp;Ports neu scannen</translation>
     </message>
 </context>
 <context>
@@ -2680,10 +2321,12 @@ Stunden: %1</translation>
     </message>
     <message>
         <source>AHI</source>
+        <extracomment>Apnea Hypopnea Index</extracomment>
         <translation>AHI</translation>
     </message>
     <message>
         <source>RDI</source>
+        <extracomment>Respiratory Disturbance Index</extracomment>
         <translation>RDI</translation>
     </message>
     <message>
@@ -3747,1452 +3390,134 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>ProfileSelect</name>
     <message>
-        <source>-</source>
-        <translation>-</translation>
+        <source>&amp;Quit</source>
+        <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <source>CPAP</source>
-        <translation>CPAP</translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation>Beenden</translation>
-    </message>
-    <message>
-        <source>Gah!</source>
-        <translation>Bah!</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Hilfe</translation>
-    </message>
-    <message>
-        <source>Please insert your CPAP data card...</source>
-        <translation>Bitte benutzen Sie Ihre CPAP-Datenkarte...</translation>
-    </message>
-    <message>
-        <source>Donations are not implemented</source>
-        <translation>Spenden werden nicht umgesetzt</translation>
-    </message>
-    <message>
-        <source>DISCLAIMER:</source>
-        <translation>HAFTUNGSAUSSCHLUSS:</translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
-        <translation>Bitte beachten Sie, dass dies zum Verlust von Diagrammdaten führen kann, wenn die Sicherungen von OSCAR deaktiviert oder in irgendeiner Weise beeinträchtigt wurde.</translation>
-    </message>
-    <message>
-        <source>%1 %2</source>
-        <translation>%1 %2</translation>
-    </message>
-    <message>
-        <source>Daily Calendar</source>
-        <translation>Kalender täglich</translation>
-    </message>
-    <message>
-        <source>&amp;Data</source>
-        <translation>&amp;Daten</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>&amp;Ansicht</translation>
-    </message>
-    <message>
-        <source>There was a problem opening Somnopose Data File: </source>
-        <translation>Es gab ein Problem beim Öffnen der CSV Datendatei: </translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>Daily</source>
-        <translation>Täglich</translation>
+        <source>Create a new user profile.</source>
+        <translation>Erstellen Sie ein neues Benutzerprofil.</translation>
     </message>
     <message>
         <source>OSCAR</source>
         <translation>OSCAR</translation>
     </message>
     <message>
-        <source>Note:</source>
-        <translation>Hinweis:</translation>
+        <source>Sorry</source>
+        <translation>Entschuldigung</translation>
     </message>
     <message>
-        <source>Loading profile &quot;%1&quot;</source>
-        <translation>Profil laden &quot;%1&quot;</translation>
+        <source>[data directory]</source>
+        <translation>[Datenverzeichnis]</translation>
     </message>
     <message>
-        <source>Import &amp;ZEO Data</source>
-        <translation>Import &amp;ZEO Daten</translation>
+        <source>Open Profile</source>
+        <translation>Profil öffnen</translation>
     </message>
     <message>
-        <source>Copyright:</source>
-        <translation>Urheberrecht:</translation>
+        <source>Profile &apos;%1&apos; was succesfully deleted</source>
+        <translation>Profil &apos;%1&apos; wurde erfolgreich gelöscht</translation>
     </message>
     <message>
-        <source>MSeries Import complete</source>
-        <translation>M-Serie komplett Importiert</translation>
+        <source>Edit Profile</source>
+        <translation>Profil bearbeiten</translation>
     </message>
     <message>
-        <source>There was an error saving screenshot to file &quot;%1&quot;</source>
-        <translation>Es gab einen Fehler beim Speichern des Screenshot in eine Datei &quot;%1&quot;</translation>
+        <source>Enter the word DELETE below to confirm.</source>
+        <translation>Um fortzufahren bestätigen Sie unten das Wort DELETE.</translation>
     </message>
     <message>
-        <source>Choose a folder</source>
-        <translation>Wählen Sie einen Ordner</translation>
+        <source>The current location of OSCAR data store.</source>
+        <translation>Der aktuelle Speicherort des OSCAR-Datenspeichers.</translation>
     </message>
     <message>
-        <source>A %1 file structure for a %2 was located at:</source>
-        <translation>Eine%1 Dateistruktur für eine %2 wurde in:</translation>
+        <source>Choose a different OSCAR data folder.</source>
+        <translation>Wählen Sie einen anderen OSCAR-Datenordner.</translation>
     </message>
     <message>
-        <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
-        <translation>Diese Software wurde entwickelt, um Sie bei der Überprüfung der Daten zu unterstützen, die von CPAP-Geräten zur Behandlung verschiedener Schlafstörungen erzeugt werden.</translation>
+        <source>Create new profile</source>
+        <translation>Neues Profil erstellen</translation>
     </message>
     <message>
-        <source>Importing Data</source>
-        <translation>Importieren von Daten</translation>
+        <source>Incorrect Password</source>
+        <translation>Inkorrektes Passwort</translation>
     </message>
     <message>
-        <source>The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation>Die Autoren übernehmen KEINE Haftung für Personen, die sich oder Anderen durch Verwendung oder Missbrauch dieser Software schaden.</translation>
+        <source>There was an error deleting the profile directory, you need to manually remove it.</source>
+        <translation>Es gab einen Fehler beim Löschen des Profil-Verzeichnisses. Sie müssen es manuell entfernen.</translation>
     </message>
     <message>
-        <source>Online Users &amp;Guide</source>
-        <translation>Online &amp;Handbuch</translation>
+        <source>Enter Password for %1</source>
+        <translation>Passwort eingeben für %1</translation>
     </message>
     <message>
-        <source>Online Help Resources</source>
-        <translation>Online Hilfe</translation>
+        <source>New Profile</source>
+        <translation>Neues Profil</translation>
     </message>
     <message>
-        <source>View &amp;Welcome</source>
-        <translation>&amp;Willkommensansicht</translation>
+        <source>&amp;Different Folder</source>
+        <translation>&amp;Anderen Ordner</translation>
     </message>
     <message>
-        <source>Currenly supported machines:</source>
-        <translation>Derzeit unterstützte Geräte:</translation>
+        <source>Click here if you didn&apos;t want to start OSCAR.</source>
+        <translation>Klicken Sie hier, wenn Sie OSCAR nicht starten möchten.</translation>
     </message>
     <message>
-        <source>Show Performance Information</source>
-        <translation>Anzeige der Performance- Informationen</translation>
+        <source>&amp;Select User</source>
+        <translation>&amp;Zum ausgewählten Benutzer</translation>
     </message>
     <message>
-        <source>There was a problem opening MSeries block File: </source>
-        <translation>Es gab ein Problem beim Öffnen einer M-Serie Block-Datei: </translation>
+        <source>You entered an incorrect password</source>
+        <translation>Sie haben ein falsches Passwort eingegeben</translation>
     </message>
     <message>
-        <source>&lt;a href=&apos;http://www.cpaptalk.com&apos;&gt;CPAPTalk Forum&lt;/a&gt;,</source>
-        <translation>&lt;a href=&apos;http://www.apneuvereniging.nl/forum&apos;&gt;ApneuVereinigung&lt;/a&gt;,</translation>
+        <source>Search:</source>
+        <translation>Suche:</translation>
     </message>
     <message>
-        <source>Current Days</source>
-        <translation>Aktueller Tag</translation>
+        <source>Start with the selected user profile.</source>
+        <translation>Beginnen Sie mit dem ausgewählten Benutzerprofil.</translation>
     </message>
     <message>
-        <source>Contec CMS50D+, CMS50E and CMS50F (not 50FW) Oximeters</source>
-        <translation>Contec CMS50D +, CMS50E und CMS50F (nicht 50FW) Pulsoxymeter</translation>
+        <source>Delete Profile</source>
+        <translation>Profil löschen</translation>
     </message>
     <message>
-        <source>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV models)</source>
-        <translation>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV-Modelle)</translation>
+        <source>Select Profile</source>
+        <translation>Wählen Sie ein Profil aus</translation>
     </message>
     <message>
-        <source>&amp;About</source>
-        <translation>&amp;Schließen</translation>
+        <source>[version]</source>
+        <translation>(Version)</translation>
     </message>
     <message>
-        <source>Further Information</source>
-        <translation>Weitere Informationen</translation>
+        <source>You entered the password wrong too many times.</source>
+        <translation>Sie haben zu oft das falsche Kennwort eingegeben.</translation>
     </message>
     <message>
-        <source>View &amp;Daily</source>
-        <translation>&amp;Tagesansicht</translation>
+        <source>Enter Password</source>
+        <translation>Passwort eingeben</translation>
     </message>
     <message>
-        <source>View &amp;Overview</source>
-        <translation>&amp;Übersichtsansicht</translation>
+        <source>Folder:</source>
+        <translation>Ordner:</translation>
     </message>
     <message>
-        <source>Access to Preferences has been blocked until recalculation completes.</source>
-        <translation>Zugriff auf Einstellungen wurde blockiert, bis die Neuberechnung abgeschlossen ist.</translation>
+        <source>You are about to destroy profile &apos;%1&apos;.</source>
+        <translation>Sie sind dabei, das Profil zu zerstören &apos;%1&apos;.</translation>
     </message>
     <message>
-        <source>Import RemStar &amp;MSeries Data</source>
-        <translation>Import REMSTAR &amp;M-Serie Daten</translation>
+        <source>If you&apos;re trying to delete because you forgot the password, you need to delete it manually.</source>
+        <translation>Wenn Sie versuchen das Profil zu löschen, weil Sie Ihr Passwort vergessen haben, müssen Sie es manuell löschen.</translation>
     </message>
     <message>
-        <source>For some reason, OSCAR does not have any backups for the following machine:</source>
-        <translation>Aus irgendeinem Grund verfügt OSCAR über keine Sicherungen für das folgende Gerät:</translation>
+        <source>You need to enter DELETE in capital letters.</source>
+        <translation>Sie müssen DELETE in Großbuchstaben eingeben.</translation>
     </message>
     <message>
-        <source>Daily Sidebar</source>
-        <translation>Randleiste täglich</translation>
-    </message>
-    <message>
-        <source>Note as a precaution, the backup folder will be left in place.</source>
-        <translation>Als Vorsichtsmaßnahme werden die Backup Ordner an Ort und Stelle belassen.</translation>
-    </message>
-    <message>
-        <source>A file permission error casued the purge process to fail; you will have to delete the following folder manually:</source>
-        <translation>Ein Fehler bei der Dateiberechtigung hat dazu geführt, dass der Bereinigungsprozess fehlgeschlagen ist. Sie müssen den folgenden Ordner manuell löschen:</translation>
-    </message>
-    <message>
-        <source>Change &amp;User</source>
-        <translation>&amp;Benutzer ändern</translation>
-    </message>
-    <message>
-        <source>%1&apos;s Journal</source>
-        <translation>%1&apos;s Journal</translation>
-    </message>
-    <message>
-        <source>Plus a few &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt;usage notes&lt;/a&gt;, and some important information for Mac users.</source>
-        <translation>Plus ein paar &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt; Verwendungshinweise &lt;/ a&gt;, und einige wichtige Informationen für Mac-Nutzer.</translation>
-    </message>
-    <message>
-        <source>Import Problem</source>
-        <translation>Importproblem</translation>
-    </message>
-    <message>
-        <source>Friendly forums to talk and learn about Sleep Apnea:</source>
-        <translation>Bitte sprechen Sie freundlich in den Foren um mehr über OSCAR zu erfahren:</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Please be aware you can not undo this operation!&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Bitte beachten Sie, dass Sie diesen Vorgang nicht rückgängig machen können!&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Updates are not yet implemented</source>
-        <translation>Updates sind noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>View S&amp;tatistics</source>
-        <translation>Statistik &amp;anzeigen</translation>
-    </message>
-    <message>
-        <source>Monthly</source>
-        <translation>Monatlich</translation>
-    </message>
-    <message>
-        <source>Change &amp;Language</source>
-        <translation>&amp;Sprache auswählen</translation>
-    </message>
-    <message>
-        <source>&amp;About OSCAR</source>
-        <translation>&amp;Über OSCAR</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>Import</translation>
-    </message>
-    <message>
-        <source>Because there are no internal backups to rebuild from, you will have to restore from your own.</source>
-        <translation>Es existiert keine interne Datensicherung. Sie müssen Ihre eigene verwenden.</translation>
-    </message>
-    <message>
-        <source>Would you like to import from your own backups now? (you will have no data visible for this machine until you do)</source>
-        <translation>Möchten Sie jetzt Ihr eigenes Backup importieren? (Es wird nichts angezeigt bevor Sie nicht Ihre Daten einspielen)</translation>
-    </message>
-    <message>
-        <source>Please wait, importing from backup folder(s)...</source>
-        <translation>Bitte warten, Import von Backup-Ordner (n)...</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete oximetry data for %1</source>
-        <translation>Sind Sie sicher, dass Sie die Oxymetriedaten löschen möchten %1</translation>
-    </message>
-    <message>
-        <source>Purge ALL CPAP Data</source>
-        <translation>Säuberung aller CPAP-Daten</translation>
-    </message>
-    <message>
-        <source>O&amp;ximetry Wizard</source>
-        <translation>O&amp;xymetrie Assistent</translation>
-    </message>
-    <message>
-        <source>ResMed S9 Oximeter Attachment</source>
-        <translation>ResMed S9 Oxymeter Adapter</translation>
-    </message>
-    <message>
-        <source>About OSCAR</source>
-        <translation>Über OSCAR</translation>
-    </message>
-    <message>
-        <source>Bookmarks</source>
-        <translation>Lesezeichen</translation>
-    </message>
-    <message>
-        <source>Right &amp;Sidebar</source>
-        <translation>&amp;Seitenleiste rechts</translation>
-    </message>
-    <message>
-        <source>The User&apos;s Guide is not yet implemented</source>
-        <translation>Das Benutzerhandbuch ist noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Rebuild CPAP Data</source>
-        <translation>Wiederherstellung der CPAP Daten</translation>
-    </message>
-    <message>
-        <source>XML Files (*.xml)</source>
-        <translation>XML Datei (*.xml)</translation>
-    </message>
-    <message>
-        <source>The FAQ is not yet implemented</source>
-        <translation>Die FAQ ist noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Export review is not yet implemented</source>
-        <translation>Die Exportprüfung ist noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to rebuild all CPAP data for the following machine:
-
-</source>
-        <translation>Sind Sie sicher, dass Sie alle CPAP-Daten für das folgende Gerät neu erstellen möchten?:
-
-</translation>
-    </message>
-    <message>
-        <source>Report an Issue</source>
-        <translation>Ein Problem melden</translation>
-    </message>
-    <message>
-        <source>Please report any bugs you find to the OSCAR developer&apos;s group.</source>
-        <translation>Bitte melden Sie alle Fehler, die Sie finden, an die OSCAR-Entwicklergruppe.</translation>
-    </message>
-    <message>
-        <source>Date Range</source>
-        <translation>Datumsbereich</translation>
-    </message>
-    <message>
-        <source>Profile</source>
-        <translation>Profile</translation>
-    </message>
-    <message>
-        <source>View Statistics</source>
-        <translation>Statistiken anzeigen</translation>
-    </message>
-    <message>
-        <source>CPAP Data Located</source>
-        <translation>CPAP-Daten liegen an</translation>
-    </message>
-    <message>
-        <source>Access to Import has been blocked while recalculations are in progress.</source>
-        <translation>Der Zugang zu Import wurde blockiert, während Neuberechnungen im Gange sind.</translation>
-    </message>
-    <message>
-        <source>Sleep Disorder Terms &amp;Glossary</source>
-        <translation>Schlafstörungen Nutzungswörterbuch &amp;Wörterverzeichnis</translation>
-    </message>
-    <message>
-        <source>This is a beta release, some features may not yet behave as expected.</source>
-        <translation>Dies ist eine Beta-Version und einige Funktionen funktionieren noch nicht wie erwartet.</translation>
-    </message>
-    <message>
-        <source>Are you really sure you want to do this?</source>
-        <translation>Sind Sie wirklich sicher, dass Sie das tun wollen?</translation>
-    </message>
-    <message>
-        <source>Select the day with valid oximetry data in daily view first.</source>
-        <translation>Wählen Sie zuerst den Tag mit gültigen Oximetriedaten in der Tagesansicht aus.</translation>
-    </message>
-    <message>
-        <source>Purge Oximetry Data</source>
-        <translation>Oxymetriedaten löschen</translation>
-    </message>
-    <message>
-        <source>*** &lt;u&gt;Use at your own risk&lt;/u&gt; ***</source>
-        <translation>*** &lt;u&gt; Benutzung auf eigene Gefahr&lt;/u&gt; ***</translation>
-    </message>
-    <message>
-        <source>Records</source>
-        <translation>Zusammenfassung</translation>
-    </message>
-    <message>
-        <source>Use &amp;AntiAliasing</source>
-        <translation>Verwenden Sie &amp;Antialiasing</translation>
-    </message>
-    <message>
-        <source>I don&apos;t recommend using this built in web browser to do any major surfing in, it will work, but it&apos;s mainly meant as a help browser.</source>
-        <translation>Ich empfehle, nicht mit diesem Browser zu Surfen. Es wird funktionieren, aber er ist vor allem als Hilfe-Browser gedacht.</translation>
-    </message>
-    <message>
-        <source>About &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt;Sleep Apnea&lt;/a&gt; on Wikipedia</source>
-        <translation>Über &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt; Schlafapnoe&lt;/a&gt; auf Wikipedia</translation>
-    </message>
-    <message>
-        <source>Would you like to import from this location?</source>
-        <translation>Möchten Sie von diesem Ort impoertieren?</translation>
-    </message>
-    <message>
-        <source>This is &lt;font color=&apos;red&apos;&gt;&lt;u&gt;NOT&lt;/u&gt;&lt;/font&gt; medical software. This application is merely a data viewer, and no guarantee is made regarding accuracy or correctness of any calculations or data displayed.</source>
-        <translation>Dies ist &lt;font color=&apos;red&apos;&gt;&lt;u&gt;KEINE&lt;/u&gt;&lt;/font&gt; medizinische Software. Bei dieser Anwendung handelt es sich lediglich um einen Datenbetrachter, und es wird keine Garantie für die Richtigkeit oder Richtigkeit der angezeigten Berechnungen oder Daten übernommen.</translation>
-    </message>
-    <message>
-        <source>Somnopause Data Import complete</source>
-        <translation>Somnopause Datenimport abgeschlossen</translation>
-    </message>
-    <message>
-        <source>Processing import list...</source>
-        <translation>Importliste wird bearbeitet...</translation>
-    </message>
-    <message>
-        <source>Report Mode</source>
-        <translation>Report Modus</translation>
-    </message>
-    <message>
-        <source>&amp;Profiles</source>
-        <translation>&amp;Profile</translation>
-    </message>
-    <message>
-        <source>Profiles</source>
-        <translation>Profile</translation>
-    </message>
-    <message>
-        <source>CSV Export Wizard</source>
-        <translation>CSV-Export-Assistent</translation>
-    </message>
-    <message>
-        <source>DeVilbiss Intellipap (Auto)</source>
-        <translation>DeVilbiss Intellipap (Auto)</translation>
-    </message>
-    <message>
-        <source>&amp;Automatic Oximetry Cleanup</source>
-        <translation>&amp;Automatische Bereinigung der Oxymetrie</translation>
-    </message>
-    <message>
-        <source>The Glossary is not yet implemented</source>
-        <translation>Das Glossar ist noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Import is already running in the background.</source>
-        <translation>Import läuft bereits im Hintergrund.</translation>
-    </message>
-    <message>
-        <source>Specify</source>
-        <translation>einzeln Ausführen</translation>
-    </message>
-    <message>
-        <source>Standard</source>
-        <translation>Standard</translation>
-    </message>
-    <message>
-        <source>No help is available.</source>
-        <translation>Es ist keine Hilfe verfügbar.</translation>
-    </message>
-    <message>
-        <source>There was a problem opening ZEO File: </source>
-        <translation>Es gab ein Problem beim Öffnen der ZEO Datei: </translation>
-    </message>
-    <message>
-        <source>Statistics</source>
-        <translation>Statistiken</translation>
-    </message>
-    <message>
-        <source>Up to date</source>
-        <translation>Neuster Stand</translation>
-    </message>
-    <message>
-        <source>Please open a profile first.</source>
-        <translation>Bitte öffnen Sie zuerst ein Profil.</translation>
-    </message>
-    <message>
-        <source>&amp;Statistics</source>
-        <translation>&amp;Statistiken</translation>
-    </message>
-    <message>
-        <source>Please remember to point the importer at the root folder or drive letter of your data-card, and not a subfolder.</source>
-        <translation>Denken Sie daran, den Importer auf den Stammordner oder den Laufwerksbuchstaben Ihrer Datenkarte zu verweisen und nicht auf einen Unterordner.</translation>
-    </message>
-    <message>
-        <source>Welcome to OSCAR</source>
-        <translation>Willkommen bei OSCAR</translation>
-    </message>
-    <message>
-        <source>Backup &amp;Journal</source>
-        <translation>Sicherungskopie &amp;Journal</translation>
-    </message>
-    <message>
-        <source>Imported %1 CPAP session(s) from
-
-%2</source>
-        <translation>Importiert %1 CPAP-Sitzung(en) von
-
-%2</translation>
-    </message>
-    <message>
-        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</source>
-        <translation>Diese Software wird frei veröffentlicht unter &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>Reporting issues is not yet implemented</source>
-        <translation>Berichterstattungsprobleme sind noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Purge &amp;Current Selected Day</source>
-        <translation>Bereinigen, &amp;Aktualisieren des aktuell ausgewählten Tages</translation>
-    </message>
-    <message>
-        <source>Provided you have made &lt;i&gt;your &lt;b&gt;own&lt;/b&gt; backups for ALL of your CPAP data&lt;/i&gt;, you can still complete this operation, but you will have to restore from your backups manually.</source>
-        <translation>Vorausgesetzt, Sie haben &lt;i&gt;&lt;b&gt;eigene &lt;/b&gt; Backups für ALLE Ihre CPAP-Daten&lt;/i&gt;, die Sie noch vervollständigen können erstellt. Aber Sie müssen die Backups manuell wiederherstellen.</translation>
-    </message>
-    <message>
-        <source>ResMed S9 models (CPAP, Auto, VPAP)</source>
-        <translation>ResMed S9 Modellen (CPAP, AutoPAP, VPAP)</translation>
-    </message>
-    <message>
-        <source>Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.</source>
-        <translation>Ihr Arzt sollte immer die erste und beste Informationsquelle für das wichtige Management Ihrer Gesundheit sein.</translation>
-    </message>
-    <message>
-        <source>&amp;Advanced</source>
-        <translation>&amp;Fortgeschrittene</translation>
-    </message>
-    <message>
-        <source>Zeo CSV Import complete</source>
-        <translation>Zeo CSV Import abgeschlossen</translation>
-    </message>
-    <message>
-        <source>&amp;Import Data</source>
-        <translation>&amp;Daten importieren</translation>
-    </message>
-    <message>
-        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation>Hier sind die &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt; Release Notes&lt;/a&gt; für diese Version.</translation>
-    </message>
-    <message>
-        <source>Print &amp;Report</source>
-        <translation>&amp;Drucken</translation>
-    </message>
-    <message>
-        <source>&amp;Reset Graph Layout</source>
-        <translation>&amp;Zurücksetzen der Diagrammansicht</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t find any valid Machine Data at
-
-%1</source>
-        <translation>Hier konnten keine gültigen Gerätedaten gefunden werden
-
-%1</translation>
-    </message>
-    <message>
-        <source>Export for Review</source>
-        <translation>Export für Bewertung</translation>
-    </message>
-    <message>
-        <source>Take &amp;Screenshot</source>
-        <translation>&amp;Bildschirmverwaltung</translation>
-    </message>
-    <message>
-        <source>Overview</source>
-        <translation>Übersicht</translation>
-    </message>
-    <message>
-        <source>Show Debug Pane</source>
-        <translation>Debug-Fenster anzeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Edit Profile</source>
-        <translation>&amp;Profil bearbeiten</translation>
-    </message>
-    <message>
-        <source>Import Reminder</source>
-        <translation>Import Erinnerung</translation>
-    </message>
-    <message>
-        <source>Help Browser</source>
-        <translation>Hilfe Browser</translation>
-    </message>
-    <message>
-        <source>If you can read this, the restart command didn&apos;t work. You will have to do it yourself manually.</source>
-        <translation>Wenn Sie dies lesen können, hat der Neustartbefehl nicht funktioniert. Sie müssen es manuell tun.</translation>
-    </message>
-    <message>
-        <source>Exp&amp;ort Data</source>
-        <translation>Exp&amp;ort Daten</translation>
-    </message>
-    <message>
-        <source>Welcome</source>
-        <translation>Willkommen</translation>
-    </message>
-    <message>
-        <source>Import &amp;Somnopose Data</source>
-        <translation>Import &amp;CSV Daten</translation>
-    </message>
-    <message>
-        <source>Screenshot saved to file &quot;%1&quot;</source>
-        <translation>Screenshot Datei gespeichert &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <source>&amp;Preferences</source>
-        <translation>&amp;Einstellungen</translation>
-    </message>
-    <message>
-        <source>Fisher &amp; Paykel ICON (CPAP, Auto)</source>
-        <translation>Fisher &amp; Paykel ICON (CPAP, Auto)</translation>
-    </message>
-    <message>
-        <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; OSCAR&apos;s machine database for the following machine:&lt;/p&gt;</source>
-        <translation>Du bist dabei &lt;font size=+2&gt;zu löschen&lt;/font&gt; OSCAR-Gerätedatenbank für folgende Geräte:&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
-        <translation>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Toggle &amp;Line Cursor</source>
-        <translation>Ein/Aus &amp;Linienbeschreibung</translation>
-    </message>
-    <message>
-        <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
-        <translation>Sind Sie &lt;b&gt;absolut sicher&lt;/b&gt; das Sie fortfahren möchten?</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen Toggle</source>
-        <translation>&amp;Vollbild umschalten</translation>
-    </message>
-    <message>
-        <source>Import Success</source>
-        <translation>Erfolgreicher Import</translation>
-    </message>
-    <message>
-        <source>Choose where to save journal</source>
-        <translation>Wählen, wo das Blatt gespeichert werden soll</translation>
-    </message>
-    <message>
-        <source>&amp;Frequently Asked Questions</source>
-        <translation>&amp;Häufig gestellte Fragen</translation>
-    </message>
-    <message>
-        <source>Oximetry</source>
-        <translation>Oxymetrie</translation>
-    </message>
-    <message>
-        <source>A %1 file structure was located at:</source>
-        <translation>Eine%1 Dateistruktur befindet sich unter:</translation>
-    </message>
-    <message>
-        <source>(It doesn&apos;t support SSL encryption, so it&apos;s not a good idea to type your passwords or personal details anywhere.)</source>
-        <translation>(Das Programm unterstützt keine SSL-Verschlüsselung, so dass es keine gute Idee ist, Ihre Passwörter oder persönliche Daten irgendwo einzugeben.)</translation>
-    </message>
-    <message>
-        <source>Change &amp;Data Folder</source>
-        <translation>&amp;Datenordner ändern</translation>
-    </message>
-    <message>
-        <source>License:</source>
-        <translation>Lizenz:</translation>
-    </message>
-    <message>
-        <source>OSCAR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation>OSCAR wurde von einem Softwareentwickler mit persönlicher Erfahrung mit einer Schlafstörung entwickelt und durch das Feedback vieler anderer freiwilliger Tester geprägt, die sich mit ähnlichen Bedingungen befassen.</translation>
-    </message>
-    <message>
-        <source>Navigation</source>
-        <translation>Navigation</translation>
-    </message>
-    <message>
-        <source>Already up to date with CPAP data at
-
-%1</source>
-        <translation>Bereits aktuelle CPAP Daten
-
-%1</translation>
-    </message>
-</context>
-<context>
-    <name>Daily</name>
-    <message>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>u</source>
-        <translation>u</translation>
-    </message>
-    <message>
-        <source> i </source>
-        <translation> i </translation>
-    </message>
-    <message>
-        <source>Big</source>
-        <translation>Groß</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation>Ende</translation>
-    </message>
-    <message>
-        <source>UF1</source>
-        <translation>UF1</translation>
-    </message>
-    <message>
-        <source>UF2</source>
-        <translation>UF2</translation>
-    </message>
-    <message>
-        <source>%1%2</source>
-        <translation>%1%2</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
-    <message>
-        <source>TTIA</source>
-        <translation>TTIA</translation>
-    </message>
-    <message>
-        <source>Oximetry Sessions</source>
-        <translation>Oxymeter Sitzung</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation>Farbe</translation>
-    </message>
-    <message>
-        <source>Flags</source>
-        <translation>Markierungen</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Aufzeichnungen</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation>Klein</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation>Alle Ereignisse anzeigen</translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation>Start</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation>Alle Diagramme zeigen</translation>
-    </message>
-    <message>
-        <source>PAP Mode: %1</source>
-        <translation>PAP Modus: %1</translation>
-    </message>
-    <message>
-        <source>Machine Settings Unavailable</source>
-        <translation>Geräteeinstellungen nicht verfügbar</translation>
-    </message>
-    <message>
-        <source>I&apos;m feeling ...</source>
-        <translation>Ich fühle mich ...</translation>
-    </message>
-    <message>
-        <source>Journal</source>
-        <translation>Journal</translation>
-    </message>
-    <message>
-        <source>Total time in apnea</source>
-        <translation>Gesamtzeit des Apnoe</translation>
-    </message>
-    <message>
-        <source>Position Sensor Sessions</source>
-        <translation>Position Sensor Sitzungen</translation>
-    </message>
-    <message>
-        <source>Add Bookmark</source>
-        <translation>Neues Lesezeichen</translation>
-    </message>
-    <message>
-        <source>Remove Bookmark</source>
-        <translation>Lesezeichen entfernen</translation>
-    </message>
-    <message>
-        <source>Pick a Colour</source>
-        <translation>Wählen Sie eine Farbe</translation>
-    </message>
-    <message>
-        <source>Complain to your Equipment Provider!</source>
-        <translation>Beschweren Sie sich bei Ihren Anbieter!</translation>
-    </message>
-    <message>
-        <source>Session Information</source>
-        <translation>Sitzungsinformationen</translation>
-    </message>
-    <message>
-        <source>Sessions all off!</source>
-        <translation>Alle Sitzungen schließen!</translation>
-    </message>
-    <message>
-        <source>%1 event</source>
-        <translation>%1 Ereignis</translation>
-    </message>
-    <message>
-        <source>Go to the most recent day with data records</source>
-        <translation>Zum letzten Tag mit Datensätzen</translation>
-    </message>
-    <message>
-        <source>Machine Settings</source>
-        <translation>Geräteeinstellungen</translation>
-    </message>
-    <message>
-        <source>Sorry, this machine only provides compliance data.</source>
-        <translation>Tut mir leid, dieses Gerät liefert nur Compliance-Daten.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Please Note:&lt;/b&gt; All settings shown below are based on assumptions that nothing&apos;s changed since previous days.</source>
-        <translation>&lt;b&gt;Bitte beachten Sie:&lt;/b&gt; Alle unten gezeigten Einstellungen basieren auf der Annahme, dass sich seit den letzten Tagen nichts geändert hat.</translation>
-    </message>
-    <message>
-        <source>B.M.I.</source>
-        <translation>B.M.I.</translation>
-    </message>
-    <message>
-        <source>Sleep Stage Sessions</source>
-        <translation>Schlafstadium Sitzungen</translation>
-    </message>
-    <message>
-        <source>Oximeter Information</source>
-        <translation>Oxymeter Informationen</translation>
-    </message>
-    <message>
-        <source>Events</source>
-        <translation>Ereignisse</translation>
-    </message>
-    <message>
-        <source>Graphs</source>
-        <translation>Diagramme</translation>
-    </message>
-    <message>
-        <source>CPAP Sessions</source>
-        <translation>CPAP Sitzung</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation>Mittel</translation>
-    </message>
-    <message>
-        <source>Starts</source>
-        <translation>Startet</translation>
-    </message>
-    <message>
-        <source>Weight</source>
-        <translation>Gewicht</translation>
-    </message>
-    <message>
-        <source>This bookmarked is in a currently disabled area..</source>
-        <translation>Dies ist ein mit Lesezeichen derzeit deaktivierter Bereich..</translation>
-    </message>
-    <message>
-        <source>Zombie</source>
-        <translation>Nicht gut</translation>
-    </message>
-    <message>
-        <source>Bookmarks</source>
-        <translation>Lesezeichen</translation>
-    </message>
-    <message>
-        <source>Session End Times</source>
-        <translation>Sitzungsendzeit</translation>
-    </message>
-    <message>
-        <source>enable</source>
-        <translation>aktivieren</translation>
-    </message>
-    <message>
-        <source>%1 events</source>
-        <translation>%1 Ereignisse</translation>
-    </message>
-    <message>
-        <source>events</source>
-        <translation>Ereignisse</translation>
-    </message>
-    <message>
-        <source>BRICK :(</source>
-        <translation>BLOCK :(</translation>
-    </message>
-    <message>
-        <source>Event Breakdown</source>
-        <translation>Ereignis Pannen</translation>
-    </message>
-    <message>
-        <source>Click to %1 this session.</source>
-        <translation>Klicken Sie auf %1 dieser Sitzung.</translation>
-    </message>
-    <message>
-        <source>SpO2 Desaturations</source>
-        <translation>SpO2 Entsättigungen</translation>
-    </message>
-    <message>
-        <source>&quot;Nothing&apos;s here!&quot;</source>
-        <translation>&quot;Hier ist nichts!&quot;</translation>
-    </message>
-    <message>
-        <source>%1h %2m %3s</source>
-        <translation>%1h %2m %3s</translation>
-    </message>
-    <message>
-        <source>Awesome</source>
-        <translation>Sehr gut</translation>
-    </message>
-    <message>
-        <source>Pulse Change events</source>
-        <translation>Pulsereignis ändern</translation>
-    </message>
-    <message>
-        <source>SpO2 Baseline Used</source>
-        <translation>SpO2-Baseline verwendet</translation>
-    </message>
-    <message>
-        <source>Zero hours??</source>
-        <translation>Null-Stunden??</translation>
-    </message>
-    <message>
-        <source>Go to the previous day</source>
-        <translation>Zum vorherigen Tag</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation>Details</translation>
-    </message>
-    <message>
-        <source>Time over leak redline</source>
-        <translation>Zeit über Leck rote Linie</translation>
-    </message>
-    <message>
-        <source>disable</source>
-        <translation>deaktivieren</translation>
-    </message>
-    <message>
-        <source>Bookmark at %1</source>
-        <translation>Lesezeichen bei %1</translation>
-    </message>
-    <message>
-        <source>Statistics</source>
-        <translation>Statistiken</translation>
-    </message>
-    <message>
-        <source>Oscar is bored with this days lack of data.</source>
-        <translation>Oscar langweilt sich mit so wenig Daten.</translation>
-    </message>
-    <message>
-        <source>Breakdown</source>
-        <translation>Aufschlüsselung</translation>
-    </message>
-    <message>
-        <source>Unknown Session</source>
-        <translation>Unbekannte Sitzung</translation>
-    </message>
-    <message>
-        <source>Sessions exist for this day but are switched off.</source>
-        <translation>Sitzungen existieren heute, sind aber ausgeschaltet.</translation>
-    </message>
-    <message>
-        <source>Model %1 - %2</source>
-        <translation>Model %1 - %2</translation>
-    </message>
-    <message>
-        <source>Duration</source>
-        <translation>Dauer</translation>
-    </message>
-    <message>
-        <source>View Size</source>
-        <translation>Größen</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation>Ausblenden aller Diagramme</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation>Alle Ereignisse einblenden</translation>
-    </message>
-    <message>
-        <source>Impossibly short session</source>
-        <translation>Sehr kurze Sitzung</translation>
-    </message>
-    <message>
-        <source>%1 Session #%2</source>
-        <translation>%1 Sitzung #%2</translation>
-    </message>
-    <message>
-        <source>Show/hide available graphs.</source>
-        <translation>Verfügbare Diagramme anzeigen/ausblenden.</translation>
-    </message>
-    <message>
-        <source>No %1 events are recorded this day</source>
-        <translation>Keine %1 Ereignisse werden an diesem Tag aufgezeichnet</translation>
-    </message>
-    <message>
-        <source>One or more waveform record(s) for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation>Ein oder mehrere Waveform-Datensätze für diese Sitzung hatten fehlerhafte Quelldaten. Einige Überlagerungspunkte für Wellenformen stimmen möglicherweise nicht richtig überein.</translation>
-    </message>
-    <message>
-        <source>BRICK! :(</source>
-        <translation>ZIEGELSTEIN! :(</translation>
-    </message>
-    <message>
-        <source>Show or hide the calender</source>
-        <translation>Ein/Aus Kalender</translation>
-    </message>
-    <message>
-        <source>Time outside of ramp</source>
-        <translation>Außerhalb der Rampenzeit</translation>
-    </message>
-    <message>
-        <source>Unable to display Pie Chart on this system</source>
-        <translation>Das Kreisdiagramm kann auf diesem System nicht angezeigt werden</translation>
-    </message>
-    <message>
-        <source>Total ramp time</source>
-        <translation>Gesamte Rampenzeit</translation>
-    </message>
-    <message>
-        <source>This day just contains summary data, only limited information is available.</source>
-        <translation>Dieser Tag enthält nur zusammenfassende Daten. Es stehen nur begrenzte Informationen zur Verfügung.</translation>
-    </message>
-    <message>
-        <source>(Mode/Pressure settings are guessed on this day.)</source>
-        <translation>(Die Einstellungen für den Druckmodus werden an diesem Tag geschätzt.)</translation>
-    </message>
-    <message>
-        <source>Time at Pressure</source>
-        <translation>Zeit in Druck</translation>
-    </message>
-    <message>
-        <source>Go to the next day</source>
-        <translation>Gehen Sie auf den nächsten Tag</translation>
-    </message>
-    <message>
-        <source>Session Start Times</source>
-        <translation>Sitzungsstartzeit</translation>
-    </message>
-</context>
-<context>
-    <name>OximeterImport</name>
-    <message>
-        <source>%1</source>
-        <translation>%1</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to enable updating the device identifier next import, which is useful for those who have multiple oximeters lying around.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wer mehrere verschiedene Oxymeter benutzt, muss die Aktualisierung der Geräteerkennung ermöglichen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Live Oximetry import has been stopped</source>
-        <translation>Der Live-Oxymetrie-Import wurde gestoppt</translation>
-    </message>
-    <message>
-        <source>Press Start to commence recording</source>
-        <translation>Drücken Sie Start, um die Aufnahme zu beginnen</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Beenden</translation>
-    </message>
-    <message>
-        <source>No CPAP data available on %1</source>
-        <translation>Keine CPAP Daten auf%1 verfügbar</translation>
-    </message>
-    <message>
-        <source>It also can read from ChoiceMMed MD300W1 oximeter .dat files.</source>
-        <translation>Es kann auch von Choicemmed MD300W1 Oxymeter DAT-Dateien gelesen werden.</translation>
-    </message>
-    <message>
-        <source>Please wait until oximeter upload process completes. Do not unplug your oximeter.</source>
-        <translation>Bitte warten Sie, bis der Oxymeter Upload-Vorgang abgeschlossen ist. Das Oxymeter nicht trennen.</translation>
-    </message>
-    <message>
-        <source>Finger not detected</source>
-        <translation>Kein Fingerchlip angeschlossen</translation>
-    </message>
-    <message>
-        <source>You need to tell your oximeter to begin sending data to the computer.</source>
-        <translation>Sie müssen im Menü Ihres Oxymeters den Upload starten.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier können Sie Ihr Oxymeter bezeichnen (7 Zeichen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>No Oximetry module could parse the given file:</source>
-        <translation>Kein Oxymetriemodul kann die angegebene Datei analysieren:</translation>
-    </message>
-    <message>
-        <source>Renaming this oximeter from &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>Dieses Oxymeter umbenennen aus &apos;%1&apos; to &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Please note: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Make sure your correct oximeter type is selected otherwise import will fail.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Bitte bachten Sie: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Bevor Sie importieren stellen Sie sicher, dass Sie Ihren Oxymeter-Typ gewählt haben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import from data files created by software that came with your Pulse Oximeter, such as SpO2Review.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option ermöglicht den Import von Dateien, welche durch Software von SpO2 Review erzeugt wurde.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Oximeter import completed..</source>
-        <translation>Oxymeterdatenimport abgeschlossen..</translation>
-    </message>
-    <message>
-        <source>&amp;Retry</source>
-        <translation>&amp;Wiederholen</translation>
-    </message>
-    <message>
-        <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
-    </message>
-    <message>
-        <source>You may wish to note, other companies, such as Pulox, simply rebadge Contec CMS50&apos;s under new names, such as the Pulox PO-200, PO-300, PO-400. These should also work.</source>
-        <translation>Sie werden darauf hingewiesen, dass andere Unternehmen, wie Pulox identisch mit dem CMS50 sind. (wie der Pulox PO-200, PO-300, PO-400). Diese sollten auch funktionieren.</translation>
-    </message>
-    <message>
-        <source>%1 session(s) on %2, starting at %3</source>
-        <translation>%1 Sitzung(en) an %2, Starten ab %3</translation>
-    </message>
-    <message>
-        <source>I need to set the time manually, because my oximeter doesn&apos;t have an internal clock.</source>
-        <translation>Ich muss die Zeit manuell einstellen, denn mein Oxymeter hat keine eigebaute Uhr.</translation>
-    </message>
-    <message>
-        <source>You can manually adjust the time here if required:</source>
-        <translation>Falls erforderlich, können Sie hier die Zeit manuell einstellen:</translation>
-    </message>
-    <message>
-        <source>OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
-        <translation>Mit OSCAR können Sie neben CPAP-Sitzungsdaten auch Oxymetriedaten nachverfolgen, wodurch Sie wertvolle Einblicke in die Wirksamkeit der CPAP-Behandlung erhalten. Es funktioniert auch eigenständig mit Ihrem Pulsoxymeter, sodass Sie Ihre aufgezeichneten Daten speichern, verfolgen und überprüfen können.</translation>
-    </message>
-    <message>
-        <source>Oximeter Session %1</source>
-        <translation>Oxymetersitzung %1</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t access oximeter</source>
-        <translation>Konnte nicht auf das Oxymeter zugreifen</translation>
-    </message>
-    <message>
-        <source>Please choose which one you want to import into OSCAR</source>
-        <translation>Bitte wählen Sie aus, welche Sie in OSCAR importieren möchten</translation>
-    </message>
-    <message>
-        <source>Please connect your oximeter device</source>
-        <translation>Bitte verbinden Sie Ihr Oxymeter-Gerät</translation>
-    </message>
-    <message>
-        <source>Important Notes:</source>
-        <translation>Wichtige Hinweise:</translation>
-    </message>
-    <message>
-        <source>Starting up...</source>
-        <translation>Sarten Sie...</translation>
-    </message>
-    <message>
-        <source>Contec CMS50D+ devices do not have an internal clock, and do not record a starting time. If you do not have a CPAP session to link a recording to, you will have to enter the start time manually after the import process is completed.</source>
-        <translation>Contec CMS50D + Geräte verfügen über keine interne Uhr und notieren keine Startzeit. Hier müssen Sie die Startzeit manuell eingeben, nachdem der Importvorgang abgeschlossen ist.</translation>
-    </message>
-    <message>
-        <source>HH:mm:ssap</source>
-        <translation>HH:mm:ssap</translation>
-    </message>
-    <message>
-        <source>Import directly from a recording on a device</source>
-        <translation>Importieren direkt aus einer Aufzeichnung auf einem Gerät</translation>
-    </message>
-    <message>
-        <source>Oximeter name is different.. If you only have one and are sharing it between profiles, set the name to the same on both profiles.</source>
-        <translation>Oxymeter Name ist anders. Wenn Sie mit mehreren Profilen arbeiten setzen Sie den Namen auf allen Profilen gleich.</translation>
-    </message>
-    <message>
-        <source>Even for devices with an internal clock, it is still recommended to get into the habit of starting oximeter records at the same time as CPAP sessions, because CPAP internal clocks tend to drift over time, and not all can be reset easily.</source>
-        <translation>Auch bei Geräten mit einer internen Uhr wird empfohlen die CPAP-Sitzung gleichzeitig mit der Oxymetrie-Sitzung zu beginnen. Manche CPAP Geräte neigen mit der Zeit dazu ungenaue Zeitdaten zu liefern.</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>&amp;Information Page</source>
-        <translation>&amp;Informationsseite</translation>
-    </message>
-    <message>
-        <source>I want to use the time reported by my oximeter&apos;s built in clock.</source>
-        <translation>Ich will die Zeit von meiner im Oxymeter eingebauten Uhr verwenden.</translation>
-    </message>
-    <message>
-        <source>Live Oximetry Stopped</source>
-        <translation>Live-Oxymetrie gestoppt</translation>
-    </message>
-    <message>
-        <source>Waiting for %1 to start</source>
-        <translation>Warten auf %1 zu starten</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Reminder for CPAP users: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Did you remember to import your CPAP sessions first?&lt;br/&gt;&lt;/span&gt;If you forget, you won&apos;t have a valid time to sync this oximetry session to.&lt;br/&gt;To a ensure good sync between devices, always try to start both at the same time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Erinnerung für CPAP Benutzer: &lt;/span&gt;&lt;span style=&quot; color:#fb0000;&quot;&gt;Haben Sie daran gedacht erst Ihre CPAP Daten zu importieren?&lt;br/&gt;&lt;/span&gt;Bitte versuchen Sie immer die CPAP Sitzung gleichzeitig mir der Oxymetrie Sitzung zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>SpO2 %</source>
-        <translation>SpO2 %</translation>
-    </message>
-    <message>
-        <source>Select a valid oximetry data file</source>
-        <translation>Wählen Sie eine gültige Oxymetriedatendatei aus</translation>
-    </message>
-    <message>
-        <source>%1 device is uploading data...</source>
-        <translation>%1 Gerät Hochladen von Daten...</translation>
-    </message>
-    <message>
-        <source>&amp;End Recording</source>
-        <translation>&amp;Aufnahme Beenden</translation>
-    </message>
-    <message>
-        <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until OSCAR prompts you to.</source>
-        <translation>CMS50E / F-Benutzer: Wenn Sie direkt importieren, wählen Sie bitte keinen Upload auf Ihrem Gerät aus, bis Sie von OSCAR dazu aufgefordert werden.</translation>
-    </message>
-    <message>
-        <source>&amp;Choose Session</source>
-        <translation>&amp;Wählen Sie die Sitzung</translation>
-    </message>
-    <message>
-        <source>Nothing to import</source>
-        <translation>Nichts zu importieren</translation>
-    </message>
-    <message>
-        <source>Select upload option on %1</source>
-        <translation>Wählen Sie eine Uploadfunktion %1</translation>
-    </message>
-    <message>
-        <source>Select Oximeter Type:</source>
-        <translation>Wählen Sie den Oxymeter Typ:</translation>
-    </message>
-    <message>
-        <source>Waiting for the device to start the upload process...</source>
-        <translation>Warten auf das Gerät, um den Upload-Vorgang zu starten...</translation>
-    </message>
-    <message>
-        <source>Could not detect any connected oximeter devices.</source>
-        <translation>Konnte keine angeschlossenen Oxymeter Geräte erkennen.</translation>
-    </message>
-    <message>
-        <source>Oximeter Import Wizard</source>
-        <translation>Oxymeter Import-Assistenten</translation>
-    </message>
-    <message>
-        <source>&amp;Save and Finish</source>
-        <translation>&amp;Speichern und Beenden</translation>
-    </message>
-    <message>
-        <source>Pulse Oximeters are medical devices used to measure blood oxygen saturation. During extended Apnea events and abnormal breathing patterns, blood oxygen saturation levels can drop significantly, and can indicate issues that need medical attention.</source>
-        <translation>Pulsoxymeter sind medizinische Geräte und werden zur Feststellung der Sauerstoffsättigung im Blut benutzt. Bei längeren Apnea Ereignissen und abnormalen Atemmustern, kann die Blutsauerstoffsättigung deutlich sinken. Dann sollten Sie Ihren Arzt informieren.</translation>
-    </message>
-    <message>
-        <source>For OSCAR to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
-        <translation>Damit OSCAR direkt von Ihrem Oxymeter-Gerät aus suchen und lesen kann, müssen Sie sicherstellen, dass die richtigen Gerätetreiber (z. B. USB zu Serial UART) auf Ihrem Computer installiert sind. Weitere Informationen dazu, %1klick hier%2.</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation>Startzeit</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OSCAR benötigt eine Startzeit, um zu wissen, wo die Oxymetriesitzung gespeichert werden soll.&lt;/p&gt;&lt;p&gt;Wählen Sie eine der folgenden Optionen:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Pulse Rate</source>
-        <translation>Pulsrate</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Note: Syncing to CPAP session starting time will always be more accurate.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hinweis: Synchronisieren Sie die CPAP-Sitzungs- Startzeit. Danach wird das Ergebnis immer genauer sein.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Set device date/time</source>
-        <translation>Datum/Uhrzeit im Gerät gesetzt</translation>
-    </message>
-    <message>
-        <source>Oximetry Files (*.spo *.spor *.spo2 *.SpO2 *.dat)</source>
-        <translation>Oxymetriedateien (*.spo *.spor *.spo2 *.SpO2 *.dat)</translation>
-    </message>
-    <message>
-        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation>OSCAR ist derzeit mit den Serien-Oxymetern Contec CMS50D +, CMS50E, CMS50F und CMS50I kompatibel.&lt;br/&gt;(Hinweis: Direkter Import von Bluetooth-Modellen ist &lt;span style=&quot; font-weight:600;&quot;&gt;wahrscheinlich noch&lt;/span&gt; nicht möglich)</translation>
-    </message>
-    <message>
-        <source>Import Completed. When did the recording start?</source>
-        <translation>Import abgeschlossen. Wann hat die Aufnahme zu starten?</translation>
-    </message>
-    <message>
-        <source>Import from a datafile saved by another program, like SpO2Review</source>
-        <translation>Import aus einer Datendatei von einem anderen Programm, welche von SpO2Review gespeichert wurden</translation>
-    </message>
-    <message>
-        <source>Day recording (normally would of) started</source>
-        <translation>Normalerweise wird der Tag der Aufnahme gestartet</translation>
-    </message>
-    <message>
-        <source>Multiple Sessions Detected</source>
-        <translation>Mehrere Sitzungen erkannt</translation>
-    </message>
-    <message>
-        <source>I started this oximeter recording at (or near) the same time as a session on my CPAP machine.</source>
-        <translation>Ich begann diese Oxymeter Aufnahme zur gleichen Zeit (oder nahe der Zeit) wie eine Session auf meinem CPAP-Gerät.</translation>
-    </message>
-    <message>
-        <source>Record attached to computer overnight (provides plethysomogram)</source>
-        <translation>Waren Sie über Nacht an den PC angeschlossen benutzen Sie das (Plethysonogramm)</translation>
-    </message>
-    <message>
-        <source>Erase session after successful upload</source>
-        <translation>Löschen der Sitzung nach erfolgreichem Upload</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, some oximeters will require you to do something in the devices menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option ermöglicht den Import (über Kabel) aus Ihrem Oxymeter.&lt;/p&gt;&lt;p&gt;Nach der Auswahl dieser Option, werden einige Einstellungen im Oxymeter erforderlich sein um den Upload zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Live Oximetry Mode</source>
-        <translation>Live-Oxymetriemodus</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>Set device identifier</source>
-        <translation>Geräteidentifizierung</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation>Details</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, OSCAR will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert, setzt OSCAR die interne Uhr des CMS50 automatisch auf die aktuelle Uhrzeit Ihres Computers zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Oximeter not detected</source>
-        <translation>Kein Oxymeter angeschlossen</translation>
-    </message>
-    <message>
-        <source>Please remember:</source>
-        <translation>Bitte beachten Sie:</translation>
-    </message>
-    <message>
-        <source>Where would you like to import from?</source>
-        <translation>Von wo wollen Sie importieren?</translation>
-    </message>
-    <message>
-        <source>If you can read this, you likely have your oximeter type set wrong in preferences.</source>
-        <translation>Wenn Sie das lesen, haben Sie nicht das richtige Oxymeter in den Einstellungen gewählt.</translation>
-    </message>
-    <message>
-        <source>I want to use the time my computer recorded for this live oximetry session.</source>
-        <translation>Ich möchte die Zeit von meinem Computer für diese Live-Oxymetrie-Sitzung benutzen.</translation>
-    </message>
-    <message>
-        <source>Scanning for compatible oximeters</source>
-        <translation>Scannen von kompatieblen Oxymetern</translation>
-    </message>
-    <message>
-        <source>Please connect your oximeter, enter it&apos;s menu and select upload to commence data transfer...</source>
-        <translation>Bitte schließen Sie Ihr Oxymeter an und wählen Sie im Menü Upload mit Datenübertragung beginnen...</translation>
-    </message>
-    <message>
-        <source>Choose CPAP session to sync to:</source>
-        <translation>Wählen Sie aus um die CPAP-Sitzung zu synchronisieren:</translation>
-    </message>
-    <message>
-        <source>Duration</source>
-        <translation>Dauer</translation>
-    </message>
-    <message>
-        <source>Welcome to the Oximeter Import Wizard</source>
-        <translation>Herzlich Willkommen beim Oxymeter-Import-Assistenten</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you don&apos;t mind a being attached to a running computer overnight, this option provide a useful plethysomogram graph, which gives an indication of heart rhythm, on top of the normal oximetry readings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sollten Sie das Pulsoxymeter über Nacht an einem PC betreiben, kann diese Option sehr nützlich sein um Herzrhythmusstörungen zu erkennen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
-        <translation>Wenn Sie versuchen, Oxymetrie- und CPAP-Daten zu synchronisieren, stellen Sie sicher, dass Sie Ihre CPAP-Sitzungen zuerst importiert haben, bevor Sie fortfahren!</translation>
-    </message>
-    <message>
-        <source>&quot;%1&quot;, session %2</source>
-        <translation>&quot;%1&quot;, Sitzung %2</translation>
-    </message>
-    <message>
-        <source>CMS50Fv3.7+/H/I, Pulox PO-400/500</source>
-        <translation>CMS50Fv3.7+/H/I, Pulox PO-400/500</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option löscht die importierte Sitzung von Ihrem Oxymeter, nachdem der Import abgeschlossen ist. &lt;/p&gt;&lt;p&gt;Seien Sie vorsichtig, denn wenn etwas nicht funktioniert, bevor OSCAR Ihre Sitzung speichert, erhalten Sie die Daten nicht zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Show Live Graphs</source>
-        <translation>Live-Diagramme anzeigen</translation>
-    </message>
-    <message>
-        <source>Live Import Stopped</source>
-        <translation>Live Import stoppen</translation>
-    </message>
-    <message>
-        <source>Oximeter Starting time</source>
-        <translation>Oxymeter Startzeit</translation>
-    </message>
-    <message>
-        <source>Skip this page next time.</source>
-        <translation>Überspringen Sie diese Seite das nächste Mal.</translation>
-    </message>
-    <message>
-        <source>If you can still read this after a few seconds, cancel and try again</source>
-        <translation>Sollte der Vorgang zu lange dauern, starten Sie Ihn nach ein paar Sekunden erneut</translation>
-    </message>
-    <message>
-        <source>CMS50D+/E/F, Pulox PO-200/300</source>
-        <translation>CMS50D+/E/F, Pulox PO-200/300</translation>
-    </message>
-    <message>
-        <source>&amp;Sync and Save</source>
-        <translation>&amp;Sync und Speichern</translation>
-    </message>
-    <message>
-        <source>Your oximeter did not have any valid sessions.</source>
-        <translation>Ihre Oxymeter hatten keine gültigen Sitzungen.</translation>
-    </message>
-    <message>
-        <source>Something went wrong getting session data</source>
-        <translation>Ein Fehler ist immer wenn Sitzungs-Daten nicht übereinstimmen</translation>
-    </message>
-    <message>
-        <source>Connecting to %1 Oximeter</source>
-        <translation>Anschließen an ein %1 Oxymeter</translation>
-    </message>
-    <message>
-        <source>Recording...</source>
-        <translation>Aufnahme...</translation>
-    </message>
-    <message>
-        <source>ChoiceMMed MD300W1</source>
-        <translation>ChoiceMMed MD300W1</translation>
+        <source>You entered an Incorrect Password too many times. Exiting!</source>
+        <translation>Sie haben zu oft ein falsches Passwort eingegeben. Verlassen!</translation>
     </message>
 </context>
 <context>
@@ -5393,418 +3718,415 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
         <source>You need to enter DELETE in capital letters.</source>
         <translation>Sie müssen DELETE in Großbuchstaben eingeben.</translation>
     </message>
+    <message>
+        <source>You must create a profile</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>Help</name>
+    <name>ProgressDialog</name>
+    <message>
+        <source>Abort</source>
+        <translation>Abbrechen</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>&quot;</source>
+        <translation>&quot;</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation>%</translation>
+    </message>
+    <message>
+        <source>?</source>
+        <translation>?</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>H</source>
+        <translation>H</translation>
+    </message>
+    <message>
+        <source>P</source>
+        <translation>P</translation>
+    </message>
+    <message>
+        <source>h</source>
+        <translation>h</translation>
+    </message>
+    <message>
+        <source>m</source>
+        <translation>m</translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation>s</translation>
+    </message>
+    <message>
+        <source> m</source>
+        <translation> m</translation>
+    </message>
+    <message>
+        <source>%1</source>
+        <translation>%1</translation>
+    </message>
+    <message>
+        <source>??</source>
+        <translation>??</translation>
+    </message>
+    <message>
+        <source>AI</source>
+        <translation>AI</translation>
+    </message>
+    <message>
+        <source>CA</source>
+        <translation>CA</translation>
+    </message>
+    <message>
+        <source>EP</source>
+        <translation>EP</translation>
+    </message>
+    <message>
+        <source>FL</source>
+        <translation>FL</translation>
+    </message>
+    <message>
+        <source>HI</source>
+        <translation>HI</translation>
+    </message>
+    <message>
+        <source>IE</source>
+        <translation>IE</translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation>Hz</translation>
+    </message>
+    <message>
+        <source>LE</source>
+        <translation>LE</translation>
+    </message>
+    <message>
+        <source>LF</source>
+        <translation>LF</translation>
+    </message>
+    <message>
+        <source>LL</source>
+        <translation>LL</translation>
+    </message>
+    <message>
+        <source>Kg</source>
+        <translation>kg</translation>
+    </message>
+    <message>
+        <source>O2</source>
+        <translation>O2</translation>
+    </message>
+    <message>
+        <source>OA</source>
+        <translation>OA</translation>
+    </message>
+    <message>
+        <source>NR</source>
+        <translation>NR</translation>
+    </message>
+    <message>
+        <source>PB</source>
+        <translation>PB</translation>
+    </message>
+    <message>
+        <source>PC</source>
+        <translation>PC</translation>
+    </message>
     <message>
         <source>No</source>
         <translation>Nein</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation>Form</translation>
+        <source>PP</source>
+        <translation>PP</translation>
     </message>
     <message>
-        <source>Index</source>
-        <translation>Index</translation>
+        <source>PS</source>
+        <translation>PS</translation>
     </message>
     <message>
-        <source>clear</source>
-        <translation>klar</translation>
+        <source>On</source>
+        <translation>An</translation>
     </message>
     <message>
-        <source>HelpEngine did not set up correctly</source>
-        <translation>Hilfe Anwendung wurde nicht richtig eingerichtet</translation>
+        <source>RE</source>
+        <translation>RE</translation>
     </message>
     <message>
-        <source>Help files do not appear to be present.</source>
-        <translation>Hilfedateien scheinen nicht vorhanden zu sein.</translation>
+        <source>S9</source>
+        <translation>S9</translation>
     </message>
     <message>
-        <source>HelpEngine could not register documentation correctly.</source>
-        <translation>Die Hilfe Anwendung konnte die Dokumentation nicht korrekt registrieren.</translation>
+        <source>SA</source>
+        <translation>SA</translation>
     </message>
     <message>
-        <source>Help Files are not yet available for %1 and will display in %2.</source>
-        <translation>Hilfedateien sind noch nicht verfügbar für %1 und werden angezeigt in %2.</translation>
+        <source>SD</source>
+        <translation>SD</translation>
     </message>
     <message>
-        <source>Hide this message</source>
-        <translation>Verberge diese Nachricht</translation>
+        <source>TB</source>
+        <translation>TB</translation>
     </message>
     <message>
-        <source>Please wait a bit.. Indexing still in progress</source>
-        <translation>Bitte warten Sie etwas.. Die Indizierung läuft noch</translation>
+        <source>UA</source>
+        <translation>UA</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation>Suche</translation>
+        <source>VS</source>
+        <translation>VS</translation>
     </message>
     <message>
-        <source>Contents</source>
-        <translation>Inhalt</translation>
+        <source>ft</source>
+        <translation>ft</translation>
     </message>
     <message>
-        <source>%1 result(s) for &quot;%2&quot;</source>
-        <translation>%1 Resultat(e) für &quot;%2&quot;</translation>
+        <source>lb</source>
+        <translation>lb</translation>
     </message>
     <message>
-        <source>No documentation available</source>
-        <translation>Keine Dokumentation verfügbar</translation>
+        <source>ml</source>
+        <translation>ml</translation>
     </message>
     <message>
-        <source>Search Topic:</source>
-        <translation>Suchthema:</translation>
-    </message>
-</context>
-<context>
-    <name>Overview</name>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
+        <source>ms</source>
+        <translation>ms</translation>
     </message>
     <message>
-        <source>End:</source>
-        <translation>Ende:</translation>
+        <source>oz</source>
+        <translation>oz</translation>
     </message>
     <message>
-        <source>Form</source>
-        <translation>Form</translation>
+        <source>x1</source>
+        <translation>x1</translation>
     </message>
     <message>
-        <source>Usage</source>
-        <translation>Verwendung</translation>
+        <source>x2</source>
+        <translation>x2</translation>
     </message>
     <message>
-        <source>Respiratory
-Disturbance
-Index</source>
-        <translation>Atem-
-Störung
-Index</translation>
+        <source>x3</source>
+        <translation>x3</translation>
     </message>
     <message>
-        <source>Show all graphs</source>
-        <translation>Alle Diagramme zeigen</translation>
+        <source>x4</source>
+        <translation>x4</translation>
     </message>
     <message>
-        <source>Reset view to selected date range</source>
-        <translation>Ansicht auf den ausgewählten Datumsbereich zurücksetzen</translation>
+        <source>x5</source>
+        <translation>x5</translation>
     </message>
     <message>
-        <source>Total Time in Apnea</source>
-        <translation>Gesamtzeit im Apnoe</translation>
+        <source> cm</source>
+        <translation> cm</translation>
     </message>
     <message>
-        <source>Drop down to see list of graphs to switch on/off.</source>
-        <translation>Drop-Down-Liste, Diagramme, Ein/Ausschalten.</translation>
+        <source>&amp;No</source>
+        <translation>&amp;Nein</translation>
     </message>
     <message>
-        <source>Usage
-(hours)</source>
-        <translation>Verwendung
-(Stunden)</translation>
+        <source>90%</source>
+        <translation>90%</translation>
     </message>
     <message>
-        <source>Last Three Months</source>
-        <translation>Letzten 3 Monate</translation>
+        <source>???</source>
+        <translation>???</translation>
     </message>
-    <message>
-        <source>Total Time in Apnea
-(Minutes)</source>
-        <translation>Gesamtzeit im Apnoe
-(Minuten)</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation>Gebrauch</translation>
-    </message>
-    <message>
-        <source>How you felt
-(0-10)</source>
-        <translation>Wie fühlen Sie sich?
-(0-10)</translation>
-    </message>
-    <message>
-        <source>Graphs</source>
-        <translation>Diagramme</translation>
-    </message>
-    <message>
-        <source>Range:</source>
-        <translation>Zeitraum:</translation>
-    </message>
-    <message>
-        <source>Start:</source>
-        <translation>Start:</translation>
-    </message>
-    <message>
-        <source>Last Month</source>
-        <translation>Letzter Monat</translation>
-    </message>
-    <message>
-        <source>Apnea
-Hypopnea
-Index</source>
-        <translation>Apnoe
-Hypopnoe
-Index</translation>
-    </message>
-    <message>
-        <source>Last 6 Months</source>
-        <translation>Letzten 6 Monate</translation>
-    </message>
-    <message>
-        <source>Body
-Mass
-Index</source>
-        <translation>Body
-Masse
-Index</translation>
-    </message>
-    <message>
-        <source>Session Times</source>
-        <translation>Anwendungszeit</translation>
-    </message>
-    <message>
-        <source>Last Two Weeks</source>
-        <translation>Letzten zwei Wochen</translation>
-    </message>
-    <message>
-        <source>Everything</source>
-        <translation>Alles</translation>
-    </message>
-    <message>
-        <source>Last Week</source>
-        <translation>Letzte Woche</translation>
-    </message>
-    <message>
-        <source>Last Year</source>
-        <translation>Letztes Jahr</translation>
-    </message>
-    <message>
-        <source>Toggle Graph Visibility</source>
-        <translation>Umschalten Sichtbarkeit Diagramm</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation>Alle Diagramme zeigen</translation>
-    </message>
-    <message>
-        <source>Last Two Months</source>
-        <translation>Letzten 2 Monate</translation>
-    </message>
-</context>
-<context>
-    <name>Oximetry</name>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
-    <message>
-        <source>SpO2</source>
-        <translation>SpO2</translation>
-    </message>
-    <message>
-        <source>Pulse</source>
-        <translation>Puls</translation>
-    </message>
-    <message>
-        <source>&amp;Open .spo/R File</source>
-        <translation>&amp;Öffnen .spo/R Datei</translation>
-    </message>
-    <message>
-        <source>R&amp;eset</source>
-        <translation>R&amp;eset</translation>
-    </message>
-    <message>
-        <source>Serial &amp;Import</source>
-        <translation>Serien &amp;Import</translation>
-    </message>
-    <message>
-        <source>Serial Port</source>
-        <translation>Serien Port</translation>
-    </message>
-    <message>
-        <source>d/MM/yy h:mm:ss AP</source>
-        <translation>d/MM/yy h:mm:ss AP</translation>
-    </message>
-    <message>
-        <source>&amp;Start Live</source>
-        <translation>&amp;Start-Live</translation>
-    </message>
-    <message>
-        <source>&amp;Rescan Ports</source>
-        <translation>&amp;Ports neu scannen</translation>
-    </message>
-</context>
-<context>
-    <name>ExportCSV</name>
     <message>
         <source>AHI</source>
         <translation>AHI</translation>
+    </message>
+    <message>
+        <source>ASV</source>
+        <translation>ASV</translation>
+    </message>
+    <message>
+        <source>BMI</source>
+        <translation>BMI</translation>
+    </message>
+    <message>
+        <source>BND</source>
+        <translation>BND</translation>
+    </message>
+    <message>
+        <source>CAI</source>
+        <translation>CAI</translation>
+    </message>
+    <message>
+        <source>Apr</source>
+        <translation>Apr</translation>
+    </message>
+    <message>
+        <source>CSR</source>
+        <translation>CSR</translation>
+    </message>
+    <message>
+        <source>Aug</source>
+        <translation>Aug</translation>
+    </message>
+    <message>
+        <source>Avg</source>
+        <translation>Gem</translation>
+    </message>
+    <message>
+        <source>DOB</source>
+        <translation>Geburtsdatum</translation>
+    </message>
+    <message>
+        <source>EPI</source>
+        <translation>EPI</translation>
+    </message>
+    <message>
+        <source>EPR</source>
+        <translation>EPR</translation>
+    </message>
+    <message>
+        <source>Dec</source>
+        <translation>Dez</translation>
+    </message>
+    <message>
+        <source>FLI</source>
+        <translation>FLI</translation>
     </message>
     <message>
         <source>End</source>
         <translation>Ende</translation>
     </message>
     <message>
-        <source>%1% </source>
-        <translation>%1% </translation>
+        <source>Feb</source>
+        <translation>Feb</translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation>Datum</translation>
+        <source>Jan</source>
+        <translation>Jan</translation>
     </message>
     <message>
-        <source>End:</source>
-        <translation>Ende:</translation>
+        <source>Jul</source>
+        <translation>Jul</translation>
     </message>
     <message>
-        <source>Quick Range:</source>
-        <translation>Zeitspanne:</translation>
+        <source>Jun</source>
+        <translation>Jun</translation>
     </message>
     <message>
-        <source>Daily</source>
-        <translation>Täglich</translation>
+        <source>NRI</source>
+        <translation>NRI</translation>
     </message>
     <message>
-        <source>Event</source>
-        <translation>Ereignis</translation>
+        <source>Mar</source>
+        <translation>März</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Start</translation>
+        <source>Max</source>
+        <translation>Max</translation>
     </message>
     <message>
-        <source>Last Fortnight</source>
-        <translation>Letzten Vierzehn Tage</translation>
+        <source>May</source>
+        <translation>Mai</translation>
     </message>
     <message>
-        <source>Most Recent Day</source>
-        <translation>Neuste Tag</translation>
+        <source>Med</source>
+        <translation>Med</translation>
     </message>
     <message>
-        <source> Count</source>
-        <translation> Land</translation>
+        <source>Min</source>
+        <translation>Min</translation>
     </message>
     <message>
-        <source>Filename:</source>
-        <translation>Dateiname:</translation>
+        <source>Nov</source>
+        <translation>Nov</translation>
     </message>
     <message>
-        <source>Select file to export to</source>
-        <translation>Wählen Sie die Datei, um zu Exportieren</translation>
+        <source>Oct</source>
+        <translation>Okt</translation>
     </message>
     <message>
-        <source>Resolution:</source>
-        <translation>Auflösung:</translation>
+        <source>Off</source>
+        <translation>Aus</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Aufheben</translation>
+        <source>RDI</source>
+        <translation>RDI</translation>
     </message>
     <message>
-        <source>Dates:</source>
-        <translation>Termine:</translation>
+        <source>REI</source>
+        <translation>REI</translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation>In Gebrauch</translation>
+        <source>UAI</source>
+        <translation>UAI</translation>
     </message>
     <message>
-        <source>Export</source>
-        <translation>Export</translation>
+        <source>UF1</source>
+        <translation>UF1</translation>
     </message>
     <message>
-        <source>OSCAR_</source>
-        <translation>OSCAR_</translation>
+        <source>UF2</source>
+        <translation>UF2</translation>
     </message>
     <message>
-        <source>Start:</source>
-        <translation>Start:</translation>
+        <source>UF3</source>
+        <translation>UF3</translation>
     </message>
     <message>
-        <source>Data/Duration</source>
-        <translation>Daten/Dauer</translation>
+        <source>Sep</source>
+        <translation>Sep</translation>
     </message>
     <message>
-        <source>CSV Files (*.csv)</source>
-        <translation>CSV Dateien (*.csv)</translation>
+        <source>VS2</source>
+        <translation>VS2</translation>
     </message>
     <message>
-        <source>Last Month</source>
-        <translation>Letzter Monat</translation>
+        <source>Yes</source>
+        <translation>Ja</translation>
     </message>
     <message>
-        <source>Last 6 Months</source>
-        <translation>Letzten 6 Monate</translation>
+        <source>Zeo</source>
+        <translation>Zeo</translation>
     </message>
     <message>
-        <source>Total Time</source>
-        <translation>Gesamte Zeit</translation>
+        <source>bpm</source>
+        <translation>bpm</translation>
     </message>
     <message>
-        <source>DateTime</source>
-        <translation>Datum-Zeit</translation>
+        <source>v%1</source>
+        <translation>v%1</translation>
     </message>
     <message>
-        <source>Session Count</source>
-        <translation>Sitzungs Anzahl</translation>
+        <source>Brain Wave</source>
+        <translation>Gehirn Wellen</translation>
     </message>
     <message>
-        <source>Session</source>
-        <translation>Sitzung</translation>
+        <source>%1%2</source>
+        <translation>%1%2</translation>
     </message>
     <message>
-        <source>Everything</source>
-        <translation>Alles</translation>
+        <source>%1: </source>
+        <translation>%1: </translation>
     </message>
     <message>
-        <source>Last Week</source>
-        <translation>Letzte Woche</translation>
+        <source>&amp;Yes</source>
+        <translation>&amp;Ja</translation>
     </message>
     <message>
-        <source>Last Year</source>
-        <translation>Letztes Jahr</translation>
+        <source>15mm</source>
+        <translation>15mm</translation>
     </message>
     <message>
-        <source>Export as CSV</source>
-        <translation>Export in CSV Datei</translation>
-    </message>
-    <message>
-        <source>Sessions_</source>
-        <translation>Sitzungen_</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation>Details</translation>
-    </message>
-    <message>
-        <source>Summary_</source>
-        <translation>Zusammenfassung_</translation>
-    </message>
-    <message>
-        <source>Details_</source>
-        <translation>Details_</translation>
-    </message>
-    <message>
-        <source>Sessions</source>
-        <translation>Sitzungen</translation>
-    </message>
-</context>
-<context>
-    <name>NewProfile</name>
-    <message>
-        <source>ASV</source>
-        <translation>ASV</translation>
+        <source>22mm</source>
+        <translation>22mm</translation>
     </message>
     <message>
         <source>APAP</source>
@@ -5815,359 +4137,2372 @@ Index</translation>
         <translation>CPAP</translation>
     </message>
     <message>
-        <source>Male</source>
-        <translation>Männlich</translation>
+        <source>Auto</source>
+        <translation>Auto</translation>
     </message>
     <message>
-        <source>&amp;Back</source>
-        <translation>&amp;Zurück</translation>
+        <source>Busy</source>
+        <translation>Beschäftigt</translation>
     </message>
     <message>
-        <source>&amp;Next</source>
-        <translation>&amp;Weiter</translation>
+        <source>Min EPAP</source>
+        <translation>Min EPAP</translation>
     </message>
     <message>
-        <source>TimeZone</source>
-        <translation>Zeitzone</translation>
+        <source>EPAP</source>
+        <translation>EPAP</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>ICON</source>
+        <translation>ICON</translation>
+    </message>
+    <message>
+        <source>Min IPAP</source>
+        <translation>Min IPAP</translation>
+    </message>
+    <message>
+        <source>IPAP</source>
+        <translation>IPAP</translation>
+    </message>
+    <message>
+        <source>Last</source>
+        <translation>Letzte Verwendung</translation>
+    </message>
+    <message>
+        <source>Leak</source>
+        <translation>Leck</translation>
+    </message>
+    <message>
+        <source>Mask</source>
+        <translation>Maske</translation>
+    </message>
+    <message>
+        <source>Med.</source>
+        <translation>Med.</translation>
+    </message>
+    <message>
+        <source>Mode</source>
+        <translation>Modus</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Keiner</translation>
+    </message>
+    <message>
+        <source>RERA</source>
+        <translation>RERA</translation>
+    </message>
+    <message>
+        <source>Peak</source>
+        <translation>Spitze</translation>
+    </message>
+    <message>
+        <source>Ramp</source>
+        <translation>Rampe</translation>
+    </message>
+    <message>
+        <source>SpO2</source>
+        <translation>SpO2</translation>
+    </message>
+    <message>
+        <source>Zero</source>
+        <translation>Null</translation>
+    </message>
+    <message>
+        <source>ÇSR</source>
+        <translation>CSR</translation>
+    </message>
+    <message>
+        <source>Resp. Event</source>
+        <translation>Resp. Ereignis</translation>
+    </message>
+    <message>
+        <source>Inclination</source>
+        <translation>Neigung</translation>
+    </message>
+    <message>
+        <source>Launching Windows Explorer failed</source>
+        <translation>Das Starten vom Windows Explorer ist gescheitert</translation>
+    </message>
+    <message>
+        <source>Would you like to switch on automatic backups, so next time a new version of OSCAR needs to do so, it can rebuild from these?</source>
+        <translation>Möchten Sie die automatischen Sicherungen einschalten, so dass das nächste Mal, wenn eine neue Version von OSCAR erforderlich ist, diese neu erstellt werden kann?</translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <translation>%1 %2</translation>
+    </message>
+    <message>
+        <source>Hose Diameter</source>
+        <translation>Schlauchdurchmesser</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>RemStar Pro with C-Flex+</source>
+        <translation>RemStar Pro mit C-Flex+</translation>
+    </message>
+    <message>
+        <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
+        <translation type="vanished">OSCT (%1) muss seine Datenbank aktualisieren für %2 %3 %4</translation>
+    </message>
+    <message>
+        <source>???: </source>
+        <translation>???: </translation>
+    </message>
+    <message>
+        <source>AVAPS</source>
+        <translation>AVAPS</translation>
+    </message>
+    <message>
+        <source>CMS50</source>
+        <translation>CMS50</translation>
+    </message>
+    <message>
+        <source>Therapy Pressure</source>
+        <translation>Therapiedruck</translation>
+    </message>
+    <message>
+        <source>BiPAP</source>
+        <translation>BiPAP</translation>
+    </message>
+    <message>
+        <source>Brand</source>
+        <translation>Marke</translation>
+    </message>
+    <message>
+        <source>EPR: </source>
+        <translation>EPR: </translation>
+    </message>
+    <message>
+        <source>Daily</source>
+        <translation>Täglich</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>E-mail</translation>
+        <translation>Email</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>First</source>
+        <translation>Erste Verwendung</translation>
+    </message>
+    <message>
+        <source>Ramp Pressure</source>
+        <translation>Rampen Druck</translation>
+    </message>
+    <message>
+        <source>L/min</source>
+        <translation>L/min</translation>
+    </message>
+    <message>
+        <source>Hours</source>
+        <translation>Stunden</translation>
+    </message>
+    <message>
+        <source>MD300</source>
+        <translation>MD300</translation>
+    </message>
+    <message>
+        <source>Leaks</source>
+        <translation>Lecks</translation>
+    </message>
+    <message>
+        <source>Max: </source>
+        <translation>Max: </translation>
+    </message>
+    <message>
+        <source>Min: </source>
+        <translation>Min: </translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Model</translation>
     </message>
     <message>
         <source>OSCAR</source>
         <translation>OSCAR</translation>
     </message>
     <message>
+        <source>Nasal</source>
+        <translation>Nase</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation>Aufzeichnungen</translation>
+    </message>
+    <message>
         <source>Phone</source>
         <translation>Telefon</translation>
     </message>
     <message>
-        <source>Any reports generated are for PERSONAL USE ONLY, and NOT IN ANY WAY fit for compliance or medical diagnostic purposes.</source>
-        <translation>Alle Berichte die erzeugt werden, sind nur zum PERSÖNLICHEN GEBRAUCH und  in keiner Weise für die Einhaltung medizinischer Diagnosezwecke geeignet.</translation>
+        <source>Ready</source>
+        <translation>Bereit</translation>
     </message>
     <message>
-        <source>&amp;Close this window</source>
-        <translation>&amp;Fenster schließen</translation>
+        <source>TTIA:</source>
+        <translation>TTIA:</translation>
     </message>
     <message>
-        <source>Edit User Profile</source>
-        <translation>Benutzerprofil bearbeiten</translation>
+        <source>W-Avg</source>
+        <translation>W-Durchschnitt</translation>
     </message>
     <message>
-        <source>The authors will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation>Die Autoren haften nicht für &lt;u&gt;irgendetwas&lt;/u&gt; im Zusammenhang mit der Verwendung oder dem Missbrauch dieser Software.</translation>
+        <source>Snore</source>
+        <translation>Schnarchen</translation>
     </message>
     <message>
-        <source>Please provide a username for this profile</source>
-        <translation>Bitte geben Sie einen Benutzernamen für dieses Profil an</translation>
+        <source>Start</source>
+        <translation>Start</translation>
     </message>
     <message>
-        <source>Welcome to Open Source CPAP Reviewer</source>
-        <translation>Willkommen beim Open Source CPAP Reviewer</translation>
+        <source>Usage</source>
+        <translation>Verwendung</translation>
     </message>
     <message>
-        <source>CPAP Treatment Information</source>
-        <translation>CPAP-Behandlungsinformationen</translation>
+        <source>Respiratory Disturbance Index</source>
+        <translation>Atem-Störungs-Verzeichnis</translation>
     </message>
     <message>
-        <source>Password Protect Profile</source>
-        <translation>Profilpasswort</translation>
+        <source>cmH2O</source>
+        <translation>cmH2O</translation>
     </message>
     <message>
-        <source>OSCAR is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation>OSCAR ist lediglich als Datenanzeige gedacht und ersetzt keinesfalls die kompetente medizinische Anleitung Ihres Arztes.</translation>
+        <source>The developers needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
+        <translation>Die Entwickler benötigen eine ZIP-Kopie der SD-Karte dieser Geräte und entsprechende Encore-PDF-Berichte, damit OSCAR verwendet werden kann.</translation>
     </message>
     <message>
-        <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation>OSCAR wurde frei veröffentlicht unter &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, und kommt ohne Gewähr und ohne irgendwelche Ansprüche auf Eignung für irgendeinen Zweck.</translation>
+        <source>Pressure Support</source>
+        <translation>Druckunterstützung</translation>
     </message>
     <message>
-        <source>Accuracy of any data displayed is not and can not be guaranteed.</source>
-        <translation>Für die Korrektheit der Daten kann nicht garantiert werden.</translation>
+        <source>Bedtime: %1</source>
+        <translation>Schlafenszeit: %1</translation>
     </message>
     <message>
-        <source>D.O.B.</source>
-        <translation>Geb. Dat.</translation>
+        <source>Hypopnea</source>
+        <translation>Hypopnoe</translation>
     </message>
     <message>
-        <source>Female</source>
-        <translation>Weiblich</translation>
+        <source>ratio</source>
+        <translation>Verhältnis</translation>
     </message>
     <message>
-        <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <source>Tidal Volume</source>
+        <translation>AZV</translation>
+    </message>
+    <message>
+        <source>Getting Ready...</source>
+        <translation>Fertig werden...</translation>
+    </message>
+    <message>
+        <source>Entire Day</source>
+        <translation>Ganzer Tag</translation>
+    </message>
+    <message>
+        <source>Intellipap pressure relief mode.</source>
+        <translation>Intellipap Druckmodus.</translation>
+    </message>
+    <message>
+        <source>Personal Sleep Coach</source>
+        <translation>Persönlichen Schlaftrainer</translation>
+    </message>
+    <message>
+        <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
+        <translation>Neueste Oxymetriedaten: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
+    </message>
+    <message>
+        <source>PRS1 Humidification level</source>
+        <translation>PRS1 Befeuchtungsebene</translation>
+    </message>
+    <message>
+        <source>Scanning Files</source>
+        <translation>Scanne Dateien</translation>
+    </message>
+    <message>
+        <source>Clear Airway</source>
+        <translation>Centraler Apnoe</translation>
+    </message>
+    <message>
+        <source>Respironics</source>
+        <translation>Respironics</translation>
+    </message>
+    <message>
+        <source>Parsing Identification File</source>
+        <translation>Parsing-Identifikationsdatei</translation>
+    </message>
+    <message>
+        <source>Heart rate in beats per minute</source>
+        <translation>Die Herzfrequenz in Schlägen pro Minute</translation>
+    </message>
+    <message>
+        <source>A large mask leak affecting machine performance.</source>
+        <translation>Eine zu große Maske beeinflußt die Geräteleistung.</translation>
+    </message>
+    <message>
+        <source>Somnopose Software</source>
+        <translation>Somnopose Software</translation>
+    </message>
+    <message>
+        <source>Time spent awake</source>
+        <translation>Zeit im Wachliegen</translation>
+    </message>
+    <message>
+        <source>Temp. Enable</source>
+        <translation>Temp. aktivieren</translation>
+    </message>
+    <message>
+        <source>Timed Breath</source>
+        <translation>Zeitüberschreitung Atem</translation>
+    </message>
+    <message>
+        <source>Pop out Graph</source>
+        <translation>grafische Darstellung</translation>
+    </message>
+    <message>
+        <source>Mask On Time</source>
+        <translation>Masken-Einschaltzeit</translation>
+    </message>
+    <message>
+        <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
+        <translation>Es ist wahrscheinlich, dass dabei eine Datenbeschädigung auftreten kann. Sind Sie sicher, dass Sie das tun wollen?</translation>
+    </message>
+    <message>
+        <source>Auto BiPAP</source>
+        <translation>Auto BiPAP</translation>
+    </message>
+    <message>
+        <source>Loading profile &quot;%1&quot;...</source>
+        <translation>Profil laden &quot;%1&quot;...</translation>
+    </message>
+    <message>
+        <source>Breathing Not Detected</source>
+        <translation>Atmung nicht erkannt</translation>
+    </message>
+    <message>
+        <source>There is no data to graph</source>
+        <translation>Es gibt keine Daten zum Darstellen</translation>
+    </message>
+    <message>
+        <source>Journal</source>
+        <translation>Journal</translation>
+    </message>
+    <message>
+        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
+        <translation type="vanished">Eine Einschränkung bei der normalen Atmung, was zu einer Abflachung der Strömungswellenform führt.</translation>
+    </message>
+    <message>
+        <source>Locating STR.edf File(s)...</source>
+        <translation>Suche nach STR.edf-Datei (en)...</translation>
+    </message>
+    <message>
+        <source>Pat. Trig. Breath</source>
+        <translation>Pat. Trig. Atem</translation>
+    </message>
+    <message>
+        <source>(Summary Only)</source>
+        <translation>(Nur Zusammenfassung)</translation>
+    </message>
+    <message>
+        <source>Ramp Delay Period</source>
+        <translation>Rampen-Verzögerungszeit</translation>
+    </message>
+    <message>
+        <source>RemStar BiPAP Auto with Bi-Flex</source>
+        <translation>RemStar BiPAP Auto mit Bi-Flex</translation>
+    </message>
+    <message>
+        <source>Sessions Switched Off</source>
+        <translation>Ereignisse abgemeldet</translation>
+    </message>
+    <message>
+        <source>Awakenings</source>
+        <translation>Erwachen</translation>
+    </message>
+    <message>
+        <source>This folder currently resides at the following location:</source>
+        <translation>Dieser Ordner befindet sich derzeit an der folgenden Position:</translation>
+    </message>
+    <message>
+        <source>Morning Feel</source>
+        <translation>Morgen erwartet Sie</translation>
+    </message>
+    <message>
+        <source>Pulse Change</source>
+        <translation>Impulsänderung</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Getrennt</translation>
+    </message>
+    <message>
+        <source>Sleep Stage</source>
+        <translation>Schlafstadium</translation>
+    </message>
+    <message>
+        <source>Sys1 Resist. Status</source>
+        <translation>Sys1 Resistenzstatus</translation>
+    </message>
+    <message>
+        <source>BiPAP AVAPS</source>
+        <translation>BiPAP AVAPS</translation>
+    </message>
+    <message>
+        <source>Minute Vent.</source>
+        <translation>Minuten Vent.</translation>
+    </message>
+    <message>
+        <source>Heated Tubing Connected</source>
+        <translation>beheizter Schlauch angeschlossen</translation>
+    </message>
+    <message>
+        <source>You did not select a directory.</source>
+        <translation type="vanished">Sie haben kein Verzeichnis ausgewählt.</translation>
+    </message>
+    <message>
+        <source>VPAP Adapt</source>
+        <translation>VPAP Anpassung</translation>
+    </message>
+    <message>
+        <source>SpO2 Drop</source>
+        <translation>SpO2-Tropfen</translation>
+    </message>
+    <message>
+        <source>Ramp Event</source>
+        <translation>Rampenereignis</translation>
+    </message>
+    <message>
+        <source>SensAwake feature will reduce pressure when waking is detected.</source>
+        <translation>SensAwake wird den Druck reduzieren, wenn die Funktion erkennt, dass Sie wachwerden.</translation>
+    </message>
+    <message>
+        <source>Show All Events</source>
+        <translation>Alle Ereignisse anzeigen</translation>
+    </message>
+    <message>
+        <source>CMS50E/F</source>
+        <translation>CMS50E/F</translation>
+    </message>
+    <message>
+        <source>Upright angle in degrees</source>
+        <translation>Bis rechten Winkel in Grad</translation>
+    </message>
+    <message>
+        <source>Importing Sessions...</source>
+        <translation>Importiere Sitzung...</translation>
+    </message>
+    <message>
+        <source>%1% %2</source>
+        <translation>%1% %2</translation>
+    </message>
+    <message>
+        <source>%1: %2</source>
+        <translation>%1: %2</translation>
+    </message>
+    <message>
+        <source>Higher Expiratory Pressure</source>
+        <translation>Höherer Expirationsdruck</translation>
+    </message>
+    <message>
+        <source>Summary Only :(</source>
+        <translation>Nur die Zusammenfassung :(</translation>
+    </message>
+    <message>
+        <source>NRI=%1 LKI=%2 EPI=%3</source>
+        <translation>NRI=%1 LKI=%2 EPI=%3</translation>
+    </message>
+    <message>
+        <source>M-Series</source>
+        <translation>M-Serie</translation>
+    </message>
+    <message>
+        <source>If you are concerned, click No to exit, and backup your profile manually, before starting OSCAR again.</source>
+        <translation>Wenn Sie betroffen sind, klicken Sie auf Nein, um den Vorgang zu beenden, und sichern Sie Ihr Profil manuell, bevor Sie OSCAR erneut starten.</translation>
+    </message>
+    <message>
+        <source>A vibratory snore</source>
+        <translation>Eine Schnarchvibration</translation>
+    </message>
+    <message>
+        <source>Vibratory Snore</source>
+        <translation>Schnarchvibration</translation>
+    </message>
+    <message>
+        <source>As you did not select a data folder, OSCAR will exit.</source>
+        <translation>Da Sie keinen Datenordner ausgewählt haben, wird OSCAR beendet.</translation>
+    </message>
+    <message>
+        <source>Lower Inspiratory Pressure</source>
+        <translation>Niedrigster Inspirationsdruck</translation>
+    </message>
+    <message>
+        <source>Humidifier Enabled Status</source>
+        <translation>Befeuchtungsstatus aktiviert</translation>
+    </message>
+    <message>
+        <source>Full Face</source>
+        <translation>Mund-Nase-Maske</translation>
+    </message>
+    <message>
+        <source>Full Time</source>
+        <translation>Volle Zeit</translation>
+    </message>
+    <message>
+        <source>SmartFlex Level</source>
+        <translation>Smartflex Ebene</translation>
+    </message>
+    <message>
+        <source>System One Resistance Status</source>
+        <translation>System One Resistenzstatus</translation>
+    </message>
+    <message>
+        <source>Journal Data</source>
+        <translation>Journal Daten</translation>
+    </message>
+    <message>
+        <source>(%1% compliant, defined as &gt; %2 hours)</source>
+        <translation>(%1% konform, definiert als &gt; %2 Stunden)</translation>
+    </message>
+    <message>
+        <source>Resp. Rate</source>
+        <translation>Resp. Rate</translation>
+    </message>
+    <message>
+        <source>Insp. Time</source>
+        <translation>Insp. Zeit</translation>
+    </message>
+    <message>
+        <source>Exp. Time</source>
+        <translation>Exp. Zeit</translation>
+    </message>
+    <message>
+        <source>OSCAR will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
+        <translation>OSCAR wird nun beendet und (versucht) den Dateimanager Ihres Computers zu starten, damit Sie Ihr Profil manuell sichern können:</translation>
+    </message>
+    <message>
+        <source>ClimateLine Temperature</source>
+        <translation>Schlauchtemeratur</translation>
+    </message>
+    <message>
+        <source>Philips Respironics</source>
+        <translation>Philips Respironics</translation>
+    </message>
+    <message>
+        <source>Machine Unsupported</source>
+        <translation>Gerät wird nicht unterstützt</translation>
+    </message>
+    <message>
+        <source>0cmH2O</source>
+        <translation>0cmH2O</translation>
+    </message>
+    <message>
+        <source>SOMNOsoft2</source>
+        <translation>SOMNOsoft2</translation>
+    </message>
+    <message>
+        <source>A relative assessment of the pulse strength at the monitoring site</source>
+        <translation>Eine relative Bewertung der Pulsstärke an der Messstelle</translation>
+    </message>
+    <message>
+        <source>Machine</source>
+        <translation>Gerät</translation>
+    </message>
+    <message>
+        <source>1cmH2O</source>
+        <translation>1cmH2O</translation>
+    </message>
+    <message>
+        <source>Whether System One resistance settings are available to you.</source>
+        <translation>Die Widerstandseinstellungen von System One sind für Sie da.</translation>
+    </message>
+    <message>
+        <source>Mask On</source>
+        <translation>Maske auf</translation>
+    </message>
+    <message>
+        <source>2cmH2O</source>
+        <translation>2cmH2O</translation>
+    </message>
+    <message>
+        <source>Max: %1</source>
+        <translation>Max: %1</translation>
+    </message>
+    <message>
+        <source>Sorry, the purge operation failed, which means this version of OSCAR can&apos;t start.</source>
+        <translation>Die Bereinigungsoperation ist fehlgeschlagen, was bedeutet, dass diese Version von OSCAR nicht gestartet werden kann.</translation>
+    </message>
+    <message>
+        <source>3cmH2O</source>
+        <translation>3cmH2O</translation>
+    </message>
+    <message>
+        <source>A sudden (user definable) drop in blood oxygen saturation</source>
+        <translation>Ein plötzlicher (frei definierbarer) Abfall der Blutsauerstoffsättigung</translation>
+    </message>
+    <message>
+        <source>Time spent in deep sleep</source>
+        <translation>Zeit im Tiefschlaf</translation>
+    </message>
+    <message>
+        <source>Top secret internal stuff you&apos;re not supposed to see ;)</source>
+        <translation>Streng geheimes inneres Zeug, das Sie nicht sehen sollten ;)</translation>
+    </message>
+    <message>
+        <source>There are no graphs visible to print</source>
+        <translation>Im Druckergebnis sind keine Diagramme sichtbar</translation>
+    </message>
+    <message>
+        <source>The version of OSCAR you just ran is OLDER than the one used to create this data (%1).</source>
+        <translation>Die gerade ausgeführte Version von OSCAR ist älter als die zum Erstellen dieser Daten verwendete (%1).</translation>
+    </message>
+    <message>
+        <source>OSCAR picked only the first one of these, and will use it in future:
+
+</source>
+        <translation>OSCAR hat nur das Erste ausgewählt und wird es zukünftig verwenden:
+
+</translation>
+    </message>
+    <message>
+        <source>Target Vent.</source>
+        <translation>Ziel Vent.</translation>
+    </message>
+    <message>
+        <source>Humidification Level</source>
+        <translation>Befeuchtungsebene</translation>
+    </message>
+    <message>
+        <source>Sleep position in degrees</source>
+        <translation>Schlafposition in Grad</translation>
+    </message>
+    <message>
+        <source>Plots Disabled</source>
+        <translation>Teile deaktivieren</translation>
+    </message>
+    <message>
+        <source>Min: %1</source>
+        <translation>Min: %1</translation>
+    </message>
+    <message>
+        <source>Minutes</source>
+        <translation>Minuten</translation>
+    </message>
+    <message>
+        <source>Periodic Breathing</source>
+        <translation>periodische Atmung</translation>
+    </message>
+    <message>
+        <source>Popout %1 Graph</source>
+        <translation>Ausschalten %1 Grafik</translation>
+    </message>
+    <message>
+        <source>Ramp Only</source>
+        <translation>Nur Rampe</translation>
+    </message>
+    <message>
+        <source>Ramp Time</source>
+        <translation>Rampenzeit</translation>
+    </message>
+    <message>
+        <source>For some reason, OSCAR couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.
+
+</source>
+        <translation>Aus irgendeinem Grund konnte OSCAR keinen Journalobjektdatensatz in Ihrem Profil finden. Es wurden jedoch mehrere Journaldatenordner gefunden.
+
+</translation>
+    </message>
+    <message>
+        <source>PRS1 pressure relief mode.</source>
+        <translation>PRS1 Druckmodus.</translation>
+    </message>
+    <message>
+        <source>An abnormal period of Periodic Breathing</source>
+        <translation>Ein abnormaler Abschnitt der periodischen Atmung</translation>
+    </message>
+    <message>
+        <source>ResMed Mask Setting</source>
+        <translation>ResMed Maskeneinstellungen</translation>
+    </message>
+    <message>
+        <source>ResMed Exhale Pressure Relief</source>
+        <translation>ResMed Ausatem Druckentlastung</translation>
+    </message>
+    <message>
+        <source>A-Flex</source>
+        <translation>A-Flex</translation>
+    </message>
+    <message>
+        <source>EPR Level</source>
+        <translation>EPR Ebene</translation>
+    </message>
+    <message>
+        <source>Unintentional Leaks</source>
+        <translation>Unbeabsichtigte Lecks</translation>
+    </message>
+    <message>
+        <source>Would you like to show bookmarked areas in this report?</source>
+        <translation>Möchten Sie die Lesezeichenbereiche in diesem Bericht anzeigen?</translation>
+    </message>
+    <message>
+        <source>Somnopose</source>
+        <translation>Somnopose</translation>
+    </message>
+    <message>
+        <source>System One (60 Series)</source>
+        <translation>System One (60 Series)</translation>
+    </message>
+    <message>
+        <source>AHI %1</source>
+        <translation>AHI %1</translation>
+    </message>
+    <message>
+        <source>Next time you run, you will be asked again.</source>
+        <translation type="vanished">Beim nächsten Startvorgang werden Sie wieder gefragt.</translation>
+    </message>
+    <message>
+        <source>C-Flex</source>
+        <translation>C-Flex</translation>
+    </message>
+    <message>
+        <source>BiPAP Pro</source>
+        <translation>BiPAP Pro</translation>
+    </message>
+    <message>
+        <source>CPAP Pro</source>
+        <translation>CPAP Pro</translation>
+    </message>
+    <message>
+        <source>VPAP-S/T</source>
+        <translation>VPAP-S/T</translation>
+    </message>
+    <message>
+        <source>VPAPauto</source>
+        <translation>VPAPauto</translation>
+    </message>
+    <message>
+        <source>RemStar Plus Compliance Only</source>
+        <translation>Nur RemStar Plus Therapietreue konformität</translation>
+    </message>
+    <message>
+        <source>Apnea Hypopnea Index</source>
+        <translation>Apnoe-Hypopnoe-Index</translation>
+    </message>
+    <message>
+        <source>Physical Height</source>
+        <translation>Physikalische Größe</translation>
+    </message>
+    <message>
+        <source>Pt. Access</source>
+        <translation>Pt. Zugriff</translation>
+    </message>
+    <message>
+        <source>CMS50F</source>
+        <translation>CMS50F</translation>
+    </message>
+    <message>
+        <source>ASV (Fixed EPAP)</source>
+        <translation>ASV (Fest EPAP)</translation>
+    </message>
+    <message>
+        <source>Patient Triggered Breaths</source>
+        <translation>Durch Patienten ausgelöste Atemzüge</translation>
+    </message>
+    <message>
+        <source>This means you will need to import this machine data again afterwards from your own backups or data card.</source>
+        <translation>Das heißt, Sie müssen diese Gerätedaten danach wieder von Ihren eigenen Backups oder Datenkarte importieren.</translation>
+    </message>
+    <message>
+        <source>Contec</source>
+        <translation>Contec</translation>
+    </message>
+    <message>
+        <source>Events</source>
+        <translation>Ereignisse</translation>
+    </message>
+    <message>
+        <source>Humid. Level</source>
+        <translation>Befeuchtungsebene</translation>
+    </message>
+    <message>
+        <source>AB Filter</source>
+        <translation>AB Filter</translation>
+    </message>
+    <message>
+        <source>Sys1 Resist. Lock</source>
+        <translation>Sys1 Widerst. Sperre</translation>
+    </message>
+    <message>
+        <source>%1
+Line %2, column %3</source>
+        <translation>%1
+Linie %2, Spalte %3</translation>
     </message>
     <message>
         <source>Height</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <source>Contact Information</source>
-        <translation>Kontaktinformationen</translation>
+        <source>BiPAP autoSV Advanced</source>
+        <translation>BiPAP autoSV Fortgeschritten</translation>
     </message>
     <message>
-        <source>Locale Settings</source>
-        <translation>Ländereinstellungen</translation>
+        <source>Ramp Enable</source>
+        <translation>Rampe aktivieren</translation>
+    </message>
+    <message>
+        <source>(% %1 in events)</source>
+        <translation>(% %1 der Ereignisse)</translation>
+    </message>
+    <message>
+        <source>RemStar BiPAP Pro with Bi-Flex</source>
+        <translation>RemStar BiPAP Pro mit Bi-Flex</translation>
+    </message>
+    <message>
+        <source>Lower Threshold</source>
+        <translation>untere Schwelle</translation>
+    </message>
+    <message>
+        <source>No Data</source>
+        <translation>Keine Daten</translation>
+    </message>
+    <message>
+        <source>Zeo sleep quality measurement</source>
+        <translation>Schlafqualitätsmessung</translation>
+    </message>
+    <message>
+        <source>Page %1 of %2</source>
+        <translation>Seite %1 von %2</translation>
+    </message>
+    <message>
+        <source>Litres</source>
+        <translation>Liter</translation>
+    </message>
+    <message>
+        <source>Manual</source>
+        <translation>Handbuch</translation>
+    </message>
+    <message>
+        <source>Median</source>
+        <translation>Mittlere</translation>
+    </message>
+    <message>
+        <source>Fixed %1 (%2)</source>
+        <translation>Fest %1 (%2)</translation>
+    </message>
+    <message>
+        <source>Min %1</source>
+        <translation>Min %1</translation>
+    </message>
+    <message>
+        <source>Could not find explorer.exe in path to launch Windows Explorer.</source>
+        <translation>Explorer.exe konnte den Pfad im Windows-Explorer nicht starten.</translation>
+    </message>
+    <message>
+        <source>Machine automatically switches off</source>
+        <translation>Gerät schaltet sich automatisch aus</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation>Angeschlossen</translation>
+    </message>
+    <message>
+        <source>Low Usage Days: %1</source>
+        <translation>Tage mit zu geringer Nutzung: %1</translation>
+    </message>
+    <message>
+        <source>PS Max</source>
+        <translation>PS Max</translation>
+    </message>
+    <message>
+        <source>PS Min</source>
+        <translation>PS Min</translation>
+    </message>
+    <message>
+        <source>Database Outdated
+Please Rebuild CPAP Data</source>
+        <translation>veraltete Datenbank
+Bitte die Wiederherstellung Ihrer CPAP Daten laden</translation>
+    </message>
+    <message>
+        <source>Flow Limit.</source>
+        <translation>Fließgrenze.</translation>
+    </message>
+    <message>
+        <source>Detected mask leakage including natural Mask leakages</source>
+        <translation>Erkannte Masken Lecks einschließlich der natürlichen Maskenlecks</translation>
+    </message>
+    <message>
+        <source>Plethy</source>
+        <translation>Plethy (Ein Gerät zum Bestimmen und Registrieren der Variationen in der Größe oder des Volumens eines Schenkels, der Arm oder Bein, und somit die Variationen in der Menge des Blutes in dem Glied.)</translation>
+    </message>
+    <message>
+        <source>PRS1_%1</source>
+        <translation>PRS1_%1</translation>
+    </message>
+    <message>
+        <source>SensAwake</source>
+        <translation>Druckverminderungstechnologie während des Wachwerdens</translation>
+    </message>
+    <message>
+        <source>ST/ASV</source>
+        <translation>ST/ASV</translation>
+    </message>
+    <message>
+        <source>Median Leaks</source>
+        <translation>Mittlere Lecks</translation>
+    </message>
+    <message>
+        <source>%1 Report</source>
+        <translation>%1 Bericht</translation>
+    </message>
+    <message>
+        <source>ResMed</source>
+        <translation>ResMed</translation>
+    </message>
+    <message>
+        <source>Pr. Relief</source>
+        <translation>Druckentlastung</translation>
+    </message>
+    <message>
+        <source>Graphs Switched Off</source>
+        <translation>Diagramme abgemeldet</translation>
+    </message>
+    <message>
+        <source>Serial</source>
+        <translation>Serien</translation>
+    </message>
+    <message>
+        <source>Series</source>
+        <translation>Serie</translation>
+    </message>
+    <message>
+        <source>SpO2 %</source>
+        <translation>SpO2 %</translation>
+    </message>
+    <message>
+        <source>VPAP-S</source>
+        <translation>VPAP-S</translation>
+    </message>
+    <message>
+        <source>VPAP-T</source>
+        <translation>VPAP-T</translation>
+    </message>
+    <message>
+        <source>(last night)</source>
+        <translation>(letzte Nacht)</translation>
+    </message>
+    <message>
+        <source>AHI	%1
+</source>
+        <translation>AHI	%1
+</translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Gewicht</translation>
+    </message>
+    <message>
+        <source>Mask Pressure (High resolution)</source>
+        <translation>Maskendruck (hohe Auflösung)</translation>
+    </message>
+    <message>
+        <source>ZEO ZQ</source>
+        <translation>Schlafqualitätsmessung</translation>
+    </message>
+    <message>
+        <source>PRS1 pressure relief setting.</source>
+        <translation>PRS1 Druckeinstellung.</translation>
+    </message>
+    <message>
+        <source>Orientation</source>
+        <translation>Orientierung</translation>
+    </message>
+    <message>
+        <source>Whether or not machine shows AHI via LCD panel.</source>
+        <translation>Gerät zeigt AHI über LCD-Panel an.</translation>
+    </message>
+    <message>
+        <source>Smart Start</source>
+        <translation>Schneller Start</translation>
+    </message>
+    <message>
+        <source>Event Flags</source>
+        <translation>Ereignismarkierungen</translation>
+    </message>
+    <message>
+        <source>A few breaths automatically starts machine</source>
+        <translation>Nach ein paar Atemzügen startet das Gerät autmatisch</translation>
+    </message>
+    <message>
+        <source>Zeo ZQ</source>
+        <translation>Schlafqualitätsmessung</translation>
+    </message>
+    <message>
+        <source>Migrating Summary File Location</source>
+        <translation>Migrieren des Speicherorts der Zusammenfassungsdatei</translation>
+    </message>
+    <message>
+        <source>Zombie</source>
+        <translation>Mir geht es</translation>
+    </message>
+    <message>
+        <source>C-Flex+</source>
+        <translation>C-Flex+</translation>
+    </message>
+    <message>
+        <source>Bookmarks</source>
+        <translation>Lesezeichen</translation>
+    </message>
+    <message>
+        <source>PAP Mode</source>
+        <translation>PAP Modus</translation>
     </message>
     <message>
         <source>CPAP Mode</source>
         <translation>CPAP Modus</translation>
     </message>
     <message>
-        <source>Select Country</source>
-        <translation>Land wählen</translation>
+        <source>Time taken to get to sleep</source>
+        <translation>Einschlafzeit</translation>
     </message>
     <message>
-        <source>PLEASE READ CAREFULLY</source>
-        <translation>BITTE LESEN SIE</translation>
+        <source>SmartFlex Settings</source>
+        <translation>SmartFlex Einstellungen</translation>
     </message>
     <message>
-        <source>Untreated AHI</source>
-        <translation>Unbehandelter AHI</translation>
+        <source>An apnea where the airway is open</source>
+        <translation>Atemaussetzer obwohl Atemwege offen sind</translation>
     </message>
     <message>
-        <source>Keep the kids out.. Nothing more.. This isn&apos;t meant to be uber security.</source>
-        <translation>Die Software ist nichts für Kinder.</translation>
+        <source>Flow Limitation</source>
+        <translation>Flusslimitierung</translation>
     </message>
     <message>
-        <source>metric</source>
-        <translation>metrisch</translation>
+        <source>Pin %1 Graph</source>
+        <translation>Anzeigen %1 Grafik</translation>
     </message>
     <message>
-        <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
-        <translation>OSCAR ist urheberrechtlich geschützt &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nachteule Software</translation>
+        <source>Unpin %1 Graph</source>
+        <translation>Loslösen %1 Grafik</translation>
+    </message>
+    <message>
+        <source>Queueing Import Tasks...</source>
+        <translation>Warteschlangenimportaufgaben...</translation>
+    </message>
+    <message>
+        <source>Hours: %1h, %2m, %3s</source>
+        <translation>Stunden: %1h, %2m, %3s</translation>
+    </message>
+    <message>
+        <source>OSCAR does not yet have any automatic card backups stored for this device.</source>
+        <translation>Für OSCAR sind noch keine automatischen Kartensicherungen für dieses Gerät gespeichert.</translation>
+    </message>
+    <message>
+        <source>%1
+Length: %3
+Start: %2</source>
+        <translation>%1
+Länge: %3
+Start: %2</translation>
+    </message>
+    <message>
+        <source>CMS50F3.7</source>
+        <translation>CMS50F3.7</translation>
+    </message>
+    <message>
+        <source>RDI	%1
+</source>
+        <translation>RDI	%1
+</translation>
+    </message>
+    <message>
+        <source>ASVAuto</source>
+        <translation>ASVAuto</translation>
+    </message>
+    <message>
+        <source>PS %1 over %2-%3 (%4)</source>
+        <translation>PS %1 über %2-%3 (%4)</translation>
+    </message>
+    <message>
+        <source>Flow Rate</source>
+        <translation>Fließrate</translation>
+    </message>
+    <message>
+        <source>Time taken to breathe out</source>
+        <translation>Ausatmungszeit</translation>
+    </message>
+    <message>
+        <source>Important:</source>
+        <translation>Wichtig:</translation>
+    </message>
+    <message>
+        <source>Machine auto starts by breathing</source>
+        <translation>Wenn Sie atmen beginnt das Gerät zu arbeiten</translation>
+    </message>
+    <message>
+        <source>Peak %1</source>
+        <translation>Spitze %1</translation>
+    </message>
+    <message>
+        <source>ANGLE / OpenGLES</source>
+        <translation>ANGLE / OpenGLES</translation>
+    </message>
+    <message>
+        <source>An optical Photo-plethysomogram showing heart rhythm</source>
+        <translation>Eine optische Darstellung vom Herzrhythmus</translation>
+    </message>
+    <message>
+        <source>Loading %1 data for %2...</source>
+        <translation>Daten für %1 werden geladen %2...</translation>
+    </message>
+    <message>
+        <source>Pillows</source>
+        <translation>Kissen</translation>
+    </message>
+    <message>
+        <source>%1
+Length: %3
+Start: %2
+</source>
+        <translation>%1
+Länge: %3
+Start: %2
+</translation>
+    </message>
+    <message>
+        <source>Humid. Lvl.</source>
+        <translation>Feucht. Lvl.</translation>
+    </message>
+    <message>
+        <source>Time Awake</source>
+        <translation>Aufwachzeit</translation>
+    </message>
+    <message>
+        <source>How you felt in the morning</source>
+        <translation>Wie fühlten Sie sich am Morgen</translation>
+    </message>
+    <message>
+        <source>Would you like OSCAR to use this location for storing its data?</source>
+        <translation type="vanished">Möchten Sie, dass OSCAR diesen Speicherort zum Speichern der Daten verwendet?</translation>
+    </message>
+    <message>
+        <source>I:E Ratio</source>
+        <translation>I: E-Verhältnis</translation>
+    </message>
+    <message>
+        <source>OSCAR v%1</source>
+        <translation>OSCAR v%1</translation>
+    </message>
+    <message>
+        <source>Amount of air displaced per breath</source>
+        <translation>Luftmenge pro Atemzug verdrängt</translation>
+    </message>
+    <message>
+        <source>Pat. Trig. Breaths</source>
+        <translation>Pat. Trig. Atemzüge</translation>
+    </message>
+    <message>
+        <source>% in %1</source>
+        <translation>% in %1</translation>
+    </message>
+    <message>
+        <source>Humidity Level</source>
+        <translation>Feuchtigkeitsgrad</translation>
+    </message>
+    <message>
+        <source>Profile</source>
+        <translation>Profile</translation>
     </message>
     <message>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <source>I agree to all the conditions above.</source>
-        <translation>Ich bin mit allen oben genannten Bedingungen einverstanden.</translation>
+        <source>Leak Flag</source>
+        <translation>Leck Markierung</translation>
     </message>
     <message>
-        <source>DST Zone</source>
-        <translation>Automatische Sommerzeit</translation>
+        <source>Leak Rate</source>
+        <translation>Leckrate</translation>
     </message>
     <message>
-        <source>about:blank</source>
-        <translation>Leere Seite</translation>
+        <source>Loading Summaries.xml.gz</source>
+        <translation>Zusammenfassungsdaten xml.gz werden geladen</translation>
     </message>
     <message>
-        <source>archiac</source>
-        <translation>archaïsch</translation>
+        <source>ClimateLine Temperature Enable</source>
+        <translation>Schlauchtemeratur ausschalten</translation>
     </message>
     <message>
-        <source>RX Pressure</source>
-        <translation>RX Druck</translation>
+        <source>Severity (0-1)</source>
+        <translation>Außergewöhnliche Schwere (0-1)</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Passwort</translation>
+        <source>Reporting from %1 to %2</source>
+        <translation>Berichterstattung vom %1 bis %2</translation>
     </message>
     <message>
-        <source>Use of this software is entirely at your own risk.</source>
-        <translation>Die Nutzung der Software erfolgt auf eigene Gefahr.</translation>
+        <source>Are you sure you want to reset all your channel colors and settings to defaults?</source>
+        <translation>Sind Sie sicher, dass Sie es wirklich wollen, alle Ihre Kanal-Farben und-Einstellungen auf die Standardwerte zurückzusetzen?</translation>
     </message>
     <message>
-        <source>Passwords don&apos;t match</source>
-        <translation>Passwörter stimmen nicht überein</translation>
+        <source>BrainWave</source>
+        <translation>Gehirnwellen</translation>
     </message>
     <message>
-        <source>First Name</source>
-        <translation>Vorname</translation>
+        <source>Inspiratory Pressure</source>
+        <translation>Einatmungsdruck</translation>
     </message>
     <message>
-        <source>Last Name</source>
-        <translation>Nachname</translation>
+        <source>OSCAR will now start with your old one.</source>
+        <translation type="vanished">OSCAR startet jetzt mit Ihrem alten.</translation>
     </message>
     <message>
-        <source>Country</source>
-        <translation>Land</translation>
+        <source>Whether or not machine allows Mask checking.</source>
+        <translation>Soll das Gerät die Maskenprüfung ermöglichen.</translation>
+    </message>
+    <message>
+        <source>Number of Awakenings</source>
+        <translation>Anzahl des Erwachens</translation>
+    </message>
+    <message>
+        <source>A pulse of pressure &apos;pinged&apos; to detect a closed airway.</source>
+        <translation>Ein Druckimpuls um geschlossene Atemwege zu öffnen.</translation>
+    </message>
+    <message>
+        <source>Intellipap pressure relief level.</source>
+        <translation>Intellipap Druckniveau.</translation>
+    </message>
+    <message>
+        <source>CMS50D+</source>
+        <translation>CMS50D+</translation>
+    </message>
+    <message>
+        <source>Non Responding Event</source>
+        <translation>Kein Ereignis registriert</translation>
+    </message>
+    <message>
+        <source>Median Leak Rate</source>
+        <translation>Mittlere Leckrate</translation>
+    </message>
+    <message>
+        <source> (%3 sec)</source>
+        <translation> (%3 sek)</translation>
+    </message>
+    <message>
+        <source>Rate of breaths per minute</source>
+        <translation>Bewerten der Atemzüge pro Minute</translation>
+    </message>
+    <message>
+        <source>Once you upgrade, you &lt;font size=+1&gt;can not&lt;/font&gt; use this profile with the previous version anymore.</source>
+        <translation>Wenn Sie ein Upgrade beauftragen, können Sie dieses Profil&lt;font size=+1&gt; nicht &lt;/ font&gt;mehr mit der vorherigen Version verwenden.</translation>
+    </message>
+    <message>
+        <source>Are you ready to upgrade, so you can run the new version of OSCAR?</source>
+        <translation>Sind Sie bereit für ein Upgrade, damit Sie die neue Version von OSCAR ausführen können?</translation>
+    </message>
+    <message>
+        <source>BiPAP autoSV Advanced 60 Series</source>
+        <translation>BiPAP autoSV Erweiterung 60 Series</translation>
+    </message>
+    <message>
+        <source>Perfusion Index</source>
+        <translation>Durchfluss Index</translation>
+    </message>
+    <message>
+        <source>RemStar Auto with A-Flex</source>
+        <translation>RemStar Auto mit A-Flex</translation>
+    </message>
+    <message>
+        <source>Graph displaying snore volume</source>
+        <translation>Graphische Anzeige Schnarchvolumen</translation>
+    </message>
+    <message>
+        <source>Mask Off</source>
+        <translation>Maske ab</translation>
+    </message>
+    <message>
+        <source>Max EPAP</source>
+        <translation>Max EPAP</translation>
+    </message>
+    <message>
+        <source>Max IPAP</source>
+        <translation>Max IPAP</translation>
+    </message>
+    <message>
+        <source>Bedtime</source>
+        <translation>Schlafenszeit</translation>
+    </message>
+    <message>
+        <source>Bi-Flex</source>
+        <translation>Bi-Flex</translation>
+    </message>
+    <message>
+        <source>EPAP %1 IPAP %2 (%3)</source>
+        <translation>EPAP %1 IPAP %2 (%3)</translation>
+    </message>
+    <message>
+        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
+        <translation type="vanished">Eine Apnoe, der nicht als Central oder atmungsbedingt ermittelt werden konnte, wegen zu hoher Leckage Störung des Klassifizierungsprozesses.</translation>
+    </message>
+    <message>
+        <source>Pressure</source>
+        <translation>Druck</translation>
+    </message>
+    <message>
+        <source>Auto On</source>
+        <translation>Automatisch ein</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Durchschnitt</translation>
+    </message>
+    <message>
+        <source>Target Minute Ventilation</source>
+        <translation>Zielminutenvolumen</translation>
+    </message>
+    <message>
+        <source>Amount of air displaced per minute</source>
+        <translation>Atemminutenvolumen</translation>
+    </message>
+    <message>
+        <source>
+TTIA: %1</source>
+        <translation>
+TTIA: %1</translation>
+    </message>
+    <message>
+        <source>Percentage of breaths triggered by patient</source>
+        <translation>Prozentualer Anteil der Atemzüge vom Patienten ausgelöst</translation>
+    </message>
+    <message>
+        <source>Non Data Capable Machine</source>
+        <translation>Gerät nicht Datenfähig</translation>
+    </message>
+    <message>
+        <source>Days: %1</source>
+        <translation>Tage: %1</translation>
+    </message>
+    <message>
+        <source>Plethysomogram</source>
+        <translation>Plethysomogramm</translation>
+    </message>
+    <message>
+        <source>Unclassified Apnea</source>
+        <translation>Apnoe ohne Zuordnung</translation>
+    </message>
+    <message>
+        <source>A user definable event detected by OSCAR&apos;s flow waveform processor.</source>
+        <translation>Ein vom Benutzer definierbares Ereignis, das vom Flow-Wave-Prozessor von OSCAR erkannt wird.</translation>
+    </message>
+    <message>
+        <source>Software Engine</source>
+        <translation>Geräte Software</translation>
+    </message>
+    <message>
+        <source>Auto Bi-Level (Fixed PS)</source>
+        <translation>Automatische Doppelebene (Fest PS)</translation>
+    </message>
+    <message>
+        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
+        <translation type="vanished">Wenn Sie ein Upgrade durchführen, geraten Sie nicht in Panik. Sie müssen lediglich sicherstellen, dass dies auf Ihren alten OSCAR-Datenordner verweist.</translation>
+    </message>
+    <message>
+        <source>Please Note</source>
+        <translation>Bitte warten Sie</translation>
+    </message>
+    <message>
+        <source>Starting Ramp Pressure</source>
+        <translation>Anlaufdruck</translation>
+    </message>
+    <message>
+        <source>Last Updated</source>
+        <translation>Letzte Aktualisierung</translation>
+    </message>
+    <message>
+        <source>Intellipap event where you breathe out your mouth.</source>
+        <translation>Intellipap Ereignis, bei der Sie mit dem Mund ausatmen.</translation>
+    </message>
+    <message>
+        <source>ASV (Variable EPAP)</source>
+        <translation>ASV (Variabel EPAP)</translation>
+    </message>
+    <message>
+        <source>Sys1 Resist. Set</source>
+        <translation>Sys1 Resist. Einst</translation>
+    </message>
+    <message>
+        <source>Exhale Pressure Relief Level</source>
+        <translation>Ausatem Druckentlastungsebene</translation>
+    </message>
+    <message>
+        <source>Flow Limit</source>
+        <translation>Fließgrenze</translation>
+    </message>
+    <message>
+        <source>UAI=%1 </source>
+        <translation>UAI=%1 </translation>
+    </message>
+    <message>
+        <source>%1 low usage, %2 no usage, out of %3 days (%4% compliant.) Length: %5 / %6 / %7</source>
+        <translation>%1 geringer Nutzung, %2 keine Verwendung, von %3 Tage (%4% konform.) Länge: %5 / %6 / %7</translation>
+    </message>
+    <message>
+        <source>Loading Summary Data</source>
+        <translation>Zusammenfassungsdaten laden</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <source>Pulse Rate</source>
+        <translation>Pulsrate</translation>
+    </message>
+    <message>
+        <source>Rise Time</source>
+        <translation>Anstiegszeit</translation>
+    </message>
+    <message>
+        <source>System One Resistance Lock</source>
+        <translation>System One Widerstandssperre</translation>
+    </message>
+    <message>
+        <source>Cheyne Stokes Respiration</source>
+        <translation>Cheyne-Stokes-Atmung</translation>
+    </message>
+    <message>
+        <source>SmartStart</source>
+        <translation>Schneller Start</translation>
+    </message>
+    <message>
+        <source>Graph showing running AHI for the past hour</source>
+        <translation>Diagrammanzeige des AHI der letzten Stunde</translation>
+    </message>
+    <message>
+        <source>Graph showing running RDI for the past hour</source>
+        <translation>Diagrammanzeige des RDI der letzten Stunde</translation>
+    </message>
+    <message>
+        <source>Temperature Enable</source>
+        <translation>Temperatur aktivieren</translation>
+    </message>
+    <message>
+        <source>Could not parse Updates.xml file.</source>
+        <translation>Konnte die Updates.xml Datei nicht analysieren.</translation>
+    </message>
+    <message>
+        <source>Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.</source>
+        <translation>Es tut uns leid, Ihre Philips Respironics CPAP-Gerät (Modell %1) wird noch nicht unterstützt.</translation>
+    </message>
+    <message>
+        <source>Seconds</source>
+        <translation>Sekunden</translation>
+    </message>
+    <message>
+        <source>%1 (%2 days): </source>
+        <translation>%1 (%2 Tage): </translation>
+    </message>
+    <message>
+        <source>Desktop OpenGL</source>
+        <translation>Desktop OpenGL</translation>
+    </message>
+    <message>
+        <source>Snapshot %1</source>
+        <translation>Schnappschuss %1</translation>
+    </message>
+    <message>
+        <source>Mask Time</source>
+        <translation>Maskenzeit</translation>
+    </message>
+    <message>
+        <source>How you feel (0 = like crap, 10 = unstoppable)</source>
+        <translation>Wie fühlen Sie sich (0 = nicht gut, 10 = hervorragend)</translation>
+    </message>
+    <message>
+        <source>Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.</source>
+        <translation>Ihr Philips Respironics CPAP-Gerät (Modell%1) ist leider nicht in der Lage ein Datenmodell zu erstellen.</translation>
+    </message>
+    <message>
+        <source>Time in REM Sleep</source>
+        <translation>Zeit im Traum/REM-Schlaf</translation>
+    </message>
+    <message>
+        <source>Channel</source>
+        <translation>Kanal</translation>
+    </message>
+    <message>
+        <source>Auto for Her</source>
+        <translation>Auto für Sie</translation>
+    </message>
+    <message>
+        <source>Time In Deep Sleep</source>
+        <translation>Zeit im Tiefschlaf</translation>
+    </message>
+    <message>
+        <source>Time in Deep Sleep</source>
+        <translation>Zeit im Tiefschlaf</translation>
+    </message>
+    <message>
+        <source>Obstructive</source>
+        <translation>Obstruktiver Apnoe</translation>
+    </message>
+    <message>
+        <source>Pressure Max</source>
+        <translation>Maximaler Druck</translation>
+    </message>
+    <message>
+        <source>Pressure Min</source>
+        <translation>Mindestdruck</translation>
+    </message>
+    <message>
+        <source>(%2 day ago)</source>
+        <translation>(%2 Vortag)</translation>
+    </message>
+    <message>
+        <source>Unknown PRS1 Code %1</source>
+        <translation>Unbekannt PRS1 Code %1</translation>
+    </message>
+    <message>
+        <source>Diameter of primary CPAP hose</source>
+        <translation>Durchmesser des Primär CPAP Schlauch</translation>
+    </message>
+    <message>
+        <source>I&apos;m very sorry your machine doesn&apos;t record useful data to graph in Daily View :(</source>
+        <translation>Es tut mir sehr leid, dass Ihr Gerät keine nützlichen Daten zur Darstellung der Tagesansicht aufzeichnet :(</translation>
+    </message>
+    <message>
+        <source>Max Leaks</source>
+        <translation>Max Lecks</translation>
+    </message>
+    <message>
+        <source>Flex Level</source>
+        <translation>Flex-Ebene</translation>
+    </message>
+    <message>
+        <source>Time to Sleep</source>
+        <translation>Einschlafzeit</translation>
+    </message>
+    <message>
+        <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
+        <translation>Atemanstrengungs - Verwandte Erregung: Eine Einschränkung bei der Atmung, die entweder durch ein Erwachen oder eine Schlafstörung verursacht wird.</translation>
+    </message>
+    <message>
+        <source>Humid. Status</source>
+        <translation>Feucht. Status</translation>
+    </message>
+    <message>
+        <source>(Sess: %1)</source>
+        <translation>(Sitzung: %1)</translation>
+    </message>
+    <message>
+        <source>Climate Control</source>
+        <translation>Klimakontrolle</translation>
+    </message>
+    <message>
+        <source>Perf. Index %</source>
+        <translation>Durchf. Index %</translation>
+    </message>
+    <message>
+        <source>If your old data is missing, copy the contents of all the other Journal_XXXXXXX folders to this one manually.</source>
+        <translation>Wenn Ihre alten Daten fehlen, kopieren Sie den Inhalt aller anderen Journal_XXXXXXX Ordner wie diese manuell.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <source>&amp;Finish</source>
-        <translation>&amp;Ende</translation>
+        <source>Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)</source>
+        <translation>Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)</translation>
+    </message>
+    <message>
+        <source>System One</source>
+        <translation>System One</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Breaths/min</source>
+        <translation>Atmungen/min</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation>Grad</translation>
+    </message>
+    <message>
+        <source>Test #1</source>
+        <translation>Test #1</translation>
+    </message>
+    <message>
+        <source>Test #2</source>
+        <translation>Test #2</translation>
+    </message>
+    <message>
+        <source>&amp;Destroy</source>
+        <translation>&amp;Vernichten</translation>
+    </message>
+    <message>
+        <source>%1 %2 / %3 / %4</source>
+        <translation>%1 %2 / %3 / %4</translation>
+    </message>
+    <message>
+        <source>Choose or create new folder for OSCAR data</source>
+        <translation type="vanished">Wählen oder erstellen Sie einen neuen Ordner für OSCAR-Daten</translation>
+    </message>
+    <message>
+        <source>There is a lockfile already present for this profile &apos;%1&apos;, claimed on &apos;%2&apos;.</source>
+        <translation>Es ist ein bereits für dieses Profil vorhanden Sperrdatei &apos;%1&apos;, behauptete auf &apos;%2&apos;.</translation>
+    </message>
+    <message>
+        <source>(yesterday)</source>
+        <translation>(gestern)</translation>
+    </message>
+    <message>
+        <source>User Flag #1</source>
+        <translation>Benutzer Markierung #1</translation>
+    </message>
+    <message>
+        <source>User Flag #2</source>
+        <translation>Benutzer Markierung #2</translation>
+    </message>
+    <message>
+        <source>User Flag #3</source>
+        <translation>Benutzer Markierung #3</translation>
+    </message>
+    <message>
+        <source>A ResMed data source showing Respiratory Events</source>
+        <translation>Die ResMed Datenquelle, der Atem Ereignisse</translation>
+    </message>
+    <message>
+        <source>Heated Tubing</source>
+        <translation>beheizte Schläuche</translation>
+    </message>
+    <message>
+        <source>OSCAR will now start the import wizard so you can reinstall your %1 data.</source>
+        <translation>OSCAR startet nun den Importassistenten, damit Sie Ihren neu installieren können %1 Daten.</translation>
+    </message>
+    <message>
+        <source>Auto CPAP</source>
+        <translation>Auto CPAP</translation>
+    </message>
+    <message>
+        <source>EPAP %1 PS %2-%3 (%6)</source>
+        <translation>EPAP %1 PS %2-%3 (%6)</translation>
+    </message>
+    <message>
+        <source>REI=%1 VSI=%2 FLI=%3 PB/CSR=%4%%</source>
+        <translation>REI=%1 VSI=%2 FLI=%3 PB/CSR=%4%%</translation>
+    </message>
+    <message>
+        <source>Median rate of detected mask leakage</source>
+        <translation>Mittlere Rate der bemerkten Masken Lecks</translation>
+    </message>
+    <message>
+        <source>Bookmark Notes</source>
+        <translation>Lesezeichen Hinweise</translation>
+    </message>
+    <message>
+        <source>Bookmark Start</source>
+        <translation>Lesezeichen Start</translation>
+    </message>
+    <message>
+        <source>PAP Device Mode</source>
+        <translation>PAP Gerätemodus</translation>
+    </message>
+    <message>
+        <source>Mask Pressure</source>
+        <translation>Maskendruck</translation>
+    </message>
+    <message>
+        <source>A vibratory snore as detcted by a System One machine</source>
+        <translation>Eine Schnarchvibration die durch ein System One endeckt wurde</translation>
+    </message>
+    <message>
+        <source>Sorry, your %1 %2 machine is not currently supported.</source>
+        <translation>Entschuldigung, Ihr %1 %2 Gerät wird derzeit nicht unterstützt.</translation>
+    </message>
+    <message>
+        <source>No oximetry data has been imported yet.</source>
+        <translation>Es wurden noch keine Oxymetriedaten importiert.</translation>
+    </message>
+    <message>
+        <source>Please be careful when playing in OSCAR&apos;s profile folders :-P</source>
+        <translation>Seien Sie vorsichtig, wenn Sie mit dem OSCAR-Profilordnern spielen :-P</translation>
+    </message>
+    <message>
+        <source>1=Awake 2=REM 3=Light Sleep 4=Deep Sleep</source>
+        <translation>1 = Wach 2 = Traum 3 = Leichter Schlaf 4 = Tiefschlaf</translation>
+    </message>
+    <message>
+        <source>Respiratory Event</source>
+        <translation>Atem Ereignis</translation>
+    </message>
+    <message>
+        <source>An abnormal period of Cheyne Stokes Respiration</source>
+        <translation>Eine abnormale Periode von Cheyne-Stokes-Atmung</translation>
+    </message>
+    <message>
+        <source>A type of respiratory event that won&apos;t respond to a pressure increase.</source>
+        <translation>Eine Art von Atem Ereignis, welches auf keinen Druckanstieg reagiert.</translation>
+    </message>
+    <message>
+        <source>Antibacterial Filter</source>
+        <translation>Antibakterienfilter</translation>
+    </message>
+    <message>
+        <source>Windows User</source>
+        <translation>Windows Benutzer</translation>
+    </message>
+    <message>
+        <source>Cataloguing EDF Files...</source>
+        <translation>EDF-Dateien werden katalogisiert...</translation>
+    </message>
+    <message>
+        <source>Question</source>
+        <translation>Frage</translation>
+    </message>
+    <message>
+        <source>System One Mask Resistance Setting</source>
+        <translation>System One Masken Resistenzeinstellungen</translation>
+    </message>
+    <message>
+        <source>Time spent in light sleep</source>
+        <translation>Zeit in der Leichtschlafphase</translation>
+    </message>
+    <message>
+        <source>Waketime: %1</source>
+        <translation>Aufwachzeit: %1</translation>
+    </message>
+    <message>
+        <source>Time In REM Sleep</source>
+        <translation>Zeit im Traum/REM-Schlaf</translation>
+    </message>
+    <message>
+        <source>Higher Inspiratory Pressure</source>
+        <translation>Höchster Inspirationsdruck</translation>
+    </message>
+    <message>
+        <source>Weinmann</source>
+        <translation>Weinmann</translation>
+    </message>
+    <message>
+        <source>Don&apos;t forget to place your datacard back in your CPAP machine</source>
+        <translation>Vergessen Sie nicht, Ihre Datenkarte wieder in Ihr CPAP Gerät zu stecken</translation>
+    </message>
+    <message>
+        <source>The machine data folder needs to be removed manually.</source>
+        <translation>Die Gerätedaten-Ordner müssen manuell entfernt werden.</translation>
+    </message>
+    <message>
+        <source>Summary Only</source>
+        <translation>Nur Zusammenfassung</translation>
+    </message>
+    <message>
+        <source>Bookmark End</source>
+        <translation>Lesezeichen Ende</translation>
+    </message>
+    <message>
+        <source>Unknown Model</source>
+        <translation>Unbekanntes Model</translation>
     </message>
     <message>
         <source>Bi-Level</source>
-        <translation>Bi-Level</translation>
+        <translation>Zweite Ebene</translation>
     </message>
     <message>
-        <source>Profile Changes</source>
-        <translation>Profiländerungen</translation>
+        <source>Intellipap</source>
+        <translation>Intellipap</translation>
     </message>
     <message>
-        <source>Personal Information (for reports)</source>
-        <translation>Persönliche Informationen (für Berichte)</translation>
+        <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
+        <translation>&lt;i&gt; Ihre alten Gerätedaten sollten regeneriert werden. Sie haben die Backup-Funktion während eines früheren Datenimports nicht deaktiviert.&lt;/ i&gt;</translation>
     </message>
     <message>
-        <source>User Name</source>
-        <translation>Benutzername</translation>
+        <source>Debugging channel #1</source>
+        <translation>Debugging von Kanal #1</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Biological (birth) gender is sometimes needed to enhance the accuracy of a few calculations, feel free to leave this blank and skip any of them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Manchmal ist ein biologisches (Geburts-) Geschlecht erforderlich, um die Genauigkeit einiger Berechnungen zu verbessern. Lassen Sie dieses Feld leer können Sie alles überspringen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>Debugging channel #2</source>
+        <translation>Debugging von Kanal #2</translation>
     </message>
     <message>
-        <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
-        <translation>Diese Software wird entwickelt, um Sie bei der Überprüfung der von Ihrem CPAP-Geräte und zugehörige Ausrüstung erzeugten Daten zu unterstützen.</translation>
+        <source>Unknown</source>
+        <translation>Unbekannt</translation>
     </message>
     <message>
-        <source>User Information</source>
-        <translation>Benutzerinformationen</translation>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
     </message>
     <message>
-        <source>...twice...</source>
-        <translation>...zweimal...</translation>
+        <source>Finishing Up...</source>
+        <translation>Beenden...</translation>
     </message>
     <message>
-        <source>Doctors Name</source>
-        <translation>Name des Arztes</translation>
+        <source>Events/hr</source>
+        <translation>Ereignisse/Stunde</translation>
     </message>
     <message>
-        <source>It&apos;s totally ok to fib or skip this, but your rough age is needed to enhance accuracy of certain calculations.</source>
-        <translation>Dies ist jedoch erforderlich, um die Genauigkeit bestimmter Berechnungen zu verbessern.</translation>
+        <source>PRS1 humidifier connected?</source>
+        <translation>PRS1 Luftbefeuchter angeschlossen?</translation>
     </message>
     <message>
-        <source>Doctors / Clinic Information</source>
-        <translation>Name des Arztes in der Klinik</translation>
+        <source>CPAP Session contains summary data only</source>
+        <translation>CPAP Sitzung enthält nur Übersichtsdaten</translation>
     </message>
     <message>
-        <source>Practice Name</source>
-        <translation>Name der Praxis</translation>
+        <source>Finishing up...</source>
+        <translation>Beenden...</translation>
     </message>
     <message>
-        <source>Date Diagnosed</source>
-        <translation>Diagnosedatum</translation>
+        <source>Fisher &amp; Paykel</source>
+        <translation>Fisher &amp; Paykel</translation>
     </message>
     <message>
-        <source>Accept and save this information?</source>
-        <translation>Akzeptieren und speichern Sie diese Informationen?</translation>
+        <source>Duration</source>
+        <translation>Dauer</translation>
+    </message>
+    <message>
+        <source>Scanning Files...</source>
+        <translation>Scanne Dateien...</translation>
+    </message>
+    <message>
+        <source>
+Hours: %1</source>
+        <translation>
+Stunden: %1</translation>
+    </message>
+    <message>
+        <source>Flex Mode</source>
+        <translation>Flex Modus</translation>
+    </message>
+    <message>
+        <source>Sessions</source>
+        <translation>Sitzungen</translation>
+    </message>
+    <message>
+        <source>A period during a session where the machine could not detect flow.</source>
+        <translation>Ein Abschnitt während einer Sitzung, in der das Gerät keinen Fluss erkennen konnte.</translation>
+    </message>
+    <message>
+        <source>Auto Off</source>
+        <translation>Automatisch aus</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation>Überblick</translation>
+    </message>
+    <message>
+        <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
+        <translation>Der von Ihnen gewählte Ordner ist weder leer noch enthält er gültige OSCAR-Daten.</translation>
+    </message>
+    <message>
+        <source>Temperature</source>
+        <translation>Temperatur</translation>
+    </message>
+    <message>
+        <source>Patient Access</source>
+        <translation>Patientenzugriff</translation>
+    </message>
+    <message>
+        <source>Entire Day&apos;s Flow Waveform</source>
+        <translation>Gesamte Tages Flusswellenform</translation>
+    </message>
+    <message>
+        <source>Exiting</source>
+        <translation>Verlassen</translation>
+    </message>
+    <message>
+        <source>DeVilbiss</source>
+        <translation>DeVilbiss</translation>
+    </message>
+    <message>
+        <source>Time in Light Sleep</source>
+        <translation>Zeit in der Leichtschlafphase</translation>
+    </message>
+    <message>
+        <source>Time In Light Sleep</source>
+        <translation>Zeit in der Leichtschlafphase</translation>
+    </message>
+    <message>
+        <source>Fixed Bi-Level</source>
+        <translation>Feste Doppelebene</translation>
+    </message>
+    <message>
+        <source>Machine Information</source>
+        <translation>Geräte-Informationen</translation>
+    </message>
+    <message>
+        <source>Pressure Support Maximum</source>
+        <translation>Druckunterstützung Maximum</translation>
+    </message>
+    <message>
+        <source>Graph showing severity of flow limitations</source>
+        <translation>Graphische Darstellung des Schweregrades der Flusslimitierungen</translation>
+    </message>
+    <message>
+        <source>: %1 hours, %2 minutes, %3 seconds
+</source>
+        <translation>: %1 Stunden, %2 Minuten, %3 Sekunden
+</translation>
+    </message>
+    <message>
+        <source>Auto Bi-Level (Variable PS)</source>
+        <translation>Automatische Doppelebene (Variable PS)</translation>
+    </message>
+    <message>
+        <source>Mask Alert</source>
+        <translation>Maskenalarm</translation>
+    </message>
+    <message>
+        <source>OSCAR Reminder</source>
+        <translation>OSCAR-Erinnerung</translation>
+    </message>
+    <message>
+        <source>OSCAR found an old Journal folder, but it looks like it&apos;s been renamed:</source>
+        <translation>OSCAR hat einen alten Journalordner gefunden, der jedoch umbenannt wurde:</translation>
+    </message>
+    <message>
+        <source>A partially obstructed airway</source>
+        <translation>Teilweise behinderte Atemwege</translation>
+    </message>
+    <message>
+        <source>Pressure Support Minimum</source>
+        <translation>Druckunterstützung Minimum</translation>
+    </message>
+    <message>
+        <source>Large Leak</source>
+        <translation>Großes Leck</translation>
+    </message>
+    <message>
+        <source>Time started according to str.edf</source>
+        <translation>Zeit nach str.edf gestartet</translation>
+    </message>
+    <message>
+        <source>Wake-up</source>
+        <translation>Aufwachzeit</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Warnung</translation>
+    </message>
+    <message>
+        <source>Min Pressure</source>
+        <translation>Mindestdruck</translation>
+    </message>
+    <message>
+        <source>System One Resistance Setting</source>
+        <translation>System One Resistenzeinstellungen</translation>
+    </message>
+    <message>
+        <source>Total Leak Rate</source>
+        <translation>Gesamtleckrate</translation>
+    </message>
+    <message>
+        <source>RemStar Plus</source>
+        <translation>RemStar Plus</translation>
+    </message>
+    <message>
+        <source>d MMM [ %1 - %2 ]</source>
+        <translation>d MMM [ %1 - %2 ]</translation>
+    </message>
+    <message>
+        <source>Max Pressure</source>
+        <translation>Größter Druck</translation>
+    </message>
+    <message>
+        <source>MaskPressure</source>
+        <translation>Maskendruck</translation>
+    </message>
+    <message>
+        <source>Duration %1:%2:%3</source>
+        <translation>Dauer %1:%2:%3</translation>
+    </message>
+    <message>
+        <source>Upper Threshold</source>
+        <translation>obere Schwelle</translation>
+    </message>
+    <message>
+        <source>DreamStation</source>
+        <translation>Dream Station</translation>
+    </message>
+    <message>
+        <source>OSCAR will not touch this folder, and will create a new one instead.</source>
+        <translation>OSCAR benutzt diesen Ordner nicht und erstellt stattdessen einen neuen.</translation>
+    </message>
+    <message>
+        <source>Total Leaks</source>
+        <translation>Anzahl der Lecks</translation>
+    </message>
+    <message>
+        <source>Minute Ventilation</source>
+        <translation>Minutenvolumen</translation>
+    </message>
+    <message>
+        <source>Rate of detected mask leakage</source>
+        <translation>Anzahl erkannter Masken Lecks</translation>
+    </message>
+    <message>
+        <source>Breathing flow rate waveform</source>
+        <translation>Atemflussrate Wellenform</translation>
+    </message>
+    <message>
+        <source>Lower Expiratory Pressure</source>
+        <translation>Niedriger Exspirationsdruck</translation>
+    </message>
+    <message>
+        <source>Time spent in REM Sleep</source>
+        <translation>Die Zeit, in der REM-Schlafphase</translation>
+    </message>
+    <message>
+        <source>Min %1 Max %2 (%3)</source>
+        <translation>Min %1 Max %2 (%3)</translation>
+    </message>
+    <message>
+        <source>If you are using cloud storage, make sure OSCAR is closed and syncing has completed first on the other computer before proceeding.</source>
+        <translation>Wenn Sie Cloud-Speicher verwenden, stellen Sie sicher, dass OSCAR geschlossen ist und die Synchronisierung zuerst auf dem anderen Computer abgeschlossen ist, bevor Sie fortfahren.</translation>
+    </message>
+    <message>
+        <source>AI=%1 HI=%2 CAI=%3 </source>
+        <translation>AI=%1 HI=%2 CAI=%3 </translation>
+    </message>
+    <message>
+        <source>Time taken to breathe in</source>
+        <translation>Einatmungszeit</translation>
+    </message>
+    <message>
+        <source>Maximum Therapy Pressure</source>
+        <translation>Größter Therapiedruck</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to use this folder?</source>
+        <translation>Sind Sie sicher, dass Sie diesen Ordner nutzen möchten?</translation>
+    </message>
+    <message>
+        <source>Use your file manager to make a copy of your profile directory, then afterwards, restart OSCAR and complete the upgrade process.</source>
+        <translation>Verwenden Sie Ihren Dateimanager, um eine Kopie Ihres Profilverzeichnisses zu erstellen. Starten Sie anschließend OSCAR erneut, und schließen Sie den Aktualisierungsvorgang ab.</translation>
+    </message>
+    <message>
+        <source>I&apos;m sorry to report that OSCAR can only track hours of use and very basic settings for this machine.</source>
+        <translation>Es tut mir leid zu berichten, dass OSCAR nur Betriebsstunden und grundlegende Einstellungen für dieses System verfolgen kann.</translation>
+    </message>
+    <message>
+        <source>%1 (%2 day): </source>
+        <translation>%1 (%2 Tag): </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t parse Channels.xml, this build is seriously borked, no choice but to abort!!</source>
+        <translation>Konnte die Kanäle.xml nicht analysieren. Bitte beenden Sie den Vorgang!!</translation>
+    </message>
+    <message>
+        <source>Current Selection</source>
+        <translation>Aktuelle Auswahl</translation>
+    </message>
+    <message>
+        <source>Blood-oxygen saturation percentage</source>
+        <translation>Blutsauerstoffsättigung in Prozent</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;OSCAR unterhält eine Sicherung Ihrer Gerätedatenkarte, die es für diesen Zweck verwendet.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Inspiratory Time</source>
+        <translation>Einatemzeit</translation>
+    </message>
+    <message>
+        <source>Respiratory Rate</source>
+        <translation>Atemfrequenz</translation>
+    </message>
+    <message>
+        <source>Hide All Events</source>
+        <translation>Alle Ereignisse verbergen</translation>
+    </message>
+    <message>
+        <source>Printing %1 Report</source>
+        <translation>Drucken %1 Bericht</translation>
+    </message>
+    <message>
+        <source>Expiratory Time</source>
+        <translation>Ausatemzeit</translation>
+    </message>
+    <message>
+        <source>Expiratory Puff</source>
+        <translation>Ausatem Hauch</translation>
+    </message>
+    <message>
+        <source>Maximum Leak</source>
+        <translation>Maximale Lecks</translation>
+    </message>
+    <message>
+        <source>Ratio between Inspiratory and Expiratory time</source>
+        <translation>Verhältnis zwischen den expiratorischen Zeiten</translation>
+    </message>
+    <message>
+        <source>APAP (Variable)</source>
+        <translation>APAP (Variable)</translation>
+    </message>
+    <message>
+        <source>Minimum Therapy Pressure</source>
+        <translation>Kleinster Theraphiedruck</translation>
+    </message>
+    <message>
+        <source>A sudden (user definable) change in heart rate</source>
+        <translation>Eine plötzliche (frei definierbare) Veränderung der Herzfrequenz</translation>
+    </message>
+    <message>
+        <source>Body Mass Index</source>
+        <translation>BMI</translation>
+    </message>
+    <message>
+        <source>Oximetry</source>
+        <translation>Oxymetrie</translation>
+    </message>
+    <message>
+        <source>Oximeter</source>
+        <translation>Oxymeter</translation>
+    </message>
+    <message>
+        <source>No Data Available</source>
+        <translation>Keine Daten verfügbar</translation>
+    </message>
+    <message>
+        <source>The maximum rate of mask leakage</source>
+        <translation>Der Höchstsatz der Maskenlecks</translation>
+    </message>
+    <message>
+        <source>Humidifier Status</source>
+        <translation>Luftbefeuchter Status</translation>
+    </message>
+    <message>
+        <source>Machine Initiated Breath</source>
+        <translation>Gerät Initiiert Atem</translation>
+    </message>
+    <message>
+        <source>Machine Database Changes</source>
+        <translation>Gerätedatenbankänderungen</translation>
+    </message>
+    <message>
+        <source>SmartFlex Mode</source>
+        <translation>Smart-Flex-Modus</translation>
+    </message>
+    <message>
+        <source>Journal Notes</source>
+        <translation>Journal Notizen</translation>
+    </message>
+    <message>
+        <source> (%2 min, %3 sec)</source>
+        <translation> (%2 min, %3 sek)</translation>
+    </message>
+    <message>
+        <source>You can only work with one instance of an individual OSCAR profile at a time.</source>
+        <translation>Sie können jeweils nur mit einer Instanz eines einzelnen OSCAR-Profils arbeiten.</translation>
+    </message>
+    <message>
+        <source>Expiratory Pressure</source>
+        <translation>Ausatmungsdruck</translation>
+    </message>
+    <message>
+        <source>Show AHI</source>
+        <translation>Zeige AHI</translation>
+    </message>
+    <message>
+        <source>Tgt. Min. Vent</source>
+        <translation>Tgt. Minute entlüften</translation>
+    </message>
+    <message>
+        <source>Rebuilding from %1 Backup</source>
+        <translation>Wiederherstellung von%1-Backup</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to reset all your waveform channel colors and settings to defaults?</source>
+        <translation>Sind Sie sicher, dass Sie alle Ihre Wellenform-Kanal Farben und Einstellungen auf die Standardwerte zurücksetzen wollen?</translation>
+    </message>
+    <message>
+        <source>Pressure Pulse</source>
+        <translation>Druckimpuls</translation>
+    </message>
+    <message>
+        <source>ChoiceMMed</source>
+        <translation>ChoiceMMed</translation>
+    </message>
+    <message>
+        <source>Sessions: %1 / %2 / %3 Length: %4 / %5 / %6 Longest: %7 / %8 / %9</source>
+        <translation>Sitzungen: %1 / %2 / %3 Länge: %4 / %5 / %6 Längste: %7 / %8 / %9</translation>
+    </message>
+    <message>
+        <source>Humidifier</source>
+        <translation>Luftbefeuchter</translation>
+    </message>
+    <message>
+        <source>Compliance Only :(</source>
+        <translation>Therapietreue einhalten :(</translation>
+    </message>
+    <message>
+        <source>Relief: %1</source>
+        <translation>Relief: %1</translation>
     </message>
     <message>
         <source>Patient ID</source>
-        <translation>Patient-ID</translation>
+        <translation>Patienten-ID</translation>
+    </message>
+    <message>
+        <source>Patient???</source>
+        <translation>Patient???</translation>
+    </message>
+    <message>
+        <source>An apnea caused by airway obstruction</source>
+        <translation>Eine Apnoe durch Obstruktion der Atemwege verursacht</translation>
+    </message>
+    <message>
+        <source>Vibratory Snore (VS2) </source>
+        <translation>Vibrations-Schnarchen (VS2) </translation>
+    </message>
+    <message>
+        <source>Please Wait...</source>
+        <translation>Bitte warten...</translation>
+    </message>
+    <message>
+        <source>(If you are unsure, just click yes.)</source>
+        <translation type="vanished">(Wenn Sie sich nicht sicher sind, klicken Sie einfach auf Ja.)</translation>
+    </message>
+    <message>
+        <source>Using </source>
+        <translation>Verwendung von </translation>
+    </message>
+    <message>
+        <source>, found SleepyHead -
+</source>
+        <translation>, gefunden SleepyHead -
+</translation>
+    </message>
+    <message>
+        <source>You must run the OSCAR Migration Tool</source>
+        <translation>Sie müssen das OSCAR-Migrationswerkzeug ausführen</translation>
+    </message>
+    <message>
+        <source>OSCAR (%1) needs to upgrade its database for %2 %3 %4</source>
+        <translation>OSCAR (%1) muss seine Datenbank aktualisieren für %2 %3 %4</translation>
+    </message>
+    <message>
+        <source>An apnea that couldn&apos;t be determined as Central or Obstructive.</source>
+        <translation>Eine Apnoe, die nicht als zentral oder obstruktiv bestimmt werden konnte.</translation>
+    </message>
+    <message>
+        <source>A restriction in breathing from normal, causing a flattening of the flow waveform.</source>
+        <translation>Eine Einschränkung der Atmung aus dem Normalzustand, die zu einer Verflachung der Strömungswellenform führt.</translation>
+    </message>
+    <message>
+        <source>Choose the SleepyHead data folder to migrate</source>
+        <translation>Wählen Sie den Datenordner SleepyHead für die Migration aus</translation>
+    </message>
+    <message>
+        <source>or CANCEL to skip migration.</source>
+        <translation>oder CANCEL, um die Migration zu überspringen.</translation>
+    </message>
+    <message>
+        <source>The folder you chose does not contain valid SleepyHead data.</source>
+        <translation>Der von Ihnen gewählte Ordner enthält keine gültigen SleepyHead-Daten.</translation>
+    </message>
+    <message>
+        <source>You cannot use this folder:</source>
+        <translation>Sie können diesen Ordner nicht verwenden:</translation>
+    </message>
+    <message>
+        <source>If you are upgrading, don&apos;t panic, your old data will be migrated later.</source>
+        <translation type="vanished">Wenn Sie ein Upgrade durchführen, keine Panik, Ihre alten Daten werden später migriert.</translation>
+    </message>
+    <message>
+        <source>Choose or create a new folder for OSCAR data</source>
+        <translation>Auswählen oder Erstellen eines neuen Ordners für OSCAR-Daten</translation>
+    </message>
+    <message>
+        <source>Migrating </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OSCAR will set up a folder for your data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We suggest you use this folder: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click Ok to accept this, or No if you want to use a different folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next time you run OSCAR, you will be asked again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrate SleepyHead Data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>UpdaterWindow</name>
+    <name>Report</name>
     <message>
-        <source>Log</source>
-        <translation>Anmelden</translation>
+        <source>Form</source>
+        <translation>Form</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Größe</translation>
+        <source>about:blank</source>
+        <translation>Leere Seite</translation>
+    </message>
+</context>
+<context>
+    <name>SessionBar</name>
+    <message>
+        <source>%1h %2m</source>
+        <translation>%1h %2m</translation>
     </message>
     <message>
-        <source>&amp;Finished</source>
-        <translation>&amp;Fertig</translation>
-    </message>
-    <message>
-        <source>OSCAR Updates are currently unvailable for this platform</source>
-        <translation>OSCAR-Updates sind derzeit für diese Plattform nicht verfügbar</translation>
-    </message>
-    <message>
-        <source>New SleepyHead Updates are avilable:</source>
-        <translation>Neue OSCAR-Updats stehen zur Verfügung:</translation>
-    </message>
-    <message>
-        <source>Please wait while updates are downloaded and installed...</source>
-        <translation>Bitte warten Sie solange, bis die Updates heruntergeladen und installiert wurden...</translation>
-    </message>
-    <message>
-        <source>SleepyHead Updates</source>
-        <translation>OSCAR Updates</translation>
-    </message>
-    <message>
-        <source>Updates are not yet implemented</source>
-        <translation>Updates sind noch nicht implementiert</translation>
-    </message>
-    <message>
-        <source>Component</source>
-        <translation>Komponente</translation>
-    </message>
-    <message>
-        <source>&amp;Upgrade Now</source>
-        <translation>&amp;Jetzt ein Upgrade</translation>
-    </message>
-    <message>
-        <source>Version Information</source>
-        <translation>Versionsinformationen</translation>
-    </message>
-    <message>
-        <source>Build Notes</source>
-        <translation>Erstellen Sie Notizen</translation>
-    </message>
-    <message>
-        <source>Would you like to download and install them now?</source>
-        <translation>Möchten Sie sie jetzt herunterladen und installieren?</translation>
-    </message>
-    <message>
-        <source>No updates were found for your platform.</source>
-        <translation>Es stehen keine neuen Updates zur Verfügung.</translation>
-    </message>
-    <message>
-        <source>Downloading &amp; Installing Updates</source>
-        <translation>Herunterladen &amp; Installieren von Updates</translation>
-    </message>
-    <message>
-        <source>Maybe &amp;Later</source>
-        <translation>Möglicherweise &amp;Später</translation>
-    </message>
-    <message>
-        <source>OSCAR Updater</source>
-        <translation>OSCAR Updater</translation>
-    </message>
-    <message>
-        <source>OSCAR Updates</source>
-        <translation>OSCAR Updates</translation>
-    </message>
-    <message>
-        <source>Version %1 of OSCAR is available, opening link to download site.</source>
-        <translation>Version %1 von OSCAR ist verfügbar, ein Link zur Download-Site.</translation>
-    </message>
-    <message>
-        <source>You are already running the latest version.</source>
-        <translation>Sie führen bereits die neueste Version aus.</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>Fortschritt</translation>
-    </message>
-    <message>
-        <source>%1 bytes received</source>
-        <translation>%1 Bytes empfangen</translation>
-    </message>
-    <message>
-        <source>A new version of $APP is available</source>
-        <translation>Eine neue Version von $APP ist vorhanden</translation>
-    </message>
-    <message>
-        <source>Updates</source>
-        <translation>Updates</translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation>Version</translation>
-    </message>
-    <message>
-        <source>Requesting </source>
-        <translation>Anfordern </translation>
-    </message>
-    <message>
-        <source>Release Notes</source>
-        <translation>Versionshinweise</translation>
-    </message>
-    <message>
-        <source>Checking for OSCAR Updates</source>
-        <translation>Nach OSCAR-Updates suchen</translation>
+        <source>No Sessions Present</source>
+        <translation>Gegenwärtig keine Sitzung</translation>
     </message>
 </context>
 <context>
@@ -6246,7 +6581,7 @@ Index</translation>
     </message>
     <message>
         <source>Oscar has to data to report :(</source>
-        <translation>Oscar muss Daten melden :(</translation>
+        <translation type="vanished">Oscar muss Daten melden :(</translation>
     </message>
     <message>
         <source>Date: %1 CSR: %2%</source>
@@ -6394,7 +6729,7 @@ Index</translation>
     </message>
     <message>
         <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation>Dies ist aus rechtlichen Gründen. Entschuldigung, denn ohne Herstellerunterstützung und Dokumentation ist OSCAR als Instrument für die Einhaltung von Compliance- / medizinischen Berichten ungeeignet.</translation>
+        <translation type="vanished">Dies ist aus rechtlichen Gründen. Entschuldigung, denn ohne Herstellerunterstützung und Dokumentation ist OSCAR als Instrument für die Einhaltung von Compliance- / medizinischen Berichten ungeeignet.</translation>
     </message>
     <message>
         <source>No Large Leaks on record</source>
@@ -6402,7 +6737,7 @@ Index</translation>
     </message>
     <message>
         <source>OSCAR is free open-source CPAP review software</source>
-        <translation>OSCAR ist eine kostenlose Open Source-CPAP-Überprüfungssoftware</translation>
+        <translation type="vanished">OSCAR ist eine kostenlose Open Source-CPAP-Überprüfungssoftware</translation>
     </message>
     <message>
         <source>Date: %1 PB: %2%</source>
@@ -6454,7 +6789,7 @@ Index</translation>
     </message>
     <message>
         <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation>(NICHT für den Nachweis der Therapietreue oder medizinische Berichterstattungszwecke zugelassen!)</translation>
+        <translation type="vanished">(NICHT für den Nachweis der Therapietreue oder medizinische Berichterstattungszwecke zugelassen!)</translation>
     </message>
     <message>
         <source>No CSR on record</source>
@@ -6472,16 +6807,132 @@ Index</translation>
         <source>Average Hours per Night</source>
         <translation>Durchschnittliche Stunden pro Nacht</translation>
     </message>
-</context>
-<context>
-    <name>Report</name>
     <message>
-        <source>Form</source>
-        <translation>Form</translation>
+        <source>OSCAR is free open-source CPAP report software</source>
+        <translation>OSCAR ist eine kostenlose Open-Source CPAP-Berichtssoftware</translation>
     </message>
     <message>
-        <source>about:blank</source>
-        <translation>Leere Seite</translation>
+        <source>Oscar has no data to report :(</source>
+        <translation>Oscar hat keine Daten zu melden :(</translation>
+    </message>
+</context>
+<context>
+    <name>UpdaterWindow</name>
+    <message>
+        <source>Log</source>
+        <translation>Anmelden</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Größe</translation>
+    </message>
+    <message>
+        <source>&amp;Finished</source>
+        <translation>&amp;Fertig</translation>
+    </message>
+    <message>
+        <source>OSCAR Updates are currently unvailable for this platform</source>
+        <translation>OSCAR-Updates sind derzeit für diese Plattform nicht verfügbar</translation>
+    </message>
+    <message>
+        <source>New SleepyHead Updates are avilable:</source>
+        <translation type="vanished">Neue OSCAR-Updats stehen zur Verfügung:</translation>
+    </message>
+    <message>
+        <source>Please wait while updates are downloaded and installed...</source>
+        <translation>Bitte warten Sie solange, bis die Updates heruntergeladen und installiert wurden...</translation>
+    </message>
+    <message>
+        <source>SleepyHead Updates</source>
+        <translation type="vanished">OSCAR Updates</translation>
+    </message>
+    <message>
+        <source>Updates are not yet implemented</source>
+        <translation>Updates sind noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Komponente</translation>
+    </message>
+    <message>
+        <source>&amp;Upgrade Now</source>
+        <translation>&amp;Jetzt ein Upgrade</translation>
+    </message>
+    <message>
+        <source>Version Information</source>
+        <translation>Versionsinformationen</translation>
+    </message>
+    <message>
+        <source>Build Notes</source>
+        <translation>Erstellen Sie Notizen</translation>
+    </message>
+    <message>
+        <source>Would you like to download and install them now?</source>
+        <translation>Möchten Sie sie jetzt herunterladen und installieren?</translation>
+    </message>
+    <message>
+        <source>No updates were found for your platform.</source>
+        <translation>Es stehen keine neuen Updates zur Verfügung.</translation>
+    </message>
+    <message>
+        <source>Downloading &amp; Installing Updates</source>
+        <translation>Herunterladen &amp; Installieren von Updates</translation>
+    </message>
+    <message>
+        <source>Maybe &amp;Later</source>
+        <translation>Möglicherweise &amp;Später</translation>
+    </message>
+    <message>
+        <source>OSCAR Updater</source>
+        <translation>OSCAR Updater</translation>
+    </message>
+    <message>
+        <source>OSCAR Updates</source>
+        <translation>OSCAR Updates</translation>
+    </message>
+    <message>
+        <source>Version %1 of OSCAR is available, opening link to download site.</source>
+        <translation>Version %1 von OSCAR ist verfügbar, ein Link zur Download-Site.</translation>
+    </message>
+    <message>
+        <source>You are already running the latest version.</source>
+        <translation>Sie führen bereits die neueste Version aus.</translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation>Fortschritt</translation>
+    </message>
+    <message>
+        <source>%1 bytes received</source>
+        <translation>%1 Bytes empfangen</translation>
+    </message>
+    <message>
+        <source>A new version of $APP is available</source>
+        <translation>Eine neue Version von $APP ist vorhanden</translation>
+    </message>
+    <message>
+        <source>Updates</source>
+        <translation>Updates</translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Requesting </source>
+        <translation>Anfordern </translation>
+    </message>
+    <message>
+        <source>Release Notes</source>
+        <translation>Versionshinweise</translation>
+    </message>
+    <message>
+        <source>Checking for OSCAR Updates</source>
+        <translation>Nach OSCAR-Updates suchen</translation>
+    </message>
+    <message>
+        <source>New OSCAR Updates are avilable:</source>
+        <translation>Neue OSCAR-Updates sind verfügbar:</translation>
     </message>
 </context>
 <context>
@@ -6504,15 +6955,15 @@ Index</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>Ihr IPAP- Druck war unter %1%2 für %3% diese Zeit.</translation>
+        <translation type="vanished">Ihr IPAP- Druck war unter %1%2 für %3% diese Zeit.</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation>Ihr EPAP Druck fixiert ein %1%2.</translation>
+        <translation type="vanished">Ihr EPAP Druck fixiert ein %1%2.</translation>
     </message>
     <message>
         <source>Welcome To Open Source CPAP Reviewer</source>
-        <translation>Willkommen beim Open Source CPAP Reviewer</translation>
+        <translation type="vanished">Willkommen beim Open Source CPAP Reviewer</translation>
     </message>
     <message>
         <source>No CPAP data has been imported yet.</source>
@@ -6524,7 +6975,7 @@ Index</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>Ihre EPAP- Druck war unter %1%2 für %3% diese Zeit.</translation>
+        <translation type="vanished">Ihre EPAP- Druck war unter %1%2 für %3% diese Zeit.</translation>
     </message>
     <message>
         <source>Oximetry Wizard</source>
@@ -6548,7 +6999,7 @@ Index</translation>
     </message>
     <message>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation>Ihr Gerät versorgt Sie mit einer konstanten %1-%2 %3 Luft.</translation>
+        <translation type="vanished">Ihr Gerät versorgt Sie mit einer konstanten %1-%2 %3 Luft.</translation>
     </message>
     <message>
         <source>Your machine was on for %1.</source>
@@ -6584,7 +7035,7 @@ Index</translation>
     </message>
     <message>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation>Für diese Zeit war Ihr Druck unter %1%2 für %3%.</translation>
+        <translation type="vanished">Für diese Zeit war Ihr Druck unter %1%2 für %3%.</translation>
     </message>
     <message>
         <source>yesterday</source>
@@ -6596,7 +7047,7 @@ Index</translation>
     </message>
     <message>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation>Ihr CPAP-Gerät versorgt Sie mit einer konstanten %1%2 Luft</translation>
+        <translation type="vanished">Ihr CPAP-Gerät versorgt Sie mit einer konstanten %1%2 Luft</translation>
     </message>
     <message>
         <source>CPAP Importer</source>
@@ -6626,68 +7077,40 @@ Index</translation>
         <source>The last time you used your %1...</source>
         <translation>Die letzte Verwendung von %1...</translation>
     </message>
+    <message>
+        <source>Welcome to the Open Source CPAP Analysis Reporter</source>
+        <translation>Willkommen beim Open Source CPAP Analysis Reporter</translation>
+    </message>
+    <message>
+        <source>Your CPAP machine used a constant %1 %2 of air</source>
+        <translation>Ihr CPAP-Gerät hat eine Konstante verwendet %1 %2 der Luft</translation>
+    </message>
+    <message>
+        <source>Your pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Für diese Zeit war Ihr Druck unter %1 %2 für %3%.</translation>
+    </message>
+    <message>
+        <source>Your machine used a constant %1-%2 %3 of air.</source>
+        <translation>Ihre Gerät hat eine Konstante verwendet. %1-%2 %3 von Luft.</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure fixed at %1 %2.</source>
+        <translation>Ihr EPAP Druck fixiert ein %1 %2.</translation>
+    </message>
+    <message>
+        <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Ihr IPAP- Druck war unter %1 %2 für %3% diese Zeit.</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Ihre EPAP- Druck war unter %1 %2 für %3% diese Zeit.</translation>
+    </message>
 </context>
 <context>
-    <name>AboutDialog</name>
+    <name>gGraph</name>
     <message>
-        <source>Sorry, could not locate About file.</source>
-        <translation>Leider konnte die About-Datei nicht gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>Beenden</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>GPL License</source>
-        <translation>GPL License</translation>
-    </message>
-    <message>
-        <source>As this is a pre-release version, it is recommended that you &lt;b&gt;back up your data folder manually&lt;/b&gt; before proceding, because attempting to roll back later may break things.</source>
-        <translation>Da es sich um eine Vorabversion handelt, wird empfohlen, den Datenordner vor dem Vorgang manuell zu sichern&lt;/b&gt;, da der spätere Rollback-Vorgang möglicherweise zu Problemen führt.</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>About OSCAR</source>
-        <translation>Über OSCAR</translation>
-    </message>
-    <message>
-        <source>Sorry, could not locate Credits file.</source>
-        <translation>Entschuldigung, die Credits-Datei konnte nicht gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Important:</source>
-        <translation>Wichtig:</translation>
-    </message>
-    <message>
-        <source>OSCAR v%1</source>
-        <translation>OSCAR v%1</translation>
-    </message>
-    <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation>Leider konnte kein Änderungsprotokoll gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Credits</source>
-        <translation>Verdienst</translation>
-    </message>
-    <message>
-        <source>To see if the license text is available in your language, see %1.</source>
-        <translation>Informationen dazu, ob der Lizenztext in Ihrer Sprache verfügbar ist, finden Sie unter %1.</translation>
-    </message>
-    <message>
-        <source>Release Notes</source>
-        <translation>Versionshinweise</translation>
-    </message>
-    <message>
-        <source>Show data folder</source>
-        <translation>Datenordner anzeigen</translation>
+        <source>%1 days</source>
+        <translation>%1 Tage</translation>
     </message>
 </context>
 <context>
@@ -6736,252 +7159,11 @@ Index</translation>
         <source>100% zoom level</source>
         <translation>100% Zoom-Stufe</translation>
     </message>
-</context>
-<context>
-    <name>ProfileSelect</name>
     <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Beenden</translation>
-    </message>
-    <message>
-        <source>Create a new user profile.</source>
-        <translation>Erstellen Sie ein neues Benutzerprofil.</translation>
-    </message>
-    <message>
-        <source>OSCAR</source>
-        <translation>OSCAR</translation>
-    </message>
-    <message>
-        <source>Sorry</source>
-        <translation>Entschuldigung</translation>
-    </message>
-    <message>
-        <source>[data directory]</source>
-        <translation>[Datenverzeichnis]</translation>
-    </message>
-    <message>
-        <source>Open Profile</source>
-        <translation>Profil öffnen</translation>
-    </message>
-    <message>
-        <source>Profile &apos;%1&apos; was succesfully deleted</source>
-        <translation>Profil &apos;%1&apos; wurde erfolgreich gelöscht</translation>
-    </message>
-    <message>
-        <source>Edit Profile</source>
-        <translation>Profil bearbeiten</translation>
-    </message>
-    <message>
-        <source>Enter the word DELETE below to confirm.</source>
-        <translation>Um fortzufahren bestätigen Sie unten das Wort DELETE.</translation>
-    </message>
-    <message>
-        <source>The current location of OSCAR data store.</source>
-        <translation>Der aktuelle Speicherort des OSCAR-Datenspeichers.</translation>
-    </message>
-    <message>
-        <source>Choose a different OSCAR data folder.</source>
-        <translation>Wählen Sie einen anderen OSCAR-Datenordner.</translation>
-    </message>
-    <message>
-        <source>Create new profile</source>
-        <translation>Neues Profil erstellen</translation>
-    </message>
-    <message>
-        <source>Incorrect Password</source>
-        <translation>Inkorrektes Passwort</translation>
-    </message>
-    <message>
-        <source>There was an error deleting the profile directory, you need to manually remove it.</source>
-        <translation>Es gab einen Fehler beim Löschen des Profil-Verzeichnisses. Sie müssen es manuell entfernen.</translation>
-    </message>
-    <message>
-        <source>Enter Password for %1</source>
-        <translation>Passwort eingeben für %1</translation>
-    </message>
-    <message>
-        <source>New Profile</source>
-        <translation>Neues Profil</translation>
-    </message>
-    <message>
-        <source>&amp;Different Folder</source>
-        <translation>&amp;Anderen Ordner</translation>
-    </message>
-    <message>
-        <source>Click here if you didn&apos;t want to start OSCAR.</source>
-        <translation>Klicken Sie hier, wenn Sie OSCAR nicht starten möchten.</translation>
-    </message>
-    <message>
-        <source>&amp;Select User</source>
-        <translation>&amp;Zum ausgewählten Benutzer</translation>
-    </message>
-    <message>
-        <source>You entered an incorrect password</source>
-        <translation>Sie haben ein falsches Passwort eingegeben</translation>
-    </message>
-    <message>
-        <source>Search:</source>
-        <translation>Suche:</translation>
-    </message>
-    <message>
-        <source>Start with the selected user profile.</source>
-        <translation>Beginnen Sie mit dem ausgewählten Benutzerprofil.</translation>
-    </message>
-    <message>
-        <source>Delete Profile</source>
-        <translation>Profil löschen</translation>
-    </message>
-    <message>
-        <source>Select Profile</source>
-        <translation>Wählen Sie ein Profil aus</translation>
-    </message>
-    <message>
-        <source>[version]</source>
-        <translation>(Version)</translation>
-    </message>
-    <message>
-        <source>You entered the password wrong too many times.</source>
-        <translation>Sie haben zu oft das falsche Kennwort eingegeben.</translation>
-    </message>
-    <message>
-        <source>Enter Password</source>
-        <translation>Passwort eingeben</translation>
-    </message>
-    <message>
-        <source>Folder:</source>
-        <translation>Ordner:</translation>
-    </message>
-    <message>
-        <source>You are about to destroy profile &apos;%1&apos;.</source>
-        <translation>Sie sind dabei, das Profil zu zerstören &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>If you&apos;re trying to delete because you forgot the password, you need to delete it manually.</source>
-        <translation>Wenn Sie versuchen das Profil zu löschen, weil Sie Ihr Passwort vergessen haben, müssen Sie es manuell löschen.</translation>
-    </message>
-    <message>
-        <source>You need to enter DELETE in capital letters.</source>
-        <translation>Sie müssen DELETE in Großbuchstaben eingeben.</translation>
-    </message>
-    <message>
-        <source>You entered an Incorrect Password too many times. Exiting!</source>
-        <translation>Sie haben zu oft ein falsches Passwort eingegeben. Verlassen!</translation>
-    </message>
-</context>
-<context>
-    <name>ProgressDialog</name>
-    <message>
-        <source>Abort</source>
-        <translation>Abbrechen</translation>
-    </message>
-</context>
-<context>
-    <name>MinMaxWidget</name>
-    <message>
-        <source>Scaling Mode</source>
-        <translation>Skalierungsmodus</translation>
-    </message>
-    <message>
-        <source>The Maximum Y-Axis value.. Must be greater than Minimum to work.</source>
-        <translation>Um damit zu arbeiten, muss der max. Y-Achsen Wert größer sein als der minimale Wert.</translation>
-    </message>
-    <message>
-        <source>This button resets the Min and Max to match the Auto-Fit</source>
-        <translation>Diese Schaltfläche setzt die Automatische Anpassung für Min. und Max</translation>
-    </message>
-    <message>
-        <source>The Y-Axis scaling mode, &apos;Auto-Fit&apos; for automatic scaling, &apos;Defaults&apos; for settings according to manufacturer, and &apos;Override&apos; to choose your own.</source>
-        <translation>Der Y-Achsen Skalierungsmodus &quot;Automatische Anpassung&quot;, für die automatische Skalierung, sind Vorgaben vom Hersteller. Die &quot;Übersteuerung&quot; können Sie selbst wählen.</translation>
-    </message>
-    <message>
-        <source>The Minimum Y-Axis value.. Note this can be a negative number if you wish.</source>
-        <translation>Wenn Sie es wünschen kann der Y-Achsen-Mindestwert eine negative Zahl sein.</translation>
-    </message>
-    <message>
-        <source>Defaults</source>
-        <translation>Standardwerte</translation>
-    </message>
-    <message>
-        <source>Auto-Fit</source>
-        <translation>Automatische Anpassung</translation>
-    </message>
-    <message>
-        <source>Override</source>
-        <translation>Übersteuerung</translation>
-    </message>
-</context>
-<context>
-    <name>FPIconLoader</name>
-    <message>
-        <source>This Machine Record cannot be imported in this profile.</source>
-        <translation>Dieser Geräte-Datensatz kann in diesem Profil nicht importiert werden.</translation>
-    </message>
-    <message>
-        <source>Import Error</source>
-        <translation>Import Fehler</translation>
-    </message>
-    <message>
-        <source>The Day records overlap with already existing content.</source>
-        <translation>Die Aufzeichnungen dieses Tages überschneiden sich mit bereits vorhandenen Inhalt.</translation>
-    </message>
-</context>
-<context>
-    <name>CMS50Loader</name>
-    <message>
-        <source>Could not get data transmission from oximeter.</source>
-        <translation>Keine Datenübertragung vom Oxymeter möglich.</translation>
-    </message>
-    <message>
-        <source>Please ensure you select &apos;upload&apos; from the oximeter devices menu.</source>
-        <translation>Bitte stellen Sie sicher, dass Sie den&apos;Upload&apos; aus dem Menü des Oxymeter Gerätes auswählt haben. Beim PO400 geht das automatisch.</translation>
-    </message>
-    <message>
-        <source>Could not find the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
-    </message>
-    <message>
-        <source>Could not open the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
-    </message>
-</context>
-<context>
-    <name>CMS50F37Loader</name>
-    <message>
-        <source>Could not find the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
-    </message>
-    <message>
-        <source>Could not open the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
-    </message>
-</context>
-<context>
-    <name>MD300W1Loader</name>
-    <message>
-        <source>Could not find the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht gefunden werden:</translation>
-    </message>
-    <message>
-        <source>Could not open the oximeter file:</source>
-        <translation>Die Oxymeter-Datei konnte nicht geöffnet werden:</translation>
-    </message>
-</context>
-<context>
-    <name>gGraph</name>
-    <message>
-        <source>%1 days</source>
-        <translation>%1 Tage</translation>
-    </message>
-</context>
-<context>
-    <name>SessionBar</name>
-    <message>
-        <source>%1h %2m</source>
-        <translation>%1h %2m</translation>
-    </message>
-    <message>
-        <source>No Sessions Present</source>
-        <translation>Gegenwärtig keine Sitzung</translation>
+        <source>Double click title to pin / unpin
+Click and drag to reorder graphs</source>
+        <translation>Doppelklicken Sie auf den Titel, um ihn anzuschließen / zu entfernen
+Klicken und ziehen Sie, um Diagramme neu zu ordnen</translation>
     </message>
 </context>
 </TS>

@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>TTIA</source>
-        <translation>TTIA</translation>
+        <translation type="vanished">TTIA</translation>
     </message>
     <message>
         <source>Total ramp time</source>
@@ -840,7 +840,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen Toggle</source>
-        <translation>&amp;Przełącznik PełenEkran</translation>
+        <translation type="vanished">&amp;Przełącznik PełenEkran</translation>
     </message>
     <message>
         <source>Show Debug Pane</source>
@@ -1172,7 +1172,7 @@
     </message>
     <message>
         <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation>Tutaj &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;uwagi dot. wydania&lt;/a&gt; dla tej wersji.</translation>
+        <translation type="vanished">Tutaj &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;uwagi dot. wydania&lt;/a&gt; dla tej wersji.</translation>
     </message>
     <message>
         <source>Plus a few &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt;usage notes&lt;/a&gt;, and some important information for Mac users.</source>
@@ -1385,6 +1385,18 @@
     <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
         <translation>Gdy kopie zapasowe są wyłączone lub zaburzone w inny sposób, może to spowodować utratę danych.</translation>
+    </message>
+    <message>
+        <source>No profile has been selected for Import.</source>
+        <translation>Nie wybrano profilu do importu.</translation>
+    </message>
+    <message>
+        <source>The release notes for this version can be found in the About OSCAR menu item.</source>
+        <translation>Notatki o wydaniu są w menu O programie.</translation>
+    </message>
+    <message>
+        <source>&amp;Maximize Toggle</source>
+        <translation>&amp;Przełącznik Maksymalizowania</translation>
     </message>
 </context>
 <context>
@@ -3703,6 +3715,10 @@ Restartować teraz?</translation>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
+    <message>
+        <source>You must create a profile</source>
+        <translation>Musisz utworzyć profil</translation>
+    </message>
 </context>
 <context>
     <name>ProgressDialog</name>
@@ -4885,7 +4901,7 @@ TTIA: %1</translation>
     </message>
     <message>
         <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation>OSCT (%1) wymaga uaktualnienia bazy danych dla %2 %3 %4</translation>
+        <translation type="vanished">OSCT (%1) wymaga uaktualnienia bazy danych dla %2 %3 %4</translation>
     </message>
     <message>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
@@ -5089,7 +5105,7 @@ TTIA: %1</translation>
     </message>
     <message>
         <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation>Ograniczenie oddychania, powodujące spłaszczenie wykresu przepływu.</translation>
+        <translation type="vanished">Ograniczenie oddychania, powodujące spłaszczenie wykresu przepływu.</translation>
     </message>
     <message>
         <source>Vibratory Snore</source>
@@ -5298,7 +5314,7 @@ TTIA: %1</translation>
     </message>
     <message>
         <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation>bezdech który nie może być określony jako obturacyjny lub centralny, z uwagi na zbyt duży wyciek przeszkadzający w procesie klasyfikacji.</translation>
+        <translation type="vanished">bezdech który nie może być określony jako obturacyjny lub centralny, z uwagi na zbyt duży wyciek przeszkadzający w procesie klasyfikacji.</translation>
     </message>
     <message>
         <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
@@ -5614,23 +5630,23 @@ TTIA: %1</translation>
     </message>
     <message>
         <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation>Chcesz żeby OSCAR tam przechowywał dane?</translation>
+        <translation type="vanished">Chcesz żeby OSCAR tam przechowywał dane?</translation>
     </message>
     <message>
         <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation>Jeśli przeprowadzasz aktualizację, nie wpadaj w panikę, po prostu upewnij się, że jest to wskazane w twoim starym folderze danych OSCAR.</translation>
+        <translation type="vanished">Jeśli przeprowadzasz aktualizację, nie wpadaj w panikę, po prostu upewnij się, że jest to wskazane w twoim starym folderze danych OSCAR.</translation>
     </message>
     <message>
         <source>(If you are unsure, just click yes.)</source>
-        <translation>(nie wiesz co, kliknij Tak)</translation>
+        <translation type="vanished">(nie wiesz co, kliknij Tak)</translation>
     </message>
     <message>
         <source>Choose or create new folder for OSCAR data</source>
-        <translation>Wybierz albo stwórz folder danych dla OSCAR</translation>
+        <translation type="vanished">Wybierz albo stwórz folder danych dla OSCAR</translation>
     </message>
     <message>
         <source>Next time you run, you will be asked again.</source>
-        <translation>Przy następnym uruchomieniu zostaniesz zapytany ponownie.</translation>
+        <translation type="vanished">Przy następnym uruchomieniu zostaniesz zapytany ponownie.</translation>
     </message>
     <message>
         <source>As you did not select a data folder, OSCAR will exit.</source>
@@ -5638,11 +5654,11 @@ TTIA: %1</translation>
     </message>
     <message>
         <source>You did not select a directory.</source>
-        <translation>Nie wybrałeś katalogu.</translation>
+        <translation type="vanished">Nie wybrałeś katalogu.</translation>
     </message>
     <message>
         <source>OSCAR will now start with your old one.</source>
-        <translation>OSCAR wystartuje ze starymi.</translation>
+        <translation type="vanished">OSCAR wystartuje ze starymi.</translation>
     </message>
     <message>
         <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
@@ -6380,6 +6396,86 @@ Wiersz %2, kolumna %3</translation>
         <source>You must run the OSCAR Migration Tool</source>
         <translation>Musisz uruchomić narzędzie migracji OSCAR&apos;a</translation>
     </message>
+    <message>
+        <source>OSCAR (%1) needs to upgrade its database for %2 %3 %4</source>
+        <translation>OSCAR (%1) potrzebuje zaktualizować bazę danych dla %2 %3 %4</translation>
+    </message>
+    <message>
+        <source>An apnea that couldn&apos;t be determined as Central or Obstructive.</source>
+        <translation>Bezdech, który nie moze być określony jako centralny czy obturacyjny.</translation>
+    </message>
+    <message>
+        <source>A restriction in breathing from normal, causing a flattening of the flow waveform.</source>
+        <translation>Ograniczenie oddechu, powodujące spłaszczenie wykresu przepływu.</translation>
+    </message>
+    <message>
+        <source>Choose the SleepyHead data folder to migrate</source>
+        <translation>Wybierz folder danych Sleepyhead dop przeniesienia</translation>
+    </message>
+    <message>
+        <source>or CANCEL to skip migration.</source>
+        <translation>lub Skasuj aby pominąć przenoszenie.</translation>
+    </message>
+    <message>
+        <source>The folder you chose does not contain valid SleepyHead data.</source>
+        <translation>Wybrany folder nie zawiera danych Sleepyhead.</translation>
+    </message>
+    <message>
+        <source>You cannot use this folder:</source>
+        <translation>Nie możesz użyć tego folderu:</translation>
+    </message>
+    <message>
+        <source>Choose or create a new folder for OSCAR data</source>
+        <translation>Wybierz albo utwórz nowy folder na dane OSCARa</translation>
+    </message>
+    <message>
+        <source>Migrating </source>
+        <translation>Przenoszę </translation>
+    </message>
+    <message>
+        <source> files</source>
+        <translation> pliki</translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation>od </translation>
+    </message>
+    <message>
+        <source>to </source>
+        <translation>do </translation>
+    </message>
+    <message>
+        <source>OSCAR will set up a folder for your data.</source>
+        <translation>OSCAR przygotuje folder na Twoje dane.</translation>
+    </message>
+    <message>
+        <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
+        <translation>Jeśli używałeś SleepyHead, OSCAR może później skopiować twoje stare dane do tego folderu.</translation>
+    </message>
+    <message>
+        <source>We suggest you use this folder: </source>
+        <translation>Proponujemy użycie tego folderu: </translation>
+    </message>
+    <message>
+        <source>Click Ok to accept this, or No if you want to use a different folder.</source>
+        <translation>Kliknij OK aby zaakceptować, albo Nie jeśli chcesz użyć innego folderu.</translation>
+    </message>
+    <message>
+        <source>Next time you run OSCAR, you will be asked again.</source>
+        <translation>NGdy następny raz uruchomisz OSCARa, będziesz zapytany ponownie.</translation>
+    </message>
+    <message>
+        <source>Migrate SleepyHead Data?</source>
+        <translation>Przenieść dane SleepyHead?</translation>
+    </message>
+    <message>
+        <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
+        <translation>Na następnym ekranie OSCAR poprosi o wybór folderu z danymi SleepyHead</translation>
+    </message>
+    <message>
+        <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
+        <translation>Kliknij [OK] aby przejść do kolejnego ekranu lub [NIE] jeśli nie chcesz używać danych ze SleepyHead.</translation>
+    </message>
 </context>
 <context>
     <name>Report</name>
@@ -6941,15 +7037,15 @@ Wiersz %2, kolumna %3</translation>
     </message>
     <message>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation>Twój aparat podawał stałe ciśnienie %1%2</translation>
+        <translation type="vanished">Twój aparat podawał stałe ciśnienie %1%2</translation>
     </message>
     <message>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation>Ciśnienie było poniżej %1%2 przez %3% czasu.</translation>
+        <translation type="vanished">Ciśnienie było poniżej %1%2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation>Ten aparat podawał stałe %1-%2 %3 powietrza.</translation>
+        <translation type="vanished">Ten aparat podawał stałe %1-%2 %3 powietrza.</translation>
     </message>
     <message>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
@@ -6957,15 +7053,15 @@ Wiersz %2, kolumna %3</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation>EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1%2.</translation>
+        <translation type="vanished">EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1%2.</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
+        <translation type="vanished">IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
+        <translation type="vanished">IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
@@ -6978,6 +7074,30 @@ Wiersz %2, kolumna %3</translation>
     <message>
         <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation>Witaj w OSCAR</translation>
+    </message>
+    <message>
+        <source>Your CPAP machine used a constant %1 %2 of air</source>
+        <translation>Twój aparat podawał stałe ciśnienie %1%2</translation>
+    </message>
+    <message>
+        <source>Your pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Ciśnienie było poniżej %1%2 przez %3% czasu.</translation>
+    </message>
+    <message>
+        <source>Your machine used a constant %1-%2 %3 of air.</source>
+        <translation>Ten aparat podawał stałe %1-%2 %3 powietrza.</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure fixed at %1 %2.</source>
+        <translation>EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1%2.</translation>
+    </message>
+    <message>
+        <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>EPAP (ciśnienie na wydechu) było poniżej %1%2 przez %3% czasu.</translation>
     </message>
 </context>
 <context>
@@ -7032,6 +7152,12 @@ Wiersz %2, kolumna %3</translation>
     <message>
         <source>Clone %1 Graph</source>
         <translation>Wykres klona %1</translation>
+    </message>
+    <message>
+        <source>Double click title to pin / unpin
+Click and drag to reorder graphs</source>
+        <translation>Kliknij dwukrotnie apy przypiąć/odpiąć
+Kliknij i przeciągnij aby zmienić układ wykresów</translation>
     </message>
 </context>
 </TS>

@@ -518,7 +518,7 @@
     </message>
     <message>
         <source>TTIA</source>
-        <translation>TTIA</translation>
+        <translation type="vanished">TTIA</translation>
     </message>
     <message>
         <source>Start</source>
@@ -1513,7 +1513,7 @@
     </message>
     <message>
         <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation>Voici la  &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;note de publication&lt;/a&gt; pour cette version.</translation>
+        <translation type="vanished">Voici la  &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;note de publication&lt;/a&gt; pour cette version.</translation>
     </message>
     <message>
         <source>This software is NOT suitable for medical diagnostics purposes, neither is it fit for CPAP complaince reporting purposes, or ANY other medical use for that matter.</source>
@@ -1657,7 +1657,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen Toggle</source>
-        <translation>&amp;Passer en plein écran</translation>
+        <translation type="vanished">&amp;Passer en plein écran</translation>
     </message>
     <message>
         <source>Please report any bugs you find to SleepyHead&apos;s SourceForge page.</source>
@@ -1850,6 +1850,18 @@
     <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
         <translation>S&apos;il vous plaît notez que cela pourrait entraîner la perte de données graphiques si les sauvegardes internes de OSCAR ont été désactivées.</translation>
+    </message>
+    <message>
+        <source>No profile has been selected for Import.</source>
+        <translation>aucun profile séléctionné pour l&apos;import.</translation>
+    </message>
+    <message>
+        <source>The release notes for this version can be found in the About OSCAR menu item.</source>
+        <translation>Les notes propre a cette version sont disponibles dans menu Apropos</translation>
+    </message>
+    <message>
+        <source>&amp;Maximize Toggle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4422,6 +4434,10 @@ p, li { white-space: pre-wrap; }
         <source>Backups:</source>
         <translation>Sauvegardes:</translation>
     </message>
+    <message>
+        <source>You must create a profile</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgressDialog</name>
@@ -5170,7 +5186,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation>Une restriction respiratoire normale, causant un applatissement de l&apos;onde de flux.</translation>
+        <translation type="vanished">Une restriction respiratoire normale, causant un applatissement de l&apos;onde de flux.</translation>
     </message>
     <message>
         <source>Pat. Trig. Breath</source>
@@ -5250,7 +5266,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You did not select a directory.</source>
-        <translation>Vous n&apos;avez pas séléctioné de répertoire.</translation>
+        <translation type="vanished">Vous n&apos;avez pas séléctioné de répertoire.</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
@@ -5570,7 +5586,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Next time you run, you will be asked again.</source>
-        <translation>Au prochain démarrage, la question vous sera posé de nouveau.</translation>
+        <translation type="vanished">Au prochain démarrage, la question vous sera posé de nouveau.</translation>
     </message>
     <message>
         <source>C-Flex</source>
@@ -6262,7 +6278,7 @@ Début: %2</translation>
     </message>
     <message>
         <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation>Une apnée qui ne peut etre déterminée comme Centrale ou Obstructive a cause de fuites excessive génant l&apos;analyse.</translation>
+        <translation type="vanished">Une apnée qui ne peut etre déterminée comme Centrale ou Obstructive a cause de fuites excessive génant l&apos;analyse.</translation>
     </message>
     <message>
         <source>Pressure</source>
@@ -7641,7 +7657,7 @@ Corporel</translation>
     </message>
     <message>
         <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation>OSCT (%1) doit mettre a jour sa base de donnée pour  %2 %3 %4</translation>
+        <translation type="vanished">OSCT (%1) doit mettre a jour sa base de donnée pour  %2 %3 %4</translation>
     </message>
     <message>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
@@ -7685,19 +7701,19 @@ Corporel</translation>
     </message>
     <message>
         <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation>Voulez-vous que OSCAR utilise ce répertoire  pour stocker ses données ?</translation>
+        <translation type="vanished">Voulez-vous que OSCAR utilise ce répertoire  pour stocker ses données ?</translation>
     </message>
     <message>
         <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation>Si vous upradez, pas d&apos;inquiétude vérifiez juste qe cela pointe sur votre ancien répertoire de donnée d&apos;OSCAR.</translation>
+        <translation type="vanished">Si vous upradez, pas d&apos;inquiétude vérifiez juste qe cela pointe sur votre ancien répertoire de donnée d&apos;OSCAR.</translation>
     </message>
     <message>
         <source>(If you are unsure, just click yes.)</source>
-        <translation>(si vous n&apos;en etes pas sure cliquez oui)</translation>
+        <translation type="vanished">(si vous n&apos;en etes pas sure cliquez oui)</translation>
     </message>
     <message>
         <source>Choose or create new folder for OSCAR data</source>
-        <translation>Choisissez ou créez un nouveau répertoire pour les données de OSCAR</translation>
+        <translation type="vanished">Choisissez ou créez un nouveau répertoire pour les données de OSCAR</translation>
     </message>
     <message>
         <source>As you did not select a data folder, OSCAR will exit.</source>
@@ -7705,7 +7721,7 @@ Corporel</translation>
     </message>
     <message>
         <source>OSCAR will now start with your old one.</source>
-        <translation>OSCAR va démarer avec l&apos;ancien</translation>
+        <translation type="vanished">OSCAR va démarer avec l&apos;ancien</translation>
     </message>
     <message>
         <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
@@ -7734,6 +7750,99 @@ Corporel</translation>
     <message>
         <source>You must run the OSCAR Migration Tool</source>
         <translation>Vous devez utiliser l&apos;outil de migration vers OSCAR</translation>
+    </message>
+    <message>
+        <source>Using </source>
+        <translation>Utilise</translation>
+    </message>
+    <message>
+        <source>, found SleepyHead -
+</source>
+        <translation>, SleepyHead trouvé -</translation>
+    </message>
+    <message>
+        <source>OSCAR (%1) needs to upgrade its database for %2 %3 %4</source>
+        <translation>OSCAR (%1) doit mettre a jour sa base de donnée pour %2 %3 %4</translation>
+    </message>
+    <message>
+        <source>An apnea that couldn&apos;t be determined as Central or Obstructive.</source>
+        <translation>Une apnée ne pouvant etre détérminée comme Centrale ou Obstructive</translation>
+    </message>
+    <message>
+        <source>A restriction in breathing from normal, causing a flattening of the flow waveform.</source>
+        <translation>Une restriction respiratoire normale, causant un applatissement de l&apos;onde de flux.</translation>
+    </message>
+    <message>
+        <source>Choose the SleepyHead data folder to migrate</source>
+        <translation>Choisissez le répertoire de SleepyHead pour la migration</translation>
+    </message>
+    <message>
+        <source>or CANCEL to skip migration.</source>
+        <translation>choisir ANNULER pour ne pas migrer.</translation>
+    </message>
+    <message>
+        <source>The folder you chose does not contain valid SleepyHead data.</source>
+        <translation>Le répertoire ne contient pas de données SleepyHead valide.</translation>
+    </message>
+    <message>
+        <source>You cannot use this folder:</source>
+        <translation>Vous ne pouvez pas utiliser ce répertoire</translation>
+    </message>
+    <message>
+        <source>If you are upgrading, don&apos;t panic, your old data will be migrated later.</source>
+        <translation type="vanished">Si vous upradez, pas d&apos;inquiétude, vos anciennes données seront migrées plus tard.</translation>
+    </message>
+    <message>
+        <source>Choose or create a new folder for OSCAR data</source>
+        <translation>Choisissez ou créez un nouveau répertoire pour les données de OSCAR</translation>
+    </message>
+    <message>
+        <source>Migrating </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OSCAR will set up a folder for your data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We suggest you use this folder: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click Ok to accept this, or No if you want to use a different folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next time you run OSCAR, you will be asked again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Migrate SleepyHead Data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8415,15 +8524,15 @@ Corporel</translation>
     </message>
     <message>
         <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation>Votre appareil PPC vous explose avec une pression d&apos;air constante de %1%2</translation>
+        <translation type="vanished">Votre appareil PPC vous explose avec une pression d&apos;air constante de %1%2</translation>
     </message>
     <message>
         <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation>Votre pression était en dessous de %1%2 pour %3% du temps.</translation>
+        <translation type="vanished">Votre pression était en dessous de %1%2 pour %3% du temps.</translation>
     </message>
     <message>
         <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation>Votre appareil vous explose avec une pression d&apos;air constante de %1-%2 %3 .</translation>
+        <translation type="vanished">Votre appareil vous explose avec une pression d&apos;air constante de %1-%2 %3 .</translation>
     </message>
     <message>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
@@ -8431,15 +8540,15 @@ Corporel</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation>Votre pression EPAP s&apos;est fixé %1%2.</translation>
+        <translation type="vanished">Votre pression EPAP s&apos;est fixé %1%2.</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>Votre pression IPAP était en dessous de %1%2 pendant %3% du temps.</translation>
+        <translation type="vanished">Votre pression IPAP était en dessous de %1%2 pendant %3% du temps.</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation>Votre pression EPAP était en dessous de %1%2 pendant %3% du temps.</translation>
+        <translation type="vanished">Votre pression EPAP était en dessous de %1%2 pendant %3% du temps.</translation>
     </message>
     <message>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
@@ -8464,6 +8573,30 @@ Corporel</translation>
     <message>
         <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation>Bienvenue a O.S.C.A.R. (Open Source CPAP Analysis Reporter)</translation>
+    </message>
+    <message>
+        <source>Your CPAP machine used a constant %1 %2 of air</source>
+        <translation>Votre appareil PPC a utilisée une pression d&apos;air constante de %1%2</translation>
+    </message>
+    <message>
+        <source>Your pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Votre pression était en dessous de %1 %2 pour %3% du temps.</translation>
+    </message>
+    <message>
+        <source>Your machine used a constant %1-%2 %3 of air.</source>
+        <translation>Votre appareil a utilisée une pression d&apos;air constante de %1 %2 %3</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure fixed at %1 %2.</source>
+        <translation>Votre pression EPAP s&apos;est fixé %1 %2.</translation>
+    </message>
+    <message>
+        <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Votre pression IPAP était en dessous de %1 %2 pendant %3% du temps.</translation>
+    </message>
+    <message>
+        <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
+        <translation>Votre pression EPAP était en dessous de %1 %2 pendant %3% du temps.</translation>
     </message>
 </context>
 <context>
@@ -8518,6 +8651,12 @@ Corporel</translation>
     <message>
         <source>100% zoom level</source>
         <translation>Zoom à 100%</translation>
+    </message>
+    <message>
+        <source>Double click title to pin / unpin
+Click and drag to reorder graphs</source>
+        <translation>Double clic sur le titre pour épingler/décrocher
+cliquer et glisser pour réoganiser les graphiques</translation>
     </message>
 </context>
 </TS>
