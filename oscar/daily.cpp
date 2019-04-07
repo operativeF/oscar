@@ -179,7 +179,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     ChannelID cpapcodes[] = {
         CPAP_FlowRate, CPAP_MaskPressure, CPAP_Pressure, CPAP_Leak, CPAP_Snore,  CPAP_FLG, CPAP_RespRate,
         CPAP_TidalVolume, CPAP_MinuteVent,CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
-        CPAP_IE, ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
+      /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
     };
 
     int cpapsize = sizeof(cpapcodes) / sizeof(ChannelID);
@@ -338,7 +338,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     //graphlist[schema::channel[CPAP_TidalVolume].code()]->AddLayer(AddCPAP(new gLineChart("TidalVolume2", square)));
     graphlist[schema::channel[CPAP_FLG].code()]->AddLayer(new gLineChart(CPAP_FLG, true));
     //graphlist[schema::channel[CPAP_RespiratoryEvent].code()]->AddLayer(AddCPAP(new gLineChart(CPAP_RespiratoryEvent, true)));
-    graphlist[schema::channel[CPAP_IE].code()]->AddLayer(lc=new gLineChart(CPAP_IE, false));
+//    graphlist[schema::channel[CPAP_IE].code()]->AddLayer(lc=new gLineChart(CPAP_IE, false));      // this should be inverse of supplied value
     graphlist[schema::channel[CPAP_Te].code()]->AddLayer(lc=new gLineChart(CPAP_Te, false));
     graphlist[schema::channel[CPAP_Ti].code()]->AddLayer(lc=new gLineChart(CPAP_Ti, false));
     //lc->addPlot(CPAP_Test2,COLOR:DarkYellow,square);
@@ -1148,7 +1148,7 @@ QString Daily::getStatisticsInfo(Day * day)
     ChannelID chans[]={
         CPAP_Pressure,CPAP_EPAP,CPAP_IPAP,CPAP_PS,CPAP_PTB,
         CPAP_MinuteVent, CPAP_RespRate, CPAP_RespEvent,CPAP_FLG,
-        CPAP_Leak, CPAP_LeakTotal, CPAP_Snore,CPAP_IE,CPAP_Ti,CPAP_Te, CPAP_TgMV,
+        CPAP_Leak, CPAP_LeakTotal, CPAP_Snore,  /*  CPAP_IE,   */  CPAP_Ti,CPAP_Te, CPAP_TgMV,
         CPAP_TidalVolume, OXI_Pulse, OXI_SPO2, POS_Inclination, POS_Orientation
     };
     int numchans=sizeof(chans)/sizeof(ChannelID);
