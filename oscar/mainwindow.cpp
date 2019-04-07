@@ -2353,7 +2353,7 @@ void MainWindow::GenerateStatistics()
 void MainWindow::JumpDaily()
 {
     qDebug() << "Set current Widget to Daily";
-    sleep(3);
+//    sleep(3);
     ui->tabWidget->setCurrentWidget(daily);
 }
 void MainWindow::JumpOverview()
