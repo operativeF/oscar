@@ -1420,7 +1420,7 @@ void gGraphView::paintGL()
             qDebug() << "m_emptyimage is NULL";
         else
             qDebug() << "m_emptyimage is not NULL";
-        sleep(3);
+//        sleep(3);
 
         if (! this->m_emptyimage.isNull()) {
             int x = width()/2 - this->m_emptyimage.width()/2;
