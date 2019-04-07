@@ -98,7 +98,7 @@ RC_ICONS = ./icons/logo.ico
 
 macx {
   QMAKE_TARGET_BUNDLE_PREFIX = "org.The-OSCAR-Team"
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.12
+# QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.12
   LIBS             += -lz
   ICON              = icons/OSCAR.icns
 } else:haiku {
