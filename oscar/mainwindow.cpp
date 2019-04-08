@@ -2224,7 +2224,7 @@ void MainWindow::on_actionImport_ZEO_Data_triggered()
 {
     QFileDialog w;
     w.setFileMode(QFileDialog::ExistingFiles);
-    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    w.setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     w.setOption(QFileDialog::ShowDirsOnly, false);
     w.setOption(QFileDialog::DontUseNativeDialog, true);
     w.setNameFilters(QStringList("Zeo CSV File (*.csv)"));
@@ -2308,7 +2308,7 @@ void MainWindow::on_actionImport_Somnopose_Data_triggered()
 {
     QFileDialog w;
     w.setFileMode(QFileDialog::ExistingFiles);
-    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    w.setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     w.setOption(QFileDialog::ShowDirsOnly, false);
     w.setOption(QFileDialog::DontUseNativeDialog, true);
     w.setNameFilters(QStringList("Somnopause CSV File (*.csv)"));
