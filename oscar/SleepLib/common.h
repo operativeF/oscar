@@ -134,6 +134,7 @@ const QString STR_TestBuild = "";
 
 const QString getAppName();
 const QString getDeveloperName();
+const QString getDeveloperDomain();
 const QString getModifiedAppData();
 
 void initializeStrings();
@@ -166,6 +167,7 @@ const QString STR_PREF_Language = "Language";
 
 const QString STR_AppName = "OSCAR";
 const QString STR_DeveloperName = "OSCAR_Team";
+const QString STR_DeveloperDomain = "oscar-team.org";
 const QString STR_AppData = "OSCAR_Data";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

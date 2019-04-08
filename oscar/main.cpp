@@ -245,6 +245,7 @@ int main(int argc, char *argv[]) {
     QString homeDocs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/";
     QCoreApplication::setApplicationName(getAppName());
     QCoreApplication::setOrganizationName(getDeveloperName());
+    QCoreApplication::setOrganizationDomain(getDeveloperDomain());
 
     QSettings settings;
     GFXEngine gfxEngine = (GFXEngine)qMin((unsigned int)settings.value(GFXEngineSetting, (unsigned int)GFX_OpenGL).toUInt(), (unsigned int)MaxGFXEngine);

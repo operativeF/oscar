@@ -48,6 +48,11 @@ const QString getDeveloperName()
     return STR_DeveloperName;
 }
 
+const QString getDeveloperDomain()
+{
+    return STR_DeveloperDomain;
+}
+
 const QString getAppName()
 {
     QString name = STR_AppName;
