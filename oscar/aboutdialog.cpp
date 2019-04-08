@@ -46,6 +46,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     setWindowTitle(tr("About OSCAR"));
     setMinimumSize(QSize(400,400));
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     connect(ui->closeButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
 
     int idx=AppSetting->showAboutDialog();

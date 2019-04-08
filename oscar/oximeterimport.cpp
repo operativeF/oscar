@@ -35,6 +35,7 @@ OximeterImport::OximeterImport(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(tr("Oximeter Import Wizard"));
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     ui->stackedWidget->setCurrentIndex(0);
     ui->retryButton->setVisible(false);
     ui->stopButton->setVisible(false);

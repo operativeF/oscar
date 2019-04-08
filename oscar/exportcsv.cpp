@@ -26,6 +26,7 @@ ExportCSV::ExportCSV(QWidget *parent) :
     ui->setupUi(this);
     ui->rb1_Summary->setChecked(true);
     ui->quickRangeCombo->setCurrentIndex(0);
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     // Set Date controls locale to 4 digit years
     QLocale locale = QLocale::system();
