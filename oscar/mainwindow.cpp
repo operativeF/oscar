@@ -138,6 +138,9 @@ void MainWindow::SetupGUI()
     ui->overviewButton->setDisabled(true);
     ui->statisticsButton->setDisabled(true);
     ui->importButton->setDisabled(true);
+#ifdef helpless
+    ui->helpButton->setVisible(false);
+#endif
 
     m_inRecalculation = false;
     m_restartRequired = false;
