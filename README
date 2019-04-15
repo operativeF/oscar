@@ -19,6 +19,8 @@ The help modules are libqt5help5, qttools5-dev and qttools5-dev-tools
 
 Qt5.7 SDK without help is possible (for Debian Stretch)
 
+All systems need qtcreator or qttools5-dev-tools
+
 All systems need qt5-default, libqt5serialport5, libqt5serailport5-dev and libqt5opengl5-dev
 Linux also needs libudev-dev and zlib1g-dev
 
@@ -34,7 +36,7 @@ Recommend shadow building to not cruft up the source code folder:
 cd ..
 mkdir build
 cd build
-qmake ../oscar-code/OSCAR_QT.pro 
+qmake ../OSCAR-code/OSCAR_QT.pro 
 make
 
 You may need to add a -spec option to qmake to suit your platform. 
