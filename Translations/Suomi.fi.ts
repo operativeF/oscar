@@ -35,14 +35,6 @@
         <translation>Sulje</translation>
     </message>
     <message>
-        <source>Build Date: %1</source>
-        <translation type="obsolete">Käännöspäivä: %1</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="obsolete">Graafinen järjestelmä: %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/aboutdialog.cpp" line="43"/>
         <source>Show data folder</source>
         <translation>Näytä tietojen kansio</translation>
@@ -68,10 +60,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="vanished">Olen pahoillani, muutoslokia ei löydy.</translation>
-    </message>
-    <message>
         <location filename="../oscar/aboutdialog.cpp" line="123"/>
         <source>OSCAR v%1</source>
         <translation>Oscar v%1</translation>
@@ -90,10 +78,6 @@
         <location filename="../oscar/aboutdialog.cpp" line="139"/>
         <source>To see if the license text is available in your language, see %1.</source>
         <translation>Nähdäksesi lisenssitekstin omalla kielelläsi, katso %1.</translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="obsolete">Tietoja Oscarista</translation>
     </message>
 </context>
 <context>
@@ -145,26 +129,14 @@
         <translation>Siirry edelliseen päivään</translation>
     </message>
     <message>
-        <source>Prev</source>
-        <translation type="vanished">Edellinen</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="551"/>
         <source>Show or hide the calender</source>
         <translation>Näytä tai piilota kalenteri</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="614"/>
         <source>Go to the next day</source>
         <translation>Siirry seuraavaan päivään</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation type="vanished">Seuraava</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="674"/>
@@ -198,17 +170,9 @@
         <translation> i </translation>
     </message>
     <message>
-        <source>Ctrl+I</source>
-        <translation type="vanished">Ctrl+I</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="1066"/>
         <source>B</source>
         <translation>B</translation>
-    </message>
-    <message>
-        <source>Ctrl+B</source>
-        <translation type="vanished">Ctrl+B</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1081"/>
@@ -240,10 +204,6 @@
         <location filename="../oscar/daily.ui" line="1195"/>
         <source>Zombie</source>
         <translation>Zombie</translation>
-    </message>
-    <message>
-        <source>I&apos;m feeling...</source>
-        <translation type="vanished">Tunnen...</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1208"/>
@@ -299,10 +259,6 @@
         <location filename="../oscar/daily.ui" line="1579"/>
         <source>Show/hide available graphs.</source>
         <translation>Näytä/piilota graafit.</translation>
-    </message>
-    <message>
-        <source>Drop down this list to show/hide available graphs.</source>
-        <translation type="vanished">Pudota alas tämä lista näyttääksesi/piilottaaksesi</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="220"/>
@@ -375,10 +331,6 @@
         <translation>CPAP käyttöjaksot</translation>
     </message>
     <message>
-        <source>Oximetery Sessions</source>
-        <translation type="vanished">Oksimetrin käyttöjaksot</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="864"/>
         <source>Sleep Stage Sessions</source>
         <translation>Unen tilojen jaksot</translation>
@@ -392,10 +344,6 @@
         <location filename="../oscar/daily.cpp" line="872"/>
         <source>Unknown Session</source>
         <translation>Tuntemattomat käyttöjaksot</translation>
-    </message>
-    <message>
-        <source>One or more waveform record for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="vanished">Yhdessä tai useammassa tämän käyttöjakson aaltomuototietuesssa oli korruptoitunutta tietoa. Joku aaltomuodon pisteet eivät sovi oikein.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="942"/>
@@ -433,10 +381,6 @@
         <translation>Tarjolla on vain rajoitettu määrä tietoa. Tämä päivä sisältää vain yhteenvetotiedot.</translation>
     </message>
     <message>
-        <source>TTIA</source>
-        <translation type="vanished">TTIA</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1238"/>
         <source>Total ramp time</source>
         <translation>Ramp kokonaisaika</translation>
@@ -470,18 +414,6 @@
         <location filename="../oscar/daily.cpp" line="1536"/>
         <source>&quot;Nothing&apos;s here!&quot;</source>
         <translation>&quot;Täällä ei ole mitään!&quot;</translation>
-    </message>
-    <message>
-        <source>Bob is bored with this days lack of data.</source>
-        <translation type="vanished">Bob on kyllästynyt tämän päivän tietojen puuttumiseen.</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation type="vanished">Piilota kaikki tapahtumat</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation type="vanished">Näytä kaikki tapahtumat</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1068"/>
@@ -539,14 +471,6 @@
         <translation>Happisaturaation vertailukohta</translation>
     </message>
     <message>
-        <source>PAP Mode: %1&lt;br/&gt;</source>
-        <translation type="vanished">PAP-moodi: %1&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>This day has missing pressure, mode and settings data.</source>
-        <translation type="vanished">Tältä päivältä puuttuu paine, tila ja asetustiedot.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1145"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
@@ -557,10 +481,6 @@
         <translation>Tilastot</translation>
     </message>
     <message>
-        <source>This day just contains summary data, only limited information is available .</source>
-        <translation type="vanished">Tämä päivä sisältää yhteenvetotiedot, saatavilla vain rajoitettua tietoa. </translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1222"/>
         <source>Total time in apnea</source>
         <translation>Apnean kokonaisaika</translation>
@@ -569,14 +489,6 @@
         <location filename="../oscar/daily.cpp" line="1232"/>
         <source>Time over leak redline</source>
         <translation>Ohivuodon aika</translation>
-    </message>
-    <message>
-        <source>Sleep</source>
-        <translation type="vanished">Nukahtaminen</translation>
-    </message>
-    <message>
-        <source>Wake</source>
-        <translation type="vanished">Herääminen</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1428"/>
@@ -614,10 +526,6 @@
         <translation>TIILI :(</translation>
     </message>
     <message>
-        <source>Sorry, your machine only provides compliance data.</source>
-        <translation type="vanished">Sinun laitteesi antaa vain hoidon hyvyystietoja.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1518"/>
         <source>Complain to your Equipment Provider!</source>
         <translation>Reklamoi laitteesi edustajalle!</translation>
@@ -641,14 +549,6 @@
         <location filename="../oscar/daily.cpp" line="2135"/>
         <source>Bookmark at %1</source>
         <translation>Kirjanmerkki paikassa %1</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation type="vanished">Näytä kaikki kaaviot</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation type="vanished">Piilota kaikki kaaviot</translation>
     </message>
 </context>
 <context>
@@ -763,14 +663,6 @@
         <translation>Räätälöity</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>SleepyHead_</source>
-        <translation type="vanished">SleepyHead_</translation>
-    </message>
-    <message>
         <location filename="../oscar/exportcsv.cpp" line="72"/>
         <source>OSCAR_</source>
         <translation>OSCAR_</translation>
@@ -866,14 +758,6 @@
         <source>%1% </source>
         <translation>%1% </translation>
     </message>
-    <message>
-        <source> Avg</source>
-        <translation type="obsolete"> Keskiarvo</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation type="vanished"> %1%</translation>
-    </message>
 </context>
 <context>
     <name>FPIconLoader</name>
@@ -904,10 +788,6 @@
         <location filename="../oscar/help.ui" line="92"/>
         <source>Hide this message</source>
         <translation>Piilota tämä viesti</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="198"/>
@@ -991,21 +871,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="942"/>
         <source>&amp;Statistics</source>
         <translation>Tila&amp;stot</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;This is pre-release software, some parts of this program may not yet function as intended.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Varoitus: &lt;/span&gt;Tämä on ohjelman esiversio. Jotkut tämän ohjelman osat eivät ehkä toimi tarkoitetulla tavalla.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="996"/>
@@ -1026,18 +894,6 @@
         <location filename="../oscar/mainwindow.ui" line="1020"/>
         <source>Date Range</source>
         <translation>Päivien väli</translation>
-    </message>
-    <message>
-        <source>&amp;Help Browser</source>
-        <translation type="obsolete">O&amp;hjeselain</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>qrc:/docs/index.html</source>
-        <translation type="vanished">qrc:/docs/index.html</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1391"/>
@@ -1106,10 +962,6 @@
         <translation>Raportoi uutinen</translation>
     </message>
     <message>
-        <source>Purge Oximetery Data</source>
-        <translation type="vanished">Puhdista oksimetrin tiedot</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2888"/>
         <source>Rebuild CPAP Data</source>
         <translation>Rakenna CPAP tiedot uudelleen</translation>
@@ -1118,10 +970,6 @@
         <location filename="../oscar/mainwindow.ui" line="2909"/>
         <source>&amp;Import Data</source>
         <translation>&amp;Tuo tietoja</translation>
-    </message>
-    <message>
-        <source>Shift+F2</source>
-        <translation type="vanished">Vaihto+F2</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2917"/>
@@ -1154,10 +1002,6 @@
         <translation>Vie katselmoitavaksi</translation>
     </message>
     <message>
-        <source>Report a Bug</source>
-        <translation type="obsolete">Ilmoita virhe</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="103"/>
         <source>E&amp;xit</source>
         <translation>&amp;Poistu</translation>
@@ -1173,17 +1017,9 @@
         <translation>Näytä &amp;Päivittäin</translation>
     </message>
     <message>
-        <source>F5</source>
-        <translation type="vanished">F5</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2940"/>
         <source>View &amp;Overview</source>
         <translation>Näytä &amp;Yleiskatsaus</translation>
-    </message>
-    <message>
-        <source>F6</source>
-        <translation type="vanished">F6</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2948"/>
@@ -1191,34 +1027,14 @@
         <translation>Näytä Ter&amp;vetuloa</translation>
     </message>
     <message>
-        <source>F4</source>
-        <translation type="vanished">F4</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2956"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <source>Ctrl+Tab</source>
-        <translation type="vanished">Ctrl+Tab</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2967"/>
         <source>Use &amp;AntiAliasing</source>
         <translation>Käytä &amp;reunojen pehmennys</translation>
-    </message>
-    <message>
-        <source>&amp;About SleepyHead</source>
-        <translation type="vanished">Tietoj&amp;a SleepyHeadista</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen Toggle</source>
-        <translation type="vanished">Koko&amp;ruutu</translation>
-    </message>
-    <message>
-        <source>F11</source>
-        <translation type="vanished">F11</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2991"/>
@@ -1231,26 +1047,14 @@
         <translation>&amp;Palauta kaaviot alkutilaan</translation>
     </message>
     <message>
-        <source>Check for &amp;Updates</source>
-        <translation type="vanished">Päivitysten tarkist&amp;us</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3004"/>
         <source>Take &amp;Screenshot</source>
         <translation>&amp;Ota kuvaruudunkaappaus</translation>
     </message>
     <message>
-        <source>F12</source>
-        <translation type="vanished">F12</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3012"/>
         <source>O&amp;ximetry Wizard</source>
         <translation>O&amp;ksimetrivelho</translation>
-    </message>
-    <message>
-        <source>F7</source>
-        <translation type="vanished">F7</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3020"/>
@@ -1266,10 +1070,6 @@
         <location filename="../oscar/mainwindow.ui" line="3154"/>
         <source>Daily Calendar</source>
         <translation>Päivittäinen kalenteri</translation>
-    </message>
-    <message>
-        <source>F9</source>
-        <translation type="vanished">F9</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3162"/>
@@ -1317,17 +1117,9 @@
         <translation>Oikea &amp;Sivuikkuna</translation>
     </message>
     <message>
-        <source>Ctrl+L</source>
-        <translation type="vanished">Ctrl+L</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3140"/>
         <source>Daily Sidebar</source>
         <translation>Päivittäinen sivupalkki</translation>
-    </message>
-    <message>
-        <source>F8</source>
-        <translation type="vanished">F8</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3069"/>
@@ -1370,10 +1162,6 @@
         <translation>Poista oksimetrin tiedot</translation>
     </message>
     <message>
-        <source>F10</source>
-        <translation type="vanished">F10</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3072"/>
         <location filename="../oscar/mainwindow.ui" line="3075"/>
         <source>View Statistics</source>
@@ -1388,10 +1176,6 @@
         <location filename="../oscar/mainwindow.ui" line="3088"/>
         <source>Import RemStar &amp;MSeries Data</source>
         <translation>Tuo RemStar &amp;MSeries tietoja</translation>
-    </message>
-    <message>
-        <source>&amp;Support SleepyHead Development</source>
-        <translation type="vanished">Tue &amp;SleepyHeadin kehittämistä</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3093"/>
@@ -1435,30 +1219,10 @@
         <translation>Tietoj&amp;a</translation>
     </message>
     <message>
-        <source>Loading Data</source>
-        <translation type="vanished">Ladataan tietoja</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="675"/>
         <location filename="../oscar/mainwindow.cpp" line="1901"/>
         <source>Please wait, importing from backup folder(s)...</source>
         <translation>Odota. Tietoja tuodaan varmuuskopiokansioista...</translation>
-    </message>
-    <message>
-        <source>Please wait, scanning for CPAP data cards...</source>
-        <translation type="vanished">Odota. Etsitään CPAP-kortteja</translation>
-    </message>
-    <message>
-        <source>When reporting bugs, please make sure to supply the SleepyHead version number, operating system details and CPAP machine model.</source>
-        <translation type="vanished">Jos aiot raportoida ohjelmavirheistä, varmistu, että sinulla on uusin SleepyHeadin versio. Ilmoita käyttöjärjestelmän yksityiskohdat ja CPAP-laitteen malli.</translation>
-    </message>
-    <message>
-        <source>Make sure you keep your SleepyHead data folder backed up when trying testing versions.</source>
-        <translation type="obsolete">Varmista, että Oscarin tiedot on varmuuskopioitu ennen kuin kokeilet testiversioita.</translation>
-    </message>
-    <message>
-        <source>Make sure you&apos;re willing and able to supply a .zip of your CPAP data or a crash report before you think about filing a bug report.</source>
-        <translation type="obsolete">Varmista että pystyt lähettämään zip-tiedoston CPAP tiedoista tai kaatumisraportin ennen kuin raportoit virheistä.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="620"/>
@@ -1481,14 +1245,6 @@
         <translation>CPAP-tietojen sijainti</translation>
     </message>
     <message>
-        <source>Please wait, launching file dialog...</source>
-        <translation type="vanished">Odota tiedosto-ikkunaa</translation>
-    </message>
-    <message>
-        <source>No CPAP data card detected, launching file dialog...</source>
-        <translation type="vanished">CPAP-tietojen SD-korttia ei löytynyt. Ladataan tiedostoikkuna.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="917"/>
         <source>Please remember to point the importer at the root folder or drive letter of your data-card, and not a subfolder.</source>
         <translation>Tietojen tuonnissa muista osoittaa SD-kortin juurikansioon eikä alikansioon.</translation>
@@ -1509,30 +1265,14 @@
         <translation>Tuodaan tietoja</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Tervetuloa SleepyHeadiin</translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Tietoja SleepyHeadista</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1071"/>
         <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
         <translation>Tämä ohjelma on tehty auttaakseen sinua CPAP-laitteiden keräämien tietojen näyttämiseen. Sitä käytetään erilaisten unihäiriöiden hoitoon.</translation>
     </message>
     <message>
-        <source>SleepyHead has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation type="vanished">SleepHeadin on suunnitellut ohjelmistosuunnittelija henkilökohtaisella unihäiriökokemuksella ja muotoiltu monien testaajien avustuksella samanlaisissa tilanteissa.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1075"/>
         <source>This is a beta release, some features may not yet behave as expected.</source>
         <translation>Tämä on betaversio. Muutamat ominaisuudet eivät toimi vielä oletetulla tavalla.</translation>
-    </message>
-    <message>
-        <source>Please report any bugs you find to SleepyHead&apos;s SourceForge page.</source>
-        <translation type="vanished">Ole hyvä ja raportoi kaikista löytämistäsi bugeista SleepyHeadin SourceForge -sivulla.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1078"/>
@@ -1595,17 +1335,9 @@
         <translation>(Se ei tue SSL-salausta. Ei ole hyvä idea kirjoittaa salasanojasi ja henkilökohtaisia tietojasi mihinkään.)</translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s &lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;Project Website&lt;/a&gt; on SourceForge&lt;br/&gt;</source>
-        <translation type="vanished">SleepyHeadin &lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;Projektin WWW-sivusto&lt;/a&gt; SourceForgessa&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1104"/>
         <source>Further Information</source>
         <translation>Lisätiedot</translation>
-    </message>
-    <message>
-        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation type="vanished">Tässä ovat &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;julkaisutiedot&lt;/a&gt; tälle versiolle.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1108"/>
@@ -1633,17 +1365,9 @@
         <translation>Tekijänoikeudet (c):</translation>
     </message>
     <message>
-        <source>&amp;copy;2011-2014</source>
-        <translation type="vanished">&amp;copy;2011-2014</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1125"/>
         <source>License:</source>
         <translation>Lisenssi:</translation>
-    </message>
-    <message>
-        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License&lt;/a&gt;.</source>
-        <translation type="vanished">Tämä sovellus on julkaistu lisenssillä &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1129"/>
@@ -1656,10 +1380,6 @@
         <translation>Tämä &lt;font color=&apos;red&apos;&gt;&lt;u&gt;EI OLE&lt;/u&gt;&lt;/font&gt; lääketieteellinen ohjelmisto. Tämä sovellus on enemmän tietojen näyttäjä, eikä takaa minkään laskelmien tai tietojen näyttämisen tarpeellista oikeellisuutta.</translation>
     </message>
     <message>
-        <source>The author will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation type="vanished">Ohjelman tekijä EI OLE vastuussa mistään mitä käyttäjä aiheuttaa ohjelmalla itselleen tai toisille väärinkäyttämällä tätä ohjelmaa.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1135"/>
         <source>Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.</source>
         <translation>Lääkärisi tulee olla aina ensisijainen ja paras lähde ohjeille sinun terveytesi hoitajana.</translation>
@@ -1668,26 +1388,6 @@
         <location filename="../oscar/mainwindow.cpp" line="1137"/>
         <source>*** &lt;u&gt;Use at your own risk&lt;/u&gt; ***</source>
         <translation>*** &lt;u&gt;Käytät tätä ohjelmaa omalla vastuullasi&lt;/u&gt; ***</translation>
-    </message>
-    <message>
-        <source>Loading</source>
-        <translation type="vanished">Lataa</translation>
-    </message>
-    <message>
-        <source>Revision:</source>
-        <translation type="vanished">Versio:</translation>
-    </message>
-    <message>
-        <source>branch</source>
-        <translation type="vanished">haara</translation>
-    </message>
-    <message>
-        <source>Build Date: %1 %2</source>
-        <translation type="vanished">Käännöspäivä: %1 %2</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="vanished">Graafinen järjestelmä: %1</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2484"/>
@@ -1705,30 +1405,14 @@
         <translation>XML Tiedostot (*.xml)</translation>
     </message>
     <message>
-        <source>Are you sure you want to rebuild all CPAP data for the following machine:</source>
-        <translation type="vanished">Haluatko varmasti rakentaa uudelleen kaikki CPAP-tiedot seuraavalle laitteelle:</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="234"/>
         <source>Help Browser</source>
         <translation>Apua selain</translation>
     </message>
     <message>
-        <source>&amp;copy;2011-2018</source>
-        <translation type="obsolete">&amp;copy;2011-2018</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1263"/>
         <source>Please open a profile first.</source>
         <translation>Ole hyvä ja avaa ensin profiili.</translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if SleepyHead&apos;s internal backups have been disabled or interfered with in any way.</source>
-        <translation type="obsolete">Huomaa, että jos Oscarin sisäinen varmistus on pois päältä tai tavalla tai toisella estetty, se saattaa aiheuttaa kaaviotietojen menetystä.</translation>
-    </message>
-    <message>
-        <source>For some reason, SleepyHead does not have internal backups for the following machine:</source>
-        <translation type="vanished">Joidenkin syiden takia SleepyHeadilla ei ole sisäisiä varmuuskopioita seuraaville laitteille:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1888"/>
@@ -1741,34 +1425,14 @@
         <translation>Haluatko varmasti tehdä tämän?</translation>
     </message>
     <message>
-        <source>A file permission error or simillar screwed up the purge process, you will have to delete the following folder manually:</source>
-        <translation type="obsolete">Tiedoston oikeusongelma tai vastaava estää puhdistusta, joudut käsin poistamaan seuraavan hakemiston: </translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1904"/>
         <source>Because there are no internal backups to rebuild from, you will have to restore from your own.</source>
         <translation>Sisäistä varmuuskopiota ei löydy, joudut palauttamaan käsin.</translation>
     </message>
     <message>
-        <source>James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson.</source>
-        <translation type="vanished">James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson.</translation>
-    </message>
-    <message>
-        <source>Arie Klerk (Dutch), Steffen Reitz and Marc Stephan (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish) and others I&apos;ve still to add here.</source>
-        <translation type="vanished">Arie Klerk (Dutch), Steffen Reitz and Marc Stephan (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish) ja muut, jotka minä lisään vielä tähän.</translation>
-    </message>
-    <message>
-        <source>Special thanks to Pugsy and Robysue from &lt;a href=&apos;http://cpaptalk.com&apos;&gt;CPAPTalk&lt;/a&gt; for their help with documentation and tutorials, as well as everyone who helped out by testing and sharing their CPAP data.</source>
-        <translation type="vanished">Erityiset kiitokset Pugsylle ja Robysuelle &lt;a href=&apos;http://cpaptalk.com&apos;&gt;CPAPTalkissa&lt;/a&gt; heidän avustaan dokumentoinnissa ja ohjeiden teossa, kuten myös kaikille, jotka auttoivat testauksessa ja jakoivat heidän CPAP-tietojaan.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1905"/>
         <source>Would you like to import from your own backups now? (you will have no data visible for this machine until you do)</source>
         <translation>Haluatko tuoda sinun omat varmuuskopiosi nyt? (Sinula ei ole yhtään tietoja näkyvillä tälle laitteelle, kunnes teet sen)</translation>
-    </message>
-    <message>
-        <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; SleepyHead&apos;s machine database for the following machine:</source>
-        <translation type="vanished">Olet &lt;font size=+2&gt;hävittämässä&lt;/font&gt; SleepyHeadin koneen tietokannan seuraavalle laitteelle:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1943"/>
@@ -1814,30 +1478,6 @@
         <location filename="../oscar/mainwindow.cpp" line="2446"/>
         <source>Select the day with valid oximetry data in daily view first.</source>
         <translation>Valitse päivä joka sisältää oksimetritietoa päivittäisessä näytössä.</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="vanished">Tekijänoikeudet</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Warning:&lt;/b&gt; This is a pre-release build, and may at times show unstable behaviour. It is intended for testing purposes.</source>
-        <translation type="vanished">&lt;b&gt;Varoitus:&lt;/b&gt; Tämä on esiversio ohjelmasta ja voi milloin vain toimia epävakaasti. Se on tarkoitettu vain testaustarkoituksiin.</translation>
-    </message>
-    <message>
-        <source>If you experience CPAP chart/data errors after upgrading to a new version, try rebuilding your CPAP database from the Data menu.</source>
-        <translation type="vanished">Jos tulostuvissa kaavioissa tai tiedoissa on virheitä SleepyHeadin päivityksen jälkeen, kokeile CPAP-datatietojen uudelleenrakentamista Tiedot-valikossa.</translation>
-    </message>
-    <message>
-        <source>Please ensure you are running the latest version before reporting any bugs.</source>
-        <translation type="vanished">Varmistu, että käytät ohjelman uusinta versiota ennenkuin raportoit bugista.</translation>
-    </message>
-    <message>
-        <source>Think twice before filing a bug report that already exists, PLEASE search first, as your likely not the first one to notice it!</source>
-        <translation type="vanished">Mieti kahdesti, ennenkuin täytät bugiraportin, jollainen on jo olemassa. ETSI ensin, sillä todnenäköisesti et ole ensimmäinen tuon bugin löytäjä!</translation>
-    </message>
-    <message>
-        <source>This red message line is intentional, and will not be a feature in the final version...</source>
-        <translation type="vanished">Tämä punainen viesti on tahallinen ja sitä ei ole ominaisuutena lopullisessa ohjelmaversiossa...</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="308"/>
@@ -1967,13 +1607,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The User&apos;s Guide is not yet implemented</source>
-        <translation type="vanished">Käyttäjäopasta ei ole vielä olemassa.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1488"/>
         <source>The FAQ is not yet implemented</source>
-        <translation>Usein kysyttyjä kysymyksiä ei ole vielä olemassa.</translation>
+        <translation>Usein kysyttyjä kysymyksiä ei ole vielä olemassa</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1736"/>
@@ -1986,11 +1622,9 @@
         <source>Are you sure you want to rebuild all CPAP data for the following machine:
 
 </source>
-        <translation>Oletko varma, että haluat rakentaa uudelleen kaikki CPAP-tiedot seuraavalle laitteelle:</translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
-        <translation type="vanished">Huomaa, että tämän tuloksena graafista tietoa voi kadota, jos Oscarin varmuuskopiot on poistettu käytöstä tai häiritty millään tavalla.</translation>
+        <translation>Oletko varma, että haluat rakentaa uudelleen kaikki CPAP-tiedot seuraavalle laitteelle:
+
+</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1886"/>
@@ -2013,117 +1647,9 @@
         <translation>Raporttiuutisia ei ole vielä toteutettu</translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s Online &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Users Guide&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">SleepyHeadin &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Käyttöohje&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Usein kysytyt kysymykset FAQ&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Glossary of Sleep Disorder Terms&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Unihäiriösanasto&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;SleepyHead Wiki&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;SleepyHead Wiki&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1115"/>
         <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
         <translation>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;copy;2011-2016</source>
-        <translation type="obsolete">&amp;copy;2011-2016</translation>
-    </message>
-    <message>
-        <source>Data Folder Location: &lt;a href=&quot;file://%1&quot;&gt;%2&lt;/a&gt;</source>
-        <translation type="vanished">Tietojen kansion sijainti: &lt;a href=&quot;file://%1&quot;&gt;%2&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>This software is released under the GNU Public License v3.0&lt;br/&gt;</source>
-        <translation type="vanished">Tämä ohjelma on julkaistu  GNU Public License v3.0 -lisenssillä&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>SleepyHead Project Page</source>
-        <translation type="vanished">SleepyHeadin projektisivu</translation>
-    </message>
-    <message>
-        <source>SleepyHead Wiki</source>
-        <translation type="vanished">SleepyHead Wiki</translation>
-    </message>
-    <message>
-        <source>Don&apos;t forget to Like/+1 SleepyHead on &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebook&lt;/a&gt; or &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+</source>
-        <translation type="vanished">Älä unohda tykätä/+1 SleepyHead &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebookissa&lt;/a&gt; tai &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+:ssa</translation>
-    </message>
-    <message>
-        <source>SleepyHead, brought to you by Jedimark</source>
-        <translation type="vanished">SleepyHead, Jedimarkin tuomana</translation>
-    </message>
-    <message>
-        <source>Kudos &amp; Credits</source>
-        <translation type="vanished">Kiitokset</translation>
-    </message>
-    <message>
-        <source>Bugfixes, Patches and Platform Help:</source>
-        <translation type="vanished">Virheen korjaukset, patchit ja alustojen avut:</translation>
-    </message>
-    <message>
-        <source>James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson, RezNet, PaleRider, JediBob, Diamaunt.</source>
-        <translation type="obsolete">James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson, RezNet, PaleRider, JediBob, Diamaunt.</translation>
-    </message>
-    <message>
-        <source>Translators:</source>
-        <translation type="vanished">Kääntäjät:</translation>
-    </message>
-    <message>
-        <source>Arie Klerk (Translation Coordinator, also Dutch), Steffen Reitz (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish), Plamen Tonev (Bulgarian) and others I&apos;ve still to add here.</source>
-        <translation type="obsolete">Arie Klerk (käännösten koordinaattori, myös Hollanti), Steffen Reitz (Saksa), Chen Hao (Kiina), Lars-Erik Söderström (Ruotsi), Damien Vigneron (Ranska), António Jorge Costa (Portugali), Judith Guzmán (Espanja), Plamen Tonev (Bulgaria) ja muut vielä lisäämättömät.</translation>
-    </message>
-    <message>
-        <source>3rd Party Libaries:</source>
-        <translation type="vanished">Kolmannen osapuolen kirjastot:</translation>
-    </message>
-    <message>
-        <source>SleepyHead is built using the &lt;a href=&quot;http://qt-project.org&quot;&gt;Qt Application Framework&lt;/a&gt;.</source>
-        <translation type="vanished">SleepyHead käyttää &lt;a href=&quot;http://qt-project.org&quot;&gt;Qt Application Framework&lt;/a&gt; kirjastoa.</translation>
-    </message>
-    <message>
-        <source>In the updater code, SleepyHead uses &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; by Sergey A. Tachenov, which is a C++ wrapper over Gilles Vollant&apos;s ZIP/UNZIP package.</source>
-        <translation type="obsolete">Päivityskoodissa, Oscar käyttää Sergey A. Tachenovin tekemä &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; , joka on Gilles Vollantin ZIP/UNZIP paketin C++ wrapperi.</translation>
-    </message>
-    <message>
-        <source>Thanks for using SleepyHead. If you find it within your means, please consider encouraging future development by making a donation via Paypal.</source>
-        <translation type="vanished">Kiitos SleepyHeadin käyttämisestä. Harkitse ohjelman kehittämisen rohkaisua tekemällä lahjoitus Paypalilla.</translation>
-    </message>
-    <message>
-        <source>This software comes with absolutely no warranty, either express of implied.</source>
-        <translation type="vanished">Tällä ohjelmalla ei ole absoluuttisesti mitään takuuta, ei suoraa eikä epäsuoraa.</translation>
-    </message>
-    <message>
-        <source>It comes with no guarantee of fitness for any particular purpose.</source>
-        <translation type="vanished">Se tulee ilman takuita kunnosta mihin tahansa erityiseen tarkoitukseen.</translation>
-    </message>
-    <message>
-        <source>No guarantees are made regarding the accuracy of any data this program displays.</source>
-        <translation type="vanished">Ohjelman näyttämiin tietojen tarkkuuteen ei ole takuita.</translation>
-    </message>
-    <message>
-        <source>This is NOT medical software, it is merely a research tool that provides a visual interpretation of data recorded by supported devices.</source>
-        <translation type="vanished">Tämä EI OLE lääketieteellinen ohjelma. Se on enemmän tutkimustyökalu, joka tarjoaa visuaalisen näytön laitteiden tallentamille tiedolle.</translation>
-    </message>
-    <message>
-        <source>This software is NOT suitable for medical diagnostics purposes, neither is it fit for CPAP complaince reporting purposes, or ANY other medical use for that matter.</source>
-        <translation type="vanished">Tämä ohjelma EI OLE sovelias lääketieteellisille diagnooseille, eikä myöskään CPAP-tietojen käyttöön, eikä MILLEKÄÄN muulle lääketieteelliselle käytölle siinä mielessä.</translation>
-    </message>
-    <message>
-        <source>The author and anyone associated with him accepts NO responsibilty for damages, issues or non-issues resulting from the use or mis-use of this software.</source>
-        <translation type="vanished">Ohjelman omistaja ja kaikki häneen liittyvät eivät ota vastuuta tämän ohjelman aiheuttamista vahingoista, käytöstä tai käyttämättömyydestä.</translation>
-    </message>
-    <message>
-        <source>Use this software entirely at your own risk.</source>
-        <translation type="vanished">Käytät tätä ohjelmaa omalla vastuullasi.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1268"/>
@@ -2146,59 +1672,15 @@
         <translation>Kuvaruudunkaappaus tallennettu tiedostoon &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Printing Disabled</source>
-        <translation type="vanished">Tulostaminen estetty</translation>
-    </message>
-    <message>
-        <source>Please rebuild SleepyHead with Qt 4.8.5 or greater, as printing causes a crash with this version of Qt</source>
-        <translation type="vanished">Ole hyvä ja käännä SleepyHead Qt 4.8.5:lla tai uudemmalla, jotta tulostus ei aiheuttaisi ohjelman kaatumista tällä Qt:n versiolla.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1735"/>
         <location filename="../oscar/mainwindow.cpp" line="1762"/>
         <source>Gah!</source>
         <translation>Pah!</translation>
     </message>
     <message>
-        <source>If you can read this, the restart command didn&apos;t work. Your going to have to do it yourself manually.</source>
-        <translation type="vanished">Jos pystyt lukemaan tämän, uudelleenkäynnistys ei toiminut. Sinun tulee käynnistää manuaalisesti.</translation>
-    </message>
-    <message>
-        <source>Performance will be degraded during these recalculations.</source>
-        <translation type="obsolete">Uudelleenlaskenta heikentää suorituskykyä.</translation>
-    </message>
-    <message>
-        <source>Recalculating Indices</source>
-        <translation type="obsolete">Indeksien uudelleenlaskenta</translation>
-    </message>
-    <message>
-        <source>Loading Event Data</source>
-        <translation type="vanished">Lataa tapahtumatietoja</translation>
-    </message>
-    <message>
-        <source>Recalculating Summaries</source>
-        <translation type="vanished">Laskee uudelleen yhteenvetotietoja</translation>
-    </message>
-    <message>
-        <source>Restart Required</source>
-        <translation type="vanished">Vaatii uudelleenkäynnistyksen</translation>
-    </message>
-    <message>
-        <source>Recalculations are complete, the application now needs to restart to display the changes.</source>
-        <translation type="vanished">Uudelleenlaskennat ovat valmiit. Ohjelma tulee käynnistää uudelleen muutosten näkemiseksi.</translation>
-    </message>
-    <message>
-        <source>Recalculations are now complete.</source>
-        <translation type="vanished">Uudelleenlaskennat ovat nyt valmiit.</translation>
-    </message>
-    <message>
-        <source>Task Completed</source>
-        <translation type="vanished">Tehtävä suoritettu</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2237"/>
         <source>There was a problem opening ZEO File: </source>
-        <translation>ZEO-tiedoston avauksessa ongelma:</translation>
+        <translation>ZEO-tiedoston avauksessa ongelma: </translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2241"/>
@@ -2214,14 +1696,6 @@
         <location filename="../oscar/mainwindow.cpp" line="2267"/>
         <source>MSeries Import complete</source>
         <translation>MSeries-tietojen tuonti valmis</translation>
-    </message>
-    <message>
-        <source>Changing the language will reset custom Event and Waveform names/labels/descriptions.</source>
-        <translation type="obsolete">Kielen vaihto palauttaa mukautettuja tapahtumien ja aaltomuotojen nimiä/selityksiä.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to do this?</source>
-        <translation type="obsolete">Oletko varma että haluat jatkaa?</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2320"/>
@@ -2259,7 +1733,7 @@
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1973"/>
         <source>The Minimum Y-Axis value.. Note this can be a negative number if you wish.</source>
-        <translation>Pienin Y-akselin arvo. Huomaa, tämä voi olla negatiivinen numero halutessasi</translation>
+        <translation>Pienin Y-akselin arvo. Huomaa, tämä voi olla negatiivinen numero halutessasi.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1974"/>
@@ -2498,14 +1972,6 @@
         <translation>OSCAR</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="vanished">Tekstikenttä</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.ui" line="955"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Keskeytä</translation>
@@ -2528,26 +1994,14 @@
         <translation>Valitse maa</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Tervetuloa SleepyHeadiin</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="111"/>
         <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
         <translation>Tämä ohjelma on suunniteltu auttamaan sinua CPAP-laitteiden ja niihin liittyvien laitteiden tietojen näyttämiseen.</translation>
     </message>
     <message>
-        <source>SleepyHead has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation type="vanished">SleepyHead on julkaistu vapaasti &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License&lt;/a&gt; alaisuudessa ja tulee ilman takuita ja ilman MITÄÄN vastuuta mihinkään tarkoitukseen.</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="116"/>
         <source>PLEASE READ CAREFULLY</source>
         <translation>LUE HUOLELLISESTI</translation>
-    </message>
-    <message>
-        <source>SleepyHead is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation type="vanished">SleepyHead on tarkoitettu lähinnä tietojen näyttämiseen, ja ei ehdottomasti sovellu korvaajaksi lääkärisi lääketieteelliselle ohjeelle.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="120"/>
@@ -2560,29 +2014,9 @@
         <translation>Kaikki luodut raportit ovat VAIN HENKILÖKOHTAISEEN KÄYTTÖÖN, eikä niitä voi käyttää MILLÄÄN TAVALLA lääketieteellisten diagnoosien tarkoituksiin.</translation>
     </message>
     <message>
-        <source>The author will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation type="vanished">Ohjelman tekijä ei ole vastuussa &lt;u&gt;mistään&lt;/u&gt; tämän ohjelman käytöstä tai väärinkäytöstä.</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="129"/>
         <source>Use of this software is entirely at your own risk.</source>
         <translation>Käytät tätä ohjelmaa vain omalla vastuullasi.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2018 Mark Watkins</source>
-        <translation type="obsolete">SleepyHeadin tekijänoikeudet &amp;copy;2011-2014 Mark Watkins {2011-2018 ?} Oscar on avointa lähdekoodia.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2016 Mark Watkins</source>
-        <translation type="obsolete">SleepyHeadin tekijänoikeudet &amp;copy;2011-2016 Mark Watkins. Oscar on avointa lähdekoodia.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2014 Mark Watkins</source>
-        <translation type="vanished">SleepyHeadin tekijänoikeudet &amp;copy;2011-2014 Mark Watkins</translation>
-    </message>
-    <message>
-        <source>Welcome to Open Source CPAP Reviewer</source>
-        <translation type="vanished">Tervetuloa avoimen lähdekoodin CPAP-ohjelmaan</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
@@ -2726,7 +2160,7 @@
     <message>
         <location filename="../oscar/overview.ui" line="260"/>
         <source>Drop down to see list of graphs to switch on/off.</source>
-        <translation>Pudota alas nähdäksesi luettelon graafeista näytä/piilota</translation>
+        <translation>Pudota alas nähdäksesi luettelon graafeista näytä/piilota.</translation>
     </message>
     <message>
         <location filename="../oscar/overview.ui" line="264"/>
@@ -2911,10 +2345,6 @@ indeksi</translation>
         <translation>Useampi käyttöjakso havaittu</translation>
     </message>
     <message>
-        <source>Please choose which one you want to import into SleepyHead</source>
-        <translation type="vanished">Ole hyvä ja valitse, minkä näistä haluat tuoda SleepyHeadiin</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.ui" line="1671"/>
         <source>Start Time</source>
         <translation>Aloitusaika</translation>
@@ -2942,16 +2372,12 @@ indeksi</translation>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1780"/>
         <source>I want to use the time reported by my oximeter&apos;s built in clock.</source>
-        <translation>Haluan käyttää oksimetrin sisäänrakennetun kellon aikaa</translation>
+        <translation type="unfinished">Haluan käyttää oksimetrin sisäänrakennetun kellon aikaa.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1796"/>
         <source>I started this oximeter recording at (or near) the same time as a session on my CPAP machine.</source>
-        <translation>Aloitin tämän oksimetrin tallennuksen (tai lähellä) samaan aikaan kuin aloitin CPAP-laitteen istunnon</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Oscar vaatii käynnistysajan tietääkseen mihin tallentaa oksimetrijakson.&lt;/p&gt;&lt;p&gt;Valitse yksi vaihtoehto:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Aloitin tämän oksimetrin tallennuksen (tai lähellä) samaan aikaan kuin aloitin CPAP-laitteen istunnon.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1857"/>
@@ -3015,14 +2441,6 @@ indeksi</translation>
         <translation>ChoiceMMed MD300W1</translation>
     </message>
     <message>
-        <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until SleepyHead prompts you to.</source>
-        <translation type="obsolete">CMS50E/F käyttäjät: kun tietoja tuodaan suoraan laitteesta, älä käynnistä laitteen lähetä-toimintoa ennen kuin Oscar antaa luvan.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, SleepyHead will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jos aktivoitu, Oscar resetoi CMS50:n sisäistä kelloa käyttäen tietokoneen kellonaikaa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.ui" line="1007"/>
         <source>Set device date/time</source>
         <translation>Aseta laitteen pvm/aika</translation>
@@ -3041,10 +2459,6 @@ indeksi</translation>
         <location filename="../oscar/oximeterimport.ui" line="1036"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Oksimetrin 7-kirjaiminen lyhytnimi.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before SleepyHead saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tämä vaihtoehto pyyhkii istunnon oksimetristä tuonnnin jälkeen. &lt;/p&gt;&lt;p&gt;Käytä varovasti koska et saa istuntoa takaisin jos jotakin epäonnistuu ennen kuin Oscar on tallentanut istuntoa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1080"/>
@@ -3232,10 +2646,6 @@ indeksi</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="vanished">Oscar on tällä hetkellä yhteensopiva oksimetrien Contec CMS50D+, CMS50E, CMS50F ja CMS50I sarjojen kanssa.&lt;br/&gt;(Huomaa: Suora tietojen tuonti bluetooth-malleista &lt;span style=&quot; font-weight:600;&quot;&gt; ei ole todennäköisesti&lt;/span&gt; mahdollista vielä)</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="1127"/>
         <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
         <translation>Jos olet yhdistämässä oksimetrin ja CPAP-laitteen dataa, varmistu, että tuot ensin tiedot CPAP-laitteesta ennen toimenpidettä!</translation>
@@ -3246,14 +2656,6 @@ indeksi</translation>
         <translation>Sinun tulee varmistaa oksimetrin oikea ajuri (USB tai sarjaportti), jotta voit paikallistaa ja lukea suoraan oksimetri-laitetta. Lisätietoja tästä %1 napsauta tästä %2.</translation>
     </message>
     <message>
-        <source>Oximetry Files (*.spo *.spor *.spo2 *.dat)</source>
-        <translation type="vanished">Oksimetrin tiedostot (*.spo *.spor *.spo2 *.dat)</translation>
-    </message>
-    <message>
-        <source>No Oximetery module could parse the given file:</source>
-        <translation type="obsolete">Oksimetri-moduuli ei kykene lukemaan oikein annettua tiedostoa:</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="456"/>
         <source>Oximeter not detected</source>
         <translation>Oksimetriä ei tunnistettu</translation>
@@ -3262,10 +2664,6 @@ indeksi</translation>
         <location filename="../oscar/oximeterimport.cpp" line="463"/>
         <source>Couldn&apos;t access oximeter</source>
         <translation>Ei saa yhteyttä oksimetriin</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Mode</source>
-        <translation type="obsolete">Oksimetrin Live-tila</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="477"/>
@@ -3281,14 +2679,6 @@ indeksi</translation>
         <location filename="../oscar/oximeterimport.cpp" line="525"/>
         <source>Live Import Stopped</source>
         <translation>Live-tuonti pysäytetty</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Stopped</source>
-        <translation type="obsolete">Oksimetrin Live-näyttö pysäytetty</translation>
-    </message>
-    <message>
-        <source>Live Oximetery import has been stopped</source>
-        <translation type="obsolete">Oksimetrin Live tuonti on nyt pysäytetty</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="577"/>
@@ -3331,10 +2721,6 @@ indeksi</translation>
         <translation>Jotain meni pieleen tietojen tuonnissa</translation>
     </message>
     <message>
-        <source>CMS50 Session %1</source>
-        <translation type="vanished">CMS50 käyttöjakso %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="1112"/>
         <source>Welcome to the Oximeter Import Wizard</source>
         <translation>Tervetuloa oksimetrin tuontivelhoon</translation>
@@ -3343,14 +2729,6 @@ indeksi</translation>
         <location filename="../oscar/oximeterimport.cpp" line="1114"/>
         <source>Pulse Oximeters are medical devices used to measure blood oxygen saturation. During extended Apnea events and abnormal breathing patterns, blood oxygen saturation levels can drop significantly, and can indicate issues that need medical attention.</source>
         <translation>Pulssioksimetri on lääketieteellinen veren happisaturaation (happikyllästeisyys - SpO2) mittaamiseen tarkoitettu laite. Veren happisaturaatio voi apnean ja poikkeavan hengityksen aikana laskea huomattavasti mikä voi kertoa hoitotoimenpiteitä vaadittavista ongelmista.</translation>
-    </message>
-    <message>
-        <source>SleepyHead gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
-        <translation type="obsolete">Oscar pystyy näyttämään oksimetritietoja CPAP-istuntojen ohella, mikä voi tehostaa CPAP-hoitoa. Se toimii myös yksin pulssioksimetrin kanssa, antaen mahdollisuudet tallentaa, seurata ja näyttää tallennetut tiedot.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="obsolete">Oscar on tällä hetkellä yhteensopiva seuraavien oksimetrien kanssa: Contec CMS50D+, CMS50E, CMS50F ja CMS50I. &lt;br/&gt;(Huom.: Suora tuonti &lt;span style=&quot; font-weight:600;&quot;&gt;ei toimi&lt;/span&gt; bluetooth mallien kanssa vielä)</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1120"/>
@@ -3368,17 +2746,9 @@ indeksi</translation>
         <translation>Huomaa myös:</translation>
     </message>
     <message>
-        <source>If you are trying to sync oximetery and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
-        <translation type="obsolete">Synkronoidessasi oksimetri ja CPAP-tietoja, varmista että CPAP-tiedot on tuotu ensin!</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="1129"/>
         <source>Important Notes:</source>
         <translation>Tärkeää tietoa:</translation>
-    </message>
-    <message>
-        <source>For SleepyHead to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
-        <translation type="obsolete">Varmista että oikeat laiteajurit (esim. USB-serial UART) on asennettu tietokoneeseen, jotta Oscar pystyisi havaitsemaan ja lukemaan tietoja oksimetristä. Lisää tietoa %1löytyy tästä%2.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1132"/>
@@ -3469,7 +2839,7 @@ indeksi</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="154"/>
         <source>Combine Close Sessions </source>
-        <translation>Yhdistä lähellä olevat istunnot</translation>
+        <translation>Yhdistä lähellä olevat istunnot </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="164"/>
@@ -3482,7 +2852,8 @@ indeksi</translation>
         <location filename="../oscar/preferencesdialog.ui" line="184"/>
         <source>Multiple sessions closer together than this value will be kept on the same day.
 </source>
-        <translation>Useampi kuin yksi istunto tätä arvoa lähempänä toisiaan yhdistetään samana päivänä.</translation>
+        <translation>Useampi kuin yksi istunto tätä arvoa lähempänä toisiaan yhdistetään samana päivänä.
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="239"/>
@@ -3520,56 +2891,9 @@ p, li { white-space: pre-wrap; }
         <translation>Käyttöjaksojen tallennuksen asetukset</translation>
     </message>
     <message>
-        <source>This maintains a backup of SD-card data for ResMed machines, 
-
-ResMed machines delete high resolution data older than 7 days, 
-and graph data older than 30 days..
-
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
-(Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="obsolete">ResMed-laitteille tehdään SD-kortin varmistus, 
-
-ResMed-laitteista poistuu 7 päivää vanhemmat tarkkuustiedot, 
-ja 30 päivää vanhemmat kaaviotiedot.
-
-Oscar pitää kopion tiedoista uudelleenasennuksen varalta. 
-(Erittäin suositeltavaa, jollei koneen levytila on vähäistä tai jos kaaviotiedot ei kiinnosta)</translation>
-    </message>
-    <message>
-        <source>This makes SleepyHead&apos;s data take around half as much space.
-But it makes import and day changing take longer.. 
-If you&apos;ve got a new computer with a small solid state disk, this is a good option.</source>
-        <translatorcomment>Hey! You&apos;ll get 1 TB SSDs today. This statement is too old already. Better to rewrite it as e.g. &quot;If you&apos;ve got a computer with a small disk, ...&quot;.</translatorcomment>
-        <translation type="obsolete">Tämän avulla Oscarin levytilan käyttö puolittuu.
-Mutta tietojen tuonti ja päivän vaihto vie enemmän aikaa.
-Jos sinulla on tietokone pienellä levyllä tämä on hyvä vaihtoehto.</translation>
-    </message>
-    <message>
-        <source>Compress Session Data (makes SleepyHead data smaller, but day changing slower.)</source>
-        <translation type="obsolete">Pakkaa istuntotiedot (vie vähemmän levytilaa, mutta päivien vaihto vie enemmän aikaa)</translation>
-    </message>
-    <message>
-        <source>Compress ResMed (EDF) backups to save disk space.
-Backed up EDF files are stored in the .gz format, 
-which is common on Mac &amp; Linux platforms.. 
-
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="obsolete">Pakkaa ResMed (EDF) varmuuskopiot levytilan säästämiseksi.
-Varmuuskopioidut EDF-tiedostot pakataan .gz-muotoon,
-mikä on yleinen pakkausmuoto Mac ja Linux-alustoilla.
-
-Oscar tukee suoraan pakatut varmistushakemistot. 
-Tiedostojen käyttö ResScan ohjelman kanssa vaatii että .gz-tiedostot puretaan ensin.</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="439"/>
         <source>Compress SD Card Backups (slower first import, but makes backups smaller)</source>
         <translation>Pakkaa SD-kortin varmuuskopiot (hitaampi ensimmäisellä tuonnilla, mutta tekee varmuuskopioista pienempiä)</translation>
-    </message>
-    <message>
-        <source>The following options affect the amount of disk space SleepyHead uses, and all have an effect on how long import takes.</source>
-        <translation type="vanished">Seuraavat asetukset vaikuttavat SleepyHeadin käyttämään levytilan määrään ja kaikella on vaikutus tietojen tuontiin kuluvaan aikaan.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="417"/>
@@ -3653,7 +2977,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="1650"/>
         <location filename="../oscar/preferencesdialog.ui" line="1679"/>
         <source>s</source>
-        <translation> s</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1124"/>
@@ -3735,10 +3059,6 @@ Oletusarvo on 60 minuuttia. Suositellaan jättää muuttumattomana.</translation
         <translation>&amp;Oksimetri</translation>
     </message>
     <message>
-        <source>Oximetery Settings</source>
-        <translation type="vanished">Oksimetrin asetukset</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="1078"/>
         <source>Show in Event Breakdown Piechart</source>
         <translation>Näytä ympyräkaaviossa tapahtumaerittelynä</translation>
@@ -3752,10 +3072,6 @@ Oletusarvo on 60 minuuttia. Suositellaan jättää muuttumattomana.</translation
         <location filename="../oscar/preferencesdialog.ui" line="1007"/>
         <source>#2</source>
         <translation>#2</translation>
-    </message>
-    <message>
-        <source>This experimental option attempts to use SleepyHead&apos;s event flagging system to improve machine detected event positioning.</source>
-        <translation type="obsolete">Tämä kokeellinen vaihtoehto yrittää käyttää Oscarin tapahtumaliputusjärjestelmää parantaakseen laitteen havaitseman tapahtumien paikannus.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1000"/>
@@ -3835,13 +3151,9 @@ Oletusarvo on 60 minuuttia. Suositellaan jättää muuttumattomana.</translation
         <translation>Istunnon jakamisen asetukset</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Attention ResMed users:&lt;/span&gt; There are some pitfalls you may want to consider before trying to split sessions away from ResMed&apos;s 12:00 noon day model, click &lt;a href=&quot;http://sleepyhead.sf.net/wiki/index.php/Resmed_Session_Splitting&quot;&gt;here&lt;/a&gt; for more information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Huomio ResMed-käyttäjät:&lt;/span&gt; Ennen kuin yrität jakaa ResMedin 12:00 keskipäivän mallin istuntoja, lue lisää &lt;a href=&quot;http://sleepyhead.sf.net/wiki/index.php/Resmed_Session_Splitting&quot;&gt;tästä&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="356"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This setting should be used with caution...&lt;/span&gt; Switching it off comes with consequences involving accuracy of summary only days, as certain calculations only work properly provided summary only sessions that came from individual day records are kept together. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ResMed users:&lt;/span&gt; Just because it seems natural to you and I that the 12 noon session restart should be in the previous day, does not mean ResMed&apos;s data agrees with us. The STF.edf summary index format has serious weaknesses that make doing this not a good idea.&lt;/p&gt;&lt;p&gt;This option exists to pacify those who don&apos;t care and want to see this &amp;quot;fixed&amp;quot; no matter the costs, but know it comes with a cost. If you keep your SD card in every night, and import at least once a week, you won&apos;t see problems with this very often.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tämän asetuksen kanssa pitää olla varovainen...&lt;/span&gt; Tiettyjen yhteenvetopäivien tarkkuus voi heikentyä jos sen kääntää pois päältä, koska tietyt laskennat toimii yhdessä oikein vasta kun yksittäisten päivien tallenteista tulevat yhteenlasketut istunnot pidetään yhdessä. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ResMed-käyttäjät:&lt;/span&gt; Vaikka meille kuulostaa luonnolliselta että 12-keskipäiväjakson uudellenkäynnistys tapahtuu edellisenä päivänä, se ei välttämättä tarkoita että ResMedin tiedot ovat samaa mieltä. STF.edf tiivistelmä indeksi-formaatissa on heikkouksia.&lt;/p&gt;&lt;p&gt;Tämä asetus on olemassa heille jotka eivät piittaa ja haluaa &amp;quot;korjata&amp;quot; tätä, kustannuksista riippumatta. Kunhan pidät SD-kortin laitteessa joka yö, ja tuot tiedot vähintään joka viikko, et tule näkemään ongelmia liian usein.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt; </translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tämän asetuksen kanssa pitää olla varovainen...&lt;/span&gt; Tiettyjen yhteenvetopäivien tarkkuus voi heikentyä jos sen kääntää pois päältä, koska tietyt laskennat toimii yhdessä oikein vasta kun yksittäisten päivien tallenteista tulevat yhteenlasketut istunnot pidetään yhdessä. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ResMed-käyttäjät:&lt;/span&gt; Vaikka meille kuulostaa luonnolliselta että 12-keskipäiväjakson uudellenkäynnistys tapahtuu edellisenä päivänä, se ei välttämättä tarkoita että ResMedin tiedot ovat samaa mieltä. STF.edf tiivistelmä indeksi-formaatissa on heikkouksia.&lt;/p&gt;&lt;p&gt;Tämä asetus on olemassa heille jotka eivät piittaa ja haluaa &amp;quot;korjata&amp;quot; tätä, kustannuksista riippumatta. Kunhan pidät SD-kortin laitteessa joka yö, ja tuot tiedot vähintään joka viikko, et tule näkemään ongelmia liian usein.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="359"/>
@@ -3852,10 +3164,6 @@ Oletusarvo on 60 minuuttia. Suositellaan jättää muuttumattomana.</translation
         <location filename="../oscar/preferencesdialog.ui" line="567"/>
         <source>Memory and Startup Options</source>
         <translation>Muisti- ja käynnistysasetukset</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting SleepyHead a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn&apos;t affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Oscar käynnistyy hitaammin, lataamalla ennalta kaikki yhteenvetotiedot, mikä nopeuttaa yleiskatsausta ja myöhemmin muutama laskenta. &lt;/p&gt;&lt;p&gt;Jos sinulla on paljon tietoja, kannattaa ehkä pitää pois päältä, mutta jos yleensä haluat nähdä &lt;span style=&quot; font-style:italic;&quot;&gt;kaiken&lt;/span&gt; yleiskatsauksessa, kaikki yhteenvetotiedot pitää kuitenkin ladata. &lt;/p&gt;&lt;p&gt;Huomaa että tämä asetus ei koske aaltomuoto ja tapahtumatietoja, jotka kuitenkin aina ladataan käytön mukaan.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="609"/>
@@ -3881,10 +3189,6 @@ Oletusarvo on 60 minuuttia. Suositellaan jättää muuttumattomana.</translation
         <location filename="../oscar/preferencesdialog.ui" line="626"/>
         <source>Import without asking for confirmation</source>
         <translation>Tuo kysymättä vahvistusta</translation>
-    </message>
-    <message>
-        <source>Skip user selection screen</source>
-        <translation type="obsolete">Älä näytä profiilin valintadialogia</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1153"/>
@@ -4188,7 +3492,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1572"/>
         <source>Discard segments under</source>
-        <translation>Hävitä lyhyemmät jaksot kuin </translation>
+        <translation>Hävitä lyhyemmät jaksot kuin</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1609"/>
@@ -4247,34 +3551,6 @@ Käyttäessäsi eri maskeja, käytä keskiarvoja. Se on tarpeeksi lähellä.</tr
         <location filename="../oscar/preferencesdialog.ui" line="1159"/>
         <source>Show flags for machine detected events that haven&apos;t been identified yet.</source>
         <translation>Näytä liputuksia vielä tunnistamattomien laitteen havaitsemien tapahtumien kohdalla.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Oksimetrin ja CPAP-tietojen synkronointi&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Tietoja CMS50-laitteesta tuotu SpO2Review-ohjelman kautta (.spoR-tiedostot) tai sarjaliitännän kautta &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;ei&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; sisällä tarvittavaa aikaleimaa synkronoinnin toteuttamiseksi.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live näyttömoodi (käyttäen sarjakaapelia) on yksi tapa toteuttaa synkronointi CMS50-oksimetristä, mutta ei ota huomioon CPAP-laitteen mahdollista kellon siirtymää.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Käynnistäessä oksimetrin tallennus &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;täsmälleen &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;samaan aikaan CPAP-laitteen kanssa, synkronointi on mahdollinen. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Sarjaliitäntätuonti käyttää edellisen yön ensimmäisen CPAP-istunnon aloitusajan. (Muista tuoda CPAP-tietoja ensin!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2013"/>
@@ -4369,10 +3645,6 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vieritys helpottuu zoomatessa herkkien kosketuslevyjen kanssa&lt;/p&gt;&lt;p&gt;50 ms on suositeltu arvo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>milliseconds</source>
-        <translation type="vanished">millisekuntia</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="2446"/>
         <source>How long you want the tooltips to stay visible.</source>
         <translation>Kuinka kauan haluat vihjeiden pysyvän näkyvinä.</translation>
@@ -4401,7 +3673,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2380"/>
         <source>The visual method of displaying waveform overlay flags.
 </source>
-        <translation>Visuaalinen tapa näyttää aaltomuotojen liputukset peittokuvina.</translation>
+        <translation>Visuaalinen tapa näyttää aaltomuotojen liputukset peittokuvina.
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2385"/>
@@ -4607,7 +3880,7 @@ Se voi aiheuttaa ongelmia fonttien piirtämisen kanssa kaaviokuvissa nyt käytö
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2830"/>
         <source>Bold  </source>
-        <translation>Lihavoitu</translation>
+        <translation>Lihavoitu  </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2852"/>
@@ -4806,7 +4079,7 @@ Se voi aiheuttaa ongelmia fonttien piirtämisen kanssa kaaviokuvissa nyt käytö
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="756"/>
         <source>Data Processing Required</source>
-        <translation>Tarvitaan tietojen prosessointia </translation>
+        <translation>Tarvitaan tietojen prosessointia</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="757"/>
@@ -4839,39 +4112,26 @@ Oletko varma että haluat jatkaa?</translation>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1132"/>
         <source> If you ever need to reimport this data again (whether in OSCAR or ResScan) this data won&apos;t come back.</source>
-        <translation>Jos ikinä haluat ladata uudelleen tätä tietoa (joko Oscarin tai ResScanin) tämä tieto ei tule enää uudelleen takaisin.</translation>
+        <translation> Jos ikinä haluat ladata uudelleen tätä tietoa (joko Oscarin tai ResScanin) tämä tieto ei tule enää uudelleen takaisin.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1133"/>
         <source> If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation>Jos haluat säästää levytilaa, muista tehdä manuaalisia varmuuskopioita.
-</translation>
+        <translation> Jos haluat säästää levytilaa, muista tehdä manuaalisia varmuuskopioita.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1134"/>
         <source> Are you sure you want to disable these backups?</source>
-        <translation>Haluatko varmasti estää nämä varmuuskopioinnit?</translation>
+        <translation> Haluatko varmasti estää nämä varmuuskopioinnit?</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1178"/>
         <source>Switching off backups is not a good idea, because OSCAR needs these to rebuild the database if errors are found.
 
 </source>
-        <translation>Näiden varmuuskopioiden kytkeminen pois käytöstä ei ole hyvä idea, koska Oscar tarvitsee niitä tietokannan uudelleenrakentamiseen, jos jotain menee pieleen.</translation>
-    </message>
-    <message>
-        <source>One or more of the changes you have made will require this application to be restarted,
-in order for these changes to come into effect.
+        <translation>Näiden varmuuskopioiden kytkeminen pois käytöstä ei ole hyvä idea, koska Oscar tarvitsee niitä tietokannan uudelleenrakentamiseen, jos jotain menee pieleen.
 
-Would you like do this now?</source>
-        <translation type="obsolete">Yksi tai useampi muutos vaatii että ohjelma käynnistetään uudelleen,
-jotta muutokset otetaan käyttöön.
-
-Haluatko tehdä sen nyt?</translation>
-    </message>
-    <message>
-        <source>Switching off automatic backups is not a good idea, because SleepyHead needs these to rebuild the database if errors are found.</source>
-        <translation type="obsolete">Automaattisten varmistusten kytkeminen pois päältä ei ole hyvä idea, koska Oscar tarvitsee näitä tietokannan uudelleenalustukseen virheiden sattuessa.</translation>
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1179"/>
@@ -4920,18 +4180,6 @@ Would you like do this now?</source>
         <source>ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).</source>
         <translation>ResMed S9 laitteet poistavat rutiinilla yli 7 päivää vanhoja ja yli 30 päivää vanhoja tietoja SD-kortilta riippuen resoluutiosta).</translation>
     </message>
-    <message>
-        <source>If you ever need to reimport this data again (whether in SleepyHead or ResScan) this data won&apos;t come back.</source>
-        <translation type="vanished">Jos haluat tuoda uudelleen tämän tiedon (SleepyHeadissa tai ResScanissa), se ei tule enää takaisin.</translation>
-    </message>
-    <message>
-        <source>If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="vanished">Jos haluat säästää levytilaa, muista poistaa manuaaliset varmuuskopiot.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to disable these backups?</source>
-        <translation type="vanished">Haluatko varmasti poiataa nämä varmuuskopiot?</translation>
-    </message>
 </context>
 <context>
     <name>ProfileSelect</name>
@@ -4948,7 +4196,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.ui" line="191"/>
         <source>Start with the selected user profile.</source>
-        <translation>Aloita valitulla käyttäjäprofiililla</translation>
+        <translation>Aloita valitulla käyttäjäprofiililla.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="194"/>
@@ -4958,7 +4206,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselect.ui" line="215"/>
         <source>Create a new user profile.</source>
-        <translation>Luo uusi käyttäjäprofiili</translation>
+        <translation>Luo uusi käyttäjäprofiili.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="218"/>
@@ -4986,26 +4234,14 @@ Would you like do this now?</source>
         <translation>Nykyinen Oscar tietojen lähde.</translation>
     </message>
     <message>
-        <source>Choose a different SleepyHead data folder.</source>
-        <translation type="vanished">Valitse toinen SleepyHead tietojen kansio</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="241"/>
         <source>&amp;Different Folder</source>
         <translation>&amp;Eri kansio</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="287"/>
         <source>[version]</source>
         <translation>[versio]</translation>
-    </message>
-    <message>
-        <source>Click here if you didn&apos;t want to start SleepyHead.</source>
-        <translation type="vanished">Napsauta tästä, jos et halua käynnistää SleepyHeadia</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="313"/>
@@ -5016,10 +4252,6 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselect.ui" line="370"/>
         <source>Folder:</source>
         <translation>Tietojen kansio:</translation>
-    </message>
-    <message>
-        <source>The current location of SleepyHead data store.</source>
-        <translation type="vanished">Nykyinen SleepyHead tietojen kansio</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="389"/>
@@ -5079,14 +4311,6 @@ Would you like do this now?</source>
         <translation>Sinun tulee kirjoittaa DELETE isoilla kirjaimilla.</translation>
     </message>
     <message>
-        <source>Could not open profile.. You will need to delete this profile directory manually</source>
-        <translation type="vanished">Ei voitu poistaa profiilia. Sinun tulee poistaa tämä profiilikansio käsin.</translation>
-    </message>
-    <message>
-        <source>You will find it under the following location:</source>
-        <translation type="vanished">Löydät sen seuraavasta paikasta:</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.cpp" line="239"/>
         <source>You entered an incorrect password</source>
         <translation>Annoit väärän salasanan</translation>
@@ -5138,10 +4362,6 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselector.ui" line="36"/>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>SleepyHead</source>
-        <translation type="obsolete">Oscar</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="171"/>
@@ -5487,10 +4707,6 @@ Would you like do this now?</source>
         <translation>Joulu</translation>
     </message>
     <message>
-        <source>cm</source>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/common.cpp" line="491"/>
         <source>&quot;</source>
         <translation>&quot;</translation>
@@ -5524,10 +4740,6 @@ Would you like do this now?</source>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="198"/>
         <source>Med.</source>
         <translation>Med.</translation>
-    </message>
-    <message>
-        <source>%1%</source>
-        <translation type="obsolete">%1%</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="216"/>
@@ -6321,10 +5533,6 @@ TTIA: %1</translation>
         <translation>Kirjanmerkit</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/common.cpp" line="642"/>
         <source>v%1</source>
         <translation>v%1</translation>
@@ -6608,10 +5816,6 @@ TTIA: %1</translation>
         <translation>Valmistautuu...</translation>
     </message>
     <message>
-        <source>I&apos;m sorry to report that SleepyHead can only track hours of use and very basic settings for this machine.</source>
-        <translation type="obsolete">Valitettavasti Oscar pystyy näyttämään vain käyttötunnit ja perusasetukset tälle laitteelle.</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="588"/>
         <source>Machine Unsupported</source>
         <translation>Laittteelle ei löydy tukea</translation>
@@ -6620,10 +5824,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="589"/>
         <source>Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.</source>
         <translation>Valitettavasti Philips Respironics CPAP (malli %1) ei ole tuettu vielä.</translation>
-    </message>
-    <message>
-        <source>JediMark needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with SleepyHead.</source>
-        <translation type="obsolete">Ohjelman kehittäjät tarvitsevat .zip-tiedoston SD-kortin sisällöstä ja vastaavat Encore .pdf raportit saadakseen ne toimimaan Oscarin kanssa.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="578"/>
@@ -6809,10 +6009,6 @@ TTIA: %1</translation>
         <translation>Lämmitetty letku kytketty</translation>
     </message>
     <message>
-        <source>Headed Tubing</source>
-        <translation type="vanished">Lämmitetty letku</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3534"/>
         <source>Humidification Level</source>
         <translation>Kostutuksen taso</translation>
@@ -6986,14 +6182,6 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="vanished">SleepyHead (%1) tarvitsee tietokantojen päivitystä %2 %3 %4</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;SleepyHead maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;SleepyHead suorittaa laitteesi sd-kortin tietojen varmuuskopioinnin, joita se käyttää tähän tarkoitukseen&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="510"/>
         <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
         <translation>&lt;i&gt;Vanhat tiedot täytyy generoida uudelleen edellyttäen että varmistus ei ole käännetty pois päältä asetuksista aikaisemmin tehdyssä tuonnissa.&lt;/i&gt;</translation>
@@ -7007,14 +6195,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/profiles.cpp" line="444"/>
         <source>Could not find explorer.exe in path to launch Windows Explorer.</source>
         <translation>Ei voitu löytää explorer.exe:n polkua Windows Explorerin käynnistämiseksi.</translation>
-    </message>
-    <message>
-        <source>SleepyHead does not yet have any automatic card backups stored for this device.</source>
-        <translation type="obsolete">Automaattisia varmistuskopioita SD-kortista ei löydy vielä tälle laitteelle.</translation>
-    </message>
-    <message>
-        <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="vanished">OSCT (%1) tarvitsee tietokantojen %2 %3 %4 päivitystä</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="496"/>
@@ -7082,21 +6262,9 @@ TTIA: %1</translation>
         <translation>Käytä käyttöjärjestelmäsi tiedostoselainta kopioidaksesi profiilikansion, sen jälkeen käynnistä Oscar uudelleen ja vie päivitysprosessi loppuun.</translation>
     </message>
     <message>
-        <source>If you are concerned, click No to exit, and backup your profile manually, before starting SleepyHead again.</source>
-        <translation type="vanished">Jos olet huolestunut, napsauta Ei poistuaksesi ja varmuuskopioi profiilisi käsin ennen SleepyHeadin käynnistämistä uudelleen.</translation>
-    </message>
-    <message>
-        <source>Are you ready to upgrade, so you can run the new version of SleepyHead?</source>
-        <translation type="vanished">Oletko valmis päivitykseen, jotta voit käyttää SleepyHeadin uutta versiota?</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="522"/>
         <source>Machine Database Changes</source>
         <translation>Laitteen tietokannan muutokset</translation>
-    </message>
-    <message>
-        <source>Sorry, the purge operation failed, which means this version of SleepyHead can&apos;t start.</source>
-        <translation type="vanished">Anteeksi, puhdistustoimenpide epäonnistui, joka tarkoittaa sitä, että tämä SleepyHeadin versio ei voi käynnistyä.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="534"/>
@@ -7112,22 +6280,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/profiles.cpp" line="541"/>
         <source>Rebuilding from %1 Backup</source>
         <translation>Luo uudelleen tietoja varmuuskopioista %1</translation>
-    </message>
-    <message>
-        <source>Would you like to switch on automatic backups, so next time a new version of SleepyHead needs to do so, it can rebuild from these?</source>
-        <translation type="obsolete">Haluatko laittaa päälle automaattisen varmistuksen, että se on käytettävissä seuraavan kerran kun uusi versio Oscarista tarvitsee sen?</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation type="obsolete">Oscar käynnistää tuontivelhon %1 tietojen uudelleenasentamista varten.</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation type="obsolete">Oscar sulkeutuu nyt ja (yrittää) käynnistää tietokoneen tiedostonhallinnan niin että voit itse varmistaa profiilisi:</translation>
-    </message>
-    <message>
-        <source>Use your file manager to make a copy of your profile directory, then afterwards, restart Sleepyhead and complete the upgrade process.</source>
-        <translation type="obsolete">Käytä tiedostonhallinta tehdäksesi kopion profiilisi hakemistosta. Käynnistä Oscar uudelleen toimenpiteen jälkeen ja jatka päivitysprosessia.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="110"/>
@@ -7303,10 +6455,6 @@ TTIA: %1</translation>
         <translation>UA</translation>
     </message>
     <message>
-        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation type="vanished">Hengityksen rajoitus aiheuttaen virtauksen aaltomuodon litistäminen.</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="154"/>
         <source>Vibratory Snore</source>
         <translation>Värähtelevä kuorsaus</translation>
@@ -7366,10 +6514,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/schema.cpp" line="175"/>
         <source>User Flag #1</source>
         <translation>Käyttäjälippu #1</translation>
-    </message>
-    <message>
-        <source>A user definable event detected by SleepyHead&apos;s flow waveform processor.</source>
-        <translation type="obsolete">Käyttäjän määrittelemä tapahtuma Oscarin aaltomuodon prosessorin havaitsema.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="178"/>
@@ -7568,10 +6712,6 @@ TTIA: %1</translation>
         <translation>Tukkeutunut</translation>
     </message>
     <message>
-        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation type="vanished">Määrittelemätön apnea, johtuen liiallisesta vuodosta.</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="152"/>
         <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
         <translation>Hengitysponnistuksen aiheuttama herääminen: Tukkeutunut hengitys aiheuttaa joko herääminen tai unen häiriö.</translation>
@@ -7652,10 +6792,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/schema.cpp" line="250"/>
         <source>Target Minute Ventilation</source>
         <translation>Ilmamäärä minuutissa</translation>
-    </message>
-    <message>
-        <source>Target Minute Ventilation?</source>
-        <translation type="obsolete">Ilmamäärä minuutissa?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="148"/>
@@ -7979,134 +7115,6 @@ TTIA: %1</translation>
         <translation>Alempi kynnys</translation>
     </message>
     <message>
-        <source>SleepyHead Release Notes</source>
-        <translation type="obsolete">Oscarin julkaisutiedot</translation>
-    </message>
-    <message>
-        <source>Release Notes</source>
-        <translation type="vanished">Julkaisutiedot</translation>
-    </message>
-    <message>
-        <source>After four years in the making, this build brings SleepyHead into the final beta phase.</source>
-        <translation type="obsolete">Vuosien työn jälkeen, tämä versio tuo Oscarin viimeiseen beta-vaiheeseen.</translation>
-    </message>
-    <message>
-        <source>Things are not perfect yet, but the focus from now is putting on the finishing touches. </source>
-        <translation type="obsolete">Ohjelma ei ole vielä täydellinen, mutta painopiste on tästä lähtien viimeistely. </translation>
-    </message>
-    <message>
-        <source>This version brings support for the new Philips Respironics DreamStation, and older PRS1 1060P models.</source>
-        <translation type="obsolete">Tämä versio tukee uudet Philips Respironics DreamStation ja vanhemmat PRS1 1060P-mallit.</translation>
-    </message>
-    <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="obsolete">Olen pahoillani, muutosloki ei löydy.</translation>
-    </message>
-    <message>
-        <source>Greetings!</source>
-        <translation type="obsolete">Tervetuloa!</translation>
-    </message>
-    <message>
-        <source>As this is a pre-release version, it is recommended that you back up your data folder manually before proceding, because attempting to roll back later may break things.</source>
-        <translation type="obsolete">Koska tämä on esiversio, on suositeltavaa tehdä varmuuskopiot tiedoista ennen päivitystä. Edellisen version palautus myöhemmin voi rikkoa asioita.</translation>
-    </message>
-    <message>
-        <source>Sleep Well, and good luck!</source>
-        <translation type="obsolete">Nuku hyvin ja hyvää onnea!</translation>
-    </message>
-    <message>
-        <source>Change log</source>
-        <translation type="obsolete">Muutosloki</translation>
-    </message>
-    <message>
-        <source>&amp;Ok, get on with it..</source>
-        <translation type="obsolete">&amp;Ok, anna mennä..</translation>
-    </message>
-    <message>
-        <source>A faster build of SleepyHead may be available</source>
-        <translation type="vanished">Nopeampi versio SleepyHeadista on saatavilla.</translation>
-    </message>
-    <message>
-        <source>This build of SleepyHead is a compatability version that also works on computers lacking OpenGL 2.0 support.</source>
-        <translation type="obsolete">Tämä  Oscarin käännös on yhteensopiva myös tietokoneiden kanssa joista puuttuu OpenGL 2.0 tuki.</translation>
-    </message>
-    <message>
-        <source>However it looks like your computer has full support for OpenGL 2.0!</source>
-        <translation type="obsolete">Näyttää siltä että tietokoneella on kuitenkin täysi OpenGL 2.0 yhteensopivuus!</translation>
-    </message>
-    <message>
-        <source>This version will run fine, but a &quot;&lt;b&gt;%1&lt;/b&gt;&quot; tagged build of SleepyHead will likely run a bit faster on your computer.</source>
-        <translation type="obsolete">Tämä versio toimii hyvin, mutta &quot;&lt;b&gt;%1&lt;/b&gt;&quot;-niminen Oscarin käännös tulee toimimaan nopeammin tietokoneessasi.</translation>
-    </message>
-    <message>
-        <source>You will not be bothered with this message again.</source>
-        <translation type="vanished">Tämä viesti ei vaivaa sinua enää uudelleen.</translation>
-    </message>
-    <message>
-        <source>Incompatible Graphics Hardware</source>
-        <translation type="vanished">Epäyhteensopiva graafinen näytönohjain</translation>
-    </message>
-    <message>
-        <source>This build of SleepyHead requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.</source>
-        <translation type="vanished">Tämä SleepyHeadin versio tarvitsee OpenGL 2.0 tuen toimiakseen oikein. Sinun tietokoneessasi ei ole sellaista ominaisuutta.</translation>
-    </message>
-    <message>
-        <source>You may need to update your computers graphics drivers from the GPU makers website. %1</source>
-        <translation type="vanished">Sinun tulee päivittää tietokoneesi graafiset ohjainajurit- GPU:n tekemistä webbisivuista. %1</translation>
-    </message>
-    <message>
-        <source>(&lt;a href=&apos;http://intel.com/support&apos;&gt;Intel&apos;s support site&lt;/a&gt;)</source>
-        <translation type="vanished">(&lt;a href=&apos;http://intel.com/support&apos;&gt;Intelin tukisivut&lt;/a&gt;)</translation>
-    </message>
-    <message>
-        <source>Because graphs will not render correctly, and it may cause crashes, this build will now exit.</source>
-        <translation type="vanished">Koska grafiikat eivät renderöidy oikein ja se voi aiheuttaa ohjelman kaatumisia, tämä ohjelma sulkeutuu nyt.</translation>
-    </message>
-    <message>
-        <source>There is another build available tagged &quot;&lt;b&gt;-BrokenGL&lt;/b&gt;&quot; that should work on your computer.</source>
-        <translation type="obsolete">On olemassa toinen &quot;&lt;b&gt;-BrokenGL&lt;/b&gt;&quot;-niminen versio joka toimii koneessasi.</translation>
-    </message>
-    <message>
-        <source>Would you like SleepyHead to use this location for storing its data?</source>
-        <translation type="obsolete">Onko seuraava paikka hyvä Oscarin tietojen tallentamiseen?</translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old SleepyHead data folder.</source>
-        <translation type="obsolete">Jos olet päivittämässä, älä hätäänny. Varmista että tämä osoittaa vanhan Oscarin version tietojen tallennushakemistoon.</translation>
-    </message>
-    <message>
-        <source>(If you have no idea what to do here, just click yes.)</source>
-        <translation type="obsolete">(Jos et tiedä mitä tämä tarkoittaa, napsauta vain kyllä.)</translation>
-    </message>
-    <message>
-        <source>No SleepyHead data folder was found.</source>
-        <translation type="vanished">SleepyHeadin datatietojen kansiota ei löytynyt.</translation>
-    </message>
-    <message>
-        <source>Would you like SleepyHead to use the default location for storing its data?</source>
-        <translation type="vanished">Haluatko SleepyHeadin käyttävän oletuspaikkaa sen datatietojen talletukseen?</translation>
-    </message>
-    <message>
-        <source>As you did not select a data folder, SleepyHead will exit.</source>
-        <translation type="vanished">Kun et valinnut datatietojen kansiota, SleepyHead sulkeutuu.</translation>
-    </message>
-    <message>
-        <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation type="vanished">Haluatko, että Oscar tallettaa tiedot tähän paikkaan?</translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation type="vanished">Jos päivität, älä säikähdä. Sinun tulee varmistua, että tämä osoittaa vanhoihin Oscarin tietokansioihin.</translation>
-    </message>
-    <message>
-        <source>(If you are unsure, just click yes.)</source>
-        <translation type="vanished">(Jos olet epävarma, napsauta kyllä.)</translation>
-    </message>
-    <message>
-        <source>Choose or create new folder for OSCAR data</source>
-        <translation type="vanished">Valitse tai luo uusi kansio Oscarin tiedoille</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="179"/>
         <source>Choose the SleepyHead data folder to migrate</source>
         <translation type="unfinished"></translation>
@@ -8177,21 +7185,9 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Next time you run, you will be asked again.</source>
-        <translation type="vanished">Sinulta kysytään seuraavalla kerralla uudelleen.</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="408"/>
         <source>As you did not select a data folder, OSCAR will exit.</source>
         <translation>Koska et valinnut tietojen kansiota, Oscar lopettaa toimintansa.</translation>
-    </message>
-    <message>
-        <source>You did not select a directory.</source>
-        <translation type="vanished">Et valinnut uutta kansiota.</translation>
-    </message>
-    <message>
-        <source>OSCAR will now start with your old one.</source>
-        <translation type="vanished">Oscar käynnistyy nyt vanhoilla tiedoilla.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="420"/>
@@ -8219,14 +7215,6 @@ TTIA: %1</translation>
         <translation>Tämä käyttämäsi Oscarin versio on vanhempi kuin versio (%1), millä tiedot on luotu.</translation>
     </message>
     <message>
-        <source>SleepyHead will now start with your old one.</source>
-        <translation type="vanished">SleepyHead käyttää edelleen vanhaa kansiota.</translation>
-    </message>
-    <message>
-        <source>The version of SleepyHead you just ran is OLDER than the one used to create this data (%1).</source>
-        <translation type="obsolete">Äsken käynnistämäsi versio Oscarista on VANHEMPI kuin versio käytetty tietojen luomiseen (%1).</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="503"/>
         <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
         <translation>Se voi mahdollisesti aiheuttaa tietojen hajoaminen. Oletko varma että haluat jatkaa?</translation>
@@ -8237,17 +7225,9 @@ TTIA: %1</translation>
         <translation>Kysymys</translation>
     </message>
     <message>
-        <source>Choose or create new folder for SleepyHead data</source>
-        <translation type="vanished">Valitse tai luo uusi kansio SleepyHeadin datatiedoille</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="407"/>
         <source>Exiting</source>
         <translation>Poistuu</translation>
-    </message>
-    <message>
-        <source>The folder you chose is not empty, nor does it already contain valid SleepyHead data.</source>
-        <translation type="vanished">Valitsemasi kansio ei ole tyhjä, eikä siellä ole oikeita SleepyHeadin datatietoja.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="421"/>
@@ -8275,34 +7255,14 @@ TTIA: %1</translation>
         <translation>Jos käytät pilveä, varmista, että Oscar on suljettu ja synkronointi on valmis ensin toiselle koneelle.</translation>
     </message>
     <message>
-        <source>SleepyHead Reminder</source>
-        <translation type="obsolete">Oscarin muistutus</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="434"/>
         <source>Loading profile &quot;%1&quot;...</source>
         <translation>Lataa profiilia &quot;%1&quot;...</translation>
     </message>
     <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Tietoja SleepyHeadista</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Sulje</translation>
-    </message>
-    <message>
-        <source>&amp;Donate</source>
-        <translation type="obsolete">&amp;Lahjoita</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2111"/>
         <source>Sorry, your %1 %2 machine is not currently supported.</source>
         <translation>Valitettavasti %1 %2 laitteesi ei ole tällä hetkellä tuettu.</translation>
-    </message>
-    <message>
-        <source>Sorry, this feature is not implemented yet</source>
-        <translation type="obsolete">Valitettavasti tätä toimintoa ei ole vielä toteutettu</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1167"/>
@@ -8323,12 +7283,6 @@ TTIA: %1</translation>
         <location filename="../oscar/reports.cpp" line="55"/>
         <source>Would you like to show bookmarked areas in this report?</source>
         <translation>Haluatko näyttää kirjamerkityt alueet tässä raportissa?</translation>
-    </message>
-    <message>
-        <source>This make take some time to complete..
-Please don&apos;t touch anything until it&apos;s done.</source>
-        <translation type="vanished">Tämä voi viedä jonkin aikaa..
-Älä koske mihinkään sinä aikana.</translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="98"/>
@@ -8407,170 +7361,9 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>Oscar v%1</translation>
     </message>
     <message>
-        <source>SleepyHead v%1 - http://sleepyhead.sourceforge.net</source>
-        <translation type="vanished">SleepyHead v%1 - http://sleepyhead.sourceforge.net</translation>
-    </message>
-    <message>
         <location filename="../oscar/reports.cpp" line="561"/>
         <source>Page %1 of %2</source>
         <translation>Sivu %1 / %2</translation>
-    </message>
-    <message>
-        <source>SleepyHead has finished sending the job to the printer.</source>
-        <translation type="vanished">SleepyHead on lähettänyt tulostustyön kirjoittimelle.</translation>
-    </message>
-    <message>
-        <source>Name: %1, %2</source>
-        <translation type="vanished">Nimi: %1, %2</translation>
-    </message>
-    <message>
-        <source>DOB: %1</source>
-        <translation type="vanished">Synt: %1</translation>
-    </message>
-    <message>
-        <source>Phone: %1</source>
-        <translation type="vanished">Puhelin: %1</translation>
-    </message>
-    <message>
-        <source>Email: %1</source>
-        <translation type="vanished">Sähköposti: %1</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation type="vanished">Osoite:</translation>
-    </message>
-    <message>
-        <source>Usage Statistics</source>
-        <translation type="vanished">Käyttötilastot</translation>
-    </message>
-    <message>
-        <source>This report was generated by a pre-release version of SleepyHead (%1), &lt;b&gt;and has not been approved in any way for compliance or medical diagnostic purposes&lt;/b&gt;.</source>
-        <translatorcomment>compilance jäi vielä kääntämättä</translatorcomment>
-        <translation type="vanished">Tämä raportti on tehty SleepyHeadin esiversiolla (%1), &lt;b&gt;ja sitä ei ole hyväksytty millään tavalla hoidon sopivuuteen eikä lääketieteellisiin tarkoituksiin&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>This report was generated by SleepyHead (%1), &lt;b&gt;and has not been approved in any way for compliance or medical diagnostic purposes&lt;/b&gt;.</source>
-        <translation type="obsolete">Tämä raportti on tehty Oscarin versiolla (%1), &lt;b&gt;ja sitä ei ole hyväksytty millään tavalla hoidon sopivuuteen eikä lääketieteellisiin tarkoituksiin&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is free open-source software available from http://sourceforge.net/projects/SleepyHead</source>
-        <translation type="vanished">SleepyHead on avoimen lähdekoodin ohjelma saatavana osoitteessa http://sourceforge.net/projects/SleepyHead</translation>
-    </message>
-    <message>
-        <source>CPAP Usage</source>
-        <translation type="obsolete">CPAP käyttö</translation>
-    </message>
-    <message>
-        <source>Days Used: %1</source>
-        <translation type="obsolete">Päivää käytössä: %1</translation>
-    </message>
-    <message>
-        <source>Low Use Days: %1</source>
-        <translation type="obsolete">Vähäinen käyttö, päivää: %1</translation>
-    </message>
-    <message>
-        <source>Compliance: %1%</source>
-        <translation type="obsolete">Hoitomyöntyvyys: %1%</translation>
-    </message>
-    <message>
-        <source>Days AHI of 5 or greater: %1</source>
-        <translation type="obsolete">Päivää, AHI 5 tai korkeampi: %1</translation>
-    </message>
-    <message>
-        <source>Best AHI</source>
-        <translation type="obsolete">Paras AHI</translation>
-    </message>
-    <message>
-        <source>Date: %1 AHI: %2</source>
-        <translation type="obsolete">Pvm: %1 AHI: %2</translation>
-    </message>
-    <message>
-        <source>Worst AHI</source>
-        <translation type="obsolete">Huonoin AHI</translation>
-    </message>
-    <message>
-        <source>Best Flow Limitation</source>
-        <translation type="obsolete">Paras virtauksen rajoite (FL)</translation>
-    </message>
-    <message>
-        <source>Date: %1 FL: %2</source>
-        <translation type="obsolete">Pvm: %1 FL: %2</translation>
-    </message>
-    <message>
-        <source>Worst Flow Limtation</source>
-        <translation type="obsolete">Huonoin virtauksen rajoite</translation>
-    </message>
-    <message>
-        <source>No Flow Limitation on record</source>
-        <translation type="obsolete">Virtauksen rajoite ei löydy tallenteesta</translation>
-    </message>
-    <message>
-        <source>Worst Large Leaks</source>
-        <translation type="obsolete">Huonoimmat suuret vuodot</translation>
-    </message>
-    <message>
-        <source>Date: %1 Leak: %2%</source>
-        <translation type="obsolete">Pvm: %1 Vuoto: %2%</translation>
-    </message>
-    <message>
-        <source>No Large Leaks on record</source>
-        <translation type="obsolete">Suuria vuotoja ei löydy tallenteesta</translation>
-    </message>
-    <message>
-        <source>Worst CSR</source>
-        <translation type="obsolete">Huonoin CSR</translation>
-    </message>
-    <message>
-        <source>Date: %1 CSR: %2%</source>
-        <translation type="obsolete">Pvm: %1 CSR %2%</translation>
-    </message>
-    <message>
-        <source>No CSR on record</source>
-        <translation type="obsolete">CSR ei löydy tallenteesta</translation>
-    </message>
-    <message>
-        <source>Worst PB</source>
-        <translation type="obsolete">Huonoin PB</translation>
-    </message>
-    <message>
-        <source>Date: %1 PB: %2%</source>
-        <translation type="obsolete">Pvm: %1 PB: %2%</translation>
-    </message>
-    <message>
-        <source>No PB on record</source>
-        <translation type="obsolete">PB ei löydy tallenteesta</translation>
-    </message>
-    <message>
-        <source>Want more information?</source>
-        <translation type="obsolete">Haluatko enemmän tietoa?</translation>
-    </message>
-    <message>
-        <source>SleepyHead needs all summary data loaded to calculate best/worst data for individual days.</source>
-        <translation type="obsolete">Oscar tarvitsee kaikki yhteenlasketut tiedot ladattuna laskeakseen parhaat/huonoimmat tiedot yksittäisille päiville.</translation>
-    </message>
-    <message>
-        <source>Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.</source>
-        <translation type="obsolete">Valitse Oscarin asetuksista valintaruudun &quot;Lataa ennalta kaikki yhteenvetotiedot&quot; varmistamaan tietojen saatavuutta.</translation>
-    </message>
-    <message>
-        <source>Best RX Setting</source>
-        <translation type="obsolete">Paras paineasetus</translation>
-    </message>
-    <message>
-        <source>Date: %1 - %2</source>
-        <translation type="obsolete">Pvm: %1 - %2</translation>
-    </message>
-    <message>
-        <source>Culminative AHI: %1</source>
-        <translation type="obsolete">Huipentunut AHI: %1</translation>
-    </message>
-    <message>
-        <source>Culminative Hours: %1</source>
-        <translation type="obsolete">Huipentuneet tunnit: %1</translation>
-    </message>
-    <message>
-        <source>Worst RX Setting</source>
-        <translation type="obsolete">Huonoin paineasetus</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSummaryChart.cpp" line="997"/>
@@ -8613,29 +7406,9 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>(Vain yhteenveto)</translation>
     </message>
     <message>
-        <source>There is a lockfile already present for profile &apos;%1&apos;.</source>
-        <translation type="vanished">Profiilille &apos;%1&apos; on asetettu jo aiemmin lukitus.</translation>
-    </message>
-    <message>
-        <source>You can only work with one instance of an individual SleepyHead profile at a time.</source>
-        <translation type="vanished">Voit käyttää vain yhtä SleepyHeadin profiilia kerrallaan</translation>
-    </message>
-    <message>
-        <source>Please close any other instances of SleepyHead running with this profile before proceeding.</source>
-        <translation type="vanished">Sulje kaikki muut profiilit ennen tämän profiilin käyttöä.</translation>
-    </message>
-    <message>
-        <source>If no other instances of SleepyHead are running, (eg, it crashed last time!), it is safe to ignore this message.</source>
-        <translation type="vanished">Jos nyt ei ole käynnissä yhtään toista SleepyHead-ohjelmaa (esim. kaatunut viime kerralla!), on turvallisinta ohittaa tämä viesti.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="419"/>
         <source>There is a lockfile already present for this profile &apos;%1&apos;, claimed on &apos;%2&apos;.</source>
         <translation>Profiilille &apos;%1&apos; on asetettu jo aiemmin lukitus, kohde &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>If you are using cloud storage, make sure SleepyHead is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation type="vanished">Jos käytät pilvipalveluja varmistu, että SleepyHEad on suljettu ja tietojen synkronointi on loppunut toisella koneella ennen tehtävän suorittamista.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/day.cpp" line="154"/>
@@ -8708,167 +7481,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Tervetuloa SleepyHeadiin</translation>
-    </message>
-    <message>
-        <source>What would you like to do?</source>
-        <translation type="vanished">Mitä haluat tehdä?</translation>
-    </message>
-    <message>
-        <source>Please Import Some Data</source>
-        <translation type="vanished">Ole hyvä ja tuo jotain tietoa</translation>
-    </message>
-    <message>
-        <source>CPAP&lt;br/&gt;Importer</source>
-        <translation type="vanished">CPAP&lt;br/&gt;Tuonti</translation>
-    </message>
-    <message>
-        <source>Oximetery&lt;br/&gt;Wizard</source>
-        <translation type="vanished">Oksimetri&lt;br/&gt;Velho</translation>
-    </message>
-    <message>
-        <source>or</source>
-        <translation type="vanished">tai</translation>
-    </message>
-    <message>
-        <source>View&lt;br/&gt;Statistics</source>
-        <translation type="vanished">Näytä&lt;br/&gt;Tilastoja</translation>
-    </message>
-    <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="vanished">Hyvä idea on tarkistaa asetukset ensin,&lt;/br&gt;sillä jotkut asetukset vaikuttavat tietojen tuontiin.</translation>
-    </message>
-    <message>
-        <source>First import can take a few minutes.</source>
-        <translation type="vanished">Ensimmäinen tuonti voi kestää muutaman minuutin.</translation>
-    </message>
-    <message>
-        <source>Click this box to see this in daily view.</source>
-        <translation type="vanished">Napsauta tätä laatikkoa nähdäksesi tämän päivittäisessä näytössä.</translation>
-    </message>
-    <message>
-        <source>The last time you used your %1...</source>
-        <translation type="vanished">Käytit %1 laitetta edellisen kerran...</translation>
-    </message>
-    <message>
-        <source>last night</source>
-        <translation type="vanished">viime yönä</translation>
-    </message>
-    <message>
-        <source>yesterday</source>
-        <translation type="vanished">eilen</translation>
-    </message>
-    <message>
-        <source>%2 days ago</source>
-        <translation type="vanished">%2 päivää sitten</translation>
-    </message>
-    <message>
-        <source>was %1 (on %2)</source>
-        <translation type="vanished">%1 (%2)</translation>
-    </message>
-    <message>
-        <source>perfect :)</source>
-        <translation type="vanished">täydellinen :)</translation>
-    </message>
-    <message>
-        <source>pretty darn good</source>
-        <translation type="vanished">oikein kirotun hyvä</translation>
-    </message>
-    <message>
-        <source>reasonably good</source>
-        <translation type="vanished">järkevästi hyvä</translation>
-    </message>
-    <message>
-        <source>technically &quot;treated&quot;</source>
-        <translation type="vanished">teknisesti &quot;käsitelty&quot;</translation>
-    </message>
-    <message>
-        <source>not very good</source>
-        <translation type="vanished">ei niin hyvä</translation>
-    </message>
-    <message>
-        <source>horrible, please consult your doctor</source>
-        <translation type="vanished">hirveä, ole hyvä ja ota yhteys lääkäriisi</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;span title=&quot;Mac OSX and Win8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Certain operating systems&lt;/font&gt;&lt;/span&gt; write index files to the card without asking, which can render your card unreadable by your cpap machine.</source>
-        <translation type="vanished">&lt;p&gt;&lt;span title=&quot;Mac OSX and Win8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Tietyillä käyttöjärjestelmillä&lt;/font&gt;&lt;/span&gt; indeksitiedostojen kirjoitus sd-kortille kysymättä voi tehdä kortista lukukelvottoman cpap-laitteellasi.</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;As a second line of protection, ALWAYS UNMOUNT the data card properly before removing it!&lt;/p&gt;</source>
-        <translatorcomment>unmount ja windowsissa toisella tavalla</translatorcomment>
-        <translation type="vanished">&lt;p&gt;Toinen turvallisuusvinkki, irrota SD-kortti AINA TURVALLISESTI !&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="vanished">%1 tuntia, %2 minuuttia ja %3 sekuntia</translation>
-    </message>
-    <message>
-        <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="vanished">&lt;font color = red&gt;Maskisi on ollut käytössäsi viimeiksi vain %1.&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>You had no &lt;i&gt;major&lt;/i&gt; mask leaks (maximum was %1 %2).</source>
-        <translation type="vanished">Sinulla ei ollut yhtään &lt;i&gt;suurta&lt;/i&gt; maskivuotoa (maksimi oli %1 %2).</translation>
-    </message>
-    <message>
-        <source>You had a small but acceptable amount of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Sinulla oli pieni, mutta hyväksyttävä määrä &lt;i&gt;suuria&lt;/i&gt; maskivuotoja.</translation>
-    </message>
-    <message>
-        <source>You had significant periods of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Sinulla oli merkittäviä jaksoja &lt;i&gt;suuria&lt;/i&gt; maskivuotoja.</translation>
-    </message>
-    <message>
-        <source>Your mask is leaking way too much.. Talk to your CPAP advisor.</source>
-        <translation type="vanished">Maskisi vuotaa liikaa. Kerro asiasta unihoitajallesi.</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="obsolete">CPAP-laitteesi puhaltaa jatkuvasti %1%2 ilmaa</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Ilmavirran paineesi oli alle %1%2 ja se oli %3% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="obsolete">CPAP-laitteesi puhaltaa jatkuvasti %1-%2 %3 ilmaa.</translation>
-    </message>
-    <message>
-        <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="obsolete">Laitteesi oli alle %1-%2 %3 %4% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="obsolete">EPAP paineesi oli jatkuva %1%2.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="obsolete">EPAP paineesi oli alle %1%2 %3% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="obsolete">IPAP paineesi oli alle %1%2 %3% ajasta.</translation>
-    </message>
-    <message>
-        <source>You had an AHI of %1, which is considered %2</source>
-        <translation type="vanished">Sinulla oli AHI %1, jota voi kuvailla sanoilla %2.</translation>
-    </message>
-    <message>
-        <source>You machine was on for %1.</source>
-        <translation type="vanished">Laitteesi on ollut käynnissä %1.</translation>
-    </message>
-    <message>
-        <source>No CPAP data has been imported yet.</source>
-        <translation type="vanished">Yhtään CPAP-tietoja ei ole tuotu vielä.</translation>
-    </message>
-    <message>
-        <source>Most recent Oximetery data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation type="vanished">Viimeisin oksimetrin tieto: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
-    </message>
-    <message>
         <location filename="../oscar/welcome.cpp" line="297"/>
         <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
         <translation>Viimeisimmät oksimetrin tiedot: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
@@ -8892,18 +7504,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/welcome.cpp" line="305"/>
         <source>No oximetry data has been imported yet.</source>
         <translation>Vielä ei ole tuotu oksimetrin dataa.</translation>
-    </message>
-    <message>
-        <source>No oximetery data has been imported yet.</source>
-        <translation type="vanished">Yhtään oksimetrin tietoja ei ole tuotu vielä.</translation>
-    </message>
-    <message>
-        <source>Very Important Warning</source>
-        <translation type="vanished">Erittäin tärkeä varoitus</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;ALWAYS &lt;font size=+1 color=red&gt;&lt;b&gt;write protect&lt;/b&gt;&lt;/font&gt; CPAP SDCards before inserting them into your computer.</source>
-        <translation type="vanished">&lt;p&gt;&lt;font size=+1 color=red&gt;&lt;b&gt;Kirjoitussuojaa&lt;/b&gt; AINA &lt;/font&gt; CPAP SD-kortit ennenkuin viet ne tietokoneeseesi.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.h" line="39"/>
@@ -9008,10 +7608,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>Henkilökohtainen univalmentaja</translation>
     </message>
     <message>
-        <source>(% of time)</source>
-        <translation type="vanished">(% ajasta)</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gFlagsLine.cpp" line="196"/>
         <source>Database Outdated
 Please Rebuild CPAP Data</source>
@@ -9032,10 +7628,6 @@ Ole hyvä ja uudista CPAP tiedot</translation>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="386"/>
         <source>Pop out Graph</source>
         <translation>Avaa kaavio</translation>
-    </message>
-    <message>
-        <source>SleepyHead is proudly brought to you by JediMark.</source>
-        <translation type="vanished">JediMark on tuonut ylpeänä sinulle SleepyHeadin.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1406"/>
@@ -9146,34 +7738,18 @@ Ole hyvä ja uudista CPAP tiedot</translation>
         <source>For some reason, OSCAR couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.
 
 </source>
-        <translation>Jostakin syystä Oscar ei löytänyt päivyritietoja profiilistasi, mutta löysi useamman päivyrin kansiot.</translation>
+        <translation>Jostakin syystä Oscar ei löytänyt päivyritietoja profiilistasi, mutta löysi useamman päivyrin kansiot.
+
+</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="54"/>
         <source>OSCAR picked only the first one of these, and will use it in future:
 
 </source>
-        <translation>Oscar poimi vain ensimmäisen näistä, ja käyttää sitä jatkossa:</translation>
-    </message>
-    <message>
-        <source>SleepyHead found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation type="obsolete">Oscar löysi vanhan päivyrihakemiston, mutta se näyttää siltä että se on uudelleennimetty:</translation>
-    </message>
-    <message>
-        <source>SleepyHead will not touch this folder, and will create a new one instead.</source>
-        <translation type="vanished">SleepyHead ei koske tähän kansioon ja luo uuden kansion sen sijaan.</translation>
-    </message>
-    <message>
-        <source>Please be careful when playing in SleepyHead&apos;s profile folders :-P</source>
-        <translation type="vanished">Ole huolellinen kun käsittelet SleepyHeadin profiilikansioita :-P</translation>
-    </message>
-    <message>
-        <source>For some reason, sleepyHead couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.</source>
-        <translation type="obsolete">Jostakin syystä Oscar ei löytänyt päivyritietoja profiilistasi, mutta löysi useamman päivyrin kansiot.</translation>
-    </message>
-    <message>
-        <source>SleepyHead picked only the first one of these, and will use it in future:</source>
-        <translation type="vanished">SleepyHead poimi vain ensimmäisen näistä, ja käyttää sitä jatkossa:</translation>
+        <translation>Oscar poimi vain ensimmäisen näistä, ja käyttää sitä jatkossa:
+
+</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="56"/>
@@ -9424,7 +8000,7 @@ Ole hyvä ja uudista CPAP tiedot</translation>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3101"/>
         <source>Pt. Access</source>
-        <translation>Pot. pääsy </translation>
+        <translation>Pot. pääsy</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3102"/>
@@ -9437,7 +8013,7 @@ Ole hyvä ja uudista CPAP tiedot</translation>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3111"/>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3112"/>
         <source>Climate Control</source>
-        <translation>Ilmastoint </translation>
+        <translation>Ilmastoint</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3115"/>
@@ -9489,42 +8065,6 @@ Ole hyvä ja uudista CPAP tiedot</translation>
         <location filename="../oscar/SleepLib/loader_plugins/weinmann_loader.h" line="116"/>
         <source>SOMNOsoft2</source>
         <translation>SOMNOsoft2</translation>
-    </message>
-    <message>
-        <source>Loading %1 data...</source>
-        <translation type="vanished">Lataa %1 tietoja...</translation>
-    </message>
-    <message>
-        <source>PLease Wait...</source>
-        <translation type="vanished">Odota...</translation>
-    </message>
-    <message>
-        <source>By Pressure</source>
-        <translation type="vanished">Paineella</translation>
-    </message>
-    <message>
-        <source>Statistics at Pressure</source>
-        <translation type="vanished">Paineen tilastot</translation>
-    </message>
-    <message>
-        <source>Time at Pressure</source>
-        <translation type="obsolete">Aika paineen alla</translation>
-    </message>
-    <message>
-        <source>Click to %1 this session.</source>
-        <translation type="obsolete">Paina ja %1 istunto.</translation>
-    </message>
-    <message>
-        <source>disable</source>
-        <translation type="obsolete">kiellä</translation>
-    </message>
-    <message>
-        <source>enable</source>
-        <translation type="obsolete">salli</translation>
-    </message>
-    <message>
-        <source>%1 Session #%2</source>
-        <translation type="vanished">%1 istunto #%2</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraph.cpp" line="351"/>
@@ -9587,13 +8127,6 @@ rivi %2, sarake %3</translation>
         <location filename="../oscar/Graphs/MinutesAtPressure.cpp" line="312"/>
         <source>Peak %1</source>
         <translation>Huippu %1</translation>
-    </message>
-</context>
-<context>
-    <name>QuaZipFilePrivate</name>
-    <message>
-        <source>ZIP/UNZIP API error %1</source>
-        <translation type="vanished">ZIP/UNZIP API-virhe %1</translation>
     </message>
 </context>
 <context>
@@ -9687,10 +8220,6 @@ rivi %2, sarake %3</translation>
         <translation>Keskiarvo %1</translation>
     </message>
     <message>
-        <source>90% %1</source>
-        <translation type="vanished">90% %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="561"/>
         <source>Min %1</source>
         <translation>Minimi %1</translation>
@@ -9751,30 +8280,14 @@ rivi %2, sarake %3</translation>
         <translation>Käyttötilastot</translation>
     </message>
     <message>
-        <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation type="vanished">Tämä on juridisista syistä. Ilman valmistajan tukea ja dokumentaatiota, Oscar ei sovellu vaatimustenmukaiseksi / lääketieteen raportointityökaluksi.</translation>
-    </message>
-    <message>
-        <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation type="vanished">(EI hyväksytty vaatimustenmukaiseksi tai lääketieteellisen raportoinnin tarkoituksiin)</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="657"/>
         <source>This report was generated by OSCAR v%1</source>
         <translation>Tämän raportin loi Oscar v%1</translation>
     </message>
     <message>
-        <source>OSCAR is free open-source CPAP review software</source>
-        <translation type="vanished">Oscar on vapaa avoimen lähdekoodin näyttöohjelma CPAP-tiedoille</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="993"/>
         <source>I can haz data?!?</source>
         <translation>Voinko löytää tietoja?!?</translation>
-    </message>
-    <message>
-        <source>Oscar has to data to report :(</source>
-        <translation type="vanished">Oscarilla tulisi olla tietoa raportoitavaksi :(</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="995"/>
@@ -9784,7 +8297,7 @@ rivi %2, sarake %3</translation>
     <message>
         <location filename="../oscar/statistics.cpp" line="1217"/>
         <source>Days Used: %1</source>
-        <translation> Päivää käytössä: %1</translation>
+        <translation>Päivää käytössä: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1218"/>
@@ -9927,10 +8440,6 @@ rivi %2, sarake %3</translation>
         <translation>Huonoin paineasetus</translation>
     </message>
     <message>
-        <source>This lonely sleepy sheep has no data :(</source>
-        <translation type="vanished">Tällä yksinäisellä unisella lampaalla ei ole yhtään tietoa :(</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="1051"/>
         <source>Most Recent</source>
         <translation>Viimeisin</translation>
@@ -10024,10 +8533,6 @@ rivi %2, sarake %3</translation>
 <context>
     <name>UpdaterWindow</name>
     <message>
-        <source>SleepyHead Updater</source>
-        <translation type="vanished">SleepyHead päivitys</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.ui" line="60"/>
         <source>A new version of $APP is available</source>
         <translation>Uusi versio ohjelmasta $APP on saatavilla</translation>
@@ -10041,10 +8546,6 @@ rivi %2, sarake %3</translation>
         <location filename="../oscar/UpdaterWindow.ui" line="117"/>
         <source>Release Notes</source>
         <translation>Julkaisutiedot</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.ui" line="14"/>
@@ -10112,21 +8613,9 @@ rivi %2, sarake %3</translation>
         <translation>&amp;Valmis</translation>
     </message>
     <message>
-        <source>Checking for SleepyHead Updates</source>
-        <translation type="vanished">Tarkistaa SleepyHeadin päivityksiä</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="146"/>
         <source>Requesting </source>
         <translation>Pyytää </translation>
-    </message>
-    <message>
-        <source>Saving as </source>
-        <translation type="vanished">Tallentaa nimellä</translation>
-    </message>
-    <message>
-        <source>XML update structure parsed cleanly</source>
-        <translation type="vanished">XML-päivityksen rakenne muutettu puhtaasti virheettä</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
@@ -10134,57 +8623,9 @@ rivi %2, sarake %3</translation>
         <translation>Sinun käyttöjärjestelmällesi ei ole uusia päivityksiä.</translation>
     </message>
     <message>
-        <source>SleepyHead Updates</source>
-        <translation type="obsolete">OSCAR päivitykset</translation>
-    </message>
-    <message>
-        <source>No new updates were found for your platform.</source>
-        <translation type="vanished">Käyttöjärjestelmällesi ei ole uudempia ohjelmaversioita</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1, codename &quot;%2&quot;</source>
-        <translation type="vanished">SleepyHead v%1, koodinimi &quot;%2&quot;</translation>
-    </message>
-    <message>
-        <source>platform notes</source>
-        <translation type="vanished">Käyttöjärjestelmähuomautukset</translation>
-    </message>
-    <message>
-        <source>A new version of SleepyHead is available!</source>
-        <translation type="vanished">SleepyHeadin uusi versio on saatavana!</translation>
-    </message>
-    <message>
-        <source>Shiny new &lt;b&gt;v%1&lt;/b&gt; is available. You&apos;re running old and busted v%2</source>
-        <translation type="vanished">Häikäisevä uusi &lt;b&gt;v%1&lt;/b&gt; on saatavilla. Sinulla on käytössä vanha ja murrettu v%2</translation>
-    </message>
-    <message>
-        <source>An update for SleepyHead is available.</source>
-        <translation type="vanished">SleepyHeadin päivitys on saatavilla.</translation>
-    </message>
-    <message>
-        <source>Version &lt;b&gt;%1&lt;/b&gt; is available. You&apos;re currently running v%1</source>
-        <translation type="vanished">Versio &lt;b&gt;%1&lt;/b&gt; on saatavilla. Sinulla on käytössä nyt versio %1</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1 build notes</source>
-        <translation type="vanished">SleepyHead v%1 huomautukset</translation>
-    </message>
-    <message>
-        <source>Update to QtLibs (v%1)</source>
-        <translation type="vanished">Päivitä QtLibs (v%1)</translation>
-    </message>
-    <message>
-        <source>There was an error parsing the XML Update file.</source>
-        <translation type="vanished">XML-päivityksen tiedoston käsittelyssä tapahtui virhe.</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="171"/>
         <source>%1 bytes received</source>
         <translation>%1 tavua vastaanotettu</translation>
-    </message>
-    <message>
-        <source>SleepyHead Updates are currently unvailable for this platform</source>
-        <translation type="obsolete">Päivityksiä ei ole tällä hetkellä saatavilla tälle alustalle</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="93"/>
@@ -10224,81 +8665,9 @@ rivi %2, sarake %3</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New SleepyHead Updates are avilable:</source>
-        <translation type="obsolete">Uudet päivitykset OSCARille saatavilla:</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="512"/>
         <source>Would you like to download and install them now?</source>
         <translation>Haluatko ladata ja asentaa ne nyt?</translation>
-    </message>
-    <message>
-        <source>Would you like t download and install them now?</source>
-        <translation type="obsolete">Haluatko ladata ja päivittää nyt?</translation>
-    </message>
-    <message>
-        <source>Redirected to </source>
-        <translation type="vanished">Uudelleenohjattu kohteeseen </translation>
-    </message>
-    <message>
-        <source>File size mismatch for %1</source>
-        <translation type="vanished">Tiedoston koon epäsuhtaisuus %1</translation>
-    </message>
-    <message>
-        <source>File integrity check failed for %1</source>
-        <translation type="vanished">Tiedoston %1 yhtenäisyystarkistus epäonnistui</translation>
-    </message>
-    <message>
-        <source>Extracting </source>
-        <translation type="vanished">Purkaa </translation>
-    </message>
-    <message>
-        <source>You might need to reinstall manually. Sorry :(</source>
-        <translation type="vanished">Sinun pitää uudelleenasentaa käsin, sorry :(</translation>
-    </message>
-    <message>
-        <source>Ugh.. Something went wrong with unzipping.</source>
-        <translation type="vanished">Jotain meni pieleen pakkauksen purkamisessa.</translation>
-    </message>
-    <message>
-        <source>Failed</source>
-        <translation type="vanished">Epäonnistui</translation>
-    </message>
-    <message>
-        <source>Download Complete</source>
-        <translation type="vanished">Lataus valmis</translation>
-    </message>
-    <message>
-        <source>There was an error completing a network request:
-
-(</source>
-        <translation type="vanished">Nettipyynnön suorittamisessa tapahtui virhe:
-
-(</translation>
-    </message>
-    <message>
-        <source>Update Complete!</source>
-        <translation type="vanished">Päivitys valmis!</translation>
-    </message>
-    <message>
-        <source>Updates Complete. SleepyHead needs to restart now, click Finished to do so.</source>
-        <translation type="vanished">Päivitys valmis. SleepyHead tulee käynnistää uudelleen nyt. Napsauta Valmis tehdäksesi niin.</translation>
-    </message>
-    <message>
-        <source>Update Failed :(</source>
-        <translation type="vanished">Päivitys epäonnistui :(</translation>
-    </message>
-    <message>
-        <source>Download Error. Sorry, try again later.</source>
-        <translation type="vanished">Latausvirhe. Yritä uudelleen myöhemmin.</translation>
-    </message>
-    <message>
-        <source>Downloading &amp; Installing Updates...</source>
-        <translation type="vanished">Lataa ja asentaa päivityksiä...</translation>
-    </message>
-    <message>
-        <source>Please wait while downloading and installing updates.</source>
-        <translation type="vanished">Odota ohjelman päivitysten lataamista ja asentamista.</translation>
     </message>
 </context>
 <context>
@@ -10307,10 +8676,6 @@ rivi %2, sarake %3</translation>
         <location filename="../oscar/welcome.ui" line="14"/>
         <source>Form</source>
         <translation>Muoto</translation>
-    </message>
-    <message>
-        <source>Welcome To Open Source CPAP Reviewer</source>
-        <translation type="vanished">Tervetuloa avoimen lähdekoodin CPAP-näyttösovellukseen</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.ui" line="128"/>
@@ -10351,10 +8716,6 @@ rivi %2, sarake %3</translation>
         <location filename="../oscar/welcome.ui" line="581"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;need &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;to be locked &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;before &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Varoitus: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;tarvitsee &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;olla lukittu &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;ennen &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;tietokoneeseen liittämistä&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Jotkut käyttöjärjestelmät kirjoittavat väliaikaismuistin tiedot, joka katkaisee niiden erityisen tiedostokirjanpidon&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="obsolete">Hyvä idea on tarkistaa asetukset ensin,&lt;/br&gt;sillä jotkut asetukset vaikuttavat tietojen tuontiin.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="139"/>
@@ -10449,7 +8810,7 @@ rivi %2, sarake %3</translation>
     <message>
         <location filename="../oscar/welcome.cpp" line="215"/>
         <source>Your pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Ilmavirran paineesi oli alle %1%2 ja se oli %3% ajasta. {1 %2 ?} {3%?}</translation>
+        <translation>Ilmavirran paineesi oli alle %1 %2 ja se oli %3% ajasta.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="219"/>
@@ -10459,47 +8820,23 @@ rivi %2, sarake %3</translation>
     <message>
         <location filename="../oscar/welcome.cpp" line="228"/>
         <source>Your EPAP pressure fixed at %1 %2.</source>
-        <translation type="unfinished">EPAP paineesi oli jatkuva %1%2. {1 %2.?}</translation>
+        <translation>EPAP paineesi oli jatkuva %1 %2.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="229"/>
         <location filename="../oscar/welcome.cpp" line="235"/>
         <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">IPAP paineesi oli alle %1%2 %3% ajasta. {1 %2 ?} {3%?}</translation>
+        <translation>IPAP paineesi oli alle %1 %2 %3% ajasta.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="234"/>
         <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">EPAP paineesi oli alle %1%2 %3% ajasta. {1 %2 ?} {3%?}</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="vanished">CPAP-laitteesi puhaltaa jatkuvasti %1%2 ilmaa</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Ilmavirran paineesi oli alle %1%2 ja se oli %3% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="vanished">CPAP-laitteesi puhaltaa jatkuvasti %1-%2 %3 ilmaa.</translation>
+        <translation>EPAP paineesi oli alle %1 %2 %3% ajasta.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="223"/>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
         <translation>Laitteesi oli alle %1-%2 %3 %4% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="vanished">EPAP paineesi oli jatkuva %1%2.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">IPAP paineesi oli alle %1%2 %3% ajasta.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">EPAP paineesi oli alle %1%2 %3% ajasta.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="255"/>

@@ -1102,11 +1102,6 @@
         <translation>&amp;Avancerad</translation>
     </message>
     <message>
-        <location filename="../oscar/mainwindow.ui" line="2980"/>
-        <source>&amp;Maximize Toggle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3185"/>
         <source>Report an Issue</source>
         <translation>Rapportera ett problem</translation>
@@ -1225,8 +1220,9 @@
         <translation type="vanished">&amp;Om SleepyHead</translation>
     </message>
     <message>
+        <location filename="../oscar/mainwindow.ui" line="2980"/>
         <source>&amp;Fullscreen Toggle</source>
-        <translation type="vanished">&amp;Växla till/från helskärm</translation>
+        <translation>&amp;Växla till/från helskärm</translation>
     </message>
     <message>
         <source>F11</source>
@@ -4756,7 +4752,7 @@ detta program för att vara instabilt med denna funktion aktiverad.</translation
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="64"/>
         <source>&lt;p&gt;&lt;b&gt;Please Note:&lt;/b&gt; OSCAR&apos;s advanced session splitting capabilities are not possible with &lt;b&gt;ResMed&lt;/b&gt; machines due to a limitation in the way their settings and summary data is stored, and therefore they have been disabled for this profile.&lt;/p&gt;&lt;p&gt;On ResMed machines, days will &lt;b&gt;split at noon&lt;/b&gt; like in ResMed&apos;s commercial software.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;Observera:&lt;/b&gt;OSCARs avancerade data-uppdelningsfunktioner är inte möjliga med &lt;b&gt;ResMed&lt;/b&gt;-maskiner på grund av en begränsning av hur deras inställningar och sammanfattningsdata lagras och de har därför blivit inaktiverade&lt;/p&gt;&lt;p&gt;På ResMed-maskiner kommer dagar &lt;b&gt;att delas vid middagstid dvs, kl.12.00&lt;/b&gt;precis som i ResMeds kommersiella programvara.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Observera:&lt;/b&gt;OSCARs avancerade data-uppdelningsfunktioner är inte möjliga med &lt;b&gt;ResMed&lt;/b&gt;-maskiner på grund av en begränsning av hur deras inställningar och sammanfattningsdata lagras och de har därför blivit inaktiverade&lt;/p&gt;&lt;p&gt;På ResMed-maskiner kommer dagar &lt;b&gt;att delas vid middagstid dvs, kl.12.00&lt;/b&gt;, precis som i ResMeds kommersiella programvara.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="283"/>
@@ -5240,11 +5236,6 @@ Vill du göra det nu?</translation>
         <location filename="../oscar/profileselector.cpp" line="304"/>
         <source>%1, %2</source>
         <translation>%1, %2</translation>
-    </message>
-    <message>
-        <location filename="../oscar/profileselector.cpp" line="168"/>
-        <source>You must create a profile</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="231"/>
@@ -7267,47 +7258,47 @@ TTIA: %1</translation>
     <message>
         <location filename="../oscar/main.cpp" line="210"/>
         <source>Migrating </source>
-        <translation type="unfinished"></translation>
+        <translation>Flyttar </translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="210"/>
         <source> files</source>
-        <translation type="unfinished"></translation>
+        <translation> filer</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="211"/>
         <source>from </source>
-        <translation type="unfinished"></translation>
+        <translation>från </translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="211"/>
         <source>to </source>
-        <translation type="unfinished"></translation>
+        <translation>till </translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="395"/>
         <source>OSCAR will set up a folder for your data.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR skapar en ny mapp för dina data.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="396"/>
         <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Om du har använt SleepyHead, OSCAR kan kopiera dina gamla data till denna mapp senare.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="397"/>
         <source>We suggest you use this folder: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vi föreslår att du använder denna mapp: </translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="398"/>
         <source>Click Ok to accept this, or No if you want to use a different folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka OK för att acceptera det här, eller NEJ om du vill använda en annan mapp.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="409"/>
         <source>Next time you run OSCAR, you will be asked again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nästa gång du startar OSCAR, blir du tillfrågad igen.</translation>
     </message>
     <message>
         <source>If you are upgrading, don&apos;t panic, your old data will be migrated later.</source>
@@ -7343,17 +7334,17 @@ TTIA: %1</translation>
     <message>
         <location filename="../oscar/main.cpp" line="442"/>
         <source>Migrate SleepyHead Data?</source>
-        <translation type="unfinished"></translation>
+        <translation>Flytta SleepyHead:s data?</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="443"/>
         <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
-        <translation type="unfinished"></translation>
+        <translation>På nästa sida kommer OSCAR att fråga efter mappen med SleepyHead:s data</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="444"/>
         <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka [OK] för att gå till nästa sida eller [NEJ] om du inte vill använda SleepyHead:s data.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="501"/>

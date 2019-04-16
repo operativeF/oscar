@@ -6,18 +6,18 @@
     <message>
         <location filename="../oscar/aboutdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="35"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Acerca de</translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="49"/>
         <location filename="../oscar/aboutdialog.cpp" line="122"/>
         <source>Release Notes</source>
-        <translation type="unfinished">Notas de la Versión</translation>
+        <translation>Notas de la Versión</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.ui" line="63"/>
@@ -33,14 +33,6 @@
         <location filename="../oscar/aboutdialog.ui" line="239"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Build Date: %1</source>
-        <translation type="obsolete">Fecha de compilación: %1</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="obsolete">Motor Gráfico: %1</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="43"/>
@@ -75,7 +67,7 @@
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="126"/>
         <source>Important:</source>
-        <translation type="unfinished">Importante:</translation>
+        <translation>Importante:</translation>
     </message>
     <message>
         <location filename="../oscar/aboutdialog.cpp" line="127"/>
@@ -86,10 +78,6 @@
         <location filename="../oscar/aboutdialog.cpp" line="139"/>
         <source>To see if the license text is available in your language, see %1.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="obsolete">Acerca de SleepyHead</translation>
     </message>
 </context>
 <context>
@@ -142,28 +130,14 @@
         <translation>Ir al día anterior</translation>
     </message>
     <message>
-        <source>Prev</source>
-        <translatorcomment>or previo</translatorcomment>
-        <translation type="vanished">Anterior</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="551"/>
         <source>Show or hide the calender</source>
         <translation>Mostrar u ocultar el calendario</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="614"/>
         <source>Go to the next day</source>
         <translation>Ir al día siguiente</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translatorcomment>or próximo</translatorcomment>
-        <translation type="vanished">Siguiente</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="674"/>
@@ -239,11 +213,7 @@
     <message>
         <location filename="../oscar/daily.ui" line="1050"/>
         <source> i </source>
-        <translation>i</translation>
-    </message>
-    <message>
-        <source>Ctrl+I</source>
-        <translation type="vanished">Ctrl+I</translation>
+        <translation> i </translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1081"/>
@@ -256,17 +226,9 @@
         <translation>B</translation>
     </message>
     <message>
-        <source>Ctrl+B</source>
-        <translation type="vanished">Ctrl+B</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="1195"/>
         <source>Zombie</source>
         <translation>Zombi</translation>
-    </message>
-    <message>
-        <source>I&apos;m feeling...</source>
-        <translation type="vanished">Me siento...</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1224"/>
@@ -306,10 +268,6 @@
         <translation>Eliminar Marcador</translation>
     </message>
     <message>
-        <source>Drop down this list to show/hide available graphs.</source>
-        <translation type="vanished">Expanda esta lista para mostrar u ocultar los gráficos disponibles.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="220"/>
         <source>Breakdown</source>
         <translatorcomment>desarrollo, descomponer, desarrollar, DESGLOSAR</translatorcomment>
@@ -337,10 +295,6 @@
         <translation>Eventos %1</translation>
     </message>
     <message>
-        <source>PAP Mode: %1&lt;br/&gt;</source>
-        <translation type="vanished">Modo de PAP: %1&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="231"/>
         <source>UF1</source>
         <translation>UF1</translation>
@@ -366,10 +320,6 @@
         <translation>Duración</translation>
     </message>
     <message>
-        <source>Oximetery Sessions</source>
-        <translation type="vanished">Sesiones de Oximetría</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="867"/>
         <source>Position Sensor Sessions</source>
         <translation>Sesiones del sensor de posición</translation>
@@ -385,31 +335,15 @@
         <translation>Ajustes de la máquina no disponibles</translation>
     </message>
     <message>
-        <source>This day has missing pressure, mode and settings data.</source>
-        <translation type="vanished">Este día carece de datos de presión, modo y ajustes.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1145"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
-    </message>
-    <message>
-        <source>This day just contains summary data, only limited information is available .</source>
-        <translation type="vanished">Este día contiene información de resumen, sólo está disponibe información limitada.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1232"/>
         <source>Time over leak redline</source>
         <translatorcomment>mmm</translatorcomment>
         <translation>Límite de tiempo sobre fuga</translation>
-    </message>
-    <message>
-        <source>Sleep</source>
-        <translation type="vanished">Sueño</translation>
-    </message>
-    <message>
-        <source>Wake</source>
-        <translation type="vanished">Vigilia</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1428"/>
@@ -494,7 +428,7 @@
     <message>
         <location filename="../oscar/daily.cpp" line="915"/>
         <source>%1 Session #%2</source>
-        <translation type="unfinished">%1 Sesión #%2</translation>
+        <translation>%1 Sesión #%2</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="916"/>
@@ -529,12 +463,12 @@
     <message>
         <location filename="../oscar/daily.cpp" line="1283"/>
         <source>Start</source>
-        <translation type="unfinished">Inicio</translation>
+        <translation>Inicio</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1283"/>
         <source>End</source>
-        <translation type="unfinished">Fin</translation>
+        <translation>Fin</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1539"/>
@@ -565,10 +499,6 @@
         <location filename="../oscar/daily.cpp" line="864"/>
         <source>Sleep Stage Sessions</source>
         <translation>Sesiones de Etapas del Sueño</translation>
-    </message>
-    <message>
-        <source>One or more waveform record for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="vanished">Uno o más de los registros de forma de onda para esta sesión tenía datos fuente defectuosos. Algunos de los puntos superpuestos de la forma de onda podrían no encajar correctamente.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="946"/>
@@ -611,17 +541,9 @@
         <translation>Tiempo fuera de la dampa</translation>
     </message>
     <message>
-        <source>Sorry, your machine only provides compliance data.</source>
-        <translation type="vanished">Lo siento, su máquina sólo proporciona información de cumplimiento.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1536"/>
         <source>&quot;Nothing&apos;s here!&quot;</source>
-        <translation>¡Aquí no hay nada!</translation>
-    </message>
-    <message>
-        <source>Bob is bored with this days lack of data.</source>
-        <translation type="vanished">Bob está aburrido con la carencia de datos de estos días.</translation>
+        <translation>&quot;¡Aquí no hay nada!&quot;</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1831"/>
@@ -637,22 +559,6 @@
         <location filename="../oscar/daily.cpp" line="2135"/>
         <source>Bookmark at %1</source>
         <translation>Marcador en %1</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation type="vanished">Mostrar todos los gráficos</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation type="vanished">Ocultar todos los eventos</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation type="vanished">Mostrar todos los eventos</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation type="vanished">Ocultar todos los gráficos</translation>
     </message>
 </context>
 <context>
@@ -767,14 +673,6 @@
         <translation>Personalizado</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>SleepyHead_</source>
-        <translation type="vanished">SleepyHead_</translation>
-    </message>
-    <message>
         <location filename="../oscar/exportcsv.cpp" line="72"/>
         <source>OSCAR_</source>
         <translation type="unfinished"></translation>
@@ -864,20 +762,12 @@
     <message>
         <location filename="../oscar/exportcsv.cpp" line="213"/>
         <source> Count</source>
-        <translation>Conteo</translation>
+        <translation> Conteo</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="221"/>
         <source>%1% </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> Avg</source>
-        <translation type="vanished">Media</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation type="vanished"> %1%</translation>
     </message>
 </context>
 <context>
@@ -903,16 +793,12 @@
     <message>
         <location filename="../oscar/help.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Formulario</translation>
+        <translation>Formulario</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="92"/>
         <source>Hide this message</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="198"/>
@@ -952,7 +838,7 @@
     <message>
         <location filename="../oscar/help.cpp" line="115"/>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="125"/>
@@ -967,7 +853,7 @@
     <message>
         <location filename="../oscar/help.cpp" line="239"/>
         <source>No</source>
-        <translation type="unfinished">no</translation>
+        <translation>no</translation>
     </message>
     <message>
         <location filename="../oscar/help.cpp" line="240"/>
@@ -996,21 +882,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="942"/>
         <source>&amp;Statistics</source>
         <translation>E&amp;stadísticas</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;This is pre-release software, some parts of this program may not yet function as intended.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;Este es software de pre-lanzamiento, algunas partes de este programa podrían no funcionar como se pretende.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="996"/>
@@ -1031,18 +905,6 @@
         <location filename="../oscar/mainwindow.ui" line="1020"/>
         <source>Date Range</source>
         <translation>Intérvalo de fechas</translation>
-    </message>
-    <message>
-        <source>&amp;Help Browser</source>
-        <translation type="vanished">Navegador de A&amp;yuda</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>qrc:/docs/index.html</source>
-        <translation type="vanished">qrc:/docs/index.html</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1391"/>
@@ -1112,10 +974,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Purge Oximetery Data</source>
-        <translation type="vanished">Purgar datos de oxímetro</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2888"/>
         <source>Rebuild CPAP Data</source>
         <translation>Restablecer Datos de  CPAP</translation>
@@ -1124,10 +982,6 @@
         <location filename="../oscar/mainwindow.ui" line="2909"/>
         <source>&amp;Import Data</source>
         <translation>&amp;Importar datos</translation>
-    </message>
-    <message>
-        <source>Shift+F2</source>
-        <translation type="vanished">Shift+F2</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2917"/>
@@ -1155,17 +1009,9 @@
         <translation>Ver Vista por &amp;Día</translation>
     </message>
     <message>
-        <source>F5</source>
-        <translation type="vanished">F5</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2940"/>
         <source>View &amp;Overview</source>
         <translation>Ver Vista &amp;General</translation>
-    </message>
-    <message>
-        <source>F6</source>
-        <translation type="vanished">F6</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2948"/>
@@ -1173,34 +1019,14 @@
         <translation>Ver &amp;Bienvenida</translation>
     </message>
     <message>
-        <source>F4</source>
-        <translation type="vanished">F4</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2956"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <source>Ctrl+Tab</source>
-        <translation type="vanished">Ctrl+Tab</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2967"/>
         <source>Use &amp;AntiAliasing</source>
         <translation>Usar &amp;AntiAliasing</translation>
-    </message>
-    <message>
-        <source>&amp;About SleepyHead</source>
-        <translation type="vanished">&amp;Acerca de SleepyHead</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen Toggle</source>
-        <translation type="vanished">Cambiar a &amp;Pantalla Completa</translation>
-    </message>
-    <message>
-        <source>F11</source>
-        <translation type="vanished">F11</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="2991"/>
@@ -1213,26 +1039,14 @@
         <translation>&amp;Reinicializar Gráfico</translation>
     </message>
     <message>
-        <source>Check for &amp;Updates</source>
-        <translation type="vanished">B&amp;uscar Actualizaciones</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3004"/>
         <source>Take &amp;Screenshot</source>
         <translation>&amp;Capturar Pantalla</translation>
     </message>
     <message>
-        <source>F12</source>
-        <translation type="vanished">F12</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3012"/>
         <source>O&amp;ximetry Wizard</source>
         <translation>Asistente de O&amp;ximetría</translation>
-    </message>
-    <message>
-        <source>F7</source>
-        <translation type="vanished">F7</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3020"/>
@@ -1264,10 +1078,6 @@
         <location filename="../oscar/mainwindow.ui" line="3154"/>
         <source>Daily Calendar</source>
         <translation>Calendario diario</translation>
-    </message>
-    <message>
-        <source>F9</source>
-        <translation type="vanished">F9</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3162"/>
@@ -1326,10 +1136,6 @@
         <translation>Barra lateral diaria</translation>
     </message>
     <message>
-        <source>F8</source>
-        <translation type="vanished">F8</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3069"/>
         <source>View S&amp;tatistics</source>
         <translation>Ver Es&amp;tadísticas</translation>
@@ -1370,10 +1176,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>F10</source>
-        <translation type="vanished">F10</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="3072"/>
         <location filename="../oscar/mainwindow.ui" line="3075"/>
         <source>View Statistics</source>
@@ -1388,10 +1190,6 @@
         <location filename="../oscar/mainwindow.ui" line="3088"/>
         <source>Import RemStar &amp;MSeries Data</source>
         <translation>Importar Datos de REMstar y Serie &amp;M</translation>
-    </message>
-    <message>
-        <source>&amp;Support SleepyHead Development</source>
-        <translation type="vanished">Apoyar el De&amp;sarrollo de SleepyHead</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3093"/>
@@ -1435,10 +1233,6 @@
         <translation>&amp;Acerca de</translation>
     </message>
     <message>
-        <source>Loading Data</source>
-        <translation type="vanished">Cargando Datos</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="849"/>
         <source>Access to Import has been blocked while recalculations are in progress.</source>
         <translation>Se ha bloqueado el acceso a Importar mientras hay recalculaciones en progreso.</translation>
@@ -1447,50 +1241,6 @@
         <location filename="../oscar/mainwindow.cpp" line="1002"/>
         <source>Importing Data</source>
         <translation>Importando Datos</translation>
-    </message>
-    <message>
-        <source>Loading</source>
-        <translation type="vanished">Cargando</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="vanished">Copyright</translation>
-    </message>
-    <message>
-        <source>SleepyHead Project Page</source>
-        <translation type="vanished">Página del Proyecto SleepyHead</translation>
-    </message>
-    <message>
-        <source>SleepyHead Wiki</source>
-        <translation type="vanished">Wiki de SleepyHead</translation>
-    </message>
-    <message>
-        <source>This software is released under the GNU Public License v3.0&lt;br/&gt;</source>
-        <translation type="vanished">Este software fue liberado bajo una Licencia Pública GNU v3.0&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>This software comes with absolutely no warranty, either express of implied.</source>
-        <translation type="vanished">Este software no viene con absolutamente ninguna garantía ya sea de manera expresa o implicada.</translation>
-    </message>
-    <message>
-        <source>It comes with no guarantee of fitness for any particular purpose.</source>
-        <translation type="vanished">No viene con ninguna garantía de capacidad para ningún propósito en particular.</translation>
-    </message>
-    <message>
-        <source>No guarantees are made regarding the accuracy of any data this program displays.</source>
-        <translation type="vanished">No se ha dado ninguna garantía con respecto a la exactitud de dato alguno mostrado por este programa.</translation>
-    </message>
-    <message>
-        <source>This is NOT medical software, it is merely a research tool that provides a visual interpretation of data recorded by supported devices.</source>
-        <translation type="vanished">Este no es un software médico, sino meramente una herramienta de investigación que proporciona una interpretación visual de los datos registrados por los dispositivos soportados.</translation>
-    </message>
-    <message>
-        <source>Don&apos;t forget to Like/+1 SleepyHead on &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebook&lt;/a&gt; or &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+</source>
-        <translation type="vanished">No olvide darle Like ó +1 a Sleepyhead en &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebook&lt;/a&gt; o &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+</translation>
-    </message>
-    <message>
-        <source>When reporting bugs, please make sure to supply the SleepyHead version number, operating system details and CPAP machine model.</source>
-        <translation type="vanished">Cuando reporte errores, por favor asegúrese de proporcionar el número de versión de SleepyHead y los detalles de su sistema operativo así como el modelo de su dispositivo de CPAP.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="675"/>
@@ -1538,21 +1288,9 @@
         <translation>La importación ya está corriendo en segundo plano.</translation>
     </message>
     <message>
-        <source>Please wait, scanning for CPAP data cards...</source>
-        <translation type="vanished">Por favor espere, detectando tarjetas de datos de CPAP...</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="888"/>
         <source>CPAP Data Located</source>
         <translation>Datos de CPAP encontrados</translation>
-    </message>
-    <message>
-        <source>Please wait, launching file dialog...</source>
-        <translation type="vanished">Por favor espere, lanzando diálogo de archivo...</translation>
-    </message>
-    <message>
-        <source>No CPAP data card detected, launching file dialog...</source>
-        <translation type="vanished">No se detectó tarjeta de datos de CPAP, lanzando diálogo de archivo...</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="917"/>
@@ -1570,30 +1308,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Bienvenido a SleepyHead</translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Acerca de SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1071"/>
         <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
         <translation>Este software ha sido creado para asisitirlo a revisar los datos producidos por las máquinas de CPAP que son utilizadas para el tratamiento de varios transtornos del sueño.</translation>
     </message>
     <message>
-        <source>SleepyHead has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation type="vanished">SleepyHead ha sido diseñado por un desarrollador de software con experiencia personal en transtornos del sueño, y ha sido moldeado a su vez por la retroalimentación de muchos evaluadores entusiastas que lidian con padecimientos similares.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1075"/>
         <source>This is a beta release, some features may not yet behave as expected.</source>
         <translation>Este es un lanzamiento beta, algunas características podrían aún no comportarse como se espera.</translation>
-    </message>
-    <message>
-        <source>Please report any bugs you find to SleepyHead&apos;s SourceForge page.</source>
-        <translation type="vanished">Favor de reportar cualquie error que encuentre en la página de SourceForge de SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1067"/>
@@ -1643,7 +1365,7 @@
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1085"/>
         <source>Contec CMS50D+, CMS50E and CMS50F (not 50FW) Oximeters</source>
-        <translation>Oxímetros Contec CMS50D+, CMS50E y CMS50F (no 50FW) </translation>
+        <translation>Oxímetros Contec CMS50D+, CMS50E y CMS50F (no 50FW)</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1086"/>
@@ -1706,17 +1428,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s &lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;Project Website&lt;/a&gt; on SourceForge&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;Sitio Web&lt;/a&gt; del proyecto SleepyHead en SourceForge&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1104"/>
         <source>Further Information</source>
         <translation>Más Información</translation>
-    </message>
-    <message>
-        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation type="vanished">Aquí están las&lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;Notas de la Versión&lt;/a&gt;actuales.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1108"/>
@@ -1744,17 +1458,9 @@
         <translation>Copyright:</translation>
     </message>
     <message>
-        <source>&amp;copy;2011-2018</source>
-        <translation type="obsolete">&amp;copy;2011-2018</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1125"/>
         <source>License:</source>
         <translation>Licencia:</translation>
-    </message>
-    <message>
-        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License&lt;/a&gt;.</source>
-        <translation type="vanished">Este software fue liberado bajo una &lt;a href=&quot;qrc:/COPYING&quot;&gt;Licencia Pública GNU&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1129"/>
@@ -1765,10 +1471,6 @@
         <location filename="../oscar/mainwindow.cpp" line="1131"/>
         <source>This is &lt;font color=&apos;red&apos;&gt;&lt;u&gt;NOT&lt;/u&gt;&lt;/font&gt; medical software. This application is merely a data viewer, and no guarantee is made regarding accuracy or correctness of any calculations or data displayed.</source>
         <translation>Este &lt;font color=&apos;red&apos;&gt;&lt;u&gt;NO&lt;/u&gt;&lt;/font&gt; es un software médico. Esta aplicación es meramente un visualizador de datos, y no se proporciona ninguna garantía en cuanto a la exactitud o corrección de cualquiera de los cálculos o datos mostrados.</translation>
-    </message>
-    <message>
-        <source>The author will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation type="vanished">El autor no será considerado responsable por quienquiera que se dañe a sí mismo o a otros por el uso o mal uso de este software.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1135"/>
@@ -1786,23 +1488,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Revision:</source>
-        <translation type="vanished">Revisión:</translation>
-    </message>
-    <message>
-        <source>branch</source>
-        <translatorcomment>rama</translatorcomment>
-        <translation type="vanished">ramal</translation>
-    </message>
-    <message>
-        <source>Build Date: %1 %2</source>
-        <translation type="vanished">Fecha de compilación: %1 %2</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="vanished">Motor Gráfico: %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2484"/>
         <source>%1&apos;s Journal</source>
         <translation>Diario de %1</translation>
@@ -1816,50 +1501,6 @@
         <location filename="../oscar/mainwindow.cpp" line="2486"/>
         <source>XML Files (*.xml)</source>
         <translation>Archivos XML (*.xml)</translation>
-    </message>
-    <message>
-        <source>SleepyHead, brought to you by Jedimark</source>
-        <translation type="vanished">Sleepyhead, traído a usted por Jedimark</translation>
-    </message>
-    <message>
-        <source>Kudos &amp; Credits</source>
-        <translation type="vanished">Agradecimientos y Créditos</translation>
-    </message>
-    <message>
-        <source>Bugfixes, Patches and Platform Help:</source>
-        <translation type="vanished">Correcciones,Parches y Ayuda de Plataforma:</translation>
-    </message>
-    <message>
-        <source>Translators:</source>
-        <translation type="vanished">Traductores:</translation>
-    </message>
-    <message>
-        <source>3rd Party Libaries:</source>
-        <translation type="vanished">Librerías de terceros:</translation>
-    </message>
-    <message>
-        <source>SleepyHead is built using the &lt;a href=&quot;http://qt-project.org&quot;&gt;Qt Application Framework&lt;/a&gt;.</source>
-        <translation type="vanished">SleepyHead fue realizado usando el &lt;a href=&quot;http://qt-project.org&quot;&gt;Marco de Aplicación Qt&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>In the updater code, SleepyHead uses &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; by Sergey A. Tachenov, which is a C++ wrapper over Gilles Vollant&apos;s ZIP/UNZIP package.</source>
-        <translation type="vanished">En el código del actualizador, SleepyHead utiliza &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; creado por Sergey A. Tachenov, el cual es una referencia de contenido en C++ del paquete ZIP/UNZIP de Gilles Vollant.</translation>
-    </message>
-    <message>
-        <source>Thanks for using SleepyHead. If you find it within your means, please consider encouraging future development by making a donation via Paypal.</source>
-        <translation type="vanished">Gracias por usar SleepyHead. Si lo considera dentro de sus posibilidades, por favor apoye el futuro desarrollo haciendo una donación a través de Paypal.</translation>
-    </message>
-    <message>
-        <source>This software is NOT suitable for medical diagnostics purposes, neither is it fit for CPAP complaince reporting purposes, or ANY other medical use for that matter.</source>
-        <translation type="vanished">Este software NO es apto para su uso en diagnóstico médico, ni para reportar apego al del tratamiento así como tampoco CUALQUIER otro uso médico.</translation>
-    </message>
-    <message>
-        <source>The author and anyone associated with him accepts NO responsibilty for damages, issues or non-issues resulting from the use or mis-use of this software.</source>
-        <translation type="vanished">Tanto el autor así como cualquier otro asociado con él NO aceptan responsabilidad por daños, consecuencia resultante o no del uso o mal uso de este software.</translation>
-    </message>
-    <message>
-        <source>Use this software entirely at your own risk.</source>
-        <translation type="vanished">Use este software completamente bajo su propio riesgo.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1268"/>
@@ -1940,22 +1581,13 @@
         <translation>Philips Respironics System One (modelos CPAP Pro, Auto, BiPAP y ASV)</translation>
     </message>
     <message>
-        <source>Make sure you keep your SleepyHead data folder backed up when trying testing versions.</source>
-        <translation type="vanished">Asegúrese de manter su carpeta de datos de SleepyHead respaldada cuando si prueba nuevas versiones en desarrollo.</translation>
-    </message>
-    <message>
-        <source>Make sure you&apos;re willing and able to supply a .zip of your CPAP data or a crash report before you think about filing a bug report.</source>
-        <translation type="vanished">Asegúrese de tener la disposición y capacidad de proporcionar un archivo ZIP de sus datos del CPAP o un reporte de fallo antes de llenar el reporte de error.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="616"/>
         <source>Imported %1 CPAP session(s) from
 
 %2</source>
         <translation>Se importó(aron) %1 sesión(es) de CPAP desde
 
-%2
-</translation>
+%2</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="616"/>
@@ -2007,33 +1639,9 @@
         <translation>Especifique</translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s Online &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Users Guide&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Guía de Usuario&lt;/a&gt;&lt;br/&gt;en línea de SleepyHead</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Preguntas Frecuentes&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Glossary of Sleep Disorder Terms&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Glosario de Términos de Transtornos del Sueño&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;SleepyHead Wiki&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;Wiki de SleepyHead&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1115"/>
         <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>&amp;copy;2011-2016</source>
-        <translation type="vanished">&amp;copy;2011-2016</translation>
-    </message>
-    <message>
-        <source>Arie Klerk (Translation Coordinator, also Dutch), Steffen Reitz (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish), Plamen Tonev (Bulgarian) and others I&apos;ve still to add here.</source>
-        <translation type="vanished">Arie Klerk (Coordinador de Traducción y Holandés), Steffen Reitz (Alemán), Chen Hao (Chino), Lars-Erik Söderström (Sueco), Damien Vigneron (Francés), António Jorge Costa (Portugués), Judith Guzmán (Español), Plamen Tonev (Búlgaro) y otros pendientes de añadir.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1365"/>
@@ -2046,34 +1654,10 @@
         <translation>Captura de pantalla guardada en el archivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Printing Disabled</source>
-        <translation type="vanished">Impresión deshabilitada</translation>
-    </message>
-    <message>
-        <source>Please rebuild SleepyHead with Qt 4.8.5 or greater, as printing causes a crash with this version of Qt</source>
-        <translation type="vanished">Por favor recompile SleepyHead con Qt 4.8.5 o superior, ya que al imprimir se causa una falla con esta versión de Qt</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1735"/>
         <location filename="../oscar/mainwindow.cpp" line="1762"/>
         <source>Gah!</source>
         <translation>¡Gah!</translation>
-    </message>
-    <message>
-        <source>If you can read this, the restart command didn&apos;t work. Your going to have to do it yourself manually.</source>
-        <translation type="vanished">Si puede leer esto, el comando reiniciar no funcionó. Tendrá usted que hacerlo manualmente.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to rebuild all CPAP data for the following machine:</source>
-        <translation type="vanished">¿Está usted seguro de que quiere reestablecer todos los datos de CPAP para la siguiente máquina?:</translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if SleepyHead&apos;s internal backups have been disabled or interfered with in any way.</source>
-        <translation type="vanished">Por favor considere que esto podría resultar en la pérdida de datos del gráfico si los respaldos internos de SleepyHead son deshabilitados o interferidos de algún modo.</translation>
-    </message>
-    <message>
-        <source>For some reason, SleepyHead does not have internal backups for the following machine:</source>
-        <translation type="vanished">Por algún motivo SleepyHead no tiene respaldos internos para la siguiente máquina:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1888"/>
@@ -2086,33 +1670,9 @@
         <translation>¿Está en verdad seguro de querer realizar esto?</translation>
     </message>
     <message>
-        <source>A file permission error or simillar screwed up the purge process, you will have to delete the following folder manually:</source>
-        <translation type="vanished">Un error de permiso de archivo o similar arruinó el proceso de purgado, tendrá usted que eliminar el siguiente directorio manualmente:</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1904"/>
         <source>Because there are no internal backups to rebuild from, you will have to restore from your own.</source>
         <translation>Debido a que no hay respaldos internos desde donde reestablecer, tendrá que restaurar usted mismo.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Warning:&lt;/b&gt; This is a pre-release build, and may at times show unstable behaviour. It is intended for testing purposes.</source>
-        <translation type="vanished">&lt;b&gt;Advertencia:&lt;/b&gt;Esta es una versión de prelanzamiento, y podría comportarso inestablemente en algunas ocasiones. Su finalidad es únicamente para pruebas.</translation>
-    </message>
-    <message>
-        <source>If you experience CPAP chart/data errors after upgrading to a new version, try rebuilding your CPAP database from the Data menu.</source>
-        <translation type="vanished">Si experimenta errores de datos o gráficos después de actualizar a una nueva versión, pruebe recompilando la base datos de CPAP desde el menú Datos.</translation>
-    </message>
-    <message>
-        <source>Please ensure you are running the latest version before reporting any bugs.</source>
-        <translation type="vanished">Por favor verifique que está corriendo la última versión antes de reportar algún error.</translation>
-    </message>
-    <message>
-        <source>Think twice before filing a bug report that already exists, PLEASE search first, as your likely not the first one to notice it!</source>
-        <translation type="vanished">Piense dos veces antes de llenar un reporte de error redundante, POR FAVOR busque primero ya que es posible que no sea el primero en notarlo.</translation>
-    </message>
-    <message>
-        <source>This red message line is intentional, and will not be a feature in the final version...</source>
-        <translation type="vanished">Esta línea roja de mensaje es intencional, no será una característica de la versión final.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1905"/>
@@ -2128,38 +1688,6 @@
         <location filename="../oscar/mainwindow.cpp" line="1944"/>
         <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Performance will be degraded during these recalculations.</source>
-        <translation type="vanished">El desempeño se reducirá durante estas recalculaciones.</translation>
-    </message>
-    <message>
-        <source>Recalculating Indices</source>
-        <translation type="vanished">Recalculando Índices</translation>
-    </message>
-    <message>
-        <source>Loading Event Data</source>
-        <translation type="vanished">Cargando Datos de Eventos</translation>
-    </message>
-    <message>
-        <source>Recalculating Summaries</source>
-        <translation type="vanished">Recalculando Resúmenes</translation>
-    </message>
-    <message>
-        <source>Restart Required</source>
-        <translation type="vanished">Reinicio Requerido</translation>
-    </message>
-    <message>
-        <source>Recalculations are complete, the application now needs to restart to display the changes.</source>
-        <translation type="vanished">Las recalculaciones están completas, se requiere reiniciar la aplicación para reflejar los cambios.</translation>
-    </message>
-    <message>
-        <source>Recalculations are now complete.</source>
-        <translation type="vanished">Las recalculaciones están ahora completas.</translation>
-    </message>
-    <message>
-        <source>Task Completed</source>
-        <translation type="vanished">Tarea Completada</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2237"/>
@@ -2456,10 +1984,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation type="vanished">Etiqueta de Texto</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.ui" line="955"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancelar</translation>
@@ -2482,26 +2006,14 @@
         <translation>Seleccione País</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Bienvenido a SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="111"/>
         <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
         <translation>Este software ha sido creado para asisitirlo a revisar los datos producidos por las máquinas de CPAP y otros equipos relacionados.</translation>
     </message>
     <message>
-        <source>SleepyHead has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation type="vanished">Este software fue liberado bajo una &lt;a href=&quot;qrc:/COPYING&quot;&gt;Licencia Pública GNU&lt;/a&gt;. y no viene con ninguna garantía o afirmación de capacidad para propósito alguno.</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="116"/>
         <source>PLEASE READ CAREFULLY</source>
         <translation>POR FAVOR LEA CUIDADOSAMENTE</translation>
-    </message>
-    <message>
-        <source>SleepyHead is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation type="vanished">SleepyHead ha sido concebido únicamente como un visor de datos, y definitivamente no como un sucedáneo de la orientación médica competente por parte de su médico tratatante.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="120"/>
@@ -2514,25 +2026,9 @@
         <translation>Cualquier reporte generado es EXCLUSIVAMENTE PARA USO PERSONAL y no es adecuado DE NINGÚN MODO para fines de apego al tratamiento o diagnóstico médico.</translation>
     </message>
     <message>
-        <source>The author will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation type="vanished">El autor no será considerado responsable por &lt;u&gt; absolutamente nada&lt;/u&gt;relacionado con el uso o mal uso de este software.</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="129"/>
         <source>Use of this software is entirely at your own risk.</source>
         <translation>El uso de este software es completamente bajo su propio riesgo.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2018 Mark Watkins</source>
-        <translation type="obsolete">SleepyHead tiene copyright &amp;copy;2011-2014 Mark Watkins {2011-2018 ?}</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2016 Mark Watkins</source>
-        <translation type="obsolete">SleepyHead tiene copyright &amp;copy;2011-2014 Mark Watkins {2011-2016 ?}</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2014 Mark Watkins</source>
-        <translation type="vanished">SleepyHead tiene copyright &amp;copy;2011-2014 Mark Watkins</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
@@ -2857,10 +2353,6 @@ Corporaĺ</translation>
         <translation>Múltiples sesiones detectadas</translation>
     </message>
     <message>
-        <source>Please choose which one you want to import into SleepyHead</source>
-        <translation type="vanished">Por favor elija cuál desea importar a SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.ui" line="1671"/>
         <source>Start Time</source>
         <translation type="unfinished"></translation>
@@ -2896,10 +2388,6 @@ Corporaĺ</translation>
         <location filename="../oscar/oximeterimport.ui" line="1796"/>
         <source>I started this oximeter recording at (or near) the same time as a session on my CPAP machine.</source>
         <translation>Inicié esta grabación del oxímetro al mismo (o casi) tiempo de una sesión de mi máquina CPAP.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead necesita un tiempo inicial para saber dónde guardar esta sesión de oximetría.&lt;/p&gt;&lt;p&gt;Elija una de las opciones siguientes:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1857"/>
@@ -3179,14 +2667,6 @@ Corporaĺ</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Oximetry Files (*.spo *.spor *.spo2 *.dat)</source>
-        <translation type="vanished">Archivos de Qximetría (*.spo *.spor *.spo2 *.dat)</translation>
-    </message>
-    <message>
-        <source>No Oximetery module could parse the given file:</source>
-        <translation type="vanished">Ninguno de los módulos de oximetría puede interpretar el archivo proporcionado:</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="456"/>
         <source>Oximeter not detected</source>
         <translation>Oxímetro no detectado</translation>
@@ -3195,10 +2675,6 @@ Corporaĺ</translation>
         <location filename="../oscar/oximeterimport.cpp" line="463"/>
         <source>Couldn&apos;t access oximeter</source>
         <translation>No se pudo acceder al oxímetro</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Mode</source>
-        <translation type="vanished">Modo de oximetría en vivo</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="477"/>
@@ -3214,14 +2690,6 @@ Corporaĺ</translation>
         <location filename="../oscar/oximeterimport.cpp" line="525"/>
         <source>Live Import Stopped</source>
         <translation>Importación en vivo detenida</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Stopped</source>
-        <translation type="vanished">Oximetría en vivo detenida</translation>
-    </message>
-    <message>
-        <source>Live Oximetery import has been stopped</source>
-        <translation type="vanished">La importación de oximetría en vivo ha sido detenida</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="577"/>
@@ -3262,10 +2730,6 @@ Corporaĺ</translation>
         <location filename="../oscar/oximeterimport.cpp" line="831"/>
         <source>Something went wrong getting session data</source>
         <translation>Algo salió mal al obtener los datos de la sesión</translation>
-    </message>
-    <message>
-        <source>CMS50 Session %1</source>
-        <translation type="vanished">Sesión CMS50 %1</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1112"/>
@@ -3394,7 +2858,7 @@ en serie</translation>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="154"/>
         <source>Combine Close Sessions </source>
-        <translation>Combinar Sesiones Cerradas</translation>
+        <translation>Combinar Sesiones Cerradas </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="164"/>
@@ -3446,60 +2910,14 @@ p, li { white-space: pre-wrap; }
         <translation>Opciones de almacenamiento de sesión</translation>
     </message>
     <message>
-        <source>This maintains a backup of SD-card data for ResMed machines, 
-
-ResMed machines delete high resolution data older than 7 days, 
-and graph data older than 30 days..
-
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
-(Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="vanished">Esto mantiene un respaldo de los datos de la tarjeta SD para las máquinas ResMed.
-
-Las máquinas ResMed eliminan los datos de alta resolución más viejos de 7 días, y los datos de gráficos más viejos de 30.
-
-SleepyHead puede almacenar una copia de dichos datos por si usted alguna vez requiere reinstalar (altamente recomendado,a menos que tenga poco espacio en disco y no le importe la información de gráficos).
-</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="482"/>
         <source>Create SD Card Backups during Import (Turn this off at your own peril!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This makes SleepyHead&apos;s data take around half as much space.
-But it makes import and day changing take longer.. 
-If you&apos;ve got a new computer with a small solid state disk, this is a good option.</source>
-        <translation type="vanished">Esto hace que SleepyHead ocupe la mitad de espacio, pero la importación y el cambio entre días demorará más.
-
-Si tiene una computadora nueva con un pequeño disco de estado sólido, esta es una buena opción.</translation>
-    </message>
-    <message>
-        <source>Compress Session Data (makes SleepyHead data smaller, but day changing slower.)</source>
-        <translation type="vanished">Comprimir datos de sesión (vuelve más pequeños los datos de SH, pero el cambio entre días se ralentiza)</translation>
-    </message>
-    <message>
-        <source>Compress ResMed (EDF) backups to save disk space.
-Backed up EDF files are stored in the .gz format, 
-which is common on Mac &amp; Linux platforms.. 
-
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="vanished">Comprime los respaldos de ResMed (EDF) para ahorrar espacio en disco. 
-Los archivos EDF respaldados son almacenados en formato .gz,
-el cual es común en plataformas Mac y Linux.
-
-SleepyHead puede importar desde este directorio comprimido de respaldo 
-de manera nativa. Para usarse con ResScan se requerirá descomprimir los 
-archivos .gz primero.</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="439"/>
         <source>Compress SD Card Backups (slower first import, but makes backups smaller)</source>
         <translation>Comprimir Respaldos de tarjeta SD (primera importación más lenta, respaldos más pequeños)</translation>
-    </message>
-    <message>
-        <source>The following options affect the amount of disk space SleepyHead uses, and all have an effect on how long import takes.</source>
-        <translation type="vanished">Las siguientes opciones afectan la cantidad de espacio en disco usada por SleepyHead, y todas afectan el tiempo que toman las importaciones en realizarse.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="417"/>
@@ -3549,7 +2967,7 @@ flujo</translation>
         <source>Percentage of restriction in airflow from the median value. 
 A value of 20% works well for detecting apneas. </source>
         <translation>Porcentaje de restricción de fluje respecto al valor medio.
-Un valor de 20% funciona bien para detectar apneas.</translation>
+Un valor de 20% funciona bien para detectar apneas. </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="987"/>
@@ -3653,10 +3071,6 @@ Defaults to 60 minutes.. Highly recommend it&apos;s left at this value.</source>
         <location filename="../oscar/preferencesdialog.ui" line="1007"/>
         <source>#2</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>This experimental option attempts to use SleepyHead&apos;s event flagging system to improve machine detected event positioning.</source>
-        <translation type="vanished">Esta opción experimental trata de usar el sistema de detección de eventos de SleepyHead para mejorar el posicionamiento de los eventos detectados por la máquina.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1000"/>
@@ -3779,10 +3193,6 @@ Afecta principalmente al importador.</translation>
         <translation>Cambios a los siguientes ajustes requieren un reinicio pero no una recalculación.</translation>
     </message>
     <message>
-        <source>Oximetery Settings</source>
-        <translation type="vanished">Ajustes de oximetría</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="1318"/>
         <source>Preferred Calculation Methods</source>
         <translation>Métodos de cálculo preferidos</translation>
@@ -3900,13 +3310,13 @@ ya que es el único valor disponible en los días de sólo resumen.</translation
         <location filename="../oscar/preferencesdialog.ui" line="1293"/>
         <source>AHI</source>
         <extracomment>Apnea Hypopnea Index</extracomment>
-        <translation type="unfinished">IAH</translation>
+        <translation>IAH</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1298"/>
         <source>RDI</source>
         <extracomment>Respiratory Disturbance Index</extracomment>
-        <translation type="unfinished">IPR</translation>
+        <translation>IPR</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1169"/>
@@ -4137,10 +3547,6 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Esto hace que el deplazamiento mientras se hace zoom sea más fácil en Touchpads bidireccionales sensibles.&lt;/p&gt;&lt;p&gt;El valor recomendado son 50 ms.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>milliseconds</source>
-        <translation type="vanished">milisegundos</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="2434"/>
         <source>Scroll Dampening</source>
         <translation>Atenuación del desplazamiento</translation>
@@ -4201,34 +3607,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2446"/>
         <source>How long you want the tooltips to stay visible.</source>
         <translation>Que tanto tiempo permanece visible la ventana de ayuda contextual.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Lucida Grande UI&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Lucida Grande UI&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Sincronizando datos de oximetría y CPAP&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; Datos CMS50 importados desde SpO2Review (de archivos .spoR) o el método de importación serie &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;no&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; tienen las marcas de tiempo necesarias para sincronizar.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;El modo de visualización en vivo (usando un cable serie) es la única manera de obtener una sincronización precisa con las oxímetros CMS50, pero no compensa la deriva del reloj del CPAP.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Si inicia el modo de grabación de los oxímetros &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactamente &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;al mismo tiempo que inicia su máquina CPAP, ahora también puede lograr la sincronización &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;El proceso de importación serie toma la hora de inicio de la último sesión CPAP. (¡Recuerde importar los datos del CPAP primero!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1769"/>
@@ -4496,7 +3874,7 @@ pueden volver inestable esta aplicación si se activa esta opción.</translation
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2830"/>
         <source>Bold  </source>
-        <translation>Negritas</translation>
+        <translation>Negritas  </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2852"/>
@@ -4766,20 +4144,6 @@ Are you sure you want to make these changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more of the changes you have made will require this application to be restarted,
-in order for these changes to come into effect.
-
-Would you like do this now?</source>
-        <translation type="vanished">Uno o más de los cambios realizados requieren que esta aplicación sea reiniciada
-para que surtan efecto.
-
-¿Le gustaría hacer esto ahora?</translation>
-    </message>
-    <message>
-        <source>Switching off automatic backups is not a good idea, because SleepyHead needs these to rebuild the database if errors are found.</source>
-        <translation type="vanished">Desactivar los respaldos automáticos no es una buena idea, porque SleepyHead los necesita para restaurar la base de datos si se producen errores.</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1179"/>
         <source>Are you really sure you want to do this?</source>
         <translation>¿Está verdaderamente seguro de querer realizar esto?</translation>
@@ -4805,18 +4169,6 @@ Would you like do this now?</source>
         <location filename="../oscar/preferencesdialog.cpp" line="1131"/>
         <source>ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).</source>
         <translation>Las máquinas ResMed S9 rutinariamente eliminan ciertos datos de la tarjeta SD si son anteriores a 7 y 30 días (depende de la resolución).</translation>
-    </message>
-    <message>
-        <source>If you ever need to reimport this data again (whether in SleepyHead or ResScan) this data won&apos;t come back.</source>
-        <translation type="vanished">Si alguna vez requiere reimportar estos datos nuevamente, tanto en SleepyHead como en ResScan, estos no estarán disponibles.</translation>
-    </message>
-    <message>
-        <source>If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="vanished">Si requiere conservar espacio en disco, por favor recuerde realizar respaldos manuales.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to disable these backups?</source>
-        <translation type="vanished">¿Está seguro de que quiere deshabilitar estos respaldos?</translation>
     </message>
 </context>
 <context>
@@ -4862,26 +4214,14 @@ Would you like do this now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose a different SleepyHead data folder.</source>
-        <translation type="vanished">Elegir un directorio de datos distinto para SleepyHead.</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="241"/>
         <source>&amp;Different Folder</source>
         <translation>&amp;Directorio distinto</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="287"/>
         <source>[version]</source>
         <translation>[versión]</translation>
-    </message>
-    <message>
-        <source>Click here if you didn&apos;t want to start SleepyHead.</source>
-        <translation type="vanished">Haga clic aquí si no quería isiciar SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="313"/>
@@ -4892,10 +4232,6 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselect.ui" line="370"/>
         <source>Folder:</source>
         <translation>Directorio:</translation>
-    </message>
-    <message>
-        <source>The current location of SleepyHead data store.</source>
-        <translation type="vanished">Ubicación actual del almacenamiento de datos de SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="389"/>
@@ -4966,14 +4302,6 @@ Would you like do this now?</source>
         <translation>Necesita escribir DELETE en mayúsculas.</translation>
     </message>
     <message>
-        <source>Could not open profile.. You will need to delete this profile directory manually</source>
-        <translation type="vanished">No se pudo abrir el perfil. Necesitará eliminar el directorio de este perfil manualmente</translation>
-    </message>
-    <message>
-        <source>You will find it under the following location:</source>
-        <translation type="vanished">Lo encontrará en esta ubicación:</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.cpp" line="239"/>
         <source>You entered an incorrect password</source>
         <translation>Ha ingresado una contraseña incorrecta</translation>
@@ -5025,10 +4353,6 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselector.ui" line="36"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
-    </message>
-    <message>
-        <source>SleepyHead</source>
-        <translation type="obsolete">SleepyHead</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="171"/>
@@ -5299,10 +4623,6 @@ Would you like do this now?</source>
         <translation>Desactivado</translation>
     </message>
     <message>
-        <source>cm</source>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/common.cpp" line="491"/>
         <source>&quot;</source>
         <translation>&quot;</translation>
@@ -5336,10 +4656,6 @@ Would you like do this now?</source>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="198"/>
         <source>Med.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1%</source>
-        <translation type="obsolete">%1%</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="216"/>
@@ -5399,7 +4715,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="359"/>
         <source>Min %1</source>
-        <translation type="unfinished">Mín %1</translation>
+        <translation>Mín %1</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="649"/>
@@ -5584,7 +4900,7 @@ TTIA: %1</source>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="547"/>
         <source>Profile</source>
-        <translation type="unfinished">Perfil</translation>
+        <translation>Perfil</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="548"/>
@@ -5906,7 +5222,7 @@ TTIA: %1</source>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="502"/>
         <source>s</source>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="503"/>
@@ -6030,7 +5346,7 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/common.cpp" line="622"/>
         <location filename="../oscar/SleepLib/schema.cpp" line="250"/>
         <source>Target Vent.</source>
-        <translation>Vent. Objetivo</translation>
+        <translation>Vent. Objetivo.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="623"/>
@@ -6118,10 +5434,6 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/common.cpp" line="640"/>
         <source>Bookmarks</source>
         <translation>Marcadores</translation>
-    </message>
-    <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/common.cpp" line="642"/>
@@ -6582,14 +5894,6 @@ TTIA: %1</source>
         <translation>Manguera calentable conectada</translation>
     </message>
     <message>
-        <source>Headed Tubing</source>
-        <translation type="vanished" variants="yes">
-            <lengthvariant>Manguera con Calefacción</lengthvariant>
-            <lengthvariant>Manguera calentada</lengthvariant>
-            <lengthvariant>Manguera calentable</lengthvariant>
-        </translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3534"/>
         <source>Humidification Level</source>
         <translation>Nivel de humidficación</translation>
@@ -6767,14 +6071,6 @@ TTIA: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="vanished">SleepyHead (%1) requiere actualizar su base de datos para %2 %3 %4</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;SleepyHead maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;SleepyHead mantiene un respaldo de la tarjeta de datos de sus dispositivos que se usa para este propósito.&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="510"/>
         <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
         <translation>&lt;i&gt;Los datos antiguos de su máquina deben ser regenerados, suponienda que esta característica no haya sido deshabilitada en Preferencias durante una importación de datos previa.&lt;/i&gt;</translation>
@@ -6788,10 +6084,6 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/profiles.cpp" line="444"/>
         <source>Could not find explorer.exe in path to launch Windows Explorer.</source>
         <translation>No se halló explorer.exe en el &apos;path&apos; para lanzar el Explorador de Windows.</translation>
-    </message>
-    <message>
-        <source>SleepyHead does not yet have any automatic card backups stored for this device.</source>
-        <translation type="vanished">SleepyHead aún no tiene almacenado ningún respaldo automático de tarjeta para este dispositivo.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="496"/>
@@ -6859,21 +6151,9 @@ TTIA: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you are concerned, click No to exit, and backup your profile manually, before starting SleepyHead again.</source>
-        <translation type="vanished">Si esta preocupado, haga clic en No para salir, y respalde manualmente su perfil antes de iniciar nuevamente SleepyHead.</translation>
-    </message>
-    <message>
-        <source>Are you ready to upgrade, so you can run the new version of SleepyHead?</source>
-        <translation type="vanished">¿Esta seguro de actualizar para correr la nueva versión de SleepyHead?</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="522"/>
         <source>Machine Database Changes</source>
         <translation>Cambios a la base de datos de la máquina</translation>
-    </message>
-    <message>
-        <source>Sorry, the purge operation failed, which means this version of SleepyHead can&apos;t start.</source>
-        <translation type="vanished">Lo sentimos, la operación de purga ha fallado. Esto significa que esta versión de SleepyHead no puede iniciar.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="534"/>
@@ -6889,70 +6169,6 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/profiles.cpp" line="541"/>
         <source>Rebuilding from %1 Backup</source>
         <translation>Reconstruyendo desde el respaldo de %1</translation>
-    </message>
-    <message>
-        <source>Would you like to switch on automatic backups, so next time a new version of SleepyHead needs to do so, it can rebuild from these?</source>
-        <translation type="vanished">¿Le gustaría activar los respaldos automáticos para que en caso de que una nueva versión de SleepyHead lo requiera, pueda reconstruir desde ellos?</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation type="vanished">SleepyHead iniciará ahora el asistente de importación para que pueda reinstalar sus datos de %1.</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation type="vanished">Ahora SleepyHead cerrará y tratará entonces de abrir el administrador de archivos de su computadora para que usted pueda respaldar manualmente su perfil:</translation>
-    </message>
-    <message>
-        <source>Use your file manager to make a copy of your profile directory, then afterwards, restart Sleepyhead and complete the upgrade process.</source>
-        <translation type="vanished">Use su administrador de archivos para hacer una copia del directorio de su perfil. Después reinicie SleepyHead para terminar el proceso de actualización.</translation>
-    </message>
-    <message>
-        <source>Release Notes</source>
-        <translation type="vanished">Notas de la Versión</translation>
-    </message>
-    <message>
-        <source>&amp;Ok, get on with it..</source>
-        <translation type="vanished">&amp;Entendido, adelante.</translation>
-    </message>
-    <message>
-        <source>A faster build of SleepyHead may be available</source>
-        <translation type="vanished">Una versión más rápida de SleepyHead podría estar disponible.</translation>
-    </message>
-    <message>
-        <source>You will not be bothered with this message again.</source>
-        <translation type="vanished">No será molestado nuevamente con este mensaje.</translation>
-    </message>
-    <message>
-        <source>Incompatible Graphics Hardware</source>
-        <translation type="vanished">Hardware Gráfico Incompatible</translation>
-    </message>
-    <message>
-        <source>This build of SleepyHead requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.</source>
-        <translation type="vanished">Esta versión de SleepyHead requiere soporte de OpenGL2.0 para su correcto funcionamiento y desafortunadamente su computadora carece de esta característica.</translation>
-    </message>
-    <message>
-        <source>You may need to update your computers graphics drivers from the GPU makers website. %1</source>
-        <translation type="vanished">Es posible que deba actualizar los drivers gráficos de su computadora desde el sitio del fabricante del GPU.%1</translation>
-    </message>
-    <message>
-        <source>(&lt;a href=&apos;http://intel.com/support&apos;&gt;Intel&apos;s support site&lt;/a&gt;)</source>
-        <translation type="vanished">(&lt;a href=&apos;http://www.intel.com/p/es_XL/support/&apos;&gt;Sitio de soporte de Intel&lt;/a&gt;)</translation>
-    </message>
-    <message>
-        <source>Because graphs will not render correctly, and it may cause crashes, this build will now exit.</source>
-        <translation type="vanished">Debido a que los gráficos no se pueden generar correctamente, se podrían producir fallos. Esta versión cerrará automaáticamente.</translation>
-    </message>
-    <message>
-        <source>No SleepyHead data folder was found.</source>
-        <translation type="vanished">No se encontró ningún directorio de datos de SleepyHead.</translation>
-    </message>
-    <message>
-        <source>Would you like SleepyHead to use the default location for storing its data?</source>
-        <translation type="vanished">¿Le gustaría que SleepyHead use la ubicación por defecto para almacenar sus datos?</translation>
-    </message>
-    <message>
-        <source>As you did not select a data folder, SleepyHead will exit.</source>
-        <translation type="vanished">Ya que no seleccionó ningún directorio de datos, SleepyHead cerrará.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="179"/>
@@ -7025,17 +6241,9 @@ TTIA: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Next time you run, you will be asked again.</source>
-        <translation type="vanished">Se le preguntará de nuevo la próxima vez.</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="408"/>
         <source>As you did not select a data folder, OSCAR will exit.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You did not select a directory.</source>
-        <translation type="vanished">No seleccionó ningún directorio.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="420"/>
@@ -7063,10 +6271,6 @@ TTIA: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead will now start with your old one.</source>
-        <translation type="vanished">SleepyHead ahora iniciará con el antiguo.</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="503"/>
         <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
@@ -7077,17 +6281,9 @@ TTIA: %1</source>
         <translation>Pregunta</translation>
     </message>
     <message>
-        <source>Choose or create new folder for SleepyHead data</source>
-        <translation type="vanished">Elegir o crear un nuevo directorio para los datos de SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="407"/>
         <source>Exiting</source>
         <translation>Saliendo</translation>
-    </message>
-    <message>
-        <source>The folder you chose is not empty, nor does it already contain valid SleepyHead data.</source>
-        <translation type="vanished">El directorio que eligió no está vacío, ni contiene datos válidos de SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="421"/>
@@ -7120,18 +6316,6 @@ TTIA: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Acerca de SleepyHead</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Cerrar</translation>
-    </message>
-    <message>
-        <source>&amp;Donate</source>
-        <translation type="vanished">&amp;Donar</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2111"/>
         <source>Sorry, your %1 %2 machine is not currently supported.</source>
         <translation type="unfinished"></translation>
@@ -7157,12 +6341,6 @@ TTIA: %1</source>
         <translation>¿Le gustaría mostrar las áreas con marcadores en este reporte?</translation>
     </message>
     <message>
-        <source>This make take some time to complete..
-Please don&apos;t touch anything until it&apos;s done.</source>
-        <translation type="vanished">Esto podría tomar algo de tiempo en completarse.
-Por favor no toque nada hasta que finalize.</translation>
-    </message>
-    <message>
         <location filename="../oscar/reports.cpp" line="98"/>
         <source>Printing %1 Report</source>
         <translation>Imprimiendo reporte %1</translation>
@@ -7176,7 +6354,8 @@ Por favor no toque nada hasta que finalize.</translation>
         <location filename="../oscar/reports.cpp" line="190"/>
         <source>: %1 hours, %2 minutes, %3 seconds
 </source>
-        <translation>: %1 horas, %2 minutos, %3 segundos</translation>
+        <translation>: %1 horas, %2 minutos, %3 segundos
+</translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="236"/>
@@ -7205,7 +6384,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/reports.cpp" line="281"/>
         <source>UAI=%1 </source>
-        <translation>IANC=%1</translation>
+        <translation>IANC=%1 </translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="283"/>
@@ -7238,17 +6417,9 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead v%1 - http://sleepyhead.sourceforge.net</source>
-        <translation type="vanished">SleeepyHead v%! - ttp://sleepyhead.sourceforge.net</translation>
-    </message>
-    <message>
         <location filename="../oscar/reports.cpp" line="561"/>
         <source>Page %1 of %2</source>
         <translation>Página %1 de %2</translation>
-    </message>
-    <message>
-        <source>SleepyHead has finished sending the job to the printer.</source>
-        <translation type="vanished">SleepyHead ha enviado el trabajo a la impresora.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gXAxis.cpp" line="64"/>
@@ -7458,7 +6629,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="156"/>
         <source>Vibratory Snore (VS2) </source>
-        <translation>Ronquido vibratorio (VS2)</translation>
+        <translation>Ronquido vibratorio (VS2) </translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="275"/>
@@ -7509,10 +6680,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <location filename="../oscar/SleepLib/schema.cpp" line="148"/>
         <source>UA</source>
         <translation>ANC</translation>
-    </message>
-    <message>
-        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation type="vanished">Una restricción en la respiración a comparación con lo normal, que causa un achatamiento en la forma de onda de flujo.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="154"/>
@@ -7586,10 +6753,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <location filename="../oscar/SleepLib/schema.cpp" line="175"/>
         <source>User Flag #1</source>
         <translation>Bandera de usuario #1</translation>
-    </message>
-    <message>
-        <source>A user definable event detected by SleepyHead&apos;s flow waveform processor.</source>
-        <translation type="vanished">Un evento definible por el usuario detectado por el procesador de formas de onda de SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="178"/>
@@ -7871,10 +7034,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation>Ventilación minuto objetivo</translation>
     </message>
     <message>
-        <source>Target Minute Ventilation?</source>
-        <translation type="vanished">Ventilación minuto objetivo</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="148"/>
         <source>An apnea that couldn&apos;t be determined as Central or Obstructive.</source>
         <translation type="unfinished"></translation>
@@ -7977,7 +7136,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="300"/>
         <source>Height</source>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="300"/>
@@ -7987,7 +7146,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="301"/>
         <source>Notes</source>
-        <translation type="unfinished">Notas</translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="301"/>
@@ -8027,7 +7186,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="308"/>
         <source>Journal</source>
-        <translation type="unfinished">Diario</translation>
+        <translation>Diario</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="315"/>
@@ -8209,50 +7368,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation>Ángulo vertical en grados</translation>
     </message>
     <message>
-        <source>Name: %1, %2</source>
-        <translation type="vanished">Nombre: %1, %2</translation>
-    </message>
-    <message>
-        <source>DOB: %1</source>
-        <translation type="vanished">Fecha de Nacimiento: %1</translation>
-    </message>
-    <message>
-        <source>Phone: %1</source>
-        <translation type="vanished">Teléfono: %1</translation>
-    </message>
-    <message>
-        <source>Email: %1</source>
-        <translation type="vanished">Correo Electrónico: %1</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation type="vanished">Domicilio:</translation>
-    </message>
-    <message>
-        <source>Usage Statistics</source>
-        <translation type="vanished">Estadísticas de uso</translation>
-    </message>
-    <message>
-        <source>This report was generated by a pre-release version of SleepyHead (%1), &lt;b&gt;and has not been approved in any way for compliance or medical diagnostic purposes&lt;/b&gt;.</source>
-        <translation type="vanished">Este reporte fue generado por una versión de pre-lanzamiento  de SleepyHead (%1), &lt;b&gt; y no ha sido aprobada de ningún modo para fines de cumplimiento o diagnóstico médico&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is free open-source software available from http://sourceforge.net/projects/SleepyHead</source>
-        <translation type="vanished">SleepyHead es un software libre de fuente abierta disponible en http://sourceforge.net/projects/SleepyHead</translation>
-    </message>
-    <message>
-        <source>CPAP Usage</source>
-        <translation type="obsolete">Uso de CPAP</translation>
-    </message>
-    <message>
-        <source>Best RX Setting</source>
-        <translation type="obsolete">Mejor Prescripción</translation>
-    </message>
-    <message>
-        <source>Worst RX Setting</source>
-        <translation type="obsolete">Peor Prescripción</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gSummaryChart.cpp" line="997"/>
         <source>Days: %1</source>
         <translation>Días: %1</translation>
@@ -8293,29 +7408,9 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation>(Sólo resumen)</translation>
     </message>
     <message>
-        <source>There is a lockfile already present for profile &apos;%1&apos;.</source>
-        <translation type="vanished">Ya hay un archivo de cierre (lockfile) presente para el perfil &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>You can only work with one instance of an individual SleepyHead profile at a time.</source>
-        <translation type="vanished">Sólo se puede trabajar con una instancia de perfil personal de Sleepytime a la vez.</translation>
-    </message>
-    <message>
-        <source>Please close any other instances of SleepyHead running with this profile before proceeding.</source>
-        <translation type="vanished">Por favor cierre otras instancias de SleepyHead que estén corriendo con este perfiĺ antes de continuar.</translation>
-    </message>
-    <message>
-        <source>If no other instances of SleepyHead are running, (eg, it crashed last time!), it is safe to ignore this message.</source>
-        <translation type="vanished">Si no hay otras instancias de SleepyHead corriendo, (ej. hubo un error), es seguro ignorar este mensaje.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="419"/>
         <source>There is a lockfile already present for this profile &apos;%1&apos;, claimed on &apos;%2&apos;.</source>
         <translation>Ya hay un archivo de cierre (lockfile) presente para el perfil &apos;%1&apos;, reclamado en &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>If you are using cloud storage, make sure SleepyHead is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation type="vanished">Si está usando almacenamiento en la nube, asegúrese de que SleepyHead está cerrado y que la sincronización se ha completado en la computadora antes de continuar.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/day.cpp" line="154"/>
@@ -8390,166 +7485,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Bienvenido a SleepyHead</translation>
-    </message>
-    <message>
-        <source>What would you like to do?</source>
-        <translation type="vanished">¿Qué puedo hacer por usted?</translation>
-    </message>
-    <message>
-        <source>Please Import Some Data</source>
-        <translation type="vanished">Por favor importe algunos datos</translation>
-    </message>
-    <message>
-        <source>CPAP&lt;br/&gt;Importer</source>
-        <translation type="vanished">Importador&lt;br/&gt;CPAP</translation>
-    </message>
-    <message>
-        <source>Oximetery&lt;br/&gt;Wizard</source>
-        <translation type="vanished">Asistente&lt;br/&gt;de Oximetría</translation>
-    </message>
-    <message>
-        <source>or</source>
-        <translation type="vanished">o</translation>
-    </message>
-    <message>
-        <source>View&lt;br/&gt;Statistics</source>
-        <translation type="vanished">Ver&lt;br/&gt;Estadísticas</translation>
-    </message>
-    <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="vanished">Es una buena idea que revise Preferencias primero,&lt;br/&gt;ya que hay algunas opciones que afectan la importación.</translation>
-    </message>
-    <message>
-        <source>First import can take a few minutes.</source>
-        <translation type="vanished">La primera importación podría tomar varios minutos.</translation>
-    </message>
-    <message>
-        <source>Click this box to see this in daily view.</source>
-        <translation type="vanished">Haga clic en esta caja para ver esto en la vista diaria.</translation>
-    </message>
-    <message>
-        <source>The last time you used your %1...</source>
-        <translation type="vanished">La última vez que usó su %1...</translation>
-    </message>
-    <message>
-        <source>last night</source>
-        <translation type="vanished">anoche</translation>
-    </message>
-    <message>
-        <source>yesterday</source>
-        <translation type="vanished">ayer</translation>
-    </message>
-    <message>
-        <source>%2 days ago</source>
-        <translation type="vanished">hace %2 días</translation>
-    </message>
-    <message>
-        <source>was %1 (on %2)</source>
-        <translation type="vanished">fue %1 (en %2)</translation>
-    </message>
-    <message>
-        <source>perfect :)</source>
-        <translation type="vanished">perfecto :)</translation>
-    </message>
-    <message>
-        <source>pretty darn good</source>
-        <translation type="vanished">bastante bien</translation>
-    </message>
-    <message>
-        <source>reasonably good</source>
-        <translation type="vanished">razonablemente bien</translation>
-    </message>
-    <message>
-        <source>technically &quot;treated&quot;</source>
-        <translation type="vanished">tecnicamente &quot;tratado&quot;</translation>
-    </message>
-    <message>
-        <source>not very good</source>
-        <translation type="vanished">no muy bien</translation>
-    </message>
-    <message>
-        <source>horrible, please consult your doctor</source>
-        <translation type="vanished">horrible, por favor consulte un médico</translation>
-    </message>
-    <message>
-        <source>You had an AHI of %1, which is considered %2</source>
-        <translation type="vanished">Usted tuvo una IAH of %1, lo cual es considerado %2</translation>
-    </message>
-    <message>
-        <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="vanished"> %1 horas, %2 minutos, %3 segundos</translation>
-    </message>
-    <message>
-        <source>You machine was on for %1.</source>
-        <translation type="vanished">Su máquina estuvo encendida por %1.</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;span title=&quot;Mac OSX and Win8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Certain operating systems&lt;/font&gt;&lt;/span&gt; write index files to the card without asking, which can render your card unreadable by your cpap machine.</source>
-        <translation type="vanished">&lt;p&gt;&lt;span title=&quot;Mac OSX y Win8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Ciertos sistemas operativos&lt;/font&gt;&lt;/span&gt; wescriben archivos de indizado en la tarjeta sin solicitar permiso, lo cual puede volver su tarjeta ilegible para la máquina CPAP.</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;As a second line of protection, ALWAYS UNMOUNT the data card properly before removing it!&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;AComo segunda línea de protección ¡SIEMPRE DESMONTE propiamente la tarjeta de datos antes de removerla!&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="vanished">&lt;font color = red&gt;Sólo tuvo la mascarilla puesta por %1.&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>You had no &lt;i&gt;major&lt;/i&gt; mask leaks (maximum was %1 %2).</source>
-        <translation type="vanished">YNo tuvo fugas &lt;i&gt;mayores&lt;/i&gt; de la mascarilla (la máxima fue de %1 %2).</translation>
-    </message>
-    <message>
-        <source>You had a small but acceptable amount of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Tuvo una pequeña pero aceptable cantidad de fugas&lt;i&gt;mayores&lt;/i&gt; de la mascarilla.</translation>
-    </message>
-    <message>
-        <source>You had significant periods of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Tuvo períodos significativos de fugas &lt;i&gt;mayores&lt;/i&gt; de.la mascarilla.</translation>
-    </message>
-    <message>
-        <source>Your mask is leaking way too much.. Talk to your CPAP advisor.</source>
-        <translation type="vanished">Su máscara está fugando demasiado. Hable con su consejero de CPAP.</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="vanished">Su máquina CPAP le sopló con %1%2 constantes de aire</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Su presión estuvo bajo %1%2 por %3 del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="vanished">Su máquina le sopló con %1-%2 %3 constantes de aire.</translation>
-    </message>
-    <message>
-        <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="vanished">Su máquina estuvo por debajo de %1-%2 %3 por %4 del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="vanished">La presión de EPAP se fijó en %1%2.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Su presión de EPAP estuvo debajo de  %1%2 por %3% del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Su presión de IPAP estuvo debajo de  %1%2 por %3% del tiempo.</translation>
-    </message>
-    <message>
-        <source>No CPAP data has been imported yet.</source>
-        <translation type="vanished">No se han importado datos de CPAP todavía.</translation>
-    </message>
-    <message>
-        <source>Most recent Oximetery data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation type="vanished">Datos de oximetría más recientes: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </translation>
-    </message>
-    <message>
         <location filename="../oscar/welcome.cpp" line="297"/>
         <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
         <translation type="unfinished"></translation>
@@ -8573,18 +7508,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <location filename="../oscar/welcome.cpp" line="305"/>
         <source>No oximetry data has been imported yet.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No oximetery data has been imported yet.</source>
-        <translation type="vanished">No se han importado datos de oximetría todavía.</translation>
-    </message>
-    <message>
-        <source>Very Important Warning</source>
-        <translation type="vanished">Advertencia muy Importante</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;ALWAYS &lt;font size=+1 color=red&gt;&lt;b&gt;write protect&lt;/b&gt;&lt;/font&gt; CPAP SDCards before inserting them into your computer.</source>
-        <translation type="vanished">&lt;p&gt;SIEMPRE &lt;font size=+1 color=red&gt;&lt;b&gt;proteja contra escritura&lt;/b&gt;&lt;/font&gt; las tarjetas SD del CPAP antes de insertarlas en su computadora.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.h" line="39"/>
@@ -8722,7 +7645,7 @@ Por favor no toque nada hasta que finalize.</translation>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="2995"/>
         <source>CPAP Mode</source>
-        <translation type="unfinished">Modo de CPAP</translation>
+        <translation>Modo de CPAP</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3001"/>
@@ -8945,10 +7868,6 @@ Por favor no toque nada hasta que finalize.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>(% of time)</source>
-        <translation type="vanished">(% del tiempo)</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gFlagsLine.cpp" line="196"/>
         <source>Database Outdated
 Please Rebuild CPAP Data</source>
@@ -8974,10 +7893,6 @@ Por favor recompile los datos del CPAP</translation>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="386"/>
         <source>Pop out Graph</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SleepyHead is proudly brought to you by JediMark.</source>
-        <translation type="vanished">SleepyHead es orgullosamente traído a usted por JediMark.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1406"/>
@@ -9099,26 +8014,6 @@ Por favor recompile los datos del CPAP</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation type="vanished">SleepyHead encontró un directorio de diario antiguo, pero parece que ha sido renombrado:</translation>
-    </message>
-    <message>
-        <source>SleepyHead will not touch this folder, and will create a new one instead.</source>
-        <translation type="vanished">SleepyHead no tocará este directorio y creará uno nuevo.</translation>
-    </message>
-    <message>
-        <source>Please be careful when playing in SleepyHead&apos;s profile folders :-P</source>
-        <translation type="vanished">Por favor sea cuidadoso cuando juegue con los archivos de perfil de SleepyHead :-P</translation>
-    </message>
-    <message>
-        <source>For some reason, sleepyHead couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.</source>
-        <translation type="vanished">Por algún motivo, SleepyHead no pudo encontrar un registro del diario en su perfil, pero encontró varios directorios con datos de diario.</translation>
-    </message>
-    <message>
-        <source>SleepyHead picked only the first one of these, and will use it in future:</source>
-        <translation type="vanished">SleepyHead tomó el primero de ellos y será el que use de aquí en adelante:</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="56"/>
         <source>If your old data is missing, copy the contents of all the other Journal_XXXXXXX folders to this one manually.</source>
         <translation>Si sus antiguos datos no están presentes, copie los contenidos desde todos los otros directorios Journal_XXXXXXX manualmente hacia este.</translation>
@@ -9178,26 +8073,6 @@ Por favor recompile los datos del CPAP</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Loading %1 data...</source>
-        <translation type="vanished">Cargando datos de %1...</translation>
-    </message>
-    <message>
-        <source>PLease Wait...</source>
-        <translation type="vanished">Por favor espere...</translation>
-    </message>
-    <message>
-        <source>By Pressure</source>
-        <translation type="vanished">Por presión</translation>
-    </message>
-    <message>
-        <source>Statistics at Pressure</source>
-        <translation type="vanished">Estadísticas de presión</translation>
-    </message>
-    <message>
-        <source>%1 Session #%2</source>
-        <translation type="vanished">%1 Sesión #%2</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.cpp" line="266"/>
         <source>CMS50D+</source>
         <translation type="unfinished"></translation>
@@ -9252,13 +8127,6 @@ Line %2, column %3</source>
         <location filename="../oscar/Graphs/MinutesAtPressure.cpp" line="312"/>
         <source>Peak %1</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QuaZipFilePrivate</name>
-    <message>
-        <source>ZIP/UNZIP API error %1</source>
-        <translation type="vanished">Error de la API ZIP/UNZIP %1</translation>
     </message>
 </context>
 <context>
@@ -9384,10 +8252,6 @@ Line %2, column %3</source>
         <translation>%1 Mediana</translation>
     </message>
     <message>
-        <source>90% %1</source>
-        <translation type="vanished">90% %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="561"/>
         <source>Min %1</source>
         <translation>Mín %1</translation>
@@ -9420,32 +8284,32 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="587"/>
         <source>Name: %1, %2</source>
-        <translation type="unfinished">Nombre: %1, %2</translation>
+        <translation>Nombre: %1, %2</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="589"/>
         <source>DOB: %1</source>
-        <translation type="unfinished">Fecha de Nacimiento: %1</translation>
+        <translation>Fecha de Nacimiento: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="592"/>
         <source>Phone: %1</source>
-        <translation type="unfinished">Teléfono: %1</translation>
+        <translation>Teléfono: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="595"/>
         <source>Email: %1</source>
-        <translation type="unfinished">Correo Electrónico: %1</translation>
+        <translation>Correo Electrónico: %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="598"/>
         <source>Address:</source>
-        <translation type="unfinished">Domicilio:</translation>
+        <translation>Domicilio:</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="641"/>
         <source>Usage Statistics</source>
-        <translation type="unfinished">Estadísticas de uso</translation>
+        <translation>Estadísticas de uso</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="657"/>
@@ -9582,7 +8446,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="1450"/>
         <source>Best RX Setting</source>
-        <translation type="unfinished">Mejor Prescripción</translation>
+        <translation>Mejor Prescripción</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1453"/>
@@ -9605,11 +8469,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="1462"/>
         <source>Worst RX Setting</source>
-        <translation type="unfinished">Peor Prescripción</translation>
-    </message>
-    <message>
-        <source>This lonely sleepy sheep has no data :(</source>
-        <translation type="vanished">Esta solitaria ovejita somnolienta no tiene datos :(</translation>
+        <translation>Peor Prescripción</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1052"/>
@@ -9632,7 +8492,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/statistics.cpp" line="1125"/>
         <source>No %1 data available.</source>
-        <translation>No hay datos %1 disponibles</translation>
+        <translation>No hay datos %1 disponibles.</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="1128"/>
@@ -9688,10 +8548,6 @@ Line %2, column %3</source>
 <context>
     <name>UpdaterWindow</name>
     <message>
-        <source>SleepyHead Updater</source>
-        <translation type="vanished">Actualizador de SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.ui" line="60"/>
         <source>A new version of $APP is available</source>
         <translation>Una nueva versión de $APP está disponible</translation>
@@ -9705,10 +8561,6 @@ Line %2, column %3</source>
         <location filename="../oscar/UpdaterWindow.ui" line="117"/>
         <source>Release Notes</source>
         <translation>Notas de la Versión</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.ui" line="14"/>
@@ -9776,70 +8628,14 @@ Line %2, column %3</source>
         <translation>&amp;Finalizado</translation>
     </message>
     <message>
-        <source>Checking for SleepyHead Updates</source>
-        <translation type="vanished">Verificando actualizaciones de SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="146"/>
         <source>Requesting </source>
-        <translation>Solicitando</translation>
-    </message>
-    <message>
-        <source>Saving as </source>
-        <translation type="vanished">Guardando como</translation>
-    </message>
-    <message>
-        <source>XML update structure parsed cleanly</source>
-        <translation type="vanished">La actualización de estructura XML se realizó limpiamente</translation>
+        <translation>Solicitando </translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
         <source>No updates were found for your platform.</source>
         <translation>No se encontraron actualizaciones para su plataforma.</translation>
-    </message>
-    <message>
-        <source>SleepyHead Updates</source>
-        <translation type="obsolete">Actualizaciones de OSCAR</translation>
-    </message>
-    <message>
-        <source>No new updates were found for your platform.</source>
-        <translation type="vanished">No se encontraron nuevas actualizaciones para su plataforma.</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1, codename &quot;%2&quot;</source>
-        <translation type="vanished">SleepyHead v%1, nombre clave &quot;%2&quot;</translation>
-    </message>
-    <message>
-        <source>platform notes</source>
-        <translation type="vanished">Notas de la Plataforma</translation>
-    </message>
-    <message>
-        <source>A new version of SleepyHead is available!</source>
-        <translation type="vanished">¡Una nueva versión de SleepyHead está disponible!</translation>
-    </message>
-    <message>
-        <source>Shiny new &lt;b&gt;v%1&lt;/b&gt; is available. You&apos;re running old and busted v%2</source>
-        <translation type="vanished">La nueva y brillante versión &lt;b&gt;v%1&lt;/b&gt; está disponible. Usted está corriendo la vieja y gastada v%2</translation>
-    </message>
-    <message>
-        <source>An update for SleepyHead is available.</source>
-        <translation type="vanished">Una actualización para SleepyHead está disponible.</translation>
-    </message>
-    <message>
-        <source>Version &lt;b&gt;%1&lt;/b&gt; is available. You&apos;re currently running v%1</source>
-        <translation type="vanished">La versión &lt;b&gt;%1&lt;/b&gt; está disponible. Usted está usando la v%1</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1 build notes</source>
-        <translation type="vanished">Notas de compilación de SleepyHead v%1</translation>
-    </message>
-    <message>
-        <source>Update to QtLibs (v%1)</source>
-        <translation type="vanished">Actualización de QtLibs (v%1)</translation>
-    </message>
-    <message>
-        <source>There was an error parsing the XML Update file.</source>
-        <translation type="vanished">Hubo un error interpretando el archivo de actualización XML.</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="171"/>
@@ -9887,68 +8683,6 @@ Line %2, column %3</source>
         <location filename="../oscar/UpdaterWindow.cpp" line="512"/>
         <source>Would you like to download and install them now?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Redirected to </source>
-        <translation type="vanished">Redirigido a</translation>
-    </message>
-    <message>
-        <source>File size mismatch for %1</source>
-        <translation type="vanished">Tamaño del archivo %1 no coincide</translation>
-    </message>
-    <message>
-        <source>File integrity check failed for %1</source>
-        <translation type="vanished">Falló la comprobación de integridad para %1</translation>
-    </message>
-    <message>
-        <source>Extracting </source>
-        <translation type="vanished">Extrayendo</translation>
-    </message>
-    <message>
-        <source>You might need to reinstall manually. Sorry :(</source>
-        <translation type="vanished">Lo sentimos :( Es posible que requiera reinstalar manualmente</translation>
-    </message>
-    <message>
-        <source>Ugh.. Something went wrong with unzipping.</source>
-        <translation type="vanished">Ups... Algo salió mal al descomprimir.</translation>
-    </message>
-    <message>
-        <source>Failed</source>
-        <translation type="vanished">Fallido</translation>
-    </message>
-    <message>
-        <source>Download Complete</source>
-        <translation type="vanished">Descarga Completada</translation>
-    </message>
-    <message>
-        <source>There was an error completing a network request:
-
-(</source>
-        <translation type="vanished">Hubo un error completando una petición de red:(</translation>
-    </message>
-    <message>
-        <source>Update Complete!</source>
-        <translation type="vanished">Actualización Completada</translation>
-    </message>
-    <message>
-        <source>Updates Complete. SleepyHead needs to restart now, click Finished to do so.</source>
-        <translation type="vanished">Actualizaciones completas. SleepyHead requiere reiniciar ahora, haga clic en Finalizado para hacerlo.</translation>
-    </message>
-    <message>
-        <source>Update Failed :(</source>
-        <translation type="vanished">Actualización Fallida :(</translation>
-    </message>
-    <message>
-        <source>Download Error. Sorry, try again later.</source>
-        <translation type="vanished">Error de descarga. Lo sentimos, intente nuevamente más tarde.</translation>
-    </message>
-    <message>
-        <source>Downloading &amp; Installing Updates...</source>
-        <translation type="vanished">Descargando e instalando actualizaciones...</translation>
-    </message>
-    <message>
-        <source>Please wait while downloading and installing updates.</source>
-        <translation type="vanished">Por favor espere mientras se descargan e instalan las actualizaciones.</translation>
     </message>
 </context>
 <context>
@@ -9999,10 +8733,6 @@ Line %2, column %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="obsolete">Es una buena idea que revise Preferencias primero,&lt;br/&gt;ya que hay algunas opciones que afectan la importación.</translation>
-    </message>
-    <message>
         <location filename="../oscar/welcome.cpp" line="139"/>
         <source>It would be a good idea to check File-&gt;Preferences first,</source>
         <translation type="unfinished"></translation>
@@ -10050,7 +8780,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="171"/>
         <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="unfinished"> %1 horas, %2 minutos, %3 segundos</translation>
+        <translation>%1 horas, %2 minutos, %3 segundos</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="174"/>
@@ -10095,7 +8825,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="215"/>
         <source>Your pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Su presión estuvo bajo %1%2 por %3 del tiempo. {1 %2 ?} {3%?}</translation>
+        <translation>Su presión estuvo bajo %1 %2 por %3 del tiempo.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="219"/>
@@ -10105,47 +8835,23 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="228"/>
         <source>Your EPAP pressure fixed at %1 %2.</source>
-        <translation type="unfinished">La presión de EPAP se fijó en %1%2. {1 %2.?}</translation>
+        <translation>La presión de EPAP se fijó en %1 %2.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="229"/>
         <location filename="../oscar/welcome.cpp" line="235"/>
         <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Su presión de IPAP estuvo debajo de  %1%2 por %3% del tiempo. {1 %2 ?} {3%?}</translation>
+        <translation>Su presión de IPAP estuvo debajo de %1 %2 por %3% del tiempo.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="234"/>
         <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Su presión de EPAP estuvo debajo de  %1%2 por %3% del tiempo. {1 %2 ?} {3%?}</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="obsolete">Su máquina CPAP le sopló con %1%2 constantes de aire</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="obsolete">Su presión estuvo bajo %1%2 por %3 del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="obsolete">Su máquina le sopló con %1-%2 %3 constantes de aire.</translation>
+        <translation>Su presión de EPAP estuvo debajo de %1 %2 por %3% del tiempo.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="223"/>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
         <translation type="unfinished">Su máquina estuvo por debajo de %1-%2 %3 por %4 del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="obsolete">La presión de EPAP se fijó en %1%2.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="obsolete">Su presión de IPAP estuvo debajo de  %1%2 por %3% del tiempo.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="obsolete">Su presión de EPAP estuvo debajo de  %1%2 por %3% del tiempo.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="255"/>

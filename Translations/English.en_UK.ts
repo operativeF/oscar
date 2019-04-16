@@ -1245,14 +1245,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please wait, launching file dialog...</source>
-        <translation type="vanished">Please wait, launching file dialogue...</translation>
-    </message>
-    <message>
-        <source>No CPAP data card detected, launching file dialog...</source>
-        <translation type="vanished">No CPAP data card detected, launching file dialogue...</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="917"/>
         <source>Please remember to point the importer at the root folder or drive letter of your data-card, and not a subfolder.</source>
         <translation type="unfinished"></translation>
@@ -2881,43 +2873,9 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This maintains a backup of SD-card data for ResMed machines, 
-
-ResMed machines delete high resolution data older than 7 days, 
-and graph data older than 30 days..
-
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
-(Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="vanished">This maintains a backup of SD-card data for ResMed machines, 
-
-ResMed machines delete high resolution data older than 7 days, 
-and graph data older than 30 days..
-
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
-(Highly recomended, unless your short on disc space or don&apos;t care about the graph data)</translation>
-    </message>
-    <message>
-        <source>Compress ResMed (EDF) backups to save disk space.
-Backed up EDF files are stored in the .gz format, 
-which is common on Mac &amp; Linux platforms.. 
-
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="vanished">Compress ResMed (EDF) backups to save disc space.
-Backed up EDF files are stored in the .gz format, 
-which is common on Mac &amp; Linux platforms.. 
-
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="439"/>
         <source>Compress SD Card Backups (slower first import, but makes backups smaller)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following options affect the amount of disk space SleepyHead uses, and all have an effect on how long import takes.</source>
-        <translation type="vanished">The following options affect the amount of disc space SleepyHead uses, and all have an effect on how long import takes.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="417"/>
@@ -4138,10 +4096,6 @@ Would you like do this now?</source>
         <location filename="../oscar/preferencesdialog.cpp" line="1131"/>
         <source>ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="vanished">If you need to conserve disc space, please remember to carry out manual backups.</translation>
     </message>
 </context>
 <context>
@@ -6675,10 +6629,6 @@ TTIA: %1</source>
         <location filename="../oscar/SleepLib/schema.cpp" line="144"/>
         <source>Obstructive</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation type="vanished">an apnoea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="152"/>

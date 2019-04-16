@@ -129,26 +129,14 @@
         <translation>Φόρμα</translation>
     </message>
     <message>
-        <source>Prev</source>
-        <translation type="vanished">Προηγούμενο</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="551"/>
         <source>Show or hide the calender</source>
         <translation>Εμφάνιση ή απόκρυψη του ημερολογίου</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="614"/>
         <source>Go to the next day</source>
         <translation>Μετάβαση στην επόμενη μέρα</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation type="vanished">Επόμενο</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="674"/>
@@ -182,17 +170,9 @@
         <translation>i </translation>
     </message>
     <message>
-        <source>Ctrl+I</source>
-        <translation type="vanished">Ctrl+I</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="1066"/>
         <source>B</source>
         <translation>B</translation>
-    </message>
-    <message>
-        <source>Ctrl+B</source>
-        <translation type="vanished">Ctrl+B</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1081"/>
@@ -224,10 +204,6 @@
         <location filename="../oscar/daily.ui" line="1195"/>
         <source>Zombie</source>
         <translation>Βρυκόλακας</translation>
-    </message>
-    <message>
-        <source>I&apos;m feeling...</source>
-        <translation type="vanished">Νιώθω...</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="1208"/>
@@ -283,10 +259,6 @@
         <location filename="../oscar/daily.ui" line="1579"/>
         <source>Show/hide available graphs.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drop down this list to show/hide available graphs.</source>
-        <translation type="vanished">Επιλογή απο την λίστα για να εμφανίσετε / αποκρύψετε της διαθέσιμες Γραφικες Παράστασης</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="220"/>
@@ -359,10 +331,6 @@
         <translation>Συνεδρίες CPAP</translation>
     </message>
     <message>
-        <source>Oximetery Sessions</source>
-        <translation type="vanished">Συνεδρίες οξυμετρίας</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="864"/>
         <source>Sleep Stage Sessions</source>
         <translation>Συνεδρίες Στάδιο Ύπνου</translation>
@@ -376,10 +344,6 @@
         <location filename="../oscar/daily.cpp" line="872"/>
         <source>Unknown Session</source>
         <translation>άγνωστη Συνεδρία</translation>
-    </message>
-    <message>
-        <source>One or more waveform record for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="vanished">Μία ή περισσότερες κυματομορφές για τούτη τη συνεδρία είχαν ελαττωματικα δεδομένα από την πηγή. Ορισμένα σημεία κυματομορφής μπορεί να μην ταιριάζουν σωστά.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="942"/>
@@ -452,18 +416,6 @@
         <translation>&quot;Τίποτα δεν είναι εδώ!&quot;</translation>
     </message>
     <message>
-        <source>Bob is bored with this days lack of data.</source>
-        <translation type="vanished">Ο Bob έχει βαρεθεί λογο έλλειψης στοιχείων ημέρας.</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation type="vanished">Απόκρυψη όλων των γεγονότων</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation type="vanished">Εμφάνιση όλων των γεγονότων</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1068"/>
         <source>Oximeter Information</source>
         <translation>πληροφορίες Οξύμετρο</translation>
@@ -519,14 +471,6 @@
         <translation>Χρησιμοποιείται Βάση SpO2</translation>
     </message>
     <message>
-        <source>PAP Mode: %1&lt;br/&gt;</source>
-        <translation type="vanished">Τρόπος PAP: %1&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>This day has missing pressure, mode and settings data.</source>
-        <translation type="vanished">Λείπουν δεδομένα πίεσης, τρόπος και ρυθμίσεις για αυτήν την ημέρα.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1145"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
@@ -537,10 +481,6 @@
         <translation>Στατιστικά</translation>
     </message>
     <message>
-        <source>This day just contains summary data, only limited information is available .</source>
-        <translation type="vanished">Αυτή η μέρα περιέχει απλά συνοπτικά στοιχεία, μόνο περιορισμένες πληροφορίες είναι διαθέσιμες.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1222"/>
         <source>Total time in apnea</source>
         <translation>Συνολικός χρόνος άπνοιας</translation>
@@ -549,14 +489,6 @@
         <location filename="../oscar/daily.cpp" line="1232"/>
         <source>Time over leak redline</source>
         <translation>Χρόνο πάνω από διαρροή κόκκινη υπογράμμιση</translation>
-    </message>
-    <message>
-        <source>Sleep</source>
-        <translation type="vanished">Ύπνος</translation>
-    </message>
-    <message>
-        <source>Wake</source>
-        <translation type="vanished">Άυπνος</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1428"/>
@@ -594,10 +526,6 @@
         <translation>ΤΟΥΒΛΟΥ :(</translation>
     </message>
     <message>
-        <source>Sorry, your machine only provides compliance data.</source>
-        <translation type="vanished">Συγνώμη, το μηχάνημά σας παρέχει μόνο τα δεδομένα της συμμόρφωσης.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1518"/>
         <source>Complain to your Equipment Provider!</source>
         <translation>Παραπονεθείτε στον Πάροχο του εξοπλισμό σας!</translation>
@@ -621,14 +549,6 @@
         <location filename="../oscar/daily.cpp" line="2135"/>
         <source>Bookmark at %1</source>
         <translation>Αποθηκεύετε με σελιδοδείκτη στο % 1</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation type="vanished">Εμφάνιση όλων των γραφικoν παραστάσεον</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation type="vanished">Απόκρυψη όλων των γραφικoν παραστάσεον</translation>
     </message>
 </context>
 <context>
@@ -741,10 +661,6 @@
         <location filename="../oscar/exportcsv.cpp" line="107"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="72"/>
@@ -874,10 +790,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../oscar/help.ui" line="198"/>
         <source>Search Topic:</source>
         <translation type="unfinished"></translation>
@@ -982,10 +894,6 @@
         <location filename="../oscar/mainwindow.ui" line="1020"/>
         <source>Date Range</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1391"/>
@@ -4745,10 +4653,6 @@ Would you like do this now?</source>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="198"/>
         <source>Med.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1%</source>
-        <translation type="obsolete">%1%</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="216"/>

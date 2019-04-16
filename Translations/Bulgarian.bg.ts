@@ -35,14 +35,6 @@
         <translation>Затваряне</translation>
     </message>
     <message>
-        <source>Build Date: %1</source>
-        <translation type="obsolete">Дата на версията: %1</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="obsolete">Графичен енджин: %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/aboutdialog.cpp" line="43"/>
         <source>Show data folder</source>
         <translation type="unfinished"></translation>
@@ -68,10 +60,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="vanished">Съжалявам, не може да се открие дневника на промените.</translation>
-    </message>
-    <message>
         <location filename="../oscar/aboutdialog.cpp" line="123"/>
         <source>OSCAR v%1</source>
         <translation type="unfinished"></translation>
@@ -90,10 +78,6 @@
         <location filename="../oscar/aboutdialog.cpp" line="139"/>
         <source>To see if the license text is available in your language, see %1.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="obsolete">Относно SleepyHead</translation>
     </message>
 </context>
 <context>
@@ -145,26 +129,14 @@
         <translation>Отиди на предишен ден</translation>
     </message>
     <message>
-        <source>Prev</source>
-        <translation type="vanished">Назад</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="551"/>
         <source>Show or hide the calender</source>
         <translation>Покажи или скрий календар</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="614"/>
         <source>Go to the next day</source>
         <translation>Отиди на следващ ден</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation type="vanished">Напред</translation>
     </message>
     <message>
         <location filename="../oscar/daily.ui" line="674"/>
@@ -254,10 +226,6 @@
         <translation>Зомби</translation>
     </message>
     <message>
-        <source>I&apos;m feeling...</source>
-        <translation type="vanished">Чувствам се...</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.ui" line="1224"/>
         <source>Weight</source>
         <translation>Тегло</translation>
@@ -293,10 +261,6 @@
         <translation>Премахни отметка</translation>
     </message>
     <message>
-        <source>Drop down this list to show/hide available graphs.</source>
-        <translation type="vanished">Избери от този списък за да се покажат/скрият наличните графики.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="220"/>
         <source>Breakdown</source>
         <translation>Класифициране</translation>
@@ -320,10 +284,6 @@
         <location filename="../oscar/daily.cpp" line="640"/>
         <source>%1 events</source>
         <translation>%1 събития</translation>
-    </message>
-    <message>
-        <source>PAP Mode: %1&lt;br/&gt;</source>
-        <translation type="vanished">PAP режим: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="231"/>
@@ -351,10 +311,6 @@
         <translation>Продължителност</translation>
     </message>
     <message>
-        <source>Oximetery Sessions</source>
-        <translation type="vanished">Оксиметрични сесии</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="867"/>
         <source>Position Sensor Sessions</source>
         <translation>Позиционен сензор сесии</translation>
@@ -370,17 +326,9 @@
         <translation>Няма информация за настройките на апарата</translation>
     </message>
     <message>
-        <source>This day has missing pressure, mode and settings data.</source>
-        <translation type="vanished">Този ден има липсваща информация за налягане, режим и настройки.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1145"/>
         <source>%1%2</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>This day just contains summary data, only limited information is available .</source>
-        <translation type="vanished">Този ден съдържа само общи дани, налична е само ограничена информация.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1222"/>
@@ -391,14 +339,6 @@
         <location filename="../oscar/daily.cpp" line="1232"/>
         <source>Time over leak redline</source>
         <translation>Общо време с теч на въздух над граница</translation>
-    </message>
-    <message>
-        <source>Sleep</source>
-        <translation type="vanished">Заспиване</translation>
-    </message>
-    <message>
-        <source>Wake</source>
-        <translation type="vanished">Събуждане</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1428"/>
@@ -556,10 +496,6 @@
         <translation>Сесии фази на сън</translation>
     </message>
     <message>
-        <source>One or more waveform record for this session had faulty source data. Some waveform overlay points may not match up correctly.</source>
-        <translation type="vanished">Един или повече записи за формата на вълната за тази сесия идват от повредени данни. Поради тази причина е възможно някои от слоевете със запис да не са подравнени коректно. </translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="946"/>
         <source>&lt;b&gt;Please Note:&lt;/b&gt; All settings shown below are based on assumptions that nothing&apos;s changed since previous days.</source>
         <translation type="unfinished"></translation>
@@ -595,17 +531,9 @@
         <translation>Време извън рампинг</translation>
     </message>
     <message>
-        <source>Sorry, your machine only provides compliance data.</source>
-        <translation type="vanished">Съжалявам, вашият апарат предоставя само данни за спазване.</translation>
-    </message>
-    <message>
         <location filename="../oscar/daily.cpp" line="1536"/>
         <source>&quot;Nothing&apos;s here!&quot;</source>
         <translation>&quot;Няма нищо тук!&quot;</translation>
-    </message>
-    <message>
-        <source>Bob is bored with this days lack of data.</source>
-        <translation type="vanished">Боб отегчен от тези дни, за които няма данни.</translation>
     </message>
     <message>
         <location filename="../oscar/daily.cpp" line="1831"/>
@@ -621,22 +549,6 @@
         <location filename="../oscar/daily.cpp" line="2135"/>
         <source>Bookmark at %1</source>
         <translation>Отметка в %1</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation type="vanished">Показване на всички графики</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation type="vanished">Скриване на всички събития</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation type="vanished">Показване на всички събития</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation type="vanished">Скриване на всички графики</translation>
     </message>
 </context>
 <context>
@@ -751,14 +663,6 @@
         <translation>По избор</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>SleepyHead_</source>
-        <translation type="vanished">SleepyHead_</translation>
-    </message>
-    <message>
         <location filename="../oscar/exportcsv.cpp" line="72"/>
         <source>OSCAR_</source>
         <translation type="unfinished"></translation>
@@ -847,20 +751,12 @@
     <message>
         <location filename="../oscar/exportcsv.cpp" line="213"/>
         <source> Count</source>
-        <translation>Брой</translation>
+        <translation> Брой</translation>
     </message>
     <message>
         <location filename="../oscar/exportcsv.cpp" line="221"/>
         <source>%1% </source>
-        <translation type="unfinished">%1:  {1%?}</translation>
-    </message>
-    <message>
-        <source> Avg</source>
-        <translation type="vanished">Средно</translation>
-    </message>
-    <message>
-        <source> %1%</source>
-        <translation type="vanished"> %1%</translation>
+        <translation>%1% </translation>
     </message>
 </context>
 <context>
@@ -892,10 +788,6 @@
         <location filename="../oscar/help.ui" line="92"/>
         <source>Hide this message</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../oscar/help.ui" line="198"/>
@@ -979,21 +871,9 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="942"/>
         <source>&amp;Statistics</source>
         <translation>&amp;Статистики</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;This is pre-release software, some parts of this program may not yet function as intended.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание: &lt;/span&gt;Тази версия на софтуера не е финална, някои части от тази програма може да не функционират нормално.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="996"/>
@@ -1014,14 +894,6 @@
         <location filename="../oscar/mainwindow.ui" line="1020"/>
         <source>Date Range</source>
         <translation>Период от време</translation>
-    </message>
-    <message>
-        <source>&amp;Help Browser</source>
-        <translation type="vanished">&amp;Помощ браузър</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="1391"/>
@@ -1090,10 +962,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Purge Oximetery Data</source>
-        <translation type="vanished">Изтриване оксиметрични данни</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2888"/>
         <source>Rebuild CPAP Data</source>
         <translation>Презареждане на CPAP данни</translation>
@@ -1134,10 +1002,6 @@
         <translation>Експорт за преглед</translation>
     </message>
     <message>
-        <source>Report a Bug</source>
-        <translation type="vanished">Съобщи за грешка</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="103"/>
         <source>E&amp;xit</source>
         <translation>И&amp;зход</translation>
@@ -1173,14 +1037,6 @@
         <translation>Използване на заглаждане (&amp;AntiAliasing)</translation>
     </message>
     <message>
-        <source>&amp;About SleepyHead</source>
-        <translation type="vanished">&amp;Относно SleepyHead</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen Toggle</source>
-        <translation type="vanished">&amp;Превключване към цял екран</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.ui" line="2991"/>
         <source>Show Debug Pane</source>
         <translation>Показване на Debug прозорец</translation>
@@ -1189,10 +1045,6 @@
         <location filename="../oscar/mainwindow.ui" line="2999"/>
         <source>&amp;Reset Graph Layout</source>
         <translation>&amp;Възстановяване на графичната подредба</translation>
-    </message>
-    <message>
-        <source>Check for &amp;Updates</source>
-        <translation type="vanished">Проверка за &amp;нова версия</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3004"/>
@@ -1307,7 +1159,7 @@
     <message>
         <location filename="../oscar/mainwindow.ui" line="2872"/>
         <source>Purge Oximetry Data</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3072"/>
@@ -1324,10 +1176,6 @@
         <location filename="../oscar/mainwindow.ui" line="3088"/>
         <source>Import RemStar &amp;MSeries Data</source>
         <translation>Импорт данни от RemStar &amp;MSeries</translation>
-    </message>
-    <message>
-        <source>&amp;Support SleepyHead Development</source>
-        <translation type="vanished">&amp;Подкрепи разработката на SleepyHead</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.ui" line="3093"/>
@@ -1371,10 +1219,6 @@
         <translation>&amp;Относно</translation>
     </message>
     <message>
-        <source>Loading Data</source>
-        <translation type="vanished">Зареждане данни</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="849"/>
         <source>Access to Import has been blocked while recalculations are in progress.</source>
         <translation>Достъп до импорт функцията е блокиран докато се извършват преизчисления.</translation>
@@ -1389,22 +1233,6 @@
         <location filename="../oscar/mainwindow.cpp" line="1901"/>
         <source>Please wait, importing from backup folder(s)...</source>
         <translation>Моля изчакайте, извършва се импорт от архивната папка...</translation>
-    </message>
-    <message>
-        <source>Please wait, scanning for CPAP data cards...</source>
-        <translation type="vanished">Моля изчакайте, сканирам за карти с CPAP данни...</translation>
-    </message>
-    <message>
-        <source>When reporting bugs, please make sure to supply the SleepyHead version number, operating system details and CPAP machine model.</source>
-        <translation type="vanished">Когато съобщавате за грешки, моля указвайте също така версията на SleepyHead, която използвате, детайли за операционната система и моделът на вашия CPAP апарат.</translation>
-    </message>
-    <message>
-        <source>Make sure you keep your SleepyHead data folder backed up when trying testing versions.</source>
-        <translation type="vanished">Убедете се че разполагате с резервни копия на папката с данни на SleepyHead преди да опитвате тестови версии.</translation>
-    </message>
-    <message>
-        <source>Make sure you&apos;re willing and able to supply a .zip of your CPAP data or a crash report before you think about filing a bug report.</source>
-        <translation type="vanished">Убедете се че имате желание и възможност да предоставите .zip архив на вашата папка със CPAP данни или краш репорт преди да попълните репорт за открит проблем с програмата.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="620"/>
@@ -1431,14 +1259,6 @@
         <translation>Данни за CPAP са открити</translation>
     </message>
     <message>
-        <source>Please wait, launching file dialog...</source>
-        <translation type="vanished">Моля изчакайте, стартира се файловият прозорец...</translation>
-    </message>
-    <message>
-        <source>No CPAP data card detected, launching file dialog...</source>
-        <translation type="vanished">Не е открита карта със CPAP данни, стартира се файловият прозорец...</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="917"/>
         <source>Please remember to point the importer at the root folder or drive letter of your data-card, and not a subfolder.</source>
         <translation>Моля не забравяйте да посочите главната папка (не поддиректория) или буква на устройство, в която се намират вашите CPAP данни.</translation>
@@ -1454,30 +1274,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Добре дошли в SleepyHead</translation>
-    </message>
-    <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Относно SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1071"/>
         <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
         <translation>Този софтуер е създаден с цел да асистира-за преглед на данните от CPAP апарати, използвани за терапия при различни разстройства по време на сън.</translation>
     </message>
     <message>
-        <source>SleepyHead has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation type="vanished">SleepyHead е проектиран от софтуерен разработчик с личен опит с разстройство по време на сън и е оформен от предложения и отзиви на много други доброволци тестери с подобни състояния.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1075"/>
         <source>This is a beta release, some features may not yet behave as expected.</source>
         <translation>Това е бета версия, възможно е някои функции все още да не работят както се очаква от тях.</translation>
-    </message>
-    <message>
-        <source>Please report any bugs you find to SleepyHead&apos;s SourceForge page.</source>
-        <translation type="vanished">Моля съобщавайте за всякакви открити грешки на страницата на SleepyHead в SourceForge.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1078"/>
@@ -1535,17 +1339,9 @@
         <translation>(не поддържа SSL криптиране, следвателно не е изобщо добра идея да се въвеждат пароли или лична информация където и да е било в него)</translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s &lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;Project Website&lt;/a&gt; on SourceForge&lt;br/&gt;</source>
-        <translation type="vanished">Сайт на проекта &lt;a href=&apos;http://www.sourceforge.net/projects/sleepyhead&apos;&gt;SleepyHead&lt;/a&gt; в SourceForge&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1104"/>
         <source>Further Information</source>
         <translation>За повече информация</translation>
-    </message>
-    <message>
-        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation type="vanished">Бележките по това издание се намират &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;тук&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1108"/>
@@ -1573,17 +1369,9 @@
         <translation>Запазени права:</translation>
     </message>
     <message>
-        <source>&amp;copy;2011-2018</source>
-        <translation type="obsolete">&amp;copy;2011-2018</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1125"/>
         <source>License:</source>
         <translation>Лиценз:</translation>
-    </message>
-    <message>
-        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License&lt;/a&gt;.</source>
-        <translation type="vanished">Този софтуер свободен и лицензиран под &lt;a href=&quot;qrc:/COPYING&quot;&gt;Общ публичен лиценз GNU&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1129"/>
@@ -1596,10 +1384,6 @@
         <translation>Това &lt;font color=&apos;red&apos;&gt;&lt;u&gt;НЕ Е&lt;/u&gt;&lt;/font&gt; медицински софтуер. Тази програма е просто визуализатор на данни, и няма гаранции относно акуратност и коректност на изчисленията или визуализацията на показаните данни.</translation>
     </message>
     <message>
-        <source>The author will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation type="vanished">Не може да бъде търсена отговорност от автора ако някой нарани себе си или друг при използването или неизползването на този софтуер.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1135"/>
         <source>Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.</source>
         <translation>Вашият лекар винаги трябва да бъде първи и най-добър източник за напътствия относно важната информация за вашето здраве.</translation>
@@ -1610,45 +1394,9 @@
         <translation>*** &lt;u&gt;Използвайте на своя отговорност&lt;/u&gt; ***</translation>
     </message>
     <message>
-        <source>Loading</source>
-        <translation type="vanished">Зареждане</translation>
-    </message>
-    <message>
-        <source>Revision:</source>
-        <translation type="vanished">Ревизия:</translation>
-    </message>
-    <message>
-        <source>branch</source>
-        <translation type="vanished">branch</translation>
-    </message>
-    <message>
-        <source>Data Folder Location: &lt;a href=&quot;file://%1&quot;&gt;%2&lt;/a&gt;</source>
-        <translation type="vanished">Местоположение на папката с данни:&lt;a href=&quot;file://%1&quot;&gt;%2&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Arie Klerk (Dutch), Steffen Reitz and Marc Stephan (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish) and others I&apos;ve still to add here.</source>
-        <translation type="vanished">Arie Klerk (Нидерландски), Steffen Reitz и Marc Stephan (Немски), Chen Hao (Китайски), Lars-Erik Söderström (Шведски), Damien Vigneron (Френски), António Jorge Costa (Португалски), Judith Guzmán (Испански), Plamen Tonev (Български) както и други, които ще бъдат добавяни в бъдеще.</translation>
-    </message>
-    <message>
-        <source>Special thanks to Pugsy and Robysue from &lt;a href=&apos;http://cpaptalk.com&apos;&gt;CPAPTalk&lt;/a&gt; for their help with documentation and tutorials, as well as everyone who helped out by testing and sharing their CPAP data.</source>
-        <translation type="vanished">Специални благодарности на Pugsy и Robysue от &lt;a href=&apos;http://cpaptalk.com&apos;&gt;CPAPTalk&lt;/a&gt; за тяхната помощ с документацията и материалите за обучение, както и на всички, които помагат чрез тестване и споделяне на CPAP данните си.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to rebuild all CPAP data for the following machine:</source>
-        <translation type="vanished">Сигурни ли сте че желаете да презапишете всички CPAP данни за следния апарат: </translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if SleepyHead&apos;s internal backups have been disabled or interfered with in any way.</source>
-        <translation type="vanished">Моля имайте предвид, че това би могло да доведе до загуба на графики, при положение, че вътрешният бекъп е бил изключен или е бил модифициран по някакъв начин.</translation>
-    </message>
-    <message>
-        <source>For some reason, SleepyHead does not have internal backups for the following machine:</source>
-        <translation type="vanished">По някакви причини SleepyHead не разполага с вътрешни резервни копия за следния апарат:</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1888"/>
         <source>Provided you have made &lt;i&gt;your &lt;b&gt;own&lt;/b&gt; backups for ALL of your CPAP data&lt;/i&gt;, you can still complete this operation, but you will have to restore from your backups manually.</source>
-        <translation>Ако сте правили &lt;i&gt;свой &lt;b&gt;собствен&lt;/b&gt; бекъп на абсолютно всички CPAP данни досега&lt;/i&gt; ще можете да завършите тази операция, но ще е необходимо да извършите възстановяването от бекъп ръчно.  </translation>
+        <translation>Ако сте правили &lt;i&gt;свой &lt;b&gt;собствен&lt;/b&gt; бекъп на абсолютно всички CPAP данни досега&lt;/i&gt; ще можете да завършите тази операция, но ще е необходимо да извършите възстановяването от бекъп ръчно.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1889"/>
@@ -1656,22 +1404,14 @@
         <translation>Сигурни ли сте че желаете да направите това?</translation>
     </message>
     <message>
-        <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; SleepyHead&apos;s machine database for the following machine:</source>
-        <translation type="vanished">Ще &lt;font size=+2&gt;унищожите&lt;/font&gt; данните на SleepyHead за следния ваш апарат:</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1943"/>
         <source>Note as a precaution, the backup folder will be left in place.</source>
-        <translation>За всеки случай бекъп папката ще бъде оставена.  </translation>
+        <translation>За всеки случай бекъп папката ще бъде оставена.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1944"/>
         <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
         <translation>&lt;b&gt;Абсолютно ли сте сигурни&lt;/b&gt; че желаете да продължите?</translation>
-    </message>
-    <message>
-        <source>A file permission error or simillar screwed up the purge process, you will have to delete the following folder manually:</source>
-        <translation type="vanished">Вероятно недостатъчни права за достъп пречат на процеса по изчистване, налага се да изтриете ръчно следната папка:</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2484"/>
@@ -1837,30 +1577,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copyright</source>
-        <translation type="vanished">Запазени права</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Warning:&lt;/b&gt; This is a pre-release build, and may at times show unstable behaviour. It is intended for testing purposes.</source>
-        <translation type="vanished">&lt;b&gt;Внимание:&lt;/b&gt;Това е предварителна версия на софтуера и понякога може да е бавен или нестабилен. Предвиден е да се използва за тестови цели.</translation>
-    </message>
-    <message>
-        <source>If you experience CPAP chart/data errors after upgrading to a new version, try rebuilding your CPAP database from the Data menu.</source>
-        <translation type="vanished">Ако наблюдавате грешки в CPAP графиките/данните след като сте обновили към нова версия опитайте да презаредите CPAP базата данни от менюто Данни.</translation>
-    </message>
-    <message>
-        <source>Please ensure you are running the latest version before reporting any bugs.</source>
-        <translation type="vanished">Моля убедете се че използвате последна версия на софтуера преди да съобщите за проблем с него.</translation>
-    </message>
-    <message>
-        <source>Think twice before filing a bug report that already exists, PLEASE search first, as your likely not the first one to notice it!</source>
-        <translation type="vanished">МОЛЯ преди да попълните ново съобщение за грешка в програмата първо проверете дали тя вече не е съобщена, тъй като е много вероятно да е забелязана вече от друг потребител! </translation>
-    </message>
-    <message>
-        <source>This red message line is intentional, and will not be a feature in the final version...</source>
-        <translation type="vanished">Това червено съобщение е умишлено и няма да бъде част от финалната версия...</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="308"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
@@ -1929,113 +1645,9 @@
         <translation>Посочи</translation>
     </message>
     <message>
-        <source>SleepyHead&apos;s Online &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Users Guide&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">Онлайн &lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=SleepyHead_Users_Guide&quot;&gt;Ръководство за употреба&lt;/a&gt; на SleepyHead&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Frequently_Asked_Questions&quot;&gt;Често задавани въпроси&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Glossary of Sleep Disorder Terms&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary&quot;&gt;Речник на термините при разстройства на съня&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;SleepyHead Wiki&lt;/a&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;a href=&quot;http://sleepyhead.sourceforge.net/wiki/index.php?title=Main_Page&quot;&gt;SleepyHead Уики&lt;/a&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1115"/>
         <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
         <translation>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;copy;2011-2016</source>
-        <translation type="vanished">&amp;copy;2011-2016</translation>
-    </message>
-    <message>
-        <source>This software is released under the GNU Public License v3.0&lt;br/&gt;</source>
-        <translation type="vanished">Този софтуер e свободен и лицензиран под Общ публичен лиценз GNU v3.0&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>SleepyHead Project Page</source>
-        <translation type="vanished">Страница на проекта SleepyHead</translation>
-    </message>
-    <message>
-        <source>SleepyHead Wiki</source>
-        <translation type="vanished">SleepyHead Wiki</translation>
-    </message>
-    <message>
-        <source>Don&apos;t forget to Like/+1 SleepyHead on &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebook&lt;/a&gt; or &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+</source>
-        <translation type="vanished">Не забравяйте да харесате/+1 SleepyHead на &lt;a href=&quot;http://www.facebook.com/SleepyHeadCPAP&quot;&gt;Facebook&lt;/a&gt; или &lt;a href=&quot;http://plus.google.com/u/0/b/101426655252362287937&quot;&gt;Google+</translation>
-    </message>
-    <message>
-        <source>SleepyHead, brought to you by Jedimark</source>
-        <translation type="vanished">SleepyHead е при вас благодарение на JediMark</translation>
-    </message>
-    <message>
-        <source>Kudos &amp; Credits</source>
-        <translation type="vanished">Благодарности и заслуги</translation>
-    </message>
-    <message>
-        <source>Bugfixes, Patches and Platform Help:</source>
-        <translation type="vanished">Корекция на грешки, кръпки и платформена помощ:</translation>
-    </message>
-    <message>
-        <source>James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson, RezNet, PaleRider, JediBob, Diamaunt.</source>
-        <translation type="vanished">James Marshall, Rich Freeman, John Masters, Keary Griffin, Patricia Shanahan, Alec Clews, manders99, Sean Stangl, Roy Stone, François Revol, Michael Masterson, RezNet, PaleRider, JediBob, Diamaunt.</translation>
-    </message>
-    <message>
-        <source>Translators:</source>
-        <translation type="vanished">Преводачи:</translation>
-    </message>
-    <message>
-        <source>Arie Klerk (Translation Coordinator, also Dutch), Steffen Reitz (German), Chen Hao (Chinese), Lars-Erik Söderström (Swedish), Damien Vigneron (French), António Jorge Costa (Portuguese), Judith Guzmán (Spanish), Plamen Tonev (Bulgarian) and others I&apos;ve still to add here.</source>
-        <translation type="vanished">Arie Klerk (координатор по транслацията, Нидерландски), Steffen Reitz (Немски), Chen Hao (Китайски), Lars-Erik Söderström (Шведски), Damien Vigneron (Френски), António Jorge Costa (Португалски), Judith Guzmán (Испански), Plamen Tonev (Български) и други, които ще се добавят тук.</translation>
-    </message>
-    <message>
-        <source>3rd Party Libaries:</source>
-        <translation type="vanished">Външни библиотеки:</translation>
-    </message>
-    <message>
-        <source>SleepyHead is built using the &lt;a href=&quot;http://qt-project.org&quot;&gt;Qt Application Framework&lt;/a&gt;.</source>
-        <translation type="vanished">За написването на SleepyHeadis е използван &lt;a href=&quot;http://qt-project.org&quot;&gt;Qt Application Framework&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>In the updater code, SleepyHead uses &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; by Sergey A. Tachenov, which is a C++ wrapper over Gilles Vollant&apos;s ZIP/UNZIP package.</source>
-        <translation type="vanished">В кода за ъпдейт SleepyHead използва &lt;a href=&quot;http://sourceforge.net/projects/quazip&quot;&gt;QuaZip&lt;/a&gt; от Sergey A. Tachenov, който е C++ обвивка за пакета ZIP/UNZIP на Gilles Vollant.</translation>
-    </message>
-    <message>
-        <source>Thanks for using SleepyHead. If you find it within your means, please consider encouraging future development by making a donation via Paypal.</source>
-        <translation type="vanished">Благодаря Ви че използвате SleepyHead. Ако Ви върши добра работа моля обмислете дали не бихте искали да окуражите бъдещата му разработка чрез дарение през PayPal. </translation>
-    </message>
-    <message>
-        <source>This software comes with absolutely no warranty, either express of implied.</source>
-        <translation type="vanished">Този софтуер не предоставя никакви гаранции.</translation>
-    </message>
-    <message>
-        <source>It comes with no guarantee of fitness for any particular purpose.</source>
-        <translation type="vanished">Не се дава гаранция за съотвествие с конкретна употреба.</translation>
-    </message>
-    <message>
-        <source>No guarantees are made regarding the accuracy of any data this program displays.</source>
-        <translation type="vanished">Не се предоставят гаранции за точност на данни и визуализации, които този софтуер предоставя.</translation>
-    </message>
-    <message>
-        <source>This is NOT medical software, it is merely a research tool that provides a visual interpretation of data recorded by supported devices.</source>
-        <translation type="vanished">Това НЕ Е медицински софтуер, той е предназначен за визуална интерпретация на данни записани от поддържани апарати.</translation>
-    </message>
-    <message>
-        <source>This software is NOT suitable for medical diagnostics purposes, neither is it fit for CPAP complaince reporting purposes, or ANY other medical use for that matter.</source>
-        <translation type="vanished">Този софтуер НЕ Е подходящ за медицинска диагностика, за съответствие със CPAP терапия или каквито и да е друга медицинска употреба.</translation>
-    </message>
-    <message>
-        <source>The author and anyone associated with him accepts NO responsibilty for damages, issues or non-issues resulting from the use or mis-use of this software.</source>
-        <translation type="vanished">Авторът и всички асоциирани с него не поемат НИКАКВА отговорност за щети, проблеми произтичащи от използването или неизползвнето на този софтуер.</translation>
-    </message>
-    <message>
-        <source>Use this software entirely at your own risk.</source>
-        <translation type="vanished">Използвайте на своя отговорност.</translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="1268"/>
@@ -2048,14 +1660,6 @@
         <translation>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV модели)</translation>
     </message>
     <message>
-        <source>Build Date: %1 %2</source>
-        <translation type="vanished">Дата на версията: %1 %2</translation>
-    </message>
-    <message>
-        <source>Graphics Engine: %1</source>
-        <translation type="vanished">Графичен енджин: %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1365"/>
         <source>There was an error saving screenshot to file &quot;%1&quot;</source>
         <translation>Има проблем със запазването на снимка на екрана във файл &quot;%1&quot;</translation>
@@ -2066,59 +1670,15 @@
         <translation>Снимката на екрана е записана във файл &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Printing Disabled</source>
-        <translation type="vanished">Печатът е изключен</translation>
-    </message>
-    <message>
-        <source>Please rebuild SleepyHead with Qt 4.8.5 or greater, as printing causes a crash with this version of Qt</source>
-        <translation type="vanished">Моля прекомпилирайте SleepyHead с Qt версия 4.8.5 или по-висока, тъй има проблеми със стабилността на тази версия на Qt при печатане</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="1735"/>
         <location filename="../oscar/mainwindow.cpp" line="1762"/>
         <source>Gah!</source>
         <translation>Ох!</translation>
     </message>
     <message>
-        <source>If you can read this, the restart command didn&apos;t work. Your going to have to do it yourself manually.</source>
-        <translation type="vanished">Ако четете това значи командата за рестарт не е извършена успешно. Ще се наложи да рестартирате ръчно.</translation>
-    </message>
-    <message>
-        <source>Performance will be degraded during these recalculations.</source>
-        <translation type="vanished">Производителноста ще бъде намалена докато се извършват преизчисления.</translation>
-    </message>
-    <message>
-        <source>Recalculating Indices</source>
-        <translation type="vanished">Преизчисляват се индекси</translation>
-    </message>
-    <message>
-        <source>Loading Event Data</source>
-        <translation type="vanished">Зареждане на данни за събития</translation>
-    </message>
-    <message>
-        <source>Recalculating Summaries</source>
-        <translation type="vanished">Преизчисляване на обща информация </translation>
-    </message>
-    <message>
-        <source>Restart Required</source>
-        <translation type="vanished">Необходим е рестарт</translation>
-    </message>
-    <message>
-        <source>Recalculations are complete, the application now needs to restart to display the changes.</source>
-        <translation type="vanished">Преизчисленията завършиха, необходимо е приложението да бъде рестартирано за да се видят промените.</translation>
-    </message>
-    <message>
-        <source>Recalculations are now complete.</source>
-        <translation type="vanished">Преизчисленията завършиха.</translation>
-    </message>
-    <message>
-        <source>Task Completed</source>
-        <translation type="vanished">Задачата приключи</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2237"/>
         <source>There was a problem opening ZEO File: </source>
-        <translation>Има проблем с отварянето на файл от ZEO:</translation>
+        <translation>Има проблем с отварянето на файл от ZEO: </translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2241"/>
@@ -2128,7 +1688,7 @@
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2263"/>
         <source>There was a problem opening MSeries block File: </source>
-        <translation>Има проблем с отварянето на файл с данни от MSeries:</translation>
+        <translation>Има проблем с отварянето на файл с данни от MSeries: </translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2267"/>
@@ -2136,17 +1696,9 @@
         <translation>Импорта от MSeries приключи</translation>
     </message>
     <message>
-        <source>Changing the language will reset custom Event and Waveform names/labels/descriptions.</source>
-        <translation type="vanished">Промяната на езика ще възстанови стандартните настройки за имена/етикети/описание на събитията и вълните.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to do this?</source>
-        <translation type="vanished">Сигурни ли сте, че желаете да направите това?</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2320"/>
         <source>There was a problem opening Somnopose Data File: </source>
-        <translation>Има проблем с отварянето на файл с данни от Somnopose:</translation>
+        <translation>Има проблем с отварянето на файл с данни от Somnopose: </translation>
     </message>
     <message>
         <location filename="../oscar/mainwindow.cpp" line="2324"/>
@@ -2418,10 +1970,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.ui" line="955"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Отказ</translation>
@@ -2444,26 +1992,14 @@
         <translation>Изберете държава</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Добре дошли в SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="111"/>
         <source>This software is being designed to assist you in reviewing the data produced by your CPAP machines and related equipment.</source>
-        <translation>Този софтуер е проектиран с цел да помага за визуализиране на данните от вашия CPAP апарат и подобно оборудване. </translation>
-    </message>
-    <message>
-        <source>SleepyHead has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
-        <translation type="vanished">SleepyHead е свободен софтуер, лицензиран под &lt;a href=&apos;qrc:/COPYING&apos;&gt;Общ публичен лиценз GNU&lt;/a&gt;, предоставя се без гаранции, както и без каквито и да е претенции че върши дадена работа.</translation>
+        <translation>Този софтуер е проектиран с цел да помага за визуализиране на данните от вашия CPAP апарат и подобно оборудване.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="116"/>
         <source>PLEASE READ CAREFULLY</source>
         <translation>МОЛЯ ПРОЧЕТЕТЕ ВНИМАТЕЛНО</translation>
-    </message>
-    <message>
-        <source>SleepyHead is intended merely as a data viewer, and definitely not a substitute for competent medical guidance from your Doctor.</source>
-        <translation type="vanished">SleepyHead е предназначен за преглед на данни и определено не е заместител на квалифицирана медицинска консултация с вашия лекар.</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="120"/>
@@ -2476,25 +2012,9 @@
         <translation>Всички генерирани отчети са само за лична употреба а не за определяне дали се спазва терапията или за диагностични цели.</translation>
     </message>
     <message>
-        <source>The author will not be held liable for &lt;u&gt;anything&lt;/u&gt; related to the use or misuse of this software.</source>
-        <translation type="vanished">Не може да бъде търсена отговорност от автора за &lt;u&gt;каквото и да е&lt;/u&gt; произтичащо от правилната или неправилна употреба на този софтуер.</translation>
-    </message>
-    <message>
         <location filename="../oscar/newprofile.cpp" line="129"/>
         <source>Use of this software is entirely at your own risk.</source>
         <translation>Използвайте на своя отговорност.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2018 Mark Watkins</source>
-        <translation type="obsolete">SleepyHead е със запазени права &amp;copy;2011-2014 Марк Уоткинс {2011-2018 ?}</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2016 Mark Watkins</source>
-        <translation type="vanished">SleepyHead е със запазени права &amp;copy;2011-2016 Mark Watkins</translation>
-    </message>
-    <message>
-        <source>SleepyHead is copyright &amp;copy;2011-2014 Mark Watkins</source>
-        <translation type="vanished">SleepyHead е със запазени права &amp;copy;2011-2014 Марк Уоткинс</translation>
     </message>
     <message>
         <location filename="../oscar/newprofile.cpp" line="109"/>
@@ -2824,10 +2344,6 @@ Index</source>
         <translation>Налични са повече от една сесия</translation>
     </message>
     <message>
-        <source>Please choose which one you want to import into SleepyHead</source>
-        <translation type="vanished">Моля изберете коя желаете да импортнете в SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.ui" line="1671"/>
         <source>Start Time</source>
         <translation>Начално време</translation>
@@ -2861,10 +2377,6 @@ Index</source>
         <location filename="../oscar/oximeterimport.ui" line="1796"/>
         <source>I started this oximeter recording at (or near) the same time as a session on my CPAP machine.</source>
         <translation>Стартирах този оксиметричен запис в същото време (или почти същото), в което стартирах и CPAP сесия на апарата.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead needs a starting time to know where to save this oximetry session to.&lt;/p&gt;&lt;p&gt;Choose one of the following options:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SleepyHead има нужда да му бъде указано начално време за да знае къде да запише тази оксиметрична сесия.&lt;/p&gt;&lt;p&gt;Изберете една от следните опции:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1857"/>
@@ -2928,14 +2440,6 @@ Index</source>
         <translation>ChoiceMMed MD300W1</translation>
     </message>
     <message>
-        <source>CMS50E/F users, when importing directly, please don&apos;t select upload on your device until SleepyHead prompts you to.</source>
-        <translation type="vanished">За потребителите на CMS50E/F: когато импортирате директно моля не избирайте качване от вашето устройство докато SleepyHead не поиска това.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, SleepyHead will automatically reset your CMS50&apos;s internal clock using your computers current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ако е включена тази опция, SleepyHead автоматично ще настройва вътрешния часовник на CMS50 използвайки текущо време на вашия компютър.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.ui" line="1007"/>
         <source>Set device date/time</source>
         <translation>Синхронизация на дата/час</translation>
@@ -2954,10 +2458,6 @@ Index</source>
         <location filename="../oscar/oximeterimport.ui" line="1036"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Тук, в рамките на 7 символа можете да укажете идентификатор за този оксиметър.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before SleepyHead saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;С тази опция след приключване на импортирането на сесията тя ще бъде изтрита от вашия оксиметър. &lt;/p&gt;&lt;p&gt;Внимавайте с употребата тъй като ако нещо се случи преди SleepyHead да успее да запише вашата сесия тя ще бъде загубена.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.ui" line="1080"/>
@@ -3155,14 +2655,6 @@ Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Oximetry Files (*.spo *.spor *.spo2 *.dat)</source>
-        <translation type="vanished">Оксиметрични файлове (*.spo *.spor *.spo2 *.dat)</translation>
-    </message>
-    <message>
-        <source>No Oximetery module could parse the given file:</source>
-        <translation type="vanished">Няма оксиметричен модул, който да може да обработи подадения файл:</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="456"/>
         <source>Oximeter not detected</source>
         <translation>Не е открит оксиметър</translation>
@@ -3171,10 +2663,6 @@ Index</source>
         <location filename="../oscar/oximeterimport.cpp" line="463"/>
         <source>Couldn&apos;t access oximeter</source>
         <translation>Оксиметърът не е достъпен</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Mode</source>
-        <translation type="vanished">Оксиметър в реално време</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="477"/>
@@ -3190,14 +2678,6 @@ Index</source>
         <location filename="../oscar/oximeterimport.cpp" line="525"/>
         <source>Live Import Stopped</source>
         <translation>Импортването на данни в реално време е прекратено</translation>
-    </message>
-    <message>
-        <source>Live Oximetery Stopped</source>
-        <translation type="vanished">Оксиметрията в реално време е спряна</translation>
-    </message>
-    <message>
-        <source>Live Oximetery import has been stopped</source>
-        <translation type="vanished">Импорта на оксиметрия в реално време беше прекратена</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="577"/>
@@ -3240,10 +2720,6 @@ Index</source>
         <translation>Получи се някаква грешка в процеса на получаване на данни от сесията</translation>
     </message>
     <message>
-        <source>CMS50 Session %1</source>
-        <translation type="vanished">CMS50 Сесия %1</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="1112"/>
         <source>Welcome to the Oximeter Import Wizard</source>
         <translation>Добре дошли в помощника за импорт от оксиметър</translation>
@@ -3252,14 +2728,6 @@ Index</source>
         <location filename="../oscar/oximeterimport.cpp" line="1114"/>
         <source>Pulse Oximeters are medical devices used to measure blood oxygen saturation. During extended Apnea events and abnormal breathing patterns, blood oxygen saturation levels can drop significantly, and can indicate issues that need medical attention.</source>
         <translation>Пулсоксиметрите са медицински устройства, които се използват за измерване на кислородната сатурация в кръвта. По време на продължителна апнея и абнормални дихателни събития нивата на кислородната сатурация в кръвта могат да паднат до ниски стойности и да индикират за проблеми, които се нуждаят от медицинска помощ.</translation>
-    </message>
-    <message>
-        <source>SleepyHead gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
-        <translation type="vanished">SleepyHead предоставя възможност да се следят оксиметричните данни заедно с CPAP сесиите, което може да предостави ценна информация за ефективността на CPAP терапията. Също така може да работи самостоятелно с вашия пулсоксиметър с цел съхраняване и следене на данните от него.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="vanished">SleepyHead в момента е съвемстим със следните сериални оксиметри: Contec CMS50D+, CMS50E, CMS50F и CMS50I.&lt;br/&gt;(Забележка: Директното импортиране от bluetooth модели е &lt;span style=&quot; font-weight:600;&quot;&gt;най-вероятно невъзможно&lt;/span&gt; все още)</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1120"/>
@@ -3277,17 +2745,9 @@ Index</source>
         <translation>Моля запомнете:</translation>
     </message>
     <message>
-        <source>If you are trying to sync oximetery and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
-        <translation type="vanished">Ако желаете да синхронизирате оксиметрични и CPAP данни моля не забравяйте че винаги първо трябва да се импортират CPAP сесиите!</translation>
-    </message>
-    <message>
         <location filename="../oscar/oximeterimport.cpp" line="1129"/>
         <source>Important Notes:</source>
         <translation>Важни бележки:</translation>
-    </message>
-    <message>
-        <source>For SleepyHead to be able to locate and read directly from your Oximeter device, you need to ensure the correct device drivers (eg. USB to Serial UART) have been installed on your computer. For more information about this, %1click here%2.</source>
-        <translation type="vanished">За да може SleepyHead да открие и чете директно от вашия оксиметър трябва да се уверите, че са инсталирани коректните драйвери (например USB към Serial UART) за това устройство на вашия компютър. За повече информация относно това натиснете %1тук%2.</translation>
     </message>
     <message>
         <location filename="../oscar/oximeterimport.cpp" line="1132"/>
@@ -3345,7 +2805,7 @@ Index</source>
     <message>
         <location filename="../oscar/oximetry.ui" line="385"/>
         <source>Serial &amp;Import</source>
-        <translation>Импорт от &amp;сериен порт </translation>
+        <translation>Импорт от &amp;сериен порт</translation>
     </message>
     <message>
         <location filename="../oscar/oximetry.ui" line="398"/>
@@ -3391,7 +2851,8 @@ Index</source>
         <location filename="../oscar/preferencesdialog.ui" line="184"/>
         <source>Multiple sessions closer together than this value will be kept on the same day.
 </source>
-        <translation>Множество сесии по-близки като време от тази стойност ще бъдат запазвани в един и същ ден.</translation>
+        <translation>Множество сесии по-близки като време от тази стойност ще бъдат запазвани в един и същ ден.
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="239"/>
@@ -3429,60 +2890,14 @@ p, li { white-space: pre-wrap; }
         <translation>Опции за съхранение на сесиите</translation>
     </message>
     <message>
-        <source>This maintains a backup of SD-card data for ResMed machines, 
-
-ResMed machines delete high resolution data older than 7 days, 
-and graph data older than 30 days..
-
-SleepyHead can keep a copy of this data if you ever need to reinstall. 
-(Highly recomended, unless your short on disk space or don&apos;t care about the graph data)</source>
-        <translation type="vanished">Това съхранява архивно копие на данните от SD картата за апаратите ResMed, 
-
-ResMed апаратите изтриват подробни данни по-стари от 7 дни, 
-и графичните данни по-стари от 30 дни..
-
-SleepyHead може да съхранява копие на тези данни в случай, че някога имате нужда от преинсталиране. 
-(Силно препоръчителноd, освен ако нямате свободно дисково пространство или не се интересувате от графични данни)</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="482"/>
         <source>Create SD Card Backups during Import (Turn this off at your own peril!)</source>
         <translation>Създаване на архивно копие на SD картата по време на импортиране (Изключете това само на ваша отговорност!)</translation>
     </message>
     <message>
-        <source>This makes SleepyHead&apos;s data take around half as much space.
-But it makes import and day changing take longer.. 
-If you&apos;ve got a new computer with a small solid state disk, this is a good option.</source>
-        <translation type="vanished">Това прави файловете на SleepyHead да заемат наполовина дисково пространство.
-За сметка на това импортирането и смяната на дни отнема повече време.. 
-Ако разполагате с нов компютър с малък solid state disk (SSD), това е подходяща опция.</translation>
-    </message>
-    <message>
-        <source>Compress Session Data (makes SleepyHead data smaller, but day changing slower.)</source>
-        <translation type="vanished">Компресиране на данните за сесии (прави SleepyHead файловете по-малки, но смяната на дни става по-бавно) </translation>
-    </message>
-    <message>
-        <source>Compress ResMed (EDF) backups to save disk space.
-Backed up EDF files are stored in the .gz format, 
-which is common on Mac &amp; Linux platforms.. 
-
-SleepyHead can import from this compressed backup directory natively.. 
-To use with ResScan will require the .gz files to be uncompressed first..</source>
-        <translation type="vanished">Компресиране на ResMed (EDF) архиви с цел спестяване на дисково пространство.
-Архивираните EDF файлове се съхраняват в .gz формат, 
-който е широко използван в Mac &amp; Линукс операционни системи.. 
-
-SleepyHead може да импортира от тези компресирани формати нативно.. 
-За да се използват от ResScan е необходимо .gz файловете да бъдат първо разкомпресирани..</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="439"/>
         <source>Compress SD Card Backups (slower first import, but makes backups smaller)</source>
         <translation>Компресиране на архивните копия на SD картата (първото импортиране е по-бавно, но прави архивите по-малки)</translation>
-    </message>
-    <message>
-        <source>The following options affect the amount of disk space SleepyHead uses, and all have an effect on how long import takes.</source>
-        <translation type="vanished">Следните опции оказват влияние на дисковото пространство, което SleepyHead използва и всички те имат отношение към това, колко време отнема импортирането.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="417"/>
@@ -3588,7 +3003,7 @@ Defaults to 60 minutes.. Highly recommend it&apos;s left at this value.</source>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1193"/>
         <source> minutes</source>
-        <translation>минути</translation>
+        <translation> минути</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1232"/>
@@ -3634,10 +3049,6 @@ Defaults to 60 minutes.. Highly recommend it&apos;s left at this value.</source>
         <location filename="../oscar/preferencesdialog.ui" line="1007"/>
         <source>#2</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>This experimental option attempts to use SleepyHead&apos;s event flagging system to improve machine detected event positioning.</source>
-        <translation type="vanished">Тази експериментална опция се опитва да използва системата за маркиране на събития на SleepyHead с цел да подобри позиционирането на събития открити от апарата.</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1000"/>
@@ -3760,10 +3171,6 @@ Mainly affects the importer.</source>
         <translation>Промени в следните настройки ще изискват рестарт, а не преизчисления.</translation>
     </message>
     <message>
-        <source>Oximetery Settings</source>
-        <translation type="vanished">Оксиметрични настройки</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="1318"/>
         <source>Preferred Calculation Methods</source>
         <translation>Предпочитан метод за калкулация</translation>
@@ -3826,10 +3233,6 @@ as this is the only value available on summary-only days.</source>
         <translation>Настройки за разделяне на сесии</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Attention ResMed users:&lt;/span&gt; There are some pitfalls you may want to consider before trying to split sessions away from ResMed&apos;s 12:00 noon day model, click &lt;a href=&quot;http://sleepyhead.sf.net/wiki/index.php/Resmed_Session_Splitting&quot;&gt;here&lt;/a&gt; for more information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание към потребителите на ResMed:&lt;/span&gt; Има някои особености, които е добре да имате предвид преди да се опитвате да разделяте сесии различно от модела избран от ResMed (12:00ч. обедно време), натиснете &lt;a href=&quot;http://sleepyhead.sf.net/wiki/index.php/Resmed_Session_Splitting&quot;&gt;тук&lt;/a&gt; за повече информация.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="356"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This setting should be used with caution...&lt;/span&gt; Switching it off comes with consequences involving accuracy of summary only days, as certain calculations only work properly provided summary only sessions that came from individual day records are kept together. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ResMed users:&lt;/span&gt; Just because it seems natural to you and I that the 12 noon session restart should be in the previous day, does not mean ResMed&apos;s data agrees with us. The STF.edf summary index format has serious weaknesses that make doing this not a good idea.&lt;/p&gt;&lt;p&gt;This option exists to pacify those who don&apos;t care and want to see this &amp;quot;fixed&amp;quot; no matter the costs, but know it comes with a cost. If you keep your SD card in every night, and import at least once a week, you won&apos;t see problems with this very often.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Тази опция трябва да се използва внимателно...&lt;/span&gt; Изключването й носи последствия като например точността на дните само с общи данни. Това е така, тъй като някои изчисления работят коректно само когато са налични едновременно сесиите с общи данни и индивидуалните дни. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;За потребителите на ResMed:&lt;/span&gt; Само защото изглежда естествено рестарта на сесията в 12 часът на обяд да бъде в предишния ден не означава че данните на ResMed мислят също като вас. Индекс форматът STF.edf има сериозна слабост, която прави това лоша идея.&lt;/p&gt;&lt;p&gt;Тази възможност съществува само за спокойствие на тези, които не се притесняват от това и желаят да виждат това &amp;quot;фиксирано&amp;quot; без значение цената, която се плаща. Не го забравяйте. Ако държите SD картата си всяка нощ в CPAP апарата и правите импорт на данните поне веднъж седмично то би трябвало да нямате чести проблеми с това.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -3843,10 +3246,6 @@ as this is the only value available on summary-only days.</source>
         <location filename="../oscar/preferencesdialog.ui" line="567"/>
         <source>Memory and Startup Options</source>
         <translation>Настройки за стартиране и памет</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Makes starting SleepyHead a bit slower, by pre-loading all the summary data in advance, which speeds up overview browsing and a few other calculations later on. &lt;/p&gt;&lt;p&gt;If you have a large amount of data, it might be worth keeping this switched off, but if you typically like to view &lt;span style=&quot; font-style:italic;&quot;&gt;everything&lt;/span&gt; in overview, all the summary data still has to be loaded anyway. &lt;/p&gt;&lt;p&gt;Note this setting doesn&apos;t affect waveform and event data, which is always demand loaded as needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Прави старирането на SleepyHead по-бавно тъй като предварително зарежда всички общи данни с цел ускоряване на прегледа след това. &lt;/p&gt;&lt;p&gt;Ако имате голям обем данни може би е добра идея да оставите изключена тази възможност. Ако обаче обикновено желаете да виждате &lt;span style=&quot; font-style:italic;&quot;&gt;всички данни&lt;/span&gt; в общия преглед то целия обем данни така или иначе ще трябва да се заредят. &lt;/p&gt;&lt;p&gt;Тази опция не засяга данните за вълните и събитията, които винаги се зареждат само при нужда.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="609"/>
@@ -3872,10 +3271,6 @@ as this is the only value available on summary-only days.</source>
         <location filename="../oscar/preferencesdialog.ui" line="626"/>
         <source>Import without asking for confirmation</source>
         <translation>Импортиране без потвърждение</translation>
-    </message>
-    <message>
-        <source>Skip user selection screen</source>
-        <translation type="vanished">Пропускане на екрана за избор на потребител</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1153"/>
@@ -4064,7 +3459,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2141"/>
         <source>Last Checked For Updates: </source>
-        <translation>Последна проверка за обновления:</translation>
+        <translation>Последна проверка за обновления: </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2154"/>
@@ -4129,10 +3524,6 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Това прави по-лесно скролирането при увеличение когато се използва чувствителен двупосочен TouchPad&lt;/p&gt;&lt;p&gt;50мс е препоръчителната стойност.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>milliseconds</source>
-        <translation type="vanished">милисекунди</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.ui" line="2434"/>
         <source>Scroll Dampening</source>
         <translation>Плавност на скролиране</translation>
@@ -4171,7 +3562,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2380"/>
         <source>The visual method of displaying waveform overlay flags.
 </source>
-        <translation>Визуален метод за показване на overlay вълни на маркери.</translation>
+        <translation>Визуален метод за показване на overlay вълни на маркери.
+</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2385"/>
@@ -4192,34 +3584,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../oscar/preferencesdialog.ui" line="2446"/>
         <source>How long you want the tooltips to stay visible.</source>
         <translation>Колко дълго желаете да седят показани подсказките.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Lucida Grande UI&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.Lucida Grande UI&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Синхронизация на оксиметрични и CPAP данни&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 данни импортирани от SpO2Review (от .spoR файлове) или от сериен импорт&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;НЯМАТ&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; коректно време, което е необходимо за да се извърши синхронизация.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Данните &quot;на живо&quot; (през сериен кабел) е един от начините да се получи коректна синхронизация от CMS50 оксиметри, но не се отчита отместването на часовника на CPAP апарата.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Ако стартирате запис на оксиметър в &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;точно &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;същото време в което стартирате и CPAP апарата, можете да получите добра синхронизация. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;При импортиране от сериен порт се използва времето на стартиране на първата CPAP сесия от последната нощ. (Не забравяйте да направите импорт първо на CPAP данните си!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="1769"/>
@@ -4320,38 +3684,6 @@ If you use a few different masks, pick average values instead. It should still b
         <location filename="../oscar/preferencesdialog.ui" line="1159"/>
         <source>Show flags for machine detected events that haven&apos;t been identified yet.</source>
         <translation>Показване на флагове за събития, открити от апарата, които не са идентифицирани засега.</translation>
-    </message>
-    <message>
-        <source>Allow Event Renaming</source>
-        <translation type="vanished">Позволи преименуване на събития</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Синхронизация на оксиметрични и CPAP данни&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 данни импортирани от SpO2Review (от .spoR файлове) или или импортирането по сериен метод &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;не&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; предоставя коректна информация за дата/час, необходими за синхронизация.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Режим на живо (използвайки сериен кабел) е един от методите да се реализира точех синхрон с оксиметри CMS50, но не се взема предвид неточността на часовниците в CPAP апаратите.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Ако стартирате вашия оксиметър в &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;точно &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;същото време, в което стартирате и вашия CPAP апарат, ще постигнете точен синхрон. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Процесът по импортиране през сериен порт приема за начало началното време на старт на първата CPAP сесия от предишната нощ. (Не забравяйте че е необходимо първо да импортирате вашите CPAP данни!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2424"/>
@@ -4521,7 +3853,7 @@ this application to be unstable with this feature enabled.</source>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2830"/>
         <source>Bold  </source>
-        <translation>Удебелен</translation>
+        <translation>Удебелен  </translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.ui" line="2852"/>
@@ -4771,20 +4103,6 @@ Are you sure you want to make these changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more of the changes you have made will require this application to be restarted,
-in order for these changes to come into effect.
-
-Would you like do this now?</source>
-        <translation type="vanished">Една или повече от промените, които сте направили изискват програмата да бъде рестартирана
-за да имат ефект.
-
-Желаете ли да се рестартира програмата сега?</translation>
-    </message>
-    <message>
-        <source>Switching off automatic backups is not a good idea, because SleepyHead needs these to rebuild the database if errors are found.</source>
-        <translation type="vanished">Изкючването на автоматично архивиране не е добра идея, защото SleepyHead се нуждае от тях за презареждане на базата, в случай че се открият грешки.</translation>
-    </message>
-    <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1179"/>
         <source>Are you really sure you want to do this?</source>
         <translation>Сигурни ли сте че желаете да направите това?</translation>
@@ -4831,18 +4149,6 @@ Would you like do this now?</source>
         <source>ResMed S9 machines routinely delete certain data from your SD card older than 7 and 30 days (depending on resolution).</source>
         <translation>Апаратите ResMed S9 рутинно изтриват някои данни от SD картата (по-стари от 7 и 30 дни, в зависимост от резолюцията).</translation>
     </message>
-    <message>
-        <source>If you ever need to reimport this data again (whether in SleepyHead or ResScan) this data won&apos;t come back.</source>
-        <translation type="vanished">Ако някога имате нужда да реимпортирате тези данни отново (независимо дали в SleepyHead или ResScan) тези данни няма да се възстановят.</translation>
-    </message>
-    <message>
-        <source>If you need to conserve disk space, please remember to carry out manual backups.</source>
-        <translation type="vanished">Ако желаете да спестите дисково пространство моля не забравяйте да си правите собствени ръчни архивни копия.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to disable these backups?</source>
-        <translation type="vanished">Сигурни ли сте че желаете да изключите архивните копия?</translation>
-    </message>
 </context>
 <context>
     <name>ProfileSelect</name>
@@ -4887,26 +4193,14 @@ Would you like do this now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose a different SleepyHead data folder.</source>
-        <translation type="vanished">Избиране на друга папка за данни на SleepyHead.</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="241"/>
         <source>&amp;Different Folder</source>
         <translation>&amp;Различна папка</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.ui" line="287"/>
         <source>[version]</source>
         <translation>[версия]</translation>
-    </message>
-    <message>
-        <source>Click here if you didn&apos;t want to start SleepyHead.</source>
-        <translation type="vanished">Натиснете тук ако не искате да стартирате SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="313"/>
@@ -4917,10 +4211,6 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselect.ui" line="370"/>
         <source>Folder:</source>
         <translation>Папка:</translation>
-    </message>
-    <message>
-        <source>The current location of SleepyHead data store.</source>
-        <translation type="vanished">Текущото местоположение на данните на SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/profileselect.ui" line="389"/>
@@ -4990,14 +4280,6 @@ Would you like do this now?</source>
         <translation>Необходимо е да изпишете DELETE с главни букви.</translation>
     </message>
     <message>
-        <source>Could not open profile.. You will need to delete this profile directory manually</source>
-        <translation type="vanished">Профилът не може да се зареди.. Необходимо е да го изтриете ръчно от неговата директория</translation>
-    </message>
-    <message>
-        <source>You will find it under the following location:</source>
-        <translation type="vanished">Тя се намира в следния път:</translation>
-    </message>
-    <message>
         <location filename="../oscar/profileselect.cpp" line="239"/>
         <source>You entered an incorrect password</source>
         <translation>Въвели сте грешна парола</translation>
@@ -5048,11 +4330,7 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.ui" line="36"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
-    </message>
-    <message>
-        <source>SleepyHead</source>
-        <translation type="obsolete">SleepyHead</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.ui" line="171"/>
@@ -5128,7 +4406,7 @@ Would you like do this now?</source>
         <location filename="../oscar/profileselector.cpp" line="133"/>
         <location filename="../oscar/profileselector.cpp" line="304"/>
         <source>%1, %2</source>
-        <translation type="unfinished">%1: %2 {1,?}</translation>
+        <translation>%1, %2</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="168"/>
@@ -5230,12 +4508,12 @@ Would you like do this now?</source>
     <message>
         <location filename="../oscar/profileselector.cpp" line="433"/>
         <source>TB</source>
-        <translation type="unfinished">TB</translation>
+        <translation>TB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="433"/>
         <source>PB</source>
-        <translation type="unfinished">PB</translation>
+        <translation>PB</translation>
     </message>
     <message>
         <location filename="../oscar/profileselector.cpp" line="453"/>
@@ -5320,10 +4598,6 @@ Would you like do this now?</source>
         <translation>Изкл</translation>
     </message>
     <message>
-        <source>cm</source>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/common.cpp" line="491"/>
         <source>&quot;</source>
         <translation>&quot;</translation>
@@ -5359,10 +4633,6 @@ Would you like do this now?</source>
         <translation>Сред.</translation>
     </message>
     <message>
-        <source>%1%</source>
-        <translation type="vanished">%1%</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="216"/>
         <source>Min: %1</source>
         <translation>Мин: %1</translation>
@@ -5371,13 +4641,13 @@ Would you like do this now?</source>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="247"/>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="257"/>
         <source>Min: </source>
-        <translation>Мин:</translation>
+        <translation>Мин: </translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="252"/>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="262"/>
         <source>Max: </source>
-        <translation>Макс:</translation>
+        <translation>Макс: </translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gSessionTimesChart.cpp" line="266"/>
@@ -6142,10 +5412,6 @@ TTIA: %1</translation>
         <translation>Отметки</translation>
     </message>
     <message>
-        <source>SleepyHead</source>
-        <translation type="vanished">SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/common.cpp" line="642"/>
         <source>v%1</source>
         <translation>v%1</translation>
@@ -6407,10 +5673,6 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>I&apos;m sorry to report that SleepyHead can only track hours of use and very basic settings for this machine.</source>
-        <translation type="vanished">За съжаление трябва да ви съобщя че специално за вашият апарат SleepyHead може само да следи броя на часовете, в които е използван и някои прости настройки.</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="588"/>
         <source>Machine Unsupported</source>
         <translation>Апарата не се поддържа</translation>
@@ -6419,10 +5681,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="589"/>
         <source>Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.</source>
         <translation>За съжаление вашият апарат Philips Respironics CPAP (Модел %1) не се поддържа все още.</translation>
-    </message>
-    <message>
-        <source>JediMark needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with SleepyHead.</source>
-        <translation type="vanished">Моля изпратете на JediMark .zip архив със съдържанието на SD картата с памет за този апарат както и съответни Encore .pdf репорти за да може този софтуер да поддържа и вашия модел в следващите си версии.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="578"/>
@@ -6608,10 +5866,6 @@ TTIA: %1</translation>
         <translation>Свързан нагреваем маркуч</translation>
     </message>
     <message>
-        <source>Headed Tubing</source>
-        <translation type="vanished">Нагреваем маркуч</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/loader_plugins/prs1_loader.cpp" line="3534"/>
         <source>Humidification Level</source>
         <translation>Степен на овлажняване</translation>
@@ -6785,14 +6039,6 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="vanished">SleepyHead (%1) се нуждае от обновяване на базата си за %2 %3 %4</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;SleepyHead maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;SleepyHead поддържа резервен архив на вашите карти с данни от апарати, който използва за тези цели.&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="510"/>
         <source>&lt;i&gt;Your old machine data should be regenerated provided this backup feature has not been disabled in preferences during a previous data import.&lt;/i&gt;</source>
         <translation>&lt;i&gt;Данните от Вашият стар апарат трябва да бъдат регенерирани в случай че тази опция за архивиране не е била изключена в настройките преди да направите предишен импорт на данни.&lt;/i&gt;</translation>
@@ -6806,10 +6052,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/profiles.cpp" line="444"/>
         <source>Could not find explorer.exe in path to launch Windows Explorer.</source>
         <translation>explorer.exe не бе открит в дефинираните пътища на Уиндоус и не може да бъде стартиран Windows Explorer.</translation>
-    </message>
-    <message>
-        <source>SleepyHead does not yet have any automatic card backups stored for this device.</source>
-        <translation type="vanished">SleepyHead все още не разполага с автоматично резервно копие (архив) на карта с данни за този апарат.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="496"/>
@@ -6877,21 +6119,9 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you are concerned, click No to exit, and backup your profile manually, before starting SleepyHead again.</source>
-        <translation type="vanished">Ако това Ви притеснява, изберете Не за да излезете и направете резервно копие на профила си преди да стартирате SleepyHead отново.</translation>
-    </message>
-    <message>
-        <source>Are you ready to upgrade, so you can run the new version of SleepyHead?</source>
-        <translation type="vanished">Готови ли сте да обновите софтуера, за да използвате нова версия на SleepyHead?</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="522"/>
         <source>Machine Database Changes</source>
         <translation>Промяна в базата данни за апарат</translation>
-    </message>
-    <message>
-        <source>Sorry, the purge operation failed, which means this version of SleepyHead can&apos;t start.</source>
-        <translation type="vanished">Съжалявам, операцията по изчистване се провали, което означава че тази версия на SleepyHead не може да стартира.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/profiles.cpp" line="534"/>
@@ -6907,146 +6137,6 @@ TTIA: %1</translation>
         <location filename="../oscar/SleepLib/profiles.cpp" line="541"/>
         <source>Rebuilding from %1 Backup</source>
         <translation>Презареждане от архив %1</translation>
-    </message>
-    <message>
-        <source>Would you like to switch on automatic backups, so next time a new version of SleepyHead needs to do so, it can rebuild from these?</source>
-        <translation type="vanished">Желаете ли да активирате правенето на автоматични резервни копия (архив), така че следващият път когато SleepyHead има нужда да може да регенерира данните от него?</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now start the import wizard so you can reinstall your %1 data.</source>
-        <translation type="vanished">SleepyHead ще стартира помощника за импортиране, за да можете да преинсталирате данните за %1.</translation>
-    </message>
-    <message>
-        <source>SleepyHead will now exit, then (attempt to) launch your computers file manager so you can manually back your profile up:</source>
-        <translation type="vanished">SleepyHead сега ще се затвори, след което ще (се опита да) стартира файлов мениджър за да можете да направите ръчно архивно копие на профила си:</translation>
-    </message>
-    <message>
-        <source>Use your file manager to make a copy of your profile directory, then afterwards, restart Sleepyhead and complete the upgrade process.</source>
-        <translation type="vanished">Използвайте своя файлов мениджър за да направите копие на папката на профила си, след което рестартирайте SleepyHead и завършете процеса по ъпгрейд.</translation>
-    </message>
-    <message>
-        <source>SleepyHead Release Notes</source>
-        <translation type="vanished">SleepyHead бележки към изданието</translation>
-    </message>
-    <message>
-        <source>Release Notes</source>
-        <translation type="vanished">Бележки по изданието</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;After four years in the making, this build brings SleepyHead into the final beta phase.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;След четири години разработка тази версия довежда SleepyHead до финална бета фаза.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Things are not perfect yet, but the focus from now is putting on the finishing touches. </source>
-        <translation type="vanished">&lt;p&gt;Все още не е перфектна, но от тук нататък фокусът ще е предимно върху окончателното оформление.</translation>
-    </message>
-    <message>
-        <source>This version brings support for the new Philips Respironics DreamStation, and older PRS1 1060P models.&lt;/p&gt;</source>
-        <translation type="vanished">Тази нова версия поддържа вече и новият апарат на Philips Respironics DreamStation, както и старите модели PRS1 1060P.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>After four years in the making, this build brings SleepyHead into the final beta phase.</source>
-        <translation type="vanished">След четири години разработка тази версия довежда SleepyHead до финална бета фаза.</translation>
-    </message>
-    <message>
-        <source>Things are not perfect yet, but the focus from now is putting on the finishing touches. </source>
-        <translation type="vanished">Все още не е перфектна, но от тук нататък фокусът ще е предимно върху окончателното оформление.</translation>
-    </message>
-    <message>
-        <source>This version brings support for the new Philips Respironics DreamStation, and older PRS1 1060P models.</source>
-        <translation type="vanished">Тази нова версия поддържа вече и новият апарат на Philips Respironics DreamStation, както и старите модели PRS1 1060P.</translation>
-    </message>
-    <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="vanished">Съжалявам, не може да се открие дневника на промените.</translation>
-    </message>
-    <message>
-        <source>Greetings!</source>
-        <translation type="vanished">Поздрави!</translation>
-    </message>
-    <message>
-        <source>As this is a pre-release version, it is recommended that you back up your data folder manually before proceding, because attempting to roll back later may break things.</source>
-        <translation type="vanished">Тъй като това е предварителна версия се препоръчва да архивирате вашата папка с данни ръчно преди да продължите тъй като опит за връщане на стара версия обратно може да повреди данните ви.</translation>
-    </message>
-    <message>
-        <source>Sleep Well, and good luck!</source>
-        <translation type="vanished">Приятни сънища и късмет!</translation>
-    </message>
-    <message>
-        <source>Change log</source>
-        <translation type="vanished">Списък с промени</translation>
-    </message>
-    <message>
-        <source>&amp;Ok, get on with it..</source>
-        <translation type="vanished">&amp;ОК, напред..</translation>
-    </message>
-    <message>
-        <source>A faster build of SleepyHead may be available</source>
-        <translation type="vanished">Може да е налична по-бърза версия на SleepyHead</translation>
-    </message>
-    <message>
-        <source>This build of SleepyHead is a compatability version that also works on computers lacking OpenGL 2.0 support.</source>
-        <translation type="vanished">Тази версия на SleepyHead е съвместима и работи също така на компютри, които нямат поддръжка на OpenGL 2.0.</translation>
-    </message>
-    <message>
-        <source>However it looks like your computer has full support for OpenGL 2.0!</source>
-        <translation type="vanished">Изглежда, че вашият компютър има пълна поддръжка на OpenGL 2.0!</translation>
-    </message>
-    <message>
-        <source>This version will run fine, but a &quot;&lt;b&gt;%1&lt;/b&gt;&quot; tagged build of SleepyHead will likely run a bit faster on your computer.</source>
-        <translation type="vanished">Тази версия ще работи нормално, но има друга версия на SleepyHead - &quot;&lt;b&gt;%1&lt;/b&gt;&quot;, която най-вероятно ще работи малко по-бързо на вашия компютър.</translation>
-    </message>
-    <message>
-        <source>You will not be bothered with this message again.</source>
-        <translation type="vanished">Това съобщение няма да се появява повече.</translation>
-    </message>
-    <message>
-        <source>Incompatible Graphics Hardware</source>
-        <translation type="vanished">Несъвместим графичен хардуер</translation>
-    </message>
-    <message>
-        <source>This build of SleepyHead requires OpenGL 2.0 support to function correctly, and unfortunately your computer lacks this capability.</source>
-        <translation type="vanished">Тази версия на SleepyHead изисква поддръжка на OpenGL 2.0 за да работи коректно, за съжаление Вашият компютър няма такава.</translation>
-    </message>
-    <message>
-        <source>You may need to update your computers graphics drivers from the GPU makers website. %1</source>
-        <translation type="vanished">Можете да опитате да обновите драйверите за видеокартата. %1</translation>
-    </message>
-    <message>
-        <source>(&lt;a href=&apos;http://intel.com/support&apos;&gt;Intel&apos;s support site&lt;/a&gt;)</source>
-        <translation type="vanished">(&lt;a href=&apos;http://intel.com/support&apos;&gt;Сайт за поддръжка на Intel&lt;/a&gt;)</translation>
-    </message>
-    <message>
-        <source>Because graphs will not render correctly, and it may cause crashes, this build will now exit.</source>
-        <translation type="vanished">Тъй като е възможно графиките да не се изчертават правилно, както и да се наблюдават забивания, тази версия на програмата ще се затвори.</translation>
-    </message>
-    <message>
-        <source>There is another build available tagged &quot;&lt;b&gt;-BrokenGL&lt;/b&gt;&quot; that should work on your computer.</source>
-        <translation type="vanished">Има друга версия на този софтуер обозначена като &quot;&lt;b&gt;-BrokenGL&lt;/b&gt;&quot; която би трябвало да работи на вашия компютър.</translation>
-    </message>
-    <message>
-        <source>Would you like SleepyHead to use this location for storing its data?</source>
-        <translation type="vanished">Желаете ли SleepyHead да използва това местоположение за съхранение на данните си?</translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old SleepyHead data folder.</source>
-        <translation type="vanished">Ако обновявате програмата в момента - без паника, необходимо е само да укажете къде се намира вашата стара папка с данните на SleepyHead.</translation>
-    </message>
-    <message>
-        <source>(If you have no idea what to do here, just click yes.)</source>
-        <translation type="vanished">(ако нямате идея какво да правите тук просто изберете Да)</translation>
-    </message>
-    <message>
-        <source>No SleepyHead data folder was found.</source>
-        <translation type="vanished">Не е открита папка с данните на SleepyHead.</translation>
-    </message>
-    <message>
-        <source>Would you like SleepyHead to use the default location for storing its data?</source>
-        <translation type="vanished">Бихте ли желали SleepyHead да използва обичайното местоположение за съхранение на данните си?</translation>
-    </message>
-    <message>
-        <source>As you did not select a data folder, SleepyHead will exit.</source>
-        <translation type="vanished">Не сте избрали папка за данни, SleepyHead ще се затвори.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="179"/>
@@ -7119,17 +6209,9 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Next time you run, you will be asked again.</source>
-        <translation type="vanished">При следващото стартиране, ще бъдете попитани отново.</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="408"/>
         <source>As you did not select a data folder, OSCAR will exit.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You did not select a directory.</source>
-        <translation type="vanished">Не сте избрали директория.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="420"/>
@@ -7157,14 +6239,6 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead will now start with your old one.</source>
-        <translation type="vanished">SleepyHead ще стартира със старата.</translation>
-    </message>
-    <message>
-        <source>The version of SleepyHead you just ran is OLDER than the one used to create this data (%1).</source>
-        <translation type="vanished">Версията на SleepyHead, която сте стартирали е ПО–СТАРА от версията, която е използвана за създаване на тези данни (%1).</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="503"/>
         <source>It is likely that doing this will cause data corruption, are you sure you want to do this?</source>
         <translation>Много е вероятно това да причини повреда на данни, сигурни ли сте че искате да продължите?</translation>
@@ -7175,17 +6249,9 @@ TTIA: %1</translation>
         <translation>Въпрос</translation>
     </message>
     <message>
-        <source>Choose or create new folder for SleepyHead data</source>
-        <translation type="vanished">Посочете или създайте нова папка за съхранение на данните на SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/main.cpp" line="407"/>
         <source>Exiting</source>
         <translation>Изход</translation>
-    </message>
-    <message>
-        <source>The folder you chose is not empty, nor does it already contain valid SleepyHead data.</source>
-        <translation type="vanished">Папката, която сте избрали не е празна или вече съдържа валидни SleepyHead данни.</translation>
     </message>
     <message>
         <location filename="../oscar/main.cpp" line="421"/>
@@ -7213,34 +6279,14 @@ TTIA: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead Reminder</source>
-        <translation type="vanished">Напомняне на SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="434"/>
         <source>Loading profile &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About SleepyHead</source>
-        <translation type="vanished">Относно SleepyHead</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Затваряне</translation>
-    </message>
-    <message>
-        <source>&amp;Donate</source>
-        <translation type="vanished">&amp;Дарения</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="2111"/>
         <source>Sorry, your %1 %2 machine is not currently supported.</source>
         <translation>Съжаляваме, вашият %1 %2 апарат не се поддържа за момента.</translation>
-    </message>
-    <message>
-        <source>Sorry, this feature is not implemented yet</source>
-        <translation type="vanished">Съжаляваме, тази функция все още не работи</translation>
     </message>
     <message>
         <location filename="../oscar/preferencesdialog.cpp" line="1167"/>
@@ -7263,12 +6309,6 @@ TTIA: %1</translation>
         <translation>Желаете ли да се покажат областите с отметки в този репорт?</translation>
     </message>
     <message>
-        <source>This make take some time to complete..
-Please don&apos;t touch anything until it&apos;s done.</source>
-        <translation type="vanished">Това може да отнеме известно време за да приключи..
-Моля, не пипайте нищо докато не е готово.</translation>
-    </message>
-    <message>
         <location filename="../oscar/reports.cpp" line="98"/>
         <source>Printing %1 Report</source>
         <translation>Печатане на репорт %1</translation>
@@ -7282,13 +6322,15 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/reports.cpp" line="190"/>
         <source>: %1 hours, %2 minutes, %3 seconds
 </source>
-        <translation>: %1 часа, %2 минути, %3 секунди</translation>
+        <translation>: %1 часа, %2 минути, %3 секунди
+</translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="236"/>
         <source>RDI	%1
 </source>
-        <translation>RDI	%1</translation>
+        <translation>RDI	%1
+</translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="238"/>
@@ -7300,7 +6342,7 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     <message>
         <location filename="../oscar/reports.cpp" line="271"/>
         <source>AI=%1 HI=%2 CAI=%3 </source>
-        <translation>AI=%1 HI=%2 CAI=%3</translation>
+        <translation>AI=%1 HI=%2 CAI=%3 </translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="277"/>
@@ -7310,7 +6352,7 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     <message>
         <location filename="../oscar/reports.cpp" line="281"/>
         <source>UAI=%1 </source>
-        <translation>UAI=%1</translation>
+        <translation>UAI=%1 </translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="283"/>
@@ -7320,7 +6362,7 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     <message>
         <location filename="../oscar/reports.cpp" line="352"/>
         <source>Reporting from %1 to %2</source>
-        <translation>Репорт от %1 до %2 </translation>
+        <translation>Репорт от %1 до %2</translation>
     </message>
     <message>
         <location filename="../oscar/reports.cpp" line="424"/>
@@ -7343,17 +6385,9 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead v%1 - http://sleepyhead.sourceforge.net</source>
-        <translation type="vanished">SleepyHead v%1 - http://sleepyhead.sourceforge.net</translation>
-    </message>
-    <message>
         <location filename="../oscar/reports.cpp" line="561"/>
         <source>Page %1 of %2</source>
         <translation>Страница %1 от %2</translation>
-    </message>
-    <message>
-        <source>SleepyHead has finished sending the job to the printer.</source>
-        <translation type="vanished">SleepyHead изпрати задачата за печат към принтера.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gXAxis.cpp" line="64"/>
@@ -7631,10 +6665,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>UA</translation>
     </message>
     <message>
-        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation type="vanished">Обструкция на нормалното дишане, причиняващо изправяне на вълната.</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="154"/>
         <source>Vibratory Snore</source>
         <translation>Вибраторно хъркане</translation>
@@ -7706,10 +6736,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/SleepLib/schema.cpp" line="175"/>
         <source>User Flag #1</source>
         <translation>Потребителски маркер #1</translation>
-    </message>
-    <message>
-        <source>A user definable event detected by SleepyHead&apos;s flow waveform processor.</source>
-        <translation type="vanished">Потребителски указано събитие засечено от SleepyHead.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="178"/>
@@ -7878,10 +6904,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>Чейн-Стоксово дишане</translation>
     </message>
     <message>
-        <source>An abnormal period of Periodic Breathing/Cheyne Stokes Respiration</source>
-        <translation type="vanished">Абнормален период на Периодично дишане/Чейн-Стоксово дишане</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="138"/>
         <source>CSR</source>
         <translation>CSR</translation>
@@ -7905,10 +6927,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/SleepLib/schema.cpp" line="144"/>
         <source>Obstructive</source>
         <translation>Обструкция</translation>
-    </message>
-    <message>
-        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation type="vanished">апнея, която не може да бъде определена като централна или обструктивна поради наличието на големи течове, които пречат на процеса по класифициране.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="152"/>
@@ -7991,10 +7009,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/SleepLib/schema.cpp" line="250"/>
         <source>Target Minute Ventilation</source>
         <translation>Целева белодробна вместимост</translation>
-    </message>
-    <message>
-        <source>Target Minute Ventilation?</source>
-        <translation type="vanished">Целева белодробна вместимост?</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/schema.cpp" line="253"/>
@@ -8320,158 +7334,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>Ъгъл на изправяне в градуси</translation>
     </message>
     <message>
-        <source>Name: %1, %2</source>
-        <translation type="vanished">Име: %1, %2</translation>
-    </message>
-    <message>
-        <source>DOB: %1</source>
-        <translation type="vanished">Дата на раждане: %1</translation>
-    </message>
-    <message>
-        <source>Phone: %1</source>
-        <translation type="vanished">Телефон: %1</translation>
-    </message>
-    <message>
-        <source>Email: %1</source>
-        <translation type="vanished">E-мейл: %1</translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation type="vanished">Адрес:</translation>
-    </message>
-    <message>
-        <source>Usage Statistics</source>
-        <translation type="vanished">Статистики за употреба</translation>
-    </message>
-    <message>
-        <source>This report was generated by a pre-release version of SleepyHead (%1), &lt;b&gt;and has not been approved in any way for compliance or medical diagnostic purposes&lt;/b&gt;.</source>
-        <translation type="vanished">Този репорт е бил генериран от предварителна версия SleepyHead (%1), &lt;b&gt;и няма никакво одобрение за съответствие или използване за диагностични медицински цели&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>This report was generated by SleepyHead (%1), &lt;b&gt;and has not been approved in any way for compliance or medical diagnostic purposes&lt;/b&gt;.</source>
-        <translation type="vanished">Този репорт е генериран от SleepyHead (%1), &lt;b&gt;и няма никакво одобрение за съответствие или използване за диагностични медицински цели&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>SleepyHead is free open-source software available from http://sourceforge.net/projects/SleepyHead</source>
-        <translation type="vanished">SleepyHead е свободен софтуер с отворен код и може да се свали от http://sourceforge.net/projects/SleepyHead</translation>
-    </message>
-    <message>
-        <source>CPAP Usage</source>
-        <translation type="vanished">Употреба на CPAP</translation>
-    </message>
-    <message>
-        <source>Days Used: %1</source>
-        <translation type="vanished">Дни употреба: %1</translation>
-    </message>
-    <message>
-        <source>Low Use Days: %1</source>
-        <translation type="vanished">Дни с малко използване: %1</translation>
-    </message>
-    <message>
-        <source>Compliance: %1%</source>
-        <translation type="vanished">Спазване: %1%</translation>
-    </message>
-    <message>
-        <source>Days AHI of 5 or greater: %1</source>
-        <translation type="vanished">Дни с AHI 5 или по-голям: %1</translation>
-    </message>
-    <message>
-        <source>Best AHI</source>
-        <translation type="vanished">Най-добро AHI</translation>
-    </message>
-    <message>
-        <source>Date: %1 AHI: %2</source>
-        <translation type="vanished">Дата: %1 AHI: %2</translation>
-    </message>
-    <message>
-        <source>Worst AHI</source>
-        <translation type="vanished">Най-лошо AHI</translation>
-    </message>
-    <message>
-        <source>Best Flow Limitation</source>
-        <translation type="vanished">Най-добро ограничение на дебита</translation>
-    </message>
-    <message>
-        <source>Date: %1 FL: %2</source>
-        <translation type="vanished">Дата: %1 FL: %2</translation>
-    </message>
-    <message>
-        <source>Worst Flow Limtation</source>
-        <translation type="vanished">Най-лошо ограничение на дебита</translation>
-    </message>
-    <message>
-        <source>No Flow Limitation on record</source>
-        <translation type="vanished">Без запис за ограничение на дебита</translation>
-    </message>
-    <message>
-        <source>Worst Large Leaks</source>
-        <translation type="vanished">Най-лоши големи течове</translation>
-    </message>
-    <message>
-        <source>Date: %1 Leak: %2%</source>
-        <translation type="vanished">Дата: %1 Течове: %2%</translation>
-    </message>
-    <message>
-        <source>No Large Leaks on record</source>
-        <translation type="vanished">Без запис за големи течове</translation>
-    </message>
-    <message>
-        <source>Worst CSR</source>
-        <translation type="vanished">Най-лошо CSR</translation>
-    </message>
-    <message>
-        <source>Date: %1 CSR: %2%</source>
-        <translation type="vanished">Дата: %1 CSR: %2%</translation>
-    </message>
-    <message>
-        <source>No CSR on record</source>
-        <translation type="vanished">Без запис зa CSR</translation>
-    </message>
-    <message>
-        <source>Worst PB</source>
-        <translation type="vanished">Най-лошо PB</translation>
-    </message>
-    <message>
-        <source>Date: %1 PB: %2%</source>
-        <translation type="vanished">Дата: %1 PB: %2%</translation>
-    </message>
-    <message>
-        <source>No PB on record</source>
-        <translation type="vanished">Без запис за PB</translation>
-    </message>
-    <message>
-        <source>Want more information?</source>
-        <translation type="vanished">Желаете повече информация?</translation>
-    </message>
-    <message>
-        <source>SleepyHead needs all summary data loaded to calculate best/worst data for individual days.</source>
-        <translation type="vanished">SleepyHead се нуждае да зареди цялата обща информация за да изчисли най-добрите/най-лоши данни за индивидуални дни.</translation>
-    </message>
-    <message>
-        <source>Please enable Pre-Load Summaries checkbox in preferences to make sure this data is available.</source>
-        <translation type="vanished">Моля включете опцията за предварително зареждане на обща информация при старт в настройките за да се осигури наличността на тези данни.</translation>
-    </message>
-    <message>
-        <source>Best RX Setting</source>
-        <translation type="vanished">Най-добри настройки</translation>
-    </message>
-    <message>
-        <source>Date: %1 - %2</source>
-        <translation type="vanished">Дати: %1 - %2</translation>
-    </message>
-    <message>
-        <source>Culminative AHI: %1</source>
-        <translation type="vanished">Кулминативен AHI: %1</translation>
-    </message>
-    <message>
-        <source>Culminative Hours: %1</source>
-        <translation type="vanished">Кулминативни часове: %1</translation>
-    </message>
-    <message>
-        <source>Worst RX Setting</source>
-        <translation type="vanished">Най-лоши настройки</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gSummaryChart.cpp" line="997"/>
         <source>Days: %1</source>
         <translation>Дни: %1</translation>
@@ -8512,29 +7374,9 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>(само резюме)</translation>
     </message>
     <message>
-        <source>There is a lockfile already present for profile &apos;%1&apos;.</source>
-        <translation type="vanished">Вече съществува lockfile за профил &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>You can only work with one instance of an individual SleepyHead profile at a time.</source>
-        <translation type="vanished">Можете да работите само с едно копие на един и същ профил в даден момент.</translation>
-    </message>
-    <message>
-        <source>Please close any other instances of SleepyHead running with this profile before proceeding.</source>
-        <translation type="vanished">Моля затворете всички други работещи копия на SleepyHead, които използват този профил преди да продължите.</translation>
-    </message>
-    <message>
-        <source>If no other instances of SleepyHead are running, (eg, it crashed last time!), it is safe to ignore this message.</source>
-        <translation type="vanished">Ако няма работещи други копия на SleepyHead в момента (например последният път програмата е забила!) е безопасно да игнорирате това съобщение.</translation>
-    </message>
-    <message>
         <location filename="../oscar/mainwindow.cpp" line="419"/>
         <source>There is a lockfile already present for this profile &apos;%1&apos;, claimed on &apos;%2&apos;.</source>
         <translation>Вече съществува lockfile за този профил &apos;%1&apos;, предявен на &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <source>If you are using cloud storage, make sure SleepyHead is closed and syncing has completed first on the other computer before proceeding.</source>
-        <translation type="vanished">Ако използвате за съхранение &quot;облачна&quot; услуга, моля уверете се първо че SleepyHead е затворен и синхронизацията с &quot;облака&quot; е приключила преди да се опитате да го отворите от друг компютър.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/day.cpp" line="154"/>
@@ -8607,166 +7449,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <source>Welcome to SleepyHead</source>
-        <translation type="vanished">Добре дошли в SleepyHead</translation>
-    </message>
-    <message>
-        <source>What would you like to do?</source>
-        <translation type="vanished">Какво желаете да направите?</translation>
-    </message>
-    <message>
-        <source>Please Import Some Data</source>
-        <translation type="vanished">Моля импортирайте някакви данни</translation>
-    </message>
-    <message>
-        <source>CPAP&lt;br/&gt;Importer</source>
-        <translation type="vanished">CPAP&lt;br/&gt;импорт</translation>
-    </message>
-    <message>
-        <source>Oximetery&lt;br/&gt;Wizard</source>
-        <translation type="vanished">Помощник &lt;br/&gt;оксиметър</translation>
-    </message>
-    <message>
-        <source>or</source>
-        <translation type="vanished">или</translation>
-    </message>
-    <message>
-        <source>View&lt;br/&gt;Statistics</source>
-        <translation type="vanished">Преглед&lt;br/&gt;статистики</translation>
-    </message>
-    <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="vanished">Добра идея е да проверите настройките си първо,&lt;/br&gt;защото има такива, които влияят на импортирането.</translation>
-    </message>
-    <message>
-        <source>First import can take a few minutes.</source>
-        <translation type="vanished">Първият импорт може да отнеме няколко минути.</translation>
-    </message>
-    <message>
-        <source>Click this box to see this in daily view.</source>
-        <translation type="vanished">Натиснете тази кутийка за да видите това в дневен преглед.</translation>
-    </message>
-    <message>
-        <source>The last time you used your %1...</source>
-        <translation type="vanished">Последният път, когато сте използвали %1 апарата си...</translation>
-    </message>
-    <message>
-        <source>last night</source>
-        <translation type="vanished">снощи</translation>
-    </message>
-    <message>
-        <source>yesterday</source>
-        <translation type="vanished">вчера</translation>
-    </message>
-    <message>
-        <source>%2 days ago</source>
-        <translation type="vanished">преди %2 дни</translation>
-    </message>
-    <message>
-        <source>was %1 (on %2)</source>
-        <translation type="vanished">е било %1 (в %2)</translation>
-    </message>
-    <message>
-        <source>perfect :)</source>
-        <translation type="vanished">отличен :)</translation>
-    </message>
-    <message>
-        <source>pretty darn good</source>
-        <translation type="vanished">много добър</translation>
-    </message>
-    <message>
-        <source>reasonably good</source>
-        <translation type="vanished">добър</translation>
-    </message>
-    <message>
-        <source>technically &quot;treated&quot;</source>
-        <translation type="vanished">технически &quot;под долната граница,категоризираща апнея&quot;</translation>
-    </message>
-    <message>
-        <source>not very good</source>
-        <translation type="vanished">не много добре</translation>
-    </message>
-    <message>
-        <source>horrible, please consult your doctor</source>
-        <translation type="vanished">лошо, моля консултирайте се с вашия лекар</translation>
-    </message>
-    <message>
-        <source>You had an AHI of %1, which is considered %2</source>
-        <translation type="vanished">Имали сте AHI %1, който се счита за %2</translation>
-    </message>
-    <message>
-        <source>%1 hours, %2 minutes and %3 seconds</source>
-        <translation type="vanished">%1 часа, %2 минути и %3 секунди</translation>
-    </message>
-    <message>
-        <source>You machine was on for %1.</source>
-        <translation type="vanished">Вашият апарат е бил включен за %1.</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;span title=&quot;Mac OSX and Win8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Certain operating systems&lt;/font&gt;&lt;/span&gt; write index files to the card without asking, which can render your card unreadable by your cpap machine.</source>
-        <translation type="vanished">&lt;p&gt;&lt;span title=&quot;Apple Mac OS X и Windows 8.1&quot;  onmouseover=&apos;ChangeColor(this, &quot;#eeeeee&quot;);&apos; onmouseout=&apos;ChangeColor(this, &quot;#ffffff&quot;);&apos;&gt;&lt;font color=blue&gt;Някои операционни системи&lt;/font&gt;&lt;/span&gt; записват индекс файлове на картата без дори да ви попитат, което може да обърка вашия CPAP апарат и той да откаже да я прочете.</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;As a second line of protection, ALWAYS UNMOUNT the data card properly before removing it!&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;За по-добра защита, ВИНАГИ откачайте SD картата от менюто на операционната си система преди да я извадите физически от компютъра си!&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;font color = red&gt;You only had the mask on for %1.&lt;/font&gt;</source>
-        <translation type="vanished">&lt;font color = red&gt;Използвали сте маската само %1.&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>You had no &lt;i&gt;major&lt;/i&gt; mask leaks (maximum was %1 %2).</source>
-        <translation type="vanished">Нямали сте &lt;i&gt;значителни&lt;/i&gt; течове от маската (максимумът е бил %1 %2).</translation>
-    </message>
-    <message>
-        <source>You had a small but acceptable amount of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Имали сте малко, но приемлив брой значителен теч от вашата маска.</translation>
-    </message>
-    <message>
-        <source>You had significant periods of &lt;i&gt;major&lt;/i&gt; mask leakage.</source>
-        <translation type="vanished">Имали сте съществени периоди на значителен теч от вашата маска. </translation>
-    </message>
-    <message>
-        <source>Your mask is leaking way too much.. Talk to your CPAP advisor.</source>
-        <translation type="vanished">Течът от вашата маска е твърде голям. Моля консултирайте се с вашия лекар.</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="vanished">Вашият CPAP апарат Ви е обдухвал с постоянно налягане %1%2</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Налягането ви е било под %1%2 за %3% от времето.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="vanished">Вашият апарат Ви е обдухвал с постоянно налягане %1-%2 %3.</translation>
-    </message>
-    <message>
-        <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
-        <translation type="vanished">Вашият апарат е бил под %1-%2 %3 за %4% от времето.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="vanished">Вашето EPAP налягане фиксирано на %1%2.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Вашето EPAP налягане е било под %1%2 за %3% от времето.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Вашето IPAP налягане е било под %1%2 за %3% от времето.</translation>
-    </message>
-    <message>
-        <source>No CPAP data has been imported yet.</source>
-        <translation type="vanished">Няма импортирани CPAP данни засега.</translation>
-    </message>
-    <message>
-        <source>Most recent Oximetery data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
-        <translation type="vanished">Последни оксиметрични данни: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../oscar/welcome.cpp" line="297"/>
         <source>Most recent Oximetry data: &lt;a onclick=&apos;alert(&quot;daily=%2&quot;);&apos;&gt;%1&lt;/a&gt; </source>
         <translation type="unfinished"></translation>
@@ -8790,18 +7472,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <location filename="../oscar/welcome.cpp" line="305"/>
         <source>No oximetry data has been imported yet.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No oximetery data has been imported yet.</source>
-        <translation type="vanished">Няма импортнати оксиметрични данни засега.</translation>
-    </message>
-    <message>
-        <source>Very Important Warning</source>
-        <translation type="vanished">Внимание: Много важно</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;ALWAYS &lt;font size=+1 color=red&gt;&lt;b&gt;write protect&lt;/b&gt;&lt;/font&gt; CPAP SDCards before inserting them into your computer.</source>
-        <translation type="vanished">&lt;p&gt;ВИНАГИ &lt;font size=+1 color=red&gt;&lt;b&gt;заключвайте за запис&lt;/b&gt;&lt;/font&gt; CPAP SD картата си преди да я поставите във вашия компютър.</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/cms50_loader.h" line="39"/>
@@ -9057,7 +7727,7 @@ Please don&apos;t touch anything until it&apos;s done.</source>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3058"/>
         <source>Humid. Level</source>
-        <translation>Степен на овлажн.</translation>
+        <translation>Степен на овлажн</translation>
     </message>
     <message>
         <location filename="../oscar/SleepLib/loader_plugins/resmed_loader.cpp" line="3059"/>
@@ -9162,10 +7832,6 @@ Please don&apos;t touch anything until it&apos;s done.</source>
         <translation>Включен рампинг</translation>
     </message>
     <message>
-        <source>(% of time)</source>
-        <translation type="vanished">(% от времето)</translation>
-    </message>
-    <message>
         <location filename="../oscar/Graphs/gFlagsLine.cpp" line="196"/>
         <source>Database Outdated
 Please Rebuild CPAP Data</source>
@@ -9186,10 +7852,6 @@ Please Rebuild CPAP Data</source>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="386"/>
         <source>Pop out Graph</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SleepyHead is proudly brought to you by JediMark.</source>
-        <translation type="vanished">SleepyHead е при вас благодарение на JediMark.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="1406"/>
@@ -9310,26 +7972,6 @@ Please Rebuild CPAP Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SleepyHead found an old Journal folder, but it looks like it&apos;s been renamed:</source>
-        <translation type="vanished">SleepyHead откри стара журнална папка, но изглежда, че е била преименувана:</translation>
-    </message>
-    <message>
-        <source>SleepyHead will not touch this folder, and will create a new one instead.</source>
-        <translation type="vanished">SleepyHead няма да докосва тази папка, вместо нея ще създаде нова.</translation>
-    </message>
-    <message>
-        <source>Please be careful when playing in SleepyHead&apos;s profile folders :-P</source>
-        <translation type="vanished">Моля бъдете внимателни, когато експериментирате в папката с профили на SleepyHead :-P</translation>
-    </message>
-    <message>
-        <source>For some reason, sleepyHead couldn&apos;t find a journal object record in your profile, but did find multiple Journal data folders.</source>
-        <translation type="vanished">По някаква причина SleepyHead не може да открие журнален обект във Вашия профил, но открива много журнални папки.</translation>
-    </message>
-    <message>
-        <source>SleepyHead picked only the first one of these, and will use it in future:</source>
-        <translation type="vanished">SleepyHead ще избере една от първите и ще я ползва и за в бъдеще:</translation>
-    </message>
-    <message>
         <location filename="../oscar/SleepLib/journal.cpp" line="56"/>
         <source>If your old data is missing, copy the contents of all the other Journal_XXXXXXX folders to this one manually.</source>
         <translation>Ако старите Ви данни липсват копирайте съдържанието на всички останали Journal_XXXXXXX папки в тази ръчно.</translation>
@@ -9387,42 +8029,6 @@ Please Rebuild CPAP Data</source>
         <location filename="../oscar/SleepLib/loader_plugins/weinmann_loader.h" line="116"/>
         <source>SOMNOsoft2</source>
         <translation>SOMNOsoft2</translation>
-    </message>
-    <message>
-        <source>Loading %1 data...</source>
-        <translation type="vanished">Зареждане на данни от %1 ...</translation>
-    </message>
-    <message>
-        <source>PLease Wait...</source>
-        <translation type="vanished">Моля изчакайте...</translation>
-    </message>
-    <message>
-        <source>By Pressure</source>
-        <translation type="vanished">По налягане</translation>
-    </message>
-    <message>
-        <source>Statistics at Pressure</source>
-        <translation type="vanished">Статистики за налягане</translation>
-    </message>
-    <message>
-        <source>Time at Pressure</source>
-        <translation type="vanished">Време с налягане</translation>
-    </message>
-    <message>
-        <source>Click to %1 this session.</source>
-        <translation type="vanished">Натисни за да се  %1 тази сесия.</translation>
-    </message>
-    <message>
-        <source>disable</source>
-        <translation type="vanished">изключи</translation>
-    </message>
-    <message>
-        <source>enable</source>
-        <translation type="vanished">включи</translation>
-    </message>
-    <message>
-        <source>%1 Session #%2</source>
-        <translation type="vanished">%1 Сесия #%2</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraph.cpp" line="351"/>
@@ -9488,13 +8094,6 @@ Line %2, column %3</source>
     </message>
 </context>
 <context>
-    <name>QuaZipFilePrivate</name>
-    <message>
-        <source>ZIP/UNZIP API error %1</source>
-        <translation type="vanished">ZIP/UNZIP API грешка %1</translation>
-    </message>
-</context>
-<context>
     <name>Report</name>
     <message>
         <location filename="../oscar/reports.ui" line="14"/>
@@ -9512,7 +8111,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="246"/>
         <source>%1h %2m</source>
-        <translation type="unfinished">%1: %2m {1h?}</translation>
+        <translation>%1h %2m</translation>
     </message>
     <message>
         <location filename="../oscar/sessionbar.cpp" line="289"/>
@@ -9603,10 +8202,6 @@ Line %2, column %3</source>
         <location filename="../oscar/statistics.cpp" line="557"/>
         <source>%1 Median</source>
         <translation>%1 медиана</translation>
-    </message>
-    <message>
-        <source>90% %1</source>
-        <translation type="vanished">90% %1</translation>
     </message>
     <message>
         <location filename="../oscar/statistics.cpp" line="561"/>
@@ -9829,10 +8424,6 @@ Line %2, column %3</source>
         <translation>Най-лоши настройки</translation>
     </message>
     <message>
-        <source>This lonely sleepy sheep has no data :(</source>
-        <translation type="vanished">Тази самотна овчица няма данни, с които да работи :(</translation>
-    </message>
-    <message>
         <location filename="../oscar/statistics.cpp" line="1052"/>
         <source>Last Week</source>
         <translation>Последна седмица</translation>
@@ -9906,10 +8497,6 @@ Line %2, column %3</source>
 <context>
     <name>UpdaterWindow</name>
     <message>
-        <source>SleepyHead Updater</source>
-        <translation type="vanished">Обновяване на SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.ui" line="60"/>
         <source>A new version of $APP is available</source>
         <translation>Има нова версия на $APP</translation>
@@ -9923,10 +8510,6 @@ Line %2, column %3</source>
         <location filename="../oscar/UpdaterWindow.ui" line="117"/>
         <source>Release Notes</source>
         <translation>Бележки по изданието</translation>
-    </message>
-    <message>
-        <source>about:blank</source>
-        <translation type="vanished">about:blank</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.ui" line="14"/>
@@ -9994,21 +8577,9 @@ Line %2, column %3</source>
         <translation>&amp;Край</translation>
     </message>
     <message>
-        <source>Checking for SleepyHead Updates</source>
-        <translation type="vanished">Проверка за нова версия на SleepyHead</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="146"/>
         <source>Requesting </source>
         <translation>Поискване </translation>
-    </message>
-    <message>
-        <source>Saving as </source>
-        <translation type="vanished">Запис като </translation>
-    </message>
-    <message>
-        <source>XML update structure parsed cleanly</source>
-        <translation type="vanished">XML файлът е обработен успешно</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="504"/>
@@ -10016,57 +8587,9 @@ Line %2, column %3</source>
         <translation>Не е открита нова версия за вашата платформа.</translation>
     </message>
     <message>
-        <source>SleepyHead Updates</source>
-        <translation type="obsolete">Обновления за OSCAR</translation>
-    </message>
-    <message>
-        <source>No new updates were found for your platform.</source>
-        <translation type="vanished">Не е открита нова версия за вашата платформа.</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1, codename &quot;%2&quot;</source>
-        <translation type="vanished">SleepyHead v%1, кодово име &quot;%2&quot;</translation>
-    </message>
-    <message>
-        <source>platform notes</source>
-        <translation type="vanished">платформени бележки</translation>
-    </message>
-    <message>
-        <source>A new version of SleepyHead is available!</source>
-        <translation type="vanished">Има нова версия на SleepyHead!</translation>
-    </message>
-    <message>
-        <source>Shiny new &lt;b&gt;v%1&lt;/b&gt; is available. You&apos;re running old and busted v%2</source>
-        <translation type="vanished">Чисто нова версия &lt;b&gt;v%1&lt;/b&gt; е налична. Вие работите със стара и изтъркана v%2</translation>
-    </message>
-    <message>
-        <source>An update for SleepyHead is available.</source>
-        <translation type="vanished">Налична е нова версия на SleepyHead.</translation>
-    </message>
-    <message>
-        <source>Version &lt;b&gt;%1&lt;/b&gt; is available. You&apos;re currently running v%1</source>
-        <translation type="vanished">Версия &lt;b&gt;%1&lt;/b&gt; е налична. В момента работите с v%1</translation>
-    </message>
-    <message>
-        <source>SleepyHead v%1 build notes</source>
-        <translation type="vanished">Бележки по версия v%1 на SleepyHead</translation>
-    </message>
-    <message>
-        <source>Update to QtLibs (v%1)</source>
-        <translation type="vanished">Обновление на QtLibs (v%1)</translation>
-    </message>
-    <message>
-        <source>There was an error parsing the XML Update file.</source>
-        <translation type="vanished">Грешка при обработката на XML файла за обновяване.</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="171"/>
         <source>%1 bytes received</source>
         <translation>%1 байта получени</translation>
-    </message>
-    <message>
-        <source>SleepyHead Updates are currently unvailable for this platform</source>
-        <translation type="vanished">За момента, за тази платформа не са налични нови версии на SleepyHead</translation>
     </message>
     <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="93"/>
@@ -10106,81 +8629,9 @@ Line %2, column %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New SleepyHead Updates are avilable:</source>
-        <translation type="obsolete">Налична е обновена версия на OSCAR:</translation>
-    </message>
-    <message>
         <location filename="../oscar/UpdaterWindow.cpp" line="512"/>
         <source>Would you like to download and install them now?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Would you like t download and install them now?</source>
-        <translation type="vanished">Желаете ли да я свалите и инсталирате сега?</translation>
-    </message>
-    <message>
-        <source>Redirected to </source>
-        <translation type="vanished">Пренасочен към </translation>
-    </message>
-    <message>
-        <source>File size mismatch for %1</source>
-        <translation type="vanished">Разлика в големината на %1</translation>
-    </message>
-    <message>
-        <source>File integrity check failed for %1</source>
-        <translation type="vanished">Проверката за непокътнатост на %1 се провали</translation>
-    </message>
-    <message>
-        <source>Extracting </source>
-        <translation type="vanished">Извличане </translation>
-    </message>
-    <message>
-        <source>You might need to reinstall manually. Sorry :(</source>
-        <translation type="vanished">Вероятно ще се наложи да преинсталирате ръчно. Съжаляваме :(</translation>
-    </message>
-    <message>
-        <source>Ugh.. Something went wrong with unzipping.</source>
-        <translation type="vanished">Упс.. Има проблем с разархивирането.</translation>
-    </message>
-    <message>
-        <source>Failed</source>
-        <translation type="vanished">Неуспех</translation>
-    </message>
-    <message>
-        <source>Download Complete</source>
-        <translation type="vanished">Свалянето приключи</translation>
-    </message>
-    <message>
-        <source>There was an error completing a network request:
-
-(</source>
-        <translation type="vanished">Грешка при изпълняването на мрежова заявка:
-
-(</translation>
-    </message>
-    <message>
-        <source>Update Complete!</source>
-        <translation type="vanished">Обновяването приключи!</translation>
-    </message>
-    <message>
-        <source>Updates Complete. SleepyHead needs to restart now, click Finished to do so.</source>
-        <translation type="vanished">Обновяването приключи. SleepyHead сега има нужда от рестарт, изберете Край за да се изпълни това.</translation>
-    </message>
-    <message>
-        <source>Update Failed :(</source>
-        <translation type="vanished">Обновяването се провали :(</translation>
-    </message>
-    <message>
-        <source>Download Error. Sorry, try again later.</source>
-        <translation type="vanished">Грешка при свалянето. Съжаляваме, опитайте отново по-късно.</translation>
-    </message>
-    <message>
-        <source>Downloading &amp; Installing Updates...</source>
-        <translation type="vanished">Сваляне и инсталиране на обновления...</translation>
-    </message>
-    <message>
-        <source>Please wait while downloading and installing updates.</source>
-        <translation type="vanished">Моля изчакайте докато се свали и инсталира новата версия.</translation>
     </message>
 </context>
 <context>
@@ -10229,10 +8680,6 @@ Line %2, column %3</source>
         <location filename="../oscar/welcome.ui" line="581"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;need &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;to be locked &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;before &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>It might be a good idea to check preferences first,&lt;/br&gt;as there are some options that affect import.</source>
-        <translation type="obsolete">Добра идея е да проверите настройките си първо,&lt;/br&gt;защото има такива, които влияят на импортирането.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="139"/>
@@ -10327,7 +8774,7 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="215"/>
         <source>Your pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Налягането ви е било под %1%2 за %3% от времето. {1 %2 ?} {3%?}</translation>
+        <translation>Налягането ви е било под %1 %2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="219"/>
@@ -10337,47 +8784,23 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/welcome.cpp" line="228"/>
         <source>Your EPAP pressure fixed at %1 %2.</source>
-        <translation type="unfinished">Вашето EPAP налягане фиксирано на %1%2. {1 %2.?}</translation>
+        <translation>Вашето EPAP налягане фиксирано на %1 %2.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="229"/>
         <location filename="../oscar/welcome.cpp" line="235"/>
         <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Вашето IPAP налягане е било под %1%2 за %3% от времето. {1 %2 ?} {3%?}</translation>
+        <translation>Вашето IPAP налягане е било под %1 %2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="234"/>
         <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation type="unfinished">Вашето EPAP налягане е било под %1%2 за %3% от времето. {1 %2 ?} {3%?}</translation>
-    </message>
-    <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="vanished">Вашият CPAP апарат Ви е обдухвал с постоянно налягане %1%2</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Налягането ви е било под %1%2 за %3% от времето.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="vanished">Вашият апарат Ви е обдухвал с постоянно налягане %1-%2 %3.</translation>
+        <translation>Вашето EPAP налягане е било под %1 %2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="223"/>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
         <translation>Вашият апарат е бил под %1-%2 %3 за %4% от времето.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="vanished">Вашето EPAP налягане фиксирано на %1%2.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Вашето IPAP налягане е било под %1%2 за %3% от времето.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Вашето EPAP налягане е било под %1%2 за %3% от времето.</translation>
     </message>
     <message>
         <location filename="../oscar/welcome.cpp" line="255"/>
@@ -10408,12 +8831,12 @@ Line %2, column %3</source>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="393"/>
         <source>Restore X-axis zoom too 100% to view entire days data.</source>
-        <translation>Презареждане на мащаба на абсцисната ос до 100% за преглед на цели дни. </translation>
+        <translation>Презареждане на мащаба на абсцисната ос до 100% за преглед на цели дни.</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="395"/>
         <source>Reset Graph Layout</source>
-        <translation>Възстановяване на изгледа на диаграмите </translation>
+        <translation>Възстановяване на изгледа на диаграмите</translation>
     </message>
     <message>
         <location filename="../oscar/Graphs/gGraphView.cpp" line="396"/>

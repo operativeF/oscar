@@ -44,10 +44,6 @@
         <translation>Przepraszam, nie znaleziono pliku Zasługi.</translation>
     </message>
     <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="vanished">Przepraszam, nie znaleziono pliku ze zmianami.</translation>
-    </message>
-    <message>
         <source>OSCAR v%1</source>
         <translation>OSCAR v%1</translation>
     </message>
@@ -306,10 +302,6 @@
         <translation>Ten dzień zawiera tylko dane sumaryczne, jest dostępna tylko ograniczona informacja.</translation>
     </message>
     <message>
-        <source>TTIA</source>
-        <translation type="vanished">TTIA</translation>
-    </message>
-    <message>
         <source>Total ramp time</source>
         <translation>Całkowity czas rampy</translation>
     </message>
@@ -336,14 +328,6 @@
     <message>
         <source>&quot;Nothing&apos;s here!&quot;</source>
         <translation>&quot;Tu nic nie ma!&quot;</translation>
-    </message>
-    <message>
-        <source>Hide all events</source>
-        <translation type="vanished">Ukryj wszystkie zdarzenia</translation>
-    </message>
-    <message>
-        <source>Show all events</source>
-        <translation type="vanished">Pokaż wszystkie zdarzenia</translation>
     </message>
     <message>
         <source>Oximeter Information</source>
@@ -456,14 +440,6 @@
     <message>
         <source>Bookmark at %1</source>
         <translation>Zrób zakładkę przy %1</translation>
-    </message>
-    <message>
-        <source>Show all graphs</source>
-        <translation type="vanished">Pokaż wszystkie wykresy</translation>
-    </message>
-    <message>
-        <source>Hide all graphs</source>
-        <translation type="vanished">Ukryj wszystkie wykresy</translation>
     </message>
 </context>
 <context>
@@ -839,10 +815,6 @@
         <translation>Użyj &amp;AntiAliasing</translation>
     </message>
     <message>
-        <source>&amp;Fullscreen Toggle</source>
-        <translation type="vanished">&amp;Przełącznik PełenEkran</translation>
-    </message>
-    <message>
         <source>Show Debug Pane</source>
         <translation>Pokaż okno debugowania</translation>
     </message>
@@ -1127,10 +1099,6 @@
         <translation>Proszę najpierw otworzyć profil.</translation>
     </message>
     <message>
-        <source>The User&apos;s Guide is not yet implemented</source>
-        <translation type="vanished">Poradnik użytkownika nie działa</translation>
-    </message>
-    <message>
         <source>The FAQ is not yet implemented</source>
         <translation>FAQ nie działa</translation>
     </message>
@@ -1145,10 +1113,6 @@
         <translation>Na pewno chcesz przebudować wszystkie dane dla :
 
 </translation>
-    </message>
-    <message>
-        <source>Please note, that this could result in loss of graph data if OSCAR&apos;s backups have been disabled or interfered with in any way.</source>
-        <translation type="vanished">Gdy kopie zapasowe są wyłączone lub zaburzone w inny sposób, może to spowodować utratę danych wykresów.</translation>
     </message>
     <message>
         <source>For some reason, OSCAR does not have any backups for the following machine:</source>
@@ -1169,10 +1133,6 @@
     <message>
         <source>Further Information</source>
         <translation>Inne informacje</translation>
-    </message>
-    <message>
-        <source>Here are the &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;release notes&lt;/a&gt; for this version.</source>
-        <translation type="vanished">Tutaj &lt;a href=&apos;qrc:/docs/release_notes.html&apos;&gt;uwagi dot. wydania&lt;/a&gt; dla tej wersji.</translation>
     </message>
     <message>
         <source>Plus a few &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt;usage notes&lt;/a&gt;, and some important information for Mac users.</source>
@@ -1643,10 +1603,6 @@
     <message>
         <source>Use of this software is entirely at your own risk.</source>
         <translation>Używasz tego programu wyłącznie na własne ryzyko.</translation>
-    </message>
-    <message>
-        <source>Welcome to Open Source CPAP Reviewer</source>
-        <translation type="vanished">Witaj w OSCAR</translation>
     </message>
     <message>
         <source>OSCAR has been released freely under the &lt;a href=&apos;qrc:/COPYING&apos;&gt;GNU Public License v3&lt;/a&gt;, and comes with no warranty, and without ANY claims to fitness for any purpose.</source>
@@ -2147,10 +2103,6 @@ Ciała (BMI)</translation>
     <message>
         <source>OSCAR gives you the ability to track Oximetry data alongside CPAP session data, which can give valuable insight into the effectiveness of CPAP treatment. It will also work standalone with your Pulse Oximeter, allowing you to store, track and review your recorded data.</source>
         <translation>OSCAR daje możliwość śledzenia danych pulsoksymetru razem z danymi CPAP, co daje wgląd na efektywność leczenia. Można też przeglądać dane osobno.</translation>
-    </message>
-    <message>
-        <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probaby not&lt;/span&gt; possible yet)</source>
-        <translation type="vanished">OSCAR obecnie współpracuje z modelami Contec CMS50D+, CMS50E, CMS50I.( Uwaga - bezpośrednie importowanie przez bluetooth raczej niemożliwe.)</translation>
     </message>
     <message>
         <source>If you are trying to sync oximetry and CPAP data, please make sure you imported your CPAP sessions first before proceeding!</source>
@@ -4900,10 +4852,6 @@ TTIA: %1</translation>
         <translation>Nie znaleziono explorer.exe na ścieżce uruchomienia Eksploratora Windows.</translation>
     </message>
     <message>
-        <source>OSCT (%1) needs to upgrade its database for %2 %3 %4</source>
-        <translation type="vanished">OSCT (%1) wymaga uaktualnienia bazy danych dla %2 %3 %4</translation>
-    </message>
-    <message>
         <source>&lt;b&gt;OSCAR maintains a backup of your devices data card that it uses for this purpose.&lt;/b&gt;</source>
         <translation>&lt;b&gt;OSCAR prowadzi kopię zapasową danych z Twoich aparatów których używa w tym celu.&lt;/b&gt;</translation>
     </message>
@@ -5102,10 +5050,6 @@ TTIA: %1</translation>
     <message>
         <source>UA</source>
         <translation>UA</translation>
-    </message>
-    <message>
-        <source>An restriction in breathing from normal, causing a flattening of the flow waveform.</source>
-        <translation type="vanished">Ograniczenie oddychania, powodujące spłaszczenie wykresu przepływu.</translation>
     </message>
     <message>
         <source>Vibratory Snore</source>
@@ -5311,10 +5255,6 @@ TTIA: %1</translation>
     <message>
         <source>Obstructive</source>
         <translation>Obturacyjne</translation>
-    </message>
-    <message>
-        <source>an apnea that couldn&apos;t be determined as Central or Obstructive, due to excessive leakage interfering with the classification process.</source>
-        <translation type="vanished">bezdech który nie może być określony jako obturacyjny lub centralny, z uwagi na zbyt duży wyciek przeszkadzający w procesie klasyfikacji.</translation>
     </message>
     <message>
         <source>Respiratory Effort Related Arousal: An restriction in breathing that causes an either an awakening or sleep disturbance.</source>
@@ -5629,36 +5569,8 @@ TTIA: %1</translation>
         <translation>Dolny próg</translation>
     </message>
     <message>
-        <source>Would you like OSCAR to use this location for storing its data?</source>
-        <translation type="vanished">Chcesz żeby OSCAR tam przechowywał dane?</translation>
-    </message>
-    <message>
-        <source>If you are upgrading, don&apos;t panic, you just need to make sure this is pointed at your old OSCAR data folder.</source>
-        <translation type="vanished">Jeśli przeprowadzasz aktualizację, nie wpadaj w panikę, po prostu upewnij się, że jest to wskazane w twoim starym folderze danych OSCAR.</translation>
-    </message>
-    <message>
-        <source>(If you are unsure, just click yes.)</source>
-        <translation type="vanished">(nie wiesz co, kliknij Tak)</translation>
-    </message>
-    <message>
-        <source>Choose or create new folder for OSCAR data</source>
-        <translation type="vanished">Wybierz albo stwórz folder danych dla OSCAR</translation>
-    </message>
-    <message>
-        <source>Next time you run, you will be asked again.</source>
-        <translation type="vanished">Przy następnym uruchomieniu zostaniesz zapytany ponownie.</translation>
-    </message>
-    <message>
         <source>As you did not select a data folder, OSCAR will exit.</source>
         <translation>Ponieważ nie wybrałeś foldera danych, OSCAR ucieka.</translation>
-    </message>
-    <message>
-        <source>You did not select a directory.</source>
-        <translation type="vanished">Nie wybrałeś katalogu.</translation>
-    </message>
-    <message>
-        <source>OSCAR will now start with your old one.</source>
-        <translation type="vanished">OSCAR wystartuje ze starymi.</translation>
     </message>
     <message>
         <source>The folder you chose is not empty, nor does it already contain valid OSCAR data.</source>
@@ -6598,28 +6510,12 @@ Wiersz %2, kolumna %3</translation>
         <translation>Statystyki użycia</translation>
     </message>
     <message>
-        <source>This is for legal reasons. Sorry, not sorry. Without manufacturer support and documentation, OSCAR is unsuitable as a compliance/medical reporting tool.</source>
-        <translation type="vanished">Następujące wynika z przyczyn prawnych. Bez wsparcia i dokumentacji producentów sprzętu OSCAR nie moze być uznany za narzędzie do generowania raportów i analiz.</translation>
-    </message>
-    <message>
-        <source>(NOT approved for compliance or medical reporting purposes)</source>
-        <translation type="vanished">(tylko do użytku własnego)</translation>
-    </message>
-    <message>
         <source>This report was generated by OSCAR v%1</source>
         <translation>Ten raport został wygenerowany przez OSCAR v%1</translation>
     </message>
     <message>
-        <source>OSCAR is free open-source CPAP review software</source>
-        <translation type="vanished">OSCAR to wolne oprogramowanie do przeglądu danych CPAP</translation>
-    </message>
-    <message>
         <source>I can haz data?!?</source>
         <translation>Nima, nima , danych dla Oskarka ...?!?</translation>
-    </message>
-    <message>
-        <source>Oscar has to data to report :(</source>
-        <translation type="vanished">Oscar nie ma danych do zaraportowania :(</translation>
     </message>
     <message>
         <source>Days Used: %1</source>
@@ -6909,14 +6805,6 @@ Wiersz %2, kolumna %3</translation>
         <translation>Nie znaleziono uaktualnień dla Twojej platformy.</translation>
     </message>
     <message>
-        <source>SleepyHead Updates</source>
-        <translation type="vanished">Uaktualnienia OSCAR</translation>
-    </message>
-    <message>
-        <source>New SleepyHead Updates are avilable:</source>
-        <translation type="vanished">Są dostępne uaktualnienia:</translation>
-    </message>
-    <message>
         <source>Would you like to download and install them now?</source>
         <translation>Czy chcesz pobrać i zainstalować je teraz?</translation>
     </message>
@@ -6934,10 +6822,6 @@ Wiersz %2, kolumna %3</translation>
     <message>
         <source>Form</source>
         <translation>Formularz</translation>
-    </message>
-    <message>
-        <source>Welcome To Open Source CPAP Reviewer</source>
-        <translation type="vanished">Witaj w OSCAR - Open Source CPAP Analysis Reporter</translation>
     </message>
     <message>
         <source>What would you like to do?</source>
@@ -7036,32 +6920,8 @@ Wiersz %2, kolumna %3</translation>
         <translation>AHI wynosiło %1, co stanowi %2 %3 dniowej średniej wynoszącej %4.</translation>
     </message>
     <message>
-        <source>Your CPAP machine blasted you with a constant %1%2 of air</source>
-        <translation type="vanished">Twój aparat podawał stałe ciśnienie %1%2</translation>
-    </message>
-    <message>
-        <source>Your pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">Ciśnienie było poniżej %1%2 przez %3% czasu.</translation>
-    </message>
-    <message>
-        <source>Your machine blasted you with a constant %1-%2 %3 of air.</source>
-        <translation type="vanished">Ten aparat podawał stałe %1-%2 %3 powietrza.</translation>
-    </message>
-    <message>
         <source>Your machine was under %1-%2 %3 for %4% of the time.</source>
         <translation>Aparat był poniżej %1-%2 %3 przez %4% czasu.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure fixed at %1%2.</source>
-        <translation type="vanished">EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1%2.</translation>
-    </message>
-    <message>
-        <source>Your IPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
-    </message>
-    <message>
-        <source>Your EPAP pressure was under %1%2 for %3% of the time.</source>
-        <translation type="vanished">IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your average leaks were %1 %2, which is %3 your %4 day average of %5.</source>
@@ -7077,11 +6937,11 @@ Wiersz %2, kolumna %3</translation>
     </message>
     <message>
         <source>Your CPAP machine used a constant %1 %2 of air</source>
-        <translation>Twój aparat podawał stałe ciśnienie %1%2</translation>
+        <translation>Twój aparat podawał stałe ciśnienie %1 %2</translation>
     </message>
     <message>
         <source>Your pressure was under %1 %2 for %3% of the time.</source>
-        <translation>Ciśnienie było poniżej %1%2 przez %3% czasu.</translation>
+        <translation>Ciśnienie było poniżej %1 %2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your machine used a constant %1-%2 %3 of air.</source>
@@ -7089,15 +6949,15 @@ Wiersz %2, kolumna %3</translation>
     </message>
     <message>
         <source>Your EPAP pressure fixed at %1 %2.</source>
-        <translation>EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1%2.</translation>
+        <translation>EPAP (ciśnienie na wydechu) ustaliło się na poziomie %1 %2.</translation>
     </message>
     <message>
         <source>Your IPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation>IPAP (ciśnienie na wdechu) było poniżej %1%2 przez %3% czasu.</translation>
+        <translation>IPAP (ciśnienie na wdechu) było poniżej %1 %2 przez %3% czasu.</translation>
     </message>
     <message>
         <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
-        <translation>EPAP (ciśnienie na wydechu) było poniżej %1%2 przez %3% czasu.</translation>
+        <translation>EPAP (ciśnienie na wydechu) było poniżej %1 %2 przez %3% czasu.</translation>
     </message>
 </context>
 <context>

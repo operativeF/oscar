@@ -1393,7 +1393,7 @@
     </message>
     <message>
         <source>&amp;Maximize Toggle</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Maximieren des Umschalters</translation>
     </message>
 </context>
 <context>
@@ -3720,7 +3720,7 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
     </message>
     <message>
         <source>You must create a profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen ein Profil erstellen</translation>
     </message>
 </context>
 <context>
@@ -6436,51 +6436,51 @@ Stunden: %1</translation>
     </message>
     <message>
         <source>Migrating </source>
-        <translation type="unfinished"></translation>
+        <translation>Migration </translation>
     </message>
     <message>
         <source> files</source>
-        <translation type="unfinished"></translation>
+        <translation> Dateien</translation>
     </message>
     <message>
         <source>from </source>
-        <translation type="unfinished"></translation>
+        <translation>von </translation>
     </message>
     <message>
         <source>to </source>
-        <translation type="unfinished"></translation>
+        <translation>zu </translation>
     </message>
     <message>
         <source>OSCAR will set up a folder for your data.</source>
-        <translation type="unfinished"></translation>
+        <translation>OSCAR richtet einen Ordner für Ihre Daten ein.</translation>
     </message>
     <message>
         <source>If you have been using SleepyHead, OSCAR can copy your old data to this folder later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie SleepyHead verwendet haben, kann OSCAR Ihre alten Daten später in diesen Ordner kopieren.</translation>
     </message>
     <message>
         <source>We suggest you use this folder: </source>
-        <translation type="unfinished"></translation>
+        <translation>Wir empfehlen Ihnen, diesen Ordner zu verwenden: </translation>
     </message>
     <message>
         <source>Click Ok to accept this, or No if you want to use a different folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie auf Ok, um dies zu akzeptieren, oder auf Nein, wenn Sie einen anderen Ordner verwenden möchten.</translation>
     </message>
     <message>
         <source>Next time you run OSCAR, you will be asked again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie OSCAR das nächste Mal ausführen, werden Sie erneut gefragt.</translation>
     </message>
     <message>
         <source>Migrate SleepyHead Data?</source>
-        <translation type="unfinished"></translation>
+        <translation>SleepyHead Daten migrieren?</translation>
     </message>
     <message>
         <source>On the next screen OSCAR will ask you to select a folder with SleepyHead data</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf dem nächsten Bildschirm fordert OSCAR Sie auf, einen Ordner mit SleepyHead-Daten auszuwählen</translation>
     </message>
     <message>
         <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie auf [OK], um zum nächsten Bildschirm zu gelangen, oder auf[Nein], wenn Sie keine SleepyHead-Daten verwenden möchten.</translation>
     </message>
 </context>
 <context>

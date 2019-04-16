@@ -61,10 +61,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, could not locate changelog.</source>
-        <translation type="vanished">Spiacente, non trovo le informazioni sulla versione.</translation>
-    </message>
-    <message>
         <location filename="../oscar/aboutdialog.cpp" line="123"/>
         <source>OSCAR v%1</source>
         <translation>OSCAR v%1</translation>
