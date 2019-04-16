@@ -36,7 +36,10 @@
         <file>icons/help.png</file>
         <file>icons/session-off.png</file>
         <file>icons/session-on.png</file>
-        <file>icons/logo.png</file>
+        <file>icons/logo-lg.png</file>
+        <file>icons/logo-lm.png</file>
+        <file>icons/logo-md.png</file>
+        <file>icons/logo-sm.png</file>
         <file>icons/sdcard-lock.png</file>
         <file>icons/statistics.png</file>
         <file>icons/prs1.png</file>

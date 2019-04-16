@@ -114,7 +114,7 @@ void initTranslations()
         QHBoxLayout lang_layout(&langsel);
 
         QLabel img;
-        img.setPixmap(QPixmap(":/icons/logo.png"));
+        img.setPixmap(QPixmap(":/icons/logo-lg.png"));
 
         QPushButton lang_okbtn("->", &langsel); // hard coded non translatable
 

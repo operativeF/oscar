@@ -40,7 +40,7 @@
 #include <SleepLib/loader_plugins/zeo_loader.h>
 #include <SleepLib/loader_plugins/somnopose_loader.h>
 
-#ifndef REMSTAR_M_SUPPORT
+#ifdef REMSTAR_M_SUPPORT
 #include <SleepLib/loader_plugins/mseries_loader.h>
 #endif
 
@@ -89,7 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Nifty Notification popups in System Tray (uses Growl on Mac)
     if (QSystemTrayIcon::isSystemTrayAvailable() && QSystemTrayIcon::supportsMessages()) {
         qDebug() << "Using System Tray for Menu";
-        systray = new QSystemTrayIcon(QIcon(":/icons/logo.png"), this);
+        systray = new QSystemTrayIcon(QIcon(":/icons/logo-sm.png"), this);
         systray->show();
         // seems to need the systray menu for notifications to work
         systraymenu = new QMenu(this);
@@ -231,6 +231,7 @@ void MainWindow::SetupGUI()
     QTimer::singleShot(50, this, SLOT(Startup()));
 
     ui->actionChange_Data_Folder->setVisible(false);
+    ui->action_Frequently_Asked_Questions->setVisible(false);
 
 #ifndef helpless
     help = new Help(this);
@@ -482,7 +483,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     progress->setMessage(tr("Loading profile \"%1\"").arg(profileName));
 
     // Show the logo?
-//    QPixmap logo=QPixmap(":/icons/logo.png").scaled(64,64);
+//    QPixmap logo=QPixmap(":/icons/logo-md.png").scaled(64,64);
 //    progress->setPixmap(logo);
 
     QApplication::processEvents();
@@ -529,6 +530,30 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     ui->tabWidget->setTabEnabled(2, !noMachines);       // daily, STR_TR_Daily);
     ui->tabWidget->setTabEnabled(3, !noMachines);       // overview, STR_TR_Overview);
     ui->tabWidget->setTabEnabled(4, !noMachines);       // overview, STR_TR_Overview);
+
+    int srm = 0;
+    if (p_profile) {
+        srm = p_profile->general->statReportMode();
+    }
+
+    switch (srm) {
+        case 0:
+            ui->reportModeStandard->setChecked(true);
+            break;
+        case 1:
+            ui->reportModeMonthly->setChecked(true);
+            break;
+        case 2:
+            ui->reportModeRange->setChecked(true);
+            ui->statEndDate->setVisible(true);
+            ui->statStartDate->setVisible(true);
+            break;
+        default:
+            if (p_profile) {
+                p_profile->general->setStatReportMode(0);
+            }
+            break;
+    }
 
     progress->close();
     delete progress;
@@ -1117,7 +1142,7 @@ QString MainWindow::getWelcomeHTML()
            tr("<a href='http://www.cpaptalk.com'>CPAPTalk Forum</a>,") +
            tr("<a href='http://www.apneaboard.com/forums/'>Apnea Board</a>") + "</p>"
            "</td>"
-           "<td><image src='qrc:/icons/logo.png' width=220 height=220><br/>"
+           "<td><image src='qrc:/icons/logo-lg.png' width=220 height=220><br/>"
            "</td>"
            "</tr>"
            "<tr>"
@@ -1482,7 +1507,10 @@ void MainWindow::on_action_CycleTabs_triggered()
 void MainWindow::on_actionOnline_Users_Guide_triggered()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=OSCAR_Users_Guide"));
-    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The User's Guide is not yet available"));
+//    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The User's Guide is not yet available"));
+    if (QMessageBox::question(nullptr, STR_MessageBox_Question, tr("The User's Guide will open in your default browser"),
+            QMessageBox::Ok|QMessageBox::Cancel, QMessageBox::Ok) == QMessageBox::Ok )
+        QDesktopServices::openUrl(QUrl("https://www.apneaboard.com/wiki/index.php?title=OSCAR_Help"));
 }
 
 void MainWindow::on_action_Frequently_Asked_Questions_triggered()
@@ -2120,7 +2148,7 @@ void MainWindow::doRecompressEvents()
     ProgressDialog progress(this);
     progress.setMessage("Recompressing Session Files");
     progress.setProgressMax(p_profile->daylist.size());
-    QPixmap icon = QPixmap(":/icons/logo.png").scaled(64,64);
+    QPixmap icon = QPixmap(":/icons/logo-md.png").scaled(64,64);
     progress.setPixmap(icon);
     progress.open();
 
@@ -2151,7 +2179,7 @@ void MainWindow::doReprocessEvents()
     ProgressDialog progress(this);
     progress.setMessage("Recalculating summaries");
     progress.setProgressMax(p_profile->daylist.size());
-    QPixmap icon = QPixmap(":/icons/logo.png").scaled(64,64);
+    QPixmap icon = QPixmap(":/icons/logo-md.png").scaled(64,64);
     progress.setPixmap(icon);
     progress.open();
 
@@ -2278,7 +2306,10 @@ void MainWindow::on_actionImport_RemStar_MSeries_Data_triggered()
 void MainWindow::on_actionSleep_Disorder_Terms_Glossary_triggered()
 {
 //    QDesktopServices::openUrl(QUrl("http://sleepyhead.sourceforge.net/wiki/index.php?title=Glossary"));
-    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The Glossary is not yet implemented"));
+//    QMessageBox::information(nullptr, STR_MessageBox_Information, tr("The Glossary is not yet implemented"));
+    if (QMessageBox::question(nullptr, STR_MessageBox_Question, tr("The Glossary will open in your default browser"),
+            QMessageBox::Ok|QMessageBox::Cancel, QMessageBox::Ok) == QMessageBox::Ok )
+        QDesktopServices::openUrl(QUrl("https://www.apneaboard.com/wiki/index.php?title=Definitions"));
 }
 
 void MainWindow::on_actionHelp_Support_OSCAR_Development_triggered()

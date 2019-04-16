@@ -633,7 +633,7 @@ QString Statistics::htmlHeader(bool showheader)
     "</head>"
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
 
-    QPixmap logoPixmap(":/icons/logo.png");
+    QPixmap logoPixmap(":/icons/logo-md.png");
     if (showheader) {
         html += "<div align=center>"
         +resizeHTMLPixmap(logoPixmap,64,64)+"<br/>"
@@ -991,7 +991,7 @@ QString Statistics::GenerateHTML()
         html += "<div align=center>";
 //        html += QString("<tr><td align=center>") +
         html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
-                "<p><img src='qrc:/icons/logo.png' width=\"100\" height=\"100\"></p>"
+                "<p><img src='qrc:/icons/logo-lm.png' width=\"100\" height=\"100\"></p>"
                 "<p><i>"+tr("Oscar has no data to report :(")+"</i></p>");
 
 //        "</table></div>";

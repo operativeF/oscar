@@ -331,7 +331,7 @@ gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
 
     this->setMouseTracking(true);
     m_emptytext = STR_Empty_NoData;
-    m_emptyimage = QPixmap(":/icons/logo.png");
+    m_emptyimage = QPixmap(":/icons/logo-md.png");
     InitGraphGlobals(); // FIXME: sstangl: handle error return.
 #ifdef ENABLE_THREADED_DRAWING
     m_idealthreads = QThread::idealThreadCount();

@@ -137,7 +137,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
 //    sleep(3);
     GraphView->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 
-    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
+    GraphView->setEmptyImage(QPixmap(":/icons/logo-md.png"));
 
     snapGV=new gGraphView(GraphView);
     snapGV->setMinimumSize(172,172);
@@ -420,7 +420,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
 
-    GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
+    GraphView->setEmptyImage(QPixmap(":/icons/logo-md.png"));
     GraphView->setEmptyText(STR_Empty_NoData);
     previous_date=QDate();
 
@@ -1388,7 +1388,7 @@ void Daily::Load(QDate date)
     }
 
     if (!cpap) {
-        GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
+        GraphView->setEmptyImage(QPixmap(":/icons/logo-md.png"));
     }
     if (cpap) {
         float hours=day->hours(MT_CPAP);
@@ -1399,7 +1399,7 @@ void Daily::Load(QDate date)
                 GraphView->setEmptyImage(QPixmap(":/icons/sadface.png"));
                 isBrick=true;
             } else {
-                GraphView->setEmptyImage(QPixmap(":/icons/logo.png"));
+                GraphView->setEmptyImage(QPixmap(":/icons/logo-md.png"));
             }
         }
 
@@ -1505,7 +1505,7 @@ void Daily::Load(QDate date)
                 html+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
                 if (day->size()>0) {
                     html+="<tr><td colspan=5 align='center'><font size='+3'>"+tr("Sessions all off!")+"</font></td></tr>";
-                    html+="<tr><td colspan=5 align='center><img src='qrc:/icons/logo.png'></td></tr>";
+                    html+="<tr><td colspan=5 align='center><img src='qrc:/icons/logo-md.png'></td></tr>";
                     html+="<tr bgcolor='#89abcd'><td colspan=5 align='center'><i><font color=white size=+1>"+tr("Sessions exist for this day but are switched off.")+"</font></i></td></tr>\n";
                     GraphView->setEmptyText(STR_Empty_NoSessions);
                 } else {
@@ -1534,9 +1534,9 @@ void Daily::Load(QDate date)
             html+="<table cellspacing=0 cellpadding=0 border=0 height=100% width=100%>";
             html+="<tr height=25%><td align=center></td></tr>";
             html+="<tr><td align=center><font size='+3'>"+tr("\"Nothing's here!\"")+"</font></td></tr>";
-            html+="<tr><td align=center><img src='qrc:/icons/logo.png'></td></tr>";
+            html+="<tr><td align=center><img src='qrc:/icons/logo-md.png'></td></tr>";
             html+="<tr height=5px><td align=center></td></tr>";
-            html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("Oscar is bored with this days lack of data.")+"</font></i></td></tr>";
+            html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("No data is available for this day.")+"</font></i></td></tr>";
             html+="<tr height=25%><td align=center></td></tr>";
             html+="</table>\n";
         }
