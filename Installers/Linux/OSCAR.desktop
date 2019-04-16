@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.1
+Name=OSCAR
+GenericName=CPAP Reporter
+TryExec=OSCAR
+Exec=OSCAR
+Terminal=false
+Icon=/opt/OSCAR/OSCAR.png
+Type=Application
+Categories=Education,Science,MedicalSoftware
+
