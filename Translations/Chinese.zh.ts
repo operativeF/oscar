@@ -437,8 +437,8 @@
         <translation>抱歉，此设备仅提供相容数据。</translation>
     </message>
     <message>
-        <source>Oscar is bored with this days lack of data.</source>
-        <translation>缺乏这几天的数据。</translation>
+        <source>No data is available for this day.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -956,10 +956,6 @@
         <translation>Zeo CSV导入完成</translation>
     </message>
     <message>
-        <source>&amp;Import Data</source>
-        <translation>&amp;导入数据</translation>
-    </message>
-    <message>
         <source>Print &amp;Report</source>
         <translation>打印&amp;报告</translation>
     </message>
@@ -1320,10 +1316,6 @@
         <translation>没有可用的帮助。</translation>
     </message>
     <message>
-        <source>The Glossary is not yet implemented</source>
-        <translation>术语表不可用</translation>
-    </message>
-    <message>
         <source>Donations are not implemented</source>
         <translation>捐赠不可用</translation>
     </message>
@@ -1334,10 +1326,6 @@
     <message>
         <source>Reporting issues is not yet implemented</source>
         <translation>报告问题不可用</translation>
-    </message>
-    <message>
-        <source>The User&apos;s Guide is not yet available</source>
-        <translation>用户指南不可用</translation>
     </message>
     <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
@@ -1353,6 +1341,18 @@
     </message>
     <message>
         <source>The release notes for this version can be found in the About OSCAR menu item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import SDcard Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide will open in your default browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Glossary will open in your default browser</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

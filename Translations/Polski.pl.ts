@@ -426,10 +426,6 @@
         <translation>Poskarż się sprzedawcy sprzętu!</translation>
     </message>
     <message>
-        <source>Oscar is bored with this days lack of data.</source>
-        <translation>Oscar ma dość tych dni bez danych.</translation>
-    </message>
-    <message>
         <source>Pick a Colour</source>
         <translation>Wybierz kolor</translation>
     </message>
@@ -440,6 +436,10 @@
     <message>
         <source>Bookmark at %1</source>
         <translation>Zrób zakładkę przy %1</translation>
+    </message>
+    <message>
+        <source>No data is available for this day.</source>
+        <translation>Brak danych dla tego dnia.</translation>
     </message>
 </context>
 <context>
@@ -761,10 +761,6 @@
     <message>
         <source>Rebuild CPAP Data</source>
         <translation>Przebuduj dane CPAP</translation>
-    </message>
-    <message>
-        <source>&amp;Import Data</source>
-        <translation>&amp;Zaimportuj dane</translation>
     </message>
     <message>
         <source>&amp;Preferences</source>
@@ -1219,10 +1215,6 @@
         <translation>Brak pomocy.</translation>
     </message>
     <message>
-        <source>The Glossary is not yet implemented</source>
-        <translation>Słownik jeszcze nie działa</translation>
-    </message>
-    <message>
         <source>Donations are not implemented</source>
         <translation>Darowizny jeszcze nie działają</translation>
     </message>
@@ -1339,10 +1331,6 @@
         <translation>Ukończono import danych Pozycji Snu</translation>
     </message>
     <message>
-        <source>The User&apos;s Guide is not yet available</source>
-        <translation>Poradnik użytkownika nie działa</translation>
-    </message>
-    <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
         <translation>Gdy kopie zapasowe są wyłączone lub zaburzone w inny sposób, może to spowodować utratę danych.</translation>
     </message>
@@ -1357,6 +1345,18 @@
     <message>
         <source>&amp;Maximize Toggle</source>
         <translation>&amp;Przełącznik Maksymalizowania</translation>
+    </message>
+    <message>
+        <source>&amp;Import SDcard Data</source>
+        <translation>&amp;Import danyc z karty SD</translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide will open in your default browser</source>
+        <translation>Podręcznik użytkownika otworzy się w oknie domyślnej przeglądarki</translation>
+    </message>
+    <message>
+        <source>The Glossary will open in your default browser</source>
+        <translation>Słownik otworzy się w oknie domyślnej przeglądarki</translation>
     </message>
 </context>
 <context>

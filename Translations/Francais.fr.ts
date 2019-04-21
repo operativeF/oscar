@@ -437,8 +437,8 @@
         <translation>Désolé votre machine ne fournit que des donées de conformité.</translation>
     </message>
     <message>
-        <source>Oscar is bored with this days lack of data.</source>
-        <translation>absence de donnée ce jour.</translation>
+        <source>No data is available for this day.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1100,10 +1100,6 @@
         <translation>Import du Fichier CSV ZEO terminé</translation>
     </message>
     <message>
-        <source>&amp;Import Data</source>
-        <translation>&amp;Import de donnée</translation>
-    </message>
-    <message>
         <source>Print &amp;Report</source>
         <translation>Imprimer &amp;Raport</translation>
     </message>
@@ -1320,10 +1316,6 @@
         <translation>Aucune aide disponible.</translation>
     </message>
     <message>
-        <source>The Glossary is not yet implemented</source>
-        <translation>Désolé, fonction non encore implémentée</translation>
-    </message>
-    <message>
         <source>Donations are not implemented</source>
         <translation>Désolé, fonction non encore implémentée</translation>
     </message>
@@ -1333,10 +1325,6 @@
     </message>
     <message>
         <source>Reporting issues is not yet implemented</source>
-        <translation>Désolé, fonction non encore implémentée</translation>
-    </message>
-    <message>
-        <source>The User&apos;s Guide is not yet available</source>
         <translation>Désolé, fonction non encore implémentée</translation>
     </message>
     <message>
@@ -1353,6 +1341,18 @@
     </message>
     <message>
         <source>&amp;Maximize Toggle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import SDcard Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The User&apos;s Guide will open in your default browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Glossary will open in your default browser</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
