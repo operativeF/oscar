@@ -850,7 +850,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="Resources.qrc">:/icons/logo-lm.png</pixmap>
+          <pixmap resource="Resources.qrc">:/icons/logo-lg.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

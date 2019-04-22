@@ -114,12 +114,6 @@
           </item>
           <item>
            <widget class="QLabel" name="OSCAR_Logo">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="maximumSize">
              <size>
               <width>128</width>
@@ -130,7 +124,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="Resources.qrc">:/icons/logo-lm.png</pixmap>
+             <pixmap resource="Resources.qrc">:/icons/logo-lg.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
