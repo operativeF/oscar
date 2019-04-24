@@ -69,7 +69,8 @@ public:
   AppWideSetting(Preferences *pref)
     : PrefSettings(pref)
   {
-      m_multithreading = initPref(STR_IS_Multithreading, idealThreads() > 1).toBool();
+//    m_multithreading = initPref(STR_IS_Multithreading, idealThreads() > 1).toBool();
+      m_multithreading = false;     // too dangerous to allow 
       m_showPerformance = initPref(STR_US_ShowPerformance, false).toBool();
       m_showDebug = initPref(STR_US_ShowDebug, false).toBool();
       initPref(STR_AS_CalendarVisible, true);
@@ -182,7 +183,8 @@ public:
   void setProfileName(QString name) { setPref(STR_GEN_Profile, m_profileName=name); }
   void setAutoLaunchImport(bool b) { setPref(STR_US_AutoLaunchImport, b); }
   void setCacheSessions(bool c) { setPref(STR_IS_CacheSessions, m_cacheSessions=c); }
-  void setMultithreading(bool b) { setPref(STR_IS_Multithreading, m_multithreading = b); }
+// force multithreading to false until proven OK
+  void setMultithreading(bool b) { Q_UNUSED(b) setPref(STR_IS_Multithreading, m_multithreading = false); }
   void setShowDebug(bool b) { setPref(STR_US_ShowDebug, m_showDebug=b); }
   void setShowPerformance(bool b) { setPref(STR_US_ShowPerformance, m_showPerformance=b); }
   //! \brief Sets whether to display the (Daily View) Calendar

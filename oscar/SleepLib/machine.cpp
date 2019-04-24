@@ -380,14 +380,16 @@ bool Machine::unlinkDay(Day * d)
 
 QString Machine::getPixmapPath()
 {
-    if (!loader()) return "";
+    if (!loader())
+        return "";
     return loader()->getPixmapPath(info.series);
 }
 
 QPixmap & Machine::getPixmap()
 {
     static QPixmap pm;
-    if (!loader()) return pm;
+    if (!loader())
+        return pm;
     return loader()->getPixmap(info.series);
 }
 
@@ -901,16 +903,21 @@ void Machine::runTasks()
         return;
 
     QThreadPool * threadpool = QThreadPool::globalInstance();
-    //int m_totaltasks=m_tasklist.size();
-    //int m_currenttask=0;
- //   if (loader()) emit loader()->setProgressMax(m_totaltasks);
+/***********************************************************
+    int m_totaltasks=m_tasklist.size();
+    int m_currenttask=0;
+    if (loader())
+        emit loader()->setProgressMax(m_totaltasks);
+***********************************************************/
     while (!m_tasklist.isEmpty()) {
         if (threadpool->tryStart(m_tasklist.at(0))) {
             m_tasklist.pop_front();
-/*            if (loader()) {
+/************************************************************
+            if (loader()) {
                 emit loader()->setProgressValue(++m_currenttask);
                 QApplication::processEvents();
-            }*/
+            }
+***************************************************************/
         }
     }
     QThreadPool::globalInstance()->waitForDone(-1);
@@ -1060,17 +1067,22 @@ bool Machine::LoadSummary(ProgressDialog * progress)
     QMap<qint64, Session *>::iterator it;
     int cnt = 0;
     bool loadSummaries = profile->session->preloadSummaries();
+    qDebug() << "PreloadSummaries is " << (loadSummaries ? "true" : "false");
+    qDebug() << "Queue task loader is " << (loader() ? "" : "not ") << "available";
+//  sleep(1);
 
-    //progress->setMessage(QObject::tr("Queueing Open Tasks"));
-    //QApplication::processEvents();
+//  progress->setMessage(QObject::tr("Queueing Open Tasks"));
+//  QApplication::processEvents();
 
-  //  progress->setMaximum(sess_order.size());
+//  progress->setMaximum(sess_order.size());
+
     for (it = sess_order.begin(); it != it_end; ++it, ++cnt) {
-        //
-/*        if ((cnt % 100) == 0) {
+/****************************************************************
+        if ((cnt % 100) == 0) {
             progress->setValue(cnt);
             //QApplication::processEvents();
-        } */
+        } 
+*****************************************************************/
         Session * sess = it.value();
         if (!AddSession(sess)) {
             delete sess;

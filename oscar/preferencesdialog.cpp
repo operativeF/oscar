@@ -217,7 +217,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
 
     ui->skipEmptyDays->setChecked(profile->general->skipEmptyDays());
     ui->showUnknownFlags->setChecked(profile->general->showUnknownFlags());
-    ui->enableMultithreading->setChecked(AppSetting->multithreading());
+//  ui->enableMultithreading->setChecked(AppSetting->multithreading());
+    ui->enableMultithreading->setVisible(false);
     ui->removeCardNotificationCheckbox->setChecked(AppSetting->removeCardReminder());
     ui->cacheSessionData->setChecked(AppSetting->cacheSessions());
     ui->preloadSummaries->setChecked(profile->session->preloadSummaries());

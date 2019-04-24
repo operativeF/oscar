@@ -142,6 +142,11 @@ bool processFile( QString fullpath ) {
     QTextStream instr(&fl);
     QTextStream outstr(&tmp);
     while (instr.readLineInto(&line)) {
+        if (line.contains("EnableMultithreading")) {
+            if (line.contains("true")) {
+                line.replace("true","false");
+            }
+        }
         line.replace("SleepyHead","OSCAR");
         outstr << line;
     }
