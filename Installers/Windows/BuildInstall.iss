@@ -5,7 +5,7 @@
 
 #include "buildinfo.iss"
 
-#define MyAppVersion MyMajorVersion+"."+MyMinorVersion+"."+MyRevision+"-"+MyReleaseStatus+"-"+MyBuildNumber
+#define MyAppVersion MyMajorVersion+"."+MyMinorVersion+"."+MyRevision+"-"+MyReleaseStatus+MyBuildNumber
 
 #define MyAppName "OSCAR"
 #define MyAppPublisher "The OSCAR Team"
@@ -36,7 +36,11 @@ AppCopyright=Copyright 2019 {#MyAppPublisher}
 DefaultDirName={pf}\OSCAR
 DefaultGroupName={#MyAppName}
 OutputDir=.\Installer
+#if MyReleaseStatus == "r"
+OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}{#MySuffix}
+#else
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}-{#MyGitRevision}{#MySuffix}
+#endif
 SetupIconFile=setup.ico
 Compression=lzma
 SolidCompression=yes
