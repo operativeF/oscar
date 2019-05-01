@@ -169,7 +169,7 @@ class gYAxisWeight: public gYAxis
     gYAxisWeight(UnitSystem us = US_Metric, QColor col = Qt::black) : gYAxis(col), m_unitsystem(us) {}
     virtual ~gYAxisWeight() {}
 
-    //! \brief Returns the current UnitSystem displayed (eg, US_Metric (the rest of the world), US_Archiac (American) )
+    //! \brief Returns the current UnitSystem displayed (eg, US_Metric (the rest of the world), US_English (American) )
     UnitSystem unitSystem() { return m_unitsystem; }
 
     //! \brief Set the unit system displayed by this YTicker

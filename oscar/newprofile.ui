@@ -40,7 +40,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="welcomePage">
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -456,12 +456,12 @@
                   </property>
                   <item>
                    <property name="text">
-                    <string>metric</string>
+                    <string>Metric</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>archiac</string>
+                    <string>English</string>
                    </property>
                   </item>
                  </widget>
