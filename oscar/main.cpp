@@ -444,7 +444,7 @@ int main(int argc, char *argv[]) {
     qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
 
     QDir newDir(GetAppData());
-    if ( ! newDir.exists() ) {                      // directoy doesn't exist yet, try to migrate old data
+    if ( ! newDir.exists() || newDir.isEmpty() ) {                      // directoy doesn't exist yet or is empty, try to migrate old data
         if (QMessageBox::question(nullptr, QObject::tr("Migrate SleepyHead Data?"),
                                   QObject::tr("On the next screen OSCAR will ask you to select a folder with SleepyHead data") +"\n" +
                                   QObject::tr("Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data."),
