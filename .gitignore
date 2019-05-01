@@ -38,3 +38,6 @@ Makefile*
 *.qmlproject.user
 *.qmlproject.user.*
 
+#Remnants of editors etc.
+.vscode
+*.bak

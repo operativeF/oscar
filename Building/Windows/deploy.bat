@@ -12,7 +12,7 @@
 :::     Inno Setup - http://www.jrsoftware.org/isinfo.php, installed to default Program Files (x86) location
 :::     gawk - somewhere in the PATH or in Git for Windows installed in its default lolcation
 :::
-::: Deploy.bat resides in .../OSCAR-code/Installers/Windows, along with
+::: Deploy.bat resides in .../OSCAR-code/Nuilding/Windows, along with
 :::     buildinstall.iss -- script for Inno Setup to create installer
 :::     getBuildInfo.awk -- gawk script for extracting version fields from various files
 :::     setup.ico -- Icon to be used for the installer.    
@@ -44,6 +44,7 @@ echo shadowBuildDir is %shadowBuildDir%
 
 copy %toolDir%buildInstall.iss %shadowBuildDir% || exit 45
 copy %toolDir%setup.ico %shadowBuildDir% || exit 46
+copy %toolDir%use*.reg %shadowBuildDir% || exit 47
 
 :::
 ::: If gawk.exe is in the PATH, use it.  If not, add Git mingw tools (awk) to path. They cannot
@@ -69,6 +70,7 @@ if exist %shadowBuildDir%\Release\*.* rmdir /s /q %shadowBuildDir%\Release
 mkdir %shadowBuildDir%\Release
 cd %shadowBuildDir%\Release
 copy %shadowBuildDir%\oscar.exe .  || exit 71
+copy %shadowBuildDir%\use*.reg .  || exit 72
 
 ::: Now in Release subdirectory
 ::: If QT created a help directory, copy it.  But it might not have if "helpless" option was set

@@ -150,6 +150,11 @@ Now you should be able to build the OSCAR project from the QT Build menu.
 To make 32-bit or 64-bit builds, just make sure the correct Build item is
 selected in the Build & Run section on the left.
 
+If you prefer to build from the command line and not use QT Creator, a
+batch script buildall.bat will build and create installers for both 32-bit
+and 64-bit versions of Windows.  This script has some hard-coded paths, so
+will need to be modified for your system configuration.
+
 **The Deploy.BAT file**
 
 The deployment batch file creates two folders inside the shadow build folder:
