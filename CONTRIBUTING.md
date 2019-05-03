@@ -21,7 +21,10 @@ Setting aside the religious wars that can arise over any development methodology
 
 ### How Do I Develop in a Branch?
 
-If necessary, fork your own copy of the repo.  Then:
+0. Create your own fork of the repo and configure it to stay up-to-date with the upstream repo.
+	* Go to https://gitlab.com/pholy/OSCAR-code and click on **Fork** in the top right of the project page.
+	* In your fork's sidebar, go to **Settings > Repository** then click on **Expand** for "Mirroring repositories".
+	* Enter "https://gitlab.com/pholy/OSCAR-code" for the repository **URL**, make sure the mirror is set to **Pull** and then click **Mirror repository**.
 
 1. Create a branch to work on your feature or bugfix:
 
@@ -33,7 +36,7 @@ If necessary, fork your own copy of the repo.  Then:
 
 3. Test your code. See the instructions on how to build the project. It should build successfully, without warnings, and your feature should work as intended.
 
-4. Sync your branch with master:
+4. Bring your branch up to date with the current master: while you've been working, the "master" branch might have advanced past where it was when you first created your branch from it. Before you try to reincorporate your branch back into the "master" branch, you need to make sure your branch has incorporated any intervening changes in master:
 
         git checkout master
         git pull
@@ -42,12 +45,24 @@ If necessary, fork your own copy of the repo.  Then:
 
 5. If there are any merge conflicts, resolve them and then build and test again. See below for details on resolving conflicts.
 
-6. Push your branch up to gitlab: `git push -u origin my-branch`. Note that `git push` by itself won't push a branch that doesn't exist upstream.
+6. Push your branch up to gitlab: `git push -u origin my-branch`. Note that `git push` by itself won't push a branch that doesn't exist upstream, so you need to do this the first time you push your branch. After that (if you need to push additional changes later), you can just use `git push`.
 
 7. Create a merge request describing your proposed change, linking to any issues that it might address, and attaching your branch.
+	* On gitlab, create a new merge request from your branch into the upstream's master branch. The "git push" above will helpfully provide you with a direct URL to start this process. (Make sure you're logged into gitlab or you'll get a 404 error.) Otherwise you can do it manually by going to **Merge Requests > New Merge Request** and selecting your branch; upstream master is the default target.
+	* Fill in the **Title** and **Description** summarizing your proposed change. You don't need to go into exhaustive detail, since all of your commits and their comments will be attached to the request.
+	* Check the **Delete source branch when merge request is accepted** box (optional but recommended).
+	* Do **NOT** check "Squash commits": this will make your local copy think that the branch was never merged. (If you really want to squash commits, you'll need to use "-D" to delete your branch later.)
+	* Click **Submit merge request**.
 	* You may need to repeat steps 2-6 a few times, if changes are needed before your request is accepted, or 4-6 if other changes are merged into master before your request is accepted.
 
-8. Accept the merge request, which merges your branch into master and updates any linked issues.
+8. An upstream developer will eventually accept the merge request, which merges your branch into master and updates any linked issues.
+
+9. Once the branch has been merged, you can delete your local branch. Assuming you checked the "Delete source branch..." option above (which will only delete the branch on gitlab):
+
+        get checkout master
+        git pull
+        git fetch --prune
+        git branch -d my-branch
 
 If you have commit access to the repo, you *can* theoretically skip steps 7 and 8 and just merge your branch into master directly, but this is discouraged, as it may circumvent automated tests or other workflow requirements. But if you absolutely can't bear to deal with creating a merge request in a particular situation, at least do your development in a branch rather than master!
 
