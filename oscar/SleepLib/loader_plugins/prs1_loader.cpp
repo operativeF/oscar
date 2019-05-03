@@ -525,9 +525,7 @@ int PRS1Loader::OpenMachine(const QString & path)
     emit setProgressValue(0);
 
     QStringList paths;
-
     int sessionid_base = 10;
-
     QString propertyfile;
 
     for (int i = 0; i < flist.size(); i++) {
@@ -616,9 +614,47 @@ int PRS1Loader::OpenMachine(const QString & path)
         copyPath(path, backupPath);
     }
 
+    emit updateMessage(QObject::tr("Scanning Files..."));
+    QCoreApplication::processEvents();
 
+    // Walk through the files and create an import task for each logical session.
+    ScanFiles(paths, sessionid_base, m);
+
+    int tasks = countTasks();
+    unknownCodes.clear();
+
+    emit updateMessage(QObject::tr("Importing Sessions..."));
+    QCoreApplication::processEvents();
+
+    runTasks(AppSetting->multithreading());
+
+    emit updateMessage(QObject::tr("Finishing up..."));
+    QCoreApplication::processEvents();
+
+    finishAddingSessions();
+
+    if (unknownCodes.size() > 0) {
+        for (auto it = unknownCodes.begin(), end=unknownCodes.end(); it != end; ++it) {
+            qDebug() << QString("Unknown CPAP Codes '0x%1' was detected during import").arg((short)it.key(), 2, 16, QChar(0));
+            QStringList & strlist = it.value();
+            for (int i=0;i<it.value().size(); ++i) {
+                qDebug() << strlist.at(i);
+            }
+        }
+    }
+
+    return m->unsupported() ? -1 : tasks;
+}
+
+
+void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machine * m)
+{
     SessionID sid;
     long ext;
+
+    QDir dir;
+    dir.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    dir.setSorting(QDir::Name);
 
     int size = paths.size();
 
@@ -628,9 +664,6 @@ int PRS1Loader::OpenMachine(const QString & path)
 
     PRS1Import * task = nullptr;
     // Note, I have observed p0/p1/etc folders containing duplicates session files (in Robin Sanders data.)
-
-    emit updateMessage(QObject::tr("Scanning Files..."));
-    QCoreApplication::processEvents();
 
     QDateTime datetime;
 
@@ -643,12 +676,13 @@ int PRS1Loader::OpenMachine(const QString & path)
 
         if (!dir.exists() || !dir.isReadable()) { continue; }
 
-        flist = dir.entryInfoList();
+        QFileInfoList flist = dir.entryInfoList();
 
         // Scan for individual session files
         for (int i = 0; i < flist.size(); i++) {
             if (isAborted()) break;
             QFileInfo fi = flist.at(i);
+            bool ok;
 
             QString ext_s = fi.fileName().section(".", -1);
             ext = ext_s.toInt(&ok);
@@ -756,32 +790,6 @@ int PRS1Loader::OpenMachine(const QString & path)
         }
         if (isAborted()) break;
     }
-
-
-    int tasks = countTasks();
-    unknownCodes.clear();
-
-    emit updateMessage(QObject::tr("Importing Sessions..."));
-    QCoreApplication::processEvents();
-
-    runTasks(AppSetting->multithreading());
-
-    emit updateMessage(QObject::tr("Finishing up..."));
-    QCoreApplication::processEvents();
-
-    finishAddingSessions();
-
-    if (unknownCodes.size() > 0) {
-        for (auto it = unknownCodes.begin(), end=unknownCodes.end(); it != end; ++it) {
-            qDebug() << QString("Unknown CPAP Codes '0x%1' was detected during import").arg((short)it.key(), 2, 16, QChar(0));
-            QStringList & strlist = it.value();
-            for (int i=0;i<it.value().size(); ++i) {
-                qDebug() << strlist.at(i);
-            }
-        }
-    }
-
-    return m->unsupported() ? -1 : tasks;
 }
 
 bool PRS1Import::ParseF5EventsFV3()
