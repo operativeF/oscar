@@ -1,4 +1,4 @@
-﻿/* SleepLib PRS1 Loader Header
+/* SleepLib PRS1 Loader Header
  *
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -152,7 +152,7 @@ public:
     bool ParseSummaryF5V1();
     //! \brief Summary parser for 60 series Family 5-2 BiPAP/AutoSV models
     bool ParseSummaryF5V2();
-    //! \brief Summary parser for 60 series Family 5-2 BiPAP/AutoSV models
+    //! \brief Summary parser for 60 series Family 5-3 BiPAP/AutoSV models
     bool ParseSummaryF5V3();
 
     //! \brief Summary parser for DreamStation series CPAP/APAP models
@@ -177,6 +177,11 @@ protected:
     Machine * mach;
 
     int summary_duration;
+
+    //! \brief Parse all the chunks in a single machine session
+    bool ParseSession(void);
+    //! \brief Save parsed session data to the database
+    void SaveSessionToDatabase(void);
 };
 
 /*! \class PRS1Loader

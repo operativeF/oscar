@@ -1,5 +1,6 @@
-﻿/* SleepLib PRS1 Loader Implementation
+/* SleepLib PRS1 Loader Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -3131,6 +3132,16 @@ void PRS1Import::run()
 {
     if (mach->unsupported())
         return;
+
+    if (ParseSession()) {
+        SaveSessionToDatabase();
+    }
+}
+
+
+bool PRS1Import::ParseSession(void)
+{
+    bool save = false;
     session = new Session(mach, sessionid);
 
     if ((compliance && ParseCompliance()) || (summary && ParseSummary())) {
@@ -3158,26 +3169,31 @@ void PRS1Import::run()
                 session->setSummaryOnly(true);
                 session->really_set_last(session->first()+(qint64(summary_duration) * 1000L));
             }
-
-            // Make sure it's saved
-            session->SetChanged(true);
-
-            // Add the session to the database
-            loader->addSession(session);
-
-            // Update indexes, process waveform and perform flagging
-            session->UpdateSummaries();
-
-            // Save is not threadsafe
-            loader->saveMutex.lock();
-            session->Store(mach->getDataPath());
-            loader->saveMutex.unlock();
-
-            // Unload them from memory
-            session->TrashEvents();
+            save = true;
         }
-
     }
+    return save;
+}
+
+
+void PRS1Import::SaveSessionToDatabase(void)
+{
+    // Make sure it's saved
+    session->SetChanged(true);
+
+    // Add the session to the database
+    loader->addSession(session);
+
+    // Update indexes, process waveform and perform flagging
+    session->UpdateSummaries();
+
+    // Save is not threadsafe
+    loader->saveMutex.lock();
+    session->Store(mach->getDataPath());
+    loader->saveMutex.unlock();
+
+    // Unload them from memory
+    session->TrashEvents();
 }
 
 
