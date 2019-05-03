@@ -6,6 +6,10 @@
  * License. See the file COPYING in the main directory of the source code
  * for more details. */
 
+#ifdef UNITTEST_MODE
+#include "tests/AutoTest.h"
+#endif
+
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
@@ -241,6 +245,15 @@ bool migrateFromSH(QString destDir) {
 
     return success;
 }
+
+#ifdef UNITTEST_MODE
+
+int main(int argc, char* argv[])
+{
+    AutoTest::run(argc, argv);
+}
+
+#else
 
 int main(int argc, char *argv[]) {
 #ifdef Q_WS_X11
@@ -576,3 +589,5 @@ int main(int argc, char *argv[]) {
 
     return a.exec();
 }
+
+#endif // !UNITTEST_MODE

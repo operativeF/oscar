@@ -432,3 +432,22 @@ DISTFILES += help/default.css \
     help/help_en/OSCAR_Guide_en.qhp \
     help/index.qhcp
 }
+
+# Turn on unit testing by adding "CONFIG+=test" to your qmake command
+test {
+    TARGET = test
+    DEFINES += UNITTEST_MODE
+
+    QT += testlib
+    QT -= gui
+    CONFIG += console
+    CONFIG -= app_bundle
+
+    SOURCES += \
+        tests/prs1tests.cpp
+
+    HEADERS += \
+        tests/AutoTest.h \
+        tests/prs1tests.h
+}
+
