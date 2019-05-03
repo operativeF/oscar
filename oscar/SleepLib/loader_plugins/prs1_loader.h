@@ -253,7 +253,13 @@ class PRS1Loader : public CPAPLoader
     //! \brief Opens the SD folder structure for this machine, scans for data files and imports any new sessions
     int OpenMachine(const QString & path);
 
-    //! \brief Scan the given directories for session data and create an import task for each logical session.
+    //! \brief Finds the P0,P1,... session paths and property pathname and returns the base (10 or 16) of the session filenames
+    int FindSessionDirsAndProperties(const QString & path, QStringList & paths, QString & propertyfile);
+
+    //! \brief Reads the model number from the property file, evaluates its capabilities, and returns a machine instance
+    Machine* CreateMachineFromProperties(QString propertyfile);
+
+    //! \brief Scans the given directories for session data and create an import task for each logical session.
     void ScanFiles(const QStringList & paths, int sessionid_base, Machine * m);
     
 //    //! \brief Parses "properties.txt" file containing machine information

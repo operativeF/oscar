@@ -516,97 +516,17 @@ int PRS1Loader::OpenMachine(const QString & path)
     emit updateMessage(QObject::tr("Getting Ready..."));
     QCoreApplication::processEvents();
 
-    dir.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    dir.setSorting(QDir::Name);
-    QFileInfoList flist = dir.entryInfoList();
-
-    QString filename;
-
     emit setProgressValue(0);
 
     QStringList paths;
-    int sessionid_base = 10;
     QString propertyfile;
+    int sessionid_base;
+    sessionid_base = FindSessionDirsAndProperties(path, paths, propertyfile);
 
-    for (int i = 0; i < flist.size(); i++) {
-        QFileInfo fi = flist.at(i);
-        filename = fi.fileName();
-
-        if (fi.isDir()) {
-            if ((filename[0].toLower() == 'p') && (isdigit(filename[1]))) {
-                // p0, p1, p2.. etc.. folders contain the session data
-                paths.push_back(fi.canonicalFilePath());
-            } else if (filename.toLower() == "e") {
-                // Error files..
-                // Reminder: I have been given some info about these. should check it over.
-            }
-        } else if (filename.compare("properties.txt",Qt::CaseInsensitive) == 0) {
-            propertyfile = fi.canonicalFilePath();
-        } else if (filename.compare("PROP.TXT",Qt::CaseInsensitive) == 0) {
-            sessionid_base = 16;
-            propertyfile = fi.canonicalFilePath();
-        }
-    }
-
-    MachineInfo info = newInfo();
-    // Have a peek first to get the serial number.
-    PeekProperties(info, propertyfile);
-
-    QString modelstr;
-    bool fnd = false;
-    for (int i=0; i<info.modelnumber.size(); i++) {
-        QChar c = info.modelnumber.at(i);
-        if (c.isDigit()) {
-            modelstr += c;
-            fnd = true;
-        } else if (fnd) break;
-    }
-
-    bool ok;
-    int model = modelstr.toInt(&ok);
-    if (ok) {
-        int series = ((model / 10) % 10);
-        int type = (model / 100);
-
-        // Assumption is made here all PRS1 machines less than 450P are not data capable.. this could be wrong one day.
-        if ((type < 4) && p_profile->cpap->brickWarning()) {
-            QApplication::processEvents();
-            QMessageBox::information(QApplication::activeWindow(),
-                                     QObject::tr("Non Data Capable Machine"),
-                                     QString(QObject::tr("Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.")+"\n\n"+
-                                             QObject::tr("I'm sorry to report that OSCAR can only track hours of use and very basic settings for this machine.")).
-                                     arg(info.modelnumber),QMessageBox::Ok);
-            p_profile->cpap->setBrickWarning(false);
-
-        }
-
-        // A bit of protection against future annoyances..
-        if (((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
-            qDebug() << model << type << series << info.modelnumber << "unsupported";
-            QMessageBox::information(QApplication::activeWindow(),
-                                     QObject::tr("Machine Unsupported"),
-                                     QObject::tr("Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.").arg(info.modelnumber) +"\n\n"+
-                                     QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
-                                     ,QMessageBox::Ok);
-
-            return -1;
-        }
-    } else {
-        // model number didn't parse.. Meh... Silently ignore it
-//        QMessageBox::information(QApplication::activeWindow(),
-//                                 QObject::tr("Machine Unsupported"),
-//                                 QObject::tr("OSCAR could not parse the model number, this machine can not be imported..") +"\n\n"+
-//                                 QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
-//                                ,QMessageBox::Ok);
+    Machine *m = CreateMachineFromProperties(propertyfile);
+    if (m == nullptr) {
         return -1;
     }
-
-
-    // Which is needed to get the right machine record..
-    Machine *m = p_profile->CreateMachine(info);
-
-    // This time supply the machine object so it can populate machine properties..
-    PeekProperties(m->info, propertyfile, m);
 
     QString backupPath = m->getBackupPath() + path.section("/", -2);
 
@@ -644,6 +564,105 @@ int PRS1Loader::OpenMachine(const QString & path)
     }
 
     return m->unsupported() ? -1 : tasks;
+}
+
+
+int PRS1Loader::FindSessionDirsAndProperties(const QString & path, QStringList & paths, QString & propertyfile)
+{
+    QDir dir(path);
+    dir.setFilter(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    dir.setSorting(QDir::Name);
+    QFileInfoList flist = dir.entryInfoList();
+
+    QString filename;
+
+    int sessionid_base = 10;
+
+    for (int i = 0; i < flist.size(); i++) {
+        QFileInfo fi = flist.at(i);
+        filename = fi.fileName();
+
+        if (fi.isDir()) {
+            if ((filename[0].toLower() == 'p') && (isdigit(filename[1]))) {
+                // p0, p1, p2.. etc.. folders contain the session data
+                paths.push_back(fi.canonicalFilePath());
+            } else if (filename.toLower() == "e") {
+                // Error files..
+                // Reminder: I have been given some info about these. should check it over.
+            }
+        } else if (filename.compare("properties.txt",Qt::CaseInsensitive) == 0) {
+            propertyfile = fi.canonicalFilePath();
+        } else if (filename.compare("PROP.TXT",Qt::CaseInsensitive) == 0) {
+            sessionid_base = 16;
+            propertyfile = fi.canonicalFilePath();
+        }
+    }
+    return sessionid_base;
+}
+
+
+Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
+{
+    MachineInfo info = newInfo();
+    // Have a peek first to get the model number.
+    PeekProperties(info, propertyfile);
+    
+    QString modelstr;
+    bool fnd = false;
+    for (int i=0; i<info.modelnumber.size(); i++) {
+        QChar c = info.modelnumber.at(i);
+        if (c.isDigit()) {
+            modelstr += c;
+            fnd = true;
+        } else if (fnd) break;
+    }
+
+    bool ok;
+    int model = modelstr.toInt(&ok);
+    if (ok) {
+        int series = ((model / 10) % 10);
+        int type = (model / 100);
+
+        // Assumption is made here all PRS1 machines less than 450P are not data capable.. this could be wrong one day.
+        if ((type < 4) && p_profile->cpap->brickWarning()) {
+            QApplication::processEvents();
+            QMessageBox::information(QApplication::activeWindow(),
+                                     QObject::tr("Non Data Capable Machine"),
+                                     QString(QObject::tr("Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.")+"\n\n"+
+                                             QObject::tr("I'm sorry to report that OSCAR can only track hours of use and very basic settings for this machine.")).
+                                     arg(info.modelnumber),QMessageBox::Ok);
+            p_profile->cpap->setBrickWarning(false);
+
+        }
+
+        // A bit of protection against future annoyances..
+        if (((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
+            qDebug() << model << type << series << info.modelnumber << "unsupported";
+            QMessageBox::information(QApplication::activeWindow(),
+                                     QObject::tr("Machine Unsupported"),
+                                     QObject::tr("Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.").arg(info.modelnumber) +"\n\n"+
+                                     QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
+                                     ,QMessageBox::Ok);
+
+            return nullptr;
+        }
+    } else {
+        // model number didn't parse.. Meh... Silently ignore it
+//        QMessageBox::information(QApplication::activeWindow(),
+//                                 QObject::tr("Machine Unsupported"),
+//                                 QObject::tr("OSCAR could not parse the model number, this machine can not be imported..") +"\n\n"+
+//                                 QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
+//                                ,QMessageBox::Ok);
+        return nullptr;
+    }
+
+
+    // Which is needed to get the right machine record..
+    Machine *m = p_profile->CreateMachine(info);
+
+    // This time supply the machine object so it can populate machine properties..
+    PeekProperties(m->info, propertyfile, m);
+    return m;
 }
 
 
