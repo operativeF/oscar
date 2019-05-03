@@ -1,5 +1,6 @@
-﻿/* SleepLib Profiles Header
+/* SleepLib Profiles Header
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -263,7 +264,7 @@ void Scan(); // Initialize and load Profile
 void Done(); // Save all Profile objects and clear list
 int CleanupProfile(Profile *prof);
 
-Profile *Create(QString name);
+Profile *Create(QString name, const QString* in_path=nullptr);
 Profile *Get(QString name);
 Profile *Get();
 

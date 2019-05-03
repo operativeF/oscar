@@ -1,5 +1,6 @@
-﻿/* SleepLib Profiles Implementation
+/* SleepLib Profiles Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -971,9 +972,14 @@ Profile *Get(QString name)
     return nullptr;
 }
 
-Profile *Create(QString name)
+Profile *Create(QString name, const QString* in_path)
 {
-    QString path = p_pref->Get("{home}/Profiles/") + name;
+    QString path;
+    if (in_path == nullptr) {
+        path = p_pref->Get("{home}/Profiles/") + name;
+    } else {
+        path = *in_path;
+    }
     QDir dir(path);
 
     if (!dir.exists(path)) {
