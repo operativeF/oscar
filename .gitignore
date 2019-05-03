@@ -12,6 +12,7 @@
 *.qm
 
 build/*
+git_info.h
 
 # Qt-es
 
@@ -33,6 +34,7 @@ Makefile*
 
 *.autosave
 *.swp
+.DS_Store
 
 #QtCtreator Qml
 *.qmlproject.user
@@ -41,3 +43,4 @@ Makefile*
 #Remnants of editors etc.
 .vscode
 *.bak
+*~
