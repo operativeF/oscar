@@ -123,6 +123,7 @@ struct WaveHeaderList {
 
 PRS1Loader::PRS1Loader()
 {
+#ifndef UNITTEST_MODE  // no QPixmap without a QGuiApplication
     const QString PRS1_ICON = ":/icons/prs1.png";
     const QString PRS1_60_ICON = ":/icons/prs1_60s.png";
     const QString DREAMSTATION_ICON = ":/icons/dreamstation.png";
@@ -134,6 +135,7 @@ PRS1Loader::PRS1Loader()
     m_pixmaps["System One (60 Series)"] = QPixmap(PRS1_60_ICON);
     m_pixmap_paths["DreamStation"] = DREAMSTATION_ICON;
     m_pixmaps["DreamStation"] = QPixmap(DREAMSTATION_ICON);
+#endif
 
     //genCRCTable();  // find what I did with this..
     m_type = MT_CPAP;
@@ -625,12 +627,14 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 
         // Assumption is made here all PRS1 machines less than 450P are not data capable.. this could be wrong one day.
         if ((type < 4) && p_profile->cpap->brickWarning()) {
+#ifndef UNITTEST_MODE
             QApplication::processEvents();
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Non Data Capable Machine"),
                                      QString(QObject::tr("Your Philips Respironics CPAP machine (Model %1) is unfortunately not a data capable model.")+"\n\n"+
                                              QObject::tr("I'm sorry to report that OSCAR can only track hours of use and very basic settings for this machine.")).
                                      arg(info.modelnumber),QMessageBox::Ok);
+#endif
             p_profile->cpap->setBrickWarning(false);
 
         }
@@ -638,12 +642,14 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
         // A bit of protection against future annoyances..
         if (((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
             qDebug() << model << type << series << info.modelnumber << "unsupported";
+#ifndef UNITTEST_MODE
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Machine Unsupported"),
                                      QObject::tr("Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.").arg(info.modelnumber) +"\n\n"+
                                      QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
                                      ,QMessageBox::Ok);
 
+#endif
             return nullptr;
         }
     } else {

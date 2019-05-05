@@ -1,4 +1,4 @@
-﻿/* SleepLib Machine Loader Class Implementation
+/* SleepLib Machine Loader Class Implementation
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -71,10 +71,12 @@ void DestroyLoaders()
 
 MachineLoader::MachineLoader() :QObject(nullptr)
 {
+#ifndef UNITTEST_MODE  // no QPixmap without a QGuiApplication
     if (!genpixmapinit) {
         genericCPAPPixmap = new QPixmap(genericPixmapPath);
         genpixmapinit = true;
     }
+#endif
     m_abort = false;
     m_type = MT_UNKNOWN;
     m_status = NEUTRAL;
