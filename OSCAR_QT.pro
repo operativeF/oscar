@@ -10,3 +10,7 @@ TEMPLATE = subdirs
 SUBDIRS += oscar
 
 CONFIG += ordered
+
+macx: {
+    QMAKE_INFO_PLIST = Building/MacOS/Info.plist.in
+}
