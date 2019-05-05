@@ -440,14 +440,16 @@ test {
 
     QT += testlib
     QT -= gui
-    CONFIG += console
+    CONFIG += console debug
     CONFIG -= app_bundle
 
     SOURCES += \
-        tests/prs1tests.cpp
+        tests/prs1tests.cpp \
+        tests/sessiontests.cpp
 
     HEADERS += \
         tests/AutoTest.h \
-        tests/prs1tests.h
+        tests/prs1tests.h \
+        tests/sessiontests.h
 }
 
