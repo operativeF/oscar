@@ -2674,6 +2674,10 @@ bool PRS1Import::ParseSummaryF5V3()
     session->settings[CPAP_PSMin] = minps/10.0f;
     session->settings[CPAP_PSMax] = maxps/10.0f;
 
+    if (hbdata[4].size() < 2) {
+        qDebug() << "summary missing duration section:" << session->session();
+        return false;
+    }
     unsigned char * durBlock = (unsigned char *)hbdata[4].data();
     summary_duration = durBlock[0] | durBlock[1] << 8;
 
