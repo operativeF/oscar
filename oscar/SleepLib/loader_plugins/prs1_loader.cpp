@@ -779,6 +779,9 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                 }
 
                 SessionID chunk_sid = chunk->sessionid;
+                if (chunk_sid != sid && chunk_sid > 2000) {  // log any really weird session IDs
+                    qDebug() << fi.canonicalFilePath() << chunk_sid;
+                }
                 if (m->SessionExists(sid)) {
                     delete chunk;
                     continue;
