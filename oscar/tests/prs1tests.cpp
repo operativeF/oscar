@@ -51,9 +51,11 @@ void parseAndEmitSessionYaml(const QString & path)
     
     // Each session now has a PRS1Import object in m_tasklist
     QList<ImportTask*>::iterator i;
-    for (i = s_loader->m_tasklist.begin(); i != s_loader->m_tasklist.end(); i++) {
+    while (!s_loader->m_tasklist.isEmpty()) {
+        ImportTask* task = s_loader->m_tasklist.takeFirst();
+
         // Run the parser
-        PRS1Import* import = dynamic_cast<PRS1Import*>(*i);
+        PRS1Import* import = dynamic_cast<PRS1Import*>(task);
         import->ParseSession();
         
         // Emit the parsed session data to compare against our regression benchmarks
@@ -62,7 +64,7 @@ void parseAndEmitSessionYaml(const QString & path)
         SessionToYaml(outpath, session);
         
         delete session;
-        //delete import;  // TODO: this crashes: there's a bug in the loader somewhere
+        delete task;
    }
 }
 
