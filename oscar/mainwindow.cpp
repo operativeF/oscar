@@ -117,10 +117,9 @@ void MainWindow::SetupGUI()
     setWindowTitle(STR_TR_OSCAR + QString(" %1").arg(version));
 
 #ifdef Q_OS_MAC
-
     ui->action_About->setMenuRole(QAction::ApplicationSpecificRole);
     ui->action_Preferences->setMenuRole(QAction::ApplicationSpecificRole);
-    ui->action_Exit->setMenuRole(QAction::ApplicationSpecificRole);
+    ui->action_Preferences->setShortcuts(QKeySequence::Preferences);
 #endif
 
     ui->actionToggle_Line_Cursor->setChecked(AppSetting->lineCursorMode());
