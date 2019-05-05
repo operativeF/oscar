@@ -15,6 +15,10 @@
 #include "SleepLib/machine_loader.h"
 #include "SleepLib/profiles.h"
 
+#ifdef UNITTEST_MODE
+#define private public
+#define protected public
+#endif
 
 //********************************************************************************************
 /// IMPORTANT!!!

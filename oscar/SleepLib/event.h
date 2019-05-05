@@ -1,4 +1,4 @@
-﻿/* SleepLib Event Class Header
+/* SleepLib Event Class Header
  *
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -12,6 +12,11 @@
 #include <QDateTime>
 
 #include "machine_common.h"
+
+#ifdef UNITTEST_MODE
+#define private public
+#define protected public
+#endif
 
 //! \brief EventLists can either be Waveform or Event types
 enum EventListType { EVL_Waveform, EVL_Event };

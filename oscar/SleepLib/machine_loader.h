@@ -1,4 +1,4 @@
-﻿/* SleepLib MachineLoader Base Class Header
+/* SleepLib MachineLoader Base Class Header
  *
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *
@@ -22,6 +22,10 @@
 #include "zlib.h"
 #endif
 
+#ifdef UNITTEST_MODE
+#define private public
+#define protected public
+#endif
 
 class MachineLoader;
 enum DeviceStatus { NEUTRAL, IMPORTING, LIVE, DETECTING };
