@@ -163,7 +163,7 @@ QString getGraphicsEngine()
     gfxEngine = CSTR_GFX_BrokenGL;
 #else
     QString glversion = getOpenGLVersionString();
-    qDebug() << glversion << glversion;
+    qDebug() << "Gfx Engine" << glversion;
     if (glversion.contains(CSTR_GFX_ANGLE)) {
         gfxEngine = CSTR_GFX_ANGLE;
     } else if (glversion.contains("Mesa")) {

@@ -44,3 +44,6 @@ Makefile*
 .vscode
 *.bak
 *~
+
+#Doxygen output does not go in repository
+doxydoc
