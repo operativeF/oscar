@@ -332,7 +332,7 @@ private:
     void finishCPAPImport();
     QList<ImportPath> detectCPAPCards();
 
-    QString getWelcomeHTML();
+//    QString getWelcomeHTML();
     void FreeSessions();
 
     Ui::MainWindow *ui;

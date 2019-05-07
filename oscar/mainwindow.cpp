@@ -390,7 +390,7 @@ void MainWindow::firstRunMessage()
     }
 }
 
-QString GenerateWelcomeHTML();
+// QString GenerateWelcomeHTML();
 
 bool MainWindow::OpenProfile(QString profileName, bool skippassword)
 {
@@ -1077,7 +1077,7 @@ void MainWindow::setRecBoxHTML(QString html)
 {
     ui->recordsBox->setHtml(html);
 }
-
+/***
 QString MainWindow::getWelcomeHTML()
 {
     // This is messy, but allows it to be translated easier
@@ -1171,7 +1171,7 @@ QString MainWindow::getWelcomeHTML()
 
            ;
 }
-
+***/
 void MainWindow::updateFavourites()
 {
     QDate date = p_profile->LastDay(MT_JOURNAL);
