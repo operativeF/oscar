@@ -1,10 +1,11 @@
 @echo off
 setlocal
 set DIR=%~dp0
+cd %DIR%
 
-for /f %%i in ('git --work-tree %DIR% rev-parse --abbrev-ref HEAD') do set GIT_BRANCH=%%i
-for /f %%i in ('git --work-tree %DIR% rev-parse --short HEAD') do set GIT_REVISION=%%i
-git --work-tree %DIR% diff-index --quiet HEAD || set GIT_REVISION=%GIT_REVISION%+
+for /f %%i in ('git rev-parse --abbrev-ref HEAD') do set GIT_BRANCH=%%i
+for /f %%i in ('git rev-parse --short HEAD') do set GIT_REVISION=%%i
+git diff-index --quiet HEAD -- || set GIT_REVISION=%GIT_REVISION%+
 
 if "%GIT_BRANCH"=="" set GIT_BRANCH="Unknown"
 if "%GIT_REVISION"=="" set GIT_REVISION="Unknown"
