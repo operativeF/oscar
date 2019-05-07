@@ -5,7 +5,12 @@
 
 #include "buildinfo.iss"
 
-#define MyAppVersion MyMajorVersion+"."+MyMinorVersion+"."+MyRevision+"-"+MyReleaseStatus+MyBuildNumber
+#define MyAppVersion MyMajorVersion+"."+MyMinorVersion+"."+MyRevision+"-"+MyReleaseStatus
+#if MyReleaseStatus == "r"
+#define MyAppVersion MyAppVersion+MyBuildNumber
+#else
+#define MyAppVersion MyAppVersion+"-"+MyBuildNumber
+#endif
 
 #define MyAppName "OSCAR"
 #define MyAppPublisher "The OSCAR Team"
@@ -51,6 +56,7 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
 Name: "corsican"; MessagesFile: "compiler:Languages\Corsican.isl"
@@ -60,19 +66,14 @@ Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
-Name: "greek"; MessagesFile: "compiler:Languages\Greek.isl"
 Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
-Name: "hungarian"; MessagesFile: "compiler:Languages\Hungarian.isl"
-;Name: "icelandic"; MessagesFile: "compiler:Languages\Icelandic.isl"
+Name: "icelandic"; MessagesFile: "compiler:Languages\Icelandic.isl"
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
-Name: "scottishgaelic"; MessagesFile: "compiler:Languages\ScottishGaelic.isl"
-Name: "serbiancyrillic"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
-Name: "serbianlatin"; MessagesFile: "compiler:Languages\SerbianLatin.isl"
 Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
@@ -92,6 +93,9 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 ; Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
+
+[Messages]
+ConfirmUninstall=Are you sure you want to completely remove %1 and all of its components?  (Data folder and settings will not be removed.)
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
