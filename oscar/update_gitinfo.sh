@@ -2,14 +2,24 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
-echo Updating $DIR/git_info.h
 
-GIT_BRANCH=`git -C $DIR rev-parse --abbrev-ref HEAD`
-GIT_REVISION=`git -C $DIR rev-parse --short HEAD`
+GIT_BRANCH=`git --work-tree $DIR rev-parse --abbrev-ref HEAD`
+GIT_REVISION=`git --work-tree $DIR rev-parse --short HEAD`
+$(git --work-tree $DIR diff-index --quiet HEAD)
+if [ $? -ne 0 ]; then
+    GIT_REVISION="$GIT_REVISION+"  # uncommitted changes
+fi
 
 [ -z "$GIT_BRANCH" ] &&	GIT_BRANCH="Unknown";
 [ -z "$GIT_REVISION" ] && GIT_REVISION="Unknown";
 
-echo // This is an auto generated file > $DIR/git_info.h
-echo const QString GIT_BRANCH=\"$GIT_BRANCH\"\; >> $DIR/git_info.h
-echo const QString GIT_REVISION=\"$GIT_REVISION\"\; >> $DIR/git_info.h
+echo // This is an auto generated file > $DIR/git_info.h.new
+echo const QString GIT_BRANCH=\"$GIT_BRANCH\"\; >> $DIR/git_info.h.new
+echo const QString GIT_REVISION=\"$GIT_REVISION\"\; >> $DIR/git_info.h.new
+
+if diff $DIR/git_info.h $DIR/git_info.h.new &> /dev/null; then
+    rm $DIR/git_info.h.new
+else
+    echo Updating $DIR/git_info.h
+    mv $DIR/git_info.h.new $DIR/git_info.h
+fi
