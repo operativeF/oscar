@@ -14,8 +14,8 @@ installed at any location.
 
 The following programs and files are required to create Windows installers:
 
--   Inno Setup 5.6.1 from <http://www.jrsoftware.org/isdl.php>. Download and
-    install innosetup-qsp-5.6.1-unicode.exe.
+-   Inno Setup 6.0.2 from <http://www.jrsoftware.org/isdl.php>. Download and
+    install innosetup-qsp-6.0.2.exe.
 
 -   GIT for windows, from <https://gitforwindows.org/>. GIT for Windows adds
     itself to your path.
@@ -28,15 +28,13 @@ The following programs and files are required to create Windows installers:
 -   QT Open Source edition from <https://www.qt.io/download>. I use version
     5.12.2. More recent versions may also work but I have not tested any.
 
-**Installing Inno Setup 5**
+**Installing Inno Setup 6**
 
-Inno Setup 5.6.1 is found on <http://www.jrsoftware.org/isdl.php>. Download and
-install innosetup-qsp-5.6.1-unicode.exe. Do not download 6.x versions. They are
-still in beta as this is written, and changes to the installer script may be
-required.
+Inno Setup 6.0.2 is found on <http://www.jrsoftware.org/isdl.php>. Download and
+install innosetup-qsp-6.0.2.exe.
 
 The deployment batch file assumes that Inno Setup is installed into its default
-location: C:\\Program Files (x86)\\Inno Setup 5. If you put it somewhere else,
+location: C:\\Program Files (x86)\\Inno Setup 6. If you put it somewhere else,
 you will have to change the batch file.
 
 Run the installer, accepting options to install inno script studio (for possible
@@ -107,7 +105,7 @@ installer:
 
 And complete the installation (this also takes a while).
 
-**Getting Started Developing Oscar in QT**
+**Getting Started Developing Oscar in QT Creator**
 
 In browser, log into your account at gitlab.com. Select the Oscar project at
 https://gitlab.com/pholy/OSCAR-code. Clone a copy of the repository to a
@@ -150,10 +148,12 @@ Now you should be able to build the OSCAR project from the QT Build menu.
 To make 32-bit or 64-bit builds, just make sure the correct Build item is
 selected in the Build & Run section on the left.
 
-If you prefer to build from the command line and not use QT Creator, a
-batch script buildall.bat will build and create installers for both 32-bit
-and 64-bit versions of Windows.  This script has some hard-coded paths, so
-will need to be modified for your system configuration.
+**Compiling and building from the command line**
+
+If you prefer to build from the command line and not use QT Creator, a batch
+script buildall.bat will build and create installers for both 32-bit and 64-bit
+versions of Windows. This script has some hard-coded paths, so will need to be
+modified for your system configuration.
 
 **The Deploy.BAT file**
 

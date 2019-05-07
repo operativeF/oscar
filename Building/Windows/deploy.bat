@@ -9,7 +9,7 @@
 ::: to the file name of the installer.
 :::
 ::: Requirements:
-:::     Inno Setup - http://www.jrsoftware.org/isinfo.php, installed to default Program Files (x86) location
+:::     Inno Setup 6 - http://www.jrsoftware.org/isinfo.php, installed to default Program Files (x86) location
 :::     gawk - somewhere in the PATH or in Git for Windows installed in its default lolcation
 :::
 ::: Deploy.bat resides in .../OSCAR-code/Nuilding/Windows, along with
@@ -95,5 +95,5 @@ if exist Translations\*.ts del /q Translations\*.ts
 
 ::: Create installer
 cd ..
-:::"%ProgramFiles(x86)%\Inno Setup 5\compil32" /cc BuildInstall.iss
-"%ProgramFiles(x86)%\Inno Setup 5\iscc" /Q BuildInstall.iss
+:::"%ProgramFiles(x86)%\Inno Setup 6\compil32" /cc BuildInstall.iss
+"%ProgramFiles(x86)%\Inno Setup 6\iscc" /Q BuildInstall.iss
