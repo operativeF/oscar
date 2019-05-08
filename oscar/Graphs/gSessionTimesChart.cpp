@@ -1142,7 +1142,8 @@ void gAHIChart::customCalc(Day *day, QVector<SummaryChartSlice> &list)
         case 1:
             calc->wavg_sum += value;
             calc->divisor += hours;
-        default:
+            break;
+        case 2:
             calc->avg_sum += value;
             calc->cnt++;
             break;
