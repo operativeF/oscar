@@ -1074,8 +1074,8 @@ void gTTIAChart::afterDraw(QPainter &, gGraph &graph, QRectF rect)
             }
             break;
         case 2:
-            if (calc.divisor > 0) {
-                mid = calc.avg_sum / calc.divisor;
+            if (calc.cnt > 0) {
+                mid = calc.avg_sum / calc.cnt;
             }
             break;
         }
