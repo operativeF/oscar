@@ -14,10 +14,11 @@ echo // This is an auto generated file > %DIR%git_info.new
 echo const QString GIT_BRANCH="%GIT_BRANCH%"; >> %DIR%git_info.new
 echo const QString GIT_REVISION="%GIT_REVISION%"; >> %DIR%git_info.new
 
-fc %DIR%git_info.h %DIR%git_info.new > nul
-if errorlevel 0 (
-    del /q %DIR%git_info.new
-) else (
-    echo Updating %DIR%git_info.h
-    move /y %DIR%git_info.new %DIR%git_info.h
-)
+fc %DIR%git_info.h %DIR%git_info.new >nul 2>nul && del /q %DIR%git_info.new || goto NewFile
+goto AllDone
+
+:NewFile
+echo Updating %DIR%git_info.h
+move /y %DIR%git_info.new %DIR%git_info.h
+
+:AllDone
