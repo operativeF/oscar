@@ -424,7 +424,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     GraphView->setEmptyText(STR_Empty_NoData);
     previous_date=QDate();
 
-    ui->calButton->setChecked(AppSetting->calendarVisible() ? Qt::Checked : Qt::Unchecked);
+    ui->calButton->setChecked(AppSetting->calendarVisible() ? true : false);
     on_calButton_toggled(AppSetting->calendarVisible());
 
     GraphView->resetLayout();
