@@ -692,8 +692,10 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
     QDateTime datetime;
 
+    /* Unused until we get an actual timestamp below.
     QDateTime ignoreBefore = p_profile->session->ignoreOlderSessionsDate();
     bool ignoreOldSessions = p_profile->session->ignoreOlderSessions();
+    */
 
     // for each p0/p1/p2/etc... folder
     for (int p=0; p < size; ++p) {
@@ -723,12 +725,14 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                 continue;
             }
 
+            /* This never worked: the filename isn't a timestamp.
             if (ignoreOldSessions) {
                 datetime = QDateTime::fromTime_t(sid);
                 if (datetime < ignoreBefore) {
                     continue;
                 }
             }
+            */
 
 
             if (m->SessionExists(sid)) {
