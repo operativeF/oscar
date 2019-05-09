@@ -3,9 +3,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
-GIT_BRANCH=`git --work-tree $DIR rev-parse --abbrev-ref HEAD`
-GIT_REVISION=`git --work-tree $DIR rev-parse --short HEAD`
-$(git --work-tree $DIR diff-index --quiet HEAD)
+GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+GIT_REVISION=`git rev-parse --short HEAD`
+$(git diff-index --quiet HEAD --)
 if [ $? -ne 0 ]; then
     GIT_REVISION="$GIT_REVISION+"  # uncommitted changes
 fi

@@ -424,7 +424,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     GraphView->setEmptyText(STR_Empty_NoData);
     previous_date=QDate();
 
-    ui->calButton->setChecked(AppSetting->calendarVisible() ? Qt::Checked : Qt::Unchecked);
+    ui->calButton->setChecked(AppSetting->calendarVisible() ? true : false);
     on_calButton_toggled(AppSetting->calendarVisible());
 
     GraphView->resetLayout();
@@ -2350,10 +2350,10 @@ void Daily::updateCube()
 }
 
 
-void Daily::on_toggleGraphs_clicked(bool checked)
+void Daily::on_toggleGraphs_clicked(bool /*checked*/)
 {
     QString s;
-    QIcon *icon=checked ? icon_off : icon_on;
+    //QIcon *icon=checked ? icon_off : icon_on;
     if (ui->graphCombo == nullptr )
         qDebug() << "ToggleGraphs clicked with null graphCombo ptr";
     else
@@ -2414,10 +2414,10 @@ void Daily::on_eventsCombo_activated(int index)
     GraphView->redraw();
 }
 
-void Daily::on_toggleEvents_clicked(bool checked)
+void Daily::on_toggleEvents_clicked(bool /*checked*/)
 {
     QString s;
-    QIcon *icon=checked ? icon_on : icon_off;
+    //QIcon *icon=checked ? icon_on : icon_off;
 
     if (ui->toggleEvents == nullptr )
         qDebug() << "ToggleEvents clicked with null toggleEvents ptr";

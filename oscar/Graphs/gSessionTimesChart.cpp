@@ -1074,8 +1074,8 @@ void gTTIAChart::afterDraw(QPainter &, gGraph &graph, QRectF rect)
             }
             break;
         case 2:
-            if (calc.divisor > 0) {
-                mid = calc.avg_sum / calc.divisor;
+            if (calc.cnt > 0) {
+                mid = calc.avg_sum / calc.cnt;
             }
             break;
         }
@@ -1142,7 +1142,8 @@ void gAHIChart::customCalc(Day *day, QVector<SummaryChartSlice> &list)
         case 1:
             calc->wavg_sum += value;
             calc->divisor += hours;
-        default:
+            break;
+        case 2:
             calc->avg_sum += value;
             calc->cnt++;
             break;

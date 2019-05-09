@@ -443,8 +443,8 @@ test {
     CONFIG += console debug
     CONFIG -= app_bundle
     !win32 {  # add memory checking on Linux and macOS test builds
-        QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
-        QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
+        QMAKE_CFLAGS += -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
+        QMAKE_CXXFLAGS += -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
         QMAKE_LFLAGS += -fsanitize=address
     }
 
