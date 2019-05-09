@@ -591,7 +591,9 @@ bool CMS50Loader::readSpoRFile(QString path)
         if (dchr[0]) {
             QString dstr(dchr);
             m_startTime = QDateTime::fromString(dstr, "MM/dd/yy HH:mm:ss");
-            if (m_startTime.date().year() < 2000) { m_startTime = m_startTime.addYears(100); }
+            if (m_startTime.date().year() < 2000) {
+                m_startTime = m_startTime.addYears(100);
+            }
         } else {
             m_startTime = QDateTime(QDate::currentDate(), QTime(0,0,0));
             cms50dplus = true;
@@ -614,7 +616,7 @@ bool CMS50Loader::readSpoRFile(QString path)
         in >> hour >> minute >> second;
         
         if ( year == 0 ) {    // typically from a CMS50D+
-            m_startTime = QDateTime(QDate::currentDate(), QTime(0, 0, 0));
+            m_startTime = QDateTime(QDate::currentDate(), QTime(hour, minute, second));
             cms50dplus = true;
         }
         else

@@ -46,7 +46,7 @@ Q_OBJECT
 
     virtual void process();
 
-    virtual bool isStartTimeValid() { return true; }
+    virtual bool isStartTimeValid() { return !cms50dplus; }
 
     virtual QString getUser();
     virtual QString getModel();
@@ -132,7 +132,7 @@ protected:
     QDate imp_date;
     QTime imp_time;
 
-    QString user;
+    QString userName;
 
     unsigned char current_command;
 
