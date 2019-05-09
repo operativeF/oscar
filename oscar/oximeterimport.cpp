@@ -442,7 +442,7 @@ void OximeterImport::on_fileImportButton_clicked()
     //	oximodule->setStartTime( ??? );  Nope, it was set in the loader module by the file import routime
         on_syncButton_clicked();
     }
-    qDebug() << "Finished file import: Oximodule startTime is " << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ss");
+    qDebug() << "Finished file import: Oximodule startTime is " << oximodule->startTime().toString("yyyy.MM.dd HH:mm:ss");
 }
 
 void OximeterImport::on_liveImportButton_clicked()
@@ -557,13 +557,13 @@ void OximeterImport::on_stopButton_clicked()
 
 void OximeterImport::on_calendarWidget_clicked(const QDate &date)
 {
-	qDebug() << "Calendar widget clicked " << date.toString("yyyy-MMM-dd");
+	qDebug() << "Calendar widget clicked " << date.toString("yyyy.MM.dd");
     if (ui->radioSyncCPAP->isChecked()) {
         Day * day = p_profile->GetGoodDay(date, MT_CPAP);
 
         sessbar->clear();
         if (day) {
-            QDateTime time=QDateTime::fromMSecsSinceEpoch(day->first(), Qt::LocalTime);
+            QDateTime time=QDateTime::fromMSecsSinceEpoch(day->first(), Qt::UTC);
             sessbar->clear();
             QList<QColor> colors;
             colors.push_back("#ffffe0");
@@ -580,13 +580,11 @@ void OximeterImport::on_calendarWidget_clicked(const QDate &date)
             ui->dateTimeEdit->setDateTime(time);
         } else {
             ui->sessbarLabel->setText(tr("No CPAP data available on %1").arg(date.toString(Qt::SystemLocaleLongDate)));
-            qDebug() << "Using oximeter time " << oximodule->startTime().toString("yyyy-MMM-dd hh:mm:ssap") << "on date " << date.toString(Qt::SystemLocaleLongDate);
             ui->dateTimeEdit->setDateTime(QDateTime(date,oximodule->startTime().time()));
         }
 
         sessbar->update();
     } else if (ui->radioSyncOximeter) {
-        qDebug() << "Using oximeter date and time";
         ui->sessbarLabel->setText(tr("%1").arg(date.toString(Qt::SystemLocaleLongDate)));
         ui->dateTimeEdit->setDateTime(QDateTime(date, ui->dateTimeEdit->dateTime().time()));
     }
@@ -599,8 +597,7 @@ void OximeterImport::on_calendarWidget_selectionChanged()
 
 void OximeterImport::onSessionSelected(Session * session)
 {
-    QDateTime time=QDateTime::fromMSecsSinceEpoch(session->first(), Qt::LocalTime);
-    qDebug() << "Selected session starts at " << time.toString("yyyy-MMM-dd hh:mm:ssap");
+    QDateTime time=QDateTime::fromMSecsSinceEpoch(session->first(), Qt::UTC);
     ui->dateTimeEdit->setDateTime(time);
 }
 
@@ -610,7 +607,7 @@ void OximeterImport::on_sessionBackButton_clicked()
     int idx = (sessbar->selected()-1);
     if (idx >= 0) {
         sessbar->setSelected(idx);
-        QDateTime datetime = QDateTime::fromMSecsSinceEpoch(sessbar->session(idx)->first(), Qt::LocalTime);
+        QDateTime datetime = QDateTime::fromMSecsSinceEpoch(sessbar->session(idx)->first(), Qt::UTC);
         ui->dateTimeEdit->setDateTime(datetime);
         sessbar->update();
     }
@@ -622,7 +619,7 @@ void OximeterImport::on_sessionForwardButton_clicked()
     int idx = (sessbar->selected()+1);
     if (idx < sessbar->count()) {
         sessbar->setSelected(idx);
-        QDateTime datetime = QDateTime::fromMSecsSinceEpoch(sessbar->session(idx)->first(), Qt::LocalTime);
+        QDateTime datetime = QDateTime::fromMSecsSinceEpoch(sessbar->session(idx)->first(), Qt::UTC);
         ui->dateTimeEdit->setDateTime(datetime);
         sessbar->update();
     }
@@ -642,7 +639,7 @@ void OximeterImport::on_radioSyncOximeter_clicked()
     ui->syncCPAPGroup->setVisible(false);
     if ( oximodule ) {
     	if (oximodule->isStartTimeValid()) {
-    		qDebug() << "Oximeter time is valid " << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ssap");
+    		qDebug() << "Oximeter time is valid " << oximodule->startTime().toString();
         	ui->calendarWidget->setSelectedDate(oximodule->startTime().date());
         	ui->dateTimeEdit->setDateTime(oximodule->startTime());
         } else
@@ -784,7 +781,7 @@ void OximeterImport::on_syncButton_clicked()
         qCritical() << "OximeterImport::on_syncButton_clicked called when oximodule is null";
         return;
     }
-	qDebug() << "Oximodule Start Time is " << oximodule->startTime().toString("yyyy-MMM-dd HH.mm.ss") << "Duration: " << oximodule->getDuration(/* dummy */ 0 );
+	qDebug() << "Oximodule Start Time is " << oximodule->startTime().toString("yyyy.MM.dd HH.mm.ss") << "Duration: " << oximodule->getDuration(/* dummy */ 0 );
 
     ui->stackedWidget->setCurrentWidget(ui->syncPage);
 
@@ -795,7 +792,7 @@ void OximeterImport::on_syncButton_clicked()
     QDate last = p_profile->LastDay();
 
     QDate oxidate = oximodule->startTime().date();
-    qDebug() << "Oximodule start date is " << oximodule->startTime().date().toString("yyyy-MMM-dd");
+    qDebug() << "Oximodule start date is " << oximodule->startTime().date().toString("yyyy.MM.dd");
 
 
     if ((oxidate >= first) && (oxidate <= last)) {
@@ -1144,14 +1141,14 @@ void OximeterImport::setInformation()
 void OximeterImport::on_oximeterType_currentIndexChanged(int index)
 {
     switch (index) {
-    case 0: // New CMS50's Version 7 protocol
+    case 0: //New CMS50's
         ui->directImportButton->setEnabled(true);
         ui->liveImportButton->setEnabled(false);
         ui->fileImportButton->setEnabled(true);
         ui->oldCMS50specific->setVisible(false);
         ui->newCMS50settingsPanel->setVisible(true);
         break;
-    case 1: // old CMS50 models
+    case 1:
         ui->directImportButton->setEnabled(true);
         ui->liveImportButton->setEnabled(true);
         ui->fileImportButton->setEnabled(true);
