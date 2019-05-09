@@ -155,7 +155,10 @@ void initTranslations()
         langsel.connect(&langlist, SIGNAL(itemDoubleClicked(QListWidgetItem*)), &langsel, SLOT(close()));
         langsel.connect(&lang_okbtn, SIGNAL(clicked()), &langsel, SLOT(close()));
 
+        langsel.raise();
+
         langsel.exec();
+
         langsel.disconnect(&lang_okbtn, SIGNAL(clicked()), &langsel, SLOT(close()));
         langsel.disconnect(&langlist, SIGNAL(itemDoubleClicked(QListWidgetItem*)), &langsel, SLOT(close()));
         language = langlist.currentItem()->data(Qt::UserRole).toString();
