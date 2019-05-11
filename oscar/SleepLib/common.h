@@ -85,6 +85,9 @@ const float pound_convert = ounce_convert * 16;
 
 QString weightString(float kg, UnitSystem us = US_Undefined);
 
+//! \brief Format pressure relief by placing a space before cmH2O if not already there
+QString formatRelief (QString relief);
+
 //! \brief Mercilessly trash a directory
 bool removeDir(const QString &path);
 

@@ -34,6 +34,7 @@ QString formatTime(float time)
     return QString().sprintf("%02i:%02i", hours, minutes); //,seconds);
 }
 
+
 QDataStream & operator>>(QDataStream & in, RXItem & rx)
 {
     in >> rx.start;
@@ -375,7 +376,7 @@ void Statistics::updateRXChanges()
         // Get Event flags list
         QList<ChannelID> flags3 = day->getSortedMachineChannels(MT_CPAP, schema::FLAG | schema::MINOR_FLAG | schema::SPAN);
 
-        // Generate pressure/mode/relief strings
+        // Generate pressure/mode/`strings
         QString relief = day->getPressureRelief();
         QString mode = day->getCPAPMode();
         QString pressure = day->getPressureSettings();
@@ -936,7 +937,7 @@ QString Statistics::GenerateRXChanges()
                 QString("<td>%1</td>").arg(ahi, 0, 'f', 2)+
                 QString("<td>%1</td>").arg(fli, 0, 'f', 2)+
                 QString("<td>%1 (%2)</td>").arg(rx.machine->model()).arg(rx.machine->modelnumber())+
-                QString("<td>%1</td>").arg(rx.relief)+
+                QString("<td>%1</td>").arg(formatRelief(rx.relief))+
                 QString("<td>%1</td>").arg(rx.mode)+
                 QString("<td>%1</td>").arg(rx.pressure)+
                 "</tr>";
@@ -1456,7 +1457,7 @@ void Statistics::UpdateRecordsBox()
             html += tr("Culminative AHI: %1").arg(double(rxbest.ahi) / rxbest.hours, 0, 'f', 2) + "<br/>";
             html += tr("Culminative Hours: %1").arg(rxbest.hours, 0, 'f', 2) + "<br/>";
             html += QString("%1").arg(rxbest.pressure) + "<br/>";
-            html += QString("%1").arg(rxbest.relief) + "<br/>";
+            html += QString("%1").arg(formatRelief(rxbest.relief)) + "<br/>";
             html += "<br/>";
 
             html += "<b>"+tr("Worst RX Setting")+"</b><br/>";
@@ -1469,7 +1470,7 @@ void Statistics::UpdateRecordsBox()
             html += tr("Culminative Hours: %1").arg(rxworst.hours, 0, 'f', 2) + "<br/>";
 
             html += QString("%1").arg(rxworst.pressure) + "<br/>";
-            html += QString("%1").arg(rxworst.relief) + "<br/>";
+            html += QString("%1").arg(formatRelief(rxworst.relief)) + "<br/>";
         }
     }
 

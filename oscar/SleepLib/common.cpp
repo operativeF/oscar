@@ -238,6 +238,23 @@ QString weightString(float kg, UnitSystem us)
     return ("Bad UnitSystem");
 }
 
+// Format perssure relief
+QString formatRelief (QString relief)
+{
+    int icm = 0;
+    QString newRelief = relief;
+    if (relief == nullptr )
+        return relief;
+    icm = relief.indexOf("cmH2O");
+    if (icm >= 1) {
+        QChar t = relief.mid(icm-1,1)[0];
+        if (t.isDigit())
+            newRelief = relief.insert(icm, " ");
+    }
+//  qDebug() << "Relief input" << relief << "returning" << newRelief;
+    return newRelief;
+}
+
 bool operator <(const ValueCount &a, const ValueCount &b)
 {
     return a.value < b.value;
