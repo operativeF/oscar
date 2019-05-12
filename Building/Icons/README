@@ -1,0 +1,13 @@
+
+
+
+Windows .ico file should contain 16x16, 32x32, 48x48, and 256x256 images.
+
+MacOS .icns file should contain:
+
+    Icon size (@1x) 	                Icon size (@2x)
+    512px × 512px (512pt × 512pt @1x) 	1024px × 1024px (512pt × 512pt @2x)
+    256px × 256px (256pt × 256pt @1x) 	512px × 512px (256pt × 256pt @2x)
+    128px × 128px (128pt × 128pt @1x) 	256px × 256px (128pt × 128pt @2x)
+    32px × 32px (32pt × 32pt @1x) 	    64px × 64px (32pt × 32pt @2x)
+    16px × 16px (16pt × 16pt @1x) 	    32px × 32px (16pt × 16pt @2x)
