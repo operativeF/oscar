@@ -427,7 +427,6 @@ DISTFILES += help/default.css \
     help/help_nl/supported.html \
     help/help_nl/tipsntricks.html \
     help/help_en/reportingbugs.html \
-    win_icon.rc \
     help/help_nl/OSCAR_Guide_nl.qhp \
     help/help_en/OSCAR_Guide_en.qhp \
     help/index.qhcp
