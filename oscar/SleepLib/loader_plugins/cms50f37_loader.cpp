@@ -167,7 +167,7 @@ unsigned char cms50_sequence[] = { 0xa7, 0xa2, 0xa0, 0xb0, 0xac, 0xb3, 0xad, 0xa
 const int TIMEOUT = 2000;
 
 
-const quint8 COMMAND_GET_VERSION = 0xA0;  // not sure of this one
+//const quint8 COMMAND_GET_VERSION = 0xA0;  // not sure of this one
 const quint8 COMMAND_CMS50_HELLO2 = 0xA2; // stop live data stream
 const quint8 COMMAND_GET_SESSION_COUNT = 0xA3;
 const quint8 COMMAND_GET_SESSION_DURATION = 0xA4;
