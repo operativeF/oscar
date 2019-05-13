@@ -112,6 +112,7 @@ PRS1::~PRS1()
 }
 
 
+#if 0 // TODO: Remove: unused, superseded by PRS1Waveform
 /*! \struct WaveHeaderList
     \brief Used in PRS1 Waveform Parsing */
 struct WaveHeaderList {
@@ -119,6 +120,7 @@ struct WaveHeaderList {
     quint8  sample_format;
     WaveHeaderList(quint16 i, quint8 f) { interleave = i; sample_format = f; }
 };
+#endif
 
 
 PRS1Loader::PRS1Loader()
@@ -701,20 +703,28 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
     for (int p=0; p < size; ++p) {
         dir.setPath(paths.at(p));
 
-        if (!dir.exists() || !dir.isReadable()) { continue; }
+        if (!dir.exists() || !dir.isReadable()) {
+            qWarning() << dir.canonicalPath() << "can't read directory";
+            continue;
+        }
 
         QFileInfoList flist = dir.entryInfoList();
 
         // Scan for individual session files
         for (int i = 0; i < flist.size(); i++) {
-            if (isAborted()) break;
+            if (isAborted()) {
+                qDebug() << "received abort signal";
+                break;
+            }
             QFileInfo fi = flist.at(i);
+            QString path = fi.canonicalFilePath();
             bool ok;
 
             QString ext_s = fi.fileName().section(".", -1);
             ext = ext_s.toInt(&ok);
             if (!ok) {
                 // not a numerical extension
+                qWarning() << path << "unexpected filename";
                 continue;
             }
 
@@ -722,6 +732,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             sid = session_s.toInt(&ok, sessionid_base);
             if (!ok) {
                 // not a numerical session ID
+                qWarning() << path << "unexpected filename";
                 continue;
             }
 
@@ -737,6 +748,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
             if (m->SessionExists(sid)) {
                 // Skip already imported session
+                qDebug() << path << "session already exists, skipping" << sid;
                 continue;
             }
 
@@ -766,10 +778,16 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             }
 
             // Parse the data chunks and read the files..
+            if (fi.canonicalFilePath().isEmpty()) {
+                qWarning() << fi;
+            }
             QList<PRS1DataChunk *> Chunks = ParseFile(fi.canonicalFilePath());
 
             for (int i=0; i < Chunks.size(); ++i) {
-                if (isAborted()) break;
+                if (isAborted()) {
+                    qDebug() << "received abort signal 2";
+                    break;
+                }
 
                 PRS1DataChunk * chunk = Chunks.at(i);
 
@@ -777,16 +795,18 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                     const unsigned char * data = (unsigned char *)chunk->m_data.constData();
 
                     if (data[0x00] != 0) {
+                        qWarning() << path << "data doesn't start with 0, skipping:" << data[0x00] << chunk->m_data.size();
                         delete chunk;
                         continue;
                     }
                 }
 
                 SessionID chunk_sid = chunk->sessionid;
-                if (chunk_sid != sid && chunk_sid > 2000) {  // log any really weird session IDs
+                if (i > 0 || chunk_sid != sid) {  // log multiple chunks in non-waveform files and session ID mismatches
                     qDebug() << fi.canonicalFilePath() << chunk_sid;
                 }
-                if (m->SessionExists(sid)) {
+                if (m->SessionExists(sid)) {  // BUG: this should presumably be chunk_sid, but any change needs to be tested.
+                    qDebug() << path << "session already exists, skipping" << sid << chunk_sid;
                     delete chunk;
                     continue;
                 }
@@ -804,23 +824,36 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                 }
                 switch (ext) {
                 case 0:
-                    if (task->compliance) continue; // (skipping to avoid duplicates)
+                    if (task->compliance) {
+                        qWarning() << path << "duplicate compliance?";
+                        continue; // (skipping to avoid duplicates)
+                    }
                     task->compliance = chunk;
                     break;
                 case 1:
-                    if (task->summary) continue;
+                    if (task->summary) {
+                        qWarning() << path << "duplicate summary?";
+                        continue;
+                    }
                     task->summary = chunk;
                     break;
                 case 2:
-                    if (task->event) continue;
+                    if (task->event) {
+                        qWarning() << path << "duplicate events?";
+                        continue;
+                    }
                     task->event = chunk;
                     break;
                 default:
+                    qWarning() << path << "unexpected file";
                     break;
                 }
             }
         }
-        if (isAborted()) break;
+        if (isAborted()) {
+            qDebug() << "received abort signal 3";
+            break;
+        }
     }
 }
 
@@ -3072,6 +3105,7 @@ bool PRS1Import::ParseOximetery()
 
         int size = oxi->m_data.size();
         if (size == 0) {
+            qDebug() << oxi->sessionid << oxi->timestamp << "empty?";
             continue;
         }
         quint64 ti = quint64(oxi->timestamp) * 1000L;
@@ -3121,12 +3155,16 @@ bool PRS1Import::ParseWaveforms()
 
         int size = waveform->m_data.size();
         if (size == 0) {
+            qDebug() << waveform->sessionid << waveform->timestamp << "empty?";
             continue;
         }
         quint64 ti = quint64(waveform->timestamp) * 1000L;
         quint64 dur = qint64(waveform->duration) * 1000L;
 
         quint64 diff = ti - lastti;
+        if ((lastti != 0) && diff > 0) {
+            qDebug() << waveform->sessionid << waveform->timestamp << "BND?" << (diff / 1000L) << "=" << waveform->timestamp << "-" << (lastti / 1000L);
+        }
         if ((diff > 500) && (lastti != 0)) {
             if (!bnd) {
                 bnd = session->AddEventList(PRS1_BND, EVL_Event);
@@ -3245,16 +3283,21 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 {
     QList<PRS1DataChunk *> CHUNKS;
 
-    if (path.isEmpty())
+    if (path.isEmpty()) {
+        // ParseSession passes empty filepaths for waveforms if none exist.
+        //qWarning() << path << "ParseFile given empty path";
         return CHUNKS;
+    }
 
     QFile f(path);
 
     if (!f.exists()) {
+        qWarning() << path << "missing";
         return CHUNKS;
     }
 
     if (!f.open(QIODevice::ReadOnly)) {
+        qWarning() << path << "can't open";
         return CHUNKS;
     }
 
@@ -3285,6 +3328,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
     do {
         headerBA = f.read(16);
         if (headerBA.size() != 16) {
+            qDebug() << path << "file too short?";
             break;
         }
 
@@ -3299,8 +3343,10 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
         sessionid = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | header[7];
         timestamp = (header[14] << 24) | (header[13] << 16) | (header[12] << 8) | header[11];
 
-        if (blocksize == 0)
+        if (blocksize == 0) {
+            qDebug() << path << "blocksize 0?";
             break;
+        }
 
         if (fileVersion < 2) {
             qDebug() << "Never seen PRS1 header version < 2 before";
@@ -3328,6 +3374,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
                 headerB2 = f.read(hdb_size+1);  // add extra byte for checksum
                 if (headerB2.size() != hdb_size+1) {
+                    qWarning() << path << "read error in extended header";
                     break;
                 }
 
@@ -3338,8 +3385,18 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
             } else headerB2 = QByteArray();
 
        } else { // Waveform Chunk
+           QFileInfo fi(path);
+           bool ok;
+           int sessionid_base = (fileVersion == 2 ? 10 : 16);
+           QString session_s = fi.fileName().section(".", 0, -2);
+           quint32 sid = session_s.toInt(&ok, sessionid_base);
+           if (!ok || sid != sessionid) {
+               qDebug() << path << sessionid;  // log mismatched waveforum session IDs
+           }
+
             extra = f.read(4);
             if (extra.size() != 4) {
+                qWarning() << path << "read error in waveform header";
                 break;
             }
             header_size += 4;
@@ -3349,25 +3406,32 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
             duration = header[0x0f] | header[0x10] << 8;
             wvfm_signals = header[0x12] | header[0x13] << 8;
+            if (wvfm_signals > 2) {
+                qDebug() << path << wvfm_signals << "channels";
+            }
 
             int ws_size = (fileVersion == 3) ? 4 : 3;
             int sbsize = wvfm_signals * ws_size + 1;
 
             extra = f.read(sbsize);
             if (extra.size() != sbsize) {
+                qWarning() << path << "read error in waveform header 2";
                 break;
             }
             headerBA.append(extra);
             header = (unsigned char *)headerBA.data();
             header_size += sbsize;
 
-            // Read the waveform information in reverse.
+            // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
             int pos = 0x14 + (wvfm_signals - 1) * ws_size;
             for (int i = 0; i < wvfm_signals; ++i) {
                 quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
+                if (interleave != 5) {
+                    qDebug() << path << "interleave?" << interleave;
+                }
 
                 if (fileVersion == 2) {
-                    quint8 sample_format = header[pos + 2];
+                    quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
                     waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
                     pos -= 3;
                 } else if (fileVersion == 3) {
@@ -3387,6 +3451,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
        for (int i=0; i < (header_size-1); i++) achk += header[i];
 
        if (achk != header[header_size-1]) { // Header checksum mismatch?
+           qWarning() << path << "header checksum calc" << achk << "!= stored" << header[header_size-1];
            break;
        }
 
@@ -3399,6 +3464,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
                || (lastchunk->family != family)
                || (lastchunk->familyVersion != familyVersion)
                || (lastchunk->htype != htype)) {
+                   qWarning() << path << "unexpected header data, skipping";
                    QByteArray junk = f.read(lastblocksize - header_size);
 
                    Q_UNUSED(junk)
@@ -3408,8 +3474,10 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
                    }
                    ++cruft;
                    // quit after 3 attempts
-                   if (cruft > 3)
+                   if (cruft > 3) {
+                       qWarning() << path << "too many unexpected headers, bailing";
                        break;
+                   }
 
                    continue;
                    // Corrupt header.. skip it.
@@ -3456,6 +3524,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
         chunk->m_data = f.read(blocksize);
 
         if (chunk->m_data.size() < blocksize) {
+            qWarning() << "less data in file than specified in header";
             delete chunk;
             break;
         }
