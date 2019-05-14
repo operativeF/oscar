@@ -1,7 +1,12 @@
+All icon and other PNG files are derived from a Photoshop file.  The Photoshop
+file has multiple layers, which need to be enabled or disabled when producing
+the various PNG files.  A full description of which layers need to be adjusted
+is in Photshop Notes.xlsm, an Excel worksheet.
 
-
+Smaller icons require manual editing for best appearance.
 
 Windows .ico file should contain 16x16, 32x32, 48x48, and 256x256 images.
+A .ico file can be built at the website icoconvert.com.
 
 MacOS .icns file should contain:
 
@@ -11,3 +16,5 @@ MacOS .icns file should contain:
     128px × 128px (128pt × 128pt @1x) 	256px × 256px (128pt × 128pt @2x)
     32px × 32px (32pt × 32pt @1x) 	    64px × 64px (32pt × 32pt @2x)
     16px × 16px (16pt × 16pt @1x) 	    32px × 32px (16pt × 16pt @2x)
+	
+The .icns file can be edited on Windows using the Greenfish Icon Editor.
