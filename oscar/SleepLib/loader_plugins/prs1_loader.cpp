@@ -3438,60 +3438,50 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
 PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
 {
-    QString path = QFileInfo(f).canonicalFilePath();
-    PRS1DataChunk* chunk = nullptr;
     PRS1DataChunk* out_chunk = nullptr;
+
+    PRS1DataChunk* chunk = new PRS1DataChunk();
+    chunk->m_path = QFileInfo(f).canonicalFilePath();
+    chunk->m_filepos = f.pos();
+    chunk->m_index = cnt;
     
-    quint8 fileVersion;
-    quint16 blocksize;
     quint16 wvfm_signals=0;
 
     unsigned char * header;
-    int htype,family,familyVersion,ext,header_size = 0;
     quint8 achk=0;
-    quint32 sessionid=0, timestamp=0;
-
-    int duration=0;
 
     QByteArray headerBA, headerB2, extra;
 
-    QList<PRS1Waveform> waveformInfo;
-
     do {
-        qint64 filepos = f.pos();
-        headerBA = f.read(16);
-        if (headerBA.size() != 16) {
-            qDebug() << path << "file too short?";
+        chunk->m_header = f.read(16);
+        if (chunk->m_header.size() != 16) {
+            qWarning() << chunk->m_path << "file too short?";
             break;
         }
 
-        header = (unsigned char *)headerBA.data();
+        header = (unsigned char *)chunk->m_header.data();
 
-        fileVersion = header[0];    // Correlates to DataFileVersion in PROP[erties].TXT, only 2 or 3 has ever been observed
-        blocksize = (header[2] << 8) | header[1];
-        htype = header[3];      // 00 = normal, 01=waveform
-        family = header[4];
-        familyVersion = header[5];
-        ext = header[6];
-        sessionid = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | header[7];
-        timestamp = (header[14] << 24) | (header[13] << 16) | (header[12] << 8) | header[11];
+        chunk->fileVersion = header[0];    // Correlates to DataFileVersion in PROP[erties].TXT, only 2 or 3 has ever been observed
+        chunk->blockSize = (header[2] << 8) | header[1];
+        chunk->htype = header[3];      // 00 = normal, 01=waveform
+        chunk->family = header[4];
+        chunk->familyVersion = header[5];
+        chunk->ext = header[6];
+        chunk->sessionid = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | header[7];
+        chunk->timestamp = (header[14] << 24) | (header[13] << 16) | (header[12] << 8) | header[11];
 
-        if (blocksize == 0) {
-            qDebug() << path << "blocksize 0?";
+        if (chunk->blockSize == 0) {
+            qWarning() << chunk->m_path << "blocksize 0?";
             break;
         }
 
-        if (fileVersion < 2) {
-            qDebug() << "Never seen PRS1 header version < 2 before";
+        if (chunk->fileVersion < 2 || chunk->fileVersion > 3) {
+            qWarning() << chunk->m_path << "Never seen PRS1 header version < 2 or > 3 before";
             break;
         }
 
-        header_size = 16; // most common header size, newer familyVersion 3 models are larger.
-
-        waveformInfo.clear();
-
-        bool hasHeaderDataBlock = (fileVersion == 3);
-        if (ext < 5) { // Not a waveform chunk
+        bool hasHeaderDataBlock = (chunk->fileVersion == 3);
+        if (chunk->ext < 5) { // Not a waveform chunk
 
             // Check if this is a newer machine with a header data block
 
@@ -3505,63 +3495,60 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
 
                 headerB2 = f.read(hdb_size+1);  // add extra byte for checksum
                 if (headerB2.size() != hdb_size+1) {
-                    qWarning() << path << "read error in extended header";
+                    qWarning() << chunk->m_path << "read error in extended header";
                     break;
                 }
 
-                headerBA.append(headerB2);
-                header = (unsigned char *)headerBA.data(); // important because it's memory location could move
-
-                header_size += hdb_size+1;
-            } else headerB2 = QByteArray();
+                chunk->m_header.append(headerB2);
+            } else {
+                headerB2 = QByteArray();
+            }
 
        } else { // Waveform Chunk
-           QFileInfo fi(path);
+           QFileInfo fi(f);
            bool ok;
-           int sessionid_base = (fileVersion == 2 ? 10 : 16);
+           int sessionid_base = (chunk->fileVersion == 2 ? 10 : 16);
            QString session_s = fi.fileName().section(".", 0, -2);
            quint32 sid = session_s.toInt(&ok, sessionid_base);
-           if (!ok || sid != sessionid) {
-               qDebug() << path << sessionid;  // log mismatched waveforum session IDs
+           if (!ok || sid != chunk->sessionid) {
+               qDebug() << chunk->m_path << chunk->sessionid;  // log mismatched waveforum session IDs
            }
 
             extra = f.read(4);
             if (extra.size() != 4) {
-                qWarning() << path << "read error in waveform header";
+                qWarning() << chunk->m_path << "read error in waveform header";
                 break;
             }
-            header_size += 4;
-            headerBA.append(extra);
+            chunk->m_header.append(extra);
             // Get the header address again to be safe
-            header = (unsigned char *)headerBA.data();
+            header = (unsigned char *)chunk->m_header.data();
 
-            duration = header[0x0f] | header[0x10] << 8;
+            chunk->duration = header[0x0f] | header[0x10] << 8;
             wvfm_signals = header[0x12] | header[0x13] << 8;
 
-            int ws_size = (fileVersion == 3) ? 4 : 3;
+            int ws_size = (chunk->fileVersion == 3) ? 4 : 3;
             int sbsize = wvfm_signals * ws_size + 1;
 
             extra = f.read(sbsize);
             if (extra.size() != sbsize) {
-                qWarning() << path << "read error in waveform header 2";
+                qWarning() << chunk->m_path << "read error in waveform header 2";
                 break;
             }
-            headerBA.append(extra);
-            header = (unsigned char *)headerBA.data();
-            header_size += sbsize;
+            chunk->m_header.append(extra);
+            header = (unsigned char *)chunk->m_header.data();
 
             // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
             int pos = 0x14 + (wvfm_signals - 1) * ws_size;
             for (int i = 0; i < wvfm_signals; ++i) {
                 quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
-                if (fileVersion == 2) {
+                if (chunk->fileVersion == 2) {
                     quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
-                    waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
+                    chunk->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
                     pos -= 3;
-                } else if (fileVersion == 3) {
+                } else if (chunk->fileVersion == 3) {
                     //quint16 sample_size = header[pos + 2] | header[pos + 3] << 8; // size in bits?? (08 00)
                     // Possibly this is size in bits, and sign bit for the other byte?
-                    waveformInfo.push_back(PRS1Waveform(interleave, 0));
+                    chunk->waveformInfo.push_back(PRS1Waveform(interleave, 0));
                     pos -= 4;
                 }
             }
@@ -3569,27 +3556,15 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
 
        // Calculate 8bit additive header checksum
        achk=0;
+       header = (unsigned char *)chunk->m_header.data(); // important because its memory location could move
+       int header_size = chunk->m_header.size();
        for (int i=0; i < (header_size-1); i++) achk += header[i];
 
        if (achk != header[header_size-1]) { // Header checksum mismatch?
-           qWarning() << path << "header checksum calc" << achk << "!= stored" << header[header_size-1];
+           qWarning() << chunk->m_path << "header checksum calc" << achk << "!= stored" << header[header_size-1];
            break;
        }
 
-        chunk = new PRS1DataChunk();
-
-        chunk->m_path = path;
-        chunk->m_filepos = filepos;
-        chunk->m_index = cnt;
-
-        chunk->sessionid = sessionid;
-
-        chunk->fileVersion = fileVersion;
-        chunk->htype = htype;
-        chunk->family = family;
-        chunk->familyVersion = familyVersion;
-        chunk->ext = ext;
-        chunk->timestamp = timestamp;
         if (hasHeaderDataBlock) {
             const unsigned char * hd = (unsigned char *)headerB2.constData();
             int pos = 0;
@@ -3600,26 +3575,13 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
             }
         }
         chunk->m_headerblock = headerB2;
-        chunk->m_header = headerBA;
-        chunk->blockSize = blocksize;
-
-        blocksize -= header_size;
-
-        if (ext >= 5) {
-            chunk->duration = duration;
-
-            // I don't trust deep copy, just being safe...
-            for (int i=0;i<waveformInfo.size(); ++i) {
-                chunk->waveformInfo.push_back(waveformInfo.at(i));
-            }
-        }
+        int data_size = chunk->blockSize - chunk->m_header.size();
 
         // Read data block
-        chunk->m_data = f.read(blocksize);
+        chunk->m_data = f.read(data_size);
 
-        if (chunk->m_data.size() < blocksize) {
-            qWarning() << "less data in file than specified in header";
-            delete chunk;
+        if (chunk->m_data.size() < data_size) {
+            qWarning() << chunk->m_path << "less data in file than specified in header";
             break;
         }
 
@@ -3646,6 +3608,7 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
         out_chunk = chunk;
     } while (false);
 
+    if (out_chunk == nullptr) delete chunk;
     return out_chunk;
 }
 
