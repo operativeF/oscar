@@ -795,6 +795,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                     const unsigned char * data = (unsigned char *)chunk->m_data.constData();
 
                     if (data[0x00] != 0) {
+                        // 5 length 5, 6 length 1, 7 length 3, 8 length 3 seen on 960P
                         qWarning() << path << "data doesn't start with 0, skipping:" << data[0x00] << chunk->m_data.size();
                         delete chunk;
                         continue;
@@ -3095,6 +3096,45 @@ bool PRS1Import::ParseEvents()
     return res;
 }
 
+
+QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *> & allchunks)
+{
+    QList<PRS1DataChunk *> coalesced;
+    PRS1DataChunk *chunk = nullptr, *lastchunk = nullptr;
+    
+    for (int i=0; i < allchunks.size(); ++i) {
+        chunk = allchunks.at(i);
+        
+        if (lastchunk != nullptr) {
+            if (lastchunk->sessionid != chunk->sessionid) {
+                qWarning() << "lastchunk->sessionid != chunk->sessionid in PRS1Loader::CoalesceWaveformChunks()";
+                // Free any remaining chunks
+                for (int j=i; j < allchunks.size(); ++j) {
+                    chunk = allchunks.at(j);
+                    delete chunk;
+                }
+                break;
+            }
+            
+            qint64 diff = (chunk->timestamp - lastchunk->timestamp) - lastchunk->duration;
+            if (diff == 0) {
+                // In sync, so append waveform data to previous chunk
+                lastchunk->m_data.append(chunk->m_data);
+                lastchunk->duration += chunk->duration;
+                delete chunk;
+                continue;
+            }
+            // else start a new chunk to resync
+        }
+        
+        coalesced.append(chunk);
+        lastchunk = chunk;
+    }
+    
+    return coalesced;
+}
+
+
 bool PRS1Import::ParseOximetery()
 {
     int size = oximetry.size();
@@ -3232,6 +3272,7 @@ bool PRS1Import::ParseSession(void)
 
         // Parse .005 Waveform file
         waveforms = loader->ParseFile(wavefile);
+        waveforms = CoalesceWaveformChunks(waveforms);
         if (session->eventlist.contains(CPAP_FlowRate)) {
             if (waveforms.size() > 0) {
                 // Delete anything called "Flow rate" picked up in the events file if real data is present
@@ -3242,6 +3283,7 @@ bool PRS1Import::ParseSession(void)
 
         // Parse .006 Waveform file
         oximetry = loader->ParseFile(oxifile);
+        oximetry = CoalesceWaveformChunks(oximetry);
         ParseOximetery();
 
         if (session->first() > 0) {
@@ -3308,7 +3350,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
     quint16 wvfm_signals=0;
 
     unsigned char * header;
-    int cnt = 0;
 
     //int lastheadersize = 0;
     int lastblocksize = 0;
@@ -3354,8 +3395,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
         }
 
         header_size = 16; // most common header size, newer familyVersion 3 models are larger.
-
-        int diff = 0;
 
         waveformInfo.clear();
 
@@ -3440,9 +3479,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
                     waveformInfo.push_back(PRS1Waveform(interleave, 0));
                     pos -= 4;
                 }
-            }
-            if (lastchunk != nullptr) {
-                diff = (timestamp - lastchunk->timestamp) - lastchunk->duration;
             }
        }
 
@@ -3548,31 +3584,9 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 #endif
         }
 
-        if ((chunk->ext == 5) || (chunk->ext == 6)) {  // if Flow/MaskPressure Waveform or OXI Waveform file
-            if (lastchunk != nullptr) {
-                if (lastchunk->sessionid != chunk->sessionid) {
-                    qWarning() << "lastchunk->sessionid != chunk->sessionid in PRS1Loader::ParseFile2()";
-                    break;
-                }
-
-                if (diff == 0) {
-                    // In sync, so append waveform data to previous chunk
-                    lastchunk->m_data.append(chunk->m_data);
-                    lastchunk->duration += chunk->duration;
-                    delete chunk;
-                    cnt++;
-                    chunk = lastchunk;
-                    continue;
-                }
-                // else start a new chunk to resync
-            }
-        }
-
         CHUNKS.append(chunk);
 
         lastchunk = chunk;
-        cnt++;
-
     } while (!f.atEnd());
 
     return CHUNKS;

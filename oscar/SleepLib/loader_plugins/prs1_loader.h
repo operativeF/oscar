@@ -138,6 +138,9 @@ public:
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents();
 
+    //! \brief Coalesce contiguous .005 or .006 waveform chunks from the file into larger chunks for import.
+    QList<PRS1DataChunk *> CoalesceWaveformChunks(QList<PRS1DataChunk *> & allchunks);
+
     //! \brief Takes the parsed list of Flow/MaskPressure waveform chunks and adds them to the database
     bool ParseWaveforms();
 
