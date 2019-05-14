@@ -3101,11 +3101,13 @@ QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *>
 {
     QList<PRS1DataChunk *> coalesced;
     PRS1DataChunk *chunk = nullptr, *lastchunk = nullptr;
+    int num;
     
     for (int i=0; i < allchunks.size(); ++i) {
         chunk = allchunks.at(i);
         
         if (lastchunk != nullptr) {
+            // Waveform files shouldn't contain multiple sessions
             if (lastchunk->sessionid != chunk->sessionid) {
                 qWarning() << "lastchunk->sessionid != chunk->sessionid in PRS1Loader::CoalesceWaveformChunks()";
                 // Free any remaining chunks
@@ -3116,15 +3118,46 @@ QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *>
                 break;
             }
             
+            // Check whether the data format is the same between the two chunks
+            bool same_format = (lastchunk->waveformInfo.size() == chunk->waveformInfo.size());
+            if (same_format) {
+                num = chunk->waveformInfo.size();
+                for (int n=0; n < num; n++) {
+                    const PRS1Waveform &a = lastchunk->waveformInfo.at(n);
+                    const PRS1Waveform &b = chunk->waveformInfo.at(n);
+                    if (a.interleave != b.interleave) {
+                        // We've never seen this before
+                        qWarning() << chunk->m_path << "format change?" << a.interleave << b.interleave;
+                        same_format = false;
+                        break;
+                    }
+                }
+            } else {
+                // We've never seen this before
+                qWarning() << chunk->m_path << "channels change?" << lastchunk->waveformInfo.size() << chunk->waveformInfo.size();
+            }
+            
             qint64 diff = (chunk->timestamp - lastchunk->timestamp) - lastchunk->duration;
-            if (diff == 0) {
-                // In sync, so append waveform data to previous chunk
+            if (same_format && diff == 0) {
+                // Same format and in sync, so append waveform data to previous chunk
                 lastchunk->m_data.append(chunk->m_data);
                 lastchunk->duration += chunk->duration;
                 delete chunk;
                 continue;
             }
             // else start a new chunk to resync
+        }
+        
+        // Report any formats we haven't seen before
+        num = chunk->waveformInfo.size();
+        if (num > 2) {
+            qDebug() << chunk->m_path << num << "channels";
+        }
+        for (int n=0; n < num; n++) {
+            int interleave = chunk->waveformInfo.at(n).interleave;
+            if (interleave != 5) {
+                qDebug() << chunk->m_path << "interleave?" << interleave;
+            }
         }
         
         coalesced.append(chunk);
@@ -3350,6 +3383,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
     quint16 wvfm_signals=0;
 
     unsigned char * header;
+    int cnt = 0;
 
     //int lastheadersize = 0;
     int lastblocksize = 0;
@@ -3367,6 +3401,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
     QList<PRS1Waveform> waveformInfo;
 
     do {
+        qint64 filepos = f.pos();
         headerBA = f.read(16);
         if (headerBA.size() != 16) {
             qDebug() << path << "file too short?";
@@ -3445,9 +3480,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
             duration = header[0x0f] | header[0x10] << 8;
             wvfm_signals = header[0x12] | header[0x13] << 8;
-            if (wvfm_signals > 2) {
-                qDebug() << path << wvfm_signals << "channels";
-            }
 
             int ws_size = (fileVersion == 3) ? 4 : 3;
             int sbsize = wvfm_signals * ws_size + 1;
@@ -3465,10 +3497,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
             int pos = 0x14 + (wvfm_signals - 1) * ws_size;
             for (int i = 0; i < wvfm_signals; ++i) {
                 quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
-                if (interleave != 5) {
-                    qDebug() << path << "interleave?" << interleave;
-                }
-
                 if (fileVersion == 2) {
                     quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
                     waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
@@ -3515,12 +3543,17 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
                        break;
                    }
 
+                   cnt++;
                    continue;
                    // Corrupt header.. skip it.
             }
         }
 
         chunk = new PRS1DataChunk();
+
+        chunk->m_path = path;
+        chunk->m_filepos = filepos;
+        chunk->m_index = cnt;
 
         chunk->sessionid = sessionid;
 
@@ -3587,6 +3620,7 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
         CHUNKS.append(chunk);
 
         lastchunk = chunk;
+        cnt++;
     } while (!f.atEnd());
 
     return CHUNKS;

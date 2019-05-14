@@ -78,6 +78,10 @@ public:
     QByteArray m_data;
     QByteArray m_headerblock;
 
+    QString m_path;
+    qint64 m_filepos;  // file offset
+    int m_index;  // nth chunk in file
+
     SessionID sessionid;
 
     quint8 fileVersion;
