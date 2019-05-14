@@ -75,6 +75,7 @@ public:
     }
     inline int size() const { return m_data.size(); }
 
+    QByteArray m_header;
     QByteArray m_data;
     QByteArray m_headerblock;
 
@@ -85,6 +86,7 @@ public:
     SessionID sessionid;
 
     quint8 fileVersion;
+    quint16 blockSize;
     quint8 ext;
     quint8 htype;
     quint8 family;
@@ -230,6 +232,9 @@ class PRS1Loader : public CPAPLoader
     //! \brief Parse a PRS1 summary/event/waveform file and break into invidivual session or waveform chunks
     QList<PRS1DataChunk *> ParseFile(const QString & path);
 
+    //! \brief Parse and return the next chunk from a PRS1 file
+    PRS1DataChunk* ParseChunk(class QFile & f, int index=0);
+    
     //! \brief Register this Module to the list of Loaders, so it knows to search for PRS1 data.
     static void Register();
 

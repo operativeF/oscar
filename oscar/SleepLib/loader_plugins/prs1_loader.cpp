@@ -3378,18 +3378,75 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
     PRS1DataChunk *chunk = nullptr, *lastchunk = nullptr;
 
+    int cnt = 0;
+
+    int cruft = 0;
+    int firstsession = 0;
+
+    do {
+        chunk = ParseChunk(f, cnt);
+        if (chunk == nullptr) {
+            break;
+        }
+
+        if (lastchunk != nullptr) {
+            // If there's any mismatch between header information, try and skip the block
+            // This probably isn't the best approach for dealing with block corruption :/
+            if ((lastchunk->fileVersion != chunk->fileVersion)
+                    || (lastchunk->ext != chunk->ext)
+                    || (lastchunk->family != chunk->family)
+                    || (lastchunk->familyVersion != chunk->familyVersion)
+                    || (lastchunk->htype != chunk->htype)) {
+                qWarning() << path << "unexpected header data, skipping";
+                
+                // TODO: Find a sample of this problem to see if the below approach has any
+                // value, or whether we should just drop the chunk.
+                QByteArray junk = f.read(lastchunk->blockSize - chunk->m_header.size());
+
+                Q_UNUSED(junk)
+                if (lastchunk->ext == 5) {
+                    // The data is random crap
+                    // lastchunk->m_data.append(junk.mid(lastheadersize-16));
+                }
+                ++cruft;
+                // quit after 3 attempts
+                if (cruft > 3) {
+                    qWarning() << path << "too many unexpected headers, bailing";
+                    break;
+                }
+
+                cnt++;
+                delete chunk;
+                continue;
+                // Corrupt header.. skip it.
+            }
+        }
+        
+        if (!firstsession) {
+            firstsession = chunk->sessionid;
+        }
+
+        CHUNKS.append(chunk);
+
+        lastchunk = chunk;
+        cnt++;
+    } while (!f.atEnd());
+
+    return CHUNKS;
+}
+
+
+PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
+{
+    QString path = QFileInfo(f).canonicalFilePath();
+    PRS1DataChunk* chunk = nullptr;
+    PRS1DataChunk* out_chunk = nullptr;
+    
     quint8 fileVersion;
     quint16 blocksize;
     quint16 wvfm_signals=0;
 
     unsigned char * header;
-    int cnt = 0;
-
-    //int lastheadersize = 0;
-    int lastblocksize = 0;
-
-    int cruft = 0;
-    int firstsession = 0;
     int htype,family,familyVersion,ext,header_size = 0;
     quint8 achk=0;
     quint32 sessionid=0, timestamp=0;
@@ -3519,36 +3576,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
            break;
        }
 
-
-       if (lastchunk != nullptr) {
-           // If there's any mismatch between header information, try and skip the block
-           // This probably isn't the best approach for dealing with block corruption :/
-           if ((lastchunk->fileVersion != fileVersion)
-               || (lastchunk->ext != ext)
-               || (lastchunk->family != family)
-               || (lastchunk->familyVersion != familyVersion)
-               || (lastchunk->htype != htype)) {
-                   qWarning() << path << "unexpected header data, skipping";
-                   QByteArray junk = f.read(lastblocksize - header_size);
-
-                   Q_UNUSED(junk)
-                   if (lastchunk->ext == 5) {
-                       // The data is random crap
-                       // lastchunk->m_data.append(junk.mid(lastheadersize-16));
-                   }
-                   ++cruft;
-                   // quit after 3 attempts
-                   if (cruft > 3) {
-                       qWarning() << path << "too many unexpected headers, bailing";
-                       break;
-                   }
-
-                   cnt++;
-                   continue;
-                   // Corrupt header.. skip it.
-            }
-        }
-
         chunk = new PRS1DataChunk();
 
         chunk->m_path = path;
@@ -3557,9 +3584,6 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 
         chunk->sessionid = sessionid;
 
-        if (!firstsession) {
-            firstsession = chunk->sessionid;
-        }
         chunk->fileVersion = fileVersion;
         chunk->htype = htype;
         chunk->family = family;
@@ -3576,8 +3600,9 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
             }
         }
         chunk->m_headerblock = headerB2;
+        chunk->m_header = headerBA;
+        chunk->blockSize = blocksize;
 
-        lastblocksize = blocksize;
         blocksize -= header_size;
 
         if (ext >= 5) {
@@ -3616,14 +3641,12 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
             }
 #endif
         }
+        
+        // Only return the chunk if it has passed all tests above.
+        out_chunk = chunk;
+    } while (false);
 
-        CHUNKS.append(chunk);
-
-        lastchunk = chunk;
-        cnt++;
-    } while (!f.atEnd());
-
-    return CHUNKS;
+    return out_chunk;
 }
 
 void InitModelMap()
