@@ -73,6 +73,8 @@ public:
         
         duration = 0;
 
+        m_filepos = -1;
+        m_index = -1;
     }
     PRS1DataChunk(class QFile & f);
     ~PRS1DataChunk() {
@@ -110,6 +112,9 @@ public:
 
     //! \brief Read and parse the next chunk header from a PRS1 file
     bool ReadHeader(class QFile & f);
+
+    //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
+    bool ReadData(class QFile & f);
 };
 
 class PRS1Loader;

@@ -3449,8 +3449,37 @@ PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
     PRS1DataChunk* chunk = new PRS1DataChunk(f);
 
     do {
+        // Parse the header and calculate its checksum.
         bool ok = chunk->ReadHeader(f);
-        if (!ok) break;
+        if (!ok) {
+            break;
+        }
+
+        // Make sure the calculated checksum matches the stored checksum.
+        if (chunk->calcChecksum != chunk->storedChecksum) {
+            qWarning() << chunk->m_path << "header checksum calc" << chunk->calcChecksum << "!= stored" << chunk->storedChecksum;
+            break;
+        }
+
+        // Log mismatched waveform session IDs
+        if (chunk->ext >= 5) {
+            QFileInfo fi(f);
+            bool numeric;
+            int sessionid_base = (chunk->fileVersion == 2 ? 10 : 16);
+            QString session_s = fi.fileName().section(".", 0, -2);
+            quint32 sid = session_s.toInt(&numeric, sessionid_base);
+            if (!numeric || sid != chunk->sessionid) {
+                qDebug() << chunk->m_path << chunk->sessionid;
+            }
+        }
+        
+        // Read the block's data and calculate the block CRC.
+        ok = chunk->ReadData(f);
+        if (!ok) {
+            break;
+        }
+        
+        // TODO: move block CRC comparison here
 
         // Only return the chunk if it has passed all tests above.
         out_chunk = chunk;
@@ -3533,15 +3562,6 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
             this->m_headerblock = headerB2;
 
        } else { // Waveform Chunk
-           QFileInfo fi(f);
-           bool ok;
-           int sessionid_base = (this->fileVersion == 2 ? 10 : 16);
-           QString session_s = fi.fileName().section(".", 0, -2);
-           quint32 sid = session_s.toInt(&ok, sessionid_base);
-           if (!ok || sid != this->sessionid) {
-               qDebug() << this->m_path << this->sessionid;  // log mismatched waveforum session IDs
-           }
-
             QByteArray extra = f.read(5);
             if (extra.size() != 5) {
                 qWarning() << this->m_path << "read error in waveform header";
@@ -3607,12 +3627,17 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         // Append the stored checksum to the raw data *after* calculating the checksum on the preceding data.
         this->m_header.append(checksum);
 
-        // Make sure the calculated checksum matches the stored checksum.
-        if (this->calcChecksum != this->storedChecksum) { // Header checksum mismatch?
-            qWarning() << this->m_path << "header checksum calc" << this->calcChecksum << "!= stored" << this->storedChecksum;
-            break;
-        }
+        ok = true;
+    } while (false);
 
+    return ok;
+}
+
+
+bool PRS1DataChunk::ReadData(QFile & f)
+{
+    bool ok = false;
+    do {
         // Read data block
         int data_size = this->blockSize - this->m_header.size();
         this->m_data = f.read(data_size);
