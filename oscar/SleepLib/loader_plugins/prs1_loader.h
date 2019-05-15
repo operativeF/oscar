@@ -105,7 +105,9 @@ public:
     QMap<unsigned char, short> hblock;
     
     quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
-    quint8 calcChecksum;  // header checksum as calculated when parsing
+    quint8 calcChecksum;    // header checksum as calculated when parsing
+    quint32 storedCrc;      // header + data CRC stored in file, last 2-4 bytes of chunk
+    quint32 calcCrc;        // header + data CRC as calculated when parsing
 
     //! \brief Parse and return the next chunk from a PRS1 file
     static PRS1DataChunk* ParseNext(class QFile & f);
@@ -125,6 +127,9 @@ protected:
 
     //! \brief Read and parse the waveform-specific header data from a PRS1 file
     bool ReadWaveformHeader(class QFile & f);
+
+    //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
+    bool ExtractStoredCrc(int size);
 };
 
 class PRS1Loader;
