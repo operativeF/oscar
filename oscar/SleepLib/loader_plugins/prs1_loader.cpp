@@ -3384,10 +3384,11 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
     int firstsession = 0;
 
     do {
-        chunk = ParseChunk(f, cnt);
+        chunk = PRS1DataChunk::ParseNext(f);
         if (chunk == nullptr) {
             break;
         }
+        chunk->SetIndex(cnt);  // for logging/debugging purposes
 
         if (lastchunk != nullptr) {
             // If there's any mismatch between header information, try and skip the block
@@ -3436,44 +3437,63 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 }
 
 
-PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
+PRS1DataChunk::PRS1DataChunk(QFile & f)
+{
+    m_path = QFileInfo(f).canonicalFilePath();
+}
+
+
+PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
 {
     PRS1DataChunk* out_chunk = nullptr;
+    PRS1DataChunk* chunk = new PRS1DataChunk(f);
 
-    PRS1DataChunk* chunk = new PRS1DataChunk();
-    chunk->m_path = QFileInfo(f).canonicalFilePath();
-    chunk->m_filepos = f.pos();
-    chunk->m_index = cnt;
-    
     do {
-        chunk->m_header = f.read(15);
-        if (chunk->m_header.size() != 15) {
-            qWarning() << chunk->m_path << "file too short?";
+        bool ok = chunk->ReadHeader(f);
+        if (!ok) break;
+
+        // Only return the chunk if it has passed all tests above.
+        out_chunk = chunk;
+    } while (false);
+
+    if (out_chunk == nullptr) delete chunk;
+    return out_chunk;
+}
+
+
+bool PRS1DataChunk::ReadHeader(QFile & f)
+{
+    bool ok = false;
+    do {
+        this->m_filepos = f.pos();
+        this->m_header = f.read(15);
+        if (this->m_header.size() != 15) {
+            qWarning() << this->m_path << "file too short?";
             break;
         }
-        unsigned char * header = (unsigned char *)chunk->m_header.data();
+        unsigned char * header = (unsigned char *)this->m_header.data();
 
-        chunk->fileVersion = header[0];    // Correlates to DataFileVersion in PROP[erties].TXT, only 2 or 3 has ever been observed
-        chunk->blockSize = (header[2] << 8) | header[1];
-        chunk->htype = header[3];      // 00 = normal, 01=waveform
-        chunk->family = header[4];
-        chunk->familyVersion = header[5];
-        chunk->ext = header[6];
-        chunk->sessionid = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | header[7];
-        chunk->timestamp = (header[14] << 24) | (header[13] << 16) | (header[12] << 8) | header[11];
+        this->fileVersion = header[0];    // Correlates to DataFileVersion in PROP[erties].TXT, only 2 or 3 has ever been observed
+        this->blockSize = (header[2] << 8) | header[1];
+        this->htype = header[3];      // 00 = normal, 01=waveform
+        this->family = header[4];
+        this->familyVersion = header[5];
+        this->ext = header[6];
+        this->sessionid = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | header[7];
+        this->timestamp = (header[14] << 24) | (header[13] << 16) | (header[12] << 8) | header[11];
 
-        if (chunk->blockSize == 0) {
-            qWarning() << chunk->m_path << "blocksize 0?";
+        if (this->blockSize == 0) {
+            qWarning() << this->m_path << "blocksize 0?";
             break;
         }
 
-        if (chunk->fileVersion < 2 || chunk->fileVersion > 3) {
-            qWarning() << chunk->m_path << "Never seen PRS1 header version < 2 or > 3 before";
+        if (this->fileVersion < 2 || this->fileVersion > 3) {
+            qWarning() << this->m_path << "Never seen PRS1 header version < 2 or > 3 before";
             break;
         }
 
-        bool hasHeaderDataBlock = (chunk->fileVersion == 3);
-        if (chunk->ext < 5) { // Not a waveform chunk
+        bool hasHeaderDataBlock = (this->fileVersion == 3);
+        if (this->ext < 5) { // Not a waveform chunk
             QByteArray headerB2;
 
             // Check if this is a newer machine with a header data block
@@ -3483,85 +3503,85 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
                 // followed by variable, data byte pairs
                 QByteArray extra = f.read(1);
                 if (extra.size() < 1) {
-                    qWarning() << chunk->m_path << "read error extended header";
+                    qWarning() << this->m_path << "read error extended header";
                     break;
                 }
-                chunk->m_header.append(extra);
-                header = (unsigned char *)chunk->m_header.data();
+                this->m_header.append(extra);
+                header = (unsigned char *)this->m_header.data();
 
                 int hdb_len = header[15];
                 int hdb_size = hdb_len * 2;
 
                 headerB2 = f.read(hdb_size);
                 if (headerB2.size() != hdb_size) {
-                    qWarning() << chunk->m_path << "read error in extended header";
+                    qWarning() << this->m_path << "read error in extended header";
                     break;
                 }
                 
-                chunk->m_header.append(headerB2);
-                header = (unsigned char *)chunk->m_header.data();
+                this->m_header.append(headerB2);
+                header = (unsigned char *)this->m_header.data();
                 const unsigned char * hd = (unsigned char *)headerB2.constData();
                 int pos = 0;
                 int recs = header[15];
                 for (int i=0; i<recs; i++) {
-                    chunk->hblock[hd[pos]] = hd[pos+1];
+                    this->hblock[hd[pos]] = hd[pos+1];
                     pos += 2;
                 }
             } else {
                 headerB2 = QByteArray();
             }
-            chunk->m_headerblock = headerB2;
+            this->m_headerblock = headerB2;
 
        } else { // Waveform Chunk
            QFileInfo fi(f);
            bool ok;
-           int sessionid_base = (chunk->fileVersion == 2 ? 10 : 16);
+           int sessionid_base = (this->fileVersion == 2 ? 10 : 16);
            QString session_s = fi.fileName().section(".", 0, -2);
            quint32 sid = session_s.toInt(&ok, sessionid_base);
-           if (!ok || sid != chunk->sessionid) {
-               qDebug() << chunk->m_path << chunk->sessionid;  // log mismatched waveforum session IDs
+           if (!ok || sid != this->sessionid) {
+               qDebug() << this->m_path << this->sessionid;  // log mismatched waveforum session IDs
            }
 
             QByteArray extra = f.read(5);
             if (extra.size() != 5) {
-                qWarning() << chunk->m_path << "read error in waveform header";
+                qWarning() << this->m_path << "read error in waveform header";
                 break;
             }
-            chunk->m_header.append(extra);
+            this->m_header.append(extra);
             // Get the header address again to be safe
-            header = (unsigned char *)chunk->m_header.data();
+            header = (unsigned char *)this->m_header.data();
 
-            chunk->duration = header[0x0f] | header[0x10] << 8;
+            this->duration = header[0x0f] | header[0x10] << 8;
             int always_1 = header[0x11];
             if (always_1 != 1) {
-                qWarning() << chunk->m_path << always_1 << "!= 1";
+                qWarning() << this->m_path << always_1 << "!= 1";
                 //break;  // don't break to avoid changing behavior (for now)
             }
             quint16 wvfm_signals = header[0x12] | header[0x13] << 8;
 
-            int ws_size = (chunk->fileVersion == 3) ? 4 : 3;
+            int ws_size = (this->fileVersion == 3) ? 4 : 3;
             int sbsize = wvfm_signals * ws_size;
 
             extra = f.read(sbsize);
             if (extra.size() != sbsize) {
-                qWarning() << chunk->m_path << "read error in waveform header 2";
+                qWarning() << this->m_path << "read error in waveform header 2";
                 break;
             }
-            chunk->m_header.append(extra);
-            header = (unsigned char *)chunk->m_header.data();
+            this->m_header.append(extra);
+            header = (unsigned char *)this->m_header.data();
 
             // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
             int pos = 0x14 + (wvfm_signals - 1) * ws_size;
             for (int i = 0; i < wvfm_signals; ++i) {
                 quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
-                if (chunk->fileVersion == 2) {
+                if (this->fileVersion == 2) {
                     quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
-                    chunk->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
+                    this->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
                     pos -= 3;
-                } else if (chunk->fileVersion == 3) {
+                } else if (this->fileVersion == 3) {
                     //quint16 sample_size = header[pos + 2] | header[pos + 3] << 8; // size in bits?? (08 00)
                     // Possibly this is size in bits, and sign bit for the other byte?
-                    chunk->waveformInfo.push_back(PRS1Waveform(interleave, 0));
+                    this->waveformInfo.push_back(PRS1Waveform(interleave, 0));
                     pos -= 4;
                 }
             }
@@ -3570,63 +3590,62 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
         // The 8bit checksum comes at the end.
         QByteArray checksum = f.read(1);
         if (checksum.size() < 1) {
-            qWarning() << chunk->m_path << "read error header checksum";
+            qWarning() << this->m_path << "read error header checksum";
             break;
         }
-        chunk->storedChecksum = checksum.data()[0];
+        this->storedChecksum = checksum.data()[0];
 
         // Calculate 8bit additive header checksum.
-        header = (unsigned char *)chunk->m_header.data(); // important because its memory location could move
-        int header_size = chunk->m_header.size();
+        header = (unsigned char *)this->m_header.data(); // important because its memory location could move
+        int header_size = this->m_header.size();
         quint8 achk=0;
         for (int i=0; i < header_size; i++) {
             achk += header[i];
         }
-        chunk->calcChecksum = achk;
+        this->calcChecksum = achk;
         
         // Append the stored checksum to the raw data *after* calculating the checksum on the preceding data.
-        chunk->m_header.append(checksum);
+        this->m_header.append(checksum);
 
         // Make sure the calculated checksum matches the stored checksum.
-        if (chunk->calcChecksum != chunk->storedChecksum) { // Header checksum mismatch?
-            qWarning() << chunk->m_path << "header checksum calc" << chunk->calcChecksum << "!= stored" << chunk->storedChecksum;
+        if (this->calcChecksum != this->storedChecksum) { // Header checksum mismatch?
+            qWarning() << this->m_path << "header checksum calc" << this->calcChecksum << "!= stored" << this->storedChecksum;
             break;
         }
 
         // Read data block
-        int data_size = chunk->blockSize - chunk->m_header.size();
-        chunk->m_data = f.read(data_size);
-        if (chunk->m_data.size() < data_size) {
-            qWarning() << chunk->m_path << "less data in file than specified in header";
+        int data_size = this->blockSize - this->m_header.size();
+        this->m_data = f.read(data_size);
+        if (this->m_data.size() < data_size) {
+            qWarning() << this->m_path << "less data in file than specified in header";
             break;
         }
 
-        if (chunk->fileVersion==3) {
-            //int ds = chunk->m_data.size();
-            //quint32 crc16 = chunk->m_data.at(ds-2) | chunk->m_data.at(ds-1) << 8;
-            chunk->m_data.chop(4);
+        if (this->fileVersion==3) {
+            //int ds = this->m_data.size();
+            //quint32 crc16 = this->m_data.at(ds-2) | this->m_data.at(ds-1) << 8;
+            this->m_data.chop(4);
         } else {
             // last two bytes contain crc16 checksum.
-            int ds = chunk->m_data.size();
-            quint16 crc16 = chunk->m_data.at(ds-2) | chunk->m_data.at(ds-1) << 8;
-            chunk->m_data.chop(2);
+            int ds = this->m_data.size();
+            quint16 crc16 = this->m_data.at(ds-2) | this->m_data.at(ds-1) << 8;
+            this->m_data.chop(2);
 #ifdef PRS1_CRC_CHECK
             // This fails.. it needs to include the header!
-            quint16 calc16 = CRC16((unsigned char *)chunk->m_data.data(), chunk->m_data.size());
+            quint16 calc16 = CRC16((unsigned char *)this->m_data.data(), this->m_data.size());
             if (calc16 != crc16) {
                 // corrupt data block.. bleh..
-            //   qDebug() << "CRC16 doesn't match for chunk" << chunk->sessionid << "for" << path;
+            //   qDebug() << "CRC16 doesn't match for chunk" << this->sessionid << "for" << path;
             }
 #endif
         }
         
-        // Only return the chunk if it has passed all tests above.
-        out_chunk = chunk;
+        ok = true;
     } while (false);
 
-    if (out_chunk == nullptr) delete chunk;
-    return out_chunk;
+    return ok;
 }
+        
 
 void InitModelMap()
 {

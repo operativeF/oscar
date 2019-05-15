@@ -62,15 +62,19 @@ class PRS1DataChunk
     friend class PRS1DataGroup;
 public:
     PRS1DataChunk() {
-        timestamp = 0;
+        fileVersion = 0;
+        blockSize = 0;
         ext = 255;
-        sessionid = 0;
         htype = 0;
         family = 0;
         familyVersion = 0;
+        timestamp = 0;
+        sessionid = 0;
+        
         duration = 0;
 
     }
+    PRS1DataChunk(class QFile & f);
     ~PRS1DataChunk() {
     }
     inline int size() const { return m_data.size(); }
@@ -82,8 +86,7 @@ public:
     QString m_path;
     qint64 m_filepos;  // file offset
     int m_index;  // nth chunk in file
-
-    SessionID sessionid;
+    inline void SetIndex(int index) { m_index = index; }
 
     quint8 fileVersion;
     quint16 blockSize;
@@ -92,6 +95,7 @@ public:
     quint8 family;
     quint8 familyVersion;
     quint32 timestamp;
+    SessionID sessionid;
 
     quint16 duration;
 
@@ -100,6 +104,12 @@ public:
     
     quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
     quint8 calcChecksum;  // header checksum as calculated when parsing
+
+    //! \brief Parse and return the next chunk from a PRS1 file
+    static PRS1DataChunk* ParseNext(class QFile & f);
+
+    //! \brief Read and parse the next chunk header from a PRS1 file
+    bool ReadHeader(class QFile & f);
 };
 
 class PRS1Loader;
@@ -235,9 +245,6 @@ class PRS1Loader : public CPAPLoader
     //! \brief Parse a PRS1 summary/event/waveform file and break into invidivual session or waveform chunks
     QList<PRS1DataChunk *> ParseFile(const QString & path);
 
-    //! \brief Parse and return the next chunk from a PRS1 file
-    PRS1DataChunk* ParseChunk(class QFile & f, int index=0);
-    
     //! \brief Register this Module to the list of Loaders, so it knows to search for PRS1 data.
     static void Register();
 
