@@ -3521,51 +3521,24 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
             break;
         }
 
-        bool hasHeaderDataBlock = (this->fileVersion == 3);
+        bool hdr_ok = false;
         if (this->ext < 5) { // Not a waveform chunk
-            QByteArray headerB2;
-
-            // Check if this is a newer machine with a header data block
-
-            if (hasHeaderDataBlock) {
-                // This is a new machine, byte 15 is header data block length
-                // followed by variable, data byte pairs
-                QByteArray extra = f.read(1);
-                if (extra.size() < 1) {
-                    qWarning() << this->m_path << "read error extended header";
+            switch (this->fileVersion) {
+                case 2:
+                    hdr_ok = ReadNormalHeaderV2(f);
                     break;
-                }
-                this->m_header.append(extra);
-                header = (unsigned char *)this->m_header.data();
-
-                int hdb_len = header[15];
-                int hdb_size = hdb_len * 2;
-
-                headerB2 = f.read(hdb_size);
-                if (headerB2.size() != hdb_size) {
-                    qWarning() << this->m_path << "read error in extended header";
+                case 3:
+                    hdr_ok = ReadNormalHeaderV3(f);
                     break;
-                }
-                
-                this->m_header.append(headerB2);
-                header = (unsigned char *)this->m_header.data();
-                const unsigned char * hd = (unsigned char *)headerB2.constData();
-                int pos = 0;
-                int recs = header[15];
-                for (int i=0; i<recs; i++) {
-                    this->hblock[hd[pos]] = hd[pos+1];
-                    pos += 2;
-                }
-            } else {
-                headerB2 = QByteArray();
+                default:
+                    //hdr_ok remains false, warning is above
+                    break;
             }
-            this->m_headerblock = headerB2;
-
         } else { // Waveform Chunk
-            bool hdr_ok = ReadWaveformHeader(f);
-            if (!hdr_ok) {
-                break;
-            }
+            hdr_ok = ReadWaveformHeader(f);
+        }
+        if (!hdr_ok) {
+            break;
         }
 
         // The 8bit checksum comes at the end.
@@ -3588,6 +3561,57 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         // Append the stored checksum to the raw data *after* calculating the checksum on the preceding data.
         this->m_header.append(checksum);
 
+        ok = true;
+    } while (false);
+
+    return ok;
+}
+
+
+bool PRS1DataChunk::ReadNormalHeaderV2(QFile & /*f*/)
+{
+    this->m_headerblock = QByteArray();
+    return true;  // always OK
+}
+
+
+bool PRS1DataChunk::ReadNormalHeaderV3(QFile & f)
+{
+    bool ok = false;
+    unsigned char * header;
+    QByteArray headerB2;
+
+    // This is a new machine, byte 15 is header data block length
+    // followed by variable, data byte pairs
+    do {
+        QByteArray extra = f.read(1);
+        if (extra.size() < 1) {
+            qWarning() << this->m_path << "read error extended header";
+            break;
+        }
+        this->m_header.append(extra);
+        header = (unsigned char *)this->m_header.data();
+
+        int hdb_len = header[15];
+        int hdb_size = hdb_len * 2;
+
+        headerB2 = f.read(hdb_size);
+        if (headerB2.size() != hdb_size) {
+            qWarning() << this->m_path << "read error in extended header";
+            break;
+        }
+        this->m_headerblock = headerB2;
+        
+        this->m_header.append(headerB2);
+        header = (unsigned char *)this->m_header.data();
+        const unsigned char * hd = (unsigned char *)headerB2.constData();
+        int pos = 0;
+        int recs = header[15];
+        for (int i=0; i<recs; i++) {
+            this->hblock[hd[pos]] = hd[pos+1];
+            pos += 2;
+        }
+        
         ok = true;
     } while (false);
 

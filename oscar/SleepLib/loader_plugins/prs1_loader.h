@@ -117,6 +117,12 @@ public:
     bool ReadData(class QFile & f);
     
 protected:
+    //! \brief Read and parse the non-waveform header data from a V2 PRS1 file
+    bool ReadNormalHeaderV2(class QFile & f);
+
+    //! \brief Read and parse the non-waveform header data from a V3 PRS1 file
+    bool ReadNormalHeaderV3(class QFile & f);
+
     //! \brief Read and parse the waveform-specific header data from a PRS1 file
     bool ReadWaveformHeader(class QFile & f);
 };
