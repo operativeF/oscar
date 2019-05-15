@@ -115,6 +115,10 @@ public:
 
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
+    
+protected:
+    //! \brief Read and parse the waveform-specific header data from a PRS1 file
+    bool ReadWaveformHeader(class QFile & f);
 };
 
 class PRS1Loader;

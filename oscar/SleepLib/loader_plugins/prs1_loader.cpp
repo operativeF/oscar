@@ -3561,49 +3561,10 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
             }
             this->m_headerblock = headerB2;
 
-       } else { // Waveform Chunk
-            QByteArray extra = f.read(5);
-            if (extra.size() != 5) {
-                qWarning() << this->m_path << "read error in waveform header";
+        } else { // Waveform Chunk
+            bool hdr_ok = ReadWaveformHeader(f);
+            if (!hdr_ok) {
                 break;
-            }
-            this->m_header.append(extra);
-            // Get the header address again to be safe
-            header = (unsigned char *)this->m_header.data();
-
-            this->duration = header[0x0f] | header[0x10] << 8;
-            int always_1 = header[0x11];
-            if (always_1 != 1) {
-                qWarning() << this->m_path << always_1 << "!= 1";
-                //break;  // don't break to avoid changing behavior (for now)
-            }
-            quint16 wvfm_signals = header[0x12] | header[0x13] << 8;
-
-            int ws_size = (this->fileVersion == 3) ? 4 : 3;
-            int sbsize = wvfm_signals * ws_size;
-
-            extra = f.read(sbsize);
-            if (extra.size() != sbsize) {
-                qWarning() << this->m_path << "read error in waveform header 2";
-                break;
-            }
-            this->m_header.append(extra);
-            header = (unsigned char *)this->m_header.data();
-
-            // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
-            int pos = 0x14 + (wvfm_signals - 1) * ws_size;
-            for (int i = 0; i < wvfm_signals; ++i) {
-                quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
-                if (this->fileVersion == 2) {
-                    quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
-                    this->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
-                    pos -= 3;
-                } else if (this->fileVersion == 3) {
-                    //quint16 sample_size = header[pos + 2] | header[pos + 3] << 8; // size in bits?? (08 00)
-                    // Possibly this is size in bits, and sign bit for the other byte?
-                    this->waveformInfo.push_back(PRS1Waveform(interleave, 0));
-                    pos -= 4;
-                }
             }
         }
 
@@ -3627,6 +3588,62 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         // Append the stored checksum to the raw data *after* calculating the checksum on the preceding data.
         this->m_header.append(checksum);
 
+        ok = true;
+    } while (false);
+
+    return ok;
+}
+
+
+bool PRS1DataChunk::ReadWaveformHeader(QFile & f)
+{
+    bool ok = false;
+    unsigned char * header;
+    do {
+        QByteArray extra = f.read(5);
+        if (extra.size() != 5) {
+            qWarning() << this->m_path << "read error in waveform header";
+            break;
+        }
+        this->m_header.append(extra);
+        // Get the header address again to be safe
+        header = (unsigned char *)this->m_header.data();
+
+        this->duration = header[0x0f] | header[0x10] << 8;
+        int always_1 = header[0x11];
+        if (always_1 != 1) {
+            qWarning() << this->m_path << always_1 << "!= 1";
+            //break;  // don't break to avoid changing behavior (for now)
+        }
+        quint16 wvfm_signals = header[0x12] | header[0x13] << 8;
+
+        int ws_size = (this->fileVersion == 3) ? 4 : 3;
+        int sbsize = wvfm_signals * ws_size;
+
+        extra = f.read(sbsize);
+        if (extra.size() != sbsize) {
+            qWarning() << this->m_path << "read error in waveform header 2";
+            break;
+        }
+        this->m_header.append(extra);
+        header = (unsigned char *)this->m_header.data();
+
+        // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
+        int pos = 0x14 + (wvfm_signals - 1) * ws_size;
+        for (int i = 0; i < wvfm_signals; ++i) {
+            quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
+            if (this->fileVersion == 2) {
+                quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
+                this->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
+                pos -= 3;
+            } else if (this->fileVersion == 3) {
+                //quint16 sample_size = header[pos + 2] | header[pos + 3] << 8; // size in bits?? (08 00)
+                // Possibly this is size in bits, and sign bit for the other byte?
+                this->waveformInfo.push_back(PRS1Waveform(interleave, 0));
+                pos -= 4;
+            }
+        }
+        
         ok = true;
     } while (false);
 
