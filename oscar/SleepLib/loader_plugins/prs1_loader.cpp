@@ -3448,13 +3448,12 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
     quint16 wvfm_signals=0;
 
     unsigned char * header;
-    quint8 achk=0;
 
     QByteArray headerBA, headerB2, extra;
 
     do {
-        chunk->m_header = f.read(16);
-        if (chunk->m_header.size() != 16) {
+        chunk->m_header = f.read(15);
+        if (chunk->m_header.size() != 15) {
             qWarning() << chunk->m_path << "file too short?";
             break;
         }
@@ -3489,16 +3488,23 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
                 // This is a new machine, byte 15 is header data block length
                 // followed by variable, data byte pairs
                 // then the 8bit Checksum
+                QByteArray extra = f.read(1);
+                if (extra.size() < 1) {
+                    qWarning() << chunk->m_path << "read error extended header";
+                    break;
+                }
+                chunk->m_header.append(extra);
+                header = (unsigned char *)chunk->m_header.data();
 
                 int hdb_len = header[15];
                 int hdb_size = hdb_len * 2;
 
-                headerB2 = f.read(hdb_size+1);  // add extra byte for checksum
-                if (headerB2.size() != hdb_size+1) {
+                headerB2 = f.read(hdb_size);
+                if (headerB2.size() != hdb_size) {
                     qWarning() << chunk->m_path << "read error in extended header";
                     break;
                 }
-
+                
                 chunk->m_header.append(headerB2);
             } else {
                 headerB2 = QByteArray();
@@ -3514,8 +3520,8 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
                qDebug() << chunk->m_path << chunk->sessionid;  // log mismatched waveforum session IDs
            }
 
-            extra = f.read(4);
-            if (extra.size() != 4) {
+            extra = f.read(5);
+            if (extra.size() != 5) {
                 qWarning() << chunk->m_path << "read error in waveform header";
                 break;
             }
@@ -3524,10 +3530,15 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
             header = (unsigned char *)chunk->m_header.data();
 
             chunk->duration = header[0x0f] | header[0x10] << 8;
+            int always_1 = header[0x11];
+            if (always_1 != 1) {
+                qWarning() << chunk->m_path << always_1 << "!= 1";
+                //break;  // don't break to avoid changing behavior (for now)
+            }
             wvfm_signals = header[0x12] | header[0x13] << 8;
 
             int ws_size = (chunk->fileVersion == 3) ? 4 : 3;
-            int sbsize = wvfm_signals * ws_size + 1;
+            int sbsize = wvfm_signals * ws_size;
 
             extra = f.read(sbsize);
             if (extra.size() != sbsize) {
@@ -3552,20 +3563,33 @@ PRS1DataChunk* PRS1Loader::ParseChunk(QFile & f, int cnt)
                     pos -= 4;
                 }
             }
-       }
+        }
 
-       // Calculate 8bit additive header checksum
-       achk=0;
-       header = (unsigned char *)chunk->m_header.data(); // important because its memory location could move
-       int header_size = chunk->m_header.size();
-       for (int i=0; i < (header_size-1); i++) achk += header[i];
+        // Calculate 8bit additive header checksum
+        QByteArray checksum = f.read(1);
+        if (checksum.size() < 1) {
+            qWarning() << chunk->m_path << "read error header checksum";
+            break;
+        }
+        chunk->storedChecksum = checksum.data()[0];
 
-       if (achk != header[header_size-1]) { // Header checksum mismatch?
-           qWarning() << chunk->m_path << "header checksum calc" << achk << "!= stored" << header[header_size-1];
-           break;
-       }
+        header = (unsigned char *)chunk->m_header.data(); // important because its memory location could move
+        int header_size = chunk->m_header.size();
+        quint8 achk=0;
+        for (int i=0; i < header_size; i++) {
+            achk += header[i];
+        }
+        chunk->calcChecksum = achk;
+        
+        chunk->m_header.append(checksum);
+
+        if (chunk->calcChecksum != chunk->storedChecksum) { // Header checksum mismatch?
+            qWarning() << chunk->m_path << "header checksum calc" << chunk->calcChecksum << "!= stored" << chunk->storedChecksum;
+            break;
+        }
 
         if (hasHeaderDataBlock) {
+            header = (unsigned char *)chunk->m_header.data();
             const unsigned char * hd = (unsigned char *)headerB2.constData();
             int pos = 0;
             int recs = header[15];

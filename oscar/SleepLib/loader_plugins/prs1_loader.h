@@ -97,6 +97,9 @@ public:
 
     QList<PRS1Waveform> waveformInfo;
     QMap<unsigned char, short> hblock;
+    
+    quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
+    quint8 calcChecksum;  // header checksum as calculated when parsing
 };
 
 class PRS1Loader;
