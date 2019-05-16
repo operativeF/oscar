@@ -5,7 +5,8 @@ is in Photshop Notes.xlsm, an Excel worksheet.
 
 Smaller icons require manual editing for best appearance.
 
-Windows .ico file should contain 16x16, 32x32, 48x48, and 256x256 images.
+Windows .ico file should contain 16x16, 32x32, 48x48, and 256x256 images.  We
+also include 24x24 for Windows XP compatibility.
 A .ico file can be built at the website icoconvert.com.
 
 MacOS .icns file should contain:
