@@ -1345,7 +1345,8 @@ void MainWindow::on_actionCheck_for_Updates_triggered()
 bool toolbox_visible = false;
 void MainWindow::on_action_Screenshot_triggered()
 {
-    daily->hideSpaceHogs();
+    if (daily)
+        daily->hideSpaceHogs();
     toolbox_visible = ui->toolBox->isVisible();
     ui->toolBox->hide();
     QTimer::singleShot(250, this, SLOT(DelayedScreenshot()));
@@ -1393,7 +1394,8 @@ void MainWindow::DelayedScreenshot()
     } else {
         Notify(tr("Screenshot saved to file \"%1\"").arg(QDir::toNativeSeparators(a)));
     }
-    daily->showSpaceHogs();
+    if (daily)
+        daily->showSpaceHogs();
     ui->toolBox->setVisible(toolbox_visible);
 
 }
