@@ -64,12 +64,12 @@ public:
     PRS1DataChunk() {
         fileVersion = 0;
         blockSize = 0;
-        ext = 255;
         htype = 0;
         family = 0;
         familyVersion = 0;
-        timestamp = 0;
+        ext = 255;
         sessionid = 0;
+        timestamp = 0;
         
         duration = 0;
 
@@ -90,20 +90,26 @@ public:
     int m_index;  // nth chunk in file
     inline void SetIndex(int index) { m_index = index; }
 
+    // Common fields
     quint8 fileVersion;
     quint16 blockSize;
-    quint8 ext;
     quint8 htype;
     quint8 family;
     quint8 familyVersion;
-    quint32 timestamp;
+    quint8 ext;
     SessionID sessionid;
+    quint32 timestamp;
 
-    quint16 duration;
-
+    // Waveform-specific fields
+    quint16 interval_count;
+    quint8 interval_seconds;
+    int duration;
     QList<PRS1Waveform> waveformInfo;
+    
+    // V3 normal/non-waveform fields
     QMap<unsigned char, short> hblock;
     
+    // Trailing common fields
     quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
     quint8 calcChecksum;    // header checksum as calculated when parsing
     quint32 storedCrc;      // header + data CRC stored in file, last 2-4 bytes of chunk

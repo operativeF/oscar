@@ -33,6 +33,9 @@
 //const int PRS1_EVENT_FILE=2;
 //const int PRS1_WAVEFORM_FILE=5;
 
+const int PRS1_HTYPE_NORMAL=0;
+const int PRS1_HTYPE_INTERVAL=1;
+
 
 //********************************************************************************************
 /// IMPORTANT!!!
@@ -1783,6 +1786,12 @@ bool PRS1Import::ParseF3Events()
     int hy, oa, ca;
     qint64 div = 0;
 
+    // TODO: make sure the assumptions here agree with the header:
+    // size == number of intervals
+    // interval seconds = 120
+    // interleave for each channel = 1
+    // also warn on any remainder of data size % record size (but don't fail)
+    
     const qint64 block_duration = 120000;
 
     for (int x=0; x < size; x++) {
@@ -3555,10 +3564,11 @@ PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
         }
 
         // Log mismatched waveform session IDs
-        if (chunk->ext >= 5) {
+        if (chunk->htype == PRS1_HTYPE_INTERVAL) {
             QFileInfo fi(f);
             bool numeric;
             int sessionid_base = (chunk->fileVersion == 2 ? 10 : 16);
+            if (chunk->family == 3 && chunk->familyVersion >= 3) sessionid_base = 16;
             QString session_s = fi.fileName().section(".", 0, -2);
             quint32 sid = session_s.toInt(&numeric, sessionid_base);
             if (!numeric || sid != chunk->sessionid) {
@@ -3619,10 +3629,15 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
             qWarning() << this->m_path << "@" << hex << this->m_filepos << "Never seen PRS1 header version < 2 or > 3 before";
             break;
         }
+        if (this->htype != PRS1_HTYPE_NORMAL && this->htype != PRS1_HTYPE_INTERVAL) {
+            qWarning() << this->m_path << "unexpected htype:" << this->htype;
+            //break;  // don't break to avoid changing behavior (for now)
+        }
 
         // Read format-specific variable-length header data.
         bool hdr_ok = false;
-        if (this->ext < 5) { // Not a waveform chunk
+        if (this->htype != PRS1_HTYPE_INTERVAL) {  // Not just waveforms: the 1160P uses this for its .002 events file.
+            // Not a waveform/interval chunk
             switch (this->fileVersion) {
                 case 2:
                     hdr_ok = ReadNormalHeaderV2(f);
@@ -3634,7 +3649,8 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
                     //hdr_ok remains false, warning is above
                     break;
             }
-        } else { // Waveform Chunk
+        } else {
+            // Waveform/interval chunk
             hdr_ok = ReadWaveformHeader(f);
         }
         if (!hdr_ok) {
@@ -3724,25 +3740,24 @@ bool PRS1DataChunk::ReadWaveformHeader(QFile & f)
     bool ok = false;
     unsigned char * header;
     do {
-        QByteArray extra = f.read(5);
-        if (extra.size() != 5) {
+        // Read the fixed-length waveform header.
+        QByteArray extra = f.read(4);
+        if (extra.size() != 4) {
             qWarning() << this->m_path << "read error in waveform header";
             break;
         }
         this->m_header.append(extra);
-        // Get the header address again to be safe
         header = (unsigned char *)this->m_header.data();
 
-        this->duration = header[0x0f] | header[0x10] << 8;
-        int always_1 = header[0x11];
-        if (always_1 != 1) {
-            qWarning() << this->m_path << always_1 << "!= 1";
-            //break;  // don't break to avoid changing behavior (for now)
-        }
-        quint16 wvfm_signals = header[0x12] | header[0x13] << 8;
+        // Parse the fixed-length portion.
+        this->interval_count = header[0x0f] | header[0x10] << 8;
+        this->interval_seconds = header[0x11];  // not always 1 after all
+        this->duration = this->interval_count * this->interval_seconds;  // ??? the last entry doesn't always seem to be a full interval?
+        quint8 wvfm_signals = header[0x12];
 
+        // Read the variable-length data + trailing byte.
         int ws_size = (this->fileVersion == 3) ? 4 : 3;
-        int sbsize = wvfm_signals * ws_size;
+        int sbsize = wvfm_signals * ws_size + 1;
 
         extra = f.read(sbsize);
         if (extra.size() != sbsize) {
@@ -3752,22 +3767,36 @@ bool PRS1DataChunk::ReadWaveformHeader(QFile & f)
         this->m_header.append(extra);
         header = (unsigned char *)this->m_header.data();
 
-        // Read the waveform information in reverse. // TODO: Double-check this, always seems to be flow then pressure.
-        int pos = 0x14 + (wvfm_signals - 1) * ws_size;
+        // Parse the variable-length waveform information.
+        int pos = 0x13;
         for (int i = 0; i < wvfm_signals; ++i) {
-            quint16 interleave = header[pos] | header[pos + 1] << 8; // samples per block (Usually 05 00)
+            quint8 kind = header[pos];
+            if (kind != i) {  // always seems to range from 0...wvfm_signals-1, alert if not
+                qWarning() << this->m_path << kind << "!=" << i << "waveform kind";
+                //break;  // don't break to avoid changing behavior (for now)
+            }
+            quint16 interleave = header[pos + 1] | header[pos + 2] << 8;  // samples per interval
             if (this->fileVersion == 2) {
-                quint8 sample_format = header[pos + 2];  // TODO: sample_format seems to be unused anywhere else in the loader.
-                this->waveformInfo.push_back(PRS1Waveform(interleave, sample_format));
-                pos -= 3;
+                this->waveformInfo.push_back(PRS1Waveform(interleave, kind));
+                pos += 3;
             } else if (this->fileVersion == 3) {
-                //quint16 sample_size = header[pos + 2] | header[pos + 3] << 8; // size in bits?? (08 00)
-                // Possibly this is size in bits, and sign bit for the other byte?
-                this->waveformInfo.push_back(PRS1Waveform(interleave, 0));
-                pos -= 4;
+                int always_8 = header[pos + 3];  // sample size in bits?
+                if (always_8 != 8) {
+                    qWarning() << this->m_path << always_8 << "!= 8 in waveform header";
+                    //break;  // don't break to avoid changing behavior (for now)
+                }
+                this->waveformInfo.push_back(PRS1Waveform(interleave, kind));
+                pos += 4;
             }
         }
         
+        // And the trailing byte, whatever it is.
+        int always_0 = header[pos];
+        if (always_0 != 0) {
+            qWarning() << this->m_path << always_0 << "!= 0 in waveform header";
+            //break;  // don't break to avoid changing behavior (for now)
+        }
+       
         ok = true;
     } while (false);
 
