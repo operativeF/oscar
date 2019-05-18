@@ -181,8 +181,12 @@ QString getBranchVersion()
     if (GIT_BRANCH != "master") {
         version += GIT_BRANCH+"-";
     }
-    version += GIT_REVISION +" ";
-    version += getGraphicsEngine()+"]";
+    version += GIT_REVISION;
+#ifndef UNITTEST_MODE
+    // There is no graphics engine on the console.
+    version += QString(" ") + getGraphicsEngine();
+#endif
+    version += "]";
 
     return version;
 }

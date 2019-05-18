@@ -18,6 +18,8 @@ static QString prs1OutputPath(const QString & inpath, const QString & serial, in
 
 void PRS1Tests::initTestCase(void)
 {
+    initializeStrings();
+    qDebug() << STR_TR_OSCAR + " " + getBranchVersion();
     QString profile_path = TESTDATA_PATH "profile/";
     Profiles::Create("test", &profile_path);
 
