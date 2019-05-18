@@ -117,10 +117,9 @@ void MainWindow::SetupGUI()
     setWindowTitle(STR_TR_OSCAR + QString(" %1").arg(version));
 
 #ifdef Q_OS_MAC
-
     ui->action_About->setMenuRole(QAction::ApplicationSpecificRole);
     ui->action_Preferences->setMenuRole(QAction::ApplicationSpecificRole);
-    ui->action_Exit->setMenuRole(QAction::ApplicationSpecificRole);
+    ui->action_Preferences->setShortcuts(QKeySequence::Preferences);
 #endif
 
     ui->actionToggle_Line_Cursor->setChecked(AppSetting->lineCursorMode());
@@ -1346,37 +1345,25 @@ void MainWindow::on_actionCheck_for_Updates_triggered()
 bool toolbox_visible = false;
 void MainWindow::on_action_Screenshot_triggered()
 {
-    daily->hideSpaceHogs();
+    if (daily)
+        daily->hideSpaceHogs();
     toolbox_visible = ui->toolBox->isVisible();
     ui->toolBox->hide();
     QTimer::singleShot(250, this, SLOT(DelayedScreenshot()));
 }
+
 void MainWindow::DelayedScreenshot()
 {
     // Make sure to scale for high resolution displays (like Retina)
    // qreal pr = devicePixelRatio();
 
-
-    QScreen * screen = QApplication::primaryScreen();
-
-
-    int titleBarHeight = -QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight);
-#ifdef Q_OS_WIN
-    titleBarHeight += 6;
-#endif
-
-    QPixmap pixmap = screen->grabWindow(winId(),0,titleBarHeight);
-
-/*#if defined(Q_OS_WIN) || defined(Q_OS_LINUX) || defined(Q_OS_HAIKU)
-     // grab the whole screen
-    grab()
-     QPixmap desktop = QPixmap::grabWindow(QApplication::desktop()->winId());
-
-     QPixmap pixmap = desktop.copy(x() * pr, y() * pr, (width()+6) * pr, (height()+22) * pr);
-
-#elif defined(Q_OS_MAC)
-    QPixmap pixmap = QPixmap::grabWindow(this->winId(), x(), y(), width() / pr, (height() / pr) + 10);
-#endif */
+    auto screenshotRect = geometry();
+    auto titleBarHeight = QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight);
+    auto pixmap = QApplication::primaryScreen()->grabWindow(QDesktopWidget().winId(),
+                                                            screenshotRect.left(),
+                                                            screenshotRect.top() - titleBarHeight,
+                                                            screenshotRect.width(),
+                                                            screenshotRect.height() + titleBarHeight);
 
     QString a = p_pref->Get("{home}/Screenshots");
     QDir dir(a);
@@ -1394,7 +1381,8 @@ void MainWindow::DelayedScreenshot()
     } else {
         Notify(tr("Screenshot saved to file \"%1\"").arg(QDir::toNativeSeparators(a)));
     }
-    daily->showSpaceHogs();
+    if (daily)
+        daily->showSpaceHogs();
     ui->toolBox->setVisible(toolbox_visible);
 
 }

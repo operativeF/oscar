@@ -797,7 +797,7 @@ If you use a few different masks, pick average values instead. It should still b
                <string>Your masks vent rate at 20 cmH2O pressure</string>
               </property>
               <property name="minimum">
-               <number>400</number>
+               <number>300</number>
               </property>
               <property name="maximum">
                <number>550</number>
@@ -853,7 +853,7 @@ If you use a few different masks, pick average values instead. It should still b
                <string>Your masks vent rate at 4 cmH2O pressure</string>
               </property>
               <property name="minimum">
-               <number>170</number>
+               <number>120</number>
               </property>
               <property name="maximum">
                <number>240</number>
