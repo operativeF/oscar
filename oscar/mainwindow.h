@@ -215,7 +215,6 @@ class MainWindow : public QMainWindow
     void on_actionCheck_for_Updates_triggered();
 
     //! \brief Attempts to do a screenshot of the application window
-    //! \note This is currently broken on Macs
     void on_action_Screenshot_triggered();
 
     //! \brief This is the actual screenshot code.. It's delayed with a QTimer to give the menu time to close.
