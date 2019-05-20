@@ -872,7 +872,11 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
             // Parse the data chunks and read the files..
             if (fi.canonicalFilePath().isEmpty()) {
-                qWarning() << fi;
+#if QT_VERSION < QT_VERSION_CHECK(5,12,0)
+                qWarning() << fi.fileName() << "canonicalFilePath is empty";
+#else
+                qWarning() << fi << "cannonicalFilePath is empty";
+#endif
             }
             QList<PRS1DataChunk *> Chunks = ParseFile(fi.canonicalFilePath());
 
