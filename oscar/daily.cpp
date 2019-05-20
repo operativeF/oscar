@@ -1557,10 +1557,11 @@ void Daily::Load(QDate date)
     const int maxcolors=sizeof(cols)/sizeof(QColor);
     QList<Session *>::iterator i;
 
+    sessionbar->clear();    // clear sessionbar as some days don't have sessions
+
     if (cpap) {
         int c=0;
 
-        sessionbar->clear();
         for (i=day->begin();i!=day->end();++i) {
             Session * s=*i;
             if ((*s).type() == MT_CPAP)
