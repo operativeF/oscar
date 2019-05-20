@@ -162,10 +162,6 @@ void SessionToYaml(QString filepath, Session* session)
     }
     QTextStream out(&file);
 
-    // TODO: We sometimes see invalid session IDs. Either memory is getting trampled or the file
-    // header has the wrong ID (or isn't getting parsed right). Track this down once we can test parsing.
-    if (session->session() > 2000) qDebug() << "memory trampled? session ID" << session->session();
-    
     out << "session:" << endl;
     out << "  id: " << session->session() << endl;
     out << "  start: " << ts(session->first()) << endl;

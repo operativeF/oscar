@@ -62,35 +62,80 @@ class PRS1DataChunk
     friend class PRS1DataGroup;
 public:
     PRS1DataChunk() {
-        timestamp = 0;
-        ext = 255;
-        sessionid = 0;
+        fileVersion = 0;
+        blockSize = 0;
         htype = 0;
         family = 0;
         familyVersion = 0;
+        ext = 255;
+        sessionid = 0;
+        timestamp = 0;
+        
         duration = 0;
 
+        m_filepos = -1;
+        m_index = -1;
     }
+    PRS1DataChunk(class QFile & f);
     ~PRS1DataChunk() {
     }
     inline int size() const { return m_data.size(); }
 
+    QByteArray m_header;
     QByteArray m_data;
     QByteArray m_headerblock;
 
-    SessionID sessionid;
+    QString m_path;
+    qint64 m_filepos;  // file offset
+    int m_index;  // nth chunk in file
+    inline void SetIndex(int index) { m_index = index; }
 
+    // Common fields
     quint8 fileVersion;
-    quint8 ext;
+    quint16 blockSize;
     quint8 htype;
     quint8 family;
     quint8 familyVersion;
+    quint8 ext;
+    SessionID sessionid;
     quint32 timestamp;
 
-    quint16 duration;
-
+    // Waveform-specific fields
+    quint16 interval_count;
+    quint8 interval_seconds;
+    int duration;
     QList<PRS1Waveform> waveformInfo;
+    
+    // V3 normal/non-waveform fields
     QMap<unsigned char, short> hblock;
+    
+    // Trailing common fields
+    quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
+    quint8 calcChecksum;    // header checksum as calculated when parsing
+    quint32 storedCrc;      // header + data CRC stored in file, last 2-4 bytes of chunk
+    quint32 calcCrc;        // header + data CRC as calculated when parsing
+
+    //! \brief Parse and return the next chunk from a PRS1 file
+    static PRS1DataChunk* ParseNext(class QFile & f);
+
+    //! \brief Read and parse the next chunk header from a PRS1 file
+    bool ReadHeader(class QFile & f);
+
+    //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
+    bool ReadData(class QFile & f);
+    
+protected:
+    //! \brief Read and parse the non-waveform header data from a V2 PRS1 file
+    bool ReadNormalHeaderV2(class QFile & f);
+
+    //! \brief Read and parse the non-waveform header data from a V3 PRS1 file
+    bool ReadNormalHeaderV3(class QFile & f);
+
+    //! \brief Read and parse the waveform-specific header data from a PRS1 file
+    bool ReadWaveformHeader(class QFile & f);
+
+    //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
+    bool ExtractStoredCrc(int size);
 };
 
 class PRS1Loader;
@@ -137,6 +182,9 @@ public:
 
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents();
+
+    //! \brief Coalesce contiguous .005 or .006 waveform chunks from the file into larger chunks for import.
+    QList<PRS1DataChunk *> CoalesceWaveformChunks(QList<PRS1DataChunk *> & allchunks);
 
     //! \brief Takes the parsed list of Flow/MaskPressure waveform chunks and adds them to the database
     bool ParseWaveforms();

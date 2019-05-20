@@ -18,6 +18,7 @@ class PRS1Tests : public QObject
  
 private slots:
     void initTestCase();
+    void testChunksToYaml();
     void testSessionsToYaml();
     // void test2();
     void cleanupTestCase();
