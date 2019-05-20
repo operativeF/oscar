@@ -47,9 +47,14 @@ class MainWindow;
  This document is an attempt to provide a little technical insight into OSCAR's program internals.
 
  \section project_info Further Information
- The project was hosted on sourceforge, and it's original project page can be reached at <a href="http://sourceforge.net/projects/sleepyhead">http://sourceforge.net/projects/sleepyhead</a>.
+ OSCAR is hosted on <a href="https://gitlab.com/pholy/OSCAR-code">Gitlab</a> with full source code available there.
 
- There was also a <a href="http://sourceforge.net/apps/mediawiki/sleepyhead/index.php?title=Main_Page">SleepyHead Wiki</a> containing further information
+ Help for users can be found in the <a href="http://www.apneaboard.com/wiki/index.php?title=OSCAR_Help">OSCAR Help Wiki</a>.
+
+ Data structures are described in a <a href="http://www.apneaboard.com/wiki/index.php?title=OSCAR_Data_Information">OSCAR Data Information Wiki</a>.
+
+ The SleepyHead project was hosted on sourceforge, and it's original project page can be reached at <a href="http://sourceforge.net/projects/sleepyhead">http://sourceforge.net/projects/sleepyhead</a>.
+ There was also a <a href="http://sourceforge.net/apps/mediawiki/sleepyhead/index.php?title=Main_Page">SleepyHead Wiki</a> containing further information.
 
  \section structure Program Structure
  OSCAR is written in C++ using Qt Toolkit library, and comprises of 3 main components
