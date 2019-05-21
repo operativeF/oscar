@@ -46,7 +46,8 @@ qint64 timezoneOffset();
 enum SummaryType { ST_CNT, ST_SUM, ST_AVG, ST_WAVG, ST_PERC, ST_90P, ST_MIN, ST_MAX, ST_MID, ST_CPH, ST_SPH, ST_FIRST, ST_LAST, ST_HOURS, ST_SESSIONS, ST_SETMIN, ST_SETAVG, ST_SETMAX, ST_SETWAVG, ST_SETSUM, ST_SESSIONID, ST_DATE };
 
 /*! \enum MachineType
-    \brief Generalized type of a machine
+    \brief Generalized type of a machine. MT_CPAP is any type of xPAP machine, MT_OXIMETER any type of Oximeter
+    \brief MT_SLEEPSTAGE stage of sleep detector (ZEO importer), MT_JOURNAL for optional notes, MT_POSITION for sleep position detector (Somnopose)
   */
 enum MachineType { MT_UNKNOWN = 0, MT_CPAP, MT_OXIMETER, MT_SLEEPSTAGE, MT_JOURNAL, MT_POSITION, MT_UNCATEGORIZED = 99};
 //void InitMapsWithoutAwesomeInitializerLists();
