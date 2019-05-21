@@ -47,3 +47,6 @@ Makefile*
 
 #Doxygen output does not go in repository
 doxydoc
+
+#SourceTrail files
+*.json
