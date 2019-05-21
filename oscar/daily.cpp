@@ -964,11 +964,10 @@ QString Daily::getMachineSettings(Day * day) {
 
         ChannelID cpapmode = loader->CPAPModeChannel();
         schema::Channel & chan = schema::channel[cpapmode];
-        first[cpapmode] = QString("<tr><td><p tiltle='%2'>%1</p></td><td colspan=4>%3</td></tr>")
+        first[cpapmode] = QString("<tr><td><p title='%2'>%1</p></td><td colspan=4>%3</td></tr>")
                 .arg(chan.label())
                 .arg(chan.description())
                 .arg(day->getCPAPMode());
-
 
         if (sess) for (; it != it_end; ++it) {
             ChannelID code = it.key();
@@ -991,11 +990,13 @@ QString Daily::getMachineSettings(Day * day) {
 
                 data = it.value().toString() + " "+ chan.units();
             }
+            if (code ==0xe202)      // Format EPR relief correctly
+                data = formatRelief(data);
+
             QString tmp = QString("<tr><td><p title='%2'>%1</p></td><td colspan=4>%3</td></tr>")
                     .arg(schema::channel[code].label())
                     .arg(schema::channel[code].description())
                     .arg(data);
-
 
             if ((code == CPAP_IPAP)
             || (code == CPAP_EPAP)
