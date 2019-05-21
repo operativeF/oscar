@@ -872,7 +872,7 @@ QString Statistics::GenerateRXChanges()
     QString html = "<div align=center><br/>";
     html += QString("<table class=curved style=\"page-break-before:always;\" "+table_width+" width=100%>");
     html += "<thead>";
-    html += "<tr bgcolor='"+heading_color+"'><th colspan=9 align=center><font size=+2>" + tr("Changes to Prescription Settings") + "</font></th></tr>";
+    html += "<tr bgcolor='"+heading_color+"'><th colspan=9 align=center><font size=+2>" + tr("Changes to Machine Settings") + "</font></th></tr>";
 
 //    QString extratxt;
 
