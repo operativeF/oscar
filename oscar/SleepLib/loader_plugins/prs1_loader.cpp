@@ -954,11 +954,195 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
     }
 }
 
+enum PRS1ParsedEventType
+{
+    EV_PRS1_TB,
+    EV_PRS1_OA,
+    EV_PRS1_CA,
+    EV_PRS1_FL,
+    EV_PRS1_PB,
+    EV_PRS1_LL,
+    EV_PRS1_HY,
+    EV_PRS1_IPAP,
+    EV_PRS1_TOTLEAK,
+    EV_PRS1_IPAPLOW,
+    EV_PRS1_IPAPHIGH,
+    EV_PRS1_RR,
+    EV_PRS1_PTB,
+    EV_PRS1_MV,
+    EV_PRS1_TV,
+    EV_PRS1_SNORE,
+    EV_PRS1_EPAP,
+};
+
+enum PRS1ParsedEventUnit
+{
+    PRS1_UNIT_NONE,
+    PRS1_UNIT_CMH2O,
+    PRS1_UNIT_ML,
+};
+
+class PRS1ParsedEvent
+{
+public:
+    PRS1ParsedEventType m_type;
+    int m_start;     // seconds relative to chunk timestamp at which this event began
+    int m_duration;
+    int m_value;
+    float m_offset;
+    float m_gain;
+    PRS1ParsedEventUnit m_unit;
+
+protected:
+    PRS1ParsedEvent(PRS1ParsedEventType type, int start)
+    : m_type(type), m_start(start), m_duration(0), m_value(0), m_offset(0.0), m_gain(1.0), m_unit(PRS1_UNIT_NONE)
+    {
+    }
+    ~PRS1ParsedEvent()
+    {
+    }
+};
+
+class PRS1ParsedDurationEvent : public PRS1ParsedEvent
+{    
+protected:
+    PRS1ParsedDurationEvent(PRS1ParsedEventType type, int start, int duration) : PRS1ParsedEvent(type, start)
+    {
+        m_duration = duration;
+    }
+};
+
+class PRS1ParsedValueEvent : public PRS1ParsedEvent
+{
+protected:
+    PRS1ParsedValueEvent(PRS1ParsedEventType type, int start, int value) : PRS1ParsedEvent(type, start) { m_value = value; }
+};
+
+class PRS1PressureEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1PressureEvent(PRS1ParsedEventType type, int start, int value) 
+        : PRS1ParsedValueEvent(type, start, value) 
+    { 
+        m_gain = 0.1;
+        m_unit = PRS1_UNIT_CMH2O;
+    }
+};
+
+class PRS1TimedBreathEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1TimedBreathEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_TB, start, duration) {}
+};
+
+class PRS1ObstructiveApneaEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1ObstructiveApneaEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_OA, start, duration) {}
+};
+
+class PRS1ClearAirwayEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1ClearAirwayEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_CA, start, duration) {}
+};
+
+class PRS1FlowLimitationEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1FlowLimitationEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_FL, start, duration) {}
+};
+
+class PRS1PeriodicBreathingEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1PeriodicBreathingEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_PB, start, duration) {}
+};
+
+class PRS1LargeLeakEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1LargeLeakEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_LL, start, duration) {}
+};
+
+class PRS1HypopneaEvent : public PRS1ParsedDurationEvent
+{
+public:
+    PRS1HypopneaEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_HY, start, duration) {}
+};
+
+class PRS1IPAPEvent : public PRS1PressureEvent
+{
+public:
+    PRS1IPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAP, start, value) {}
+};
+
+class PRS1TotalLeakEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1TotalLeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TOTLEAK, start, value) {}
+};
+
+class PRS1IPAPHighEvent : public PRS1PressureEvent
+{
+public:
+    PRS1IPAPHighEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAPHIGH, start, value) {}
+};
+
+class PRS1IPAPLowEvent : public PRS1PressureEvent
+{
+public:
+    PRS1IPAPLowEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAPLOW, start, value) {}
+};
+
+class PRS1RespiratoryRateEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1RespiratoryRateEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_RR, start, value) {}
+};
+
+class PRS1PatientTriggeredBreathsEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1PatientTriggeredBreathsEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_PTB, start, value) {}
+};
+
+class PRS1MinuteVentilationEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1MinuteVentilationEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_MV, start, value) {}
+};
+
+class PRS1TidalVolumeEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1TidalVolumeEvent(int start, int value)
+        : PRS1ParsedValueEvent(EV_PRS1_TV, start, value)
+    {
+        m_gain = 10.0;
+        m_unit = PRS1_UNIT_ML;
+    }
+};
+
+class PRS1SnoreEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1SnoreEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_SNORE, start, value) {}
+};
+
+class PRS1EPAPEvent : public PRS1PressureEvent
+{
+public:
+    PRS1EPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_EPAP, start, value) {}
+};
+
+void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
+{
+    m_parsedData.push_back(event);
+}
+
 bool PRS1Import::ParseF5EventsFV3()
 {
-    EventDataType data0, data1, data2, data3, data4, data5;
-    Q_UNUSED(data3)
-
     EventDataType currentPressure=0, leak; //, p;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
@@ -972,16 +1156,7 @@ bool PRS1Import::ParseF5EventsFV3()
     //qint64 start=timestamp;
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
-    qint64 tt = 0;
-    int pos = 0;
-    //int cnt = 0;
-    short delta;//,duration;
-    //bool badcode = false;
-    unsigned char lastcode3 = 0, lastcode2 = 0, lastcode = 0, code = 0;
-    int lastpos = 0, startpos = 0, lastpos2 = 0, lastpos3 = 0;
 
-    int size = event->m_data.size();
-    unsigned char * buffer = (unsigned char *)event->m_data.data();
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
 
@@ -1007,6 +1182,118 @@ bool PRS1Import::ParseF5EventsFV3()
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
 
+    bool ok;
+    ok = event->ParseEventsF5V3();
+    if (!ok) {
+        return false;
+    }
+    
+    for (int i=0; i < event->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = event->m_parsedData.at(i);
+        t = qint64(event->timestamp + e->m_start) * 1000L;
+        
+        switch (e->m_type) {
+            case EV_PRS1_TB:
+                TB->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_OA:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_CA:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_FL:
+                FL->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_PB:
+                PB->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_LL:
+                LL->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_HY:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_IPAP:
+                IPAP->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case EV_PRS1_TOTLEAK:
+                TOTLEAK->AddEvent(t, e->m_value);
+                leak = e->m_value;
+                if (calcLeaks) { // Much Quicker doing this here than the recalc method.
+                    leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
+                    if (leak < 0) leak = 0;
+                    LEAK->AddEvent(t, leak);
+                }
+                break;
+            case EV_PRS1_IPAPLOW:
+                IPAPLo->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_IPAPHIGH:
+                IPAPHi->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_RR:
+                RR->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_PTB:
+                PTB->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_MV:
+                MV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TV:
+                TV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_SNORE:
+                SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS->AddEvent(t, 0); //data2); // VSnore
+                }
+                break;
+            case EV_PRS1_EPAP:
+                EPAP->AddEvent(t, e->m_value);
+                EventDataType ps = currentPressure - e->m_value;
+                PS->AddEvent(t, ps);           // Pressure Support
+                break;
+            default:
+                qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
+                break;
+        }
+    }
+    
+    session->updateLast(t);
+    session->m_cnt.clear();
+    session->m_cph.clear();
+
+    session->m_valuesummary[CPAP_Pressure].clear();
+    session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));
+
+    return true;
+}
+
+
+bool PRS1DataChunk::ParseEventsF5V3()
+{
+    if (this->family != 5 || this->familyVersion != 3) {
+        qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
+        //break;  // don't break to avoid changing behavior (for now)
+    }
+    
+    EventDataType data0, data1, data2, data3, data4, data5;
+    Q_UNUSED(data3)
+
+    int t = 0;
+    int pos = 0;
+    //int cnt = 0;
+    short delta;//,duration;
+    //bool badcode = false;
+    unsigned char lastcode3 = 0, lastcode2 = 0, lastcode = 0, code = 0;
+    int lastpos = 0, startpos = 0, lastpos2 = 0, lastpos3 = 0;
+
+    int size = this->m_data.size();
+    unsigned char * buffer = (unsigned char *)this->m_data.data();
+
     while (pos < size) {
         lastcode3 = lastcode2;
         lastcode2 = lastcode;
@@ -1018,7 +1305,7 @@ bool PRS1Import::ParseF5EventsFV3()
         code = buffer[pos++];
 
         if (code >= 0x12) {
-            qDebug() << "Illegal PRS1 code " << hex << int(code) << " appeared at " << hex << startpos << "in" << event->sessionid;;
+            qDebug() << "Illegal PRS1 code " << hex << int(code) << " appeared at " << hex << startpos << "in" << this->sessionid;;
             qDebug() << "1: (" << int(lastcode) << hex << lastpos << ")";
             qDebug() << "2: (" << int(lastcode2) << hex << lastpos2 << ")";
             qDebug() << "3: (" << int(lastcode3) << hex << lastpos3 << ")";
@@ -1027,90 +1314,67 @@ bool PRS1Import::ParseF5EventsFV3()
         delta = buffer[pos];
         //delta=buffer[pos+1] << 8 | buffer[pos];
         pos += 2;
-        t += qint64(delta) * 1000L;
-        tt=t;
+        t += delta;
 
         switch(code) {
         case 0x01: // Leak ???
             data0 = buffer[pos++];
-
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
+            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
             break;
         case 0x02: // Meh??? Timed Breath??
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-            TB->AddEvent(tt, data0);
-
-
+            this->AddEvent(new PRS1TimedBreathEvent(t - data0, data0));
             break;
         case 0x03: // Graph Data
-            IPAP->AddEvent(t, currentPressure = data0 = buffer[pos++]); // 00=IAP
+            data0 = buffer[pos++];
+            this->AddEvent(new PRS1IPAPEvent(t, data0));                             // 00=IAP
             data4 = buffer[pos++];
-            IPAPLo->AddEvent(t, data4);               // 01=IAP Low
+            this->AddEvent(new PRS1IPAPLowEvent(t, data4));                          // 01=IAP Low
             data5 = buffer[pos++];
-            IPAPHi->AddEvent(t, data5);               // 02=IAP High
-
-            TOTLEAK->AddEvent(t, leak=buffer[pos++]);           // 03=LEAK
-            if (calcLeaks) { // Much Quicker doing this here than the recalc method.
-                leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
-                if (leak < 0) leak = 0;
-
-                LEAK->AddEvent(t, leak);
-            }
+            this->AddEvent(new PRS1IPAPHighEvent(t, data5));                         // 02=IAP High
+            this->AddEvent(new PRS1TotalLeakEvent(t, buffer[pos++]));                // 03=LEAK
 
 
-            RR->AddEvent(t, buffer[pos++]);             // 04=Breaths Per Minute
-            PTB->AddEvent(t, buffer[pos++]);            // 05=Patient Triggered Breaths
-            MV->AddEvent(t, buffer[pos++]);             // 06=Minute Ventilation
+            this->AddEvent(new PRS1RespiratoryRateEvent(t, buffer[pos++]));          // 04=Breaths Per Minute
+            this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, buffer[pos++]));  // 05=Patient Triggered Breaths
+            this->AddEvent(new PRS1MinuteVentilationEvent(t, buffer[pos++]));        // 06=Minute Ventilation
             //tmp=buffer[pos++] * 10.0;
-            TV->AddEvent(t, buffer[pos++]);             // 07=Tidal Volume
-            SNORE->AddEvent(t, data2 = buffer[pos++]); // 08=Snore
-
-            if (data2 > 0) {
-                VS->AddEvent(t, 0); //data2); // VSnore
-            }
-
-            EPAP->AddEvent(t, data1 = buffer[pos++]); // 09=EPAP
-            data2 = data0 - data1;
-            PS->AddEvent(t, data2);           // Pressure Support
+            this->AddEvent(new PRS1TidalVolumeEvent(t, buffer[pos++]));              // 07=Tidal Volume
+            this->AddEvent(new PRS1SnoreEvent(t, buffer[pos++]));                    // 08=Snore
+            this->AddEvent(new PRS1EPAPEvent(t, buffer[pos++]));                     // 09=EPAP
             data0 = buffer[pos++];
 
 
             break;
         case 0x05:
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-            OA->AddEvent(tt, data0);
+            this->AddEvent(new PRS1ObstructiveApneaEvent(t - data0, data0));
 
 //            PS->AddEvent(tt, data0);
             break;
         case 0x06: // Clear Airway
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-
-            CA->AddEvent(tt, data0);
+            this->AddEvent(new PRS1ClearAirwayEvent(t - data0, data0));
 
 //            PTB->AddEvent(tt, data0);
             break;
         case 0x07:
             data0 = buffer[pos++];
             data1 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
+            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
 
 
             break;
         case 0x08: // Flow Limitation
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-
-            FL->AddEvent(tt, data0);
+            this->AddEvent(new PRS1FlowLimitationEvent(t - data0, data0));
             break;
         case 0x09:
             data0 = buffer[pos++];
             data1 = buffer[pos++];
             data2 = buffer[pos++];
             data3 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
+            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
 
 
           //  TB->AddEvent(tt, data0);
@@ -1120,8 +1384,7 @@ bool PRS1Import::ParseF5EventsFV3()
             data0 *= 2;
             pos += 2;
             data1 = buffer[pos++];
-            tt = t - qint64(data1) * 1000L;
-            PB->AddEvent(tt, data0);
+            this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));
 
             break;
         case 0x0b: // Large Leak
@@ -1129,37 +1392,27 @@ bool PRS1Import::ParseF5EventsFV3()
             data0 *= 2;
             pos += 2;
             data1 = buffer[pos++];
-            tt = t - qint64(data1) * 1000L;
-            LL->AddEvent(tt, data0);
+            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));
 
             break;
         case 0x0d: // flag ??
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-            HY->AddEvent(tt, data0);
+            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
 
 
             break;
         case 0x0e:
             data0 = buffer[pos++];
-            tt -= qint64(data0) * 1000L; // Subtract Time Offset
-            HY->AddEvent(tt, data0);
+            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
 
             break;
         default:
-            qDebug() << "Unknown code:" << hex << code << "in" << event->sessionid << "at" << pos;
+            qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << pos;
 
 
         }
 
     }
-
-    session->updateLast(t);
-    session->m_cnt.clear();
-    session->m_cph.clear();
-
-    session->m_valuesummary[CPAP_Pressure].clear();
-    session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));
 
     return true;
 }
@@ -3542,6 +3795,14 @@ QList<PRS1DataChunk *> PRS1Loader::ParseFile(const QString & path)
 PRS1DataChunk::PRS1DataChunk(QFile & f)
 {
     m_path = QFileInfo(f).canonicalFilePath();
+}
+
+PRS1DataChunk::~PRS1DataChunk()
+{
+    for (int i=0; i < m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = m_parsedData.at(i);
+        delete e;
+    }
 }
 
 

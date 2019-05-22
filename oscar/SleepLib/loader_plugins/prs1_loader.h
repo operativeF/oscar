@@ -77,13 +77,13 @@ public:
         m_index = -1;
     }
     PRS1DataChunk(class QFile & f);
-    ~PRS1DataChunk() {
-    }
+    ~PRS1DataChunk();
     inline int size() const { return m_data.size(); }
 
     QByteArray m_header;
     QByteArray m_data;
     QByteArray m_headerblock;
+    QList<class PRS1ParsedEvent*> m_parsedData;
 
     QString m_path;
     qint64 m_filepos;  // file offset
@@ -124,7 +124,13 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 3 machine
+    bool ParseEventsF5V3();
+
 protected:
+    //! \brief Add a parsed event to the chunk
+    void AddEvent(class PRS1ParsedEvent* event);
+
     //! \brief Read and parse the non-waveform header data from a V2 PRS1 file
     bool ReadNormalHeaderV2(class QFile & f);
 
