@@ -174,7 +174,14 @@ void SessionToYaml(QString filepath, Session* session)
     QList<ChannelID> keys = session->settings.keys();
     std::sort(keys.begin(), keys.end());
     for (QList<ChannelID>::iterator key = keys.begin(); key != keys.end(); key++) {
-        out << "    " << settingChannel(*key) << ": " << session->settings[*key].toString() << endl;
+        QVariant & value = session->settings[*key];
+        QString s;
+        if ((QMetaType::Type) value.type() == QMetaType::Float) {
+            s = QString::number(value.toFloat());  // Print the shortest accurate representation rather than QVariant's full precision.
+        } else {
+            s = value.toString();
+        }
+        out << "    " << settingChannel(*key) << ": " << s << endl;
     }
 
     out << "  events:" << endl;
