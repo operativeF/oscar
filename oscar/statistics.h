@@ -156,6 +156,7 @@ class Statistics : public QObject
     void saveRXChanges();
     void updateRXChanges();
 
+    QString getUserInfo();
     QString GenerateHTML();
     QString GenerateMachineList();
     QString GenerateRXChanges();
