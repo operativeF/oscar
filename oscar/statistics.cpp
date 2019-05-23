@@ -604,7 +604,7 @@ const QString table_width = "width=99%";
 QString Statistics::htmlHeader(bool showheader)
 {
     QString html = QString("<html><head>")+
-
+/********
     "<style type='text/css'>"
         "p,a,td,body { font-family: '"+QApplication::font().family()+"'; }"
         "p,a,td,body { font-size: "+QString::number(QApplication::font().pointSize() + 2)+"px; }"
@@ -636,7 +636,7 @@ QString Statistics::htmlHeader(bool showheader)
         "{ tableRow.style.backgroundColor = highLight; }"
         "function Go(url) { throw(url); }"
     "</script>"
-
+******/
     "</head>"
 
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
