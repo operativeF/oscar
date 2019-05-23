@@ -108,6 +108,9 @@ public:
     
     // V3 normal/non-waveform fields
     QMap<unsigned char, short> hblock;
+
+    QMap<unsigned char, QByteArray> mainblock;
+    QMap<unsigned char, QByteArray> hbdata;
     
     // Trailing common fields
     quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
@@ -124,8 +127,11 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
+    bool ParseSummaryF5V3(void);
+    
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 3 machine
-    bool ParseEventsF5V3();
+    bool ParseEventsF5V3(void);
 
 protected:
     //! \brief Add a parsed event to the chunk
@@ -172,9 +178,6 @@ public:
     PRS1DataChunk * event;
     QList<PRS1DataChunk *> waveforms;
     QList<PRS1DataChunk *> oximetry;
-
-    QMap<unsigned char, QByteArray> mainblock;
-    QMap<unsigned char, QByteArray> hbdata;
 
 
     QString wavefile;
