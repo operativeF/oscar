@@ -1308,6 +1308,7 @@ bool PRS1Import::ParseF5EventsFV3()
 }
 
 
+// 900X series
 bool PRS1DataChunk::ParseEventsF5V3(void)
 {
     if (this->family != 5 || this->familyVersion != 3) {
@@ -1682,14 +1683,6 @@ bool PRS1Import::ParseF5Events()
             pos += 1;
             //tt-=delta;
             tt -= qint64(data1) * 1000L;
-
-            if (!PB) {
-                if (!(PB = session->AddEventList(cpapcode, EVL_Event))) {
-                    qDebug() << "!PB addeventlist exit";
-                    return false;
-                }
-            }
-
             PB->AddEvent(tt, data0);
             break;
 
@@ -1701,14 +1694,6 @@ bool PRS1Import::ParseF5Events()
                 pos += 2;
                 data1 = buffer[pos++];
                 tt = t - qint64(data1) * 1000L;
-
-                if (!PB) {
-                    if (!(PB = session->AddEventList(cpapcode, EVL_Event))) {
-                        qDebug() << "!PB addeventlist exit";
-                        return false;
-                    }
-                }
-
                 PB->AddEvent(tt, data0);
 
             } else {
@@ -1758,13 +1743,6 @@ bool PRS1Import::ParseF5Events()
                 SNORE->AddEvent(t, data2 = buffer[pos++]); // 08=Snore
 
                 if (data2 > 0) {
-                    if (!VS) {
-                        if (!(VS = session->AddEventList(CPAP_VSnore, EVL_Event))) {
-                            qDebug() << "!VS eventlist exit";
-                            return false;
-                        }
-                    }
-
                     VS->AddEvent(t, 0); //data2); // VSnore
                 }
 
@@ -1792,13 +1770,6 @@ bool PRS1Import::ParseF5Events()
                 SNORE->AddEvent(t, data2 = buffer[pos+8]); //??
 
                 if (data2 > 0) {
-                    if (!VS) {
-                        if (!(VS = session->AddEventList(CPAP_VSnore, EVL_Event))) {
-                            qDebug() << "!VS eventlist exit";
-                            return false;
-                        }
-                    }
-
                     VS->AddEvent(t, 0); //data2); // VSnore
                 }
                 data2 = data1 - data0;
@@ -1868,16 +1839,6 @@ bool PRS1Import::ParseF5Events()
     session->updateLast(t);
     session->m_cnt.clear();
     session->m_cph.clear();
-
-//    EventDataType minEpap = session->Min(CPAP_EPAP);
-//    EventDataType minIpapLo = session->Min(CPAP_IPAPLo);
-//    EventDataType maxIpapHi = session->Max(CPAP_IPAPHi);
-
-//    session->settings[CPAP_IPAPLo] = minIpapLo;
-//    session->settings[CPAP_IPAPHi] = maxIpapHi;
-
-//    session->settings[CPAP_PSMax] = maxIpapHi - minEpap;
-//    session->settings[CPAP_PSMin] = minIpapLo - minEpap;
 
     session->m_valuesummary[CPAP_Pressure].clear();
     session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));

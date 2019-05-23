@@ -224,7 +224,7 @@ void parseAndEmitChunkYaml(const QString & path)
 
 void PRS1Tests::testChunksToYaml()
 {
-    iterateTestCards(TESTDATA_PATH "prs1/input/", parseAndEmitChunkYaml);
+    //iterateTestCards(TESTDATA_PATH "prs1/input/", parseAndEmitChunkYaml);
 }
 
 
