@@ -957,6 +957,25 @@ QString Statistics::GenerateRXChanges()
     return html;
 }
 
+// Report no data available
+QString Statistics::htmlNoData()
+{
+            QString html = "<div align=center>";
+            html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
+                    "<p><img src='qrc:/icons/logo-lm.png' width=\"100\" height=\"100\"></p>"
+                    "<p><i>"+tr("Oscar has no data to report :(")+"</i></p>");
+            return html;
+}
+
+// Get RDI or AHI text depending on user preferences
+QString Statistics::getRDIorAHIText() {
+    if (p_profile->general->calculateRDI()) {
+        return STR_TR_RDI;
+    }
+    return STR_TR_AHI;
+}
+
+// Create the HTML that will be the Statistics page.
 QString Statistics::GenerateHTML()
 {
     QList<Machine *> cpap_machines = p_profile->GetMachines(MT_CPAP);
@@ -966,6 +985,7 @@ QString Statistics::GenerateHTML()
     mach.append(cpap_machines);
     mach.append(oximeters);
 
+    // Go through all CPAP and Oximeter machines and see if any data is present
     bool havedata = false;
     for (int i=0; i < mach.size(); ++i) {
         int daysize = mach[i]->day.size();
@@ -975,69 +995,49 @@ QString Statistics::GenerateHTML()
         }
     }
 
-
+    // Create HTML header and <body> statement
     QString html = htmlHeader(havedata);
 
-   // return "";
-
+    // If we don't have any data, return HTML that says that and we are done
+    if (!havedata) {
+        html += htmlNoData();
+        html += htmlFooter(havedata);
+        return html;
+    }
 
     // Find first and last days with valid CPAP data
     QDate lastcpap = p_profile->LastGoodDay(MT_CPAP);
     QDate firstcpap = p_profile->FirstGoodDay(MT_CPAP);
 
-
+    // Get dates for standard report (last week, month, 6 months, year)
     QDate cpapweek = lastcpap.addDays(-6);
     QDate cpapmonth = lastcpap.addDays(-29);
     QDate cpap6month = lastcpap.addMonths(-6);
     QDate cpapyear = lastcpap.addMonths(-12);
 
+    // but not before the first available date of course
     if (cpapweek < firstcpap) { cpapweek = firstcpap; }
     if (cpapmonth < firstcpap) { cpapmonth = firstcpap; }
     if (cpap6month < firstcpap) { cpap6month = firstcpap; }
     if (cpapyear < firstcpap) { cpapyear = firstcpap; }
 
 
-    if (!havedata) {
-//        html += "<div align=center><table class=curved height=100% "+table_width+">";
-        html += "<div align=center>";
-//        html += QString("<tr><td align=center>") +
-        html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
-                "<p><img src='qrc:/icons/logo-lm.png' width=\"100\" height=\"100\"></p>"
-                "<p><i>"+tr("Oscar has no data to report :(")+"</i></p>");
+    QString ahitxt = getRDIorAHIText();
 
-//        "</table></div>";
-        html += htmlFooter(havedata);
-        return html;
-    }
-
-
-   // int cpapdays = p_profile->countDays(MT_CPAP, firstcpap, lastcpap);
-
-//    CPAPMode cpapmode = (CPAPMode)(int)p_profile->calcSettingsMax(CPAP_Mode, MT_CPAP, firstcpap, lastcpap);
-
- //   float percentile = p_profile->general->prefCalcPercentile() / 100.0;
-
-    //    int mididx=p_profile->general->prefCalcMiddle();
-    //    SummaryType ST_mid;
-    //    if (mididx==0) ST_mid=ST_PERC;
-    //    if (mididx==1) ST_mid=ST_WAVG;
-    //    if (mididx==2) ST_mid=ST_AVG;
-
-    QString ahitxt;
-
-    if (p_profile->general->calculateRDI()) {
-        ahitxt = STR_TR_RDI;
-    } else {
-        ahitxt = STR_TR_AHI;
-    }
-
-  //  int decimals = 2;
+    // Prepare top of table
     html += "<div align=center>";
     html += "<table class=curved "+table_width+">";
 
+    // Compute number of monthly periods for a monthly rather than standard time distribution
     int number_periods = 0;
-    if (p_profile->general->statReportMode() == 1) {
-        number_periods = p_profile->FirstDay().daysTo(p_profile->LastDay()) / 30;
+    if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
+        QDate beginDate = max(firstcpap, lastcpap.addYears(-1));
+        int beginMonth = beginDate.month();
+        int lastMonth = lastcpap.month();
+        if (lastMonth - beginMonth < 0) lastMonth +=12; // handle time extending to next year
+        number_periods = lastMonth - beginMonth + 1;
+        qDebug() << "begin" << beginDate << "beginMonth" << beginMonth << "lastMonth" << lastMonth << "periods" << number_periods;
+        // But not more than one year
         if (number_periods > 12) {
             number_periods = 12;
         }
@@ -1058,7 +1058,7 @@ QString Statistics::GenerateHTML()
             first = p_profile->FirstGoodDay(row.type);
 
             periods.clear();
-            if (p_profile->general->statReportMode() == 0) {
+            if (p_profile->general->statReportMode() == STAT_MODE_STANDARD) {
                 periods.push_back(Period(last,last,tr("Most Recent")));
                 periods.push_back(Period(qMax(last.addDays(-6), first), last, tr("Last Week")));
                 periods.push_back(Period(qMax(last.addDays(-29),first), last, tr("Last 30 Days")));
@@ -1167,7 +1167,7 @@ QString Statistics::GenerateHTML()
         int np = periods.size();
         int width;
         for (int j=0; j < np; j++) {
-            if (p_profile->general->statReportMode() == 1) {
+            if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
                 width = j < np-1 ? 6 : 100 - (25 + 6*(np-1));
             } else {
                 width = 75/np;

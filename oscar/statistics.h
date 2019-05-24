@@ -157,6 +157,7 @@ class Statistics : public QObject
     void updateRXChanges();
 
     QString getUserInfo();
+    QString getRDIorAHIText();
     QString GenerateHTML();
     QString GenerateMachineList();
     QString GenerateRXChanges();
@@ -165,6 +166,7 @@ class Statistics : public QObject
 
 
   protected:
+    QString htmlNoData();
     QString htmlHeader(bool showheader);
     QString htmlFooter(bool showinfo=true);
 
