@@ -129,6 +129,9 @@ public:
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
     bool ParseSummaryF5V3(void);
+
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator family version 6 machine
+    bool ParseEventsF3V6(void);
     
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 0-2 machine
     bool ParseEventsF5V012(void);

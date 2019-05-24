@@ -956,6 +956,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
 enum PRS1ParsedEventType
 {
+    EV_PRS1_RAW = -1,     // these only get logged
     EV_PRS1_UNKNOWN = 0,  // these have their value graphed
     EV_PRS1_TB,
     EV_PRS1_OA,
@@ -975,6 +976,10 @@ enum PRS1ParsedEventType
     EV_PRS1_TV,
     EV_PRS1_SNORE,
     EV_PRS1_EPAP,
+    EV_PRS1_RERA,
+    EV_PRS1_NRI,
+    EV_PRS1_TEST1,
+    EV_PRS1_TEST2,
     EV_PRS1_SETTING,
 };
 
@@ -1038,6 +1043,22 @@ class PRS1UnknownValueEvent : public PRS1ParsedValueEvent
 public:
     int m_code;
     PRS1UnknownValueEvent(int code, int start, int value, float gain=1.0) : PRS1ParsedValueEvent(EV_PRS1_UNKNOWN, start, value), m_code(code) { m_gain = gain; }
+};
+
+class PRS1UnknownDataEvent : public PRS1ParsedEvent
+{
+public:
+    int m_pos;
+    unsigned char m_code;
+    QByteArray m_data;
+    PRS1UnknownDataEvent(const QByteArray & data, int pos, int len=18)
+        : PRS1ParsedEvent(EV_PRS1_RAW, 0)
+    {
+        m_pos = pos;
+        m_data = data.mid(pos, len);
+        Q_ASSERT(m_data.size() >= 3);
+        m_code = m_data.at(0);
+    }
 };
 
 class PRS1PressureEvent : public PRS1ParsedValueEvent
@@ -1184,6 +1205,30 @@ class PRS1EPAPEvent : public PRS1PressureEvent
 {
 public:
     PRS1EPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_EPAP, start, value) {}
+};
+
+class PRS1RERAEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1RERAEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_RERA, start, value) {}
+};
+
+class PRS1NonRespondingEvent : public PRS1ParsedValueEvent  // TODO: is this a single event or an index/hour?
+{
+public:
+    PRS1NonRespondingEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_NRI, start, value) {}
+};
+
+class PRS1Test1Event : public PRS1ParsedValueEvent
+{
+public:
+    PRS1Test1Event(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TEST1, start, value) {}
+};
+
+class PRS1Test2Event : public PRS1ParsedValueEvent
+{
+public:
+    PRS1Test2Event(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TEST2, start, value) {}
 };
 
 void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
@@ -1922,7 +1967,7 @@ bool PRS1Import::ParseF3EventsV3()
 {
     // AVAPS machine... it's delta packed, unlike the older ones?? (double check that! :/)
 
-    EventList *PP = session->AddEventList(PRS1_TimedBreath, EVL_Event);
+    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *ZZ = session->AddEventList(CPAP_NRI, EVL_Event);
@@ -1944,12 +1989,115 @@ bool PRS1Import::ParseF3EventsV3()
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1f);
     EventList *FLOW = session->AddEventList(CPAP_Test2, EVL_Event);
 
-    qint64 t = qint64(event->timestamp) * 1000L; //, tt;
+    qint64 t;
+    bool ok;
+    ok = event->ParseEventsF3V6();
+    
+    for (int i=0; i < event->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = event->m_parsedData.at(i);
+        t = qint64(event->timestamp + e->m_start) * 1000L;
+        
+        switch (e->m_type) {
+            case EV_PRS1_TB:
+                TB->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_OA:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_CA:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_PB:
+                PB->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_LL:
+                LL->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_HY:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_EPAP:
+                EPAP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_IPAP:
+                IPAP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_LEAK:  // F3V6, is this really leak rather than totleak?
+                LEAK->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_RR:
+                RR->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_PTB:
+                PTB->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_MV:
+                MV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TV:
+                TV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_RERA:
+                RE->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_NRI:
+                ZZ->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TEST1:
+                TMV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TEST2:
+                FLOW->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_RAW:
+            {
+                PRS1UnknownDataEvent* unk = (PRS1UnknownDataEvent*) e;
+                int code = unk->m_code;
+                char* data = unk->m_data.data();
+                QString dump;
+                if (!loader->unknownCodes.contains(code)) {
+                    loader->unknownCodes.insert(code, QStringList());
+                }
+                QStringList & str = loader->unknownCodes[code];
+                dump = QString("%1@0x%5: [%2] [%3 %4]")
+                       .arg(event->sessionid, 8, 16, QChar('0'))
+                       .arg(data[0], 2, 16, QChar('0'))
+                       .arg(data[1], 2, 16, QChar('0'))
+                       .arg(data[2], 2, 16, QChar('0'))
+                       .arg(unk->m_pos, 5, 16, QChar('0'));
+                for (int i=3; i<unk->m_data.size(); i++) {
+                    dump += QString(" %1").arg(data[i], 2, 16, QChar('0'));
+                }
+                str.append(dump.trimmed());
+                break;
+            }
+            default:
+                qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
+                break;
+        }
+    }
 
+    if (!ok) {
+        return false;
+    }
+
+    return true;
+}
+
+
+// 1030X, 11030X series
+bool PRS1DataChunk::ParseEventsF3V6(void)
+{
+    if (this->family != 3 || this->familyVersion != 6) {
+        qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        //break;  // don't break to avoid changing behavior (for now)
+    }
+    
+    int t = 0;
     int pos = 0;
-    int datasize = event->m_data.size();
+    int datasize = this->m_data.size();
 
-    unsigned char * data = (unsigned char *)event->m_data.data();
+    unsigned char * data = (unsigned char *)this->m_data.data();
     unsigned char code;
     unsigned short delta;
     bool failed = false;
@@ -1958,29 +2106,13 @@ bool PRS1Import::ParseF3EventsV3()
     QString dump;
 
     do {
+        int startpos = pos;
         code = data[pos++];
         delta = (data[pos+1] < 8) | data[pos];
         pos += 2;
 #ifdef DEBUG_EVENTS
         if (code == 0x00) {
-            if (!loader->unknownCodes.contains(code)) {
-                loader->unknownCodes.insert(code, QStringList());
-            }
-            QStringList & str = loader->unknownCodes[code];
-
-            dump = QString("%1@0x%5: [%2] [%3 %4]")
-                    .arg(session->session(), 8, 16, QChar('0'))
-                    .arg(data[pos-3], 2, 16, QChar('0'))
-                    .arg(data[pos-2], 2, 16, QChar('0'))
-                    .arg(data[pos-1], 2, 16, QChar('0'))
-                    .arg(pos-3, 5, 16, QChar('0'));
-
-            for (int i=0; i<15; i++) {
-                if ((pos+i) > datasize) break;
-                dump += QString(" %1").arg(data[pos+i], 2, 16, QChar('0'));
-            }
-            str.append(dump.trimmed());
-
+            this->AddEvent(new PRS1UnknownDataEvent(this->m_data, startpos));
         }
 #endif
         unsigned short epap;
@@ -1988,95 +2120,72 @@ bool PRS1Import::ParseF3EventsV3()
         switch(code) {
         case 0x01: // Who knows
             val = data[pos++];
-            PP->AddEvent(t, val);
+            this->AddEvent(new PRS1TimedBreathEvent(t, val));
             break;
         case 0x02:
-            LEAK->AddEvent(t, data[pos+3]);
-            PTB->AddEvent(t, data[pos+5]);
-            MV->AddEvent(t, data[pos+6]);
-            TV->AddEvent(t, data[pos+7]);
+            this->AddEvent(new PRS1LeakEvent(t, data[pos+3]));
+            this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos+5]));
+            this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos+6]));
+            this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos+7]));
 
 
-            EPAP->AddEvent(t, epap=data[pos+0]);
-            IPAP->AddEvent(t, data[pos+1]);
-            FLOW->AddEvent(t, data[pos+4]);
-            TMV->AddEvent(t, data[pos+8]);
-            RR->AddEvent(t, data[pos+9]);
+            this->AddEvent(new PRS1EPAPEvent(t, epap=data[pos+0]));
+            this->AddEvent(new PRS1IPAPEvent(t, data[pos+1]));
+            this->AddEvent(new PRS1Test2Event(t, data[pos+4]));  // Flow???
+            this->AddEvent(new PRS1Test1Event(t, data[pos+8]));  // TMV???
+            this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos+9]));
             pos += 12;
 
             break;
         case 0x04: // ???
             val = data[pos++];
-            PP->AddEvent(t, val);
+            this->AddEvent(new PRS1TimedBreathEvent(t, val));
             break;
         case 0x05: // ???
             val = data[pos++];
-            CA->AddEvent(t, val);
+            this->AddEvent(new PRS1ClearAirwayEvent(t, val));
             break;
         case 0x06: // Obstructive Apnea
             val = data[pos++];
             val2 = data[pos++];
-            OA->AddEvent(t + (qint64(val2)*1000L), val);
+            this->AddEvent(new PRS1ObstructiveApneaEvent(t + val2, val));  // ??? shouldn't this be t - val2?
             break;
         case 0x07: // PB
             val = data[pos+1] << 8 | data[pos];
             pos += 2;
             val2 = data[pos++];
-            PB->AddEvent(t - (qint64(val2)*1000L), val);
+            this->AddEvent(new PRS1PeriodicBreathingEvent(t - val2, val));
             break;
         case 0x08: // RERA
             val = data[pos++];
-            RE->AddEvent(t, val);
+            this->AddEvent(new PRS1RERAEvent(t, val));
             break;
         case 0x09: // ???
             val = data[pos+1] << 8 | data[pos];
             pos += 2;
             val2 = data[pos++];
-            LL->AddEvent(t - (qint64(val)*1000L), val2);
+            this->AddEvent(new PRS1LargeLeakEvent(t - val, val2));
             break;
 
         case 0x0a: // ???
             val = data[pos++];
-            ZZ->AddEvent(t, val);
+            this->AddEvent(new PRS1NonRespondingEvent(t, val));
             break;
         case 0x0b: // Hypopnea
             val = data[pos++];
-            if (session->session() == 239) {
-                if (HY->count() == 0) {
-                    qDebug() << t << delta << val << "hypopnea";
-                }
-            }
-            HY->AddEvent(t, val);
+            this->AddEvent(new PRS1HypopneaEvent(t, val));
             break;
 
         default:
-            if (!loader->unknownCodes.contains(code)) {
-                loader->unknownCodes.insert(code, QStringList());
-            }
-            QStringList & str = loader->unknownCodes[code];
-
-            dump = QString("%1@0x%5: [%2] [%3 %4]")
-                    .arg(session->session(), 8, 16, QChar('0'))
-                    .arg(data[pos-3], 2, 16, QChar('0'))
-                    .arg(data[pos-2], 2, 16, QChar('0'))
-                    .arg(data[pos-1], 2, 16, QChar('0'))
-                    .arg(pos-3, 5, 16, QChar('0'));
-
-            for (int i=0; i<15; i++) {
-                if ((pos+i) > datasize) break;
-                dump += QString(" %1").arg(data[pos+i], 2, 16, QChar('0'));
-            }
-            str.append(dump.trimmed());
-
+            this->AddEvent(new PRS1UnknownDataEvent(this->m_data, startpos));
             failed = true;
             break;
         };
-        t += qint64(delta) * 1000L;
+        t += delta;
 
     } while ((pos < datasize) && !failed);
 
     if (failed) {
-        // Clean up this shit...
         return false;
     }
     return true;
