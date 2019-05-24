@@ -587,6 +587,7 @@ void Profile::UnloadMachineData()
     daylist.clear();
 
     for (auto & mach : m_machlist) {
+        mach->saveSessionInfo();
         mach->sessionlist.clear();
         mach->day.clear();
     }
