@@ -127,6 +127,9 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 0-2 machine
+    bool ParseSummaryF5V012(void);
+    
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
     bool ParseSummaryF5V3(void);
 
@@ -220,7 +223,7 @@ public:
     bool ParseSummaryF0V4();
     //! \brief Summary parser for 1060 series AVAPS models
     bool ParseSummaryF3();
-    //! \brief Summary parser for 50 series Family 5-0 through 60 series Family 5-2 BiPAP/AutoSV models
+    //! \brief Summary parser for 50 series Family 5-0 through 5-2 BiPAP/AutoSV models
     bool ParseSummaryF5V012();
     //! \brief Summary parser for 60 series Family 5-3 BiPAP/AutoSV models
     bool ParseSummaryF5V3();

@@ -997,12 +997,20 @@ enum PRS1ParsedEventUnit
 
 enum PRS1ParsedSettingType
 {
+    PRS1_SETTING_CPAP_MODE,
     PRS1_SETTING_EPAP_MIN,
     PRS1_SETTING_EPAP_MAX,
     PRS1_SETTING_IPAP_MIN,
     PRS1_SETTING_IPAP_MAX,
     PRS1_SETTING_PS_MIN,
     PRS1_SETTING_PS_MAX,
+    PRS1_SETTING_FLEX_MODE,
+    PRS1_SETTING_FLEX_LEVEL,
+    PRS1_SETTING_RAMP_TIME,
+    PRS1_SETTING_RAMP_PRESSURE,
+    PRS1_SETTING_HUMID_STATUS,
+    PRS1_SETTING_HUMID_LEVEL,
+    PRS1_SETTING_HEATED_TUBING,
 };
 
 class PRS1ParsedEvent
@@ -3191,7 +3199,76 @@ bool PRS1Import::ParseSummaryF3()
 
 bool PRS1Import::ParseSummaryF5V012()
 {
-    const unsigned char * data = (unsigned char *)summary->m_data.constData();
+    bool ok;
+    ok = summary->ParseSummaryF5V012();
+    
+    for (int i=0; i < summary->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
+        if (e->m_type != EV_PRS1_SETTING) {
+            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
+            continue;
+        }
+        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
+        switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
+            case PRS1_SETTING_EPAP_MIN:
+                session->settings[CPAP_EPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MAX:
+                session->settings[CPAP_EPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MIN:
+                session->settings[CPAP_IPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MAX:
+                session->settings[CPAP_IPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_PS_MIN:
+                session->settings[CPAP_PSMin] = e->value();
+                break;
+            case PRS1_SETTING_PS_MAX:
+                session->settings[CPAP_PSMax] = e->value();
+                break;
+            case PRS1_SETTING_FLEX_MODE:
+                session->settings[PRS1_FlexMode] = e->m_value;
+                break;
+            case PRS1_SETTING_FLEX_LEVEL:
+                session->settings[PRS1_FlexLevel] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_TIME:
+                session->settings[CPAP_RampTime] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_PRESSURE:
+                session->settings[CPAP_RampPressure] = e->value();
+                break;
+            case PRS1_SETTING_HUMID_STATUS:
+                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HEATED_TUBING:
+                session->settings[PRS1_HeatedTubing] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HUMID_LEVEL:
+                session->settings[PRS1_HumidLevel] = e->m_value;
+                break;
+            default:
+                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    summary_duration = summary->duration;
+
+    return true;
+}
+
+bool PRS1DataChunk::ParseSummaryF5V012(void)
+{
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
@@ -3202,28 +3279,15 @@ bool PRS1Import::ParseSummaryF5V012()
     int imax_pressure = data[0x2];
 
     cpapmode = MODE_ASV_VARIABLE_EPAP;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
-    session->settings[CPAP_Mode] = (int)cpapmode;
-
-    if (cpapmode == MODE_CPAP) {
-        session->settings[CPAP_Pressure] = imin_epap/10.0f;
-
-    } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        session->settings[CPAP_EPAP] = imin_epap/10.0f;
-        session->settings[CPAP_IPAP] = imax_epap/10.0f;
-
-    } else if (cpapmode == MODE_ASV_VARIABLE_EPAP) {
-        //int imax_ipap = imax_epap + imax_ps;
-        int imin_ipap = imin_epap + imin_ps;
-
-        session->settings[CPAP_EPAPLo] = imin_epap / 10.0f;
-        session->settings[CPAP_EPAPHi] = imax_epap / 10.0f;
-        session->settings[CPAP_IPAPLo] = imin_ipap / 10.0f;
-        session->settings[CPAP_IPAPHi] = imax_pressure / 10.0f;
-        session->settings[CPAP_PSMin] = imin_ps / 10.0f;
-        session->settings[CPAP_PSMax] = imax_ps / 10.0f;
-    }
-
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, imin_epap));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, imax_epap));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, imin_epap + imin_ps));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, imax_pressure));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
+    
     quint8 flex = data[0x0c];
 
     int flexlevel = flex & 0x03;
@@ -3250,21 +3314,20 @@ bool PRS1Import::ParseSummaryF5V012()
         }
     } else flexmode = FLEX_None;
 
-    session->settings[PRS1_FlexMode] = (int)flexmode;
-    session->settings[PRS1_FlexLevel] = (int)flexlevel;
-
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
 
     int ramp_time = data[0x0a];
-    EventDataType ramp_pressure = EventDataType(data[0x0b]) / 10.0;
+    int ramp_pressure = data[0x0b];
 
-    session->settings[CPAP_RampTime] = (int)ramp_time;
-    session->settings[CPAP_RampPressure] = ramp_pressure;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
-    session->settings[PRS1_HumidStatus] = (bool)(data[0x0d] & 0x80);        // Humidifier Connected
-    session->settings[PRS1_HeatedTubing] = (bool)(data[0x0d] & 0x10);        // Heated Hose??
-    session->settings[PRS1_HumidLevel] = (int)(data[0x0d] & 7);          // Humidifier Value
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (data[0x0d] & 0x80) != 0));        // Humidifier Connected
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (data[0x0d] & 0x10) != 0));        // Heated Hose??
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (data[0x0d] & 7)));          // Humidifier Value
 
-    summary_duration = data[0x18] | data[0x19] << 8;
+    this->duration = data[0x18] | data[0x19] << 8;
 
     return true;
 }
@@ -3274,9 +3337,6 @@ bool PRS1Import::ParseSummaryF5V3()
     bool ok;
     ok = summary->ParseSummaryF5V3();
     
-    CPAPMode cpapmode = MODE_ASV_VARIABLE_EPAP;
-
-    session->settings[CPAP_Mode] = (int)cpapmode;
     EventDataType epapHi, epapLo, minps, maxps;
 
     for (int i=0; i < summary->m_parsedData.count(); i++) {
@@ -3287,6 +3347,9 @@ bool PRS1Import::ParseSummaryF5V3()
         }
         PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
         switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
             case PRS1_SETTING_EPAP_MIN:
                 epapLo = e->value();
                 session->settings[CPAP_EPAPLo] = epapLo;
@@ -3323,6 +3386,8 @@ bool PRS1Import::ParseSummaryF5V3()
 
 bool PRS1DataChunk::ParseSummaryF5V3(void)
 {
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_ASV_VARIABLE_EPAP));
+
     unsigned char * pressureBlock = (unsigned char *)mainblock[0x0a].data();
 
     EventDataType epapHi = pressureBlock[0];
