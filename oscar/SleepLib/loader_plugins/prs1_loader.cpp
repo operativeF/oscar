@@ -3189,7 +3189,7 @@ bool PRS1Import::ParseSummaryF3()
     return true;
 }
 
-bool PRS1Import::ParseSummaryF5V0()
+bool PRS1Import::ParseSummaryF5V012()
 {
     const unsigned char * data = (unsigned char *)summary->m_data.constData();
 
@@ -3264,96 +3264,6 @@ bool PRS1Import::ParseSummaryF5V0()
     session->settings[PRS1_HeatedTubing] = (bool)(data[0x0d] & 0x10);        // Heated Hose??
     session->settings[PRS1_HumidLevel] = (int)(data[0x0d] & 7);          // Humidifier Value
 
-    summary_duration = data[0x18] | data[0x19] << 8;
-
-    return true;
-}
-
-bool PRS1Import::ParseSummaryF5V1()
-{
-    const unsigned char * data = (unsigned char *)summary->m_data.constData();
-
-    CPAPMode cpapmode = MODE_UNKNOWN;
-
-    int imin_epap = data[0x3];
-    int imax_epap = data[0x4];
-    int imin_ps = data[0x5];
-    int imax_ps = data[0x6];
-    int imax_pressure = data[0x2];
-
-    cpapmode = MODE_ASV_VARIABLE_EPAP;
-
-    session->settings[CPAP_Mode] = (int)cpapmode;
-
-    if (cpapmode == MODE_CPAP) {
-        session->settings[CPAP_Pressure] = imin_epap/10.0f;
-
-    } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        session->settings[CPAP_EPAP] = imin_epap/10.0f;
-        session->settings[CPAP_IPAP] = imax_epap/10.0f;
-
-    } else if (cpapmode == MODE_ASV_VARIABLE_EPAP) {
-        //int imax_ipap = imax_epap + imax_ps;
-        int imin_ipap = imin_epap + imin_ps;
-
-        session->settings[CPAP_EPAPLo] = imin_epap / 10.0f;
-        session->settings[CPAP_EPAPHi] = imax_epap / 10.0f;
-        session->settings[CPAP_IPAPLo] = imin_ipap / 10.0f;
-        session->settings[CPAP_IPAPHi] = imax_pressure / 10.0f;
-        session->settings[CPAP_PSMin] = imin_ps / 10.0f;
-        session->settings[CPAP_PSMax] = imax_ps / 10.0f;
-    }
-
-    quint8 flex = data[0x0c];
-
-    int flexlevel = flex & 0x03;
-    FlexMode flexmode = FLEX_Unknown;
-
-    flex &= 0xf8;
-    bool split = false;
-
-    if (flex & 0x40) {  // This bit defines the Flex setting for the CPAP component of the Split night
-        split = true;
-    }
-    if (flex & 0x80) { // CFlex bit
-        if (flex & 0x10) {
-            flexmode = FLEX_RiseTime;
-        } else if (flex & 8) { // Plus bit
-            if (split || (cpapmode == MODE_CPAP)) {
-                flexmode = FLEX_CFlexPlus;
-            } else if (cpapmode == MODE_APAP) {
-                flexmode = FLEX_AFlex;
-            }
-        } else {
-            // CFlex bits refer to Rise Time on BiLevel machines
-            flexmode = (cpapmode >= MODE_BILEVEL_FIXED) ? FLEX_BiFlex : FLEX_CFlex;
-        }
-    } else flexmode = FLEX_None;
-
-    session->settings[PRS1_FlexMode] = (int)flexmode;
-    session->settings[PRS1_FlexLevel] = (int)flexlevel;
-
-
-    int ramp_time = data[0x0a];
-    EventDataType ramp_pressure = EventDataType(data[0x0b]) / 10.0;
-
-    session->settings[CPAP_RampTime] = (int)ramp_time;
-    session->settings[CPAP_RampPressure] = ramp_pressure;
-
-    session->settings[PRS1_HumidStatus] = (bool)(data[0x0d] & 0x80);        // Humidifier Connected
-    session->settings[PRS1_HeatedTubing] = (bool)(data[0x0d] & 0x10);        // Heated Hose??
-    session->settings[PRS1_HumidLevel] = (int)(data[0x0d] & 7);          // Humidifier Value
-
-    summary_duration = data[0x18] | data[0x19] << 8;
-
-    return true;
-}
-
-bool PRS1Import::ParseSummaryF5V2()
-{
-    const unsigned char * data = (unsigned char *)summary->m_data.constData();
-
-    //CPAPMode cpapmode = MODE_UNKNOWN;
     summary_duration = data[0x18] | data[0x19] << 8;
 
     return true;
@@ -3682,11 +3592,11 @@ bool PRS1Import::ParseSummary()
         break;
     case 5:
         if (summary->familyVersion == 1) {
-            return ParseSummaryF5V1();
+            return ParseSummaryF5V012();
         } else if (summary->familyVersion == 0) {
-            return ParseSummaryF5V0();
+            return ParseSummaryF5V012();
         } else if (summary->familyVersion == 2) {
-            return ParseSummaryF5V1();
+            return ParseSummaryF5V012();
         } else if (summary->familyVersion == 3) {
             return ParseSummaryF5V3();
         }
