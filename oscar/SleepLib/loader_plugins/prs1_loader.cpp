@@ -998,10 +998,16 @@ enum PRS1ParsedEventUnit
 enum PRS1ParsedSettingType
 {
     PRS1_SETTING_CPAP_MODE,
+    PRS1_SETTING_PRESSURE,
+    PRS1_SETTING_PRESSURE_MIN,
+    PRS1_SETTING_PRESSURE_MAX,
+    PRS1_SETTING_EPAP,
     PRS1_SETTING_EPAP_MIN,
     PRS1_SETTING_EPAP_MAX,
+    PRS1_SETTING_IPAP,
     PRS1_SETTING_IPAP_MIN,
     PRS1_SETTING_IPAP_MAX,
+    PRS1_SETTING_PS,
     PRS1_SETTING_PS_MIN,
     PRS1_SETTING_PS_MAX,
     PRS1_SETTING_FLEX_MODE,
@@ -3131,71 +3137,116 @@ bool PRS1Import::ParseSummaryF0V4()
 
 bool PRS1Import::ParseSummaryF3()
 {
+    bool ok;
+    ok = summary->ParseSummaryF3();
+    
+    for (int i=0; i < summary->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
+        if (e->m_type != EV_PRS1_SETTING) {
+            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
+            continue;
+        }
+        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
+        switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
+            case PRS1_SETTING_PRESSURE:
+                session->settings[CPAP_Pressure] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MIN:
+                session->settings[CPAP_PressureMin] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MAX:
+                session->settings[CPAP_PressureMax] = e->value();
+                break;
+            case PRS1_SETTING_EPAP:
+                session->settings[CPAP_EPAP] = e->value();
+                break;
+            case PRS1_SETTING_IPAP:
+                session->settings[CPAP_IPAP] = e->value();
+                break;
+            case PRS1_SETTING_PS:
+                session->settings[CPAP_PS] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MIN:
+                session->settings[CPAP_EPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MAX:
+                session->settings[CPAP_EPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MIN:
+                session->settings[CPAP_IPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MAX:
+                session->settings[CPAP_IPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_PS_MIN:
+                session->settings[CPAP_PSMin] = e->value();
+                break;
+            case PRS1_SETTING_PS_MAX:
+                session->settings[CPAP_PSMax] = e->value();
+                break;
+            default:
+                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    summary_duration = summary->duration;
+
+    return true;
+}
+
+
+// TODO: This is probably only F3V6, as it uses mainblock, only present in fileVersion 3.
+bool PRS1DataChunk::ParseSummaryF3(void)
+{
     CPAPMode mode = MODE_UNKNOWN;
     EventDataType epap, ipap;
 
     QMap<unsigned char, QByteArray>::iterator it;
 
-    if ((it=summary->mainblock.find(0x0a)) != summary->mainblock.end()) {
+    if ((it=this->mainblock.find(0x0a)) != this->mainblock.end()) {
         mode = MODE_CPAP;
-        session->settings[CPAP_Pressure] = EventDataType(it.value()[0]/10.0f);
-    } else if ((it=summary->mainblock.find(0x0d)) != summary->mainblock.end()) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, it.value()[0]));
+    } else if ((it=this->mainblock.find(0x0d)) != this->mainblock.end()) {
         mode = MODE_APAP;
-        session->settings[CPAP_PressureMin] = EventDataType(it.value()[0]/10.0f);
-        session->settings[CPAP_PressureMax] = EventDataType(it.value()[1]/10.0f);
-    } else if ((it=summary->mainblock.find(0x0e)) != summary->mainblock.end()) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, it.value()[0]));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, it.value()[1]));
+    } else if ((it=this->mainblock.find(0x0e)) != this->mainblock.end()) {
         mode = MODE_BILEVEL_FIXED;
-        session->settings[CPAP_EPAP] = ipap = EventDataType(it.value()[0] / 10.0f);
-        session->settings[CPAP_IPAP] = epap = EventDataType(it.value()[1] / 10.0f);
-        session->settings[CPAP_PS] = ipap - epap;
-    } else if ((it=summary->mainblock.find(0x0f)) != summary->mainblock.end()) {
+        ipap = it.value()[0];
+        epap = it.value()[1];
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, ipap));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, epap));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, ipap - epap));
+    } else if ((it=this->mainblock.find(0x0f)) != this->mainblock.end()) {
         mode = MODE_BILEVEL_AUTO_VARIABLE_PS;
-        session->settings[CPAP_EPAPLo] = EventDataType(it.value()[0]/10.0f);
-        session->settings[CPAP_IPAPHi] = EventDataType(it.value()[1]/10.0f);
-        session->settings[CPAP_PSMin] = EventDataType(it.value()[2]/10.0f);
-        session->settings[CPAP_PSMax] = EventDataType(it.value()[3]/10.0f);
-    } else if ((it=summary->mainblock.find(0x10)) != summary->mainblock.end()) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, it.value()[0]));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, it.value()[1]));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, it.value()[2]));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, it.value()[3]));
+    } else if ((it=this->mainblock.find(0x10)) != this->mainblock.end()) {
         mode = MODE_APAP; // Disgusting APAP "IQ" trial
-        session->settings[CPAP_PressureMin] = EventDataType(it.value()[0]/10.0f);
-        session->settings[CPAP_PressureMax] = EventDataType(it.value()[1]/10.0f);
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, it.value()[0]));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, it.value()[1]));
     }
 
-    session->settings[CPAP_Mode] = (int)mode;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) mode));
 
-    if ((it=summary->hbdata.find(5)) != summary->hbdata.end()) {
-        summary_duration = (it.value()[1] << 8 ) + it.value()[0];
+    if ((it=this->hbdata.find(5)) != this->hbdata.end()) {
+        this->duration = (it.value()[1] << 8 ) + it.value()[0];
+    } else {
+        qWarning() << "missing summary duration";
     }
-
-/*    QDateTime date = QDateTime::fromMSecsSinceEpoch(session->first());
-    if (date.date() == QDate(2018,5,1)) {
-
-        qDebug() << "Dumping session" << (int)session->session() << "summary file";
-        QString hexstr = QString("%1@0000: ").arg(session->session(),8,16,QChar('0'));
-        const unsigned char * data = (const unsigned char *)summary->m_data.constData();
-        int size = summary->m_data.size();
-        for (int i=0; i<size; ++i) {
-            unsigned char val = data[i];
-            hexstr += QString(" %1").arg((short)val, 2, 16, QChar('0'));
-            if ((i % 0x10) == 0x0f) {
-                qDebug() << hexstr;
-                hexstr = QString("%1@%2: ").arg(session->session(),8,16,QChar('0')).arg(i+1, 4, 16, QChar('0'));
-            }
-        }
-        qDebug() << "Dumping mainblock";
-        for (auto it=mainblock.cbegin(), end=mainblock.cend(); it!=end; ++it) {
-            qDebug() << it.key() << it.value().toHex();
-        }
-        qDebug() << "Dumping hbdata";
-        for (auto it=hbdata.cbegin(), end=hbdata.cend(); it!=end; ++it) {
-            qDebug() << it.key() << it.value().toHex();
-        }
-
-        qDebug() << "In date";
-    } */
-
 
     return true;
 }
+
 
 bool PRS1Import::ParseSummaryF5V012()
 {
