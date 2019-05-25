@@ -978,6 +978,7 @@ enum PRS1ParsedEventType
     EV_PRS1_EPAP,
     EV_PRS1_RERA,
     EV_PRS1_NRI,
+    EV_PRS1_FLOWRATE,
     EV_PRS1_TEST1,
     EV_PRS1_TEST2,
     EV_PRS1_SETTING,
@@ -1217,6 +1218,12 @@ class PRS1NonRespondingEvent : public PRS1ParsedValueEvent  // TODO: is this a s
 {
 public:
     PRS1NonRespondingEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_NRI, start, value) {}
+};
+
+class PRS1FlowRateEvent : public PRS1ParsedValueEvent  // TODO: is this a single event or an index/hour?
+{
+public:
+    PRS1FlowRateEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_FLOWRATE, start, value) {}
 };
 
 class PRS1Test1Event : public PRS1ParsedValueEvent
@@ -2194,14 +2201,14 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
 
 bool PRS1Import::ParseF3Events()
 {
-    qint64 t = qint64(event->timestamp) * 1000L, tt;
+    qint64 t = qint64(event->timestamp) * 1000L;
 
     session->updateFirst(t);
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
-    EventList *LEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
-    EventList *ULK = session->AddEventList(CPAP_Leak, EVL_Event);
+    EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
+    EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
     EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
     //EventList *TMV = session->AddEventList(CPAP_TgMV, EVL_Event);
     EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event,10.0f);
@@ -2211,8 +2218,71 @@ bool PRS1Import::ParseF3Events()
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event,0.1f);
     EventList *FLOW = session->AddEventList(CPAP_FlowRate, EVL_Event);
 
-    int size = event->m_data.size()/0x10;
-    unsigned char * h = (unsigned char *)event->m_data.data();
+    bool ok;
+    ok = event->ParseEventsF3V3();
+    
+    for (int i=0; i < event->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = event->m_parsedData.at(i);
+        t = qint64(event->timestamp + e->m_start) * 1000L;
+        
+        switch (e->m_type) {
+            case EV_PRS1_OA:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_CA:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_HY:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_EPAP:
+                EPAP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_IPAP:
+                IPAP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TOTLEAK:
+                TOTLEAK->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_LEAK:
+                LEAK->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_RR:
+                RR->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_PTB:
+                PTB->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_MV:
+                MV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_TV:
+                TV->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_FLOWRATE:
+                FLOW->AddEvent(t, e->m_value);
+                break;
+            default:
+                qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
+                break;
+        }
+    }
+    
+    return true;
+}
+
+
+// 1160P series
+bool PRS1DataChunk::ParseEventsF3V3(void)
+{
+    if (this->family != 3 || this->familyVersion != 3) {
+        qWarning() << "ParseEventsF3V3 called with family" << this->family << "familyVersion" << this->familyVersion;
+        //break;  // don't break to avoid changing behavior (for now)
+    }
+    
+    int t = 0, tt;
+    int size = this->m_data.size()/0x10;
+    unsigned char * h = (unsigned char *)this->m_data.data();
 
     int hy, oa, ca;
     qint64 div = 0;
@@ -2223,31 +2293,33 @@ bool PRS1Import::ParseF3Events()
     // interleave for each channel = 1
     // also warn on any remainder of data size % record size (but don't fail)
     
-    const qint64 block_duration = 120000;
+    const qint64 block_duration = 120;
 
     for (int x=0; x < size; x++) {
-        IPAP->AddEvent(t, h[0] | (h[1] << 8));
-        EPAP->AddEvent(t, h[2] | (h[3] << 8));
-        LEAK->AddEvent(t, h[4]);
-        TV->AddEvent(t, h[5]);
-        FLOW->AddEvent(t, h[6]);
-        PTB->AddEvent(t, h[7]);
-        RR->AddEvent(t, h[8]);
+        this->AddEvent(new PRS1IPAPEvent(t, h[0] | (h[1] << 8)));
+        this->AddEvent(new PRS1EPAPEvent(t, h[2] | (h[3] << 8)));
+        this->AddEvent(new PRS1TotalLeakEvent(t, h[4]));
+        this->AddEvent(new PRS1TidalVolumeEvent(t, h[5]));
+        this->AddEvent(new PRS1FlowRateEvent(t, h[6]));
+        this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, h[7]));
+        this->AddEvent(new PRS1RespiratoryRateEvent(t, h[8]));
         //TMV->AddEvent(t, h[9]); // not sure what this is.. encore doesn't graph it.
-        MV->AddEvent(t, h[11]);
-        ULK->AddEvent(t, h[15]);
+        // h[10]?
+        this->AddEvent(new PRS1MinuteVentilationEvent(t, h[11]));
+        this->AddEvent(new PRS1LeakEvent(t, h[15]));
 
         hy = h[12];  // count of hypopnea events
         ca = h[13];  // count of clear airway events
         oa = h[14];  // count of obstructive events
 
         // divide each event evenly over the 2 minute block
+        // TODO: revisit whether this is the right approach and should be done here? should the durations be hy or div?
         if (hy > 0) {
             div = block_duration / hy;
 
             tt = t;
             for (int i=0; i < hy; ++i) {
-                HY->AddEvent(t, hy);
+                this->AddEvent(new PRS1HypopneaEvent(t, hy));
                 tt += div;
             }
         }
@@ -2257,7 +2329,7 @@ bool PRS1Import::ParseF3Events()
             tt = t;
 
             for (int i=0; i < ca; ++i) {
-                CA->AddEvent(tt, ca);
+                this->AddEvent(new PRS1ClearAirwayEvent(tt, ca));
                 tt += div;
             }
         }
@@ -2266,7 +2338,7 @@ bool PRS1Import::ParseF3Events()
 
             tt = t;
             for (int i=0; i < oa; ++i) {
-                OA->AddEvent(t, oa);
+                this->AddEvent(new PRS1ObstructiveApneaEvent(t, oa));
                 tt += div;
             }
         }
@@ -2276,6 +2348,7 @@ bool PRS1Import::ParseF3Events()
     }
     return true;
 }
+
 
 extern EventDataType CatmullRomSpline(EventDataType p0, EventDataType p1, EventDataType p2, EventDataType p3, EventDataType t = 0.5);
 
