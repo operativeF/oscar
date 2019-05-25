@@ -965,17 +965,21 @@ enum PRS1ParsedEventType
     EV_PRS1_PB,
     EV_PRS1_LL,
     EV_PRS1_HY,
-    EV_PRS1_IPAP,
     EV_PRS1_TOTLEAK,
     EV_PRS1_LEAK,  // F5V2: Is this real or actually TOTLEAK?
+    EV_PRS1_PRESSURE,  // TODO: maybe fold PRESSURE and IPAP into one
+    EV_PRS1_IPAP,
     EV_PRS1_IPAPLOW,
     EV_PRS1_IPAPHIGH,
+    EV_PRS1_EPAP,
+    EV_PRS1_FLEX,
     EV_PRS1_RR,
     EV_PRS1_PTB,
     EV_PRS1_MV,
     EV_PRS1_TV,
     EV_PRS1_SNORE,
-    EV_PRS1_EPAP,
+    EV_PRS1_VS,  // F0: Is this different from SNORE?
+    EV_PRS1_PP,
     EV_PRS1_RERA,
     EV_PRS1_NRI,
     EV_PRS1_FLOWRATE,
@@ -1137,12 +1141,6 @@ public:
     PRS1HypopneaEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_HY, start, duration) {}
 };
 
-class PRS1IPAPEvent : public PRS1PressureEvent
-{
-public:
-    PRS1IPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAP, start, value) {}
-};
-
 class PRS1TotalLeakEvent : public PRS1ParsedValueEvent
 {
 public:
@@ -1155,6 +1153,18 @@ public:
     PRS1LeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_LEAK, start, value) {}
 };
 
+class PRS1CPAPEvent : public PRS1PressureEvent
+{
+public:
+    PRS1CPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_PRESSURE, start, value) {}
+};
+
+class PRS1IPAPEvent : public PRS1PressureEvent
+{
+public:
+    PRS1IPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAP, start, value) {}
+};
+
 class PRS1IPAPHighEvent : public PRS1PressureEvent
 {
 public:
@@ -1165,6 +1175,18 @@ class PRS1IPAPLowEvent : public PRS1PressureEvent
 {
 public:
     PRS1IPAPLowEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAPLOW, start, value) {}
+};
+
+class PRS1EPAPEvent : public PRS1PressureEvent
+{
+public:
+    PRS1EPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_EPAP, start, value) {}
+};
+
+class PRS1PressureReliefEvent : public PRS1PressureEvent  // value is pressure applied during pressure relief, similar to EPAP
+{
+public:
+    PRS1PressureReliefEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_FLEX, start, value) {}
 };
 
 class PRS1RespiratoryRateEvent : public PRS1ParsedValueEvent
@@ -1202,13 +1224,19 @@ public:
     PRS1SnoreEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_SNORE, start, value) {}
 };
 
-class PRS1EPAPEvent : public PRS1PressureEvent
+class PRS1VibratorySnoreEvent : public PRS1ParsedValueEvent
 {
 public:
-    PRS1EPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_EPAP, start, value) {}
+    PRS1VibratorySnoreEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_VS, start, value) {}
 };
 
-class PRS1RERAEvent : public PRS1ParsedValueEvent
+class PRS1PressurePulseEvent : public PRS1ParsedValueEvent
+{
+public:
+    PRS1PressurePulseEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_PP, start, value) {}
+};
+
+class PRS1RERAEvent : public PRS1ParsedValueEvent  // TODO: should this really be a duration event?
 {
 public:
     PRS1RERAEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_RERA, start, value) {}
@@ -1226,7 +1254,7 @@ public:
     PRS1FlowRateEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_FLOWRATE, start, value) {}
 };
 
-class PRS1Test1Event : public PRS1ParsedValueEvent
+class PRS1Test1Event : public PRS1ParsedValueEvent  // TODO: replace test1/2 event with unknownvalue events and appropriate mapping
 {
 public:
     PRS1Test1Event(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TEST1, start, value) {}
@@ -2415,17 +2443,20 @@ void SmoothEventList(Session * session, EventList * ev, ChannelID code)
 
 }
 
+
+// 750P is F0V2; 550P is F0V2/F0V3; 450P is F0V3; 460P, 560P[BT], 660P, 760P are F0V4
+// 200X, 400X, 400G, 500X, 502G, 600X, 700X are F0V6
 bool PRS1Import::ParseF0Events()
 {
-    unsigned char code=0;
+    ChannelID Codes[] = {
+        PRS1_00, PRS1_01, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        PRS1_0B, 0, 0, PRS1_0E
+    };
+
+    int ncodes = sizeof(Codes) / sizeof(ChannelID);
     EventList *Code[0x20] = {0};
 
-    EventDataType data0, data1, data2;
-    Q_UNUSED(data2)
-    int cnt = 0;
-    short delta;
-    int pos;
-    qint64 t = qint64(event->timestamp) * 1000L, tt;
+    qint64 t = qint64(event->timestamp) * 1000L;
 
     session->updateFirst(t);
 
@@ -2444,21 +2475,13 @@ bool PRS1Import::ParseF0Events()
     EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
     //EventList *T1 = session->AddEventList(CPAP_Test1, EVL_Event, 0.1);
 
-    Code[17] = session->AddEventList(PRS1_0E, EVL_Event);
+    Code[0x0e] = session->AddEventList(PRS1_0E, EVL_Event);
     EventList * LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
 
     EventList *PRESSURE = nullptr;
     EventList *EPAP = nullptr;
     EventList *IPAP = nullptr;
     EventList *PS = nullptr;
-
-    unsigned char lastcode3 = 0, lastcode2 = 0, lastcode = 0;
-    int lastpos = 0, startpos = 0, lastpos2 = 0, lastpos3 = 0;
-
-    int size = event->m_data.size();
-
-    bool FV3 = (event->fileVersion == 3);
-    unsigned char * buffer = (unsigned char *)event->m_data.data();
 
     EventDataType currentPressure=0, leak; //, p;
 
@@ -2471,6 +2494,145 @@ bool PRS1Import::ParseF0Events()
 
     CPAPMode mode = (CPAPMode) session->settings[CPAP_Mode].toInt();
 
+    bool ok;
+    ok = event->ParseEventsF0(mode);
+    
+    for (int i=0; i < event->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = event->m_parsedData.at(i);
+        t = qint64(event->timestamp + e->m_start) * 1000L;
+        
+        switch (e->m_type) {
+            case EV_PRS1_PRESSURE:
+                if (!PRESSURE) {
+                    if (!(PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, e->m_gain))) { return false; }
+                }
+                PRESSURE->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case EV_PRS1_IPAP:
+                if(!IPAP) {
+                    if (!(IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                IPAP->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case EV_PRS1_EPAP:
+                if (!EPAP) {
+                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                if(!PS) {
+                    if (!(PS = session->AddEventList(CPAP_PS, EVL_Event, e->m_gain))) { return false; }
+                }
+                EPAP->AddEvent(t, e->m_value);
+                PS->AddEvent(t, currentPressure - e->m_value);
+                break;
+            case EV_PRS1_FLEX:
+                if (!EPAP) {
+                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                EPAP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_OA:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_CA:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_FL:
+                FL->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_PB:
+                PB->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_LL:
+                LL->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_HY:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case EV_PRS1_TOTLEAK:
+                TOTLEAK->AddEvent(t, e->m_value);
+                leak = e->m_value;
+                if (calcLeaks) { // Much Quicker doing this here than the recalc method.
+                    leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
+                    if (leak < 0) leak = 0;
+                    LEAK->AddEvent(t, leak);
+                }
+                break;
+            case EV_PRS1_SNORE:
+                SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS2->AddEvent(t, e->m_value);
+                }
+                break;
+            case EV_PRS1_VS:  // F0: Is this really distinct from SNORE and VS2?
+                VS->AddEvent(t, 0);
+                break;
+            case EV_PRS1_RERA:
+                RE->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_PP:
+                PP->AddEvent(t, e->m_value);
+                break;
+            case EV_PRS1_UNKNOWN:
+            {
+                int code = ((PRS1UnknownValueEvent*) e)->m_code;
+                Q_ASSERT(code < ncodes);
+                if (!Code[code]) {
+                    ChannelID cpapcode = Codes[(int)code];
+                    Q_ASSERT(cpapcode);  // any unknown codes returned by chunk parser should be given a channel above
+                    if (!(Code[code] = session->AddEventList(cpapcode, EVL_Event, e->m_gain))) { return false; }
+                }
+                Code[code]->AddEvent(t, e->m_value);
+                break;
+            }
+            default:
+                qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    
+    t = qint64(event->timestamp + event->duration) * 1000L;
+    
+//    SmoothEventList(session, PRESSURE, CPAP_Pressure);
+//    SmoothEventList(session, IPAP, CPAP_IPAP);
+//    SmoothEventList(session, EPAP, CPAP_EPAP);
+
+    session->updateLast(t);
+    session->m_cnt.clear();
+    session->m_cph.clear();
+    session->m_lastchan.clear();
+    session->m_firstchan.clear();
+    session->m_valuesummary[CPAP_Pressure].clear();
+    session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));
+
+    return true;
+}
+
+
+bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
+{
+    unsigned char code=0;
+
+    EventDataType data0, data1, data2;
+    Q_UNUSED(data2)
+    int cnt = 0;
+    short delta;
+    int pos;
+    int t = 0;
+    
+    unsigned char lastcode3 = 0, lastcode2 = 0, lastcode = 0;
+    int lastpos = 0, startpos = 0, lastpos2 = 0, lastpos3 = 0;
+
+    int size = this->m_data.size();
+
+    bool FV3 = (this->fileVersion == 3);
+    unsigned char * buffer = (unsigned char *)this->m_data.data();
+
     for (pos = 0; pos < size;) {
         lastcode3 = lastcode2;
         lastcode2 = lastcode;
@@ -2482,7 +2644,7 @@ bool PRS1Import::ParseF0Events()
         code = buffer[pos++];
 
         if (code > 0x15) {
-            qDebug() << "Illegal PRS1 code " << hex << int(code) << " appeared at " << hex << startpos << "in" << event->sessionid;
+            qDebug() << "Illegal PRS1 code " << hex << int(code) << " appeared at " << hex << startpos << "in" << this->sessionid;
             qDebug() << "1: (" << hex << int(lastcode) << hex << lastpos << ")";
             qDebug() << "2: (" << hex << int(lastcode2) << hex << lastpos2 << ")";
             qDebug() << "3: (" << hex << int(lastcode3) << hex << lastpos3 << ")";
@@ -2493,8 +2655,7 @@ bool PRS1Import::ParseF0Events()
             delta = buffer[pos + 1] << 8 | buffer[pos];
             pos += 2;
 
-            t += qint64(delta) * 1000L;
-            tt = t;
+            t += delta;
         }
 
         cnt++;
@@ -2502,128 +2663,70 @@ bool PRS1Import::ParseF0Events()
         switch (code) {
 
         case 0x00: // Unknown 00
-
-            if (!Code[0]) {
-                if (!(Code[0] = session->AddEventList(PRS1_00, EVL_Event))) { return false; }
-            }
-
-            Code[0]->AddEvent(t, buffer[pos++]);
-
-            if (((event->family == 0) && (event->familyVersion >= 4)) || (event->fileVersion == 3)){
+            this->AddEvent(new PRS1UnknownValueEvent(code, t, buffer[pos++]));
+            if (((this->family == 0) && (this->familyVersion >= 4)) || (this->fileVersion == 3)){
                 pos++;
             }
-
             break;
 
         case 0x01: // Unknown
-            if ((event->family == 0) && (event->familyVersion >= 4)) {
-                if (!PRESSURE) {
-                    PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, 0.1F);
-
-                    if (!PRESSURE) { return false; }
-                }
-
-                PRESSURE->AddEvent(t, currentPressure = buffer[pos++]);
+            if ((this->family == 0) && (this->familyVersion >= 4)) {
+                this->AddEvent(new PRS1CPAPEvent(t, buffer[pos++]));
             } else {
-                if (!Code[1]) {
-                    if (!(Code[1] = session->AddEventList(PRS1_01, EVL_Event))) { return false; }
-                }
-
-                Code[1]->AddEvent(t, 0);
+                this->AddEvent(new PRS1UnknownValueEvent(code, t, 0));
             }
-
             break;
 
         case 0x02: // Pressure
-            if ((event->family == 0) && (event->familyVersion >= 4)) {  // BiPAP Pressure
-                if (!EPAP) {
-                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F))) { return false; }
-                }
-                if(!IPAP) {
-                    if (!(IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F))) { return false; }
-                }
-                if(!PS) {
-                    if (!(PS = session->AddEventList(CPAP_PS, EVL_Event, 0.1F))) { return false; }
-                }
-
-                EPAP->AddEvent(t, data0 = buffer[pos++]);
-                IPAP->AddEvent(t, data1 = currentPressure = buffer[pos++]);
-                PS->AddEvent(t, data1 - data0);
+            if ((this->family == 0) && (this->familyVersion >= 4)) {  // BiPAP Pressure
+                data0 = buffer[pos++];
+                data1 = buffer[pos++];
+                this->AddEvent(new PRS1IPAPEvent(t, data1));
+                this->AddEvent(new PRS1EPAPEvent(t, data0));  // EPAP needs to be added second to calculate PS
             } else {
-                if (!PRESSURE) {
-                    PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, 0.1F);
-
-                    if (!PRESSURE) { return false; }
-                }
-
-                PRESSURE->AddEvent(t, currentPressure = buffer[pos++]);
+                this->AddEvent(new PRS1CPAPEvent(t, buffer[pos++]));
             }
-
             break;
 
         case 0x03: // BIPAP Pressure
             if (FV3) {
-                if (!PRESSURE) {
-                    PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, 0.1F);
-
-                    if (!PRESSURE) { return false; }
-                }
-                PRESSURE->AddEvent(t, currentPressure = buffer[pos++]);
-
+                this->AddEvent(new PRS1CPAPEvent(t, buffer[pos++]));
             } else {
-                if (!EPAP) {
-                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F))) { return false; }
-                }
-                if(!IPAP) {
-                    if (!(IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F))) { return false; }
-                }
-                if(!PS) {
-                    if (!(PS = session->AddEventList(CPAP_PS, EVL_Event, 0.1F))) { return false; }
-                }
-
-                EPAP->AddEvent(t, data0 = buffer[pos++]);
-                IPAP->AddEvent(t, data1 = currentPressure = buffer[pos++]);
-                PS->AddEvent(t, data1 - data0);
+                data0 = buffer[pos++];
+                data1 = buffer[pos++];
+                this->AddEvent(new PRS1IPAPEvent(t, data1));
+                this->AddEvent(new PRS1EPAPEvent(t, data0));  // EPAP needs to be added second to calculate PS
             }
             break;
 
         case 0x04: // Pressure Pulse
             data0 = buffer[pos++];
-
-            PP->AddEvent(t, data0);
+            this->AddEvent(new PRS1PressurePulseEvent(t, data0));
             break;
 
         case 0x05: // RERA
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-
-            RE->AddEvent(tt, data0);
+            this->AddEvent(new PRS1RERAEvent(t - data0, data0));
             break;
 
         case 0x06: // Obstructive Apoanea
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-            OA->AddEvent(tt, data0);
+            this->AddEvent(new PRS1ObstructiveApneaEvent(t - data0, data0));
             break;
 
         case 0x07: // Clear Airway
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-
-            CA->AddEvent(tt, data0);
+            this->AddEvent(new PRS1ClearAirwayEvent(t - data0, data0));
             break;
 
         case 0x0a: // Hypopnea
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-            HY->AddEvent(tt, data0);
+            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
             break;
 
         case 0x0c: // Flow Limitation
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-
-            FL->AddEvent(tt, data0);
+            this->AddEvent(new PRS1FlowLimitationEvent(t - data0, data0));
             break;
 
         case 0x0b: // Breathing not Detected flag???? but it doesn't line up
@@ -2631,7 +2734,7 @@ bool PRS1Import::ParseF0Events()
             data1 = buffer[pos+1];
             pos += 2;
 
-            if (event->familyVersion >= 4) {
+            if (this->familyVersion >= 4) {
                  // might not doublerize on older machines?
               //  data0 *= 2;
             }
@@ -2639,90 +2742,63 @@ bool PRS1Import::ParseF0Events()
 
             //tt = t - qint64((data0+data1)*2) * 1000L;
 
-            if (!Code[12]) {
-                Code[12] = session->AddEventList(PRS1_0B, EVL_Event);
-            }
-
-            // FIXME
-            Code[12]->AddEvent(t, data0);
+            this->AddEvent(new PRS1UnknownValueEvent(code, t, data0));  // FIXME
             break;
 
         case 0x0d: // Vibratory Snore
-            VS->AddEvent(t, 0);
+            this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
             break;
 
         case 0x0e: // Unknown
             data0 = buffer[pos + 1] << 8 | buffer[pos];
-            if (event->familyVersion >= 4) {
+            if (this->familyVersion >= 4) {
                  // might not doublerize on older machines?
                 data0 *= 2;
             }
 
             pos += 2;
             data1 = buffer[pos++];
-
-            tt = t - qint64(data1) * 1000L;
-            Code[17]->AddEvent(tt, data0);
-
+            this->AddEvent(new PRS1UnknownValueEvent(code, t - data1, data0));
             break;
 
         case 0x0f: // Cheyne Stokes Respiration
             data0 = (buffer[pos + 1] << 8 | buffer[pos]);
-            if (event->familyVersion >= 4) {
+            if (this->familyVersion >= 4) {
                  // might not doublerize on older machines
                 data0 *= 2;
             }
             pos += 2;
             data1 = buffer[pos++];
-            tt = t - qint64(data1) * 1000L;
-            PB->AddEvent(tt, data0);
+            this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));
             break;
 
         case 0x10: // Large Leak
             data0 = buffer[pos + 1] << 8 | buffer[pos];
-            if (event->familyVersion >= 4) {
+            if (this->familyVersion >= 4) {
                  // might not doublerize on older machines
                 data0 *= 2;
             }
             pos += 2;
             data1 = buffer[pos++];
-
-            tt = t - qint64(data1) * 1000L;
-            LL->AddEvent(tt, data0);
+            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));
             break;
 
         case 0x11: // Leak Rate & Snore Graphs
             data0 = buffer[pos++];
             data1 = buffer[pos++];
+            this->AddEvent(new PRS1TotalLeakEvent(t, data0));
+            this->AddEvent(new PRS1SnoreEvent(t, data1));
 
-            TOTLEAK->AddEvent(t, data0);
-            SNORE->AddEvent(t, data1);
-
-            if (calcLeaks) { // Much Quicker doing this here than the recalc method.
-                leak = data0-(((currentPressure/10.0f) - 4.0) * ppm + lpm4);
-                if (leak < 0) leak = 0;
-
-                LEAK->AddEvent(t, leak);
-            }
-
-            if (data1 > 0) {
-                VS2->AddEvent(t, data1);
-            }
-
-            if ((event->family == 0) && (event->familyVersion >= 4))  {
+            if ((this->family == 0) && (this->familyVersion >= 4))  {
                 // EPAP / Flex Pressure
                 data0 = buffer[pos++];
 
                 // Perhaps this check is not necessary, as it will theoretically add extra resolution to pressure chart
                 // for bipap models and above???
                 if (mode <= MODE_BILEVEL_FIXED) {
-                    if (!EPAP) {
-                        if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F))) { return false; }
-                    }
-                    EPAP->AddEvent(t, data0);
+                    this->AddEvent(new PRS1PressureReliefEvent(t, data0));
                 }
             }
-
             break;
 
         case 0x12: // Summary
@@ -2737,36 +2813,22 @@ bool PRS1Import::ParseF0Events()
 
         case 0x14:  // DreamStation Hypopnea
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-            HY->AddEvent(tt, data0);
+            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
             break;
 
         case 0x15:  // DreamStation Hypopnea
             data0 = buffer[pos++];
-            tt = t - (qint64(data0) * 1000L);
-            HY->AddEvent(tt, data0);
+            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
             break;
 
         default:
             // ERROR!!!
-            qWarning() << "Some new fandangled PRS1 code detected in" << event->sessionid << hex
+            qWarning() << "Some new fandangled PRS1 code detected in" << this->sessionid << hex
                        << int(code) << " at " << pos - 1;
             return false;
         }
     }
-
-//    SmoothEventList(session, PRESSURE, CPAP_Pressure);
-//    SmoothEventList(session, IPAP, CPAP_IPAP);
-//    SmoothEventList(session, EPAP, CPAP_EPAP);
-
-
-    session->updateLast(t);
-    session->m_cnt.clear();
-    session->m_cph.clear();
-    session->m_lastchan.clear();
-    session->m_firstchan.clear();
-    session->m_valuesummary[CPAP_Pressure].clear();
-    session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));
+    this->duration = t;
 
     return true;
 }
