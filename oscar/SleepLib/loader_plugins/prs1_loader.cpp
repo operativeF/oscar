@@ -3044,9 +3044,98 @@ bool PRS1Import::ParseSummaryF0()
     return true;
 }
 
+
 bool PRS1Import::ParseSummaryF0V4()
 {
-    const unsigned char * data = (unsigned char *)summary->m_data.constData();
+    bool ok;
+    ok = summary->ParseSummaryF0V4();
+    
+    for (int i=0; i < summary->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
+        if (e->m_type != EV_PRS1_SETTING) {
+            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
+            continue;
+        }
+        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
+        switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
+            case PRS1_SETTING_PRESSURE:
+                session->settings[CPAP_Pressure] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MIN:
+                session->settings[CPAP_PressureMin] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MAX:
+                session->settings[CPAP_PressureMax] = e->value();
+                break;
+            case PRS1_SETTING_EPAP:
+                session->settings[CPAP_EPAP] = e->value();
+                break;
+            case PRS1_SETTING_IPAP:
+                session->settings[CPAP_IPAP] = e->value();
+                break;
+            case PRS1_SETTING_PS:
+                session->settings[CPAP_PS] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MIN:
+                session->settings[CPAP_EPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MAX:
+                session->settings[CPAP_EPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MIN:
+                session->settings[CPAP_IPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MAX:
+                session->settings[CPAP_IPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_PS_MIN:
+                session->settings[CPAP_PSMin] = e->value();
+                break;
+            case PRS1_SETTING_PS_MAX:
+                session->settings[CPAP_PSMax] = e->value();
+                break;
+            case PRS1_SETTING_FLEX_MODE:
+                session->settings[PRS1_FlexMode] = e->m_value;
+                break;
+            case PRS1_SETTING_FLEX_LEVEL:
+                session->settings[PRS1_FlexLevel] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_TIME:
+                session->settings[CPAP_RampTime] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_PRESSURE:
+                session->settings[CPAP_RampPressure] = e->value();
+                break;
+            case PRS1_SETTING_HUMID_STATUS:
+                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HEATED_TUBING:
+                session->settings[PRS1_HeatedTubing] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HUMID_LEVEL:
+                session->settings[PRS1_HumidLevel] = e->m_value;
+                break;
+            default:
+                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    summary_duration = summary->duration;
+
+    return true;
+}
+
+
+bool PRS1DataChunk::ParseSummaryF0V4(void)
+{
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
@@ -3064,30 +3153,29 @@ bool PRS1Import::ParseSummaryF0V4()
         cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS;
     }
 
-
-    EventDataType min_pressure = EventDataType(data[0x03]) / 10.0;
-    EventDataType max_pressure = EventDataType(data[0x04]) / 10.0;
-    EventDataType min_ps  = EventDataType(data[0x05]) / 10.0; // pressure support
-    EventDataType max_ps  = EventDataType(data[0x06]) / 10.0; // pressure support
+    int min_pressure = data[0x03];
+    int max_pressure = data[0x04];
+    int min_ps  = data[0x05]; // pressure support
+    int max_ps  = data[0x06]; // pressure support
 
     if (cpapmode == MODE_CPAP) {
-        session->settings[CPAP_Pressure] = min_pressure;
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
     } else if (cpapmode == MODE_APAP) {
-        session->settings[CPAP_PressureMin] = min_pressure;
-        session->settings[CPAP_PressureMax] = max_pressure;
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
     } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        session->settings[CPAP_EPAP] = min_pressure;
-        session->settings[CPAP_IPAP] = max_pressure;
-        session->settings[CPAP_PS] = max_pressure - min_pressure;
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, max_pressure - min_pressure));
     } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
-        session->settings[CPAP_EPAPLo] = min_pressure;
-        session->settings[CPAP_EPAPHi] = max_pressure;
-        session->settings[CPAP_IPAPLo] = min_pressure + min_ps;
-        session->settings[CPAP_IPAPHi] = max_pressure;
-        session->settings[CPAP_PSMin] = min_ps;
-        session->settings[CPAP_PSMax] = max_ps;
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_pressure + min_ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, max_ps));
     }
-    session->settings[CPAP_Mode] = (int)cpapmode;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
     quint8 flex = data[0x0a];
 
@@ -3116,20 +3204,21 @@ bool PRS1Import::ParseSummaryF0V4()
     } else flexmode = FLEX_None;
 
     int ramp_time = data[0x08];
-    EventDataType ramp_pressure = EventDataType(data[0x09]) / 10.0;
+    int ramp_pressure = data[0x09];
 
-    session->settings[CPAP_RampTime] = (int)ramp_time;
-    session->settings[CPAP_RampPressure] = ramp_pressure;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
-    session->settings[PRS1_FlexMode] = (int)flexmode;
-    session->settings[PRS1_FlexLevel] = (int)flexlevel;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
 
-    session->settings[PRS1_HumidStatus] = (bool)(data[0x0b] & 0x80);        // Humidifier Connected
-    session->settings[PRS1_HeatedTubing] = (bool)(data[0x0b] & 0x10);        // Heated Hose??
-    session->settings[PRS1_HumidLevel] = (int)(data[0x0b] & 7);          // Humidifier Value
+    int humid = data[0x0b];
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
 
 
-    summary_duration = data[0x14] | data[0x15] << 8;
+    this->duration = data[0x14] | data[0x15] << 8;
 
     return true;
 }
