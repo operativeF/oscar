@@ -127,6 +127,9 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a brick
+    bool ParseCompliance(void);
+    
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 2 or 3 machine
     bool ParseSummaryF0V23(void);
     

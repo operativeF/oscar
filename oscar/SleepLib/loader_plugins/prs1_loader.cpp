@@ -986,6 +986,7 @@ enum PRS1ParsedEventType
     EV_PRS1_TEST1,
     EV_PRS1_TEST2,
     EV_PRS1_SETTING,
+    EV_PRS1_SLICE,
 };
 
 enum PRS1ParsedEventUnit
@@ -1120,6 +1121,13 @@ public:
         m_unit = PRS1PressureEvent::UNIT;
     }
 };
+
+class PRS1ParsedSliceEvent : public PRS1ParsedDurationEvent
+{
+public:
+    SliceStatus m_status;
+    PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(EV_PRS1_SLICE, start, duration), m_status(status) {}
+};        
 
 class PRS1TimedBreathEvent : public PRS1ParsedDurationEvent
 {
@@ -2858,25 +2866,87 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
 
 bool PRS1Import::ParseCompliance()
 {
-    const unsigned char * data = (unsigned char *)compliance->m_data.constData();
+    bool ok;
+    ok = compliance->ParseCompliance();
+    qint64 start = qint64(compliance->timestamp) * 1000L;
+    
+    for (int i=0; i < compliance->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = compliance->m_parsedData.at(i);
+        if (e->m_type == EV_PRS1_SLICE) {
+            PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
+            qint64 tt = start + qint64(s->m_start) * 1000L;
+            qint64 duration = qint64(s->m_duration) * 1000L;
+            session->m_slices.append(SessionSlice(tt, tt + duration, s->m_status));
+            qDebug() << compliance->sessionid << "Added Slice" << tt << (tt+duration) << s->m_status;
+            continue;
+        } else if (e->m_type != EV_PRS1_SETTING) {
+            qWarning() << "Compliance had non-setting event:" << (int) e->m_type;
+            continue;
+        }
+        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
+        switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
+            case PRS1_SETTING_PRESSURE:
+                session->settings[CPAP_Pressure] = e->value();
+                break;
+            case PRS1_SETTING_FLEX_MODE:
+                session->settings[PRS1_FlexMode] = e->m_value;
+                break;
+            case PRS1_SETTING_FLEX_LEVEL:
+                session->settings[PRS1_FlexLevel] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_TIME:
+                session->settings[CPAP_RampTime] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_PRESSURE:
+                session->settings[CPAP_RampPressure] = e->value();
+                break;
+            case PRS1_SETTING_HUMID_STATUS:
+                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HUMID_LEVEL:
+                session->settings[PRS1_HumidLevel] = e->m_value;
+                break;
+            default:
+                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    session->setSummaryOnly(true);
+    session->set_first(start);
+    session->set_last(qint64(compliance->timestamp + compliance->duration) * 1000L);
+
+    return true;
+}
+
+
+bool PRS1DataChunk::ParseCompliance(void)
+{
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
 
     if (data[0x00] > 0) {
         return false;
     }
 
-    session->settings[CPAP_Mode] = (int)MODE_CPAP;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_CPAP));
 
-    EventDataType min_pressure = EventDataType(data[0x03]) / 10.0;
+    int min_pressure = data[0x03];
    // EventDataType max_pressure = EventDataType(data[0x04]) / 10.0;
 
-    session->settings[CPAP_Pressure] = min_pressure;
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
 
 
     int ramp_time = data[0x06];
-    EventDataType ramp_pressure = EventDataType(data[0x07]) / 10.0;
+    int ramp_pressure = data[0x07];
 
-    session->settings[CPAP_RampTime] = (int)ramp_time;
-    session->settings[CPAP_RampPressure] = ramp_pressure;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
 
     quint8 flex = data[0x09];
@@ -2899,28 +2969,28 @@ bool PRS1Import::ParseCompliance()
         }
     } else flexmode = FLEX_None;
 
-    session->settings[PRS1_FlexMode] = (int)flexmode;
-    session->settings[PRS1_FlexLevel] = (int)flexlevel;
-    session->setSummaryOnly(true);
-    //session->settings[CPAP_SummaryOnly] = true;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
 
-    session->settings[PRS1_HumidStatus] = (bool)(data[0x0A] & 0x80);        // Humidifier Connected
-    session->settings[PRS1_HumidLevel] = (int)(data[0x0A] & 7);          // Humidifier Value
+    int humid = data[0x0A];
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
 
+    // TODO: What are slices, and why would only bricks have them? That seems very weird.
+    
     // need to parse a repeating structure here containing lengths of mask on/off..
     // 0x03 = mask on
     // 0x01 = mask off
 
-    qint64 start = qint64(compliance->timestamp) * 1000L;
-    qint64 tt = start;
+    int start = 0;
+    int tt = start;
 
-    int len = compliance->size()-3;
+    int len = this->size()-3;
     int pos = 0x11;
     do {
         quint8 c = data[pos++];
-        quint64 duration = data[pos] | data[pos+1] << 8;
+        int duration = data[pos] | data[pos+1] << 8;
         pos+=2;
-        duration *= 1000L;
         SliceStatus status;
         if (c == 0x03) {
             status = EquipmentOn;
@@ -2929,17 +2999,15 @@ bool PRS1Import::ParseCompliance()
         } else if (c == 0x01) {
             status = EquipmentOff;
         } else {
-            qDebug() << compliance->sessionid << "Wasn't expecting" << c;
+            qDebug() << this->sessionid << "Wasn't expecting" << c;
             break;
         }
-        session->m_slices.append(SessionSlice(tt, tt + duration, status));
-        qDebug() << compliance->sessionid << "Added Slice" << tt << (tt+duration) << status;
+        this->AddEvent(new PRS1ParsedSliceEvent(tt, duration, status));
 
         tt += duration;
     } while (pos < len);
 
-    session->set_first(start);
-    session->set_last(tt);
+    this->duration = tt;
 
     // Bleh!! There is probably 10 different formats for these useless piece of junk machines
     return true;
