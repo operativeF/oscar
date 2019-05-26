@@ -2953,8 +2953,7 @@ bool PRS1DataChunk::ParseCompliance(void)
     this->ParseFlexSetting(flex, MODE_CPAP);
 
     int humid = data[0x0A];
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
+    this->ParseHumidifierSetting(humid, false);
 
     // TODO: What are slices, and why would only bricks have them? That seems very weird.
     // TODO: The below seems not to work on 200X models.
@@ -3168,8 +3167,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_MASK_ALERT, (data[0x0c] & 0x08) != 0));
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SHOW_AHI, (data[0x0c] & 0x04) != 0));
     int humid = data[0x09];
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
+    this->ParseHumidifierSetting(humid, false);
 
    // session->
 
@@ -3324,10 +3322,7 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
     int humid = data[0x0b];
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
-
+    this->ParseHumidifierSetting(humid);
 
     this->duration = data[0x14] | data[0x15] << 8;
 
@@ -3548,9 +3543,8 @@ bool PRS1DataChunk::ParseSummaryF5V012(void)
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (data[0x0d] & 0x80) != 0));        // Humidifier Connected
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (data[0x0d] & 0x10) != 0));        // Heated Hose??
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (data[0x0d] & 7)));          // Humidifier Value
+    int humid = data[0x0d];
+    this->ParseHumidifierSetting(humid);
 
     this->duration = data[0x18] | data[0x19] << 8;
 
@@ -3592,6 +3586,16 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
+}
+
+
+void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
+{
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
+    if (supportsHeatedTubing) {
+        this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
+    }
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
 }
 
 
