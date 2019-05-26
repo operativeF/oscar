@@ -3604,8 +3604,6 @@ bool PRS1Import::ParseSummaryF5V3()
     bool ok;
     ok = summary->ParseSummaryF5V3();
     
-    EventDataType epapHi, epapLo, minps, maxps;
-
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
         if (e->m_type != EV_PRS1_SETTING) {
@@ -3618,29 +3616,28 @@ bool PRS1Import::ParseSummaryF5V3()
                 session->settings[CPAP_Mode] = e->m_value;
                 break;
             case PRS1_SETTING_EPAP_MIN:
-                epapLo = e->value();
-                session->settings[CPAP_EPAPLo] = epapLo;
+                session->settings[CPAP_EPAPLo] = e->value();
                 break;
             case PRS1_SETTING_EPAP_MAX:
-                epapHi = e->value();
-                session->settings[CPAP_EPAPHi] = epapHi;
+                session->settings[CPAP_EPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MIN:
+                session->settings[CPAP_IPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MAX:
+                session->settings[CPAP_IPAPHi] = e->value();
                 break;
             case PRS1_SETTING_PS_MIN:
-                minps = e->value();
-                session->settings[CPAP_PSMin] = minps;
+                session->settings[CPAP_PSMin] = e->value();
                 break;
             case PRS1_SETTING_PS_MAX:
-                maxps = e->value();
-                session->settings[CPAP_PSMax] = maxps;
+                session->settings[CPAP_PSMax] = e->value();
                 break;
             default:
                 qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
                 break;
         }
     }
-
-    session->settings[CPAP_IPAPLo] = epapLo + minps;
-    session->settings[CPAP_IPAPHi] = qMin(25.0f, epapHi + maxps);
 
     if (!ok) {
         return false;
@@ -3657,17 +3654,20 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
 
     unsigned char * pressureBlock = (unsigned char *)mainblock[0x0a].data();
 
-    EventDataType epapHi = pressureBlock[0];
-    EventDataType epapRange = pressureBlock[2];
-    EventDataType epapLo = epapHi - epapRange;
+    int epapHi = pressureBlock[0];
+    int epapRange = pressureBlock[2];
+    int epapLo = epapHi - epapRange;
 
-    EventDataType minps = pressureBlock[3] ;
-    EventDataType maxps = pressureBlock[4]+epapLo;
+    int minps = pressureBlock[3] ;
+    int maxps = pressureBlock[4]+epapLo;
 
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, epapHi));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, epapLo));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, minps));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, maxps));
+    
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, epapLo + minps));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, qMin(250, epapHi + maxps)));  // 25.0 cmH2O max
 
     if (hbdata[4].size() < 2) {
         qDebug() << "summary missing duration section:" << this->sessionid;
