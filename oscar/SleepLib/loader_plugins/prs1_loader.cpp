@@ -3138,7 +3138,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, ps));
     } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
-        int min_ps = 2;
+        int min_ps = 20;  // 2.0 cmH2O
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure - min_ps));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_pressure + min_ps));
