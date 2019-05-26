@@ -148,6 +148,9 @@ public:
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
     bool ParseSummaryF5V3(void);
 
+    //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
+    void ParseFlexSetting(quint8 flex, CPAPMode cpapmode);
+    
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 0 CPAP/APAP machine
     bool ParseEventsF0(CPAPMode mode);
     

@@ -2950,33 +2950,14 @@ bool PRS1DataChunk::ParseCompliance(void)
 
 
     quint8 flex = data[0x09];
-    int flexlevel = flex & 0x03;
-
-
-    FlexMode flexmode = FLEX_Unknown;
-
-    flex &= 0xf8;
-    //bool split = false;
-
-    if (flex & 0x40) {  // This bit defines the Flex setting for the CPAP component of the Split night
-      //  split = true;
-    }
-    if (flex & 0x80) { // CFlex bit
-        if (flex & 8) { // Plus bit
-            flexmode = FLEX_CFlexPlus;
-        } else {
-            flexmode = FLEX_CFlex;
-        }
-    } else flexmode = FLEX_None;
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
+    this->ParseFlexSetting(flex, MODE_CPAP);
 
     int humid = data[0x0A];
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
 
     // TODO: What are slices, and why would only bricks have them? That seems very weird.
+    // TODO: The below seems not to work on 200X models.
     
     // need to parse a repeating structure here containing lengths of mask on/off..
     // 0x03 = mask on
@@ -3193,39 +3174,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
    // session->
 
     quint8 flex = data[0x08];
-
-    int flexlevel = flex & 0x03;
-    FlexMode flexmode = FLEX_Unknown;
-
-    // 88 CFlex+ / AFlex (depending on CPAP mode)
-    // 80 CFlex
-    // 00 NoFlex
-    // c0 Split CFlex then None
-    // c8 Split CFlex+ then None
-
-    flex &= 0xf8;
-    bool split = false;
-
-    if (flex & 0x40) {  // This bit defines the Flex setting for the CPAP component of the Split night
-        split = true;
-    }
-    if (flex & 0x80) { // CFlex bit
-        if (flex & 0x10) {
-            flexmode = FLEX_RiseTime;
-        } else if (flex & 8) { // Plus bit
-            if (split || (cpapmode == MODE_CPAP)) {
-                flexmode = FLEX_CFlexPlus;
-            } else if (cpapmode == MODE_APAP) {
-                flexmode = FLEX_AFlex;
-            }
-        } else {
-            // CFlex bits refer to Rise Time on BiLevel machines
-            flexmode = (cpapmode >= MODE_BILEVEL_FIXED) ? FLEX_BiFlex : FLEX_CFlex;
-        }
-    } else flexmode = FLEX_None;
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
+    this->ParseFlexSetting(flex, cpapmode);
 
     this->duration = data[0x14] | data[0x15] << 8;
 
@@ -3366,39 +3315,13 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
     quint8 flex = data[0x0a];
-
-    int flexlevel = flex & 0x03;
-    FlexMode flexmode = FLEX_Unknown;
-
-    flex &= 0xf8;
-    bool split = false;
-
-    if (flex & 0x40) {  // This bit defines the Flex setting for the CPAP component of the Split night
-        split = true;
-    }
-    if (flex & 0x80) { // CFlex bit
-        if (flex & 0x10) {
-            flexmode = FLEX_RiseTime;
-        } else if (flex & 8) { // Plus bit
-            if (split || (cpapmode == MODE_CPAP)) {
-                flexmode = FLEX_CFlexPlus;
-            } else if (cpapmode == MODE_APAP) {
-                flexmode = FLEX_AFlex;
-            }
-        } else {
-            // CFlex bits refer to Rise Time on BiLevel machines
-            flexmode = (cpapmode >= MODE_BILEVEL_FIXED) ? FLEX_BiFlex : FLEX_CFlex;
-        }
-    } else flexmode = FLEX_None;
+    this->ParseFlexSetting(flex, cpapmode);
 
     int ramp_time = data[0x08];
     int ramp_pressure = data[0x09];
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
 
     int humid = data[0x0b];
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
@@ -3617,9 +3540,34 @@ bool PRS1DataChunk::ParseSummaryF5V012(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
     
     quint8 flex = data[0x0c];
+    this->ParseFlexSetting(flex, cpapmode);
 
+    int ramp_time = data[0x0a];
+    int ramp_pressure = data[0x0b];
+
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
+    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
+
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (data[0x0d] & 0x80) != 0));        // Humidifier Connected
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (data[0x0d] & 0x10) != 0));        // Heated Hose??
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (data[0x0d] & 7)));          // Humidifier Value
+
+    this->duration = data[0x18] | data[0x19] << 8;
+
+    return true;
+}
+
+
+void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
+{
     int flexlevel = flex & 0x03;
     FlexMode flexmode = FLEX_Unknown;
+
+    // 88 CFlex+ / AFlex (depending on CPAP mode)
+    // 80 CFlex
+    // 00 NoFlex
+    // c0 Split CFlex then None
+    // c8 Split CFlex+ then None
 
     flex &= 0xf8;
     bool split = false;
@@ -3644,21 +3592,8 @@ bool PRS1DataChunk::ParseSummaryF5V012(void)
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_MODE, (int) flexmode));
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, flexlevel));
-
-    int ramp_time = data[0x0a];
-    int ramp_pressure = data[0x0b];
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (data[0x0d] & 0x80) != 0));        // Humidifier Connected
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (data[0x0d] & 0x10) != 0));        // Heated Hose??
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (data[0x0d] & 7)));          // Humidifier Value
-
-    this->duration = data[0x18] | data[0x19] << 8;
-
-    return true;
 }
+
 
 bool PRS1Import::ParseSummaryF5V3()
 {
