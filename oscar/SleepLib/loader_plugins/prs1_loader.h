@@ -127,6 +127,9 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 2 or 3 machine
+    bool ParseSummaryF0V23(void);
+    
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 4 machine
     bool ParseSummaryF0V4(void);
     
@@ -227,7 +230,7 @@ public:
 
 
     //! \brief Summary parser for 50 series Family 0 CPAP/APAP models
-    bool ParseSummaryF0();
+    bool ParseSummaryF0V23();
     //! \brief Summary parser for 60 series Family 0 CPAP/APAP models
     bool ParseSummaryF0V4();
     //! \brief Summary parser for 1060 series AVAPS models
