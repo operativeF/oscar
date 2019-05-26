@@ -581,16 +581,17 @@ void Profile::UnloadMachineData()
         return;
     }
 
-    for (auto & day : daylist) {
-        delete day;
-    }
-    daylist.clear();
-
     for (auto & mach : m_machlist) {
         mach->saveSessionInfo();
         mach->sessionlist.clear();
         mach->day.clear();
     }
+
+    for (auto & day : daylist) {
+        delete day;
+    }
+    daylist.clear();
+
     removeLock();
 }
 void Profile::LoadMachineData(ProgressDialog *progress)
