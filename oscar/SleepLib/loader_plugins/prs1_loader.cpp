@@ -1111,7 +1111,7 @@ enum PRS1ParsedEventType
     EV_PRS1_LL,
     EV_PRS1_HY,
     EV_PRS1_TOTLEAK,
-    EV_PRS1_LEAK,  // F5V2: Is this real or actually TOTLEAK?
+    EV_PRS1_LEAK,  // unintentional leak
     EV_PRS1_PRESSURE,  // TODO: maybe fold PRESSURE and IPAP into one
     EV_PRS1_IPAP,
     EV_PRS1_IPAPLOW,
@@ -1322,7 +1322,7 @@ public:
     PRS1TotalLeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TOTLEAK, start, value) {}
 };
 
-class PRS1LeakEvent : public PRS1ParsedValueEvent  // TODO: F5V2 - is this real or actually TotalLeak?
+class PRS1LeakEvent : public PRS1ParsedValueEvent  // TODO: do machines really report unintentional leak?
 {
 public:
     PRS1LeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_LEAK, start, value) {}
@@ -1448,20 +1448,7 @@ void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
 
 bool PRS1Import::ParseF5EventsFV3()
 {
-    EventDataType currentPressure=0, leak, ps=0;
-
-    bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
-    EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
-    EventDataType lpm20 = p_profile->cpap->custom20cmH2OLeaks();
-
-    EventDataType lpm = lpm20 - lpm4;
-    EventDataType ppm = lpm / 16.0;
-
-
-    //qint64 start=timestamp;
-    qint64 t = qint64(event->timestamp) * 1000L;
-    session->updateFirst(t);
-
+    // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
 
@@ -1486,6 +1473,21 @@ bool PRS1Import::ParseF5EventsFV3()
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
+
+    // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
+    EventDataType currentPressure=0, leak, ps=0;
+
+    bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
+    EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
+    EventDataType lpm20 = p_profile->cpap->custom20cmH2OLeaks();
+
+    EventDataType lpm = lpm20 - lpm4;
+    EventDataType ppm = lpm / 16.0;
+
+
+    //qint64 start=timestamp;
+    qint64 t = qint64(event->timestamp) * 1000L;
+    session->updateFirst(t);
 
     bool ok;
     ok = event->ParseEventsF5V3();
@@ -1726,17 +1728,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
 
 bool PRS1Import::ParseF5Events()
 {
-    ChannelID Codes[] = {
-        PRS1_00, PRS1_01, CPAP_Pressure, CPAP_EPAP, CPAP_PressurePulse, CPAP_Obstructive,
-        CPAP_ClearAirway, CPAP_Hypopnea, PRS1_08,  CPAP_FlowLimit, PRS1_0A, CPAP_PB,
-        PRS1_0C, CPAP_VSnore, PRS1_0E, PRS1_0F,
-        CPAP_LargeLeak, // Large leak apparently
-        CPAP_LeakTotal, PRS1_12
-    };
-
-    int ncodes = sizeof(Codes) / sizeof(ChannelID);
-    EventList *Code[0x20] = {nullptr};
-
+    // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
 
@@ -1763,9 +1755,22 @@ bool PRS1Import::ParseF5Events()
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
   //  EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
 
+    // On-demand channels
+    ChannelID Codes[] = {
+        PRS1_00, PRS1_01, CPAP_Pressure, CPAP_EPAP, CPAP_PressurePulse, CPAP_Obstructive,
+        CPAP_ClearAirway, CPAP_Hypopnea, PRS1_08,  CPAP_FlowLimit, PRS1_0A, CPAP_PB,
+        PRS1_0C, CPAP_VSnore, PRS1_0E, PRS1_0F,
+        CPAP_LargeLeak, // Large leak apparently
+        CPAP_LeakTotal, PRS1_12
+    };
+
+    int ncodes = sizeof(Codes) / sizeof(ChannelID);
+    EventList *Code[0x20] = {nullptr};
+
     //EventList * PRESSURE=nullptr;
     //EventList * PP=nullptr;
 
+    // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
     EventDataType currentPressure=0, leak, ps=0; //, p;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
@@ -1828,7 +1833,7 @@ bool PRS1Import::ParseF5Events()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case EV_PRS1_LEAK:  // F5V2, is this really leak rather than totleak?
+            case EV_PRS1_LEAK:
                 LEAK->AddEvent(t, e->m_value);
                 break;
             case EV_PRS1_RR:
@@ -2100,7 +2105,7 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
                 this->AddEvent(new PRS1IPAPEvent(t, data1=buffer[pos+0])); // 0
                 this->AddEvent(new PRS1IPAPLowEvent(t, buffer[pos+1])); // 1
                 this->AddEvent(new PRS1IPAPHighEvent(t, buffer[pos+2])); // 2
-                this->AddEvent(new PRS1LeakEvent(t, buffer[pos+3])); // 3  // F5V2, is this really leak rather than totleak?
+                this->AddEvent(new PRS1LeakEvent(t, buffer[pos+3])); // 3  // F5V2, is this really unintentional leak rather than total leak?
                 this->AddEvent(new PRS1TidalVolumeEvent(t, buffer[pos+7])); // 7
                 this->AddEvent(new PRS1RespiratoryRateEvent(t, buffer[pos+4])); // 4
                 this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, buffer[pos+5]));  // 5
@@ -2175,8 +2180,7 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
 
 bool PRS1Import::ParseF3EventsV3()
 {
-    // AVAPS machine... it's delta packed, unlike the older ones?? (double check that! :/)
-
+    // Required channels
     EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
@@ -2200,6 +2204,8 @@ bool PRS1Import::ParseF3EventsV3()
     EventList *FLOW = session->AddEventList(CPAP_Test2, EVL_Event);
 
     qint64 t;
+    // missing session->updateFirst(t)?
+    
     bool ok;
     ok = event->ParseEventsF3V6();
     
@@ -2232,7 +2238,7 @@ bool PRS1Import::ParseF3EventsV3()
             case EV_PRS1_IPAP:
                 IPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_LEAK:  // F3V6, is this really leak rather than totleak?
+            case EV_PRS1_LEAK:
                 LEAK->AddEvent(t, e->m_value);
                 break;
             case EV_PRS1_RR:
@@ -2298,6 +2304,8 @@ bool PRS1Import::ParseF3EventsV3()
 // 1030X, 11030X series
 bool PRS1DataChunk::ParseEventsF3V6(void)
 {
+    // AVAPS machine... it's delta packed, unlike the older ones?? (double check that! :/)
+
     if (this->family != 3 || this->familyVersion != 6) {
         qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
         //break;  // don't break to avoid changing behavior (for now)
@@ -2333,7 +2341,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
             this->AddEvent(new PRS1TimedBreathEvent(t, val));
             break;
         case 0x02:
-            this->AddEvent(new PRS1LeakEvent(t, data[pos+3]));
+            this->AddEvent(new PRS1LeakEvent(t, data[pos+3]));  // TODO: F3V6, is this really unintentional leak rather than total leak?
             this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos+5]));
             this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos+6]));
             this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos+7]));
@@ -2404,9 +2412,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
 
 bool PRS1Import::ParseF3Events()
 {
-    qint64 t = qint64(event->timestamp) * 1000L;
-
-    session->updateFirst(t);
+    // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
@@ -2420,6 +2426,9 @@ bool PRS1Import::ParseF3Events()
     EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event,0.1f);
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event,0.1f);
     EventList *FLOW = session->AddEventList(CPAP_FlowRate, EVL_Event);
+
+    qint64 t = qint64(event->timestamp) * 1000L;
+    session->updateFirst(t);
 
     bool ok;
     ok = event->ParseEventsF3V3();
@@ -2471,6 +2480,10 @@ bool PRS1Import::ParseF3Events()
         }
     }
     
+    if (!ok) {
+        return false;
+    }
+
     return true;
 }
 
@@ -2509,7 +2522,7 @@ bool PRS1DataChunk::ParseEventsF3V3(void)
         //TMV->AddEvent(t, h[9]); // not sure what this is.. encore doesn't graph it.
         // h[10]?
         this->AddEvent(new PRS1MinuteVentilationEvent(t, h[11]));
-        this->AddEvent(new PRS1LeakEvent(t, h[15]));
+        this->AddEvent(new PRS1LeakEvent(t, h[15]));  // TODO: F3V3, is this really unintentional leak rather than total leak?
 
         hy = h[12];  // count of hypopnea events
         ca = h[13];  // count of clear airway events
@@ -2553,6 +2566,8 @@ bool PRS1DataChunk::ParseEventsF3V3(void)
 }
 
 
+#if 0
+// Currently unused, apparently an abandoned effort to massage F0 pressure/IPAP/EPAP data.
 extern EventDataType CatmullRomSpline(EventDataType p0, EventDataType p1, EventDataType p2, EventDataType p3, EventDataType t = 0.5);
 
 void SmoothEventList(Session * session, EventList * ev, ChannelID code)
@@ -2617,24 +2632,14 @@ void SmoothEventList(Session * session, EventList * ev, ChannelID code)
     }
 
 }
+#endif
 
 
 // 750P is F0V2; 550P is F0V2/F0V3; 450P is F0V3; 460P, 560P[BT], 660P, 760P are F0V4
 // 200X, 400X, 400G, 500X, 502G, 600X, 700X are F0V6
 bool PRS1Import::ParseF0Events()
 {
-    ChannelID Codes[] = {
-        PRS1_00, PRS1_01, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        PRS1_0B, 0, 0, PRS1_0E
-    };
-
-    int ncodes = sizeof(Codes) / sizeof(ChannelID);
-    EventList *Code[0x20] = {0};
-
-    qint64 t = qint64(event->timestamp) * 1000L;
-
-    session->updateFirst(t);
-
+    // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
@@ -2650,6 +2655,15 @@ bool PRS1Import::ParseF0Events()
     EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
     //EventList *T1 = session->AddEventList(CPAP_Test1, EVL_Event, 0.1);
 
+    // On-demand channels
+    ChannelID Codes[] = {
+        PRS1_00, PRS1_01, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        PRS1_0B, 0, 0, PRS1_0E
+    };
+
+    int ncodes = sizeof(Codes) / sizeof(ChannelID);
+    EventList *Code[0x20] = {0};
+
     Code[0x0e] = session->AddEventList(PRS1_0E, EVL_Event);
     EventList * LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
 
@@ -2658,6 +2672,7 @@ bool PRS1Import::ParseF0Events()
     EventList *IPAP = nullptr;
     EventList *PS = nullptr;
 
+    // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
     EventDataType currentPressure=0, leak; //, p;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
@@ -2668,6 +2683,9 @@ bool PRS1Import::ParseF0Events()
     EventDataType ppm = lpm / 16.0;
 
     CPAPMode mode = (CPAPMode) session->settings[CPAP_Mode].toInt();
+
+    qint64 t = qint64(event->timestamp) * 1000L;
+    session->updateFirst(t);
 
     bool ok;
     ok = event->ParseEventsF0(mode);
@@ -2773,10 +2791,6 @@ bool PRS1Import::ParseF0Events()
     
     t = qint64(event->timestamp + event->duration) * 1000L;
     
-//    SmoothEventList(session, PRESSURE, CPAP_Pressure);
-//    SmoothEventList(session, IPAP, CPAP_IPAP);
-//    SmoothEventList(session, EPAP, CPAP_EPAP);
-
     session->updateLast(t);
     session->m_cnt.clear();
     session->m_cph.clear();
