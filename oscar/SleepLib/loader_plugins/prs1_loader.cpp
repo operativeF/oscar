@@ -4048,7 +4048,8 @@ bool PRS1DataChunk::ParseSummaryF0V6()
     return true;
 }
 
-bool PRS1Import::ParseSummary()
+
+bool PRS1Import::ImportSummary()
 {
     if (!summary) return false;
 
@@ -4060,7 +4061,23 @@ bool PRS1Import::ParseSummary()
 
     session->set_first(qint64(summary->timestamp) * 1000L);
 
+    session->setPhysMax(CPAP_LeakTotal, 120);
+    session->setPhysMin(CPAP_LeakTotal, 0);
+    session->setPhysMax(CPAP_Pressure, 25);
+    session->setPhysMin(CPAP_Pressure, 4);
+    session->setPhysMax(CPAP_IPAP, 25);
+    session->setPhysMin(CPAP_IPAP, 4);
+    session->setPhysMax(CPAP_EPAP, 25);
+    session->setPhysMin(CPAP_EPAP, 4);
+    session->setPhysMax(CPAP_PS, 25);
+    session->setPhysMin(CPAP_PS, 0);
+    
+    return this->ParseSummary();
+}
 
+
+bool PRS1Import::ParseSummary()
+{
     // TODO: The below is probably wrong. It should move to PRS1DataChunk when it gets fixed.
     /* Example data block
     000000c6@0000: 00 [10] 01 [00 01 02 01 01 00 02 01 00 04 01 40 07
@@ -4107,19 +4124,6 @@ bool PRS1Import::ParseSummary()
     // Family 0 = XPAP
     // Family 3 = BIPAP AVAPS
     // Family 5 = BIPAP AutoSV
-
-
-
-    session->setPhysMax(CPAP_LeakTotal, 120);
-    session->setPhysMin(CPAP_LeakTotal, 0);
-    session->setPhysMax(CPAP_Pressure, 25);
-    session->setPhysMin(CPAP_Pressure, 4);
-    session->setPhysMax(CPAP_IPAP, 25);
-    session->setPhysMin(CPAP_IPAP, 4);
-    session->setPhysMax(CPAP_EPAP, 25);
-    session->setPhysMin(CPAP_EPAP, 4);
-    session->setPhysMax(CPAP_PS, 25);
-    session->setPhysMin(CPAP_PS, 0);
 
     switch (summary->family) {
     case 0:
@@ -4182,6 +4186,7 @@ bool PRS1Import::ParseSummary()
     //avg_tidalvol=EventDataType(data[0x39])*10.0;  // Average Tidal Volume
     //////////////////////////////////////////////////////////////////////////////////////////
 }
+
 
 bool PRS1Import::ParseEvents()
 {
@@ -4461,7 +4466,7 @@ bool PRS1Import::ParseSession(void)
     bool save = false;
     session = new Session(mach, sessionid);
 
-    if ((compliance && ParseCompliance()) || (summary && ParseSummary())) {
+    if ((compliance && ParseCompliance()) || (summary && ImportSummary())) {
         if (event && !ParseEvents()) {
         }
 

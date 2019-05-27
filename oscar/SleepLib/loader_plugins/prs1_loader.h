@@ -223,6 +223,9 @@ public:
     //! \brief As it says on the tin.. Parses .001 files for bricks.
     bool ParseCompliance();
 
+    //! \brief Imports the .002 summary file.
+    bool ImportSummary();
+
     //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
     bool ParseSummary();
 
