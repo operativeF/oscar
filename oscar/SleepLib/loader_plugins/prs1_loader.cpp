@@ -3963,14 +3963,8 @@ bool PRS1Import::ImportSummary()
     session->setPhysMax(CPAP_PS, 25);
     session->setPhysMin(CPAP_PS, 0);
     
-    return this->ParseSummary();
-}
-
-
-bool PRS1Import::ParseSummaryF0V23()
-{
     bool ok;
-    ok = summary->ParseSummaryF0V23();
+    ok = this->ParseSummary();
     
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
@@ -4033,6 +4027,9 @@ bool PRS1Import::ParseSummaryF0V23()
                 break;
             case PRS1_SETTING_HUMID_STATUS:
                 session->settings[PRS1_HumidStatus] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HEATED_TUBING:
+                session->settings[PRS1_HeatedTubing] = (bool) e->m_value;
                 break;
             case PRS1_SETTING_HUMID_LEVEL:
                 session->settings[PRS1_HumidLevel] = e->m_value;
@@ -4128,24 +4125,24 @@ bool PRS1Import::ParseSummary()
     switch (summary->family) {
     case 0:
         if (summary->familyVersion == 6) {
-            return ParseSummaryF0V6();
+            return summary->ParseSummaryF0V6();
         } else if (summary->familyVersion == 4) {
-            return ParseSummaryF0V4();
+            return summary->ParseSummaryF0V4();
         } else {
-            return ParseSummaryF0V23();
+            return summary->ParseSummaryF0V23();
         }
     case 3:
-        return ParseSummaryF3();
+        return summary->ParseSummaryF3();
         break;
     case 5:
         if (summary->familyVersion == 1) {
-            return ParseSummaryF5V012();
+            return summary->ParseSummaryF5V012();
         } else if (summary->familyVersion == 0) {
-            return ParseSummaryF5V012();
+            return summary->ParseSummaryF5V012();
         } else if (summary->familyVersion == 2) {
-            return ParseSummaryF5V012();
+            return summary->ParseSummaryF5V012();
         } else if (summary->familyVersion == 3) {
-            return ParseSummaryF5V3();
+            return summary->ParseSummaryF5V3();
         }
     default:
         ;

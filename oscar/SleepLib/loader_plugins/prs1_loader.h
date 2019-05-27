@@ -242,8 +242,6 @@ public:
     bool ParseOximetery();
 
 
-    //! \brief Summary parser for 50 series Family 0 CPAP/APAP models
-    bool ParseSummaryF0V23();
     //! \brief Summary parser for 60 series Family 0 CPAP/APAP models
     bool ParseSummaryF0V4();
     //! \brief Summary parser for 1060 series AVAPS models
