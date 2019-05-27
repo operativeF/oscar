@@ -131,6 +131,9 @@ public:
     //! \brief Parse a single data chunk from a .000 file containing compliance data for a brick
     bool ParseCompliance(void);
     
+    //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
+    bool ParseSummary();
+
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 2 or 3 machine
     bool ParseSummaryF0V23(void);
     
@@ -226,9 +229,6 @@ public:
     //! \brief Imports the .002 summary file.
     bool ImportSummary();
 
-    //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
-    bool ParseSummary();
-
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents();
 
@@ -241,18 +241,6 @@ public:
     //! \brief Takes the parsed list of oximeter waveform chunks and adds them to the database.
     bool ParseOximetery();
 
-
-    //! \brief Summary parser for 60 series Family 0 CPAP/APAP models
-    bool ParseSummaryF0V4();
-    //! \brief Summary parser for 1060 series AVAPS models
-    bool ParseSummaryF3();
-    //! \brief Summary parser for 50 series Family 5-0 through 5-2 BiPAP/AutoSV models
-    bool ParseSummaryF5V012();
-    //! \brief Summary parser for 60 series Family 5-3 BiPAP/AutoSV models
-    bool ParseSummaryF5V3();
-
-    //! \brief Summary parser for DreamStation series CPAP/APAP models
-    bool ParseSummaryF0V6();
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine
     bool ParseF0Events();

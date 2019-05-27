@@ -3216,94 +3216,6 @@ bool PRS1DataChunk::ParseSummaryF0V23()
 }
 
 
-bool PRS1Import::ParseSummaryF0V4()
-{
-    bool ok;
-    ok = summary->ParseSummaryF0V4();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_PRESSURE:
-                session->settings[CPAP_Pressure] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MIN:
-                session->settings[CPAP_PressureMin] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MAX:
-                session->settings[CPAP_PressureMax] = e->value();
-                break;
-            case PRS1_SETTING_EPAP:
-                session->settings[CPAP_EPAP] = e->value();
-                break;
-            case PRS1_SETTING_IPAP:
-                session->settings[CPAP_IPAP] = e->value();
-                break;
-            case PRS1_SETTING_PS:
-                session->settings[CPAP_PS] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            case PRS1_SETTING_FLEX_MODE:
-                session->settings[PRS1_FlexMode] = e->m_value;
-                break;
-            case PRS1_SETTING_FLEX_LEVEL:
-                session->settings[PRS1_FlexLevel] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_TIME:
-                session->settings[CPAP_RampTime] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_PRESSURE:
-                session->settings[CPAP_RampPressure] = e->value();
-                break;
-            case PRS1_SETTING_HUMID_STATUS:
-                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HEATED_TUBING:
-                session->settings[PRS1_HeatedTubing] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HUMID_LEVEL:
-                session->settings[PRS1_HumidLevel] = e->m_value;
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
-
-    return true;
-}
-
-
 bool PRS1DataChunk::ParseSummaryF0V4(void)
 {
     const unsigned char * data = (unsigned char *)this->m_data.constData();
@@ -3366,73 +3278,6 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
 }
 
 
-bool PRS1Import::ParseSummaryF3()
-{
-    bool ok;
-    ok = summary->ParseSummaryF3();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_PRESSURE:
-                session->settings[CPAP_Pressure] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MIN:
-                session->settings[CPAP_PressureMin] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MAX:
-                session->settings[CPAP_PressureMax] = e->value();
-                break;
-            case PRS1_SETTING_EPAP:
-                session->settings[CPAP_EPAP] = e->value();
-                break;
-            case PRS1_SETTING_IPAP:
-                session->settings[CPAP_IPAP] = e->value();
-                break;
-            case PRS1_SETTING_PS:
-                session->settings[CPAP_PS] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
-
-    return true;
-}
-
-
 // TODO: This is probably only F3V6, as it uses mainblock, only present in fileVersion 3.
 bool PRS1DataChunk::ParseSummaryF3(void)
 {
@@ -3478,75 +3323,6 @@ bool PRS1DataChunk::ParseSummaryF3(void)
     return true;
 }
 
-
-bool PRS1Import::ParseSummaryF5V012()
-{
-    bool ok;
-    ok = summary->ParseSummaryF5V012();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            case PRS1_SETTING_FLEX_MODE:
-                session->settings[PRS1_FlexMode] = e->m_value;
-                break;
-            case PRS1_SETTING_FLEX_LEVEL:
-                session->settings[PRS1_FlexLevel] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_TIME:
-                session->settings[CPAP_RampTime] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_PRESSURE:
-                session->settings[CPAP_RampPressure] = e->value();
-                break;
-            case PRS1_SETTING_HUMID_STATUS:
-                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HEATED_TUBING:
-                session->settings[PRS1_HeatedTubing] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HUMID_LEVEL:
-                session->settings[PRS1_HumidLevel] = e->m_value;
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
-
-    return true;
-}
 
 bool PRS1DataChunk::ParseSummaryF5V012(void)
 {
@@ -3635,55 +3411,6 @@ void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
 }
 
 
-bool PRS1Import::ParseSummaryF5V3()
-{
-    bool ok;
-    ok = summary->ParseSummaryF5V3();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
-
-    return true;
-}
-
-
 bool PRS1DataChunk::ParseSummaryF5V3(void)
 {
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_ASV_VARIABLE_EPAP));
@@ -3711,73 +3438,6 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
     }
     unsigned char * durBlock = (unsigned char *)hbdata[4].data();
     this->duration = durBlock[0] | durBlock[1] << 8;
-
-    return true;
-}
-
-
-bool PRS1Import::ParseSummaryF0V6()
-{
-    bool ok;
-    ok = summary->ParseSummaryF0V6();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_PRESSURE:
-                session->settings[CPAP_Pressure] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MIN:
-                session->settings[CPAP_PressureMin] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MAX:
-                session->settings[CPAP_PressureMax] = e->value();
-                break;
-            case PRS1_SETTING_EPAP:
-                session->settings[CPAP_EPAP] = e->value();
-                break;
-            case PRS1_SETTING_IPAP:
-                session->settings[CPAP_IPAP] = e->value();
-                break;
-            case PRS1_SETTING_PS:
-                session->settings[CPAP_PS] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
 
     return true;
 }
@@ -3964,7 +3624,7 @@ bool PRS1Import::ImportSummary()
     session->setPhysMin(CPAP_PS, 0);
     
     bool ok;
-    ok = this->ParseSummary();
+    ok = summary->ParseSummary();
     
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
@@ -4073,9 +3733,9 @@ bool PRS1Import::ImportSummary()
 }
 
 
-bool PRS1Import::ParseSummary()
+bool PRS1DataChunk::ParseSummary()
 {
-    // TODO: The below is probably wrong. It should move to PRS1DataChunk when it gets fixed.
+    // TODO: The below mainblock creation is probably wrong. It should move to to its own function when it gets fixed.
     /* Example data block
     000000c6@0000: 00 [10] 01 [00 01 02 01 01 00 02 01 00 04 01 40 07
     000000c6@0010: 01 60 1e 03 02 0c 14 2c 01 14 2d 01 40 2e 01 02
@@ -4085,33 +3745,33 @@ bool PRS1Import::ParseSummary()
     000000c6@0050: 08 [61 60] 0a [00 00 00 00 03 00 00 00 02 00 02 00
     000000c6@0060: 05 00 2b 11 00 10 2b 5c 07 12 00 00] 03 [00 00 01
     000000c6@0070: 1a 00 38 04]  */
-    if (summary->fileVersion == 3) {
+    if (this->fileVersion == 3) {
         // Parse summary structures into bytearray map according to size given in header block
-        const unsigned char * data = (unsigned char *)summary->m_data.constData();
-        int size = summary->m_data.size();
+        const unsigned char * data = (unsigned char *)this->m_data.constData();
+        int size = this->m_data.size();
 
         int pos = 0;
         int bsize;
         short val, len;
         do {
             val = data[pos++];
-            auto it = summary->hblock.find(val);
-            if (it == summary->hblock.end()) {
-                qDebug() << "Block parse error in ParseSummary" << session->session();
+            auto it = this->hblock.find(val);
+            if (it == this->hblock.end()) {
+                qDebug() << "Block parse error in ParseSummary" << this->sessionid;
                 break;
             }
             bsize = it.value();
 
             if (val != 1) {
                 // store the data block for later reference
-                summary->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
+                this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
             } else {
                 // Parse the nested data structure which contains settings
                 int p2 = 0;
                 do {
                     val = data[pos + p2++];
                     len = data[pos + p2++];
-                    summary->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
+                    this->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
                     p2 += len;
                 } while ((p2 < bsize) && ((pos+p2) < size));
             }
@@ -4122,33 +3782,33 @@ bool PRS1Import::ParseSummary()
     // Family 3 = BIPAP AVAPS
     // Family 5 = BIPAP AutoSV
 
-    switch (summary->family) {
+    switch (this->family) {
     case 0:
-        if (summary->familyVersion == 6) {
-            return summary->ParseSummaryF0V6();
-        } else if (summary->familyVersion == 4) {
-            return summary->ParseSummaryF0V4();
+        if (this->familyVersion == 6) {
+            return this->ParseSummaryF0V6();
+        } else if (this->familyVersion == 4) {
+            return this->ParseSummaryF0V4();
         } else {
-            return summary->ParseSummaryF0V23();
+            return this->ParseSummaryF0V23();
         }
     case 3:
-        return summary->ParseSummaryF3();
+        return this->ParseSummaryF3();
         break;
     case 5:
-        if (summary->familyVersion == 1) {
-            return summary->ParseSummaryF5V012();
-        } else if (summary->familyVersion == 0) {
-            return summary->ParseSummaryF5V012();
-        } else if (summary->familyVersion == 2) {
-            return summary->ParseSummaryF5V012();
-        } else if (summary->familyVersion == 3) {
-            return summary->ParseSummaryF5V3();
+        if (this->familyVersion == 1) {
+            return this->ParseSummaryF5V012();
+        } else if (this->familyVersion == 0) {
+            return this->ParseSummaryF5V012();
+        } else if (this->familyVersion == 2) {
+            return this->ParseSummaryF5V012();
+        } else if (this->familyVersion == 3) {
+            return this->ParseSummaryF5V3();
         }
     default:
         ;
     }
 
-    qWarning() << "unexpected family" << summary->family << "familyVersion" << summary->familyVersion;
+    qWarning() << "unexpected family" << this->family << "familyVersion" << this->familyVersion;
     return false;
 
     //////////////////////////////////////////////////////////////////////////////////////////
