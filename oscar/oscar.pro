@@ -457,3 +457,7 @@ test {
         tests/sessiontests.h
 }
 
+# On macOS put a custom Info.plist into the bundle that disables dark mode on Mojave
+macx {
+    QMAKE_INFO_PLIST = "../Building/MacOS/Info.plist.in"
+}
