@@ -196,6 +196,7 @@ enum FlexMode { FLEX_None, FLEX_CFlex, FLEX_CFlexPlus, FLEX_AFlex, FLEX_RiseTime
 
 ChannelID PRS1_TimedBreath = 0, PRS1_HeatedTubing = 0;
 
+#if 0  // Apparently unused
 PRS1::PRS1(Profile *profile, MachineID id): CPAP(profile, id)
 {
 }
@@ -203,17 +204,104 @@ PRS1::~PRS1()
 {
 
 }
-
-
-#if 0 // TODO: Remove: unused, superseded by PRS1Waveform
-/*! \struct WaveHeaderList
-    \brief Used in PRS1 Waveform Parsing */
-struct WaveHeaderList {
-    quint16 interleave;
-    quint8  sample_format;
-    WaveHeaderList(quint16 i, quint8 f) { interleave = i; sample_format = f; }
-};
 #endif
+
+struct PRS1TestedModel
+{
+    QString model;
+    int family;
+    int familyVersion;
+};
+
+static const PRS1TestedModel s_PRS1TestedModels[] = {
+    { "450P", 0, 3 },
+    { "550P", 0, 2 },
+    { "550P", 0, 3 },
+    { "750P", 0, 2 },
+
+    { "460P",   0, 4 },
+    { "560P",   0, 4 },
+    { "560PBT", 0, 4 },
+    { "660P",   0, 4 },
+    { "760P",   0, 4 },
+    
+    { "200X110", 0, 6 },
+    { "400G110", 0, 6 },
+    { "400X110", 0, 6 },
+    { "400X150", 0, 6 },
+    { "500X110", 0, 6 },
+    { "500X150", 0, 6 },
+    { "502G150", 0, 6 },
+    { "600X110", 0, 6 },
+    { "700X110", 0, 6 },
+    
+    { "950P", 5, 0 },
+    { "960P", 5, 1 },
+    { "961P", 5, 1 },
+    { "960T", 5, 2 },
+    { "900X110", 5, 3 },
+    { "900X120", 5, 3 },
+    
+    { "1160P", 3, 3 },
+    { "1030X110", 3, 6 },
+    { "1130X110", 3, 6 },
+    
+    { "", 0, 0 },
+};
+PRS1ModelInfo s_PRS1ModelInfo;
+
+PRS1ModelInfo::PRS1ModelInfo()
+{
+    for (int i = 0; !s_PRS1TestedModels[i].model.isEmpty(); i++) {
+        const PRS1TestedModel & model = s_PRS1TestedModels[i];
+        m_testedModels[model.family][model.familyVersion].append(model.model);
+    }
+}
+
+bool PRS1ModelInfo::IsSupported(int family, int familyVersion) const
+{
+    if (m_testedModels.value(family).contains(familyVersion)) {
+        return true;
+    }
+    return false;
+}
+
+bool PRS1ModelInfo::IsTested(const QString & model, int family, int familyVersion) const
+{
+    if (m_testedModels.value(family).value(familyVersion).contains(model)) {
+        return true;
+    }
+    return false;
+};
+
+bool PRS1ModelInfo::IsSupported(const QHash<QString,QString> & props) const
+{
+    bool ok;
+    int family = props["Family"].toInt(&ok, 10);
+    if (ok) {
+        int familyVersion = props["FamilyVersion"].toInt(&ok, 10);
+        if (ok) {
+            ok = IsSupported(family, familyVersion);
+        }
+    }
+    return ok;
+}
+
+bool PRS1ModelInfo::IsTested(const QHash<QString,QString> & props) const
+{
+    bool ok;
+    int family = props["Family"].toInt(&ok, 10);
+    if (ok) {
+        int familyVersion = props["FamilyVersion"].toInt(&ok, 10);
+        if (ok) {
+            ok = IsTested(props["ModelNumber"], family, familyVersion);
+        }
+    }
+    return ok;
+};
+
+// TODO: add brick list, IsBrick() test
+// TODO: add model name, Name() function
 
 
 PRS1Loader::PRS1Loader()
@@ -232,7 +320,6 @@ PRS1Loader::PRS1Loader()
     m_pixmaps["DreamStation"] = QPixmap(DREAMSTATION_ICON);
 #endif
 
-    //genCRCTable();  // find what I did with this..
     m_type = MT_CPAP;
 }
 
@@ -390,45 +477,93 @@ void parseModel(MachineInfo & info, const QString & modelnum)
     }
 }
 
-bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Machine * mach)
+bool PRS1Loader::PeekProperties(const QString & filename, QHash<QString,QString> & props)
 {
+    const static QMap<QString,QString> s_longFieldNames = {
+        // CF?
+        { "SN", "SerialNumber" },
+        { "MN", "ModelNumber" },
+        { "PT", "ProductType" },
+        { "DF", "DataFormat" },
+        { "DFV", "DataFormatVersion" },
+        { "F", "Family" },
+        { "FV", "FamilyVersion" },
+        { "SV", "SoftwareVersion" },
+        { "FD", "FirstDate" },
+        { "LD", "LastDate" },
+        // SID?
+        // SK?
+        { "BK", "BasicKey" },
+        { "DK", "DetailsKey" },
+        { "EK", "ErrorKey" },
+        { "FN", "PatientFolderNum" },  // most recent Pn directory
+        { "PFN", "PatientFileNum" },   // number of files in the most recent Pn directory
+        { "EFN", "EquipFileNum" },     // number of .004 files in the E directory
+        { "DFN", "DFileNum" },         // number of .003 files in the D directory
+        { "VC", "ValidCheck" },
+    };
+    
     QFile f(filename);
     if (!f.open(QFile::ReadOnly)) {
         return false;
     }
     QTextStream in(&f);
-    QString modelnum;
-    int ptype=0;
-    int dfv=0;
-    bool ok;
     do {
         QString line = in.readLine();
         QStringList pair = line.split("=");
 
+        if (s_longFieldNames.contains(pair[0])) {
+            pair[0] = s_longFieldNames[pair[0]];
+        }
+        if (pair[0] == "Family") {
+            if (pair[1] == "xPAP") {
+                pair[1] = "0";
+            }
+        }
+        props[pair[0]] = pair[1];
+    } while (!in.atEnd());
+    
+    return true;
+}
+
+bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Machine * mach)
+{
+    QHash<QString,QString> props;
+    if (!PeekProperties(filename, props)) {
+        return false;
+    }
+    QString modelnum;
+    int ptype=0;
+    int dfv=0;
+    bool ok;
+    for (auto & key : props.keys()) {
         bool skip = false;
 
-        if (pair[0].contains("ModelNumber", Qt::CaseInsensitive) || pair[0].contains("MN", Qt::CaseInsensitive)) {
-            modelnum = pair[1];
+        if (key == "ModelNumber") {
+            modelnum = props[key];
             skip = true;
         }
-        if (pair[0].contains("SerialNumber", Qt::CaseInsensitive) || pair[0].contains("SN", Qt::CaseInsensitive)) {
-            info.serial = pair[1];
+        if (key == "SerialNumber") {
+            info.serial = props[key];
             skip = true;
         }
-        if (pair[0].contains("ProductType", Qt::CaseInsensitive) || pair[0].contains("PT", Qt::CaseInsensitive)) {
-            ptype = pair[1].toInt(&ok, 16);
+        if (key == "ProductType") {
+            ptype = props[key].toInt(&ok, 16);
+            if (!ok) qWarning() << "ProductType" << props[key];
             skip = true;
         }
-        if (pair[0].contains("DataFormatVersion", Qt::CaseInsensitive) || pair[0].contains("DFV", Qt::CaseInsensitive)) {
-            dfv = pair[1].toInt(&ok, 10);
+        if (key == "DataFormatVersion") {
+            dfv = props[key].toInt(&ok, 10);
+            if (!ok) qWarning() << "DataFormatVersion" << props[key];
             skip = true;
         }
         if (!mach || skip) continue;
 
-        mach->properties[pair[0]] = pair[1];
+        mach->properties[key] = props[key];
+    };
 
-    } while (!in.atEnd());
-
+    // TODO: replace the below logic with PRS1ModelInfo table-driven logic
+    
     if (!modelnum.isEmpty()) {
         parseModel(info, modelnum);
     }
@@ -763,6 +898,16 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 
     // This time supply the machine object so it can populate machine properties..
     PeekProperties(m->info, propertyfile, m);
+
+    // TODO: Replace much of the above logic with PRS1ModelInfo logic.
+    QHash<QString,QString> props;
+    PeekProperties(propertyfile, props);
+    if (!s_PRS1ModelInfo.IsSupported(props)) {
+        if (!m->unsupported()) {
+            unsupported(m);
+        }
+    }
+    
     return m;
 }
 
@@ -4002,11 +4147,7 @@ bool PRS1Import::ParseSummary()
         ;
     }
 
-    this->loader->saveMutex.lock();
-    if (!mach->unsupported()) {
-        this->loader->unsupported(mach);
-    }
-    this->loader->saveMutex.unlock();
+    qWarning() << "unexpected family" << summary->family << "familyVersion" << summary->familyVersion;
     return false;
 
     //////////////////////////////////////////////////////////////////////////////////////////

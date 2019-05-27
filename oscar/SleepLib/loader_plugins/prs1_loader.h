@@ -28,7 +28,7 @@
 const int prs1_data_version = 15;
 //
 //********************************************************************************************
-
+#if 0  // Apparently unused
 /*! \class PRS1
     \brief PRS1 customized machine object (via CPAP)
     */
@@ -41,6 +41,7 @@ class PRS1: public CPAP
 
 
 const int max_load_buffer_size = 1024 * 1024;
+#endif
 const QString prs1_class_name = STR_MACH_PRS1;
 
 /*! \struct PRS1Waveform
@@ -291,6 +292,9 @@ class PRS1Loader : public CPAPLoader
     //! \brief Examine path and return it back if it contains what looks to be a valid PRS1 SD card structure
     QString checkDir(const QString & path);
 
+    //! \brief Peek into PROP.TXT or properties.txt at given path, and return it as a normalized key/value hash
+    bool PeekProperties(const QString & filename, QHash<QString,QString> & props);
+    
     //! \brief Peek into PROP.TXT or properties.txt at given path, and use it to fill MachineInfo structure
     bool PeekProperties(MachineInfo & info, const QString & path, Machine * mach = nullptr);
 
@@ -377,5 +381,22 @@ class PRS1Loader : public CPAPLoader
 
     qint32 summary_duration;
 };
+
+
+//********************************************************************************************
+
+class PRS1ModelInfo
+{
+protected:
+    QHash<int, QHash<int, QStringList>> m_testedModels;
+    
+public:
+    PRS1ModelInfo();
+    bool IsSupported(const QHash<QString,QString> & properties) const;
+    bool IsSupported(int family, int familyVersion) const;
+    bool IsTested(const QHash<QString,QString> & properties) const;
+    bool IsTested(const QString & modelNumber, int family, int familyVersion) const;
+};
+
 
 #endif // PRS1LOADER_H

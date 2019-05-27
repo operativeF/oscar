@@ -33,6 +33,47 @@ void PRS1Tests::cleanupTestCase(void)
 }
 
 
+// ====================================================================================================
+
+extern PRS1ModelInfo s_PRS1ModelInfo;
+void PRS1Tests::testMachineSupport()
+{
+    QHash<QString,QString> tested = {
+        { "ModelNumber", "550P" },
+        { "Family", "0" },
+        { "FamilyVersion", "3" },
+    };
+    QHash<QString,QString> supported = {
+        { "ModelNumber", "700X999" },
+        { "Family", "0" },
+        { "FamilyVersion", "6" },
+    };
+    QHash<QString,QString> unsupported = {
+        { "ModelNumber", "550P" },
+        { "Family", "0" },
+        { "FamilyVersion", "9" },
+    };
+    
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(5, 3));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(5, 9));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(9, 9));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("550P", 0, 2));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("550P", 0, 3));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("760P", 0, 4));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("700X110", 0, 6));
+    Q_ASSERT(!s_PRS1ModelInfo.IsTested("700X999", 0, 6));
+    
+    Q_ASSERT(s_PRS1ModelInfo.IsTested(tested));
+    Q_ASSERT(!s_PRS1ModelInfo.IsTested(supported));
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(tested));
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(supported));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(unsupported));
+}
+
+
+// ====================================================================================================
+
+
 void parseAndEmitSessionYaml(const QString & path)
 {
     qDebug() << path;
