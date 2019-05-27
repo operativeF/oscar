@@ -3139,115 +3139,6 @@ bool PRS1DataChunk::ParseCompliance(void)
 }
 
 
-bool PRS1Import::ParseSummaryF0V23()
-{
-    bool ok;
-    ok = summary->ParseSummaryF0V23();
-    
-    for (int i=0; i < summary->m_parsedData.count(); i++) {
-        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
-            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
-            continue;
-        }
-        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
-        switch (s->m_setting) {
-            case PRS1_SETTING_CPAP_MODE:
-                session->settings[CPAP_Mode] = e->m_value;
-                break;
-            case PRS1_SETTING_PRESSURE:
-                session->settings[CPAP_Pressure] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MIN:
-                session->settings[CPAP_PressureMin] = e->value();
-                break;
-            case PRS1_SETTING_PRESSURE_MAX:
-                session->settings[CPAP_PressureMax] = e->value();
-                break;
-            case PRS1_SETTING_EPAP:
-                session->settings[CPAP_EPAP] = e->value();
-                break;
-            case PRS1_SETTING_IPAP:
-                session->settings[CPAP_IPAP] = e->value();
-                break;
-            case PRS1_SETTING_PS:
-                session->settings[CPAP_PS] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MIN:
-                session->settings[CPAP_EPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_EPAP_MAX:
-                session->settings[CPAP_EPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MIN:
-                session->settings[CPAP_IPAPLo] = e->value();
-                break;
-            case PRS1_SETTING_IPAP_MAX:
-                session->settings[CPAP_IPAPHi] = e->value();
-                break;
-            case PRS1_SETTING_PS_MIN:
-                session->settings[CPAP_PSMin] = e->value();
-                break;
-            case PRS1_SETTING_PS_MAX:
-                session->settings[CPAP_PSMax] = e->value();
-                break;
-            case PRS1_SETTING_FLEX_MODE:
-                session->settings[PRS1_FlexMode] = e->m_value;
-                break;
-            case PRS1_SETTING_FLEX_LEVEL:
-                session->settings[PRS1_FlexLevel] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_TIME:
-                session->settings[CPAP_RampTime] = e->m_value;
-                break;
-            case PRS1_SETTING_RAMP_PRESSURE:
-                session->settings[CPAP_RampPressure] = e->value();
-                break;
-            case PRS1_SETTING_HUMID_STATUS:
-                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HUMID_LEVEL:
-                session->settings[PRS1_HumidLevel] = e->m_value;
-                break;
-            case PRS1_SETTING_SYSTEMONE_RESIST_LOCK:
-                session->settings[PRS1_SysLock] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_SYSTEMONE_RESIST_SETTING:
-                session->settings[PRS1_SysOneResistSet] = e->m_value;
-                break;
-            case PRS1_SETTING_SYSTEMONE_RESIST_STATUS:
-                session->settings[PRS1_SysOneResistStat] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_HOSE_DIAMETER:
-                session->settings[PRS1_HoseDiam] = e->m_value == 15 ? QObject::tr("15mm") : QObject::tr("22mm");
-                break;
-            case PRS1_SETTING_AUTO_ON:
-                session->settings[PRS1_AutoOn] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_AUTO_OFF:
-                session->settings[PRS1_AutoOff] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_MASK_ALERT:
-                session->settings[PRS1_MaskAlert] = (bool) e->m_value;
-                break;
-            case PRS1_SETTING_SHOW_AHI:
-                session->settings[PRS1_ShowAHI] = (bool) e->m_value;
-                break;
-            default:
-                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
-                break;
-        }
-    }
-
-    if (!ok) {
-        return false;
-    }
-    summary_duration = summary->duration;
-
-    return true;
-}
-
-
 bool PRS1DataChunk::ParseSummaryF0V23()
 {
     const unsigned char * data = (unsigned char *)this->m_data.constData();
@@ -4073,6 +3964,115 @@ bool PRS1Import::ImportSummary()
     session->setPhysMin(CPAP_PS, 0);
     
     return this->ParseSummary();
+}
+
+
+bool PRS1Import::ParseSummaryF0V23()
+{
+    bool ok;
+    ok = summary->ParseSummaryF0V23();
+    
+    for (int i=0; i < summary->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = summary->m_parsedData.at(i);
+        if (e->m_type != EV_PRS1_SETTING) {
+            qWarning() << "Summary had non-setting event:" << (int) e->m_type;
+            continue;
+        }
+        PRS1ParsedSettingEvent* s = (PRS1ParsedSettingEvent*) e;
+        switch (s->m_setting) {
+            case PRS1_SETTING_CPAP_MODE:
+                session->settings[CPAP_Mode] = e->m_value;
+                break;
+            case PRS1_SETTING_PRESSURE:
+                session->settings[CPAP_Pressure] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MIN:
+                session->settings[CPAP_PressureMin] = e->value();
+                break;
+            case PRS1_SETTING_PRESSURE_MAX:
+                session->settings[CPAP_PressureMax] = e->value();
+                break;
+            case PRS1_SETTING_EPAP:
+                session->settings[CPAP_EPAP] = e->value();
+                break;
+            case PRS1_SETTING_IPAP:
+                session->settings[CPAP_IPAP] = e->value();
+                break;
+            case PRS1_SETTING_PS:
+                session->settings[CPAP_PS] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MIN:
+                session->settings[CPAP_EPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_EPAP_MAX:
+                session->settings[CPAP_EPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MIN:
+                session->settings[CPAP_IPAPLo] = e->value();
+                break;
+            case PRS1_SETTING_IPAP_MAX:
+                session->settings[CPAP_IPAPHi] = e->value();
+                break;
+            case PRS1_SETTING_PS_MIN:
+                session->settings[CPAP_PSMin] = e->value();
+                break;
+            case PRS1_SETTING_PS_MAX:
+                session->settings[CPAP_PSMax] = e->value();
+                break;
+            case PRS1_SETTING_FLEX_MODE:
+                session->settings[PRS1_FlexMode] = e->m_value;
+                break;
+            case PRS1_SETTING_FLEX_LEVEL:
+                session->settings[PRS1_FlexLevel] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_TIME:
+                session->settings[CPAP_RampTime] = e->m_value;
+                break;
+            case PRS1_SETTING_RAMP_PRESSURE:
+                session->settings[CPAP_RampPressure] = e->value();
+                break;
+            case PRS1_SETTING_HUMID_STATUS:
+                session->settings[PRS1_HumidStatus] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HUMID_LEVEL:
+                session->settings[PRS1_HumidLevel] = e->m_value;
+                break;
+            case PRS1_SETTING_SYSTEMONE_RESIST_LOCK:
+                session->settings[PRS1_SysLock] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_SYSTEMONE_RESIST_SETTING:
+                session->settings[PRS1_SysOneResistSet] = e->m_value;
+                break;
+            case PRS1_SETTING_SYSTEMONE_RESIST_STATUS:
+                session->settings[PRS1_SysOneResistStat] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_HOSE_DIAMETER:
+                session->settings[PRS1_HoseDiam] = e->m_value == 15 ? QObject::tr("15mm") : QObject::tr("22mm");
+                break;
+            case PRS1_SETTING_AUTO_ON:
+                session->settings[PRS1_AutoOn] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_AUTO_OFF:
+                session->settings[PRS1_AutoOff] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_MASK_ALERT:
+                session->settings[PRS1_MaskAlert] = (bool) e->m_value;
+                break;
+            case PRS1_SETTING_SHOW_AHI:
+                session->settings[PRS1_ShowAHI] = (bool) e->m_value;
+                break;
+            default:
+                qWarning() << "Unknown PRS1 setting type" << (int) s->m_setting;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    summary_duration = summary->duration;
+
+    return true;
 }
 
 
