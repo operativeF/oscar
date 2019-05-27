@@ -497,6 +497,10 @@ void Statistics::updateRXChanges()
 }
 
 
+// Statistics constructor is responsible for creating list of rows that will on the Statistics page
+// and skeletons of column 1 text that correspond to each calculation type.
+// Actual column 1 text is combination of skeleton for the row's calculation time and the text of the row.
+// Also creates "machine" names for machine types.
 Statistics::Statistics(QObject *parent) :
     QObject(parent)
 {
@@ -575,6 +579,7 @@ Statistics::Statistics(QObject *parent) :
 
 }
 
+// Get the user information block for displaying at top of page
 QString Statistics::getUserInfo () {
     QString address = p_profile->user->address();
     address.replace("\n", "<br/>");
@@ -601,42 +606,11 @@ QString Statistics::getUserInfo () {
 }
 
 const QString table_width = "width=99%";
+
+// Create the page header in HTML.  Includes everything from <head> through <body>
 QString Statistics::htmlHeader(bool showheader)
 {
     QString html = QString("<html><head>")+
-/********
-    "<style type='text/css'>"
-        "p,a,td,body { font-family: '"+QApplication::font().family()+"'; }"
-        "p,a,td,body { font-size: "+QString::number(QApplication::font().pointSize() + 2)+"px; }"
-
-        "table.curved {"
-            "border: 1px solid gray;"
-            "border-radius:10px;"
-            "-moz-border-radius:10px;"
-            "-webkit-border-radius:10px;"
-            "page-break-after:auto;"
-            "-fs-table-paginate: paginate;"
-        "}"
-
-        "tr.datarow:nth-child(even) {"
-            "background-color: #f8f8f8;"
-        "}"
-
-        "table { page-break-after:auto; -fs-table-paginate: paginate; }"
-        "tr    { page-break-inside:avoid; page-break-after:auto; }"
-        "td    { page-break-inside:avoid; page-break-after:auto; }"
-        "thead { display:table-header-group; }"
-        "tfoot { display:table-footer-group; }"
-    "</style>"
-
-    "<link rel='stylesheet' type='text/css' href='qrc:/docs/tooltips.css' />"
-
-    "<script type='text/javascript'>"
-        "function ChangeColor(tableRow, highLight)"
-        "{ tableRow.style.backgroundColor = highLight; }"
-        "function Go(url) { throw(url); }"
-    "</script>"
-******/
     "</head>"
 
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
@@ -659,6 +633,8 @@ QString Statistics::htmlHeader(bool showheader)
         }
     return html;
 }
+
+// HTML for page footer
 QString Statistics::htmlFooter(bool showinfo)
 {
     QString html;
@@ -675,7 +651,8 @@ QString Statistics::htmlFooter(bool showinfo)
 }
 
 
-
+// Calculate AHI for a period as total # of events / total hours used
+// Add RERA if calculating RDI instead of just AHI
 EventDataType calcAHI(QDate start, QDate end)
 {
     EventDataType val = (p_profile->calcCount(CPAP_Obstructive, MT_CPAP, start, end)
@@ -698,6 +675,7 @@ EventDataType calcAHI(QDate start, QDate end)
     return val;
 }
 
+// Calculate flow limits per hour
 EventDataType calcFL(QDate start, QDate end)
 {
     EventDataType val = (p_profile->calcCount(CPAP_FlowLimit, MT_CPAP, start, end));
@@ -712,6 +690,7 @@ EventDataType calcFL(QDate start, QDate end)
     return val;
 }
 
+// Calculate ...(what are these?)
 EventDataType calcSA(QDate start, QDate end)
 {
     EventDataType val = (p_profile->calcCount(CPAP_SensAwake, MT_CPAP, start, end));
@@ -726,7 +705,7 @@ EventDataType calcSA(QDate start, QDate end)
     return val;
 }
 
-
+// Structure for recording Prescription Changes (now called Machine Settings Changes)
 struct RXChange {
     RXChange() { highlight = 0; machine = nullptr; }
     RXChange(const RXChange &copy) {
@@ -777,6 +756,7 @@ struct UsageData {
     EventDataType ahi;
     EventDataType hours;
 };
+
 bool operator <(const UsageData &c1, const UsageData &c2)
 {
     if (c1.ahi < c2.ahi) {
@@ -1016,10 +996,10 @@ QString Statistics::GenerateHTML()
     QDate cpapyear = lastcpap.addMonths(-12);
 
     // but not before the first available date of course
-    if (cpapweek < firstcpap) { cpapweek = firstcpap; }
-    if (cpapmonth < firstcpap) { cpapmonth = firstcpap; }
+    if (cpapweek   < firstcpap) { cpapweek   = firstcpap; }
+    if (cpapmonth  < firstcpap) { cpapmonth  = firstcpap; }
     if (cpap6month < firstcpap) { cpap6month = firstcpap; }
-    if (cpapyear < firstcpap) { cpapyear = firstcpap; }
+    if (cpapyear   < firstcpap) { cpapyear   = firstcpap; }
 
 
     QString ahitxt = getRDIorAHIText();
@@ -1031,12 +1011,15 @@ QString Statistics::GenerateHTML()
     // Compute number of monthly periods for a monthly rather than standard time distribution
     int number_periods = 0;
     if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
-        QDate beginDate = max(firstcpap, lastcpap.addYears(-1));
+        QDate beginDate = qMax(firstcpap, lastcpap.addYears(-1));
         int beginMonth = beginDate.month();
         int lastMonth = lastcpap.month();
-        if (lastMonth - beginMonth < 0) lastMonth +=12; // handle time extending to next year
+        if (lastMonth < beginMonth) lastMonth += 12; // handle time extending to next year
         number_periods = lastMonth - beginMonth + 1;
-        qDebug() << "begin" << beginDate << "beginMonth" << beginMonth << "lastMonth" << lastMonth << "periods" << number_periods;
+        if (number_periods < 1) {
+            qDebug() << "*** Begin" << beginDate << "beginMonth" << beginMonth << "lastMonth" << lastMonth << "periods" << number_periods;
+            number_periods = 1;
+        }
         // But not more than one year
         if (number_periods > 12) {
             number_periods = 12;
@@ -1047,8 +1030,8 @@ QString Statistics::GenerateHTML()
 
     QList<Period> periods;
 
-
     bool skipsection = false;;
+    // Loop through all rows of the Statistics report
     for (QList<StatisticsRow>::iterator i = rows.begin(); i != rows.end(); ++i) {
         StatisticsRow &row = (*i);
         QString name;
@@ -1057,6 +1040,7 @@ QString Statistics::GenerateHTML()
             last = p_profile->LastGoodDay(row.type);
             first = p_profile->FirstGoodDay(row.type);
 
+            // Clear the periods (columns)
             periods.clear();
             if (p_profile->general->statReportMode() == STAT_MODE_STANDARD) {
                 periods.push_back(Period(last,last,tr("Most Recent")));
@@ -1064,7 +1048,7 @@ QString Statistics::GenerateHTML()
                 periods.push_back(Period(qMax(last.addDays(-29),first), last, tr("Last 30 Days")));
                 periods.push_back(Period(qMax(last.addMonths(-6), first), last, tr("Last 6 Months")));
                 periods.push_back(Period(qMax(last.addMonths(-12), first), last, tr("Last Year")));
-            } else {
+            } else {            // STAT_MODE_MONTHLY or STAT_MODE_RANGE
                 QDate l=last,s=last;
 
                 periods.push_back(Period(last,last,tr("Last Session")));

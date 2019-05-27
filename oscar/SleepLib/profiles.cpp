@@ -1160,6 +1160,7 @@ QList<Day *> Profile::getDays(MachineType mt, QDate start, QDate end)
     return list;
 }
 
+// Counts number of days in range with data for specified machine type
 int Profile::countDays(MachineType mt, QDate start, QDate end)
 {
     if (!start.isValid()) {
@@ -1226,6 +1227,7 @@ int Profile::countCompliantDays(MachineType mt, QDate start, QDate end)
 }
 
 
+// Count number of events of type code in period
 EventDataType Profile::calcCount(ChannelID code, MachineType mt, QDate start, QDate end)
 {
     if (!start.isValid()) {

@@ -15,10 +15,14 @@
 #include "SleepLib/schema.h"
 #include "SleepLib/machine.h"
 
+//! \brief Type of calculation on one statistics row
 enum StatCalcType {
     SC_UNDEFINED=0, SC_COLUMNHEADERS, SC_HEADING, SC_SUBHEADING, SC_MEDIAN, SC_AVG, SC_WAVG, SC_90P, SC_MIN, SC_MAX, SC_CPH, SC_SPH, SC_AHI, SC_HOURS, SC_COMPLIANCE, SC_DAYS, SC_ABOVE, SC_BELOW
 };
 
+/*! \struct StatisticsRow
+    \brief Describes a single row on the statistics page
+    */
 struct StatisticsRow {
     StatisticsRow() { calc=SC_UNDEFINED; }
     StatisticsRow(QString src, QString calc, QString type) {
@@ -40,6 +44,7 @@ struct StatisticsRow {
     StatCalcType calc;
     MachineType type;
 
+    //! \brief Looks up calculation type for this row
     StatCalcType lookupCalc(QString calc)
     {
         if (calc.compare("avg",Qt::CaseInsensitive)==0) {
@@ -74,6 +79,7 @@ struct StatisticsRow {
         return SC_UNDEFINED;
     }
 
+    //! \brief Look up machine type
     MachineType lookupType(QString type)
     {
         if (type.compare("cpap", Qt::CaseInsensitive)==0) {
@@ -94,6 +100,7 @@ struct StatisticsRow {
     QString value(QDate start, QDate end);
 };
 
+//! \class Prescription (Machine) setting
 class RXItem {
 public:
     RXItem() {
