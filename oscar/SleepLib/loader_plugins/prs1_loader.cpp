@@ -1099,6 +1099,12 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
     }
 }
 
+
+//********************************************************************************************
+// Internal PRS1 parsed data types
+//********************************************************************************************
+
+// For new events, add an enum here and then a class below with an PRS1_*_EVENT macro
 enum PRS1ParsedEventType
 {
     EV_PRS1_RAW = -1,     // these only get logged
@@ -1186,9 +1192,13 @@ public:
 
     inline float value(void) { return (m_value * m_gain) + m_offset; }
     
+    static const PRS1ParsedEventType TYPE = EV_PRS1_UNKNOWN;
+    static constexpr float GAIN = 1.0;
+    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_NONE;
+
 protected:
     PRS1ParsedEvent(PRS1ParsedEventType type, int start)
-    : m_type(type), m_start(start), m_duration(0), m_value(0), m_offset(0.0), m_gain(1.0), m_unit(PRS1_UNIT_NONE)
+    : m_type(type), m_start(start), m_duration(0), m_value(0), m_offset(0.0), m_gain(GAIN), m_unit(UNIT)
     {
     }
     ~PRS1ParsedEvent()
@@ -1215,17 +1225,20 @@ class PRS1UnknownValueEvent : public PRS1ParsedValueEvent
 {
 public:
     int m_code;
-    PRS1UnknownValueEvent(int code, int start, int value, float gain=1.0) : PRS1ParsedValueEvent(EV_PRS1_UNKNOWN, start, value), m_code(code) { m_gain = gain; }
+    PRS1UnknownValueEvent(int code, int start, int value, float gain=1.0) : PRS1ParsedValueEvent(TYPE, start, value), m_code(code) { m_gain = gain; }
 };
 
 class PRS1UnknownDataEvent : public PRS1ParsedEvent
 {
 public:
+    static const PRS1ParsedEventType TYPE = EV_PRS1_RAW;
+    
     int m_pos;
     unsigned char m_code;
     QByteArray m_data;
+    
     PRS1UnknownDataEvent(const QByteArray & data, int pos, int len=18)
-        : PRS1ParsedEvent(EV_PRS1_RAW, 0)
+        : PRS1ParsedEvent(TYPE, 0)
     {
         m_pos = pos;
         m_data = data.mid(pos, len);
@@ -1251,195 +1264,112 @@ public:
 class PRS1ParsedSettingEvent : public PRS1ParsedValueEvent
 {
 public:
+    static const PRS1ParsedEventType TYPE = EV_PRS1_SETTING;
     PRS1ParsedSettingType m_setting;
     
-    PRS1ParsedSettingEvent(PRS1ParsedSettingType setting, int value) : PRS1ParsedValueEvent(EV_PRS1_SETTING, 0, value), m_setting(setting) {}
+    PRS1ParsedSettingEvent(PRS1ParsedSettingType setting, int value) : PRS1ParsedValueEvent(TYPE, 0, value), m_setting(setting) {}
 };
 
 class PRS1PressureSettingEvent : public PRS1ParsedSettingEvent
 {
 public:
+    static constexpr float GAIN = PRS1PressureEvent::GAIN;
+    static const PRS1ParsedEventUnit UNIT = PRS1PressureEvent::UNIT;
+    
     PRS1PressureSettingEvent(PRS1ParsedSettingType setting, int value) 
         : PRS1ParsedSettingEvent(setting, value) 
     { 
-        m_gain = PRS1PressureEvent::GAIN;
-        m_unit = PRS1PressureEvent::UNIT;
+        m_gain = GAIN;
+        m_unit = UNIT;
     }
 };
 
 class PRS1ParsedSliceEvent : public PRS1ParsedDurationEvent
 {
 public:
+    static const PRS1ParsedEventType TYPE = EV_PRS1_SLICE;
     SliceStatus m_status;
-    PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(EV_PRS1_SLICE, start, duration), m_status(status) {}
+    
+    PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(TYPE, start, duration), m_status(status) {}
 };        
+#define _PRS1_EVENT(T, E, P, ARG) \
+class T : public P \
+{ \
+public: \
+    static const PRS1ParsedEventType TYPE = E; \
+    T(int start, int ARG) : P(TYPE, start, ARG) {} \
+}
+#define PRS1_DURATION_EVENT(T, E) _PRS1_EVENT(T, E, PRS1ParsedDurationEvent, duration)
+#define PRS1_VALUE_EVENT(T, E)    _PRS1_EVENT(T, E, PRS1ParsedValueEvent, value)
+#define PRS1_PRESSURE_EVENT(T, E) _PRS1_EVENT(T, E, PRS1PressureEvent, value)
 
-class PRS1TimedBreathEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1TimedBreathEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_TB, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1TimedBreathEvent, EV_PRS1_TB);
 
-class PRS1ObstructiveApneaEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1ObstructiveApneaEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_OA, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1ObstructiveApneaEvent, EV_PRS1_OA);
 
-class PRS1ClearAirwayEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1ClearAirwayEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_CA, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1ClearAirwayEvent, EV_PRS1_CA);
 
-class PRS1FlowLimitationEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1FlowLimitationEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_FL, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1FlowLimitationEvent, EV_PRS1_FL);
 
-class PRS1PeriodicBreathingEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1PeriodicBreathingEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_PB, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1PeriodicBreathingEvent, EV_PRS1_PB);
 
-class PRS1LargeLeakEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1LargeLeakEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_LL, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1LargeLeakEvent, EV_PRS1_LL);
 
-class PRS1HypopneaEvent : public PRS1ParsedDurationEvent
-{
-public:
-    PRS1HypopneaEvent(int start, int duration) : PRS1ParsedDurationEvent(EV_PRS1_HY, start, duration) {}
-};
+PRS1_DURATION_EVENT(PRS1HypopneaEvent, EV_PRS1_HY);
 
-class PRS1TotalLeakEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1TotalLeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TOTLEAK, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1TotalLeakEvent, EV_PRS1_TOTLEAK);
 
-class PRS1LeakEvent : public PRS1ParsedValueEvent  // TODO: do machines really report unintentional leak?
-{
-public:
-    PRS1LeakEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_LEAK, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1LeakEvent, EV_PRS1_LEAK);  // TODO: do machines really report unintentional leak?
 
-class PRS1CPAPEvent : public PRS1PressureEvent
-{
-public:
-    PRS1CPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_PRESSURE, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1CPAPEvent, EV_PRS1_PRESSURE);
 
-class PRS1IPAPEvent : public PRS1PressureEvent
-{
-public:
-    PRS1IPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAP, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1IPAPEvent, EV_PRS1_IPAP);
 
-class PRS1IPAPHighEvent : public PRS1PressureEvent
-{
-public:
-    PRS1IPAPHighEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAPHIGH, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1IPAPHighEvent, EV_PRS1_IPAPHIGH);
 
-class PRS1IPAPLowEvent : public PRS1PressureEvent
-{
-public:
-    PRS1IPAPLowEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_IPAPLOW, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1IPAPLowEvent, EV_PRS1_IPAPLOW);
 
-class PRS1EPAPEvent : public PRS1PressureEvent
-{
-public:
-    PRS1EPAPEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_EPAP, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1EPAPEvent, EV_PRS1_EPAP);
 
-class PRS1PressureReliefEvent : public PRS1PressureEvent  // value is pressure applied during pressure relief, similar to EPAP
-{
-public:
-    PRS1PressureReliefEvent(int start, int value) : PRS1PressureEvent(EV_PRS1_FLEX, start, value) {}
-};
+PRS1_PRESSURE_EVENT(PRS1PressureReliefEvent, EV_PRS1_FLEX);  // value is pressure applied during pressure relief, similar to EPAP
 
-class PRS1RespiratoryRateEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1RespiratoryRateEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_RR, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1RespiratoryRateEvent, EV_PRS1_RR);
 
-class PRS1PatientTriggeredBreathsEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1PatientTriggeredBreathsEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_PTB, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1PatientTriggeredBreathsEvent, EV_PRS1_PTB);
 
-class PRS1MinuteVentilationEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1MinuteVentilationEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_MV, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1MinuteVentilationEvent, EV_PRS1_MV);
 
 class PRS1TidalVolumeEvent : public PRS1ParsedValueEvent
 {
 public:
+    static const PRS1ParsedEventType TYPE = EV_PRS1_TV;
+
+    static constexpr float GAIN = 10.0;
+    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_ML;
+    
     PRS1TidalVolumeEvent(int start, int value)
-        : PRS1ParsedValueEvent(EV_PRS1_TV, start, value)
+        : PRS1ParsedValueEvent(TYPE, start, value)
     {
-        m_gain = 10.0;
-        m_unit = PRS1_UNIT_ML;
+        m_gain = GAIN;
+        m_unit = UNIT;
     }
 };
 
-class PRS1SnoreEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1SnoreEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_SNORE, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1SnoreEvent, EV_PRS1_SNORE);
 
-class PRS1VibratorySnoreEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1VibratorySnoreEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_VS, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1VibratorySnoreEvent, EV_PRS1_VS);
 
-class PRS1PressurePulseEvent : public PRS1ParsedValueEvent
-{
-public:
-    PRS1PressurePulseEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_PP, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1PressurePulseEvent, EV_PRS1_PP);
 
-class PRS1RERAEvent : public PRS1ParsedValueEvent  // TODO: should this really be a duration event?
-{
-public:
-    PRS1RERAEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_RERA, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1RERAEvent, EV_PRS1_RERA);  // TODO: should this really be a duration event?
 
-class PRS1NonRespondingEvent : public PRS1ParsedValueEvent  // TODO: is this a single event or an index/hour?
-{
-public:
-    PRS1NonRespondingEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_NRI, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a single event or an index/hour?
 
-class PRS1FlowRateEvent : public PRS1ParsedValueEvent  // TODO: is this a single event or an index/hour?
-{
-public:
-    PRS1FlowRateEvent(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_FLOWRATE, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1FlowRateEvent, EV_PRS1_FLOWRATE);  // TODO: is this a single event or an index/hour?
 
-class PRS1Test1Event : public PRS1ParsedValueEvent  // TODO: replace test1/2 event with unknownvalue events and appropriate mapping
-{
-public:
-    PRS1Test1Event(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TEST1, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);  // TODO: replace test1/2 event with unknownvalue events and appropriate mapping
 
-class PRS1Test2Event : public PRS1ParsedValueEvent
-{
-public:
-    PRS1Test2Event(int start, int value) : PRS1ParsedValueEvent(EV_PRS1_TEST2, start, value) {}
-};
+PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
 
 void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
 {
@@ -1500,32 +1430,32 @@ bool PRS1Import::ParseF5EventsFV3()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case EV_PRS1_TB:
+            case PRS1TimedBreathEvent::TYPE:
                 TB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_OA:
+            case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_CA:
+            case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_FL:
+            case PRS1FlowLimitationEvent::TYPE:
                 FL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_PB:
+            case PRS1PeriodicBreathingEvent::TYPE:
                 PB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_LL:
+            case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_HY:
+            case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_IPAP:
+            case PRS1IPAPEvent::TYPE:
                 IPAP->AddEvent(t, e->m_value);
                 currentPressure = e->m_value;
                 break;
-            case EV_PRS1_TOTLEAK:
+            case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 leak = e->m_value;
                 if (calcLeaks) { // Much Quicker doing this here than the recalc method.
@@ -1534,31 +1464,31 @@ bool PRS1Import::ParseF5EventsFV3()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case EV_PRS1_IPAPLOW:
+            case PRS1IPAPLowEvent::TYPE:
                 IPAPLo->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_IPAPHIGH:
+            case PRS1IPAPHighEvent::TYPE:
                 IPAPHi->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RR:
+            case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_PTB:
+            case PRS1PatientTriggeredBreathsEvent::TYPE:
                 PTB->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_MV:
+            case PRS1MinuteVentilationEvent::TYPE:
                 MV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TV:
+            case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_SNORE:
+            case PRS1SnoreEvent::TYPE:
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
                     VS->AddEvent(t, 0); //data2); // VSnore
                 }
                 break;
-            case EV_PRS1_EPAP:
+            case PRS1EPAPEvent::TYPE:
                 EPAP->AddEvent(t, e->m_value);
                 ps = currentPressure - e->m_value;
                 PS->AddEvent(t, ps);           // Pressure Support
@@ -1793,38 +1723,38 @@ bool PRS1Import::ParseF5Events()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case EV_PRS1_TB:
+            case PRS1TimedBreathEvent::TYPE:
                 TB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_OA:
+            case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_CA:
+            case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_FL:
+            case PRS1FlowLimitationEvent::TYPE:
                 FL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_PB:
+            case PRS1PeriodicBreathingEvent::TYPE:
                 PB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_LL:
+            case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_HY:
+            case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_IPAP:
+            case PRS1IPAPEvent::TYPE:
                 IPAP->AddEvent(t, e->m_value);
                 currentPressure = e->m_value;
                 break;
-            case EV_PRS1_IPAPLOW:
+            case PRS1IPAPLowEvent::TYPE:
                 IPAPLo->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_IPAPHIGH:
+            case PRS1IPAPHighEvent::TYPE:
                 IPAPHi->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TOTLEAK:
+            case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 leak = e->m_value;
                 if (calcLeaks) { // Much Quicker doing this here than the recalc method.
@@ -1833,33 +1763,33 @@ bool PRS1Import::ParseF5Events()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case EV_PRS1_LEAK:
+            case PRS1LeakEvent::TYPE:
                 LEAK->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RR:
+            case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_PTB:
+            case PRS1PatientTriggeredBreathsEvent::TYPE:
                 PTB->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_MV:
+            case PRS1MinuteVentilationEvent::TYPE:
                 MV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TV:
+            case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_SNORE:
+            case PRS1SnoreEvent::TYPE:
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
                     VS->AddEvent(t, 0); //data2); // VSnore
                 }
                 break;
-            case EV_PRS1_EPAP:
+            case PRS1EPAPEvent::TYPE:
                 EPAP->AddEvent(t, e->m_value);
                 ps = currentPressure - e->m_value;
                 PS->AddEvent(t, ps);           // Pressure Support
                 break;
-            case EV_PRS1_UNKNOWN:
+            case PRS1UnknownValueEvent::TYPE:
             {
                 int code = ((PRS1UnknownValueEvent*) e)->m_code;
                 Q_ASSERT(code < ncodes);
@@ -2214,58 +2144,58 @@ bool PRS1Import::ParseF3EventsV3()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case EV_PRS1_TB:
+            case PRS1TimedBreathEvent::TYPE:
                 TB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_OA:
+            case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_CA:
+            case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_PB:
+            case PRS1PeriodicBreathingEvent::TYPE:
                 PB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_LL:
+            case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_HY:
+            case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_EPAP:
+            case PRS1EPAPEvent::TYPE:
                 EPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_IPAP:
+            case PRS1IPAPEvent::TYPE:
                 IPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_LEAK:
+            case PRS1LeakEvent::TYPE:
                 LEAK->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RR:
+            case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_PTB:
+            case PRS1PatientTriggeredBreathsEvent::TYPE:
                 PTB->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_MV:
+            case PRS1MinuteVentilationEvent::TYPE:
                 MV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TV:
+            case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RERA:
+            case PRS1RERAEvent::TYPE:
                 RE->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_NRI:
+            case PRS1NonRespondingEvent::TYPE:
                 ZZ->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TEST1:
+            case PRS1Test1Event::TYPE:
                 TMV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TEST2:
+            case PRS1Test2Event::TYPE:
                 FLOW->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RAW:
+            case PRS1UnknownDataEvent::TYPE:
             {
                 PRS1UnknownDataEvent* unk = (PRS1UnknownDataEvent*) e;
                 int code = unk->m_code;
@@ -2438,40 +2368,40 @@ bool PRS1Import::ParseF3Events()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case EV_PRS1_OA:
+            case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_CA:
+            case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_HY:
+            case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_EPAP:
+            case PRS1EPAPEvent::TYPE:
                 EPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_IPAP:
+            case PRS1IPAPEvent::TYPE:
                 IPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TOTLEAK:
+            case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_LEAK:
+            case PRS1LeakEvent::TYPE:
                 LEAK->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_RR:
+            case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_PTB:
+            case PRS1PatientTriggeredBreathsEvent::TYPE:
                 PTB->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_MV:
+            case PRS1MinuteVentilationEvent::TYPE:
                 MV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_TV:
+            case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_FLOWRATE:
+            case PRS1FlowRateEvent::TYPE:
                 FLOW->AddEvent(t, e->m_value);
                 break;
             default:
@@ -2695,21 +2625,21 @@ bool PRS1Import::ParseF0Events()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case EV_PRS1_PRESSURE:
+            case PRS1CPAPEvent::TYPE:
                 if (!PRESSURE) {
                     if (!(PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, e->m_gain))) { return false; }
                 }
                 PRESSURE->AddEvent(t, e->m_value);
                 currentPressure = e->m_value;
                 break;
-            case EV_PRS1_IPAP:
+            case PRS1IPAPEvent::TYPE:
                 if(!IPAP) {
                     if (!(IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, e->m_gain))) { return false; }
                 }
                 IPAP->AddEvent(t, e->m_value);
                 currentPressure = e->m_value;
                 break;
-            case EV_PRS1_EPAP:
+            case PRS1EPAPEvent::TYPE:
                 if (!EPAP) {
                     if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
                 }
@@ -2719,31 +2649,31 @@ bool PRS1Import::ParseF0Events()
                 EPAP->AddEvent(t, e->m_value);
                 PS->AddEvent(t, currentPressure - e->m_value);
                 break;
-            case EV_PRS1_FLEX:
+            case PRS1PressureReliefEvent::TYPE:
                 if (!EPAP) {
                     if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
                 }
                 EPAP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_OA:
+            case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_CA:
+            case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_FL:
+            case PRS1FlowLimitationEvent::TYPE:
                 FL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_PB:
+            case PRS1PeriodicBreathingEvent::TYPE:
                 PB->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_LL:
+            case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_HY:
+            case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
                 break;
-            case EV_PRS1_TOTLEAK:
+            case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 leak = e->m_value;
                 if (calcLeaks) { // Much Quicker doing this here than the recalc method.
@@ -2752,22 +2682,22 @@ bool PRS1Import::ParseF0Events()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case EV_PRS1_SNORE:
+            case PRS1SnoreEvent::TYPE:
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
                     VS2->AddEvent(t, e->m_value);
                 }
                 break;
-            case EV_PRS1_VS:  // F0: Is this really distinct from SNORE and VS2?
+            case PRS1VibratorySnoreEvent::TYPE:  // F0: Is this really distinct from SNORE and VS2?
                 VS->AddEvent(t, 0);
                 break;
-            case EV_PRS1_RERA:
+            case PRS1RERAEvent::TYPE:
                 RE->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_PP:
+            case PRS1PressurePulseEvent::TYPE:
                 PP->AddEvent(t, e->m_value);
                 break;
-            case EV_PRS1_UNKNOWN:
+            case PRS1UnknownValueEvent::TYPE:
             {
                 int code = ((PRS1UnknownValueEvent*) e)->m_code;
                 Q_ASSERT(code < ncodes);
@@ -3031,14 +2961,14 @@ bool PRS1Import::ParseCompliance()
     
     for (int i=0; i < compliance->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = compliance->m_parsedData.at(i);
-        if (e->m_type == EV_PRS1_SLICE) {
+        if (e->m_type == PRS1ParsedSliceEvent::TYPE) {
             PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
             qint64 tt = start + qint64(s->m_start) * 1000L;
             qint64 duration = qint64(s->m_duration) * 1000L;
             session->m_slices.append(SessionSlice(tt, tt + duration, s->m_status));
             qDebug() << compliance->sessionid << "Added Slice" << tt << (tt+duration) << s->m_status;
             continue;
-        } else if (e->m_type != EV_PRS1_SETTING) {
+        } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Compliance had non-setting event:" << (int) e->m_type;
             continue;
         }
@@ -3642,7 +3572,7 @@ bool PRS1Import::ImportSummary()
     
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != EV_PRS1_SETTING) {
+        if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Summary had non-setting event:" << (int) e->m_type;
             continue;
         }
