@@ -1209,10 +1209,7 @@ protected:
 class PRS1ParsedDurationEvent : public PRS1ParsedEvent
 {    
 protected:
-    PRS1ParsedDurationEvent(PRS1ParsedEventType type, int start, int duration) : PRS1ParsedEvent(type, start)
-    {
-        m_duration = duration;
-    }
+    PRS1ParsedDurationEvent(PRS1ParsedEventType type, int start, int duration) : PRS1ParsedEvent(type, start) { m_duration = duration; }
 };
 
 class PRS1ParsedValueEvent : public PRS1ParsedEvent
@@ -1261,6 +1258,22 @@ public:
     }
 };
 
+class PRS1TidalVolumeEvent : public PRS1ParsedValueEvent
+{
+public:
+    static const PRS1ParsedEventType TYPE = EV_PRS1_TV;
+
+    static constexpr float GAIN = 10.0;
+    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_ML;
+    
+    PRS1TidalVolumeEvent(int start, int value)
+        : PRS1ParsedValueEvent(TYPE, start, value)
+    {
+        m_gain = GAIN;
+        m_unit = UNIT;
+    }
+};
+
 class PRS1ParsedSettingEvent : public PRS1ParsedValueEvent
 {
 public:
@@ -1291,7 +1304,9 @@ public:
     SliceStatus m_status;
     
     PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(TYPE, start, duration), m_status(status) {}
-};        
+};
+
+
 #define _PRS1_EVENT(T, E, P, ARG) \
 class T : public P \
 { \
@@ -1304,72 +1319,37 @@ public: \
 #define PRS1_PRESSURE_EVENT(T, E) _PRS1_EVENT(T, E, PRS1PressureEvent, value)
 
 PRS1_DURATION_EVENT(PRS1TimedBreathEvent, EV_PRS1_TB);
-
 PRS1_DURATION_EVENT(PRS1ObstructiveApneaEvent, EV_PRS1_OA);
-
 PRS1_DURATION_EVENT(PRS1ClearAirwayEvent, EV_PRS1_CA);
-
 PRS1_DURATION_EVENT(PRS1FlowLimitationEvent, EV_PRS1_FL);
-
 PRS1_DURATION_EVENT(PRS1PeriodicBreathingEvent, EV_PRS1_PB);
-
 PRS1_DURATION_EVENT(PRS1LargeLeakEvent, EV_PRS1_LL);
-
 PRS1_DURATION_EVENT(PRS1HypopneaEvent, EV_PRS1_HY);
 
 PRS1_VALUE_EVENT(PRS1TotalLeakEvent, EV_PRS1_TOTLEAK);
-
 PRS1_VALUE_EVENT(PRS1LeakEvent, EV_PRS1_LEAK);  // TODO: do machines really report unintentional leak?
 
 PRS1_PRESSURE_EVENT(PRS1CPAPEvent, EV_PRS1_PRESSURE);
-
 PRS1_PRESSURE_EVENT(PRS1IPAPEvent, EV_PRS1_IPAP);
-
 PRS1_PRESSURE_EVENT(PRS1IPAPHighEvent, EV_PRS1_IPAPHIGH);
-
 PRS1_PRESSURE_EVENT(PRS1IPAPLowEvent, EV_PRS1_IPAPLOW);
-
 PRS1_PRESSURE_EVENT(PRS1EPAPEvent, EV_PRS1_EPAP);
-
 PRS1_PRESSURE_EVENT(PRS1PressureReliefEvent, EV_PRS1_FLEX);  // value is pressure applied during pressure relief, similar to EPAP
 
 PRS1_VALUE_EVENT(PRS1RespiratoryRateEvent, EV_PRS1_RR);
-
 PRS1_VALUE_EVENT(PRS1PatientTriggeredBreathsEvent, EV_PRS1_PTB);
-
 PRS1_VALUE_EVENT(PRS1MinuteVentilationEvent, EV_PRS1_MV);
-
-class PRS1TidalVolumeEvent : public PRS1ParsedValueEvent
-{
-public:
-    static const PRS1ParsedEventType TYPE = EV_PRS1_TV;
-
-    static constexpr float GAIN = 10.0;
-    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_ML;
-    
-    PRS1TidalVolumeEvent(int start, int value)
-        : PRS1ParsedValueEvent(TYPE, start, value)
-    {
-        m_gain = GAIN;
-        m_unit = UNIT;
-    }
-};
-
 PRS1_VALUE_EVENT(PRS1SnoreEvent, EV_PRS1_SNORE);
-
 PRS1_VALUE_EVENT(PRS1VibratorySnoreEvent, EV_PRS1_VS);
-
 PRS1_VALUE_EVENT(PRS1PressurePulseEvent, EV_PRS1_PP);
-
 PRS1_VALUE_EVENT(PRS1RERAEvent, EV_PRS1_RERA);  // TODO: should this really be a duration event?
-
 PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a single event or an index/hour?
-
 PRS1_VALUE_EVENT(PRS1FlowRateEvent, EV_PRS1_FLOWRATE);  // TODO: is this a single event or an index/hour?
-
 PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);  // TODO: replace test1/2 event with unknownvalue events and appropriate mapping
-
 PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
+
+//********************************************************************************************
+
 
 void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
 {
@@ -1381,31 +1361,29 @@ bool PRS1Import::ParseF5EventsFV3()
     // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
+    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
 
-    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
     EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
-    EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
-    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
+    EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
+    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
+    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
+    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
+    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
     EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
     EventList *PS = session->AddEventList(CPAP_PS, EVL_Event, 0.1F);
     EventList *IPAPLo = session->AddEventList(CPAP_IPAPLo, EVL_Event, 0.1F);
     EventList *IPAPHi = session->AddEventList(CPAP_IPAPHi, EVL_Event, 0.1F);
-    EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
-    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
-    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
-
-    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
-    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
-
-
-    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
+    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
 
+
     // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
-    EventDataType currentPressure=0, leak, ps=0;
+    EventDataType currentPressure=0, leak;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
     EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
@@ -1415,7 +1393,6 @@ bool PRS1Import::ParseF5EventsFV3()
     EventDataType ppm = lpm / 16.0;
 
 
-    //qint64 start=timestamp;
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
 
@@ -1430,6 +1407,20 @@ bool PRS1Import::ParseF5EventsFV3()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
+            case PRS1IPAPEvent::TYPE:
+                IPAP->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case PRS1IPAPLowEvent::TYPE:
+                IPAPLo->AddEvent(t, e->m_value);
+                break;
+            case PRS1IPAPHighEvent::TYPE:
+                IPAPHi->AddEvent(t, e->m_value);
+                break;
+            case PRS1EPAPEvent::TYPE:
+                EPAP->AddEvent(t, e->m_value);
+                PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
+                break;
             case PRS1TimedBreathEvent::TYPE:
                 TB->AddEvent(t, e->m_duration);
                 break;
@@ -1438,6 +1429,9 @@ bool PRS1Import::ParseF5EventsFV3()
                 break;
             case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
+                break;
+            case PRS1HypopneaEvent::TYPE:
+                HY->AddEvent(t, e->m_duration);
                 break;
             case PRS1FlowLimitationEvent::TYPE:
                 FL->AddEvent(t, e->m_duration);
@@ -1448,13 +1442,6 @@ bool PRS1Import::ParseF5EventsFV3()
             case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
                 break;
-            case PRS1HypopneaEvent::TYPE:
-                HY->AddEvent(t, e->m_duration);
-                break;
-            case PRS1IPAPEvent::TYPE:
-                IPAP->AddEvent(t, e->m_value);
-                currentPressure = e->m_value;
-                break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 leak = e->m_value;
@@ -1464,11 +1451,11 @@ bool PRS1Import::ParseF5EventsFV3()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case PRS1IPAPLowEvent::TYPE:
-                IPAPLo->AddEvent(t, e->m_value);
-                break;
-            case PRS1IPAPHighEvent::TYPE:
-                IPAPHi->AddEvent(t, e->m_value);
+            case PRS1SnoreEvent::TYPE:
+                SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS->AddEvent(t, 0); //data2); // VSnore
+                }
                 break;
             case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
@@ -1482,23 +1469,13 @@ bool PRS1Import::ParseF5EventsFV3()
             case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
                 break;
-            case PRS1SnoreEvent::TYPE:
-                SNORE->AddEvent(t, e->m_value);
-                if (e->m_value > 0) {
-                    VS->AddEvent(t, 0); //data2); // VSnore
-                }
-                break;
-            case PRS1EPAPEvent::TYPE:
-                EPAP->AddEvent(t, e->m_value);
-                ps = currentPressure - e->m_value;
-                PS->AddEvent(t, ps);           // Pressure Support
-                break;
             default:
                 qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
                 break;
         }
     }
     
+    //t = qint64(event->timestamp + event->duration) * 1000L;
     session->updateLast(t);
     session->m_cnt.clear();
     session->m_cph.clear();
@@ -1661,29 +1638,25 @@ bool PRS1Import::ParseF5Events()
     // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
+    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
 
-    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
     EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
-    EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
-    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
+    EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
+    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
+    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
+    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
+    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
     EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
     EventList *PS = session->AddEventList(CPAP_PS, EVL_Event, 0.1F);
     EventList *IPAPLo = session->AddEventList(CPAP_IPAPLo, EVL_Event, 0.1F);
     EventList *IPAPHi = session->AddEventList(CPAP_IPAPHi, EVL_Event, 0.1F);
-    EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
-    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
-    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
-
-    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
-    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
-
-
-    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
+    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
-  //  EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
 
     // On-demand channels
     ChannelID Codes[] = {
@@ -1700,8 +1673,9 @@ bool PRS1Import::ParseF5Events()
     //EventList * PRESSURE=nullptr;
     //EventList * PP=nullptr;
 
+
     // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
-    EventDataType currentPressure=0, leak, ps=0; //, p;
+    EventDataType currentPressure=0, leak;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
     EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
@@ -1711,7 +1685,6 @@ bool PRS1Import::ParseF5Events()
     EventDataType ppm = lpm / 16.0;
 
 
-    //qint64 start=timestamp;
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
 
@@ -1723,27 +1696,6 @@ bool PRS1Import::ParseF5Events()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
-            case PRS1TimedBreathEvent::TYPE:
-                TB->AddEvent(t, e->m_duration);
-                break;
-            case PRS1ObstructiveApneaEvent::TYPE:
-                OA->AddEvent(t, e->m_duration);
-                break;
-            case PRS1ClearAirwayEvent::TYPE:
-                CA->AddEvent(t, e->m_duration);
-                break;
-            case PRS1FlowLimitationEvent::TYPE:
-                FL->AddEvent(t, e->m_duration);
-                break;
-            case PRS1PeriodicBreathingEvent::TYPE:
-                PB->AddEvent(t, e->m_duration);
-                break;
-            case PRS1LargeLeakEvent::TYPE:
-                LL->AddEvent(t, e->m_duration);
-                break;
-            case PRS1HypopneaEvent::TYPE:
-                HY->AddEvent(t, e->m_duration);
-                break;
             case PRS1IPAPEvent::TYPE:
                 IPAP->AddEvent(t, e->m_value);
                 currentPressure = e->m_value;
@@ -1753,6 +1705,31 @@ bool PRS1Import::ParseF5Events()
                 break;
             case PRS1IPAPHighEvent::TYPE:
                 IPAPHi->AddEvent(t, e->m_value);
+                break;
+            case PRS1EPAPEvent::TYPE:
+                EPAP->AddEvent(t, e->m_value);
+                PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
+                break;
+            case PRS1TimedBreathEvent::TYPE:
+                TB->AddEvent(t, e->m_duration);
+                break;
+            case PRS1ObstructiveApneaEvent::TYPE:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case PRS1ClearAirwayEvent::TYPE:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case PRS1HypopneaEvent::TYPE:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case PRS1FlowLimitationEvent::TYPE:
+                FL->AddEvent(t, e->m_duration);
+                break;
+            case PRS1PeriodicBreathingEvent::TYPE:
+                PB->AddEvent(t, e->m_duration);
+                break;
+            case PRS1LargeLeakEvent::TYPE:
+                LL->AddEvent(t, e->m_duration);
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
@@ -1766,6 +1743,12 @@ bool PRS1Import::ParseF5Events()
             case PRS1LeakEvent::TYPE:
                 LEAK->AddEvent(t, e->m_value);
                 break;
+            case PRS1SnoreEvent::TYPE:
+                SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS->AddEvent(t, 0); //data2); // VSnore
+                }
+                break;
             case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
                 break;
@@ -1777,17 +1760,6 @@ bool PRS1Import::ParseF5Events()
                 break;
             case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
-                break;
-            case PRS1SnoreEvent::TYPE:
-                SNORE->AddEvent(t, e->m_value);
-                if (e->m_value > 0) {
-                    VS->AddEvent(t, 0); //data2); // VSnore
-                }
-                break;
-            case PRS1EPAPEvent::TYPE:
-                EPAP->AddEvent(t, e->m_value);
-                ps = currentPressure - e->m_value;
-                PS->AddEvent(t, ps);           // Pressure Support
                 break;
             case PRS1UnknownValueEvent::TYPE:
             {
@@ -2111,28 +2083,26 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
 bool PRS1Import::ParseF3EventsV3()
 {
     // Required channels
-    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
-    EventList *ZZ = session->AddEventList(CPAP_NRI, EVL_Event);
-    //EventList *Z2 = session->AddEventList(CPAP_ExP, EVL_Event);
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
-    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+
     EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
-    EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
-//    EventList *ULK = session->AddEventList(CPAP_Leak, EVL_Event);
-
-    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
     EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
-    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0f);
-
+    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
     EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
+    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
+    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
+    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
+    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
+    EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
+    EventList *ZZ = session->AddEventList(CPAP_NRI, EVL_Event);
     EventList *TMV = session->AddEventList(CPAP_Test1, EVL_Event);
-    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1f);
-    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1f);
     EventList *FLOW = session->AddEventList(CPAP_Test2, EVL_Event);
 
+    
     qint64 t;
     // missing session->updateFirst(t)?
     
@@ -2144,6 +2114,12 @@ bool PRS1Import::ParseF3EventsV3()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
+            case PRS1IPAPEvent::TYPE:
+                IPAP->AddEvent(t, e->m_value);
+                break;
+            case PRS1EPAPEvent::TYPE:
+                EPAP->AddEvent(t, e->m_value);
+                break;
             case PRS1TimedBreathEvent::TYPE:
                 TB->AddEvent(t, e->m_duration);
                 break;
@@ -2153,20 +2129,14 @@ bool PRS1Import::ParseF3EventsV3()
             case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
+            case PRS1HypopneaEvent::TYPE:
+                HY->AddEvent(t, e->m_duration);
+                break;
             case PRS1PeriodicBreathingEvent::TYPE:
                 PB->AddEvent(t, e->m_duration);
                 break;
             case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
-                break;
-            case PRS1HypopneaEvent::TYPE:
-                HY->AddEvent(t, e->m_duration);
-                break;
-            case PRS1EPAPEvent::TYPE:
-                EPAP->AddEvent(t, e->m_value);
-                break;
-            case PRS1IPAPEvent::TYPE:
-                IPAP->AddEvent(t, e->m_value);
                 break;
             case PRS1LeakEvent::TYPE:
                 LEAK->AddEvent(t, e->m_value);
@@ -2346,16 +2316,17 @@ bool PRS1Import::ParseF3Events()
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
+
     EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
-    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
-    //EventList *TMV = session->AddEventList(CPAP_TgMV, EVL_Event);
-    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event,10.0f);
     EventList *RR = session->AddEventList(CPAP_RespRate, EVL_Event);
+    EventList *TV = session->AddEventList(CPAP_TidalVolume, EVL_Event, 10.0F);
+    EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
     EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
-    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event,0.1f);
-    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event,0.1f);
+    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
+    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
     EventList *FLOW = session->AddEventList(CPAP_FlowRate, EVL_Event);
+
 
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
@@ -2368,6 +2339,12 @@ bool PRS1Import::ParseF3Events()
         t = qint64(event->timestamp + e->m_start) * 1000L;
         
         switch (e->m_type) {
+            case PRS1IPAPEvent::TYPE:
+                IPAP->AddEvent(t, e->m_value);
+                break;
+            case PRS1EPAPEvent::TYPE:
+                EPAP->AddEvent(t, e->m_value);
+                break;
             case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
@@ -2376,12 +2353,6 @@ bool PRS1Import::ParseF3Events()
                 break;
             case PRS1HypopneaEvent::TYPE:
                 HY->AddEvent(t, e->m_duration);
-                break;
-            case PRS1EPAPEvent::TYPE:
-                EPAP->AddEvent(t, e->m_value);
-                break;
-            case PRS1IPAPEvent::TYPE:
-                IPAP->AddEvent(t, e->m_value);
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
@@ -2409,7 +2380,7 @@ bool PRS1Import::ParseF3Events()
                 break;
         }
     }
-    
+
     if (!ok) {
         return false;
     }
@@ -2572,18 +2543,18 @@ bool PRS1Import::ParseF0Events()
     // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
-    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
+
     EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
-    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
-
-    EventList *PP = session->AddEventList(CPAP_PressurePulse, EVL_Event);
-    EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
-    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
+    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
+    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
     EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
-    //EventList *T1 = session->AddEventList(CPAP_Test1, EVL_Event, 0.1);
+    EventList *PP = session->AddEventList(CPAP_PressurePulse, EVL_Event);
+    EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
+
 
     // On-demand channels
     ChannelID Codes[] = {
@@ -2602,8 +2573,9 @@ bool PRS1Import::ParseF0Events()
     EventList *IPAP = nullptr;
     EventList *PS = nullptr;
 
+
     // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
-    EventDataType currentPressure=0, leak; //, p;
+    EventDataType currentPressure=0, leak;
 
     bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
     EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
@@ -2647,7 +2619,7 @@ bool PRS1Import::ParseF0Events()
                     if (!(PS = session->AddEventList(CPAP_PS, EVL_Event, e->m_gain))) { return false; }
                 }
                 EPAP->AddEvent(t, e->m_value);
-                PS->AddEvent(t, currentPressure - e->m_value);
+                PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
                 break;
             case PRS1PressureReliefEvent::TYPE:
                 if (!EPAP) {
@@ -2661,6 +2633,9 @@ bool PRS1Import::ParseF0Events()
             case PRS1ClearAirwayEvent::TYPE:
                 CA->AddEvent(t, e->m_duration);
                 break;
+            case PRS1HypopneaEvent::TYPE:
+                HY->AddEvent(t, e->m_duration);
+                break;
             case PRS1FlowLimitationEvent::TYPE:
                 FL->AddEvent(t, e->m_duration);
                 break;
@@ -2669,9 +2644,6 @@ bool PRS1Import::ParseF0Events()
                 break;
             case PRS1LargeLeakEvent::TYPE:
                 LL->AddEvent(t, e->m_duration);
-                break;
-            case PRS1HypopneaEvent::TYPE:
-                HY->AddEvent(t, e->m_duration);
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
@@ -2720,10 +2692,10 @@ bool PRS1Import::ParseF0Events()
     }
     
     t = qint64(event->timestamp + event->duration) * 1000L;
-    
     session->updateLast(t);
     session->m_cnt.clear();
     session->m_cph.clear();
+
     session->m_lastchan.clear();
     session->m_firstchan.clear();
     session->m_valuesummary[CPAP_Pressure].clear();
