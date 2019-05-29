@@ -1145,6 +1145,7 @@ enum PRS1ParsedEventUnit
     PRS1_UNIT_NONE,
     PRS1_UNIT_CMH2O,
     PRS1_UNIT_ML,
+    PRS1_UNIT_S,
 };
 
 enum PRS1ParsedSettingType
@@ -1207,10 +1208,13 @@ protected:
 };
 
 class PRS1ParsedDurationEvent : public PRS1ParsedEvent
-{    
+{
 protected:
+    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_S;
+    
     PRS1ParsedDurationEvent(PRS1ParsedEventType type, int start, int duration) : PRS1ParsedEvent(type, start) { m_duration = duration; }
 };
+const PRS1ParsedEventUnit PRS1ParsedDurationEvent::UNIT;
 
 class PRS1ParsedValueEvent : public PRS1ParsedEvent
 {
@@ -1399,7 +1403,7 @@ bool PRS1Import::ParseF5EventsFV3()
     session->updateFirst(t);
 
     bool ok;
-    ok = event->ParseEventsF5V3();
+    ok = event->ParseEvents(MODE_UNKNOWN);
     if (!ok) {
         return false;
     }
@@ -1691,7 +1695,7 @@ bool PRS1Import::ParseF5Events()
     session->updateFirst(t);
 
     bool ok;
-    ok = event->ParseEventsF5V012();
+    ok = event->ParseEvents(MODE_UNKNOWN);
     
     for (int i=0; i < event->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = event->m_parsedData.at(i);
@@ -2109,7 +2113,7 @@ bool PRS1Import::ParseF3EventsV3()
     // missing session->updateFirst(t)?
     
     bool ok;
-    ok = event->ParseEventsF3V6();
+    ok = event->ParseEvents(MODE_UNKNOWN);
     
     for (int i=0; i < event->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = event->m_parsedData.at(i);
@@ -2334,7 +2338,7 @@ bool PRS1Import::ParseF3Events()
     session->updateFirst(t);
 
     bool ok;
-    ok = event->ParseEventsF3V3();
+    ok = event->ParseEvents(MODE_UNKNOWN);
     
     for (int i=0; i < event->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = event->m_parsedData.at(i);
@@ -2592,7 +2596,7 @@ bool PRS1Import::ParseF0Events()
     session->updateFirst(t);
 
     bool ok;
-    ok = event->ParseEventsF0(mode);
+    ok = event->ParseEvents(mode);
     
     for (int i=0; i < event->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = event->m_parsedData.at(i);
@@ -3763,6 +3767,36 @@ bool PRS1DataChunk::ParseSummary()
 }
 
 
+// TODO: Eventually PRS1Import::ImportEvents will call this directly, once the PRS1Import::ParseF*Events have been merged.
+bool PRS1DataChunk::ParseEvents(CPAPMode mode)
+{
+    bool ok = false;
+    switch (this->family) {
+        case 0:
+            ok = this->ParseEventsF0(mode);
+            break;
+        case 3:
+            if (this->familyVersion == 6) {
+                ok = this->ParseEventsF3V6();
+            } else if (this->familyVersion == 3) {
+                ok = this->ParseEventsF3V3();
+            }
+            break;
+        case 5:
+            if (this->familyVersion == 3) {
+                ok = this->ParseEventsF5V3();
+            } else if (this->familyVersion < 3) {
+                ok = this->ParseEventsF5V012();
+            }
+            break;
+        default:
+            qDebug() << "Unknown PRS1 family" << this->family << "familyVersion" << this->familyVersion;
+    }
+    return ok;
+}
+
+
+// TODO: Eventually this will be renamed PRS1Import::ImportEvents, once PRS1Import::ParseF*Events have been merged and incorporated.
 bool PRS1Import::ParseEvents()
 {
     bool res = false;

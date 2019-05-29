@@ -158,6 +158,9 @@ public:
     //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data
     void ParseHumidifierSetting(int humid, bool supportsHeatedTubing=true);
     
+    //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
+    bool ParseEvents(CPAPMode mode);
+
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 0 CPAP/APAP machine
     bool ParseEventsF0(CPAPMode mode);
     
