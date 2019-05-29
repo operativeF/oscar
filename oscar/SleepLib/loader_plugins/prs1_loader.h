@@ -193,6 +193,13 @@ protected:
     bool ExtractStoredCrc(int size);
 };
 
+
+#if UNITTEST_MODE
+QString _PRS1ParsedEventName(PRS1ParsedEvent* e);
+QMap<QString,QString> _PRS1ParsedEventContents(PRS1ParsedEvent* e);
+#endif
+
+
 class PRS1Loader;
 
 /*! \class PRS1Import

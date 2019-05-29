@@ -1180,6 +1180,15 @@ enum PRS1ParsedSettingType
     PRS1_SETTING_SHOW_AHI,
 };
 
+
+#if UNITTEST_MODE
+static QString timeStr(int t);
+static QString byteList(QByteArray data, int limit=-1);
+static QString hex(int i);
+static QString parsedSettingTypeName(PRS1ParsedSettingType t);
+#endif
+
+
 class PRS1ParsedEvent
 {
 public:
@@ -1196,19 +1205,31 @@ public:
     static const PRS1ParsedEventType TYPE = EV_PRS1_UNKNOWN;
     static constexpr float GAIN = 1.0;
     static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_NONE;
+    
+    virtual QMap<QString,QString> contents(void) = 0;
 
 protected:
     PRS1ParsedEvent(PRS1ParsedEventType type, int start)
     : m_type(type), m_start(start), m_duration(0), m_value(0), m_offset(0.0), m_gain(GAIN), m_unit(UNIT)
     {
     }
-    ~PRS1ParsedEvent()
+    virtual ~PRS1ParsedEvent()
     {
     }
 };
 
+
 class PRS1ParsedDurationEvent : public PRS1ParsedEvent
 {
+public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out["start"] = timeStr(m_start);
+        out["duration"] = timeStr(m_duration);
+        return out;
+    }
+
 protected:
     static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_S;
     
@@ -1216,22 +1237,51 @@ protected:
 };
 const PRS1ParsedEventUnit PRS1ParsedDurationEvent::UNIT;
 
+
 class PRS1ParsedValueEvent : public PRS1ParsedEvent
 {
+public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out["start"] = timeStr(m_start);
+        out["value"] = QString::number(value());
+        return out;
+    }
+
 protected:
     PRS1ParsedValueEvent(PRS1ParsedEventType type, int start, int value) : PRS1ParsedEvent(type, start) { m_value = value; }
 };
 
+
 class PRS1UnknownValueEvent : public PRS1ParsedValueEvent
 {
 public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out["start"] = timeStr(m_start);
+        out["code"] = hex(m_code);
+        out["value"] = QString::number(value());
+        return out;
+    }
+
     int m_code;
     PRS1UnknownValueEvent(int code, int start, int value, float gain=1.0) : PRS1ParsedValueEvent(TYPE, start, value), m_code(code) { m_gain = gain; }
 };
 
+
 class PRS1UnknownDataEvent : public PRS1ParsedEvent
 {
 public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out["pos"] = QString::number(m_pos);
+        out["data"] = byteList(m_data);
+        return out;
+    }
+
     static const PRS1ParsedEventType TYPE = EV_PRS1_RAW;
     
     int m_pos;
@@ -1282,6 +1332,13 @@ const PRS1ParsedEventType PRS1TidalVolumeEvent::TYPE;
 class PRS1ParsedSettingEvent : public PRS1ParsedValueEvent
 {
 public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out[parsedSettingTypeName(m_setting)] = QString::number(value());
+        return out;
+    }
+    
     static const PRS1ParsedEventType TYPE = EV_PRS1_SETTING;
     PRS1ParsedSettingType m_setting;
     
@@ -1305,6 +1362,22 @@ public:
 class PRS1ParsedSliceEvent : public PRS1ParsedDurationEvent
 {
 public:
+    virtual QMap<QString,QString> contents(void)
+    {
+        QMap<QString,QString> out;
+        out["start"] = timeStr(m_start);
+        out["duration"] = timeStr(m_duration);
+        QString s;
+        switch (m_status) {
+            case EquipmentOn: s = "EquipmentOn"; break;
+            case EquipmentOff: s = "EquipmentOff"; break;
+            case EquipmentLeaking: s = "EquipmentLeaking"; break;
+            case UnknownStatus: s = "Unknown"; break;
+        }
+        out["status"] = s;
+        return out;
+    }
+
     static const PRS1ParsedEventType TYPE = EV_PRS1_SLICE;
     SliceStatus m_status;
     
@@ -1353,6 +1426,131 @@ PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a singl
 PRS1_VALUE_EVENT(PRS1FlowRateEvent, EV_PRS1_FLOWRATE);  // TODO: is this a single event or an index/hour?
 PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);
 PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
+
+
+//********************************************************************************************
+
+#if UNITTEST_MODE
+static QString hex(int i)
+{
+    return QString("0x") + QString::number(i, 16).toUpper();
+}
+
+#define ENUMSTRING(ENUM) case ENUM: s = #ENUM; break
+static QString parsedEventTypeName(PRS1ParsedEventType t)
+{
+    QString s;
+    switch (t) {
+        ENUMSTRING(EV_PRS1_RAW);
+        ENUMSTRING(EV_PRS1_UNKNOWN);
+        ENUMSTRING(EV_PRS1_TB);
+        ENUMSTRING(EV_PRS1_OA);
+        ENUMSTRING(EV_PRS1_CA);
+        ENUMSTRING(EV_PRS1_FL);
+        ENUMSTRING(EV_PRS1_PB);
+        ENUMSTRING(EV_PRS1_LL);
+        ENUMSTRING(EV_PRS1_HY);
+        ENUMSTRING(EV_PRS1_TOTLEAK);
+        ENUMSTRING(EV_PRS1_LEAK);
+        ENUMSTRING(EV_PRS1_PRESSURE);
+        ENUMSTRING(EV_PRS1_IPAP);
+        ENUMSTRING(EV_PRS1_IPAPLOW);
+        ENUMSTRING(EV_PRS1_IPAPHIGH);
+        ENUMSTRING(EV_PRS1_EPAP);
+        ENUMSTRING(EV_PRS1_FLEX);
+        ENUMSTRING(EV_PRS1_RR);
+        ENUMSTRING(EV_PRS1_PTB);
+        ENUMSTRING(EV_PRS1_MV);
+        ENUMSTRING(EV_PRS1_TV);
+        ENUMSTRING(EV_PRS1_SNORE);
+        ENUMSTRING(EV_PRS1_VS);
+        ENUMSTRING(EV_PRS1_PP);
+        ENUMSTRING(EV_PRS1_RERA);
+        ENUMSTRING(EV_PRS1_NRI);
+        ENUMSTRING(EV_PRS1_FLOWRATE);
+        ENUMSTRING(EV_PRS1_TEST1);
+        ENUMSTRING(EV_PRS1_TEST2);
+        ENUMSTRING(EV_PRS1_SETTING);
+        ENUMSTRING(EV_PRS1_SLICE);
+        default:
+            s = hex(t);
+            qDebug() << "Unknown PRS1ParsedEventType type:" << qPrintable(s);
+            return s;
+    }
+    return s.mid(8).toLower();  // lop off initial EV_PRS1_
+}
+
+static QString parsedSettingTypeName(PRS1ParsedSettingType t)
+{
+    QString s;
+    switch (t) {
+        ENUMSTRING(PRS1_SETTING_CPAP_MODE);
+        ENUMSTRING(PRS1_SETTING_PRESSURE);
+        ENUMSTRING(PRS1_SETTING_PRESSURE_MIN);
+        ENUMSTRING(PRS1_SETTING_PRESSURE_MAX);
+        ENUMSTRING(PRS1_SETTING_EPAP);
+        ENUMSTRING(PRS1_SETTING_EPAP_MIN);
+        ENUMSTRING(PRS1_SETTING_EPAP_MAX);
+        ENUMSTRING(PRS1_SETTING_IPAP);
+        ENUMSTRING(PRS1_SETTING_IPAP_MIN);
+        ENUMSTRING(PRS1_SETTING_IPAP_MAX);
+        ENUMSTRING(PRS1_SETTING_PS);
+        ENUMSTRING(PRS1_SETTING_PS_MIN);
+        ENUMSTRING(PRS1_SETTING_PS_MAX);
+        ENUMSTRING(PRS1_SETTING_FLEX_MODE);
+        ENUMSTRING(PRS1_SETTING_FLEX_LEVEL);
+        ENUMSTRING(PRS1_SETTING_RAMP_TIME);
+        ENUMSTRING(PRS1_SETTING_RAMP_PRESSURE);
+        ENUMSTRING(PRS1_SETTING_HUMID_STATUS);
+        ENUMSTRING(PRS1_SETTING_HUMID_LEVEL);
+        ENUMSTRING(PRS1_SETTING_HEATED_TUBING);
+        ENUMSTRING(PRS1_SETTING_SYSTEMONE_RESIST_LOCK);
+        ENUMSTRING(PRS1_SETTING_SYSTEMONE_RESIST_SETTING);
+        ENUMSTRING(PRS1_SETTING_SYSTEMONE_RESIST_STATUS);
+        ENUMSTRING(PRS1_SETTING_HOSE_DIAMETER);
+        ENUMSTRING(PRS1_SETTING_AUTO_ON);
+        ENUMSTRING(PRS1_SETTING_AUTO_OFF);
+        ENUMSTRING(PRS1_SETTING_MASK_ALERT);
+        ENUMSTRING(PRS1_SETTING_SHOW_AHI);
+        default:
+            s = hex(t);
+            qDebug() << "Unknown PRS1ParsedSettingType type:" << qPrintable(s);
+            return s;
+    }
+    return s.mid(13).toLower();  // lop off initial PRS1_SETTING_
+}
+
+static QString timeStr(int t)
+{
+    int h = t / 3600;
+    int m = (t - (h * 3600)) / 60;
+    int s = t % 60;
+    return QString("%1:%2:%3").arg(h, 2, 10, QChar('0')).arg(m, 2, 10, QChar('0')).arg(s, 2, 10, QChar('0'));
+}
+
+static QString byteList(QByteArray data, int limit)
+{
+    int count = data.size();
+    if (limit == -1 || limit > count) limit = count;
+    QStringList l;
+    for (int i = 0; i < limit; i++) {
+        l.push_back(QString( "%1" ).arg((int) data[i] & 0xFF, 2, 16, QChar('0') ).toUpper());
+    }
+    if (limit < count) l.push_back("...");
+    QString s = l.join(" ");
+    return s;
+}
+
+QString _PRS1ParsedEventName(PRS1ParsedEvent* e)
+{
+    return parsedEventTypeName(e->m_type);
+}
+
+QMap<QString,QString> _PRS1ParsedEventContents(PRS1ParsedEvent* e)
+{
+    return e->contents();
+}
+#endif
 
 //********************************************************************************************
 
@@ -1530,6 +1728,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
             qDebug() << "1: (" << int(lastcode) << hex << lastpos << ")";
             qDebug() << "2: (" << int(lastcode2) << hex << lastpos2 << ")";
             qDebug() << "3: (" << int(lastcode3) << hex << lastpos3 << ")";
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
             return false;
         }
         delta = buffer[pos];
@@ -1628,7 +1827,8 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
 
             break;
         default:
-            qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << pos;
+            qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << startpos;
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
 
 
         }
@@ -1831,6 +2031,7 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
             qDebug() << "1: (" << int(lastcode) << hex << lastpos << ")";
             qDebug() << "2: (" << int(lastcode2) << hex << lastpos2 << ")";
             qDebug() << "3: (" << int(lastcode3) << hex << lastpos3 << ")";
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
             return false;
         }
 
@@ -2072,6 +2273,7 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
 
         default:  // ERROR!!!
             qWarning() << "Some new fandangled PRS1 code detected " << hex << int(code) << " at " << pos - 1;
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
             badcode = true;
             break;
         }
@@ -2745,6 +2947,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             qDebug() << "1: (" << hex << int(lastcode) << hex << lastpos << ")";
             qDebug() << "2: (" << hex << int(lastcode2) << hex << lastpos2 << ")";
             qDebug() << "3: (" << hex << int(lastcode3) << hex << lastpos3 << ")";
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
             return false;
         }
 
@@ -2922,6 +3125,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             // ERROR!!!
             qWarning() << "Some new fandangled PRS1 code detected in" << this->sessionid << hex
                        << int(code) << " at " << pos - 1;
+            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
             return false;
         }
     }
@@ -3526,12 +3730,6 @@ bool PRS1Import::ImportSummary()
 {
     if (!summary) return false;
 
-    // All machines have a first byte zero for clean summary
-    if (summary->m_data.constData()[0] != 0) {
-        qDebug() << "Non zero hblock[0] indicator";
-        return false;
-    }    
-
     session->set_first(qint64(summary->timestamp) * 1000L);
 
     session->setPhysMax(CPAP_LeakTotal, 120);
@@ -3657,6 +3855,12 @@ bool PRS1Import::ImportSummary()
 
 bool PRS1DataChunk::ParseSummary()
 {
+    // All machines have a first byte zero for clean summary
+    if (this->m_data.constData()[0] != 0) {
+        qDebug() << "Non zero hblock[0] indicator";
+        return false;
+    }    
+
     // TODO: The below mainblock creation is probably wrong. It should move to to its own function when it gets fixed.
     /* Example data block
     000000c6@0000: 00 [10] 01 [00 01 02 01 01 00 02 01 00 04 01 40 07
