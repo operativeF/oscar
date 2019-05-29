@@ -1273,6 +1273,7 @@ public:
         m_unit = UNIT;
     }
 };
+const PRS1ParsedEventType PRS1TidalVolumeEvent::TYPE;
 
 class PRS1ParsedSettingEvent : public PRS1ParsedValueEvent
 {
@@ -1313,7 +1314,8 @@ class T : public P \
 public: \
     static const PRS1ParsedEventType TYPE = E; \
     T(int start, int ARG) : P(TYPE, start, ARG) {} \
-}
+}; \
+const PRS1ParsedEventType T::TYPE
 #define PRS1_DURATION_EVENT(T, E) _PRS1_EVENT(T, E, PRS1ParsedDurationEvent, duration)
 #define PRS1_VALUE_EVENT(T, E)    _PRS1_EVENT(T, E, PRS1ParsedValueEvent, value)
 #define PRS1_PRESSURE_EVENT(T, E) _PRS1_EVENT(T, E, PRS1PressureEvent, value)
@@ -1345,7 +1347,7 @@ PRS1_VALUE_EVENT(PRS1PressurePulseEvent, EV_PRS1_PP);
 PRS1_VALUE_EVENT(PRS1RERAEvent, EV_PRS1_RERA);  // TODO: should this really be a duration event?
 PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a single event or an index/hour?
 PRS1_VALUE_EVENT(PRS1FlowRateEvent, EV_PRS1_FLOWRATE);  // TODO: is this a single event or an index/hour?
-PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);  // TODO: replace test1/2 event with unknownvalue events and appropriate mapping
+PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);
 PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
 
 //********************************************************************************************

@@ -125,12 +125,15 @@ static QString ts(qint64 msecs)
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
 }
 
-static QString byteList(QByteArray data)
+static QString byteList(QByteArray data, int limit=-1)
 {
+    int count = data.size();
+    if (limit == -1 || limit > count) limit = count;
     QStringList l;
-    for (int i = 0; i < data.size(); i++) {
+    for (int i = 0; i < limit; i++) {
         l.push_back(QString( "%1" ).arg((int) data[i] & 0xFF, 2, 16, QChar('0') ).toUpper());
     }
+    if (limit < count) l.push_back("...");
     QString s = l.join("");
     return s;
 }
@@ -180,7 +183,7 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
     }
     
     // data
-    out << "  data: " << byteList(chunk->m_data) << endl;
+    out << "  data: " << byteList(chunk->m_data, 100) << endl;
     
     // data CRC
     out << "  crc: " << hex << chunk->storedCrc << endl;
