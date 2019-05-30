@@ -1492,7 +1492,9 @@ QString StatisticsRow::value(QDate start, QDate end)
         value = QString("%1").arg(formatTime(p_profile->calcHours(type, start, end) / days));
     } else if (calc == SC_COMPLIANCE) {
         float c = p_profile->countCompliantDays(type, start, end);
-        float p = (100.0 / days) * c;
+//        float p = (100.0 / days) * c;
+        float realDays = qAbs(start.daysTo(end)) + 1;
+        float p = (100.0 / realDays) * c;
         value = QString("%1%").arg(p, 0, 'f', 0);
     } else if (calc == SC_DAYS) {
         value = QString("%1").arg(p_profile->countDays(type, start, end));
