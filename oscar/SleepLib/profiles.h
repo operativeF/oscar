@@ -367,6 +367,11 @@ const QString STR_US_ShowUnknownFlags = "ShowUnknownFlags";
 const QString STR_US_StatReportMode = "StatReportMode";
 const QString STR_US_LastOverviewRange = "LastOverviewRange";
 
+// Values for StatReportMode
+const int STAT_MODE_STANDARD = 0;
+const int STAT_MODE_MONTHLY = 1;
+const int STAT_MODE_RANGE = 2;
+
 class DoctorInfo : public PrefSettings
 {
   public:

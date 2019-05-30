@@ -581,15 +581,17 @@ void Profile::UnloadMachineData()
         return;
     }
 
+    for (auto & mach : m_machlist) {
+        mach->saveSessionInfo();
+        mach->sessionlist.clear();
+        mach->day.clear();
+    }
+
     for (auto & day : daylist) {
         delete day;
     }
     daylist.clear();
 
-    for (auto & mach : m_machlist) {
-        mach->sessionlist.clear();
-        mach->day.clear();
-    }
     removeLock();
 }
 void Profile::LoadMachineData(ProgressDialog *progress)
@@ -1159,6 +1161,7 @@ QList<Day *> Profile::getDays(MachineType mt, QDate start, QDate end)
     return list;
 }
 
+// Counts number of days in range with data for specified machine type
 int Profile::countDays(MachineType mt, QDate start, QDate end)
 {
     if (!start.isValid()) {
@@ -1225,6 +1228,7 @@ int Profile::countCompliantDays(MachineType mt, QDate start, QDate end)
 }
 
 
+// Count number of events of type code in period
 EventDataType Profile::calcCount(ChannelID code, MachineType mt, QDate start, QDate end)
 {
     if (!start.isValid()) {

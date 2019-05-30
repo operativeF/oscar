@@ -63,6 +63,7 @@ class Session
     Session(Machine *, SessionID);
     virtual ~Session();
 
+    //! \brief Checks whether the supplied time is within the bounds of this session (ms since epoch)
     inline bool checkInside(qint64 time) {
         return ((time >= s_first) && (time <= s_last));
     }
@@ -113,13 +114,16 @@ class Session
     //! \brief Sets whether or not session is being used.
     void setEnabled(bool b);
 
+    //! \brief Return the earliest time in session (in milliseconds since epoch)
     inline qint64 realFirst() const { return s_first; }
+
+    //! \brief Return the latest time in session (in milliseconds since epoch)
     inline qint64 realLast() const { return s_last; }
 
-    //! \brief Return the start of this sessions time range (in milliseconds since epoch)
+    //! \brief Return the start of this sessions time range, adjusted for clock drift (in milliseconds since epoch)
     qint64 first();
 
-    //! \brief Return the end of this sessions time range (in milliseconds since epoch)
+    //! \brief Return the end of this sessions time range, adjusted for clock drift (in milliseconds since epoch)
     qint64 last();
 
     //! \brief Return the millisecond length of this session
@@ -156,10 +160,13 @@ class Session
     //! \brief Just set the end of the timerange without comparing
     void really_set_last(qint64 d) { s_last = d; }
 
+    //! \brief Set  time to lower of 'd' and existing s_first
     void set_first(qint64 d) {
         if (!s_first) { s_first = d; }
         else if (d < s_first) { s_first = d; }
     }
+
+    //! \brief Set last time to higher of 'd' and existing s_last.  Throw warning if 'd' less than s_first.
     void set_last(qint64 d) {
         if (d <= s_first) {
             qWarning() << "Session::set_last() d<=s_first";
@@ -387,11 +394,16 @@ class Session
 
     //! \brief Returns true if session only contains summary data
     inline bool summaryOnly() { return s_summaryOnly; }
+
+    //! \brief Returns true if there are no settings for this session
     inline bool noSettings() { return s_noSettings; }
 
+    //! \brief Mark this session as containing summary data only or not (true, false)
     inline void setSummaryOnly(bool b) { s_summaryOnly = b; }
+    //! \brief Mark this ssession as having settings data or not (true, false)
     inline void setNoSettings(bool b) { s_noSettings = b; }
 
+    //! \brief Mark whether this session has loaded data (true, false)
     void setOpened(bool b = true) {
         s_events_loaded = b;
         s_summary_loaded = b;
@@ -411,6 +423,7 @@ class Session
 
     QString eventFile() const;
 
+    //! \brief Returns MachineType for this session
     MachineType type() { return s_machtype; }
 
 
@@ -423,13 +436,17 @@ protected:
     SessionID s_session;
 
     Machine *s_machine;
+    //! \brief Time session begins (in ms since epoch)
     qint64 s_first;
+    //! \brief Time session ends (in ms since epoch)
     qint64 s_last;
     bool s_changed;
     bool s_lonesession;
     bool s_evchecksum_checked;
     bool _first_session;
     bool s_summaryOnly;
+
+    //! \brief True if there are no settings for this session
     bool s_noSettings;
 
     bool s_summary_loaded;
