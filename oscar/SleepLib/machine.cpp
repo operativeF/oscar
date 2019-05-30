@@ -1,5 +1,6 @@
-﻿/* SleepLib Machine Class Implementation
+/* SleepLib Machine Class Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -45,6 +46,7 @@ Machine::Machine(Profile *_profile, MachineID id) : profile(_profile)
     day.clear();
     highest_sessionid = 0;
     m_unsupported = false;
+    m_untested = false;
 
     if (!id) {
         srand(time(nullptr));

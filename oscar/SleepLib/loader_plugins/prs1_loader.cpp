@@ -214,14 +214,19 @@ struct PRS1TestedModel
 };
 
 static const PRS1TestedModel s_PRS1TestedModels[] = {
+    { "251P", 0, 2 },
     { "450P", 0, 3 },
+    { "451P", 0, 3 },
     { "550P", 0, 2 },
     { "550P", 0, 3 },
+    { "551P", 0, 2 },
     { "750P", 0, 2 },
 
     { "460P",   0, 4 },
+    { "461P",   0, 4 },
     { "560P",   0, 4 },
     { "560PBT", 0, 4 },
+    { "561P",   0, 4 },
     { "660P",   0, 4 },
     { "760P",   0, 4 },
     
@@ -242,6 +247,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "900X110", 5, 3 },
     { "900X120", 5, 3 },
     
+    { "1061T", 3, 3 },
     { "1160P", 3, 3 },
     { "1030X110", 3, 6 },
     { "1130X110", 3, 6 },
@@ -835,6 +841,9 @@ int PRS1Loader::FindSessionDirsAndProperties(const QString & path, QStringList &
 
 Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 {
+    QHash<QString,QString> props;
+    PeekProperties(propertyfile, props);
+    
     MachineInfo info = newInfo();
     // Have a peek first to get the model number.
     PeekProperties(info, propertyfile);
@@ -870,13 +879,13 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
         }
 
         // A bit of protection against future annoyances..
-        if (((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
+        if (!s_PRS1ModelInfo.IsSupported(props) || ((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
             qDebug() << model << type << series << info.modelnumber << "unsupported";
 #ifndef UNITTEST_MODE
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Machine Unsupported"),
                                      QObject::tr("Sorry, your Philips Respironics CPAP machine (Model %1) is not supported yet.").arg(info.modelnumber) +"\n\n"+
-                                     QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
+                                     QObject::tr("The developers needs a .zip copy of this machine's SD card and matching Encore .pdf reports to make it work with OSCAR.")
                                      ,QMessageBox::Ok);
 
 #endif
@@ -898,10 +907,21 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 
     // This time supply the machine object so it can populate machine properties..
     PeekProperties(m->info, propertyfile, m);
+    
+    if (!m->untested() && !s_PRS1ModelInfo.IsTested(props)) {
+        m->setUntested(true);
+        qDebug() << info.modelnumber << "untested";
+#ifndef UNITTEST_MODE
+        QMessageBox::information(QApplication::activeWindow(),
+                                 QObject::tr("Machine Untested"),
+                                 QObject::tr("Your Philips Respironics CPAP machine (Model %1) has not been tested yet.").arg(info.modelnumber) +"\n\n"+
+                                 QObject::tr("It seems similar enough to other machines that it might work, but the developers would like a .zip copy of this machine's SD card and matching Encore .pdf reports to make sure it works with OSCAR.")
+                                 ,QMessageBox::Ok);
+
+#endif
+    }
 
     // TODO: Replace much of the above logic with PRS1ModelInfo logic.
-    QHash<QString,QString> props;
-    PeekProperties(propertyfile, props);
     if (!s_PRS1ModelInfo.IsSupported(props)) {
         if (!m->unsupported()) {
             unsupported(m);
@@ -1181,12 +1201,10 @@ enum PRS1ParsedSettingType
 };
 
 
-#if UNITTEST_MODE
 static QString timeStr(int t);
 static QString byteList(QByteArray data, int limit=-1);
 static QString hex(int i);
 static QString parsedSettingTypeName(PRS1ParsedSettingType t);
-#endif
 
 
 class PRS1ParsedEvent
@@ -1213,6 +1231,7 @@ protected:
     : m_type(type), m_start(start), m_duration(0), m_value(0), m_offset(0.0), m_gain(GAIN), m_unit(UNIT)
     {
     }
+public:
     virtual ~PRS1ParsedEvent()
     {
     }
@@ -1430,7 +1449,6 @@ PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
 
 //********************************************************************************************
 
-#if UNITTEST_MODE
 static QString hex(int i)
 {
     return QString("0x") + QString::number(i, 16).toUpper();
@@ -1550,7 +1568,6 @@ QMap<QString,QString> _PRS1ParsedEventContents(PRS1ParsedEvent* e)
 {
     return e->contents();
 }
-#endif
 
 //********************************************************************************************
 
