@@ -133,22 +133,26 @@ static QString eventChannel(ChannelID i)
     return s;
 }
 
-static QString intList(EventStoreType* data, int count)
+static QString intList(EventStoreType* data, int count, int limit=-1)
 {
+    if (limit == -1 || limit > count) limit = count;
     QStringList l;
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < limit; i++) {
         l.push_back(QString::number(data[i]));
     }
+    if (limit < count) l.push_back("...");
     QString s = "[ " + l.join(",") + " ]";
     return s;
 }
 
-static QString intList(quint32* data, int count)
+static QString intList(quint32* data, int count, int limit=-1)
 {
+    if (limit == -1 || limit > count) limit = count;
     QStringList l;
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < limit; i++) {
         l.push_back(QString::number(data[i] / 1000));
     }
+    if (limit < count) l.push_back("...");
     QString s = "[ " + l.join(",") + " ]";
     return s;
 }
@@ -174,7 +178,14 @@ void SessionToYaml(QString filepath, Session* session)
     QList<ChannelID> keys = session->settings.keys();
     std::sort(keys.begin(), keys.end());
     for (QList<ChannelID>::iterator key = keys.begin(); key != keys.end(); key++) {
-        out << "    " << settingChannel(*key) << ": " << session->settings[*key].toString() << endl;
+        QVariant & value = session->settings[*key];
+        QString s;
+        if ((QMetaType::Type) value.type() == QMetaType::Float) {
+            s = QString::number(value.toFloat());  // Print the shortest accurate representation rather than QVariant's full precision.
+        } else {
+            s = value.toString();
+        }
+        out << "    " << settingChannel(*key) << ": " << s << endl;
     }
 
     out << "  events:" << endl;
@@ -209,15 +220,15 @@ void SessionToYaml(QString filepath, Session* session)
             out << "      data:" << endl;
             out << "        min: " << e.Min() << endl;
             out << "        max: " << e.Max() << endl;
-            out << "        raw: " << intList((EventStoreType*) e.m_data.data(), e.count()) << endl;
+            out << "        raw: " << intList((EventStoreType*) e.m_data.data(), e.count(), 100) << endl;
             if (e.type() != EVL_Waveform) {
-                out << "        delta: " << intList((quint32*) e.m_time.data(), e.count()) << endl;
+                out << "        delta: " << intList((quint32*) e.m_time.data(), e.count(), 100) << endl;
             }
             if (e.hasSecondField()) {
                 out << "      data2:" << endl;
                 out << "        min: " << e.min2() << endl;
                 out << "        max: " << e.max2() << endl;
-                out << "        raw: " << intList((EventStoreType*) e.m_data2.data(), e.count()) << endl;
+                out << "        raw: " << intList((EventStoreType*) e.m_data2.data(), e.count(), 100) << endl;
             }
         }
     }

@@ -1,5 +1,6 @@
-﻿/* SleepLib Machine Class Header
+/* SleepLib Machine Class Header
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -184,9 +185,12 @@ class Machine
     QSemaphore *savelistSem;
 
     bool m_unsupported;
+    bool m_untested;
 
     bool unsupported() { return m_unsupported; }
     void setUnsupported(bool b) { m_unsupported = b; }
+    bool untested() { return m_untested; }
+    void setUntested(bool b) { m_untested = b; }
 
     void lockSaveMutex() { listMutex.lock(); }
     void unlockSaveMutex() { listMutex.unlock(); }

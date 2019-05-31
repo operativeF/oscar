@@ -33,6 +33,47 @@ void PRS1Tests::cleanupTestCase(void)
 }
 
 
+// ====================================================================================================
+
+extern PRS1ModelInfo s_PRS1ModelInfo;
+void PRS1Tests::testMachineSupport()
+{
+    QHash<QString,QString> tested = {
+        { "ModelNumber", "550P" },
+        { "Family", "0" },
+        { "FamilyVersion", "3" },
+    };
+    QHash<QString,QString> supported = {
+        { "ModelNumber", "700X999" },
+        { "Family", "0" },
+        { "FamilyVersion", "6" },
+    };
+    QHash<QString,QString> unsupported = {
+        { "ModelNumber", "550P" },
+        { "Family", "0" },
+        { "FamilyVersion", "9" },
+    };
+    
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(5, 3));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(5, 9));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(9, 9));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("550P", 0, 2));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("550P", 0, 3));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("760P", 0, 4));
+    Q_ASSERT(s_PRS1ModelInfo.IsTested("700X110", 0, 6));
+    Q_ASSERT(!s_PRS1ModelInfo.IsTested("700X999", 0, 6));
+    
+    Q_ASSERT(s_PRS1ModelInfo.IsTested(tested));
+    Q_ASSERT(!s_PRS1ModelInfo.IsTested(supported));
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(tested));
+    Q_ASSERT(s_PRS1ModelInfo.IsSupported(supported));
+    Q_ASSERT(!s_PRS1ModelInfo.IsSupported(unsupported));
+}
+
+
+// ====================================================================================================
+
+
 void parseAndEmitSessionYaml(const QString & path)
 {
     qDebug() << path;
@@ -84,13 +125,16 @@ static QString ts(qint64 msecs)
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
 }
 
-static QString byteList(QByteArray data)
+static QString byteList(QByteArray data, int limit=-1)
 {
+    int count = data.size();
+    if (limit == -1 || limit > count) limit = count;
     QStringList l;
-    for (int i = 0; i < data.size(); i++) {
+    for (int i = 0; i < limit; i++) {
         l.push_back(QString( "%1" ).arg((int) data[i] & 0xFF, 2, 16, QChar('0') ).toUpper());
     }
-    QString s = l.join("");
+    if (limit < count) l.push_back("...");
+    QString s = l.join(" ");
     return s;
 }
 
@@ -139,7 +183,36 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
     }
     
     // data
-    out << "  data: " << byteList(chunk->m_data) << endl;
+    bool dump_data = true;
+    if (chunk->m_parsedData.size() > 0) {
+        dump_data = false;
+        out << "  events:" << endl;
+        for (auto & e : chunk->m_parsedData) {
+            QString name = _PRS1ParsedEventName(e);
+            if (name == "raw" || name == "unknown") {
+                dump_data = true;
+            }
+            QMap<QString,QString> contents = _PRS1ParsedEventContents(e);
+            if (name == "setting" && contents.size() == 1) {
+                out << "  - set_" << contents.firstKey() << ": " << contents.first() << endl;
+            }
+            else {
+                out << "  - " << name << ":" << endl;
+                
+                // Always emit start first if present
+                if (contents.contains("start")) {
+                    out << "      " << "start" << ": " << contents["start"] << endl;
+                }
+                for (auto & key : contents.keys()) {
+                    if (key == "start") continue;
+                    out << "      " << key << ": " << contents[key] << endl;
+                }
+            }
+        }
+    }
+    if (dump_data) {
+        out << "  data: " << byteList(chunk->m_data, 100) << endl;
+    }
     
     // data CRC
     out << "  crc: " << hex << chunk->storedCrc << endl;
@@ -211,8 +284,17 @@ void parseAndEmitChunkYaml(const QString & path)
             // Parse the chunks in the file.
             QList<PRS1DataChunk *> chunks = s_loader->ParseFile(inpath);
             for (int i=0; i < chunks.size(); i++) {
-                // Emit the YAML.
                 PRS1DataChunk * chunk = chunks.at(i);
+                
+                // Parse the inner data.
+                switch (chunk->ext) {
+                    case 0: chunk->ParseCompliance(); break;
+                    case 1: chunk->ParseSummary(); break;
+                    case 2: chunk->ParseEvents(MODE_UNKNOWN); break;
+                    default: break;
+                }
+                
+                // Emit the YAML.
                 ChunkToYaml(file, chunk);
                 delete chunk;
             }

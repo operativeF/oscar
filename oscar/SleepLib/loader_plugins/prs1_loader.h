@@ -28,7 +28,7 @@
 const int prs1_data_version = 15;
 //
 //********************************************************************************************
-
+#if 0  // Apparently unused
 /*! \class PRS1
     \brief PRS1 customized machine object (via CPAP)
     */
@@ -41,6 +41,7 @@ class PRS1: public CPAP
 
 
 const int max_load_buffer_size = 1024 * 1024;
+#endif
 const QString prs1_class_name = STR_MACH_PRS1;
 
 /*! \struct PRS1Waveform
@@ -77,13 +78,13 @@ public:
         m_index = -1;
     }
     PRS1DataChunk(class QFile & f);
-    ~PRS1DataChunk() {
-    }
+    ~PRS1DataChunk();
     inline int size() const { return m_data.size(); }
 
     QByteArray m_header;
     QByteArray m_data;
     QByteArray m_headerblock;
+    QList<class PRS1ParsedEvent*> m_parsedData;
 
     QString m_path;
     qint64 m_filepos;  // file offset
@@ -108,6 +109,9 @@ public:
     
     // V3 normal/non-waveform fields
     QMap<unsigned char, short> hblock;
+
+    QMap<unsigned char, QByteArray> mainblock;
+    QMap<unsigned char, QByteArray> hbdata;
     
     // Trailing common fields
     quint8 storedChecksum;  // header checksum stored in file, last byte of m_header
@@ -124,7 +128,58 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a brick
+    bool ParseCompliance(void);
+    
+    //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
+    bool ParseSummary();
+
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 2 or 3 machine
+    bool ParseSummaryF0V23(void);
+    
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 4 machine
+    bool ParseSummaryF0V4(void);
+    
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 6 machine
+    bool ParseSummaryF0V6(void);
+    
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 3 ventilator (family version 6?) machine
+    bool ParseSummaryF3(void);
+    
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 0-2 machine
+    bool ParseSummaryF5V012(void);
+    
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
+    bool ParseSummaryF5V3(void);
+
+    //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
+    void ParseFlexSetting(quint8 flex, CPAPMode cpapmode);
+    
+    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data
+    void ParseHumidifierSetting(int humid, bool supportsHeatedTubing=true);
+    
+    //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
+    bool ParseEvents(CPAPMode mode);
+
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 0 CPAP/APAP machine
+    bool ParseEventsF0(CPAPMode mode);
+    
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator family version 3 machine
+    bool ParseEventsF3V3(void);
+    
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator family version 6 machine
+    bool ParseEventsF3V6(void);
+    
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 0-2 machine
+    bool ParseEventsF5V012(void);
+
+    //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 3 machine
+    bool ParseEventsF5V3(void);
+
 protected:
+    //! \brief Add a parsed event to the chunk
+    void AddEvent(class PRS1ParsedEvent* event);
+
     //! \brief Read and parse the non-waveform header data from a V2 PRS1 file
     bool ReadNormalHeaderV2(class QFile & f);
 
@@ -137,6 +192,13 @@ protected:
     //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
     bool ExtractStoredCrc(int size);
 };
+
+
+#if UNITTEST_MODE
+QString _PRS1ParsedEventName(PRS1ParsedEvent* e);
+QMap<QString,QString> _PRS1ParsedEventContents(PRS1ParsedEvent* e);
+#endif
+
 
 class PRS1Loader;
 
@@ -167,9 +229,6 @@ public:
     QList<PRS1DataChunk *> waveforms;
     QList<PRS1DataChunk *> oximetry;
 
-    QMap<unsigned char, QByteArray> mainblock;
-    QMap<unsigned char, QByteArray> hbdata;
-
 
     QString wavefile;
     QString oxifile;
@@ -177,8 +236,8 @@ public:
     //! \brief As it says on the tin.. Parses .001 files for bricks.
     bool ParseCompliance();
 
-    //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
-    bool ParseSummary();
+    //! \brief Imports the .002 summary file.
+    bool ImportSummary();
 
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents();
@@ -192,24 +251,6 @@ public:
     //! \brief Takes the parsed list of oximeter waveform chunks and adds them to the database.
     bool ParseOximetery();
 
-
-    //! \brief Summary parser for 50 series Family 0 CPAP/APAP models
-    bool ParseSummaryF0();
-    //! \brief Summary parser for 60 series Family 0 CPAP/APAP models
-    bool ParseSummaryF0V4();
-    //! \brief Summary parser for 1060 series AVAPS models
-    bool ParseSummaryF3();
-    //! \brief Summary parser for 50 series Family 5-0 BiPAP/AutoSV models
-    bool ParseSummaryF5V0();
-    //! \brief Summary parser for 60 series Family 5-1 BiPAP/AutoSV models
-    bool ParseSummaryF5V1();
-    //! \brief Summary parser for 60 series Family 5-2 BiPAP/AutoSV models
-    bool ParseSummaryF5V2();
-    //! \brief Summary parser for 60 series Family 5-3 BiPAP/AutoSV models
-    bool ParseSummaryF5V3();
-
-    //! \brief Summary parser for DreamStation series CPAP/APAP models
-    bool ParseSummaryF0V6();
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine
     bool ParseF0Events();
@@ -250,6 +291,9 @@ class PRS1Loader : public CPAPLoader
     //! \brief Examine path and return it back if it contains what looks to be a valid PRS1 SD card structure
     QString checkDir(const QString & path);
 
+    //! \brief Peek into PROP.TXT or properties.txt at given path, and return it as a normalized key/value hash
+    bool PeekProperties(const QString & filename, QHash<QString,QString> & props);
+    
     //! \brief Peek into PROP.TXT or properties.txt at given path, and use it to fill MachineInfo structure
     bool PeekProperties(MachineInfo & info, const QString & path, Machine * mach = nullptr);
 
@@ -336,5 +380,22 @@ class PRS1Loader : public CPAPLoader
 
     qint32 summary_duration;
 };
+
+
+//********************************************************************************************
+
+class PRS1ModelInfo
+{
+protected:
+    QHash<int, QHash<int, QStringList>> m_testedModels;
+    
+public:
+    PRS1ModelInfo();
+    bool IsSupported(const QHash<QString,QString> & properties) const;
+    bool IsSupported(int family, int familyVersion) const;
+    bool IsTested(const QHash<QString,QString> & properties) const;
+    bool IsTested(const QString & modelNumber, int family, int familyVersion) const;
+};
+
 
 #endif // PRS1LOADER_H
