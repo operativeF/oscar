@@ -122,7 +122,7 @@ QString getOpenGLVersionString()
         QOpenGLFunctions f;
         f.initializeOpenGLFunctions();
         glversion = QString(QLatin1String(reinterpret_cast<const char*>(f.glGetString(GL_VERSION))));
-        qDebug() << "OpenGL Version:" << glversion;
+        qDebug() << "Graphics Engine:" << glversion;
 #endif
    }
    return glversion;
@@ -163,7 +163,7 @@ QString getGraphicsEngine()
     gfxEngine = CSTR_GFX_BrokenGL;
 #else
     QString glversion = getOpenGLVersionString();
-    qDebug() << "Gfx Engine" << glversion;
+//    qDebug() << "Graphics Engine" << glversion;
     if (glversion.contains(CSTR_GFX_ANGLE)) {
         gfxEngine = CSTR_GFX_ANGLE;
     } else if (glversion.contains("Mesa")) {

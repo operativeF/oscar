@@ -11,6 +11,7 @@
 #endif
 
 #include <QApplication>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QDebug>
 #include <QTranslator>
@@ -266,18 +267,16 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationDomain(getDeveloperDomain());
 
     QSettings settings;
-    GFXEngine gfxEngine = (GFXEngine)qMin((unsigned int)settings.value(GFXEngineSetting, (unsigned int)GFX_OpenGL).toUInt(), (unsigned int)MaxGFXEngine);
 
-    switch (gfxEngine) {
-    case 0:
-        QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
-        break;
-    case 1:
-        QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
-        break;
-    case 2:
-    default:
-        QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    QApplication a(argc, argv);
+    QStringList args = a.arguments();
+
+    // If shift key was held down when OSCAR was launched, force Software graphics Engine (aka LegacyGFX)
+    Qt::KeyboardModifiers keymodifier = QApplication::queryKeyboardModifiers();
+    QString forcedEngine = "";
+    if (keymodifier == Qt::ShiftModifier){
+        settings.setValue(GFXEngineSetting, (unsigned int)GFX_Software);
+        forcedEngine = "Software Engine forced by shift key at launch";
     }
 
     QString lastlanguage = settings.value(LangSetting, "").toString();
@@ -286,10 +285,6 @@ int main(int argc, char *argv[]) {
     bool force_data_dir = false;
     bool changing_language = false;
     QString load_profile = "";
-
-    QApplication a(argc, argv);
-    QStringList args = a.arguments();
-
 
     if (lastlanguage.isEmpty())
         changing_language = true;
@@ -302,7 +297,12 @@ int main(int argc, char *argv[]) {
         else if (args[i] == "--language") {
             changing_language = true; // reset to force language dialog
             settings.setValue(LangSetting,"");
-        } else if (args[i] == "-p")
+        }
+        else if (args[i] == "--legacy") {
+            settings.setValue(GFXEngineSetting, (unsigned int)GFX_Software);
+            forcedEngine = "Software Engine forced by --legacy command line switch";
+        }
+        else if (args[i] == "-p")
             QThread::msleep(1000);
         else if (args[i] == "--profile") {
             if ((i+1) < args.size())
@@ -325,6 +325,20 @@ int main(int argc, char *argv[]) {
     }   // end of for args loop
 
 
+    GFXEngine gfxEngine = (GFXEngine)qMin((unsigned int)settings.value(GFXEngineSetting, (unsigned int)GFX_OpenGL).toUInt(), (unsigned int)MaxGFXEngine);
+
+    switch (gfxEngine) {
+    case 0:
+        QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
+        break;
+    case 1:
+        QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
+        break;
+    case 2:
+    default:
+        QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    }
+
     initializeLogger();
     QThread::msleep(50); // Logger takes a little bit to catch up
 #ifdef QT_DEBUG
@@ -334,6 +348,8 @@ int main(int argc, char *argv[]) {
 #endif
     relinfo = "("+QSysInfo::kernelType()+" "+QSysInfo::currentCpuArchitecture()+relinfo+")";
     qDebug() << STR_AppName.toLocal8Bit().data() << VersionString.toLocal8Bit().data() << relinfo.toLocal8Bit().data() << "built with Qt" << QT_VERSION_STR << "on" << __DATE__ << __TIME__;
+    if (forcedEngine != "")
+        qDebug() << forcedEngine;
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Language Selection
