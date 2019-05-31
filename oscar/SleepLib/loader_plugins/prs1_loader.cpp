@@ -978,6 +978,10 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             QString path = fi.canonicalFilePath();
             bool ok;
 
+            if (fi.fileName() == ".DS_Store") {
+                continue;
+            }
+
             QString ext_s = fi.fileName().section(".", -1);
             ext = ext_s.toInt(&ok);
             if (!ok) {
@@ -3156,7 +3160,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
 }
 
 
-bool PRS1Import::ParseCompliance()
+bool PRS1Import::ImportCompliance()
 {
     bool ok;
     ok = compliance->ParseCompliance();
@@ -3218,18 +3222,29 @@ bool PRS1Import::ParseCompliance()
 }
 
 
+#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VAL);
+
 bool PRS1DataChunk::ParseCompliance(void)
 {
-    const unsigned char * data = (unsigned char *)this->m_data.constData();
-
-    if (data[0x00] > 0) {
+    // This parser doesn't seem right for 200X series, so bail for now.
+    if (this->family != 0 || this->familyVersion != 2) {
         return false;
     }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+
+    CHECK_VALUE(data[0x00], 0);
+    if (data[0x00] != 0) {
+        return false;
+    }
+    CHECK_VALUE(data[0x01], 1);
+    CHECK_VALUE(data[0x02], 0);
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_CPAP));
 
     int min_pressure = data[0x03];
    // EventDataType max_pressure = EventDataType(data[0x04]) / 10.0;
+    CHECK_VALUE(data[0x04], 0);
+    CHECK_VALUE(data[0x05], 0);
 
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
 
@@ -3240,15 +3255,24 @@ bool PRS1DataChunk::ParseCompliance(void)
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
+    CHECK_VALUE(data[0x08], 0);
 
     quint8 flex = data[0x09];
     this->ParseFlexSetting(flex, MODE_CPAP);
 
+    // Something isn't right here, it keeps setting status 1 level 0 for both
+    // humidier on at level 1.0 and humidifer off/passive.
     int humid = data[0x0A];
     this->ParseHumidifierSetting(humid, false);
 
+    CHECK_VALUE(data[0x0b], 1);
+    CHECK_VALUE(data[0x0c], 0);
+    CHECK_VALUE(data[0x0d], 0);
+    CHECK_VALUE(data[0x0e], 2);
+    CHECK_VALUE(data[0x0f], 0);
+    CHECK_VALUE(data[0x10], 0);
+    
     // TODO: What are slices, and why would only bricks have them? That seems very weird.
-    // TODO: The below seems not to work on 200X models.
     
     // need to parse a repeating structure here containing lengths of mask on/off..
     // 0x03 = mask on
@@ -3278,6 +3302,15 @@ bool PRS1DataChunk::ParseCompliance(void)
 
         tt += duration;
     } while (pos < len);
+
+    // also seems to be a trailing 01 00 81 after the slices?
+    if (pos == len) {
+        CHECK_VALUE(data[pos], 1);
+        CHECK_VALUE(data[pos+1], 0);  // sometimes 1
+        CHECK_VALUE(data[pos+2], 0x81);  // 0x80 when humidifier is off?
+    } else {
+        qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
+    }
 
     this->duration = tt;
 
@@ -3876,11 +3909,13 @@ bool PRS1Import::ImportSummary()
 
 bool PRS1DataChunk::ParseSummary()
 {
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    
     // All machines have a first byte zero for clean summary
-    if (this->m_data.constData()[0] != 0) {
-        qDebug() << "Non zero hblock[0] indicator";
+    CHECK_VALUE(data[0], 0);  // sometimes 5 with a short file?
+    if (data[0] != 0) {
         return false;
-    }    
+    }
 
     // TODO: The below mainblock creation is probably wrong. It should move to to its own function when it gets fixed.
     /* Example data block
@@ -3894,7 +3929,6 @@ bool PRS1DataChunk::ParseSummary()
     000000c6@0070: 1a 00 38 04]  */
     if (this->fileVersion == 3) {
         // Parse summary structures into bytearray map according to size given in header block
-        const unsigned char * data = (unsigned char *)this->m_data.constData();
         int size = this->m_data.size();
 
         int pos = 0;
@@ -4300,7 +4334,7 @@ bool PRS1Import::ParseSession(void)
     bool save = false;
     session = new Session(mach, sessionid);
 
-    if ((compliance && ParseCompliance()) || (summary && ImportSummary())) {
+    if ((compliance && ImportCompliance()) || (summary && ImportSummary())) {
         if (event && !ParseEvents()) {
         }
 

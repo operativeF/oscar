@@ -233,10 +233,10 @@ public:
     QString wavefile;
     QString oxifile;
 
-    //! \brief As it says on the tin.. Parses .001 files for bricks.
-    bool ParseCompliance();
+    //! \brief Imports .000 files for bricks.
+    bool ImportCompliance();
 
-    //! \brief Imports the .002 summary file.
+    //! \brief Imports the .001 summary file.
     bool ImportSummary();
 
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.

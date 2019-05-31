@@ -256,6 +256,10 @@ void parseAndEmitChunkYaml(const QString & path)
             QFileInfo fi = flist.at(i);
             QString inpath = fi.canonicalFilePath();
             bool ok;
+            
+            if (fi.fileName() == ".DS_Store") {
+                continue;
+            }
 
             QString ext_s = fi.fileName().section(".", -1);
             ext_s.toInt(&ok);
