@@ -177,17 +177,19 @@ QString getGraphicsEngine()
 QString getBranchVersion()
 {
     QString version = STR_TR_AppVersion;
-    version += " [";
     if (GIT_BRANCH != "master") {
-        version += GIT_BRANCH+"-";
+        version += " [Branch: " + GIT_BRANCH + "]";
     }
-    version += GIT_REVISION;
+//    version += GIT_REVISION;
 #ifndef UNITTEST_MODE
     // There is no graphics engine on the console.
-    version += QString(" ") + getGraphicsEngine();
+//    version += QString(" ") + getGraphicsEngine();
 #endif
-    version += "]";
 
+//    version += "]";
+#ifdef BROKEN_OPENGL_BUILD
+    version += "[ "+CSTR_GFX_BrokenGL+"]";
+#endif
     return version;
 }
 
