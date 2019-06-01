@@ -1057,17 +1057,6 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
                 PRS1DataChunk * chunk = Chunks.at(i);
 
-                if (ext <= 1) {
-                    const unsigned char * data = (unsigned char *)chunk->m_data.constData();
-
-                    if (data[0x00] != 0) {
-                        // 5 length 5, 6 length 1, 7 length 3, 8 length 3 seen on 960P
-                        qWarning() << path << "data doesn't start with 0, skipping:" << data[0x00] << chunk->m_data.size();
-                        delete chunk;
-                        continue;
-                    }
-                }
-
                 SessionID chunk_sid = chunk->sessionid;
                 if (i > 0 || chunk_sid != sid) {  // log multiple chunks in non-waveform files and session ID mismatches
                     qDebug() << fi.canonicalFilePath() << chunk_sid;
@@ -3173,7 +3162,6 @@ bool PRS1Import::ImportCompliance()
             qint64 tt = start + qint64(s->m_start) * 1000L;
             qint64 duration = qint64(s->m_duration) * 1000L;
             session->m_slices.append(SessionSlice(tt, tt + duration, s->m_status));
-            qDebug() << compliance->sessionid << "Added Slice" << tt << (tt+duration) << s->m_status;
             continue;
         } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Compliance had non-setting event:" << (int) e->m_type;
@@ -3222,7 +3210,11 @@ bool PRS1Import::ImportCompliance()
 }
 
 
-#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VAL);
+// TODO: have UNEXPECTED_VALUE set a flag in the importer/machine that this data set is unusual
+#define UNEXPECTED_VALUE(SRC, VALS) { qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VALS); }
+#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) UNEXPECTED_VALUE(SRC, VAL)
+#define CHECK_VALUES(SRC, VAL1, VAL2) if ((SRC) != (VAL1) && (SRC) != (VAL2)) UNEXPECTED_VALUE(SRC, #VAL1 " or " #VAL2)
+// for more than 2 values, just write the test manually and use UNEXPECTED_VALUE if it fails
 
 bool PRS1DataChunk::ParseCompliance(void)
 {
@@ -3248,23 +3240,21 @@ bool PRS1DataChunk::ParseCompliance(void)
 
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
 
-
     int ramp_time = data[0x06];
     int ramp_pressure = data[0x07];
-
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
-    CHECK_VALUE(data[0x08], 0);
-
-    quint8 flex = data[0x09];
+    quint8 flex = data[0x08];  // TODO: why was this 0x09 originally? could the position vary?
     this->ParseFlexSetting(flex, MODE_CPAP);
 
-    // Something isn't right here, it keeps setting status 1 level 0 for both
-    // humidier on at level 1.0 and humidifer off/passive.
-    int humid = data[0x0A];
+    int humid = data[0x09];  // TODO: why was this 0x0A originally? could the position vary?
     this->ParseHumidifierSetting(humid, false);
 
+    // TODO: Where is Auto Off/On set? (both off)
+    // TODO: Where is "Altitude Compensation" set? (seems to be 1)
+    // TODO: Where are Mask Alert/Reminder Period set? (both off)
+    CHECK_VALUE(data[0x0a], 0x80);
     CHECK_VALUE(data[0x0b], 1);
     CHECK_VALUE(data[0x0c], 0);
     CHECK_VALUE(data[0x0d], 0);
@@ -3294,8 +3284,9 @@ bool PRS1DataChunk::ParseCompliance(void)
             status = EquipmentLeaking;
         } else if (c == 0x01) {
             status = EquipmentOff;
+            CHECK_VALUE(duration, 0);  // TODO: why would a slice duration be zero?
         } else {
-            qDebug() << this->sessionid << "Wasn't expecting" << c;
+            qDebug() << this->sessionid << "unknown slice status" << c;
             break;
         }
         this->AddEvent(new PRS1ParsedSliceEvent(tt, duration, status));
@@ -3306,8 +3297,8 @@ bool PRS1DataChunk::ParseCompliance(void)
     // also seems to be a trailing 01 00 81 after the slices?
     if (pos == len) {
         CHECK_VALUE(data[pos], 1);
-        CHECK_VALUE(data[pos+1], 0);  // sometimes 1
-        CHECK_VALUE(data[pos+2], 0x81);  // 0x80 when humidifier is off?
+        CHECK_VALUES(data[pos+1], 0, 1);  // sometimes 1
+        CHECK_VALUES(data[pos+2], 0x81, 0x80);  // 0x80 when humidifier is off, may be HumidifierSetting, but sometimes different from value above?
     } else {
         qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
     }
@@ -3911,8 +3902,15 @@ bool PRS1DataChunk::ParseSummary()
 {
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     
+    // TODO: 7 length 3, 8 length 3 have been seen on 960P, add those value checks once we look more closely at the data.
+    if (data[0] == 5) {
+        CHECK_VALUE(this->m_data.size(), 5);  // 4 more bytes before CRC, looks like a timestamp
+    } else if (data[0] == 6) {
+        CHECK_VALUE(this->m_data.size(), 1);  // 0 more bytes before CRC
+    } else {
+        CHECK_VALUE(data[0], 0);
+    }
     // All machines have a first byte zero for clean summary
-    CHECK_VALUE(data[0], 0);  // sometimes 5 with a short file?
     if (data[0] != 0) {
         return false;
     }
