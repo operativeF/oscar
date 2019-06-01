@@ -122,7 +122,7 @@ QString getOpenGLVersionString()
         QOpenGLFunctions f;
         f.initializeOpenGLFunctions();
         glversion = QString(QLatin1String(reinterpret_cast<const char*>(f.glGetString(GL_VERSION))));
-        qDebug() << "Graphics Engine:" << glversion;
+//        qDebug() << "Graphics Engine:" << glversion;
 #endif
    }
    return glversion;
@@ -191,6 +191,27 @@ QString getBranchVersion()
     version += "[ "+CSTR_GFX_BrokenGL+"]";
 #endif
     return version;
+}
+
+QStringList buildInfo;
+
+QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
+    buildInfo << (STR_AppName + " " + VersionString + (relinfo!="" ? " " : "") + relinfo);
+    buildInfo << (QObject::tr("Built with Qt") + " " + QT_VERSION_STR + " on " + __DATE__ + " " + __TIME__);
+    buildInfo << (QObject::tr("Branch") + " " + GIT_BRANCH + ", "
+                        + QObject::tr("Revision") + " " + GIT_REVISION);
+    buildInfo << (QObject::tr("Built on") + " " + QSysInfo::machineHostName() + " "
+                        + QObject::tr("running") + " " + QSysInfo::prettyProductName());
+    buildInfo << (QObject::tr("Graphics Engine:") + " " + getOpenGLVersionString());
+    buildInfo << (QObject::tr("Graphics Engine type:") + " " + getGraphicsEngine());
+    if (forcedEngine != "")
+        buildInfo << forcedEngine;
+
+    return buildInfo;
+}
+
+QStringList getBuildInfo() {
+    return buildInfo;
 }
 
 QString appResourcePath()
