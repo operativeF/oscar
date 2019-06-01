@@ -1007,7 +1007,10 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             }
             */
 
-
+            // TODO: BUG: This isn't right, since files can have multiple session
+            // chunks, which might not correspond to the filename. But before we can
+            // fix this we need to come up with a reasonably fast way to filter previously
+            // imported files without re-reading all of them.
             if (m->SessionExists(sid)) {
                 // Skip already imported session
                 qDebug() << path << "session already exists, skipping" << sid;
@@ -1061,7 +1064,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                 if (i > 0 || chunk_sid != sid) {  // log multiple chunks in non-waveform files and session ID mismatches
                     qDebug() << fi.canonicalFilePath() << chunk_sid;
                 }
-                if (m->SessionExists(sid)) {  // BUG: this should presumably be chunk_sid, but any change needs to be tested.
+                if (m->SessionExists(chunk_sid)) {
                     qDebug() << path << "session already exists, skipping" << sid << chunk_sid;
                     delete chunk;
                     continue;
