@@ -22,6 +22,7 @@
 #include <QProgressDialog>
 
 #include "version.h"
+#include "git_info.h"
 #include "logger.h"
 #include "mainwindow.h"
 #include "SleepLib/profiles.h"
@@ -348,6 +349,9 @@ int main(int argc, char *argv[]) {
 #endif
     relinfo = "("+QSysInfo::kernelType()+" "+QSysInfo::currentCpuArchitecture()+relinfo+")";
     qDebug() << STR_AppName.toLocal8Bit().data() << VersionString.toLocal8Bit().data() << relinfo.toLocal8Bit().data() << "built with Qt" << QT_VERSION_STR << "on" << __DATE__ << __TIME__;
+    qDebug() << "Branch" << GIT_BRANCH.toLocal8Bit().data() << "Revision" << GIT_REVISION.toLocal8Bit().data();
+    qDebug() << "Built on" << QSysInfo::machineHostName().toLocal8Bit().data() << "running" << QSysInfo::prettyProductName().toLocal8Bit().data();
+    qDebug() << "Graphics Engine:" << getGraphicsEngine().toLocal8Bit().data();
     if (forcedEngine != "")
         qDebug() << forcedEngine;
 
