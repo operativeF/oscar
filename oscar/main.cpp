@@ -22,8 +22,6 @@
 #include <QProgressDialog>
 
 #include "version.h"
-//#include "git_info.h"
-//#include "SleepLib/common.h"
 #include "logger.h"
 #include "mainwindow.h"
 #include "SleepLib/profiles.h"
@@ -343,16 +341,14 @@ int main(int argc, char *argv[]) {
 
     initializeLogger();
     QThread::msleep(50); // Logger takes a little bit to catch up
+
 #ifdef QT_DEBUG
     QString relinfo = " debug";
 #else
     QString relinfo = "";
 #endif
     relinfo = "("+QSysInfo::kernelType()+" "+QSysInfo::currentCpuArchitecture()+relinfo+")";
-
-    QStringList info = makeBuildInfo(relinfo, forcedEngine);
-    for (int i = 0; i < info.size(); ++i)
-        qDebug().noquote() << info.at(i);
+    qDebug().noquote() << STR_AppName << VersionString << relinfo << "Built with Qt" << QT_VERSION_STR << __DATE__ << __TIME__;
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Language Selection
@@ -365,6 +361,12 @@ int main(int argc, char *argv[]) {
 //    a.setFont(QFont("FreeSans", 11, QFont::Normal, false));
 
     mainwin = new MainWindow;
+
+// Moved buildInfo calls to after translation is available as makeBuildInfo includes tr() calls
+
+    QStringList info = makeBuildInfo(relinfo, forcedEngine);
+    for (int i = 0; i < info.size(); ++i)
+        qDebug().noquote() << info.at(i);
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // OpenGL Detection
@@ -474,6 +476,10 @@ int main(int argc, char *argv[]) {
     else
         qDebug() << "AppData folder already exists, so ...";
     qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
+
+    addBuildInfo("");
+    addBuildInfo(QObject::tr("Data directory:") + " " + GetAppData());
+
 
     QDir newDir(GetAppData());
 #if QT_VERSION < QT_VERSION_CHECK(5,9,0)

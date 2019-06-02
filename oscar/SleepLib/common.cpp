@@ -180,15 +180,9 @@ QString getBranchVersion()
     if (GIT_BRANCH != "master") {
         version += " [Branch: " + GIT_BRANCH + "]";
     }
-//    version += GIT_REVISION;
-#ifndef UNITTEST_MODE
-    // There is no graphics engine on the console.
-//    version += QString(" ") + getGraphicsEngine();
-#endif
 
-//    version += "]";
 #ifdef BROKEN_OPENGL_BUILD
-    version += "[ "+CSTR_GFX_BrokenGL+"]";
+    version += " ["+CSTR_GFX_BrokenGL+"]";
 #endif
     return version;
 }
@@ -196,10 +190,9 @@ QString getBranchVersion()
 QStringList buildInfo;
 
 QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
-    buildInfo << (STR_AppName + " " + VersionString + (relinfo!="" ? " " : "") + relinfo);
+    buildInfo << (STR_AppName + " " + VersionString + " " + relinfo);
     buildInfo << (QObject::tr("Built with Qt") + " " + QT_VERSION_STR + " on " + __DATE__ + " " + __TIME__);
-    buildInfo << (QObject::tr("Branch") + " " + GIT_BRANCH + ", "
-                        + QObject::tr("Revision") + " " + GIT_REVISION);
+    buildInfo << (getBranchVersion() + ", " + QObject::tr("Revision") + " " + GIT_REVISION);
     buildInfo << (QObject::tr("Built on") + " " + QSysInfo::machineHostName() + " "
                         + QObject::tr("running") + " " + QSysInfo::prettyProductName());
     buildInfo << (QObject::tr("Graphics Engine:") + " " + getOpenGLVersionString());
@@ -207,6 +200,11 @@ QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
     if (forcedEngine != "")
         buildInfo << forcedEngine;
 
+    return buildInfo;
+}
+
+QStringList addBuildInfo (QString value) {
+    buildInfo << (value);
     return buildInfo;
 }
 

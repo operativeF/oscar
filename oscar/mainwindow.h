@@ -320,6 +320,8 @@ class MainWindow : public QMainWindow
 
     void on_actionReport_a_Bug_triggered();
 
+    void on_actionSystem_Information_triggered();
+
     void on_profilesButton_clicked();
 
     void reloadProfile();
