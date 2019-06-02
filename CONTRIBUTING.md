@@ -42,18 +42,25 @@ Setting aside the religious wars that can arise over any development methodology
         git pull
         git checkout my-branch
         git merge master
+    Use `git stash` and `git stash pop` later if needed to hide some changes.
 
 5. If there are any merge conflicts, resolve them and then build and test again. See below for details on resolving conflicts.
 
-6. Push your branch up to gitlab: `git push -u origin my-branch`. Note that `git push` by itself won't push a branch that doesn't exist upstream, so you need to do this the first time you push your branch. After that (if you need to push additional changes later), you can just use `git push`.
+6. Push your branch up to gitlab: 
+
+    ```
+    git push -u origin my-branch
+    ```
+
+    Note that `git push` by itself won't push a branch that doesn't exist upstream, so you need to do this the first time you push your branch. After that (if you need to push additional changes later), you can just use `git push`.
 
 7. Create a merge request describing your proposed change, linking to any issues that it might address, and attaching your branch.
-	* On gitlab, create a new merge request from your branch into the upstream's master branch. The "git push" above will helpfully provide you with a direct URL to start this process. (Make sure you're logged into gitlab or you'll get a 404 error.) Otherwise you can do it manually by going to **Merge Requests > New Merge Request** and selecting your branch; upstream master is the default target.
-	* Fill in the **Title** and **Description** summarizing your proposed change. You don't need to go into exhaustive detail, since all of your commits and their comments will be attached to the request.
-	* Check the **Delete source branch when merge request is accepted** box (optional but recommended).
-	* Do **NOT** check "Squash commits": this will make your local copy think that the branch was never merged. (If you really want to squash commits, you'll need to use "-D" to delete your branch later.)
-	* Click **Submit merge request**.
-	* You may need to repeat steps 2-6 a few times, if changes are needed before your request is accepted, or 4-6 if other changes are merged into master before your request is accepted.
+  * On gitlab, create a new merge request from your branch into the upstream's master branch. The "git push" above will helpfully provide you with a direct URL to start this process. (Make sure you're logged into gitlab or you'll get a 404 error.) Otherwise you can do it manually by going to **Merge Requests > New Merge Request** and selecting your branch; upstream master is the default target.
+  * Fill in the **Title** and **Description** summarizing your proposed change. You don't need to go into exhaustive detail, since all of your commits and their comments will be attached to the request.
+  * Check the **Delete source branch when merge request is accepted** box (optional but recommended).
+  * Do **NOT** check "Squash commits": this will make your local copy think that the branch was never merged. (If you really want to squash commits, you'll need to use "-D" to delete your branch later.)
+  * Click **Submit merge request**.
+  * You may need to repeat steps 2-6 a few times, if changes are needed before your request is accepted, or 4-6 if other changes are merged into master before your request is accepted.
 
 8. An upstream developer will eventually accept the merge request, which merges your branch into master and updates any linked issues.
 
