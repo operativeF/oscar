@@ -192,9 +192,13 @@ QStringList buildInfo;
 QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
     buildInfo << (STR_AppName + " " + VersionString + " " + relinfo);
     buildInfo << (QObject::tr("Built with Qt") + " " + QT_VERSION_STR + " on " + __DATE__ + " " + __TIME__);
-    buildInfo << (getBranchVersion() + ", " + QObject::tr("Revision") + " " + GIT_REVISION);
-    buildInfo << (QObject::tr("Built on") + " " + QSysInfo::machineHostName() + " "
-                        + QObject::tr("running") + " " + QSysInfo::prettyProductName());
+    QString branch = "";
+    if (GIT_BRANCH != "master") {
+        branch = QObject::tr("Branch:") + " " + GIT_BRANCH + ", ";
+    }
+    buildInfo << branch + (QObject::tr("Revision")) + " " + GIT_REVISION;
+    buildInfo << QString("");
+    buildInfo << (QObject::tr("Operating system:") + " " + QSysInfo::prettyProductName());
     buildInfo << (QObject::tr("Graphics Engine:") + " " + getOpenGLVersionString());
     buildInfo << (QObject::tr("Graphics Engine type:") + " " + getGraphicsEngine());
     if (forcedEngine != "")
