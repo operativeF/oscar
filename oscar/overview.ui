@@ -259,6 +259,9 @@ QToolButton:pressed {
         <property name="toolTip">
          <string>Drop down to see list of graphs to switch on/off.</string>
         </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
         <item>
          <property name="text">
           <string>Graphs</string>
