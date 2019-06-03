@@ -908,6 +908,7 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
     // This time supply the machine object so it can populate machine properties..
     PeekProperties(m->info, propertyfile, m);
     
+    // TODO: exclude bogus 100X100
     if (!m->untested() && !s_PRS1ModelInfo.IsTested(props)) {
         m->setUntested(true);
         qDebug() << info.modelnumber << "untested";
@@ -3231,7 +3232,7 @@ bool PRS1DataChunk::ParseCompliance(void)
     if (data[0x00] != 0) {
         return false;
     }
-    CHECK_VALUE(data[0x01], 1);
+    CHECK_VALUES(data[0x01], 1, 0);  // usually 1, occasionally 0, no visible difference in report
     CHECK_VALUE(data[0x02], 0);
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_CPAP));
@@ -3278,6 +3279,11 @@ bool PRS1DataChunk::ParseCompliance(void)
     int pos = 0x11;
     do {
         quint8 c = data[pos++];
+        // TODO: This isn't duration, it's a start time! Why else would an EquipmentOff
+        // slice have a nonzero value here? In one session, there's a big black span
+        // during which the machine is counting blower time but not usage, corresponding
+        // to the EquipmentOff delta. So these aren't slices with durations, they're events
+        // with a delta offset!
         int duration = data[pos] | data[pos+1] << 8;
         pos+=2;
         SliceStatus status;
@@ -3287,7 +3293,7 @@ bool PRS1DataChunk::ParseCompliance(void)
             status = EquipmentLeaking;
         } else if (c == 0x01) {
             status = EquipmentOff;
-            CHECK_VALUE(duration, 0);  // TODO: why would a slice duration be zero?
+            CHECK_VALUE(duration, 0);
         } else {
             qDebug() << this->sessionid << "unknown slice status" << c;
             break;
@@ -3299,9 +3305,10 @@ bool PRS1DataChunk::ParseCompliance(void)
 
     // also seems to be a trailing 01 00 81 after the slices?
     if (pos == len) {
-        CHECK_VALUE(data[pos], 1);
-        CHECK_VALUES(data[pos+1], 0, 1);  // sometimes 1
-        CHECK_VALUES(data[pos+2], 0x81, 0x80);  // 0x80 when humidifier is off, may be HumidifierSetting, but sometimes different from value above?
+        CHECK_VALUES(data[pos], 1, 0);  // usually 1, occasionally 0, no visible difference in report
+        //CHECK_VALUE(data[pos+1], 0);  // sometimes 1, 2, or 5, no visible difference in report
+        //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
+        //TODO: sanity check humidifier value here, but don't add event, since we don't know when a change happened
     } else {
         qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
     }
