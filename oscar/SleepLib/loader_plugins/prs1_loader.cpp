@@ -277,6 +277,12 @@ bool PRS1ModelInfo::IsTested(const QString & model, int family, int familyVersio
     if (m_testedModels.value(family).value(familyVersion).contains(model)) {
         return true;
     }
+    // Some 500X150 C0/C1 folders have contained this bogus model number in their PROP.TXT file,
+    // with the same serial number seen in the main PROP.TXT file that shows the real model number.
+    if (model == "100X100") {
+        qDebug() << "Ignoring 100X100 for untested alert";
+        return true;
+    }
     return false;
 };
 
@@ -908,7 +914,6 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
     // This time supply the machine object so it can populate machine properties..
     PeekProperties(m->info, propertyfile, m);
     
-    // TODO: exclude bogus 100X100
     if (!m->untested() && !s_PRS1ModelInfo.IsTested(props)) {
         m->setUntested(true);
         qDebug() << info.modelnumber << "untested";
@@ -3308,7 +3313,9 @@ bool PRS1DataChunk::ParseCompliance(void)
         CHECK_VALUES(data[pos], 1, 0);  // usually 1, occasionally 0, no visible difference in report
         //CHECK_VALUE(data[pos+1], 0);  // sometimes 1, 2, or 5, no visible difference in report
         //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
-        //TODO: sanity check humidifier value here, but don't add event, since we don't know when a change happened
+        if (data[pos+2] && (((data[pos+2] & 0x80) == 0) || (data[pos+2] & 0x07) > 5)) {
+            UNEXPECTED_VALUE(data[pos+2], "valid humidifier setting");
+        }
     } else {
         qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
     }
