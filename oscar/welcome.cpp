@@ -170,7 +170,7 @@ QString Welcome::GenerateCPAPHTML()
             int hour = hours;
             QString timestr = tr("%1 hours, %2 minutes and %3 seconds").arg(hour).arg(minutes).arg(seconds);
 
-            const EventDataType compliance_min = 4.0;
+            const EventDataType compliance_min = p_profile->cpap->m_complianceHours; // 4.0;
             if (hours > compliance_min) html += tr("Your machine was on for %1.").arg(timestr)+"<br/>";
             else html += tr("<font color = red>You only had the mask on for %1.</font>").arg(timestr)+"<br/>";
 

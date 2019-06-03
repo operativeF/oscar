@@ -509,7 +509,7 @@ Statistics::Statistics(QObject *parent) :
     rows.push_back(StatisticsRow("", SC_COLUMNHEADERS, MT_CPAP));
     rows.push_back(StatisticsRow(tr("CPAP Usage"),  SC_SUBHEADING, MT_CPAP));
     rows.push_back(StatisticsRow(tr("Average Hours per Night"),      SC_HOURS,     MT_CPAP));
-    rows.push_back(StatisticsRow(tr("Compliance"),  SC_COMPLIANCE,  MT_CPAP));
+    rows.push_back(StatisticsRow(tr("Compliance (%1 hrs/day)"),  SC_COMPLIANCE,  MT_CPAP));
 
     rows.push_back(StatisticsRow(tr("Therapy Efficacy"),  SC_SUBHEADING, MT_CPAP));
     rows.push_back(StatisticsRow("AHI",        SC_AHI,     MT_CPAP));
@@ -1100,8 +1100,10 @@ QString Statistics::GenerateHTML()
 
         if (row.calc == SC_AHI) {
             name = ahitxt;
-        } else if ((row.calc == SC_HOURS) || (row.calc == SC_COMPLIANCE)) {
+        } else if (row.calc == SC_HOURS) {
             name = row.src;
+        } else if (row.calc == SC_COMPLIANCE) {
+            name = QString(row.src).arg(p_profile->cpap->m_complianceHours);
         } else if (row.calc == SC_COLUMNHEADERS) {
             html += QString("<tr><td><b>%1</b></td>\n").arg(tr("Details"));
             for (int j=0; j < periods.size(); j++) {
