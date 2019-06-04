@@ -19,6 +19,17 @@ static QString hex(int i)
     return QString("0x") + QString::number(i, 16).toUpper();
 }
 
+static QString dur(qint64 msecs)
+{
+    qint64 s = msecs / 1000L;
+    int h = s / 3600; s -= h * 3600;
+    int m = s / 60; s -= m * 60;
+    return QString("%1:%2:%3")
+        .arg(h, 2, 10, QChar('0'))
+        .arg(m, 2, 10, QChar('0'))
+        .arg(s, 2, 10, QChar('0'));
+}
+
 #define ENUMSTRING(ENUM) case ENUM: s = #ENUM; break
 static QString eventListTypeName(EventListType t)
 {
@@ -170,6 +181,11 @@ void SessionToYaml(QString filepath, Session* session)
     out << "  id: " << session->session() << endl;
     out << "  start: " << ts(session->first()) << endl;
     out << "  end: " << ts(session->last()) << endl;
+    
+    Day day;
+    day.addSession(session);
+    out << "  total_time: " << dur(day.total_time()) << endl;
+    day.removeSession(session);
 
     out << "  settings:" << endl;
 

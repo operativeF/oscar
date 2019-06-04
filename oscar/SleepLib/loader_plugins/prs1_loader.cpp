@@ -1384,19 +1384,18 @@ public:
     }
 };
 
-class PRS1ParsedSliceEvent : public PRS1ParsedDurationEvent
+class PRS1ParsedSliceEvent : public PRS1ParsedValueEvent
 {
 public:
     virtual QMap<QString,QString> contents(void)
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
-        out["duration"] = timeStr(m_duration);
         QString s;
-        switch (m_status) {
-            case EquipmentOn: s = "EquipmentOn"; break;
+        switch ((SliceStatus) m_value) {
+            case MaskOn: s = "MaskOn"; break;
+            case MaskOff: s = "MaskOff"; break;
             case EquipmentOff: s = "EquipmentOff"; break;
-            case EquipmentLeaking: s = "EquipmentLeaking"; break;
             case UnknownStatus: s = "Unknown"; break;
         }
         out["status"] = s;
@@ -1404,9 +1403,8 @@ public:
     }
 
     static const PRS1ParsedEventType TYPE = EV_PRS1_SLICE;
-    SliceStatus m_status;
     
-    PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(TYPE, start, duration), m_status(status) {}
+    PRS1ParsedSliceEvent(int start, SliceStatus status) : PRS1ParsedValueEvent(TYPE, start, (int) status) {}
 };
 
 
@@ -3169,8 +3167,11 @@ bool PRS1Import::ImportCompliance()
         if (e->m_type == PRS1ParsedSliceEvent::TYPE) {
             PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
             qint64 tt = start + qint64(s->m_start) * 1000L;
-            qint64 duration = qint64(s->m_duration) * 1000L;
-            session->m_slices.append(SessionSlice(tt, tt + duration, s->m_status));
+            if (!session->m_slices.isEmpty()) {
+                SessionSlice & prevSlice = session->m_slices.last();
+                prevSlice.end = tt;
+            }
+            session->m_slices.append(SessionSlice(tt, tt, (SliceStatus) s->m_value));
             continue;
         } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Compliance had non-setting event:" << (int) e->m_type;
@@ -3267,9 +3268,6 @@ bool PRS1DataChunk::ParseCompliance(void)
     CHECK_VALUE(data[0x0b], 1);
     CHECK_VALUE(data[0x0c], 0);
     CHECK_VALUE(data[0x0d], 0);
-    CHECK_VALUE(data[0x0e], 2);
-    CHECK_VALUE(data[0x0f], 0);
-    CHECK_VALUE(data[0x10], 0);
     
     // TODO: What are slices, and why would only bricks have them? That seems very weird.
     
@@ -3281,31 +3279,32 @@ bool PRS1DataChunk::ParseCompliance(void)
     int tt = start;
 
     int len = this->size()-3;
-    int pos = 0x11;
+    int pos = 0x0e;
     do {
         quint8 c = data[pos++];
-        // TODO: This isn't duration, it's a start time! Why else would an EquipmentOff
-        // slice have a nonzero value here? In one session, there's a big black span
-        // during which the machine is counting blower time but not usage, corresponding
-        // to the EquipmentOff delta. So these aren't slices with durations, they're events
-        // with a delta offset!
-        int duration = data[pos] | data[pos+1] << 8;
+        // These aren't really slices as originally thought, they're events with a delta offset.
+        // We'll convert them to slices in the importer.
+        int delta = data[pos] | data[pos+1] << 8;
         pos+=2;
         SliceStatus status;
-        if (c == 0x03) {
-            status = EquipmentOn;
-        } else if (c == 0x02) {
-            status = EquipmentLeaking;
+        if (c == 0x02) {
+            status = MaskOn;
+            if (tt == 0) {
+                CHECK_VALUE(delta, 0);  // we've never seen the initial MaskOn have any delta
+            } else {
+                if (delta % 60) UNEXPECTED_VALUE(delta, "even minutes");  // mask-off events seem to be whole minutes?
+            }
+        } else if (c == 0x03) {
+            status = MaskOff;
         } else if (c == 0x01) {
             status = EquipmentOff;
-            CHECK_VALUE(duration, 0);
+            // This has a delta if the mask was removed before the machine was shut off.
         } else {
             qDebug() << this->sessionid << "unknown slice status" << c;
             break;
         }
-        this->AddEvent(new PRS1ParsedSliceEvent(tt, duration, status));
-
-        tt += duration;
+        tt += delta;
+        this->AddEvent(new PRS1ParsedSliceEvent(tt, status));
     } while (pos < len);
 
     // also seems to be a trailing 01 00 81 after the slices?
@@ -3563,6 +3562,8 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
     // c0 Split CFlex then None
     // c8 Split CFlex+ then None
 
+    if (flex & (0x20 | 0x04)) UNEXPECTED_VALUE(flex, "known bits");
+
     flex &= 0xf8;
     bool split = false;
 
@@ -3591,11 +3592,18 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
 
 void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
 {
+    if (humid & (0x40 | 0x20 | 0x08)) UNEXPECTED_VALUE(humid, "known bits");
+    
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
     if (supportsHeatedTubing) {
         this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
+    } else {
+        CHECK_VALUE(humid & 0x10, 0);
     }
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
+    int humidlevel = humid & 7;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, humidlevel));          // Humidifier Value
+
+    if (humidlevel > 5) UNEXPECTED_VALUE(humidlevel, "<= 5");
 }
 
 

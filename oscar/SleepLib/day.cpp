@@ -657,7 +657,7 @@ qint64 Day::total_time()
                 }
             } else {
                 for (auto & slice : sess->m_slices) {
-                    if (slice.status == EquipmentOn) {
+                    if (slice.status == MaskOn) {
                         range.insert(slice.start, 0);
                         range.insert(slice.end, 1);
                         d_totaltime += slice.end - slice.start;
@@ -727,7 +727,7 @@ qint64 Day::total_time(MachineType type)
                 }
             } else {
                 for (const auto & slice : sess->m_slices) {
-                    if (slice.status == EquipmentOn) {
+                    if (slice.status == MaskOn) {
                         range.insert(slice.start, 0);
                         range.insert(slice.end, 1);
                         d_totaltime += slice.end - slice.start;
