@@ -182,6 +182,21 @@ void SessionToYaml(QString filepath, Session* session)
     out << "  start: " << ts(session->first()) << endl;
     out << "  end: " << ts(session->last()) << endl;
     
+    if (!session->m_slices.isEmpty()) {
+        out << "  slices:" << endl;
+        for (auto & slice : session->m_slices) {
+            QString s;
+            switch (slice.status) {
+            case MaskOn: s = "mask on"; break;
+            case MaskOff: s = "mask off"; break;
+            case EquipmentOff: s = "equipment off"; break;
+            default: s = "unknown"; break;
+            }
+            out << "  - status: " << s << endl;
+            out << "    start: " << ts(slice.start) << endl;
+            out << "    end: " << ts(slice.end) << endl;
+        }
+    }
     Day day;
     day.addSession(session);
     out << "  total_time: " << dur(day.total_time()) << endl;
