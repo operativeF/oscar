@@ -3326,7 +3326,23 @@ bool PRS1DataChunk::ParseCompliance(void)
 
 bool PRS1DataChunk::ParseSummaryF0V23()
 {
+    if (this->family != 0 || (this->familyVersion != 2 && this->familyVersion != 3)) {
+        qWarning() << "ParseSummaryF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    // TODO: SET THIS VALUE, hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 59) {
+        qWarning() << "summary data too short:" << this->m_data.size();
+        return false;
+    }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
+
+    CHECK_VALUE(data[0x00], 0);
+    if (data[0x00] != 0) {
+        return false;
+    }
+    CHECK_VALUES(data[0x01] & 0xF0, 0x60, 0x70);  // TODO: what are these?
+    CHECK_VALUES(data[0x01] & 0x0F, 1, 3);  // TODO: what are these?
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
@@ -3343,10 +3359,14 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     case 0x03:
         cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS;
     }
+    CHECK_VALUES(data[0x02], 0, 2);  // anything other than CPAP and APAP unverified
+
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
     int min_pressure = data[0x03];
     int max_pressure = data[0x04];
     int ps  = data[0x05]; // pressure support
+    CHECK_VALUE(ps, 0);  // unverified
 
     if (cpapmode == MODE_CPAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
@@ -3367,35 +3387,52 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, ps));
     }
 
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-
-
     int ramp_time = data[0x06];
     int ramp_pressure = data[0x07];
-
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
-
-    // Tubing lock has no setting byte
-
-    // Menu Options
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_LOCK, (data[0x0a] & 0x80) != 0)); // System One Resistance Lock Setting
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[0x0a] & 7));       // SYstem One Resistance setting value
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_STATUS, (data[0x0a] & 0x40) != 0));  // System One Resistance Status bit
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_ON, (data[0x0b] & 0x40) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_OFF, (data[0x0c] & 0x10) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_MASK_ALERT, (data[0x0c] & 0x08) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SHOW_AHI, (data[0x0c] & 0x04) != 0));
-    int humid = data[0x09];
-    this->ParseHumidifierSetting(humid, false);
-
-   // session->
 
     quint8 flex = data[0x08];
     this->ParseFlexSetting(flex, cpapmode);
 
+    int humid = data[0x09];
+    this->ParseHumidifierSetting(humid, false);
+    
+    // Tubing lock has no setting byte
+
+    // Menu Options
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_LOCK, (data[0x0a] & 0x80) != 0)); // System One Resistance Lock Setting
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_STATUS, (data[0x0a] & 0x40) != 0));  // System One Resistance Status bit
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[0x0a] & 7));       // System One Resistance setting value
+    CHECK_VALUE(data[0x0a] & (0x20 | 0x10), 0);
+
+    CHECK_VALUE(data[0x0b], 1);
+    
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_ON, (data[0x0c] & 0x40) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_OFF, (data[0x0c] & 0x10) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_MASK_ALERT, (data[0x0c] & 0x04) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SHOW_AHI, (data[0x0c] & 0x02) != 0));
+    CHECK_VALUE(data[0x0c] & (0xA0 | 0x09), 0);
+
+    CHECK_VALUE(data[0x0d], 0);
+    if (cpapmode == MODE_CPAP) {
+        CHECK_VALUE(data[0x0e], ramp_pressure);
+    } else {
+        CHECK_VALUE(data[0x0e], min_pressure);
+    }
+    CHECK_VALUE(data[0x0f], 0);
+
+    // TODO: This looks like compliance's slices: 02 00 00 at the beginning, followed by 03 nn nn.
+    // But looking at a long .001 file, it seems like the 03 block is 0x22 bytes long instead of 3.
+    CHECK_VALUE(data[0x10], 2);
+    CHECK_VALUE(data[0x11], 0);
+    CHECK_VALUE(data[0x12], 0);
+    CHECK_VALUE(data[0x13], 3);
+
     this->duration = data[0x14] | data[0x15] << 8;
+
+    // seems to be trailing 01 [01 or 02] 83 after final 01 00 00?
 
     return true;
 }
