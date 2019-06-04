@@ -3072,7 +3072,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
 
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1UnknownValueEvent(code, t - data1, data0));
+            this->AddEvent(new PRS1UnknownValueEvent(code, t - data1, data0));  // TODO: start time should probably match PB below
             break;
 
         case 0x0f: // Cheyne Stokes Respiration
@@ -3083,7 +3083,11 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             }
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));
+            if (this->familyVersion == 2 || this->familyVersion == 3) {
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1 - data0, data0));  // PB event appears data1 seconds after conclusion
+            } else {
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));  // TODO: this should probably be the same as F0V23, but it hasn't been tested
+            }
             break;
 
         case 0x10: // Large Leak
@@ -3094,7 +3098,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             }
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));
+            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));  // TODO: start time should probably match PB above
             break;
 
         case 0x11: // Leak Rate & Snore Graphs
