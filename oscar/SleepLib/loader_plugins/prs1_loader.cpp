@@ -1049,13 +1049,6 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             }
 
             // Parse the data chunks and read the files..
-            if (fi.canonicalFilePath().isEmpty()) {
-#if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-                qWarning() << fi.fileName() << "canonicalFilePath is empty";
-#else
-                qWarning() << fi << "cannonicalFilePath is empty";
-#endif
-            }
             QList<PRS1DataChunk *> Chunks = ParseFile(fi.canonicalFilePath());
 
             for (int i=0; i < Chunks.size(); ++i) {
@@ -1067,7 +1060,7 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
                 PRS1DataChunk * chunk = Chunks.at(i);
 
                 SessionID chunk_sid = chunk->sessionid;
-                if (i > 0 || chunk_sid != sid) {  // log multiple chunks in non-waveform files and session ID mismatches
+                if (i == 0 && chunk_sid != sid) {  // log session ID mismatches
                     qDebug() << fi.canonicalFilePath() << chunk_sid;
                 }
                 if (m->SessionExists(chunk_sid)) {
@@ -1717,7 +1710,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
 {
     if (this->family != 5 || this->familyVersion != 3) {
         qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     EventDataType data0, data1, data2, data3, data4, data5;
@@ -2437,7 +2430,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
 
     if (this->family != 3 || this->familyVersion != 6) {
         qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     int t = 0;
@@ -2623,7 +2616,7 @@ bool PRS1DataChunk::ParseEventsF3V3(void)
 {
     if (this->family != 3 || this->familyVersion != 3) {
         qWarning() << "ParseEventsF3V3 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     int t = 0, tt;
@@ -3209,7 +3202,7 @@ bool PRS1Import::ImportCompliance()
         }
     }
 
-    if (!ok) {
+    if (!ok || compliance->duration == 0) {
         return false;
     }
     session->setSummaryOnly(true);
@@ -3230,6 +3223,11 @@ bool PRS1DataChunk::ParseCompliance(void)
 {
     // This parser doesn't seem right for 200X series, so bail for now.
     if (this->family != 0 || this->familyVersion != 2) {
+        return false;
+    }
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 0x13) {
+        qWarning() << "compliance data too short:" << this->m_data.size();
         return false;
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
@@ -4549,8 +4547,8 @@ PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
         // Make sure the calculated CRC over the entire chunk (header and data) matches the stored CRC.
         if (chunk->calcCrc != chunk->storedCrc) {
             // corrupt data block.. bleh..
-            qDebug() << chunk->m_path << "@" << chunk->m_filepos << "block CRC calc" << hex << chunk->calcCrc << "!= stored" << hex << chunk->storedCrc;
-            //break;  // don't break to avoid changing behavior (for now)
+            qWarning() << chunk->m_path << "@" << chunk->m_filepos << "block CRC calc" << hex << chunk->calcCrc << "!= stored" << hex << chunk->storedCrc;
+            break;
         }
 
         // Only return the chunk if it has passed all tests above.
@@ -4595,7 +4593,7 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         }
         if (this->htype != PRS1_HTYPE_NORMAL && this->htype != PRS1_HTYPE_INTERVAL) {
             qWarning() << this->m_path << "unexpected htype:" << this->htype;
-            //break;  // don't break to avoid changing behavior (for now)
+            break;
         }
 
         // Read format-specific variable-length header data.
@@ -4732,6 +4730,7 @@ bool PRS1DataChunk::ReadWaveformHeader(QFile & f)
         header = (unsigned char *)this->m_header.data();
 
         // Parse the variable-length waveform information.
+        // TODO: move these checks into the parser, after the header checksum has been verified
         int pos = 0x13;
         for (int i = 0; i < wvfm_signals; ++i) {
             quint8 kind = header[pos];

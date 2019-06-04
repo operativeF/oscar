@@ -11,6 +11,7 @@
 
 static QString ts(qint64 msecs)
 {
+    // TODO: make this UTC so that tests don't vary by where they're run
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
 }
 

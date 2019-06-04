@@ -1,7 +1,8 @@
-﻿/* SleepLib Session Header
+/* SleepLib Session Header
  *
  * This stuff contains the session calculation smarts
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -169,7 +170,7 @@ class Session
     //! \brief Set last time to higher of 'd' and existing s_last.  Throw warning if 'd' less than s_first.
     void set_last(qint64 d) {
         if (d <= s_first) {
-            qWarning() << "Session::set_last() d<=s_first";
+            qWarning() << s_session << "Session::set_last() d<=s_first";
             return;
         }
 
