@@ -4364,12 +4364,21 @@ bool PRS1Import::ParseOximetery()
     return true;
 }
 
+
+static QString ts(qint64 msecs)
+{
+    // TODO: make this UTC so that tests don't vary by where they're run
+    return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
+}
+
+
 bool PRS1Import::ParseWaveforms()
 {
     int size = waveforms.size();
     quint64 s1, s2;
 
 
+    int discontinuities = 0;
     qint64 lastti=0;
     EventList * bnd = nullptr; // Breathing Not Detected
 
@@ -4385,13 +4394,38 @@ bool PRS1Import::ParseWaveforms()
         quint64 ti = quint64(waveform->timestamp) * 1000L;
         quint64 dur = qint64(waveform->duration) * 1000L;
 
-        quint64 diff = ti - lastti;
-        if ((lastti != 0) && diff > 0) {
-            qDebug() << waveform->sessionid << waveform->timestamp << "BND?" << (diff / 1000L) << "=" << waveform->timestamp << "-" << (lastti / 1000L);
+        qint64 diff = ti - lastti;
+        if ((lastti != 0) && (diff == 1000 || diff == -1000)) {
+            // TODO: Evidently the machines' internal clock drifts slightly, and in some sessions that
+            // means two adjacent (5-minute) waveform chunks have have a +/- 1 second difference in
+            // their notion of the correct time, since the machines only record time at 1-second
+            // resolution. Presumably the real drift is fractional, but there's no way to tell from
+            // the data.
+            //
+            // Encore apparently drops the second chunk entirely if it overlaps with the first
+            // (even by 1 second), and inserts a 1-second gap in the data if it's 1 second later than
+            // the first ended.
+            //
+            // At worst in the former case it seems preferable to drop the overlap and then one
+            // additional second to mark the discontinuity. But depending how often these drifts
+            // occur, it may be possible to adjust all the data so that it's continuous. Alternatively,
+            // if it turns out overlapping waveform data always has overlapping identical values,
+            // it might be possible to drop the duplicated sample. Though that would mean that
+            // gaps are real, though potentially only by a single sample.
+            //
+            qDebug() << waveform->sessionid << "waveform discontinuity:" << (diff / 1000L) << "s @" << ts(waveform->timestamp * 1000L);
+            discontinuities++;
         }
-        if ((diff > 500) && (lastti != 0)) {
+        if ((diff > 1000) && (lastti != 0)) {
             if (!bnd) {
                 bnd = session->AddEventList(PRS1_BND, EVL_Event);
+            }
+            // TODO: The machines' notion of BND appears to derive from the summary (maskoff/maskon)
+            // slices, but the waveform data (when present) does seem to agree. This should be confirmed
+            // once all summary parsers support slices.
+            if ((diff / 1000L) % 60) {
+                // Thus far all maskoff/maskon gaps have been multiples of 1 minute.
+                qDebug() << waveform->sessionid << "BND?" << (diff / 1000L) << "=" << ts(waveform->timestamp * 1000L) << "-" << ts(lastti);
             }
             bnd->AddEvent(ti, double(diff)/1000.0);
         }
@@ -4429,6 +4463,10 @@ bool PRS1Import::ParseWaveforms()
             flow->AddWaveform(ti, (char *)waveform->m_data.data(), waveform->m_data.size(), dur);
         }
         lastti = dur+ti;
+    }
+    
+    if (discontinuities > 1) {
+        qWarning() << session->s_session << "multiple discontinuities!" << discontinuities;
     }
 
     return true;
