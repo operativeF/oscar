@@ -280,7 +280,9 @@ bool PRS1ModelInfo::IsTested(const QString & model, int family, int familyVersio
     // Some 500X150 C0/C1 folders have contained this bogus model number in their PROP.TXT file,
     // with the same serial number seen in the main PROP.TXT file that shows the real model number.
     if (model == "100X100") {
+#ifndef UNITTEST_MODE
         qDebug() << "Ignoring 100X100 for untested alert";
+#endif
         return true;
     }
     return false;
@@ -3328,7 +3330,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         qWarning() << "ParseSummaryF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
-    // TODO: SET THIS VALUE, hardcoding this is ugly, think of a better approach
+    // TODO: hardcoding this is ugly, think of a better approach
     if (this->m_data.size() < 59) {
         qWarning() << "summary data too short:" << this->m_data.size();
         return false;
@@ -3340,7 +3342,9 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         return false;
     }
     CHECK_VALUES(data[0x01] & 0xF0, 0x60, 0x70);  // TODO: what are these?
-    CHECK_VALUES(data[0x01] & 0x0F, 1, 3);  // TODO: what are these?
+    if ((data[0x01] & 0x0F) != 1) {  // This is the most frequent value.
+        CHECK_VALUES(data[0x01] & 0x0F, 3, 0);  // TODO: what are these? 0 seems to be related to errors.
+    }
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
@@ -3356,29 +3360,35 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         break;
     case 0x03:
         cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS;
+        break;
+    default:
+        qWarning() << this->sessionid << "unknown cpap mode" << data[0x02];
+        return false;
     }
-    CHECK_VALUES(data[0x02], 0, 2);  // anything other than CPAP and APAP unverified
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
     int min_pressure = data[0x03];
     int max_pressure = data[0x04];
-    int ps  = data[0x05]; // pressure support
-    CHECK_VALUE(ps, 0);  // unverified
+    int ps  = data[0x05];  // max pressure support (for variable), seems to be zero otherwise
 
     if (cpapmode == MODE_CPAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
+        CHECK_VALUE(max_pressure, 0);
+        CHECK_VALUE(ps, 0);
     } else if (cpapmode == MODE_APAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+        CHECK_VALUE(ps, 0);
     } else if (cpapmode == MODE_BILEVEL_FIXED) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, max_pressure - min_pressure));
+        CHECK_VALUE(ps, 0);  // this seems to be unused on fixed bilevel
     } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
         int min_ps = 20;  // 2.0 cmH2O
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure - min_ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure - min_ps));  // TODO: not yet confirmed
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_pressure + min_ps));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps));
@@ -3401,7 +3411,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     // Menu Options
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_LOCK, (data[0x0a] & 0x80) != 0)); // System One Resistance Lock Setting
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_STATUS, (data[0x0a] & 0x40) != 0));  // System One Resistance Status bit
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));  // TODO: unconfirmed
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[0x0a] & 7));       // System One Resistance setting value
     CHECK_VALUE(data[0x0a] & (0x20 | 0x10), 0);
 
@@ -3414,12 +3424,12 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     CHECK_VALUE(data[0x0c] & (0xA0 | 0x09), 0);
 
     CHECK_VALUE(data[0x0d], 0);
-    if (cpapmode == MODE_CPAP) {
-        CHECK_VALUE(data[0x0e], ramp_pressure);
-    } else {
-        CHECK_VALUE(data[0x0e], min_pressure);
+    //CHECK_VALUES(data[0x0e], ramp_pressure, min_pressure);  // initial CPAP/EPAP, can be minimum pressure or ramp, or whatever auto decides to use
+    if (cpapmode == MODE_BILEVEL_FIXED) {  // initial IPAP for bilevel modes
+        CHECK_VALUE(data[0x0f], max_pressure);
+    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
+        CHECK_VALUE(data[0x0f], min_pressure + 20);
     }
-    CHECK_VALUE(data[0x0f], 0);
 
     // List of slices, really session-related events:
     int start = 0;
@@ -3457,8 +3467,10 @@ bool PRS1DataChunk::ParseSummaryF0V23()
 
     // seems to be trailing 01 [01 or 02] 83 after the slices?
     if (pos == len) {
-        CHECK_VALUE(data[pos], 1);
-        CHECK_VALUES(data[pos+1], 0, 1);
+        if (data[pos] != 1) {  // This is the usual value.
+            CHECK_VALUES(data[pos], 0, 3);  // 0 seems to be related to errors, 3 seen after 90 sec large leak before turning off?
+        }
+        //CHECK_VALUES(data[pos+1], 0, 1);  // TODO: may be related to ramp? 1-5 seems to have a ramp start or two
         //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
         if (data[pos+2] && (((data[pos+2] & 0x80) == 0) || (data[pos+2] & 0x07) > 5)) {
             UNEXPECTED_VALUE(data[pos+2], "valid humidifier setting");
@@ -3468,7 +3480,6 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     }
 
     this->duration = tt;
-    //this->duration = data[0x14] | data[0x15] << 8;
 
     return true;
 }
@@ -3663,13 +3674,14 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
 
 void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
 {
-    if (humid & (0x40 | 0x20 | 0x08)) UNEXPECTED_VALUE(humid, "known bits");
+    if (humid & (0x40 | 0x08)) UNEXPECTED_VALUE(humid, "known bits");
     
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
     if (supportsHeatedTubing) {
         this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
+        // TODO: 0x20 is seen on machines with System One humidification & heated tubing, not sure which setting it represents.
     } else {
-        CHECK_VALUE(humid & 0x10, 0);
+        CHECK_VALUE(humid & 0x30, 0);
     }
     int humidlevel = humid & 7;
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, humidlevel));          // Humidifier Value
