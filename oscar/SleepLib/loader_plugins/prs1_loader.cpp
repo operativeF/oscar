@@ -3271,12 +3271,7 @@ bool PRS1DataChunk::ParseCompliance(void)
     CHECK_VALUE(data[0x0c], 0);
     CHECK_VALUE(data[0x0d], 0);
     
-    // TODO: What are slices, and why would only bricks have them? That seems very weird.
-    
-    // need to parse a repeating structure here containing lengths of mask on/off..
-    // 0x03 = mask on
-    // 0x01 = mask off
-
+    // List of slices, really session-related events:
     int start = 0;
     int tt = start;
 
@@ -3323,7 +3318,6 @@ bool PRS1DataChunk::ParseCompliance(void)
 
     this->duration = tt;
 
-    // Bleh!! There is probably 10 different formats for these useless piece of junk machines
     return true;
 }
 
@@ -3427,16 +3421,54 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     }
     CHECK_VALUE(data[0x0f], 0);
 
-    // TODO: This looks like compliance's slices: 02 00 00 at the beginning, followed by 03 nn nn.
-    // But looking at a long .001 file, it seems like the 03 block is 0x22 bytes long instead of 3.
-    CHECK_VALUE(data[0x10], 2);
-    CHECK_VALUE(data[0x11], 0);
-    CHECK_VALUE(data[0x12], 0);
-    CHECK_VALUE(data[0x13], 3);
+    // List of slices, really session-related events:
+    int start = 0;
+    int tt = start;
 
-    this->duration = data[0x14] | data[0x15] << 8;
+    int len = this->size()-3;
+    int pos = 0x10;
+    do {
+        quint8 c = data[pos++];
+        int delta = data[pos] | data[pos+1] << 8;
+        pos+=2;
+        SliceStatus status;
+        if (c == 0x02) {
+            status = MaskOn;
+            if (tt == 0) {
+                CHECK_VALUE(delta, 0);  // we've never seen the initial MaskOn have any delta
+            } else {
+                if (delta % 60) UNEXPECTED_VALUE(delta, "even minutes");  // mask-off events seem to be whole minutes?
+            }
+        } else if (c == 0x03) {
+            status = MaskOff;
+            // These are 0x22 bytes in a summary vs. 3 bytes in compliance data
+            // TODO: What are these values?
+            pos += 0x1F;
+        } else if (c == 0x01) {
+            status = EquipmentOff;
+            // This has a delta if the mask was removed before the machine was shut off.
+        } else {
+            qDebug() << this->sessionid << "unknown slice status" << c;
+            break;
+        }
+        tt += delta;
+        this->AddEvent(new PRS1ParsedSliceEvent(tt, status));
+    } while (pos < len);
 
-    // seems to be trailing 01 [01 or 02] 83 after final 01 00 00?
+    // seems to be trailing 01 [01 or 02] 83 after the slices?
+    if (pos == len) {
+        CHECK_VALUE(data[pos], 1);
+        CHECK_VALUES(data[pos+1], 0, 1);
+        //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
+        if (data[pos+2] && (((data[pos+2] & 0x80) == 0) || (data[pos+2] & 0x07) > 5)) {
+            UNEXPECTED_VALUE(data[pos+2], "valid humidifier setting");
+        }
+    } else {
+        qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
+    }
+
+    this->duration = tt;
+    //this->duration = data[0x14] | data[0x15] << 8;
 
     return true;
 }
@@ -3839,7 +3871,8 @@ bool PRS1Import::ImportSummary()
 {
     if (!summary) return false;
 
-    session->set_first(qint64(summary->timestamp) * 1000L);
+    qint64 start = qint64(summary->timestamp) * 1000L;
+    session->set_first(start);
 
     session->setPhysMax(CPAP_LeakTotal, 120);
     session->setPhysMin(CPAP_LeakTotal, 0);
@@ -3857,7 +3890,16 @@ bool PRS1Import::ImportSummary()
     
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
+        if (e->m_type == PRS1ParsedSliceEvent::TYPE) {
+            PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
+            qint64 tt = start + qint64(s->m_start) * 1000L;
+            if (!session->m_slices.isEmpty()) {
+                SessionSlice & prevSlice = session->m_slices.last();
+                prevSlice.end = tt;
+            }
+            session->m_slices.append(SessionSlice(tt, tt, (SliceStatus) s->m_value));
+            continue;
+        } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Summary had non-setting event:" << (int) e->m_type;
             continue;
         }
