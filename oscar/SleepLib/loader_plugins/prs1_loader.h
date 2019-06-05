@@ -249,7 +249,7 @@ public:
     bool ParseWaveforms();
 
     //! \brief Takes the parsed list of oximeter waveform chunks and adds them to the database.
-    bool ParseOximetery();
+    bool ParseOximetry();
 
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine

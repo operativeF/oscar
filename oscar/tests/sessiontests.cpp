@@ -230,13 +230,23 @@ void SessionToYaml(QString filepath, Session* session)
         // Note that this is a vector of lists
         QVector<EventList *> &ev = session->eventlist[*key];
         int ev_size = ev.size();
+        if (ev_size == 0) {
+            continue;
+        }
+        EventList &e = *ev[0];
         
-        // TODO: See what this actually signifies. Some waveform data seems to have to multiple event lists,
-        // which might reflect blocks within the original files, or something else.
-        if (ev_size > 2) qDebug() << session->session() << eventChannel(*key) << "ev_size =" << ev_size;
+        // Multiple eventlists in a channel are used to account for discontiguous data.
+        // See CoalesceWaveformChunks for the coalescing of multiple contiguous waveform
+        // chunks and ParseWaveforms/ParseOximetry for the creation of eventlists per
+        // coalesced chunk.
+        //
+        // TODO: Is this only for waveform data?
+        if (ev_size > 1 && e.type() != EVL_Waveform) {
+            qWarning() << session->session() << eventChannel(*key) << "ev_size =" << ev_size;
+        }
 
         for (int j = 0; j < ev_size; j++) {
-            EventList &e = *ev[j];
+            e = *ev[j];
             out << "    - count: "  << (qint32)e.count() << endl;
             if (e.count() == 0)
                 continue;

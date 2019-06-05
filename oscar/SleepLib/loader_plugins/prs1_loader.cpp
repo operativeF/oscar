@@ -4319,7 +4319,7 @@ QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *>
 }
 
 
-bool PRS1Import::ParseOximetery()
+bool PRS1Import::ParseOximetry()
 {
     int size = oximetry.size();
 
@@ -4506,7 +4506,7 @@ bool PRS1Import::ParseSession(void)
         // Parse .006 Waveform file
         oximetry = loader->ParseFile(oxifile);
         oximetry = CoalesceWaveformChunks(oximetry);
-        ParseOximetery();
+        ParseOximetry();
 
         if (session->first() > 0) {
             if (session->last() < session->first()) {
