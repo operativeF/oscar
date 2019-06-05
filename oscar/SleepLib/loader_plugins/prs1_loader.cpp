@@ -4485,39 +4485,81 @@ void PRS1Import::run()
 
 bool PRS1Import::ParseSession(void)
 {
+    bool ok = false;
     bool save = false;
     session = new Session(mach, sessionid);
 
-    if ((compliance && ImportCompliance()) || (summary && ImportSummary())) {
-        if (event && !ParseEvents()) {
-        }
-
-        // Parse .005 Waveform file
-        waveforms = loader->ParseFile(wavefile);
-        waveforms = CoalesceWaveformChunks(waveforms);
-        if (session->eventlist.contains(CPAP_FlowRate)) {
-            if (waveforms.size() > 0) {
-                // Delete anything called "Flow rate" picked up in the events file if real data is present
-                session->destroyEvent(CPAP_FlowRate);
+    do {
+        if (compliance != nullptr) {
+            ok = ImportCompliance();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing compliance, skipping session";
+                break;
             }
         }
-        ParseWaveforms();
+        if (summary != nullptr) {
+            if (compliance != nullptr) {
+                qWarning() << sessionid << "Has both compliance and summary?!";
+                // Never seen this, but try the summary anyway.
+            }
+            ok = ImportSummary();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing summary, skipping session";
+                break;
+            }
+        }
+        if (compliance == nullptr && summary == nullptr) {
+            qWarning() << sessionid << "No compliance or summary, skipping session";
+            break;
+        }
+        
+        if (event != nullptr) {
+            ok = ParseEvents();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing events, proceeding anyway?";
+            }
+        }
 
-        // Parse .006 Waveform file
-        oximetry = loader->ParseFile(oxifile);
-        oximetry = CoalesceWaveformChunks(oximetry);
-        ParseOximetry();
+        if (!wavefile.isEmpty()) {
+            // Parse .005 Waveform file
+            waveforms = loader->ParseFile(wavefile);
+            waveforms = CoalesceWaveformChunks(waveforms);
+            if (session->eventlist.contains(CPAP_FlowRate)) {
+                if (waveforms.size() > 0) {
+                    // Delete anything called "Flow rate" picked up in the events file if real data is present
+                    session->destroyEvent(CPAP_FlowRate);
+                }
+            }
+            ok = ParseWaveforms();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing waveforms, proceeding anyway?";
+            }
+        }
+
+        if (!oxifile.isEmpty()) {
+            // Parse .006 Waveform file
+            oximetry = loader->ParseFile(oxifile);
+            oximetry = CoalesceWaveformChunks(oximetry);
+            ok = ParseOximetry();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing oximetry, proceeding anyway?";
+            }
+        }
 
         if (session->first() > 0) {
             if (session->last() < session->first()) {
                 // if last isn't set, duration couldn't be gained from summary, parsing events or waveforms..
                 // This session is dodgy, so kill it
+                qWarning() << sessionid << "Session last() earlier than first(), downgrading to summary only";
                 session->setSummaryOnly(true);
                 session->really_set_last(session->first()+(qint64(summary_duration) * 1000L));
             }
             save = true;
+        } else {
+            qWarning() << sessionid << "missing start time";
         }
-    }
+    } while (false);
+    
     return save;
 }
 
