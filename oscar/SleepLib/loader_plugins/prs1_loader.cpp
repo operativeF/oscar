@@ -3597,7 +3597,7 @@ bool PRS1DataChunk::ParseSummaryF3(void)
     if ((it=this->hbdata.find(5)) != this->hbdata.end()) {
         this->duration = (it.value()[1] << 8 ) + it.value()[0];
     } else {
-        qWarning() << "missing summary duration";
+        qWarning() << this->sessionid << "missing summary duration";
     }
 
     return true;
@@ -4024,15 +4024,20 @@ bool PRS1Import::ImportSummary()
     if (!ok) {
         return false;
     }
+    
+    summary_duration = summary->duration;
+
     if (summary->duration == 0) {
         // This does occasionally happen and merely indicates a brief session with no useful data.
         //qDebug() << summary->sessionid << "duration == 0";
-        return false;
+        return true;  // Don't bail for now, since some summary parsers are still very broken, so we want to proceed to events/waveforms.
     }
     
-    summary_duration = summary->duration;
-    session->set_last(qint64(summary->timestamp + summary->duration) * 1000L);
-
+    // Intentionally don't set the session's duration based on the summary duration.
+    // That only happens in PRS1Import::ParseSession() as a last resort.
+    // TODO: Revisit this once summary parsing is reliable.
+    //session->set_last(...);
+    
     return true;
 }
 
@@ -4573,13 +4578,22 @@ bool PRS1Import::ParseSession(void)
 
         if (session->first() > 0) {
             if (session->last() < session->first()) {
-                // Compliance and session parsing both use set_last() to set the session's last timestamp.
-                // Events and waveforms use updateLast().
-                //
-                // if last isn't set, duration couldn't be gained from summary, parsing events or waveforms..
-                // This session is dodgy, so kill it
-                qWarning() << sessionid << "Session last() earlier than first(), downgrading to summary only";
+                // Compliance uses set_last() to set the session's last timestamp, so it
+                // won't reach this point.
+                if (compliance != nullptr) {
+                    qWarning() << sessionid << "compliance didn't set session end?";
+                }
+
+                // Events and waveforms use updateLast() to set the session's last timestamp,
+                // so they should only reach this point if there was a problem parsing them.
+                if (event != nullptr || !wavefile.isEmpty() || !oxifile.isEmpty()) {
+                    qWarning() << sessionid << "Downgrading session to summary only";
+                }
                 session->setSummaryOnly(true);
+
+                // Only use the summary's duration if the session's duration couldn't be
+                // derived from events or waveforms.
+                // TODO: Revisit this once summary parsing is reliable.
                 session->really_set_last(session->first()+(qint64(summary_duration) * 1000L));
             }
             save = true;

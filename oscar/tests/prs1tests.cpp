@@ -126,6 +126,17 @@ static QString ts(qint64 msecs)
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
 }
 
+static QString dur(qint64 msecs)
+{
+    qint64 s = msecs / 1000L;
+    int h = s / 3600; s -= h * 3600;
+    int m = s / 60; s -= m * 60;
+    return QString("%1:%2:%3")
+        .arg(h, 2, 10, QChar('0'))
+        .arg(m, 2, 10, QChar('0'))
+        .arg(s, 2, 10, QChar('0'));
+}
+
 static QString byteList(QByteArray data, int limit=-1)
 {
     int count = data.size();
@@ -154,6 +165,7 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
     out << "  ext: " << chunk->ext << endl;
     out << "  session: " << chunk->sessionid << endl;
     out << "  start: " << ts(chunk->timestamp * 1000L) << endl;
+    out << "  duration: " << dur(chunk->duration * 1000L) << endl;
 
     // hblock for V3 non-waveform chunks
     if (chunk->fileVersion == 3 && chunk->htype == 0) {
