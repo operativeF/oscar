@@ -3208,7 +3208,12 @@ bool PRS1Import::ImportCompliance()
         }
     }
 
-    if (!ok || compliance->duration == 0) {
+    if (!ok) {
+        return false;
+    }
+    if (compliance->duration == 0) {
+        // This does occasionally happen and merely indicates a brief session with no useful data.
+        //qDebug() << compliance->sessionid << "duration == 0";
         return false;
     }
     session->setSummaryOnly(true);
@@ -3233,13 +3238,16 @@ bool PRS1DataChunk::ParseCompliance(void)
     }
     // TODO: hardcoding this is ugly, think of a better approach
     if (this->m_data.size() < 0x13) {
-        qWarning() << "compliance data too short:" << this->m_data.size();
+        qWarning() << this->sessionid << "compliance data too short:" << this->m_data.size();
         return false;
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
 
     CHECK_VALUE(data[0x00], 0);
     if (data[0x00] != 0) {
+        if (data[0x00] != 5) {
+            qDebug() << this->sessionid << "compliance first byte" << data[0x00] <<" != 0, skipping";
+        }
         return false;
     }
     CHECK_VALUES(data[0x01], 1, 0);  // usually 1, occasionally 0, no visible difference in report
@@ -3332,13 +3340,16 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     }
     // TODO: hardcoding this is ugly, think of a better approach
     if (this->m_data.size() < 59) {
-        qWarning() << "summary data too short:" << this->m_data.size();
+        qWarning() << this->sessionid << "summary data too short:" << this->m_data.size();
         return false;
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
 
     CHECK_VALUE(data[0x00], 0);
     if (data[0x00] != 0) {
+        if (data[0x00] != 5) {
+            qDebug() << this->sessionid << "summary first byte" << data[0x00] <<" != 0, skipping";
+        }
         return false;
     }
     CHECK_VALUES(data[0x01] & 0xF0, 0x60, 0x70);  // TODO: what are these?
@@ -3881,7 +3892,10 @@ bool PRS1DataChunk::ParseSummaryF0V6()
 
 bool PRS1Import::ImportSummary()
 {
-    if (!summary) return false;
+    if (!summary) {
+        qWarning() << "ImportSummary() called with no summary?";
+        return false;
+    }
 
     qint64 start = qint64(summary->timestamp) * 1000L;
     session->set_first(start);
@@ -4010,7 +4024,14 @@ bool PRS1Import::ImportSummary()
     if (!ok) {
         return false;
     }
+    if (summary->duration == 0) {
+        // This does occasionally happen and merely indicates a brief session with no useful data.
+        //qDebug() << summary->sessionid << "duration == 0";
+        return false;
+    }
+    
     summary_duration = summary->duration;
+    session->set_last(qint64(summary->timestamp + summary->duration) * 1000L);
 
     return true;
 }
@@ -4029,7 +4050,9 @@ bool PRS1DataChunk::ParseSummary()
         CHECK_VALUE(data[0], 0);
     }
     // All machines have a first byte zero for clean summary
+    // TODO: this check should move down into the individual family parsers once the V3 parsing below has been relocated.
     if (data[0] != 0) {
+        //qDebug() << this->sessionid << "summary first byte" << data[0] << "!= 0, skipping";
         return false;
     }
 
@@ -4490,10 +4513,12 @@ bool PRS1Import::ParseSession(void)
     session = new Session(mach, sessionid);
 
     do {
+        // TODO: There should be a way to distinguish between no-data-to-import vs. parsing errors
+        // (once we figure out what's benign and what isn't).
         if (compliance != nullptr) {
             ok = ImportCompliance();
             if (!ok) {
-                qWarning() << sessionid << "Error parsing compliance, skipping session";
+                //qWarning() << sessionid << "Error parsing compliance, skipping session";
                 break;
             }
         }
@@ -4504,7 +4529,7 @@ bool PRS1Import::ParseSession(void)
             }
             ok = ImportSummary();
             if (!ok) {
-                qWarning() << sessionid << "Error parsing summary, skipping session";
+                //qWarning() << sessionid << "Error parsing summary, skipping session";
                 break;
             }
         }
@@ -4548,6 +4573,9 @@ bool PRS1Import::ParseSession(void)
 
         if (session->first() > 0) {
             if (session->last() < session->first()) {
+                // Compliance and session parsing both use set_last() to set the session's last timestamp.
+                // Events and waveforms use updateLast().
+                //
                 // if last isn't set, duration couldn't be gained from summary, parsing events or waveforms..
                 // This session is dodgy, so kill it
                 qWarning() << sessionid << "Session last() earlier than first(), downgrading to summary only";
