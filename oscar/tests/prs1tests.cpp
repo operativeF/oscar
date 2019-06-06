@@ -100,12 +100,12 @@ void parseAndEmitSessionYaml(const QString & path)
 
         // Run the parser
         PRS1Import* import = dynamic_cast<PRS1Import*>(task);
-        import->ParseSession();
+        bool ok = import->ParseSession();
         
         // Emit the parsed session data to compare against our regression benchmarks
         Session* session = import->session;
         QString outpath = prs1OutputPath(path, m->serial(), session->session(), "-session.yml");
-        SessionToYaml(outpath, session);
+        SessionToYaml(outpath, session, ok);
         
         delete session;
         delete task;
@@ -150,13 +150,14 @@ static QString byteList(QByteArray data, int limit=-1)
     return s;
 }
 
-void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
+void ChunkToYaml(QFile & file, PRS1DataChunk* chunk, bool ok)
 {
     QTextStream out(&file);
 
     // chunk header
     out << "chunk:" << endl;
     out << "  at: " << hex << chunk->m_filepos << endl;
+    out << "  parsed: " << ok << endl;
     out << "  version: " << dec << chunk->fileVersion << endl;
     out << "  size: " << chunk->blockSize << endl;
     out << "  htype: " << chunk->htype << endl;
@@ -302,17 +303,18 @@ void parseAndEmitChunkYaml(const QString & path)
             QList<PRS1DataChunk *> chunks = s_loader->ParseFile(inpath);
             for (int i=0; i < chunks.size(); i++) {
                 PRS1DataChunk * chunk = chunks.at(i);
+                bool ok = true;
                 
                 // Parse the inner data.
                 switch (chunk->ext) {
-                    case 0: chunk->ParseCompliance(); break;
-                    case 1: chunk->ParseSummary(); break;
-                    case 2: chunk->ParseEvents(MODE_UNKNOWN); break;
+                    case 0: ok = chunk->ParseCompliance(); break;
+                    case 1: ok = chunk->ParseSummary(); break;
+                    case 2: ok = chunk->ParseEvents(MODE_UNKNOWN); break;
                     default: break;
                 }
                 
                 // Emit the YAML.
-                ChunkToYaml(file, chunk);
+                ChunkToYaml(file, chunk, ok);
                 delete chunk;
             }
             

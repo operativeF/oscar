@@ -169,7 +169,7 @@ static QString intList(quint32* data, int count, int limit=-1)
     return s;
 }
 
-void SessionToYaml(QString filepath, Session* session)
+void SessionToYaml(QString filepath, Session* session, bool ok)
 {
     QFile file(filepath);
     if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
@@ -182,6 +182,7 @@ void SessionToYaml(QString filepath, Session* session)
     out << "  id: " << session->session() << endl;
     out << "  start: " << ts(session->first()) << endl;
     out << "  end: " << ts(session->last()) << endl;
+    out << "  valid: " << ok << endl;
     
     if (!session->m_slices.isEmpty()) {
         out << "  slices:" << endl;
