@@ -3232,10 +3232,32 @@ bool PRS1Import::ImportCompliance()
 
 bool PRS1DataChunk::ParseCompliance(void)
 {
-    // This parser doesn't seem right for 200X series, so bail for now.
-    if (this->family != 0 || this->familyVersion != 2) {
+    switch (this->family) {
+    case 0:
+        if (this->familyVersion == 6) {
+            return this->ParseComplianceF0V6();
+        } else if (this->familyVersion == 2 || this->familyVersion == 3) {
+            return this->ParseComplianceF0V23();
+        }
+    default:
+        ;
+    }
+
+    qWarning() << "unexpected family" << this->family << "familyVersion" << this->familyVersion;
+    return false;
+}
+
+
+bool PRS1DataChunk::ParseComplianceF0V23(void)
+{
+    if (this->family != 0 || (this->familyVersion != 2 && this->familyVersion != 3)) {
+        qWarning() << "ParseComplianceF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
+    // F0V3 is untested, but since summary and events seem to be the same for F0V2 and F0V3,
+    // we'll assume this one is for now, but flag it as unexpected.
+    CHECK_VALUE(this->familyVersion, 2);
+    
     // TODO: hardcoding this is ugly, think of a better approach
     if (this->m_data.size() < 0x13) {
         qWarning() << this->sessionid << "compliance data too short:" << this->m_data.size();
@@ -3733,6 +3755,19 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
 }
 
 
+bool PRS1DataChunk::ParseComplianceF0V6(void)
+{
+    if (this->family != 0 || this->familyVersion != 6) {
+        qWarning() << "ParseComplianceF0V2 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    
+    // Not implemented yet!
+    
+    return false;
+}
+
+
 bool PRS1DataChunk::ParseSummaryF0V6()
 {
     // DreamStation machines...
@@ -4088,14 +4123,23 @@ bool PRS1DataChunk::ParseSummary()
             bsize = it.value();
 
             if (val != 1) {
+                if (this->hbdata.contains(val)) {
+                    qWarning() << this->sessionid << "duplicate hbdata val" << val;
+                }
                 // store the data block for later reference
                 this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
             } else {
+                if (!this->mainblock.isEmpty()) {
+                    qWarning() << this->sessionid << "duplicate mainblock";
+                }
                 // Parse the nested data structure which contains settings
                 int p2 = 0;
                 do {
                     val = data[pos + p2++];
                     len = data[pos + p2++];
+                    if (this->mainblock.contains(val)) {
+                        qWarning() << this->sessionid << "duplicate mainblock val" << val;
+                    }
                     this->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
                     p2 += len;
                 } while ((p2 < bsize) && ((pos+p2) < size));

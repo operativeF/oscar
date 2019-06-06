@@ -114,7 +114,7 @@ void parseAndEmitSessionYaml(const QString & path)
 
 void PRS1Tests::testSessionsToYaml()
 {
-    iterateTestCards(TESTDATA_PATH "prs1/input/", parseAndEmitSessionYaml);
+    //iterateTestCards(TESTDATA_PATH "prs1/input/", parseAndEmitSessionYaml);
 }
 
 

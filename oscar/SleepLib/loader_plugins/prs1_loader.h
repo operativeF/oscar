@@ -128,8 +128,14 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
-    //! \brief Parse a single data chunk from a .000 file containing compliance data for a brick
+    //! \brief Figures out which Compliance Parser to call, based on machine family/version and calls it.
     bool ParseCompliance(void);
+    
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a P25x brick
+    bool ParseComplianceF0V23(void);
+    
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a DreamStation 200X brick
+    bool ParseComplianceF0V6(void);
     
     //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
     bool ParseSummary();
