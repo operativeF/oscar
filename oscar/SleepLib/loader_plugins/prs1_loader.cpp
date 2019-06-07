@@ -3293,7 +3293,7 @@ bool PRS1DataChunk::ParseComplianceF0V23(void)
     this->ParseFlexSetting(flex, MODE_CPAP);
 
     int humid = data[0x09];  // TODO: why was this 0x0A originally? could the position vary?
-    this->ParseHumidifierSetting(humid, false);
+    this->ParseHumidifierSettingV2(humid, false);
 
     // TODO: Where is Auto Off/On set? (both off)
     // TODO: Where is "Altitude Compensation" set? (seems to be 1)
@@ -3437,7 +3437,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
     this->ParseFlexSetting(flex, cpapmode);
 
     int humid = data[0x09];
-    this->ParseHumidifierSetting(humid, false);
+    this->ParseHumidifierSettingV2(humid, false);
     
     // Tubing lock has no setting byte
 
@@ -3572,7 +3572,7 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
     int humid = data[0x0b];
-    this->ParseHumidifierSetting(humid);
+    this->ParseHumidifierSettingV2(humid);
 
     this->duration = data[0x14] | data[0x15] << 8;
 
@@ -3658,7 +3658,7 @@ bool PRS1DataChunk::ParseSummaryF5V012(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
     int humid = data[0x0d];
-    this->ParseHumidifierSetting(humid);
+    this->ParseHumidifierSettingV2(humid);
 
     this->duration = data[0x18] | data[0x19] << 8;
 
@@ -3705,7 +3705,7 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
 }
 
 
-void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
+void PRS1DataChunk::ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing)
 {
     if (humid & (0x40 | 0x08)) UNEXPECTED_VALUE(humid, "known bits");
     
@@ -3818,8 +3818,7 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
             case 3:  // Mask On
                 tt += data[pos] | (data[pos+1] << 8);
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
-                //CHECK_VALUES(data[pos+2], 0x50, 0x54);  // 0x90 (no humidifier data), 0x50 (15ht, tube 4/5, humid 4), 0x54 (15ht, tube 5, humid 5) 0x4c (15ht, tube temp 3, humidifier 3)
-                //CHECK_VALUES(data[pos+3], 0x80, 0xb0);  // 0xB4 (15ht, tube 5, humid 5), 0xB0 (15ht, tube 5, humid 4), 0x90 (tube 4, humid 4), 0x6C (15ht, tube temp 3, humidifier 3)
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
                 break;
             case 4:  // Mask Off
                 tt += data[pos] | (data[pos+1] << 8);
@@ -3849,8 +3848,7 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
                 break;
             case 6:  // Humidier setting change
                 tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
-                //CHECK_VALUES(data[pos+2], 0x54);  // when changing from tube 4, humid 4 to tube 5, humid 5
-                //CHECK_VALUES(data[pos+3], 0xb4);  // when changing from tube 4, humid 4 to tube 5, humid 5
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
@@ -3862,6 +3860,46 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
     this->duration = tt;
 
     return ok;
+}
+
+
+void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting)
+{
+    // Byte 1: 0x90 (no humidifier data), 0x50 (15ht, tube 4/5, humid 4), 0x54 (15ht, tube 5, humid 5) 0x4c (15ht, tube temp 3, humidifier 3)
+    // 0b10010000 no humidifier data
+    // 0b01010000 tube 4 and 5, humidifier 4
+    // 0b01010100 15ht, tube 5, humidifier 5
+    // 0b01001100 15ht, tube 3, humidifier 3
+    //      xxx   = humidifier setting
+    //   ???   ??
+    CHECK_VALUE(byte1 & 3, 0);
+    int unknown = byte1 >> 5;
+    if (unknown != 1 && unknown != 2 && unknown != 4) UNEXPECTED_VALUE(byte1 >> 5, "1, 2, or 4");  // 4 seems to mean no humidifer, 2 uses heated tube, 1 uses adaptive
+    int humidlevel = (byte1 >> 2) & 7;
+    if (humidlevel > 5 || humidlevel < 1) UNEXPECTED_VALUE(humidlevel, "1-5");
+
+    // Byte 2: 0xB4 (15ht, tube 5, humid 5), 0xB0 (15ht, tube 5, humid 4), 0x90 (tube 4, humid 4), 0x6C (15ht, tube temp 3, humidifier 3)
+    // 0x80?
+    // 0b10110100 15ht, tube 5, humidifier 5
+    // 0b10110000 15ht, tube 5, humidifier 4
+    // 0b10010000 tube 4, humidifier 4
+    // 0b01101100 15ht, tube 3, humidifier 3
+    //      xxx   = humidifier setting
+    //   xxx      = tube setting
+    //         ??
+    CHECK_VALUE(byte2 & 3, 0);
+    CHECK_VALUE(humidlevel, ((byte2 >> 2) & 7));
+    int tubelevel = (byte1 >> 5) & 7;
+    if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");
+
+    if (add_setting) {
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));  // this is F0V23 version, doesn't match F0V6
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));  // this is F0V23 version, doesn't match F0V6
+        this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, humidlevel));
+        
+        // TODO: add a channel for PRS1 heated tubing
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_TUBE_LEVEL, tubelevel));
+    }
 }
 
 
@@ -3968,9 +4006,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x30:
                 CHECK_VALUE(data[pos], 3);  // flex level?
                 break;
-            case 0x35:
-                // This is not duration. Value seems to line up with second pair of bytes in Mask On slice?
-                //duration += ( data[pos+1] << 8 ) + data[pos+0];
+            case 0x35:  // Humidifier setting
+                this->ParseHumidifierSettingF0V6(data[pos], data[pos+1], true);
                 break;
             case 0x36:
                 CHECK_VALUE(data[pos], 0);

@@ -161,9 +161,12 @@ public:
     //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
     void ParseFlexSetting(quint8 flex, CPAPMode cpapmode);
     
-    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data
-    void ParseHumidifierSetting(int humid, bool supportsHeatedTubing=true);
-    
+    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for fileversion 2 machines: F0V234, F5V012, and maybe others
+    void ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing=true);
+
+    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for family 0 CPAP/APAP family version 6 machines
+    void ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting=false);
+
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents(CPAPMode mode);
 
