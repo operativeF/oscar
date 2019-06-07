@@ -151,10 +151,7 @@ float getOpenGLVersion()
 #endif
 }
 
-// Obtains graphic engine as a string, for use in title bar
-// This is a bad approach as it depends on the exact version
-// id strings to distinguish engines.
-// (But too much work to find an alternate solution today)
+// Obtains graphic engine as a string
 // This works on Windows.  Don't know about other platforms.
 QString getGraphicsEngine()
 {
@@ -162,15 +159,12 @@ QString getGraphicsEngine()
 #ifdef BROKEN_OPENGL_BUILD
     gfxEngine = CSTR_GFX_BrokenGL;
 #else
-    QString glversion = getOpenGLVersionString();
-//    qDebug() << "Graphics Engine" << glversion;
-    if (glversion.contains(CSTR_GFX_ANGLE)) {
-        gfxEngine = CSTR_GFX_ANGLE;
-    } else if (glversion.contains("Mesa")) {
+    if (QCoreApplication::testAttribute(Qt::AA_UseSoftwareOpenGL))
         gfxEngine = CSTR_GFX_BrokenGL;
-    } else {
+    else if (QCoreApplication::testAttribute(Qt::AA_UseOpenGLES))
+        gfxEngine = CSTR_GFX_ANGLE;
+    else
         gfxEngine = CSTR_GFX_OpenGL;
-    }
 #endif
     return gfxEngine;
 }
