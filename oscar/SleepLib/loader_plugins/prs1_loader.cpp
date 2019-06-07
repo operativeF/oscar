@@ -3807,7 +3807,7 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
             case 0:
                 // always first? Maybe equipmenton? Maybe 0 was always equipmenton, even in F0V23?
                 CHECK_VALUE(pos, 1);
-                CHECK_VALUES(data[pos], 1, 7);
+                //CHECK_VALUES(data[pos], 1, 3);  // sometimes 7?
                 break;
             case 1:  // Settings
                 // This is where ParseSummaryF0V6 started (after "3 bytes that don't follow the pattern")
@@ -3818,8 +3818,8 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
             case 3:  // Mask On
                 tt += data[pos] | (data[pos+1] << 8);
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
-                CHECK_VALUE(data[pos+2], 0x50);
-                CHECK_VALUES(data[pos+3], 0x80, 0xb0);  // same value all occurrences in a file?
+                //CHECK_VALUES(data[pos+2], 0x50, 0x54);  // 0x90 (no humidifier data), 0x50 (15ht, tube 4/5, humid 4), 0x54 (15ht, tube 5, humid 5) 0x4c (15ht, tube temp 3, humidifier 3)
+                //CHECK_VALUES(data[pos+3], 0x80, 0xb0);  // 0xB4 (15ht, tube 5, humid 5), 0xB0 (15ht, tube 5, humid 4), 0x90 (tube 4, humid 4), 0x6C (15ht, tube temp 3, humidifier 3)
                 break;
             case 4:  // Mask Off
                 tt += data[pos] | (data[pos+1] << 8);
@@ -3827,9 +3827,9 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
                 break;
             case 7:
                 // Always follows mask off?
-                CHECK_VALUES(data[pos], 0x01, 0x00);
+                //CHECK_VALUES(data[pos], 0x01, 0x00);  // sometimes 32, 4
                 CHECK_VALUE(data[pos+1], 0x00);
-                CHECK_VALUES(data[pos+2], 0x00, 0x01);
+                //CHECK_VALUES(data[pos+2], 0x00, 0x01);  // sometimes 11, 3, 15
                 CHECK_VALUE(data[pos+3], 0x00);
                 //CHECK_VALUE(data[pos+4], 0x05, 0x0A);  // 00
                 CHECK_VALUE(data[pos+5], 0x00);
@@ -3843,12 +3843,14 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
                 //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
                 //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
                 //CHECK_VALUE(data[pos+5], 0x22);  // 0x28
-                CHECK_VALUE(data[pos+6], 0x02);  // 0x02
+                //CHECK_VALUE(data[pos+6], 0x02);  // sometimes 1, 0
                 CHECK_VALUE(data[pos+7], 0x00);  // 0x00
                 CHECK_VALUE(data[pos+8], 0x00);  // 0x00
                 break;
-            case 6:
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, pos, size));
+            case 6:  // Humidier setting change
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                //CHECK_VALUES(data[pos+2], 0x54);  // when changing from tube 4, humid 4 to tube 5, humid 5
+                //CHECK_VALUES(data[pos+3], 0xb4);  // when changing from tube 4, humid 4 to tube 5, humid 5
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
@@ -3958,13 +3960,13 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
                 break;
             case 0x2e:
-                CHECK_VALUE(data[pos], 0x80);
+                CHECK_VALUE(data[pos], 0x80);  // if below is flex level, maybe flex related? 0x80 when c-flex?
                 break;
             case 0x2f:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos], 0);  // if below is flex level, maybe flex related? 0x00 when c-flex?
                 break;
             case 0x30:
-                CHECK_VALUE(data[pos], 3);
+                CHECK_VALUE(data[pos], 3);  // flex level?
                 break;
             case 0x35:
                 // This is not duration. Value seems to line up with second pair of bytes in Mask On slice?
@@ -3980,7 +3982,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUE(data[pos], 0);
                 break;
             case 0x3b:
-                CHECK_VALUE(data[pos], 2);
+                CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1?
                 break;
             case 0x3c:
                 CHECK_VALUE(data[pos], 0);
