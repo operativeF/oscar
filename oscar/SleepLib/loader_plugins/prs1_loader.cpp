@@ -3783,6 +3783,7 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
     bool ok = true;
     int pos = 0;
     int code, size;
+    int tt = 0;
     do {
         code = data[pos++];
         if (!this->hblock.contains(code)) {
@@ -3805,35 +3806,27 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
         switch (code) {
             case 0:
                 // always first? Maybe equipmenton? Maybe 0 was always equipmenton, even in F0V23?
+                CHECK_VALUE(pos, 1);
                 CHECK_VALUES(data[pos], 1, 7);
                 break;
-            case 1:
+            case 1:  // Settings
                 // This is where ParseSummaryF0V6 started (after "3 bytes that don't follow the pattern")
                 // Both compliance and summary files seem to have the same length for this slice, so maybe the
                 // settings are the same?
                 ok = this->ParseSettingsF0V6(data + pos, size);
                 break;
-            case 3:
-                // Might be mask on + timestamp: first occurrence right after settings, has 00 00
-                // 3C 00 (60 seconds?) appears a lot later, always after a 4-then-7 sequence.
-                // First 2 bytes might be a timestamp, 0x3C (60 seconds?) appears a lot if nonzero
-                // Yes:
-                //CHECK_VALUES(data[pos], 0, 0xa4);  // nonzero second occurrence, 0x3C
-                //CHECK_VALUE(data[pos+1], 0, 0x01);  // nonzero second occurrence, 0x00
-                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+            case 3:  // Mask On
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
                 CHECK_VALUE(data[pos+2], 0x50);
                 CHECK_VALUES(data[pos+3], 0x80, 0xb0);  // same value all occurrences in a file?
                 break;
-            case 4:
-                // Might be mask off + timestamp: always follows 3, two bytes vary each time it occurs in the file
-                // Looks like a timestamp, varies each time it occurs in a file.
-                // Yes: when there's just a single 3-4 sequence, this has the total duration (and 3 is 0)
-                //CHECK_VALUES(data[pos], 0x14, 0x4e);  // 3C, 0x78, 0xD0, 0x2C
-                //CHECK_VALUES(data[pos+1], 0x16, 0x05);  // 00, 02, 01
-                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+            case 4:  // Mask Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
                 break;
             case 7:
-                // Always follows 4?
+                // Always follows mask off?
                 CHECK_VALUES(data[pos], 0x01, 0x00);
                 CHECK_VALUE(data[pos+1], 0x00);
                 CHECK_VALUES(data[pos+2], 0x00, 0x01);
@@ -3843,12 +3836,9 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
                 //CHECK_VALUE(data[pos+6], 0x64, 0x69);  // 6E, 6D, 6E, 6E, 80
                 //CHECK_VALUE(data[pos+7], 0x3d, 0x5c);  // 6A, 6A, 6B, 6C, 80
                 break;
-            case 2:
-                // always last? follows a 4-then-7 sequence, reminiscent of equipmentoff
-                // first two bytes are usually 0 but not always
-                //CHECK_VALUE(data[pos], 0x00);
-                //CHECK_VALUE(data[pos+1], 0x00);
-                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+            case 2:  // Equipment Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
                 //CHECK_VALUE(data[pos+2], 0x08);  // 0x01
                 //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
                 //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
@@ -3857,12 +3847,17 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
                 CHECK_VALUE(data[pos+7], 0x00);  // 0x00
                 CHECK_VALUE(data[pos+8], 0x00);  // 0x00
                 break;
+            case 6:
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, pos, size));
+                break;
             default:
-                UNEXPECTED_VALUE(code, "[0,1,3,4,7,2]");
+                UNEXPECTED_VALUE(code, "known slice code");
                 break;
         }
         pos += size;
     } while (ok && pos < chunk_size);
+
+    this->duration = tt;
 
     return ok;
 }
@@ -3890,7 +3885,6 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
     int min_pressure = 0;
     int max_pressure = 0;
     */
-    int duration  = 0;
 
     // Parse the nested data structure which contains settings
     int pos = 0;
@@ -3921,9 +3915,9 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 1: // ???
                 CHECK_VALUE(data[pos], 0);
                 break;
-            case 0x0a:
+            case 0x0a:  // CPAP pressure setting
                 cpapmode = MODE_CPAP;
-                imin_epap = data[pos+0];  // TODO: confirm this is right for compliance
+                imin_epap = data[pos];
                 break;
             /*
             case 13: // 0x0d
@@ -3955,13 +3949,13 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 break;
             */
             case 0x2b:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos], 0);  // maybe ramp related? 0 on brick (linear ramp)
                 break;
-            case 0x2c:
-                CHECK_VALUE(data[pos], 0x14);
+            case 0x2c:  // Ramp Time
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
                 break;
-            case 0x2d:
-                CHECK_VALUE(data[pos], 0x46);
+            case 0x2d:  // Ramp Pressure
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
                 break;
             case 0x2e:
                 CHECK_VALUE(data[pos], 0x80);
@@ -3971,6 +3965,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 break;
             case 0x30:
                 CHECK_VALUE(data[pos], 3);
+                break;
+            case 0x35:
+                // This is not duration. Value seems to line up with second pair of bytes in Mask On slice?
+                //duration += ( data[pos+1] << 8 ) + data[pos+0];
                 break;
             case 0x36:
                 CHECK_VALUE(data[pos], 0);
@@ -3993,10 +3991,6 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x3f:
                 CHECK_VALUE(data[pos], 0);
                 break;
-            case 0x35:
-                // ??? This seems totally wrong. Value seems to line up with second pair of bytes in slice code 3?
-                duration += ( data[pos+1] << 8 ) + data[pos+0];
-                break;
             default:
                 qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << pos;
                 this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data), pos, len));
@@ -4006,8 +4000,6 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
         pos += len;
     } while (ok && pos + 2 <= size);
 
-    // This is all straight from ParseSummaryF0V6; it may not apply to compliance.
-    this->duration = duration;
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
     if (cpapmode == MODE_CPAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
