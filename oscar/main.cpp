@@ -478,8 +478,8 @@ int main(int argc, char *argv[]) {
     qDebug() << "Using " + GetAppData() + " as OSCAR data folder";
 
     addBuildInfo("");
-    addBuildInfo(QObject::tr("Data directory:") + " " + GetAppData());
-
+    QString path = GetAppData();
+    addBuildInfo(QObject::tr("Data directory:") + " <a href=\"file:///" + path + "\">" + path + "</a>");
 
     QDir newDir(GetAppData());
 #if QT_VERSION < QT_VERSION_CHECK(5,9,0)
