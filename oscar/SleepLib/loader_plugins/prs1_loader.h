@@ -197,6 +197,9 @@ protected:
 
     //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
     bool ExtractStoredCrc(int size);
+
+    //! \brief Parse a settings slice from a .000 (and maybe .001) file
+    bool ParseSettingsF0V6(const unsigned char* data, int size);
 };
 
 

@@ -3755,16 +3755,280 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
 }
 
 
+// The below is based on fixing the fileVersion == 3 parsing in ParseSummary() based
+// on our understanding of slices from F0V23. The switch values come from sample files.
 bool PRS1DataChunk::ParseComplianceF0V6(void)
 {
     if (this->family != 0 || this->familyVersion != 6) {
         qWarning() << "ParseComplianceF0V2 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
-    
-    // Not implemented yet!
-    
-    return false;
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 82) {
+        qWarning() << this->sessionid << "compliance data too short:" << this->m_data.size();
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int expected_sizes[] = { 1, 0x34, 9, 4, 2, 2, 4, 8 };
+    static const int ncodes = sizeof(expected_sizes) / sizeof(int);
+    for (int i = 0; i < ncodes; i++) {
+        if (this->hblock.contains(i)) {
+            CHECK_VALUE(this->hblock[i], expected_sizes[i]);
+        } else {
+            UNEXPECTED_VALUE(this->hblock.contains(i), true);
+        }
+    }
+
+    bool ok = true;
+    int pos = 0;
+    int code, size;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (size < expected_sizes[code]) {
+            qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << expected_sizes[code];
+            ok = false;
+            break;
+        }
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0:
+                // always first? Maybe equipmenton? Maybe 0 was always equipmenton, even in F0V23?
+                CHECK_VALUES(data[pos], 1, 7);
+                break;
+            case 1:
+                // This is where ParseSummaryF0V6 started (after "3 bytes that don't follow the pattern")
+                // Both compliance and summary files seem to have the same length for this slice, so maybe the
+                // settings are the same?
+                ok = this->ParseSettingsF0V6(data + pos, size);
+                break;
+            case 3:
+                // Might be mask on + timestamp: first occurrence right after settings, has 00 00
+                // 3C 00 (60 seconds?) appears a lot later, always after a 4-then-7 sequence.
+                // First 2 bytes might be a timestamp, 0x3C (60 seconds?) appears a lot if nonzero
+                // Yes:
+                //CHECK_VALUES(data[pos], 0, 0xa4);  // nonzero second occurrence, 0x3C
+                //CHECK_VALUE(data[pos+1], 0, 0x01);  // nonzero second occurrence, 0x00
+                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+                CHECK_VALUE(data[pos+2], 0x50);
+                CHECK_VALUES(data[pos+3], 0x80, 0xb0);  // same value all occurrences in a file?
+                break;
+            case 4:
+                // Might be mask off + timestamp: always follows 3, two bytes vary each time it occurs in the file
+                // Looks like a timestamp, varies each time it occurs in a file.
+                // Yes: when there's just a single 3-4 sequence, this has the total duration (and 3 is 0)
+                //CHECK_VALUES(data[pos], 0x14, 0x4e);  // 3C, 0x78, 0xD0, 0x2C
+                //CHECK_VALUES(data[pos+1], 0x16, 0x05);  // 00, 02, 01
+                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+                break;
+            case 7:
+                // Always follows 4?
+                CHECK_VALUES(data[pos], 0x01, 0x00);
+                CHECK_VALUE(data[pos+1], 0x00);
+                CHECK_VALUES(data[pos+2], 0x00, 0x01);
+                CHECK_VALUE(data[pos+3], 0x00);
+                //CHECK_VALUE(data[pos+4], 0x05, 0x0A);  // 00
+                CHECK_VALUE(data[pos+5], 0x00);
+                //CHECK_VALUE(data[pos+6], 0x64, 0x69);  // 6E, 6D, 6E, 6E, 80
+                //CHECK_VALUE(data[pos+7], 0x3d, 0x5c);  // 6A, 6A, 6B, 6C, 80
+                break;
+            case 2:
+                // always last? follows a 4-then-7 sequence, reminiscent of equipmentoff
+                // first two bytes are usually 0 but not always
+                //CHECK_VALUE(data[pos], 0x00);
+                //CHECK_VALUE(data[pos+1], 0x00);
+                qDebug() << this->sessionid << code << ((data[pos+1] << 8) | data[pos]);
+                //CHECK_VALUE(data[pos+2], 0x08);  // 0x01
+                //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
+                //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
+                //CHECK_VALUE(data[pos+5], 0x22);  // 0x28
+                CHECK_VALUE(data[pos+6], 0x02);  // 0x02
+                CHECK_VALUE(data[pos+7], 0x00);  // 0x00
+                CHECK_VALUE(data[pos+8], 0x00);  // 0x00
+                break;
+            default:
+                UNEXPECTED_VALUE(code, "[0,1,3,4,7,2]");
+                break;
+        }
+        pos += size;
+    } while (ok && pos < chunk_size);
+
+    return ok;
+}
+
+
+// The below is based on a combination of the mainblock parsing for fileVersion == 3
+// in ParseSummary() and the switch statements of ParseSummaryF0V6.
+//
+// Both compliance and summary files (at least for 200X and 400X machines) seem to have
+// the same length for this slice, so maybe the settings are the same? At least 0x0a
+// looks like a pressure in compliance files.
+bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
+{
+    static const QMap<int,int> expected_lengths = { {0x35,2} };
+    bool ok = true;
+
+    CPAPMode cpapmode = MODE_UNKNOWN;
+
+    int imin_epap = 0;
+    /*
+    //int imax_epap = 0;
+    int imin_ps   = 0;
+    int imax_ps   = 0;
+    //int imax_pressure = 0;
+    int min_pressure = 0;
+    int max_pressure = 0;
+    */
+    int duration  = 0;
+
+    // Parse the nested data structure which contains settings
+    int pos = 0;
+    do {
+        int code = data[pos++];
+        int len = data[pos++];
+
+        int expected_len = 1;
+        if (expected_lengths.contains(code)) {
+            expected_len = expected_lengths[code];
+        }
+        CHECK_VALUE(len, expected_len);
+        if (len < expected_len) {
+            qWarning() << this->sessionid << "setting" << code << "too small" << len << "<" << expected_len;
+            ok = false;
+            break;
+        }
+        if (pos + len > size) {
+            qWarning() << this->sessionid << "setting" << code << "@" << pos << "longer than remaining slice";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0: // mode?
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 1: // ???
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x0a:
+                cpapmode = MODE_CPAP;
+                imin_epap = data[pos+0];  // TODO: confirm this is right for compliance
+                break;
+            /*
+            case 13: // 0x0d
+                cpapmode = MODE_APAP;
+                if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
+                min_pressure = dataPtr[2];
+                max_pressure = dataPtr[3];
+                break;
+            case 14: // 0x0e  // <--- this is a total guess.. might be 3 and have a pressure support value
+                cpapmode = MODE_BILEVEL_FIXED;
+                if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
+                min_pressure = dataPtr[2];
+                max_pressure = dataPtr[3];
+                imin_ps = max_pressure - min_pressure;
+                break;
+            case 15: // 0x0f
+                cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; //might be C_CHECK?
+                if (dataPtr[1] != 4) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
+                min_pressure = dataPtr[2];
+                max_pressure = dataPtr[3];
+                imin_ps = dataPtr[4];
+                imax_ps = dataPtr[5];
+                break;
+            case 0x10: // Auto Trial mode
+                cpapmode = MODE_APAP;
+                if (dataPtr[1] != 3) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
+                min_pressure = dataPtr[3];
+                max_pressure = dataPtr[4];
+                break;
+            */
+            case 0x2b:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x2c:
+                CHECK_VALUE(data[pos], 0x14);
+                break;
+            case 0x2d:
+                CHECK_VALUE(data[pos], 0x46);
+                break;
+            case 0x2e:
+                CHECK_VALUE(data[pos], 0x80);
+                break;
+            case 0x2f:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x30:
+                CHECK_VALUE(data[pos], 3);
+                break;
+            case 0x36:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x38:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x39:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x3b:
+                CHECK_VALUE(data[pos], 2);
+                break;
+            case 0x3c:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x3e:
+                CHECK_VALUE(data[pos], 0x80);
+                break;
+            case 0x3f:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x35:
+                // ??? This seems totally wrong. Value seems to line up with second pair of bytes in slice code 3?
+                duration += ( data[pos+1] << 8 ) + data[pos+0];
+                break;
+            default:
+                qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << pos;
+                this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data), pos, len));
+                break;
+        }
+
+        pos += len;
+    } while (ok && pos + 2 <= size);
+
+    // This is all straight from ParseSummaryF0V6; it may not apply to compliance.
+    this->duration = duration;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
+    if (cpapmode == MODE_CPAP) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
+/*
+    } else if (cpapmode == MODE_APAP) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+    } else if (cpapmode == MODE_BILEVEL_FIXED) {
+        // Guessing here.. haven't seen BIPAP data.
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
+    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
+*/
+    }
+
+    return ok;
 }
 
 
