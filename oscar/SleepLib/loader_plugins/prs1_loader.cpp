@@ -214,13 +214,13 @@ struct PRS1TestedModel
 };
 
 static const PRS1TestedModel s_PRS1TestedModels[] = {
-    { "251P", 0, 2 },
-    { "450P", 0, 3 },
-    { "451P", 0, 3 },
-    { "550P", 0, 2 },
-    { "550P", 0, 3 },
-    { "551P", 0, 2 },
-    { "750P", 0, 2 },
+    { "251P", 0, 2 },  // "REMstar Plus (Philips Respironics)" (brick)
+    { "450P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
+    { "451P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
+    { "550P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
+    { "550P", 0, 3 },  // "REMstar Auto (Philips Respironics)"
+    { "551P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
+    { "750P", 0, 2 },  // "BiPAP Auto (Philips Respironics)"
 
     { "460P",   0, 4 },
     { "461P",   0, 4 },
@@ -230,9 +230,9 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "660P",   0, 4 },
     { "760P",   0, 4 },
     
-    { "200X110", 0, 6 },
+    { "200X110", 0, 6 },  // "DreamStation CPAP" (brick)
     { "400G110", 0, 6 },
-    { "400X110", 0, 6 },
+    { "400X110", 0, 6 },  // "DreamStation CPAP Pro"
     { "400X150", 0, 6 },
     { "500X110", 0, 6 },
     { "500X150", 0, 6 },
@@ -3760,7 +3760,7 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
 bool PRS1DataChunk::ParseComplianceF0V6(void)
 {
     if (this->family != 0 || this->familyVersion != 6) {
-        qWarning() << "ParseComplianceF0V2 called with family" << this->family << "familyVersion" << this->familyVersion;
+        qWarning() << "ParseComplianceF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
     // TODO: hardcoding this is ugly, think of a better approach
@@ -3998,10 +3998,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
                 break;
             case 0x2e:
-                CHECK_VALUE(data[pos], 0x80);  // if below is flex level, maybe flex related? 0x80 when c-flex?
+                CHECK_VALUES(data[pos], 0x80, 0x90);  // if below is flex level, maybe flex related? 0x80 when c-flex? 0x90 when c-flex+?
                 break;
             case 0x2f:
-                CHECK_VALUE(data[pos], 0);  // if below is flex level, maybe flex related? 0x00 when c-flex?
+                CHECK_VALUE(data[pos], 0);  // if below is flex level, maybe flex related? 0x00 when c-flex and c-flex+?
                 break;
             case 0x30:
                 CHECK_VALUE(data[pos], 3);  // flex level?
@@ -4013,7 +4013,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUE(data[pos], 0);
                 break;
             case 0x38:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUES(data[pos], 0, 1);  // maybe mask resistance?
                 break;
             case 0x39:
                 CHECK_VALUE(data[pos], 0);
@@ -4022,10 +4022,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1?
                 break;
             case 0x3c:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe show AHI?
                 break;
             case 0x3e:
-                CHECK_VALUE(data[pos], 0x80);
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-on?
                 break;
             case 0x3f:
                 CHECK_VALUE(data[pos], 0);
@@ -4063,6 +4063,136 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 }
 
 
+bool PRS1DataChunk::ParseSummaryF0V6(void)
+{
+    if (this->family != 0 || this->familyVersion != 6) {
+        qWarning() << "ParseSummaryF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 105) {
+        qWarning() << this->sessionid << "summary data too short:" << this->m_data.size();
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int expected_sizes[] = { 1, 0x34, 9, 4, 2, 4, 1, 4, 0x1f, 2, 4, 0x0b };
+    static const int ncodes = sizeof(expected_sizes) / sizeof(int);
+    for (int i = 0; i < ncodes; i++) {
+        if (this->hblock.contains(i)) {
+            CHECK_VALUE(this->hblock[i], expected_sizes[i]);
+        } else {
+            UNEXPECTED_VALUE(this->hblock.contains(i), true);
+        }
+    }
+
+    bool ok = true;
+    int pos = 0;
+    int code, size;
+    int tt = 0;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (size < expected_sizes[code]) {
+            qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << expected_sizes[code];
+            ok = false;
+            break;
+        }
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0:
+                CHECK_VALUE(pos, 1);  // Always first?
+                CHECK_VALUE(data[pos], 1);
+                break;
+            case 1:  // Settings
+                ok = this->ParseSettingsF0V6(data + pos, size);
+                break;
+            case 3:  // Mask On
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            case 4:  // Mask Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
+                break;
+            case 8:  // vs. 7 in compliance, always follows mask off, also longer
+                CHECK_VALUE(data[pos], 0x02);
+                CHECK_VALUE(data[pos+1], 0x00);
+                CHECK_VALUE(data[pos+2], 0x0d);
+                CHECK_VALUE(data[pos+3], 0x00);
+                CHECK_VALUE(data[pos+4], 0x09);
+                CHECK_VALUE(data[pos+5], 0x00);
+                CHECK_VALUE(data[pos+6], 0x1e);
+                CHECK_VALUE(data[pos+7], 0x00);
+                CHECK_VALUE(data[pos+8], 0x8c);
+                CHECK_VALUE(data[pos+9], 0x00);
+                CHECK_VALUE(data[pos+0xa], 0xbb);
+                CHECK_VALUE(data[pos+0xb], 0x00);
+                CHECK_VALUE(data[pos+0xc], 0x15);
+                CHECK_VALUE(data[pos+0xd], 0x00);
+                CHECK_VALUE(data[pos+0xe], 0x01);
+                CHECK_VALUE(data[pos+0xf], 0x00);
+                CHECK_VALUE(data[pos+0x10], 0x21);
+                CHECK_VALUE(data[pos+0x11], 0x00);
+                CHECK_VALUE(data[pos+0x12], 0x13);
+                CHECK_VALUE(data[pos+0x13], 0x00);
+                CHECK_VALUE(data[pos+0x14], 0x05);
+                CHECK_VALUE(data[pos+0x15], 0x00);
+                CHECK_VALUE(data[pos+0x16], 0x00);
+                CHECK_VALUE(data[pos+0x17], 0x00);
+                CHECK_VALUE(data[pos+0x18], 0x69);
+                CHECK_VALUE(data[pos+0x19], 0x44);
+                CHECK_VALUE(data[pos+0x1a], 0x80);
+                CHECK_VALUE(data[pos+0x1b], 0x00);
+                CHECK_VALUE(data[pos+0x1c], 0x00);
+                CHECK_VALUE(data[pos+0x1d], 0x0c);
+                CHECK_VALUE(data[pos+0x1e], 0x31);
+                break;
+            case 2:  // Equipment Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
+                //CHECK_VALUE(data[pos+2], 0x08);  // 0x01
+                //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
+                //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
+                //CHECK_VALUE(data[pos+5], 0x22);  // 0x28
+                //CHECK_VALUE(data[pos+6], 0x02);  // sometimes 1, 0
+                CHECK_VALUE(data[pos+7], 0x00);  // 0x00
+                CHECK_VALUE(data[pos+8], 0x00);  // 0x00
+                break;
+            case 0x0a:  // new vs. compliance, maybe its version of 6: it looks like a timestamp + humidifier setting
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, pos, size));
+                break;
+            /*
+            case 6:  // Humidier setting change
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            */
+            default:
+                UNEXPECTED_VALUE(code, "known slice code");
+                break;
+        }
+        pos += size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = tt;
+
+    return ok;
+}
+
+
+#if 0
 bool PRS1DataChunk::ParseSummaryF0V6()
 {
     // DreamStation machines...
@@ -4218,6 +4348,7 @@ bool PRS1DataChunk::ParseSummaryF0V6()
 
     return true;
 }
+#endif
 
 
 bool PRS1Import::ImportSummary()
