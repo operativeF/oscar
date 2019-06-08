@@ -3866,15 +3866,25 @@ bool PRS1DataChunk::ParseComplianceF0V6(void)
 void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting)
 {
     // Byte 1: 0x90 (no humidifier data), 0x50 (15ht, tube 4/5, humid 4), 0x54 (15ht, tube 5, humid 5) 0x4c (15ht, tube temp 3, humidifier 3)
+    // 0x0c (15, tube 3, humid 3, fixed)
     // 0b10010000 no humidifier data
     // 0b01010000 tube 4 and 5, humidifier 4
     // 0b01010100 15ht, tube 5, humidifier 5
     // 0b01001100 15ht, tube 3, humidifier 3
     //      xxx   = humidifier setting
-    //   ???   ??
+    //   xxx      = humidifier status
+    //         ??
     CHECK_VALUE(byte1 & 3, 0);
-    int unknown = byte1 >> 5;
-    if (unknown != 1 && unknown != 2 && unknown != 4) UNEXPECTED_VALUE(byte1 >> 5, "1, 2, or 4");  // 4 seems to mean no humidifer, 2 uses heated tube, 1 uses adaptive
+    int humid = byte1 >> 5;
+    switch (humid) {
+    case 0: break;  // fixed
+    case 1: break;  // adaptive
+    case 2: break;  // heated tube
+    case 4: break;  // no humidifier, possibly a bit flag rather than integer value
+    default:
+        UNEXPECTED_VALUE(humid, "known value");
+        break;
+    }
     int humidlevel = (byte1 >> 2) & 7;
     if (humidlevel > 5 || humidlevel < 1) UNEXPECTED_VALUE(humidlevel, "1-5");
 
@@ -3889,7 +3899,7 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
     //         ??
     CHECK_VALUE(byte2 & 3, 0);
     CHECK_VALUE(humidlevel, ((byte2 >> 2) & 7));
-    int tubelevel = (byte1 >> 5) & 7;
+    int tubelevel = (byte2 >> 5) & 7;
     if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");
 
     if (add_setting) {
@@ -4112,7 +4122,7 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
         switch (code) {
             case 0:
                 CHECK_VALUE(pos, 1);  // Always first?
-                CHECK_VALUE(data[pos], 1);
+                CHECK_VALUES(data[pos], 1, 7);
                 break;
             case 1:  // Settings
                 ok = this->ParseSettingsF0V6(data + pos, size);
@@ -4127,37 +4137,37 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
                 break;
             case 8:  // vs. 7 in compliance, always follows mask off, also longer
-                CHECK_VALUE(data[pos], 0x02);
+                //CHECK_VALUES(data[pos], 0x02, 0x01);  // probably 16-bit value
                 CHECK_VALUE(data[pos+1], 0x00);
-                CHECK_VALUE(data[pos+2], 0x0d);
+                //CHECK_VALUES(data[pos+2], 0x0d, 0x0a);  // probably 16-bit value
                 CHECK_VALUE(data[pos+3], 0x00);
-                CHECK_VALUE(data[pos+4], 0x09);
+                //CHECK_VALUES(data[pos+4], 0x09, 0x0b);  // probably 16-bit value
                 CHECK_VALUE(data[pos+5], 0x00);
-                CHECK_VALUE(data[pos+6], 0x1e);
+                //CHECK_VALUES(data[pos+6], 0x1e, 0x35);  // probably 16-bit value
                 CHECK_VALUE(data[pos+7], 0x00);
-                CHECK_VALUE(data[pos+8], 0x8c);
+                //CHECK_VALUES(data[pos+8], 0x8c, 0x4c);  // probably 16-bit value
                 CHECK_VALUE(data[pos+9], 0x00);
-                CHECK_VALUE(data[pos+0xa], 0xbb);
+                //CHECK_VALUES(data[pos+0xa], 0xbb, 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xb], 0x00);
-                CHECK_VALUE(data[pos+0xc], 0x15);
+                //CHECK_VALUES(data[pos+0xc], 0x15, 0x02);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xd], 0x00);
-                CHECK_VALUE(data[pos+0xe], 0x01);
+                //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xf], 0x00);
-                CHECK_VALUE(data[pos+0x10], 0x21);
+                //CHECK_VALUES(data[pos+0x10], 0x21, 5);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0x11], 0x00);
-                CHECK_VALUE(data[pos+0x12], 0x13);
+                //CHECK_VALUES(data[pos+0x12], 0x13, 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0x13], 0x00);
-                CHECK_VALUE(data[pos+0x14], 0x05);
+                //CHECK_VALUES(data[pos+0x14], 0x05, 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0x15], 0x00);
                 CHECK_VALUE(data[pos+0x16], 0x00);
                 CHECK_VALUE(data[pos+0x17], 0x00);
-                CHECK_VALUE(data[pos+0x18], 0x69);
-                CHECK_VALUE(data[pos+0x19], 0x44);
-                CHECK_VALUE(data[pos+0x1a], 0x80);
-                CHECK_VALUE(data[pos+0x1b], 0x00);
+                //CHECK_VALUES(data[pos+0x18], 0x69, 0x23);
+                //CHECK_VALUES(data[pos+0x19], 0x44, 0x18);
+                //CHECK_VALUES(data[pos+0x1a], 0x80, 0x49);
+                //CHECK_VALUES(data[pos+0x1b], 0x00, 6);
                 CHECK_VALUE(data[pos+0x1c], 0x00);
-                CHECK_VALUE(data[pos+0x1d], 0x0c);
-                CHECK_VALUE(data[pos+0x1e], 0x31);
+                //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
+                //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
                 break;
             case 2:  // Equipment Off
                 tt += data[pos] | (data[pos+1] << 8);
