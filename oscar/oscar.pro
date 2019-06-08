@@ -160,56 +160,72 @@ HTML_FILES = $$files($$PWD/../Htmldocs/*.html)
 #copy the Translation and Help files to where the test binary wants them
 message("Setting up Translations & Help Transfers")
 macx {
-    HelpFiles.files = $$files($$PWD/help/*.qch)
-    HelpFiles.path = Contents/Resources/Help
+    !contains(DEFINES, helpless) {
+        HelpFiles.files = $$files($$PWD/help/*.qch)
+        HelpFiles.path = Contents/Resources/Help
+        QMAKE_BUNDLE_DATA += HelpFiles
+    }
     QMAKE_BUNDLE_DATA += TransFiles
-    QMAKE_BUNDLE_DATA += HelpFiles
 } else {
+    !contains(DEFINES, helpless) {
+        HELPDIR = $$OUT_PWD/Help
+        HELP_FILES += $$PWD/help/*.qch
+    }
     DDIR = $$OUT_PWD/Translations
-    HELPDIR = $$OUT_PWD/Help
     HTMLDIR = $$OUT_PWD/Html
 
     TRANS_FILES += $$PWD/translations/*.qm
-    HELP_FILES += $$PWD/help/*.qch
 
     win32 {
         TRANS_FILES_WIN = $${TRANS_FILES}
-        HELP_FILES_WIN = $${HELP_FILES}
-        HTML_FILES_WIN = $${HTML_FILES}
         TRANS_FILES_WIN ~= s,/,\\,g
-        HELP_FILES_WIN ~= s,/,\\,g
-        HTML_FILES_WIN ~= s,/,\\,g
         DDIR ~= s,/,\\,g
-        HELPDIR ~= s,/,\\,g
-        HTMLDIR ~= s,/,\\,g
-
-        !exists($$quote($$HELPDIR)): system(mkdir $$quote($$HELPDIR))
         !exists($$quote($$DDIR)): system(mkdir $$quote($$DDIR))
-        !exists($$quote($$HTMLDIR)): system(mkdir $$quote($$HTMLDIR))
-
         for(FILE,TRANS_FILES_WIN) {
             system(xcopy /y $$quote($$FILE) $$quote($$DDIR))
         }
-        for(FILE,HELP_FILES_WIN) {
-            system(xcopy /y $$quote($$FILE) $$quote($$HELPDIR))
-        }
+
+        HTML_FILES_WIN = $${HTML_FILES}
+        HTML_FILES_WIN ~= s,/,\\,g
+        HTMLDIR ~= s,/,\\,g
+        !exists($$quote($$HTMLDIR)): system(mkdir $$quote($$HTMLDIR))
         for(FILE,HTML_FILES_WIN) {
             system(xcopy /y $$quote($$FILE) $$quote($$HTMLDIR))
         }
-    } else {
-        system(mkdir -p $$quote($$HELPDIR))
-        system(mkdir -p $$quote($$DDIR))
-        system(mkdir -p $$quote($$HTMLDIR))
 
+        !contains(DEFINES, helpless) {
+            HELP_FILES_WIN = $${HELP_FILES}
+            HELP_FILES_WIN ~= s,/,\\,g
+            HELPDIR ~= s,/,\\,g
+            !exists($$quote($$HELPDIR)): system(mkdir $$quote($$HELPDIR))
+            for(FILE,HELP_FILES_WIN) {
+                system(xcopy /y $$quote($$FILE) $$quote($$HELPDIR))
+            }
+        }
+    } else {
+        system(mkdir -p $$quote($$DDIR))
         for(FILE,TRANS_FILES) {
             system(cp $$quote($$FILE) $$quote($$DDIR))
         }
-        for(FILE,HELP_FILES) {
-            system(cp $$quote($$FILE) $$quote($$HELPDIR))
-        }
+
+        system(mkdir -p $$quote($$HTMLDIR))
         for(FILE,HTML_FILES) {
             system(cp $$quote($$FILE) $$quote($$HTMLDIR))
         }
+
+        !contains(DEFINES, helpless) {
+            system(mkdir -p $$quote($$HELPDIR))
+            for(FILE,HELP_FILES) {
+                system(cp $$quote($$FILE) $$quote($$HELPDIR))
+            }
+        }
+    }
+}
+
+lessThan(QT_MAJOR_VERSION,5)|lessThan(QT_MINOR_VERSION,12) {
+    unix {
+        system("/bin/bash $$_PRO_FILE_PWD_/fix_5-12_UI_files.sh");
+        message("Fixing UI files for old QT versions")
     }
 }
 
