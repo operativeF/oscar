@@ -150,10 +150,8 @@ static QString byteList(QByteArray data, int limit=-1)
     return s;
 }
 
-void ChunkToYaml(QFile & file, PRS1DataChunk* chunk, bool ok)
+void ChunkToYaml(QTextStream & out, PRS1DataChunk* chunk, bool ok)
 {
-    QTextStream out(&file);
-
     // chunk header
     out << "chunk:" << endl;
     out << "  at: " << hex << chunk->m_filepos << endl;
@@ -224,7 +222,7 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk, bool ok)
             }
         }
     }
-    if (dump_data) {
+    if (dump_data || !ok) {
         out << "  data: " << byteList(chunk->m_data, 100) << endl;
     }
     
@@ -276,7 +274,7 @@ void parseAndEmitChunkYaml(const QString & path)
             }
 
             QString ext_s = fi.fileName().section(".", -1);
-            ext_s.toInt(&ok);
+            int ext = ext_s.toInt(&ok);
             if (!ok) {
                 // not a numerical extension
                 qWarning() << inpath << "unexpected filename";
@@ -284,7 +282,7 @@ void parseAndEmitChunkYaml(const QString & path)
             }
 
             QString session_s = fi.fileName().section(".", 0, -2);
-            session_s.toInt(&ok, sessionid_base);
+            int sessionid = session_s.toInt(&ok, sessionid_base);
             if (!ok) {
                 // not a numerical session ID
                 qWarning() << inpath << "unexpected filename";
@@ -292,12 +290,19 @@ void parseAndEmitChunkYaml(const QString & path)
             }
             
             // Create the YAML file.
-            QString outpath = prs1OutputPath(path, m->serial(), fi.fileName(), "-chunks.yml");
+            QString suffix = QString(".%1-chunks.yml").arg(ext, 3, 10, QChar('0'));
+            QString outpath = prs1OutputPath(path, m->serial(), sessionid, suffix);
             QFile file(outpath);
             if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
                 qDebug() << outpath;
                 Q_ASSERT(false);
             }
+            QTextStream out(&file);
+
+            // keep only P1234568/Pn/00000000.001
+            QStringList pathlist = QDir::toNativeSeparators(inpath).split(QDir::separator(), QString::SkipEmptyParts);
+            QString relative = pathlist.mid(pathlist.size()-3).join(QDir::separator());
+            out << "file: " << relative << endl;
 
             // Parse the chunks in the file.
             QList<PRS1DataChunk *> chunks = s_loader->ParseFile(inpath);
@@ -314,7 +319,7 @@ void parseAndEmitChunkYaml(const QString & path)
                 }
                 
                 // Emit the YAML.
-                ChunkToYaml(file, chunk, ok);
+                ChunkToYaml(out, chunk, ok);
                 delete chunk;
             }
             
