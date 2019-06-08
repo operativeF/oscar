@@ -3995,7 +3995,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
                 break;
             case 0x2d:  // Ramp Pressure
-                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
                 break;
             case 0x2e:
                 CHECK_VALUES(data[pos], 0x80, 0x90);  // if below is flex level, maybe flex related? 0x80 when c-flex? 0x90 when c-flex+?
@@ -4012,8 +4012,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x36:
                 CHECK_VALUE(data[pos], 0);
                 break;
-            case 0x38:
-                CHECK_VALUES(data[pos], 0, 1);  // maybe mask resistance?
+            case 0x38:  // Mask Resistance
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
                 break;
             case 0x39:
                 CHECK_VALUE(data[pos], 0);
@@ -4170,15 +4170,10 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+7], 0x00);  // 0x00
                 CHECK_VALUE(data[pos+8], 0x00);  // 0x00
                 break;
-            case 0x0a:  // new vs. compliance, maybe its version of 6: it looks like a timestamp + humidifier setting
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, pos, size));
-                break;
-            /*
-            case 6:  // Humidier setting change
+            case 0x0a:  // Humidier setting change
                 tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
                 this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
                 break;
-            */
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
                 break;
