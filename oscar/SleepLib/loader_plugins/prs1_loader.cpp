@@ -231,7 +231,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "760P",   0, 4 },
     
     { "200X110", 0, 6 },  // "DreamStation CPAP" (brick)
-    { "400G110", 0, 6 },
+    { "400G110", 0, 6 },  // "DreamStation Go"
     { "400X110", 0, 6 },  // "DreamStation CPAP Pro"
     { "400X150", 0, 6 },
     { "500X110", 0, 6 },
@@ -1313,7 +1313,7 @@ public:
     {
         m_pos = pos;
         m_data = data.mid(pos, len);
-        Q_ASSERT(m_data.size() >= 3);
+        Q_ASSERT(m_data.size() >= 1);
         m_code = m_data.at(0);
     }
 };
@@ -3885,8 +3885,8 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
         UNEXPECTED_VALUE(humid, "known value");
         break;
     }
+    bool humidifier_present = ((byte1 & 0x80) == 0);
     int humidlevel = (byte1 >> 2) & 7;
-    if (humidlevel > 5 || humidlevel < 1) UNEXPECTED_VALUE(humidlevel, "1-5");
 
     // Byte 2: 0xB4 (15ht, tube 5, humid 5), 0xB0 (15ht, tube 5, humid 4), 0x90 (tube 4, humid 4), 0x6C (15ht, tube temp 3, humidifier 3)
     // 0x80?
@@ -3900,7 +3900,12 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
     CHECK_VALUE(byte2 & 3, 0);
     CHECK_VALUE(humidlevel, ((byte2 >> 2) & 7));
     int tubelevel = (byte2 >> 5) & 7;
-    if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");
+    if (humidifier_present) {
+        if (humidlevel > 5 || humidlevel < 1) UNEXPECTED_VALUE(humidlevel, "1-5");
+        if (humid == 2) {  // heated tube
+            if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");  // TODO: maybe this is only if heated tube?
+        }
+    }
 
     if (add_setting) {
         //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));  // this is F0V23 version, doesn't match F0V6
@@ -3946,7 +3951,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
         if (expected_lengths.contains(code)) {
             expected_len = expected_lengths[code];
         }
-        CHECK_VALUE(len, expected_len);
+        //CHECK_VALUE(len, expected_len);
         if (len < expected_len) {
             qWarning() << this->sessionid << "setting" << code << "too small" << len << "<" << expected_len;
             ok = false;
@@ -3964,6 +3969,9 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 break;
             case 1: // ???
                 CHECK_VALUE(data[pos], 0);
+                if (len == 2) {  // 400G has extra byte
+                    CHECK_VALUE(data[pos+1], 0);
+                }
                 break;
             case 0x0a:  // CPAP pressure setting
                 cpapmode = MODE_CPAP;
@@ -3998,11 +4006,13 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 max_pressure = dataPtr[4];
                 break;
             */
-            case 0x2b:
-                CHECK_VALUE(data[pos], 0);  // maybe ramp related? 0 on brick (linear ramp)
+            case 0x2b:  // Ramp Type
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0 == "Linear", 0x80 = "SmartRamp"
                 break;
             case 0x2c:  // Ramp Time
-                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
+                if (data[pos] != 0) {  // 0 == ramp off, and ramp pressure setting doesn't appear
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
+                }
                 break;
             case 0x2d:  // Ramp Pressure
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
@@ -4013,8 +4023,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x2f:
                 CHECK_VALUE(data[pos], 0);  // if below is flex level, maybe flex related? 0x00 when c-flex and c-flex+?
                 break;
-            case 0x30:
-                CHECK_VALUE(data[pos], 3);  // flex level?
+            case 0x30:  // Flex level
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, data[pos]));
                 break;
             case 0x35:  // Humidifier setting
                 this->ParseHumidifierSettingF0V6(data[pos], data[pos+1], true);
@@ -4023,13 +4033,18 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUE(data[pos], 0);
                 break;
             case 0x38:  // Mask Resistance
-                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
+                if (data[pos] != 0) {  // 0 == mask resistance off
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
+                }
                 break;
             case 0x39:
                 CHECK_VALUE(data[pos], 0);
                 break;
             case 0x3b:
                 CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1?
+                break;
+            case 0x40:  // new to 400G, alternate tubing type? appears after 0x39 and before 0x3c, 12mm = 3?
+                CHECK_VALUE(data[pos], 3);
                 break;
             case 0x3c:
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe show AHI?
@@ -4040,9 +4055,12 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x3f:
                 CHECK_VALUE(data[pos], 0);
                 break;
+            case 0x45:  // new to 400G, only in last session?
+                CHECK_VALUE(data[pos], 1);
+                break;
             default:
-                qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << pos;
-                this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data), pos, len));
+                qDebug() << "Unknown setting:" << hex << code << "in" << this->sessionid << "at" << pos;
+                this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data, size), pos, len));
                 break;
         }
 
@@ -4080,21 +4098,25 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
         return false;
     }
     // TODO: hardcoding this is ugly, think of a better approach
-    if (this->m_data.size() < 105) {
+    if (this->m_data.size() < 68) {
         qWarning() << this->sessionid << "summary data too short:" << this->m_data.size();
         return false;
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
-    static const int expected_sizes[] = { 1, 0x34, 9, 4, 2, 4, 1, 4, 0x1f, 2, 4, 0x0b };
-    static const int ncodes = sizeof(expected_sizes) / sizeof(int);
+    static const int minimum_sizes[] = { 1, 0x2e, 9, 4, 2, 4, 1, 4, 0x1f, 2, 4, 0x0b, 1, 2, 6 };
+    static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
+    /*
     for (int i = 0; i < ncodes; i++) {
         if (this->hblock.contains(i)) {
-            CHECK_VALUE(this->hblock[i], expected_sizes[i]);
+            // These values can vary, interestingly.
+            //CHECK_VALUE(this->hblock[i], minimum_sizes[i]);
         } else {
-            UNEXPECTED_VALUE(this->hblock.contains(i), true);
+            // Even the length of hblock can vary.
+            //UNEXPECTED_VALUE(this->hblock.contains(i), true);
         }
     }
+    */
 
     bool ok = true;
     int pos = 0;
@@ -4108,11 +4130,14 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
             break;
         }
         size = this->hblock[code];
-        if (size < expected_sizes[code]) {
-            qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << expected_sizes[code];
-            ok = false;
-            break;
-        }
+        if (code < ncodes) {
+            // make sure the handlers below don't go past the end of the buffer
+            if (size < minimum_sizes[code]) {
+                qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << minimum_sizes[code];
+                ok = false;
+                break;
+            }
+        } // else if it's past ncodes, we'll log its information below (rather than handle it)
         if (pos + size > chunk_size) {
             qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
             ok = false;
@@ -4120,9 +4145,14 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
         }
 
         switch (code) {
-            case 0:
+            case 0:  // Equipment On
                 CHECK_VALUE(pos, 1);  // Always first?
-                CHECK_VALUES(data[pos], 1, 7);
+                //CHECK_VALUES(data[pos], 1, 7);  // or 3?
+                if (size == 4) {  // 400G has 3 more bytes?
+                    //CHECK_VALUE(data[pos+1], 0);  // or 2, 14, 4, etc.
+                    //CHECK_VALUES(data[pos+2], 8, 65);  // or 1
+                    //CHECK_VALUES(data[pos+3], 0, 20);  // or 21, 22, etc.
+                }
                 break;
             case 1:  // Settings
                 ok = this->ParseSettingsF0V6(data + pos, size);
@@ -4168,6 +4198,8 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+0x1c], 0x00);
                 //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
                 //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
+                // TODO: 400G has 8 more bytes?
+                // TODO: 400G sometimes has another 4 on top of that?
                 break;
             case 2:  // Equipment Off
                 tt += data[pos] | (data[pos+1] << 8);
@@ -4179,10 +4211,24 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 //CHECK_VALUE(data[pos+6], 0x02);  // sometimes 1, 0
                 CHECK_VALUE(data[pos+7], 0x00);  // 0x00
                 CHECK_VALUE(data[pos+8], 0x00);  // 0x00
+                if (size == 0x0c) {  // 400G has 3 more bytes, seem to match Equipment On bytes
+                    //CHECK_VALUE(data[pos+1], 0);
+                    //CHECK_VALUES(data[pos+2], 8, 65);
+                    //CHECK_VALUE(data[pos+3], 0);
+                }
                 break;
             case 0x0a:  // Humidier setting change
                 tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
                 this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            case 0x0e:
+                // only seen once on 400G?
+                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos+1], 0);
+                CHECK_VALUE(data[pos+2], 7);
+                CHECK_VALUE(data[pos+3], 7);
+                CHECK_VALUE(data[pos+4], 7);
+                CHECK_VALUE(data[pos+5], 0);
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
@@ -4555,7 +4601,8 @@ bool PRS1DataChunk::ParseSummary()
 
             if (val != 1) {
                 if (this->hbdata.contains(val)) {
-                    qWarning() << this->sessionid << "duplicate hbdata val" << val;
+                    // We know this is entirely wrong. It will be removed after F3V6 is updated.
+                    //qWarning() << this->sessionid << "duplicate hbdata val" << val;
                 }
                 // store the data block for later reference
                 this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
