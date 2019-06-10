@@ -234,7 +234,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "400G110", 0, 6 },  // "DreamStation Go"
     { "400X110", 0, 6 },  // "DreamStation CPAP Pro"
     { "400X150", 0, 6 },
-    { "500X110", 0, 6 },
+    { "500X110", 0, 6 },  // "DreamStation Auto CPAP"
     { "500X150", 0, 6 },
     { "502G150", 0, 6 },
     { "600X110", 0, 6 },
@@ -3937,9 +3937,9 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
     int imin_ps   = 0;
     int imax_ps   = 0;
     //int imax_pressure = 0;
+    */
     int min_pressure = 0;
     int max_pressure = 0;
-    */
 
     // Parse the nested data structure which contains settings
     int pos = 0;
@@ -3965,7 +3965,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 
         switch (code) {
             case 0: // mode?
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(pos, 2);  // always first?
+                CHECK_VALUES(data[pos], 0, 2);  // 0 when CPAP, 2 when AutoCPAP
                 break;
             case 1: // ???
                 CHECK_VALUE(data[pos], 0);
@@ -3977,13 +3978,12 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 cpapmode = MODE_CPAP;
                 imin_epap = data[pos];
                 break;
-            /*
-            case 13: // 0x0d
+            case 0x0d:  // AutoCPAP pressure setting
                 cpapmode = MODE_APAP;
-                if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-                min_pressure = dataPtr[2];
-                max_pressure = dataPtr[3];
+                min_pressure = data[pos];
+                max_pressure = data[pos+1];
                 break;
+            /*
             case 14: // 0x0e  // <--- this is a total guess.. might be 3 and have a pressure support value
                 cpapmode = MODE_BILEVEL_FIXED;
                 if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
@@ -4018,10 +4018,12 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
                 break;
             case 0x2e:
-                CHECK_VALUES(data[pos], 0x80, 0x90);  // if below is flex level, maybe flex related? 0x80 when c-flex? 0x90 when c-flex+?
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 0x80, 0x90);  // maybe flex related? 0x80 when c-flex? 0x90 when c-flex+?, 0x00 when no flex
+                }
                 break;
             case 0x2f:
-                CHECK_VALUE(data[pos], 0);  // if below is flex level, maybe flex related? 0x00 when c-flex and c-flex+?
+                CHECK_VALUE(data[pos], 0);  // maybe flex related? 0x00 when c-flex and c-flex+?
                 break;
             case 0x30:  // Flex level
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, data[pos]));
@@ -4041,7 +4043,9 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUE(data[pos], 0);
                 break;
             case 0x3b:
-                CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1?
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1, 22 = 0?
+                }
                 break;
             case 0x40:  // new to 400G, alternate tubing type? appears after 0x39 and before 0x3c, 12mm = 3?
                 CHECK_VALUE(data[pos], 3);
@@ -4070,10 +4074,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
     if (cpapmode == MODE_CPAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
-/*
     } else if (cpapmode == MODE_APAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+/*
     } else if (cpapmode == MODE_BILEVEL_FIXED) {
         // Guessing here.. haven't seen BIPAP data.
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
@@ -4104,7 +4108,7 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
-    static const int minimum_sizes[] = { 1, 0x2e, 9, 4, 2, 4, 1, 4, 0x1f, 2, 4, 0x0b, 1, 2, 6 };
+    static const int minimum_sizes[] = { 1, 0x2e, 9, 4, 2, 4, 1, 4, 0x1b, 2, 4, 0x0b, 1, 2, 6 };
     static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
     /*
     for (int i = 0; i < ncodes; i++) {
@@ -4166,10 +4170,11 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 tt += data[pos] | (data[pos+1] << 8);
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
                 break;
-            case 8:  // vs. 7 in compliance, always follows mask off, also longer
+            case 8:  // vs. 7 in compliance, always follows mask off (except when there's a 5, see below), also longer
+                // Maybe statistics of some kind, given the pressure stats that seem to appear before it on AutoCPAP machines?
                 //CHECK_VALUES(data[pos], 0x02, 0x01);  // probably 16-bit value
                 CHECK_VALUE(data[pos+1], 0x00);
-                //CHECK_VALUES(data[pos+2], 0x0d, 0x0a);  // probably 16-bit value
+                //CHECK_VALUES(data[pos+2], 0x0d, 0x0a);  // probably 16-bit value, maybe OA count?
                 CHECK_VALUE(data[pos+3], 0x00);
                 //CHECK_VALUES(data[pos+4], 0x09, 0x0b);  // probably 16-bit value
                 CHECK_VALUE(data[pos+5], 0x00);
@@ -4183,23 +4188,25 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+0xd], 0x00);
                 //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xf], 0x00);
-                //CHECK_VALUES(data[pos+0x10], 0x21, 5);  // probably 16-bit value
+                //CHECK_VALUES(data[pos+0x10], 0x21, 5);  // probably 16-bit value, maybe H count?
                 CHECK_VALUE(data[pos+0x11], 0x00);
                 //CHECK_VALUES(data[pos+0x12], 0x13, 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0x13], 0x00);
-                //CHECK_VALUES(data[pos+0x14], 0x05, 0);  // probably 16-bit value
+                //CHECK_VALUES(data[pos+0x14], 0x05, 0);  // probably 16-bit value, maybe RE count?
                 CHECK_VALUE(data[pos+0x15], 0x00);
-                CHECK_VALUE(data[pos+0x16], 0x00);
+                //CHECK_VALUE(data[pos+0x16], 0x00, 4);  // probably a 16-bit value, PB or FL count?
                 CHECK_VALUE(data[pos+0x17], 0x00);
                 //CHECK_VALUES(data[pos+0x18], 0x69, 0x23);
                 //CHECK_VALUES(data[pos+0x19], 0x44, 0x18);
                 //CHECK_VALUES(data[pos+0x1a], 0x80, 0x49);
-                //CHECK_VALUES(data[pos+0x1b], 0x00, 6);
-                CHECK_VALUE(data[pos+0x1c], 0x00);
-                //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
-                //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
-                // TODO: 400G has 8 more bytes?
-                // TODO: 400G sometimes has another 4 on top of that?
+                if (size >= 0x1f) {  // 500X is only 0x1b long!
+                    //CHECK_VALUES(data[pos+0x1b], 0x00, 6);
+                    CHECK_VALUE(data[pos+0x1c], 0x00);
+                    //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
+                    //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
+                    // TODO: 400G has 8 more bytes?
+                    // TODO: 400G sometimes has another 4 on top of that?
+                }
                 break;
             case 2:  // Equipment Off
                 tt += data[pos] | (data[pos+1] << 8);
@@ -4229,6 +4236,13 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+3], 7);
                 CHECK_VALUE(data[pos+4], 7);
                 CHECK_VALUE(data[pos+5], 0);
+                break;
+            case 0x05:
+                // AutoCPAP-related? First appeared on 500X, follows 4, before 8, look like pressure values
+                //CHECK_VALUE(data[pos], 0x4b);    // maybe min pressure? (matches ramp pressure, see ramp on pressure graph)
+                //CHECK_VALUE(data[pos+1], 0x5a);  // maybe max pressure? (close to max on pressure graph, time at pressure graph)
+                //CHECK_VALUE(data[pos+2], 0x5a);  // seems to match Average 90% Pressure
+                //CHECK_VALUE(data[pos+3], 0x58);  // seems to match Average CPAP
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
@@ -4776,6 +4790,7 @@ bool PRS1Import::ParseEvents()
 
         } else {
             if (!session->settings.contains(CPAP_Pressure) && !session->settings.contains(CPAP_PressureMin)) {
+                qWarning() << session->s_session << "broken summary, missing pressure";
                 session->settings[CPAP_BrokenSummary] = true;
 
                 //session->set_last(session->first());

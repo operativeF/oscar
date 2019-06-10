@@ -40,7 +40,7 @@ static QString eventListTypeName(EventListType t)
         ENUMSTRING(EVL_Event);
         default:
             s = hex(t);
-            qDebug() << qPrintable(s);
+            qDebug() << "EVL" << qPrintable(s);
     }
     return s;
 }
@@ -88,8 +88,9 @@ static QString settingChannel(ChannelID i)
         CHANNELNAME(PRS1_AutoOff);
         CHANNELNAME(PRS1_MaskAlert);
         CHANNELNAME(PRS1_ShowAHI);
+        CHANNELNAME(CPAP_BrokenSummary);
         s = hex(i);
-        qDebug() << qPrintable(s);
+        qDebug() << "setting channel" << qPrintable(s);
     } while(false);
     return s;
 }
@@ -138,9 +139,8 @@ static QString eventChannel(ChannelID i)
         CHANNELNAME(PRS1_0C);
         CHANNELNAME(PRS1_0E);
         CHANNELNAME(PRS1_15);
-        CHANNELNAME(CPAP_BrokenSummary);
         s = hex(i);
-        qDebug() << qPrintable(s);
+        qDebug() << "event channel" << qPrintable(s);
     } while(false);
     return s;
 }
