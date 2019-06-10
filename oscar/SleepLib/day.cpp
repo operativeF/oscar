@@ -654,6 +654,9 @@ qint64 Day::total_time()
                     range.insert(first, 0);
                     range.insert(last, 1);
                     d_totaltime += sess->length();
+                    if (sess->length() == 0) {
+                        qWarning() << sess->s_session << "0 length session";
+                    }
                 }
             } else {
                 for (auto & slice : sess->m_slices) {
@@ -661,6 +664,9 @@ qint64 Day::total_time()
                         range.insert(slice.start, 0);
                         range.insert(slice.end, 1);
                         d_totaltime += slice.end - slice.start;
+                        if (slice.end - slice.start == 0) {
+                            qWarning() << sess->s_session << "0 length slice";
+                        }
                     }
                 }
             }
@@ -724,6 +730,9 @@ qint64 Day::total_time(MachineType type)
                     range.insert(first, 0);
                     range.insert(last, 1);
                     d_totaltime += sess->length();
+                    if (sess->length() == 0) {
+                        qWarning() << sess->s_session << "0 length session";
+                    }
                 }
             } else {
                 for (const auto & slice : sess->m_slices) {
@@ -731,6 +740,9 @@ qint64 Day::total_time(MachineType type)
                         range.insert(slice.start, 0);
                         range.insert(slice.end, 1);
                         d_totaltime += slice.end - slice.start;
+                        if (slice.end - slice.start == 0) {
+                            qWarning() << sess->s_session << "0 length slice";
+                        }
                     }
                 }
             }

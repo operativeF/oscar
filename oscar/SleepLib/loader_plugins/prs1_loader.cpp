@@ -236,7 +236,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "400X150", 0, 6 },
     { "500X110", 0, 6 },  // "DreamStation Auto CPAP"
     { "500X150", 0, 6 },
-    { "502G150", 0, 6 },
+    { "502G150", 0, 6 },  // "DreamStation Go Auto"
     { "600X110", 0, 6 },
     { "700X110", 0, 6 },
     
@@ -3926,7 +3926,7 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
 // looks like a pressure in compliance files.
 bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 {
-    static const QMap<int,int> expected_lengths = { {0x35,2} };
+    static const QMap<int,int> expected_lengths = { {0x0d,2}, {0x35,2} };
     bool ok = true;
 
     CPAPMode cpapmode = MODE_UNKNOWN;
@@ -4057,7 +4057,13 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-on?
                 break;
             case 0x3f:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos], 0);  // 0x80 in one 0-length session on 502G?
+                break;
+            case 0x43:  // new to 502G, sessions 3-8, Auto-Trial is off, Opti-Start is missing
+                CHECK_VALUE(data[pos], 0x3C);
+                break;
+            case 0x44:  // new to 502G, sessions 3-8, Auto-Trial is off, Opti-Start is missing
+                CHECK_VALUE(data[pos], 0xFF);
                 break;
             case 0x45:  // new to 400G, only in last session?
                 CHECK_VALUE(data[pos], 1);
@@ -4108,7 +4114,7 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
-    static const int minimum_sizes[] = { 1, 0x2e, 9, 4, 2, 4, 1, 4, 0x1b, 2, 4, 0x0b, 1, 2, 6 };
+    static const int minimum_sizes[] = { 1, 0x2b, 9, 4, 2, 4, 1, 4, 0x1b, 2, 4, 0x0b, 1, 2, 6 };
     static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
     /*
     for (int i = 0; i < ncodes; i++) {
