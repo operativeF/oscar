@@ -238,7 +238,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "500X150", 0, 6 },
     { "502G150", 0, 6 },  // "DreamStation Go Auto"
     { "600X110", 0, 6 },  // "DreamStation BiPAP Pro"
-    { "700X110", 0, 6 },
+    { "700X110", 0, 6 },  // "DreamStation Auto BiPAP"
     
     { "950P", 5, 0 },
     { "960P", 5, 1 },
@@ -3926,7 +3926,7 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
 // looks like a pressure in compliance files.
 bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 {
-    static const QMap<int,int> expected_lengths = { {0x0d,2}, {0x0e,2}, {0x35,2} };
+    static const QMap<int,int> expected_lengths = { {0x0d,2}, {0x0e,2}, {0x0f,4}, {0x35,2} };
     bool ok = true;
 
     CPAPMode cpapmode = MODE_UNKNOWN;
@@ -3936,8 +3936,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
     //int imax_epap = 0;
     */
     int imin_ps   = 0;
-    /*
     int imax_ps   = 0;
+    /*
     //int imax_pressure = 0;
     */
     int min_pressure = 0;
@@ -3966,10 +3966,16 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
         }
 
         switch (code) {
-            case 0: // mode?
+            case 0: // Device Mode
                 CHECK_VALUE(pos, 2);  // always first?
-                if (data[pos] != 0) {
-                    CHECK_VALUES(data[pos], 1, 2);  // 0 when CPAP, 2 when AutoCPAP, 1 when Bi-Level
+                switch (data[pos]) {
+                case 0: cpapmode = MODE_CPAP; break;
+                case 2: cpapmode = MODE_APAP; break;
+                case 1: cpapmode = MODE_BILEVEL_FIXED; break;
+                case 3: cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; break;
+                default:
+                    UNEXPECTED_VALUE(data[pos], "known device mode");
+                    break;
                 }
                 break;
             case 1: // ???
@@ -3979,29 +3985,28 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 }
                 break;
             case 0x0a:  // CPAP pressure setting
-                cpapmode = MODE_CPAP;
+                CHECK_VALUE(cpapmode, MODE_CPAP);
                 imin_epap = data[pos];
                 break;
             case 0x0d:  // AutoCPAP pressure setting
-                cpapmode = MODE_APAP;
+                CHECK_VALUE(cpapmode, MODE_APAP);
                 min_pressure = data[pos];
                 max_pressure = data[pos+1];
                 break;
             case 0x0e:  // Bi-Level pressure setting
-                cpapmode = MODE_BILEVEL_FIXED;
+                CHECK_VALUE(cpapmode, MODE_BILEVEL_FIXED);
                 min_pressure = data[pos];
                 max_pressure = data[pos+1];
                 imin_ps = max_pressure - min_pressure;
                 break;
-            /*
-            case 15: // 0x0f
-                cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; //might be C_CHECK?
-                if (dataPtr[1] != 4) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-                min_pressure = dataPtr[2];
-                max_pressure = dataPtr[3];
-                imin_ps = dataPtr[4];
-                imax_ps = dataPtr[5];
+            case 0x0f:  // Auto Bi-Level pressure setting
+                CHECK_VALUE(cpapmode, MODE_BILEVEL_AUTO_VARIABLE_PS);
+                min_pressure = data[pos];
+                max_pressure = data[pos+1];
+                imin_ps = data[pos+2];
+                imax_ps = data[pos+3];
                 break;
+            /*
             case 0x10: // Auto Trial mode
                 cpapmode = MODE_APAP;
                 if (dataPtr[1] != 3) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
@@ -4060,7 +4065,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-on?
                 break;
             case 0x3f:
-                CHECK_VALUE(data[pos], 0);  // 0x80 in one 0-length session on 502G?
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-off?
                 break;
             case 0x43:  // new to 502G, sessions 3-8, Auto-Trial is off, Opti-Start is missing
                 CHECK_VALUE(data[pos], 0x3C);
@@ -4090,13 +4095,11 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
-/*
     } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
-*/
     }
 
     return ok;
@@ -4251,6 +4254,13 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 //CHECK_VALUE(data[pos+1], 0x5a);  // maybe max pressure? (close to max on pressure graph, time at pressure graph)
                 //CHECK_VALUE(data[pos+2], 0x5a);  // seems to match Average 90% Pressure
                 //CHECK_VALUE(data[pos+3], 0x58);  // seems to match Average CPAP
+                break;
+            case 0x07:
+                // AutoBiLevel-related? First appeared on 700X, follows 4, before 8, looks like pressure values
+                //CHECK_VALUE(data[pos], 0x50);    // maybe min IPAP or max titrated EPAP? (matches time at pressure graph, auto bi-level summary)
+                //CHECK_VALUE(data[pos+1], 0x64);  // maybe max IPAP or max titrated IPAP? (matches time at pressure graph, auto bi-level summary)
+                //CHECK_VALUE(data[pos+2], 0x4b);  // seems to match 90% EPAP
+                //CHECK_VALUE(data[pos+3], 0x64);  // seems to match 90% IPAP
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
