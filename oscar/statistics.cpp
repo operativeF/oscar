@@ -1011,13 +1011,14 @@ QString Statistics::GenerateHTML()
     // Compute number of monthly periods for a monthly rather than standard time distribution
     int number_periods = 0;
     if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
-        QDate beginDate = qMax(firstcpap, lastcpap.addYears(-1));
-        int beginMonth = beginDate.month();
+        int firstMonth = firstcpap.month();
         int lastMonth = lastcpap.month();
-        if (lastMonth < beginMonth) lastMonth += 12; // handle time extending to next year
-        number_periods = lastMonth - beginMonth + 1;
+        if (lastMonth <= firstMonth && firstcpap.year() != lastcpap.year())
+            lastMonth += 12; // handle time extending to next year
+        number_periods = lastMonth - firstMonth + 1;
+
         if (number_periods < 1) {
-            qDebug() << "*** Begin" << beginDate << "beginMonth" << beginMonth << "lastMonth" << lastMonth << "periods" << number_periods;
+            qDebug() << "*** Begin" << firstcpap << "beginMonth" << firstMonth << "lastMonth" << lastMonth << "periods" << number_periods;
             number_periods = 1;
         }
         // But not more than one year
