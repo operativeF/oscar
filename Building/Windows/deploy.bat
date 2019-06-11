@@ -44,7 +44,7 @@ echo shadowBuildDir is %shadowBuildDir%
 
 copy %toolDir%buildInstall.iss %shadowBuildDir% || exit 45
 copy %toolDir%setup.ico %shadowBuildDir% || exit 46
-copy %toolDir%use*.reg %shadowBuildDir% || exit 47
+:::copy %toolDir%use*.reg %shadowBuildDir% || exit 47
 
 :::
 ::: If gawk.exe is in the PATH, use it.  If not, add Git mingw tools (awk) to path. They cannot
@@ -70,7 +70,7 @@ if exist %shadowBuildDir%\Release\*.* rmdir /s /q %shadowBuildDir%\Release
 mkdir %shadowBuildDir%\Release
 cd %shadowBuildDir%\Release
 copy %shadowBuildDir%\oscar.exe .  || exit 71
-copy %shadowBuildDir%\use*.reg .  || exit 72
+:::copy %shadowBuildDir%\use*.reg .  || exit 72
 
 ::: Now in Release subdirectory
 ::: If QT created a help directory, copy it.  But it might not have if "helpless" option was set

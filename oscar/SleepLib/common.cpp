@@ -122,7 +122,7 @@ QString getOpenGLVersionString()
         QOpenGLFunctions f;
         f.initializeOpenGLFunctions();
         glversion = QString(QLatin1String(reinterpret_cast<const char*>(f.glGetString(GL_VERSION))));
-        qDebug() << "OpenGL Version:" << glversion;
+//        qDebug() << "Graphics Engine:" << glversion;
 #endif
    }
    return glversion;
@@ -151,10 +151,7 @@ float getOpenGLVersion()
 #endif
 }
 
-// Obtains graphic engine as a string, for use in title bar
-// This is a bad approach as it depends on the exact version
-// id strings to distinguish engines.
-// (But too much work to find an alternate solution today)
+// Obtains graphic engine as a string
 // This works on Windows.  Don't know about other platforms.
 QString getGraphicsEngine()
 {
@@ -162,33 +159,55 @@ QString getGraphicsEngine()
 #ifdef BROKEN_OPENGL_BUILD
     gfxEngine = CSTR_GFX_BrokenGL;
 #else
-    QString glversion = getOpenGLVersionString();
-    qDebug() << "Gfx Engine" << glversion;
-    if (glversion.contains(CSTR_GFX_ANGLE)) {
-        gfxEngine = CSTR_GFX_ANGLE;
-    } else if (glversion.contains("Mesa")) {
+    if (QCoreApplication::testAttribute(Qt::AA_UseSoftwareOpenGL))
         gfxEngine = CSTR_GFX_BrokenGL;
-    } else {
+    else if (QCoreApplication::testAttribute(Qt::AA_UseOpenGLES))
+        gfxEngine = CSTR_GFX_ANGLE;
+    else
         gfxEngine = CSTR_GFX_OpenGL;
-    }
 #endif
     return gfxEngine;
 }
 QString getBranchVersion()
 {
     QString version = STR_TR_AppVersion;
-    version += " [";
     if (GIT_BRANCH != "master") {
-        version += GIT_BRANCH+"-";
+        version += " [Branch: " + GIT_BRANCH + "]";
     }
-    version += GIT_REVISION;
-#ifndef UNITTEST_MODE
-    // There is no graphics engine on the console.
-    version += QString(" ") + getGraphicsEngine();
-#endif
-    version += "]";
 
+#ifdef BROKEN_OPENGL_BUILD
+    version += " ["+CSTR_GFX_BrokenGL+"]";
+#endif
     return version;
+}
+
+QStringList buildInfo;
+
+QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
+    buildInfo << (STR_AppName + " " + VersionString + " " + relinfo);
+    buildInfo << (QObject::tr("Built with Qt") + " " + QT_VERSION_STR + " on " + __DATE__ + " " + __TIME__);
+    QString branch = "";
+    if (GIT_BRANCH != "master") {
+        branch = QObject::tr("Branch:") + " " + GIT_BRANCH + ", ";
+    }
+    buildInfo << branch + (QObject::tr("Revision")) + " " + GIT_REVISION;
+    buildInfo << QString("");
+    buildInfo << (QObject::tr("Operating system:") + " " + QSysInfo::prettyProductName());
+    buildInfo << (QObject::tr("Graphics Engine:") + " " + getOpenGLVersionString());
+    buildInfo << (QObject::tr("Graphics Engine type:") + " " + getGraphicsEngine());
+    if (forcedEngine != "")
+        buildInfo << forcedEngine;
+
+    return buildInfo;
+}
+
+QStringList addBuildInfo (QString value) {
+    buildInfo << (value);
+    return buildInfo;
+}
+
+QStringList getBuildInfo() {
+    return buildInfo;
 }
 
 QString appResourcePath()

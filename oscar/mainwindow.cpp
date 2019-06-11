@@ -2549,6 +2549,15 @@ void MainWindow::on_actionReport_a_Bug_triggered()
     QMessageBox::information(nullptr, STR_MessageBox_Error, tr("Reporting issues is not yet implemented"));
 }
 
+void MainWindow::on_actionSystem_Information_triggered()
+{
+    QString text = ""; // tr("OSCAR version:") + "<br/>";
+    QStringList info = getBuildInfo();
+    for (int i = 0; i < info.size(); ++i)
+        text += info.at(i) + "<br/>";
+    QMessageBox::information(nullptr, tr("OSCAR Information"), text);
+}
+
 void MainWindow::on_profilesButton_clicked()
 {
     ui->tabWidget->setCurrentWidget(profileSelector);

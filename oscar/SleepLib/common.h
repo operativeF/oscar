@@ -45,6 +45,9 @@ float getOpenGLVersion();
 const QString & gitRevision();
 const QString & gitBranch();
 
+QStringList makeBuildInfo(QString relinfo, QString forcedEngine);
+QStringList getBuildInfo();
+QStringList addBuildInfo (QString value);
 
 QByteArray gCompress(const QByteArray& data);
 QByteArray gUncompress(const QByteArray &data);
