@@ -17,6 +17,13 @@
 
 extern MainWindow *mainwin;
 
+// HTML components that make up Statistics page and printed report
+QString htmlPageHeader = "";        // Page header
+QString htmlUsage = "";             // CPAP and Oximetry
+QString htmlMachineSettings = "";   // Machine (formerly Rx) changes
+QString htmlMachines = "";          // Machines used in this profile
+QString htmlReportFooter = "";      // Page footer
+
 QString resizeHTMLPixmap(QPixmap &pixmap, int width, int height) {
     QByteArray byteArray;
     QBuffer buffer(&byteArray); // use buffer to store pixmap into byteArray
@@ -976,13 +983,14 @@ QString Statistics::GenerateHTML()
     }
 
     // Create HTML header and <body> statement
-    QString html = htmlHeader(havedata);
+    htmlPageHeader = htmlHeader(havedata);
+    QString html = "";
 
     // If we don't have any data, return HTML that says that and we are done
     if (!havedata) {
         html += htmlNoData();
         html += htmlFooter(havedata);
-        return html;
+        return htmlPageHeader + html;
     }
 
     // Find first and last days with valid CPAP data
@@ -1175,18 +1183,19 @@ QString Statistics::GenerateHTML()
     html += "</table>";
     html += "</div>";
 
+    htmlUsage = html;
 
-    html += GenerateRXChanges();
-    html += GenerateMachineList();
+    htmlMachineSettings = GenerateRXChanges();
+    htmlMachines = GenerateMachineList();
 
     UpdateRecordsBox();
 
 
 
-    html += "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
+    QString htmlScript = "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
     //updateFavourites();
-    html += htmlFooter();
-    return html;
+//    html += htmlFooter();
+    return htmlPageHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
 }
 
 void Statistics::UpdateRecordsBox()
