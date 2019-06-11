@@ -3117,8 +3117,8 @@ void ResmedLoader::initChannels()
         QObject::tr("Climate Control"),
         "", LOOKUP, Qt::black));
 
-    chan->addOption(0, QObject::tr("Manual"));
-    chan->addOption(1, QObject::tr("Auto"));
+    chan->addOption(0, QObject::tr("Auto"));
+    chan->addOption(1, QObject::tr("Manual"));
 
     channel.add(GRP_CPAP, chan = new Channel(RMS9_Mask= 0xe20C, SETTING, MT_CPAP, SESSION,
         "RMS9_Mask", QObject::tr("Mask"),
