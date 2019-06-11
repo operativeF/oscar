@@ -10,6 +10,7 @@
 #define SUMMARY_H
 
 #include <QObject>
+#include <QMainWindow>
 #include <QHash>
 #include <QList>
 #include "SleepLib/schema.h"
@@ -170,6 +171,8 @@ class Statistics : public QObject
     QString GenerateRXChanges();
 
     void UpdateRecordsBox();
+
+    static void printReport(QWidget *parent = nullptr);
 
 
   protected:
