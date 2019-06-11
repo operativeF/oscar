@@ -3977,6 +3977,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                     UNEXPECTED_VALUE(data[pos], "known device mode");
                     break;
                 }
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 break;
             case 1: // ???
                 CHECK_VALUE(data[pos], 0);
@@ -3987,17 +3988,23 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x0a:  // CPAP pressure setting
                 CHECK_VALUE(cpapmode, MODE_CPAP);
                 imin_epap = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
                 break;
             case 0x0d:  // AutoCPAP pressure setting
                 CHECK_VALUE(cpapmode, MODE_APAP);
                 min_pressure = data[pos];
                 max_pressure = data[pos+1];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
                 break;
             case 0x0e:  // Bi-Level pressure setting
                 CHECK_VALUE(cpapmode, MODE_BILEVEL_FIXED);
                 min_pressure = data[pos];
                 max_pressure = data[pos+1];
                 imin_ps = max_pressure - min_pressure;
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
                 break;
             case 0x0f:  // Auto Bi-Level pressure setting
                 CHECK_VALUE(cpapmode, MODE_BILEVEL_AUTO_VARIABLE_PS);
@@ -4005,6 +4012,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 max_pressure = data[pos+1];
                 imin_ps = data[pos+2];
                 imax_ps = data[pos+3];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
                 break;
             /*
             case 0x10: // Auto Trial mode
@@ -4084,23 +4095,6 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 
         pos += len;
     } while (ok && pos + 2 <= size);
-
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-    if (cpapmode == MODE_CPAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
-    } else if (cpapmode == MODE_APAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
-    } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
-    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
-    }
 
     return ok;
 }
@@ -4273,165 +4267,6 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
 
     return ok;
 }
-
-
-#if 0
-bool PRS1DataChunk::ParseSummaryF0V6()
-{
-    // DreamStation machines...
-
-    // APAP models..
-
-    const unsigned char * data = (unsigned char *)this->m_data.constData();
-
-    CPAPMode cpapmode = MODE_UNKNOWN;
-
-    int imin_epap = 0;
-    //int imax_epap = 0;
-    int imin_ps   = 0;
-    int imax_ps   = 0;
-    //int imax_pressure = 0;
-    int min_pressure = 0;
-    int max_pressure = 0;
-    int duration  = 0;
-
-    // in 'data', we start with 3 bytes that don't follow the pattern
-    // pattern is varNumber, dataSize, dataValue(dataSize)
-    // examples, 0x0d 0x02 0x28 0xC8  , or 0x0a 0x01 0x64,
-    // first, verify that this dataSize is where we expect
-    //     each var pair in headerblock should be (indexByte, valueByte)
-
-    if ((int)this->m_headerblock[(1 * 2)] != 0x01) {
-        return false;  //nope, not here
-        qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad datablock length";
-    }
-    int dataBlockSize = this->m_headerblock[(1 * 2) + 1];
-    //int zero = 0;
-    const unsigned char *dataPtr;
-
-    //      start at 3rd byte ; did we go past the end? ; increment for dataSize + varNumberByte + dataSizeByte
-    for ( dataPtr = data + 3; dataPtr < (data + 3 + dataBlockSize); dataPtr+= dataPtr[1] + 2) {
-        switch( *dataPtr) {
-        case 00: // mode?
-            break;
-        case 01: // ???
-            break;
-        case 10: // 0x0a
-            cpapmode = MODE_CPAP;
-            if (dataPtr[1] != 1) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad CPAP value";
-            imin_epap = dataPtr[2];
-            break;
-        case 13: // 0x0d
-            cpapmode = MODE_APAP;
-            if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            break;
-        case 14: // 0x0e  // <--- this is a total guess.. might be 3 and have a pressure support value
-            cpapmode = MODE_BILEVEL_FIXED;
-            if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            imin_ps = max_pressure - min_pressure;
-            break;
-        case 15: // 0x0f
-            cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; //might be C_CHECK?
-            if (dataPtr[1] != 4) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            imin_ps = dataPtr[4];
-            imax_ps = dataPtr[5];
-            break;
-        case 0x10: // Auto Trial mode
-            cpapmode = MODE_APAP;
-            if (dataPtr[1] != 3) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[3];
-            max_pressure = dataPtr[4];
-            break;
-
-        case 0x35:
-            duration += ( dataPtr[3] << 8 ) + dataPtr[2];
-            break;
-//        case 3:
-//            break;
-        default:
-            // have not found this before
-            ;
-         //   qDebug() << "PRS1Loader::ParseSummaryF0V6=" << "Unknown datablock value:" << (zero + *dataPtr) ;
-        }
-    }
-    // now we encounter yet a different format of data
-  /*  const unsigned char *data2Ptr = data + 3 + dataBlockSize;
-    // pattern is byte/data, where length of data depends on value of 'byte'
-    bool data2Done = false;
-    while (!data2Done) {
-        switch(*data2Ptr){
-        case 0:
-            //this appears to be the last one.  '0' plus 5 bytes **eats crc** without checking
-            data2Ptr += 4;
-            data2Ptr += 2; //this is the **CRC**??
-            data2Done = true; //hope this is always there, since we don't have blocksize from header
-            break;
-        case 1:
-            //don't know yet.  data size is the '1' plus 16 bytes
-            data2Ptr += 5;
-            break;
-        case 2:
-            //don't know yet.  data size is the '2' plus 16 bytes
-            data2Ptr += 3;
-            break;
-        case 3:
-            //don't know yet.  data size is the '3' plus 4 bytes
-            // have seen multiple of these....may have to add them?
-            data2Ptr += 5;
-            break;
-        case 4:
-            // have seen multiple of these....may have to add them?
-            duration = ( data2Ptr[3] << 8 ) + data2Ptr[2];
-            data2Ptr += 3;
-            break;
-        case 5:
-            //don't know yet.  data size is the '5' plus 4 bytes
-            data2Ptr += 5;
-            break;
-        case 6:
-            //don't know yet.  data size is the '5' plus 1 byte
-            data2Ptr += 2;
-            break;
-        case 8:
-            //don't know yet.  data size is the '8' plus 27 bytes (might be a '0' in here...not enough different types found yet)
-            data2Ptr += 28;
-            break;
-        default:
-            qDebug() << "PRS1Loader::ParseSummaryF0V6=" << "Unknown datablock2 value:" << (zero + *data2Ptr) ;
-            break;
-        }
-    }*/
-// need to populate summary->
-
-    this->duration = duration;
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-    if (cpapmode == MODE_CPAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
-
-    } else if (cpapmode == MODE_APAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
-    } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        // Guessing here.. haven't seen BIPAP data.
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
-    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
-    }
-
-    return true;
-}
-#endif
 
 
 bool PRS1Import::ImportSummary()
@@ -4808,7 +4643,7 @@ bool PRS1Import::ParseEvents()
 
         } else {
             if (!session->settings.contains(CPAP_Pressure) && !session->settings.contains(CPAP_PressureMin)) {
-                qWarning() << session->s_session << "broken summary, missing pressure";
+                qWarning() << session->session() << "broken summary, missing pressure";
                 session->settings[CPAP_BrokenSummary] = true;
 
                 //session->set_last(session->first());
@@ -5049,7 +4884,7 @@ bool PRS1Import::ParseWaveforms()
     }
     
     if (discontinuities > 1) {
-        qWarning() << session->s_session << "multiple discontinuities!" << discontinuities;
+        qWarning() << session->session() << "multiple discontinuities!" << discontinuities;
     }
 
     return true;
