@@ -160,6 +160,9 @@ class MainWindow : public QMainWindow
 
     //! \brief Internal function to set Records Box html from statistics module
     void setRecBoxHTML(QString html);
+    //! \brief Internal function to set Statistics page html from statistics module
+    void setStatsHTML(QString html);
+
     int importCPAP(ImportPath import, const QString &message);
 
     void startImportDialog() { on_action_Import_Data_triggered(); }

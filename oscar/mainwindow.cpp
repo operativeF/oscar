@@ -1076,6 +1076,13 @@ void MainWindow::setRecBoxHTML(QString html)
 {
     ui->recordsBox->setHtml(html);
 }
+
+void MainWindow::setStatsHTML(QString html)
+{
+    ui->statisticsView->setHtml(html);
+}
+
+
 /***
 QString MainWindow::getWelcomeHTML()
 {
@@ -2308,14 +2315,13 @@ void MainWindow::GenerateStatistics()
     ui->statEndDate->setMaximumDate(last);
 
     Statistics stats;
-    QString html = stats.GenerateHTML();
+    QString htmlStats = stats.GenerateHTML();
+    QString htmlRecords = stats.UpdateRecordsBox();
 
     updateFavourites();
 
-    //QWebFrame *frame=ui->statisticsView->page()->currentFrame();
-    //frame->addToJavaScriptWindowObject("mainwin",this);
-    //ui->statisticsView->setHtml(html);
-    ui->statisticsView->setHtml(html);
+    setStatsHTML(htmlStats);
+    setRecBoxHTML(htmlRecords);
 
 }
 

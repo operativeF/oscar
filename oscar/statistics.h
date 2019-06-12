@@ -169,8 +169,9 @@ class Statistics : public QObject
     QString GenerateHTML();
     QString GenerateMachineList();
     QString GenerateRXChanges();
+    QString GenerateCPAPUsage();
 
-    void UpdateRecordsBox();
+    QString UpdateRecordsBox();
 
     static void printReport(QWidget *parent = nullptr);
 
