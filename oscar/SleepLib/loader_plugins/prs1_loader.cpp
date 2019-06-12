@@ -3901,7 +3901,7 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
     CHECK_VALUE(humidlevel, ((byte2 >> 2) & 7));
     int tubelevel = (byte2 >> 5) & 7;
     if (humidifier_present) {
-        if (humidlevel > 5 || humidlevel < 1) UNEXPECTED_VALUE(humidlevel, "1-5");
+        if (humidlevel > 5 || humidlevel < 0) UNEXPECTED_VALUE(humidlevel, "0-5");  // 0=off is valid when a humidifier is attached
         if (humid == 2) {  // heated tube
             if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");  // TODO: maybe this is only if heated tube?
         }
@@ -3926,20 +3926,14 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
 // looks like a pressure in compliance files.
 bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 {
-    static const QMap<int,int> expected_lengths = { {0x0d,2}, {0x0e,2}, {0x0f,4}, {0x35,2} };
+    static const QMap<int,int> expected_lengths = { {0x0c,3}, {0x0d,2}, {0x0e,2}, {0x0f,4}, {0x10,3}, {0x35,2} };
     bool ok = true;
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
-    int imin_epap = 0;
-    /*
-    //int imax_epap = 0;
-    */
+    int pressure = 0;
     int imin_ps   = 0;
     int imax_ps   = 0;
-    /*
-    //int imax_pressure = 0;
-    */
     int min_pressure = 0;
     int max_pressure = 0;
 
@@ -3973,6 +3967,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 case 2: cpapmode = MODE_APAP; break;
                 case 1: cpapmode = MODE_BILEVEL_FIXED; break;
                 case 3: cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; break;
+                case 4: cpapmode = MODE_CPAP; break;  // "CPAP-Check" in report, but seems like CPAP
                 default:
                     UNEXPECTED_VALUE(data[pos], "known device mode");
                     break;
@@ -3980,15 +3975,25 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 break;
             case 1: // ???
-                CHECK_VALUE(data[pos], 0);
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 1 when EZ-Start is enabled? 2 when Auto-Trial?
+                }
                 if (len == 2) {  // 400G has extra byte
                     CHECK_VALUE(data[pos+1], 0);
                 }
                 break;
             case 0x0a:  // CPAP pressure setting
                 CHECK_VALUE(cpapmode, MODE_CPAP);
-                imin_epap = data[pos];
-                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
+                pressure = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, pressure));
+                break;
+            case 0x0c:  // CPAP-Check pressure setting
+                CHECK_VALUE(cpapmode, MODE_CPAP);
+                min_pressure = data[pos];  // Min Setting on pressure graph
+                max_pressure = data[pos+1];  // Max Setting on pressure graph
+                pressure = data[pos+2];  // CPAP on pressure graph and CPAP-Check Pressure on settings detail
+                CHECK_VALUE(pressure, 0x5a);
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, pressure));
                 break;
             case 0x0d:  // AutoCPAP pressure setting
                 CHECK_VALUE(cpapmode, MODE_APAP);
@@ -4017,14 +4022,18 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
                 break;
-            /*
-            case 0x10: // Auto Trial mode
-                cpapmode = MODE_APAP;
-                if (dataPtr[1] != 3) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-                min_pressure = dataPtr[3];
-                max_pressure = dataPtr[4];
+            case 0x10: // Auto-Trial mode
+                CHECK_VALUE(cpapmode, MODE_CPAP);  // the mode setting is CPAP, even though it's operating in APAP mode
+                cpapmode = MODE_APAP;  // but categorize it now as APAP, since that's what it's really doing
+                CHECK_VALUE(data[pos], 30);  // Auto-Trial Duration
+                min_pressure = data[pos+1];
+                max_pressure = data[pos+2];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
                 break;
-            */
+            case 0x2a:  // EZ-Start
+                CHECK_VALUE(data[pos], 0x80);  // EZ-Start enabled
+                break;
             case 0x2b:  // Ramp Type
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0 == "Linear", 0x80 = "SmartRamp"
                 break;
@@ -4059,7 +4068,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 }
                 break;
             case 0x39:
-                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-trial?
                 break;
             case 0x3b:
                 if (data[pos] != 0) {
@@ -4106,26 +4115,18 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
         qWarning() << "ParseSummaryF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
-    // TODO: hardcoding this is ugly, think of a better approach
-    if (this->m_data.size() < 68) {
-        qWarning() << this->sessionid << "summary data too short:" << this->m_data.size();
-        return false;
-    }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
     static const int minimum_sizes[] = { 1, 0x2b, 9, 4, 2, 4, 1, 4, 0x1b, 2, 4, 0x0b, 1, 2, 6 };
     static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
-    /*
-    for (int i = 0; i < ncodes; i++) {
-        if (this->hblock.contains(i)) {
-            // These values can vary, interestingly.
-            //CHECK_VALUE(this->hblock[i], minimum_sizes[i]);
-        } else {
-            // Even the length of hblock can vary.
-            //UNEXPECTED_VALUE(this->hblock.contains(i), true);
-        }
+    // NOTE: The sizes contained in hblock can vary, even within a single machine, as can the length of hblock itself!
+
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (chunk_size < minimum_sizes[0] + minimum_sizes[1] + minimum_sizes[2]) {
+        qWarning() << this->sessionid << "summary data too short:" << chunk_size;
+        return false;
     }
-    */
+    if (chunk_size < 60) UNEXPECTED_VALUE(chunk_size, ">= 60");
 
     bool ok = true;
     int pos = 0;
@@ -4191,8 +4192,8 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+0xb], 0x00);
                 //CHECK_VALUES(data[pos+0xc], 0x15, 0x02);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xd], 0x00);
-                //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // probably 16-bit value
-                CHECK_VALUE(data[pos+0xf], 0x00);
+                //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // 16-bit VS count
+                //CHECK_VALUE(data[pos+0xf], 0x00);
                 //CHECK_VALUES(data[pos+0x10], 0x21, 5);  // probably 16-bit value, maybe H count?
                 CHECK_VALUE(data[pos+0x11], 0x00);
                 //CHECK_VALUES(data[pos+0x12], 0x13, 0);  // probably 16-bit value
@@ -4255,6 +4256,24 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 //CHECK_VALUE(data[pos+1], 0x64);  // maybe max IPAP or max titrated IPAP? (matches time at pressure graph, auto bi-level summary)
                 //CHECK_VALUE(data[pos+2], 0x4b);  // seems to match 90% EPAP
                 //CHECK_VALUE(data[pos+3], 0x64);  // seems to match 90% IPAP
+                break;
+            case 0x0b:
+                // CPAP-Check related? follows 3, so first two bytes may be time delta
+                CHECK_VALUE(data[pos], 3);
+                CHECK_VALUE(data[pos+1], 0);
+                CHECK_VALUE(data[pos+2], 0);
+                CHECK_VALUE(data[pos+3], 0);
+                CHECK_VALUE(data[pos+4], 0);
+                CHECK_VALUE(data[pos+5], 0);
+                CHECK_VALUE(data[pos+6], 0);
+                CHECK_VALUE(data[pos+7], 0);
+                CHECK_VALUE(data[pos+8], 0);
+                CHECK_VALUE(data[pos+9], 0);
+                CHECK_VALUE(data[pos+0xa], 0);
+                break;
+            case 0x06:
+                // CPAP-Check related? follows 4, before 8, looks like a pressure value
+                CHECK_VALUES(data[pos], 90, 60);  // maybe CPAP-Check pressure, also matches EZ-Start Pressure
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
