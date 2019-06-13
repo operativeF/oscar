@@ -12,10 +12,22 @@
 #include <QBuffer>
 #include <cmath>
 
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
+#include <QMainWindow>
+
 #include "mainwindow.h"
 #include "statistics.h"
 
 extern MainWindow *mainwin;
+
+// HTML components that make up Statistics page and printed report
+QString htmlReportHeader = "";      // Page header
+QString htmlUsage = "";             // CPAP and Oximetry
+QString htmlMachineSettings = "";   // Machine (formerly Rx) changes
+QString htmlMachines = "";          // Machines used in this profile
+QString htmlReportFooter = "";      // Page footer
 
 QString resizeHTMLPixmap(QPixmap &pixmap, int width, int height) {
     QByteArray byteArray;
@@ -955,8 +967,8 @@ QString Statistics::getRDIorAHIText() {
     return STR_TR_AHI;
 }
 
-// Create the HTML that will be the Statistics page.
-QString Statistics::GenerateHTML()
+// Create the HTML for CPAP and Oximetry usage
+QString Statistics::GenerateCPAPUsage()
 {
     QList<Machine *> cpap_machines = p_profile->GetMachines(MT_CPAP);
     QList<Machine *> oximeters = p_profile->GetMachines(MT_OXIMETER);
@@ -975,14 +987,11 @@ QString Statistics::GenerateHTML()
         }
     }
 
-    // Create HTML header and <body> statement
-    QString html = htmlHeader(havedata);
+    QString html = "";
 
     // If we don't have any data, return HTML that says that and we are done
     if (!havedata) {
-        html += htmlNoData();
-        html += htmlFooter(havedata);
-        return html;
+        return "";
     }
 
     // Find first and last days with valid CPAP data
@@ -1069,19 +1078,6 @@ QString Statistics::GenerateHTML()
                     l = s.addDays(-1);
                 } while ((l > first) && (j < number_periods));
 
-//                for (; j < number_periods; ++j) {
-//                    s=QDate(l.year(), l.month(), 1);
-//                    if (s < first) {
-//                        done = true;
-//                        s = first;
-//                    }
-//                    if (p_profile->countDays(row.type, s, l) > 0) {
-//                        periods.push_back(Period(s, l, s.toString("MMMM")));
-//                    } else {
-//                    }
-//                    l = s.addDays(-1);
-//                    if (done || (l < first)) break;
-//                }
                 for (; j < number_periods; ++j) {
                     periods.push_back(Period(last,last, ""));
                 }
@@ -1175,21 +1171,91 @@ QString Statistics::GenerateHTML()
     html += "</table>";
     html += "</div>";
 
-
-    html += GenerateRXChanges();
-    html += GenerateMachineList();
-
-    UpdateRecordsBox();
-
-
-
-    html += "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
-    //updateFavourites();
-    html += htmlFooter();
     return html;
 }
 
-void Statistics::UpdateRecordsBox()
+// Create the HTML that will be the Statistics page.
+QString Statistics::GenerateHTML()
+{
+    htmlReportHeader = htmlHeader(true);
+    htmlReportFooter = htmlFooter(true);
+
+    htmlUsage = GenerateCPAPUsage();
+
+    if (htmlUsage == "") {
+        return htmlReportHeader + htmlNoData() + htmlReportFooter;
+    }
+
+    htmlMachineSettings = GenerateRXChanges();
+    htmlMachines = GenerateMachineList();
+
+    UpdateRecordsBox();
+
+    QString htmlScript = "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
+
+    return htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
+}
+
+void Statistics::printReport(QWidget * parent) {
+
+    QPrinter printer(QPrinter::HighResolution);
+#ifdef Q_OS_LINUX
+    printer.setPrinterName("Print to File (PDF)");
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    QString name;
+    QString datestr;
+
+    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
+        name = "Statistics";
+        datestr = QDate::currentDate().toString(Qt::ISODate);
+    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
+        name = "Help";
+        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
+    } else { name = "Unknown"; }
+
+    QString filename = p_pref->Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
+
+    printer.setOutputFileName(filename);
+#endif
+    printer.setPrintRange(QPrinter::AllPages);
+//        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
+//            printer.setOrientation(QPrinter::Landscape);
+//        } else {
+        printer.setOrientation(QPrinter::Portrait);
+    //}
+    printer.setFullPage(false); // This has nothing to do with scaling
+    printer.setNumCopies(1);
+    printer.setResolution(1200);
+    //printer.setPaperSize(QPrinter::A4);
+    //printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter);
+    QPrintDialog pdlg(&printer, parent);
+
+    if (pdlg.exec() == QPrintDialog::Accepted) {
+
+            QTextBrowser b;
+            QPainter painter;
+            painter.begin(&printer);
+
+            QRect rect = printer.pageRect();
+            b.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
+            b.resize(rect.width()/4, rect.height()/4);
+            b.setFrameShape(QFrame::NoFrame);
+
+            double xscale = printer.pageRect().width()/double(b.width());
+            double yscale = printer.pageRect().height()/double(b.height());
+            double scale = qMin(xscale, yscale);
+            painter.translate(printer.paperRect().x() + printer.pageRect().width()/2, printer.paperRect().y() + printer.pageRect().height()/2);
+            painter.scale(scale, scale);
+            painter.translate(-b.width()/2, -b.height()/2);
+
+            b.render(&painter, QPoint(0,0));
+            painter.end();
+
+    }
+}
+
+QString Statistics::UpdateRecordsBox()
 {
     QString html = "<html><head><style type='text/css'>"
                      "p,a,td,body { font-family: '" + QApplication::font().family() + "'; }"
@@ -1474,7 +1540,8 @@ void Statistics::UpdateRecordsBox()
 
 
     html += "</body></html>";
-    mainwin->setRecBoxHTML(html);
+
+    return html;
 }
 
 
