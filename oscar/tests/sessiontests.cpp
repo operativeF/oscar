@@ -11,12 +11,24 @@
 
 static QString ts(qint64 msecs)
 {
+    // TODO: make this UTC so that tests don't vary by where they're run
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
 }
 
 static QString hex(int i)
 {
     return QString("0x") + QString::number(i, 16).toUpper();
+}
+
+static QString dur(qint64 msecs)
+{
+    qint64 s = msecs / 1000L;
+    int h = s / 3600; s -= h * 3600;
+    int m = s / 60; s -= m * 60;
+    return QString("%1:%2:%3")
+        .arg(h, 2, 10, QChar('0'))
+        .arg(m, 2, 10, QChar('0'))
+        .arg(s, 2, 10, QChar('0'));
 }
 
 #define ENUMSTRING(ENUM) case ENUM: s = #ENUM; break
@@ -28,7 +40,7 @@ static QString eventListTypeName(EventListType t)
         ENUMSTRING(EVL_Event);
         default:
             s = hex(t);
-            qDebug() << qPrintable(s);
+            qDebug() << "EVL" << qPrintable(s);
     }
     return s;
 }
@@ -76,8 +88,9 @@ static QString settingChannel(ChannelID i)
         CHANNELNAME(PRS1_AutoOff);
         CHANNELNAME(PRS1_MaskAlert);
         CHANNELNAME(PRS1_ShowAHI);
+        CHANNELNAME(CPAP_BrokenSummary);
         s = hex(i);
-        qDebug() << qPrintable(s);
+        qDebug() << "setting channel" << qPrintable(s);
     } while(false);
     return s;
 }
@@ -126,9 +139,8 @@ static QString eventChannel(ChannelID i)
         CHANNELNAME(PRS1_0C);
         CHANNELNAME(PRS1_0E);
         CHANNELNAME(PRS1_15);
-        CHANNELNAME(CPAP_BrokenSummary);
         s = hex(i);
-        qDebug() << qPrintable(s);
+        qDebug() << "event channel" << qPrintable(s);
     } while(false);
     return s;
 }
@@ -157,7 +169,7 @@ static QString intList(quint32* data, int count, int limit=-1)
     return s;
 }
 
-void SessionToYaml(QString filepath, Session* session)
+void SessionToYaml(QString filepath, Session* session, bool ok)
 {
     QFile file(filepath);
     if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
@@ -170,6 +182,27 @@ void SessionToYaml(QString filepath, Session* session)
     out << "  id: " << session->session() << endl;
     out << "  start: " << ts(session->first()) << endl;
     out << "  end: " << ts(session->last()) << endl;
+    out << "  valid: " << ok << endl;
+    
+    if (!session->m_slices.isEmpty()) {
+        out << "  slices:" << endl;
+        for (auto & slice : session->m_slices) {
+            QString s;
+            switch (slice.status) {
+            case MaskOn: s = "mask on"; break;
+            case MaskOff: s = "mask off"; break;
+            case EquipmentOff: s = "equipment off"; break;
+            default: s = "unknown"; break;
+            }
+            out << "  - status: " << s << endl;
+            out << "    start: " << ts(slice.start) << endl;
+            out << "    end: " << ts(slice.end) << endl;
+        }
+    }
+    Day day;
+    day.addSession(session);
+    out << "  total_time: " << dur(day.total_time()) << endl;
+    day.removeSession(session);
 
     out << "  settings:" << endl;
 
@@ -198,13 +231,23 @@ void SessionToYaml(QString filepath, Session* session)
         // Note that this is a vector of lists
         QVector<EventList *> &ev = session->eventlist[*key];
         int ev_size = ev.size();
+        if (ev_size == 0) {
+            continue;
+        }
+        EventList &e = *ev[0];
         
-        // TODO: See what this actually signifies. Some waveform data seems to have to multiple event lists,
-        // which might reflect blocks within the original files, or something else.
-        if (ev_size > 2) qDebug() << session->session() << eventChannel(*key) << "ev_size =" << ev_size;
+        // Multiple eventlists in a channel are used to account for discontiguous data.
+        // See CoalesceWaveformChunks for the coalescing of multiple contiguous waveform
+        // chunks and ParseWaveforms/ParseOximetry for the creation of eventlists per
+        // coalesced chunk.
+        //
+        // TODO: Is this only for waveform data?
+        if (ev_size > 1 && e.type() != EVL_Waveform) {
+            qWarning() << session->session() << eventChannel(*key) << "ev_size =" << ev_size;
+        }
 
         for (int j = 0; j < ev_size; j++) {
-            EventList &e = *ev[j];
+            e = *ev[j];
             out << "    - count: "  << (qint32)e.count() << endl;
             if (e.count() == 0)
                 continue;

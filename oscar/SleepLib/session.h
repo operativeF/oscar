@@ -1,7 +1,8 @@
-﻿/* SleepLib Session Header
+/* SleepLib Session Header
  *
  * This stuff contains the session calculation smarts
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -24,7 +25,7 @@
 class Machine;
 
 enum SliceStatus {
-    UnknownStatus=0, EquipmentOff, EquipmentLeaking, EquipmentOn
+    UnknownStatus=0, EquipmentOff, MaskOn, MaskOff  // is there an EquipmentOn?
 };
 
 class SessionSlice
@@ -137,7 +138,7 @@ class Session
 //            t = 0;
 //            for (int i=0; i<size; ++i) {
 //                const SessionSlice & slice = m_slices.at(i);
-//                if (slice.status == EquipmentOn) {
+//                if (slice.status == MaskOn) {
 //                    t += slice.end - slice.start;
 //                }
 //            }
@@ -169,7 +170,7 @@ class Session
     //! \brief Set last time to higher of 'd' and existing s_last.  Throw warning if 'd' less than s_first.
     void set_last(qint64 d) {
         if (d <= s_first) {
-            qWarning() << "Session::set_last() d<=s_first";
+            qWarning() << s_session << "Session::set_last() d<=s_first";
             return;
         }
 
@@ -187,7 +188,7 @@ class Session
             t = 0;
             for (int i=0; i<size; ++i) {
                 const SessionSlice & slice = m_slices.at(i);
-                if (slice.status == EquipmentOn) {
+                if (slice.status == MaskOn) {
                     t += slice.end - slice.start;
                 }
             }

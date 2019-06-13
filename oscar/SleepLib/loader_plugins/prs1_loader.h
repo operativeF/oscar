@@ -25,7 +25,7 @@
 //********************************************************************************************
 // Please INCREMENT the following value when making changes to this loaders implementation
 // BEFORE making a release
-const int prs1_data_version = 15;
+const int prs1_data_version = 16;
 //
 //********************************************************************************************
 #if 0  // Apparently unused
@@ -128,8 +128,14 @@ public:
     //! \brief Read the chunk's data from a PRS1 file and calculate its CRC, must be called after ReadHeader
     bool ReadData(class QFile & f);
     
-    //! \brief Parse a single data chunk from a .000 file containing compliance data for a brick
+    //! \brief Figures out which Compliance Parser to call, based on machine family/version and calls it.
     bool ParseCompliance(void);
+    
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a P25x brick
+    bool ParseComplianceF0V23(void);
+    
+    //! \brief Parse a single data chunk from a .000 file containing compliance data for a DreamStation 200X brick
+    bool ParseComplianceF0V6(void);
     
     //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
     bool ParseSummary();
@@ -155,9 +161,12 @@ public:
     //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
     void ParseFlexSetting(quint8 flex, CPAPMode cpapmode);
     
-    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data
-    void ParseHumidifierSetting(int humid, bool supportsHeatedTubing=true);
-    
+    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for fileversion 2 machines: F0V234, F5V012, and maybe others
+    void ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing=true);
+
+    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for family 0 CPAP/APAP family version 6 machines
+    void ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting=false);
+
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents(CPAPMode mode);
 
@@ -191,6 +200,9 @@ protected:
 
     //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
     bool ExtractStoredCrc(int size);
+
+    //! \brief Parse a settings slice from a .000 (and maybe .001) file
+    bool ParseSettingsF0V6(const unsigned char* data, int size);
 };
 
 
@@ -233,10 +245,10 @@ public:
     QString wavefile;
     QString oxifile;
 
-    //! \brief As it says on the tin.. Parses .001 files for bricks.
-    bool ParseCompliance();
+    //! \brief Imports .000 files for bricks.
+    bool ImportCompliance();
 
-    //! \brief Imports the .002 summary file.
+    //! \brief Imports the .001 summary file.
     bool ImportSummary();
 
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
@@ -249,7 +261,7 @@ public:
     bool ParseWaveforms();
 
     //! \brief Takes the parsed list of oximeter waveform chunks and adds them to the database.
-    bool ParseOximetery();
+    bool ParseOximetry();
 
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine
