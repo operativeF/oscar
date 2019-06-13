@@ -1202,18 +1202,18 @@ void Statistics::printReport(QWidget * parent) {
 #ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
     printer.setOutputFormat(QPrinter::PdfFormat);
-    QString name;
-    QString datestr;
+    QString name = "Statistics";
+    QString datestr = QDate::currentDate().toString(Qt::ISODate);
 
-    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-        name = "Statistics";
-        datestr = QDate::currentDate().toString(Qt::ISODate);
-    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
-        name = "Help";
-        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
-    } else { name = "Unknown"; }
+//    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
+//        name = "Statistics";
+//        datestr = QDate::currentDate().toString(Qt::ISODate);
+//    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
+//        name = "Help";
+//        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
+//    } else { name = "Unknown"; }
 
-    QString filename = p_pref->Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
+    QString filename = p_pref->Get("{home}/") + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf";
 
     printer.setOutputFileName(filename);
 #endif
