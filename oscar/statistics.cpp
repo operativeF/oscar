@@ -1199,7 +1199,7 @@ QString Statistics::GenerateHTML()
 void Statistics::printReport(QWidget * parent) {
 
     QPrinter printer(QPrinter::HighResolution);
-#ifdef Q_WS_X11
+#ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
     printer.setOutputFormat(QPrinter::PdfFormat);
     QString name;
