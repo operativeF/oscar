@@ -100,12 +100,12 @@ void parseAndEmitSessionYaml(const QString & path)
 
         // Run the parser
         PRS1Import* import = dynamic_cast<PRS1Import*>(task);
-        import->ParseSession();
+        bool ok = import->ParseSession();
         
         // Emit the parsed session data to compare against our regression benchmarks
         Session* session = import->session;
         QString outpath = prs1OutputPath(path, m->serial(), session->session(), "-session.yml");
-        SessionToYaml(outpath, session);
+        SessionToYaml(outpath, session, ok);
         
         delete session;
         delete task;
@@ -122,7 +122,19 @@ void PRS1Tests::testSessionsToYaml()
 
 static QString ts(qint64 msecs)
 {
+    // TODO: make this UTC so that tests don't vary by where they're run
     return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
+}
+
+static QString dur(qint64 msecs)
+{
+    qint64 s = msecs / 1000L;
+    int h = s / 3600; s -= h * 3600;
+    int m = s / 60; s -= m * 60;
+    return QString("%1:%2:%3")
+        .arg(h, 2, 10, QChar('0'))
+        .arg(m, 2, 10, QChar('0'))
+        .arg(s, 2, 10, QChar('0'));
 }
 
 static QString byteList(QByteArray data, int limit=-1)
@@ -138,13 +150,12 @@ static QString byteList(QByteArray data, int limit=-1)
     return s;
 }
 
-void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
+void ChunkToYaml(QTextStream & out, PRS1DataChunk* chunk, bool ok)
 {
-    QTextStream out(&file);
-
     // chunk header
     out << "chunk:" << endl;
     out << "  at: " << hex << chunk->m_filepos << endl;
+    out << "  parsed: " << ok << endl;
     out << "  version: " << dec << chunk->fileVersion << endl;
     out << "  size: " << chunk->blockSize << endl;
     out << "  htype: " << chunk->htype << endl;
@@ -153,6 +164,7 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
     out << "  ext: " << chunk->ext << endl;
     out << "  session: " << chunk->sessionid << endl;
     out << "  start: " << ts(chunk->timestamp * 1000L) << endl;
+    out << "  duration: " << dur(chunk->duration * 1000L) << endl;
 
     // hblock for V3 non-waveform chunks
     if (chunk->fileVersion == 3 && chunk->htype == 0) {
@@ -210,7 +222,7 @@ void ChunkToYaml(QFile & file, PRS1DataChunk* chunk)
             }
         }
     }
-    if (dump_data) {
+    if (dump_data || !ok) {
         out << "  data: " << byteList(chunk->m_data, 100) << endl;
     }
     
@@ -256,9 +268,13 @@ void parseAndEmitChunkYaml(const QString & path)
             QFileInfo fi = flist.at(i);
             QString inpath = fi.canonicalFilePath();
             bool ok;
+            
+            if (fi.fileName() == ".DS_Store") {
+                continue;
+            }
 
             QString ext_s = fi.fileName().section(".", -1);
-            ext_s.toInt(&ok);
+            int ext = ext_s.toInt(&ok);
             if (!ok) {
                 // not a numerical extension
                 qWarning() << inpath << "unexpected filename";
@@ -266,7 +282,7 @@ void parseAndEmitChunkYaml(const QString & path)
             }
 
             QString session_s = fi.fileName().section(".", 0, -2);
-            session_s.toInt(&ok, sessionid_base);
+            int sessionid = session_s.toInt(&ok, sessionid_base);
             if (!ok) {
                 // not a numerical session ID
                 qWarning() << inpath << "unexpected filename";
@@ -274,28 +290,36 @@ void parseAndEmitChunkYaml(const QString & path)
             }
             
             // Create the YAML file.
-            QString outpath = prs1OutputPath(path, m->serial(), fi.fileName(), "-chunks.yml");
+            QString suffix = QString(".%1-chunks.yml").arg(ext, 3, 10, QChar('0'));
+            QString outpath = prs1OutputPath(path, m->serial(), sessionid, suffix);
             QFile file(outpath);
             if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
                 qDebug() << outpath;
                 Q_ASSERT(false);
             }
+            QTextStream out(&file);
+
+            // keep only P1234568/Pn/00000000.001
+            QStringList pathlist = QDir::toNativeSeparators(inpath).split(QDir::separator(), QString::SkipEmptyParts);
+            QString relative = pathlist.mid(pathlist.size()-3).join(QDir::separator());
+            out << "file: " << relative << endl;
 
             // Parse the chunks in the file.
             QList<PRS1DataChunk *> chunks = s_loader->ParseFile(inpath);
             for (int i=0; i < chunks.size(); i++) {
                 PRS1DataChunk * chunk = chunks.at(i);
+                bool ok = true;
                 
                 // Parse the inner data.
                 switch (chunk->ext) {
-                    case 0: chunk->ParseCompliance(); break;
-                    case 1: chunk->ParseSummary(); break;
-                    case 2: chunk->ParseEvents(MODE_UNKNOWN); break;
+                    case 0: ok = chunk->ParseCompliance(); break;
+                    case 1: ok = chunk->ParseSummary(); break;
+                    case 2: ok = chunk->ParseEvents(MODE_UNKNOWN); break;
                     default: break;
                 }
                 
                 // Emit the YAML.
-                ChunkToYaml(file, chunk);
+                ChunkToYaml(out, chunk, ok);
                 delete chunk;
             }
             

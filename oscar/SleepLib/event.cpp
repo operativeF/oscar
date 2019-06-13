@@ -1,4 +1,4 @@
-﻿/* SleepLib Event Class Implementation
+/* SleepLib Event Class Implementation
  *
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
@@ -85,12 +85,12 @@ void EventList::AddEvent(qint64 time, EventStoreType data)
     if (m_first > time) {
         // Crud.. Update all the previous records
         // This really shouldn't happen.
-        qDebug() << "Unordered time detected in AddEvent().";
+        qDebug() << "Unordered time detected in AddEvent()" << m_count << m_first << time << data;
 
         qint32 delta = (m_first - time);
 
         for (quint32 i = 0; i < m_count; ++i) {
-            m_time[i] -= delta;
+            m_time[i] += delta;
         }
 
         m_first = time;

@@ -1076,6 +1076,13 @@ void MainWindow::setRecBoxHTML(QString html)
 {
     ui->recordsBox->setHtml(html);
 }
+
+void MainWindow::setStatsHTML(QString html)
+{
+    ui->statisticsView->setHtml(html);
+}
+
+
 /***
 QString MainWindow::getWelcomeHTML()
 {
@@ -1404,70 +1411,12 @@ void MainWindow::on_actionPrint_Report_triggered()
         Report::PrintReport(overview->graphView(), STR_TR_Overview);
     } else if (ui->tabWidget->currentWidget() == daily) {
         Report::PrintReport(daily->graphView(), STR_TR_Daily, daily->getDate());
-    } else {
-        QPrinter printer(QPrinter::HighResolution);
-#ifdef Q_WS_X11
-        printer.setPrinterName("Print to File (PDF)");
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        QString name;
-        QString datestr;
-
-        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-            name = "Statistics";
-            datestr = QDate::currentDate().toString(Qt::ISODate);
-        } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
-            name = "Help";
-            datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
-        } else { name = "Unknown"; }
-
-        QString filename = p_pref->Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
-
-        printer.setOutputFileName(filename);
-#endif
-        printer.setPrintRange(QPrinter::AllPages);
-//        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//            printer.setOrientation(QPrinter::Landscape);
-//        } else {
-            printer.setOrientation(QPrinter::Portrait);
-        //}
-        printer.setFullPage(false); // This has nothing to do with scaling
-        printer.setNumCopies(1);
-        printer.setResolution(1200);
-        //printer.setPaperSize(QPrinter::A4);
-        //printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter);
-        QPrintDialog pdlg(&printer, this);
-
-        if (pdlg.exec() == QPrintDialog::Accepted) {
-
-            if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-
-                QTextBrowser b;
-                QPainter painter;
-                painter.begin(&printer);
-
-                QRect rect = printer.pageRect();
-                b.setHtml(ui->statisticsView->toHtml());
-                b.resize(rect.width()/4, rect.height()/4);
-                b.setFrameShape(QFrame::NoFrame);
-
-                double xscale = printer.pageRect().width()/double(b.width());
-                double yscale = printer.pageRect().height()/double(b.height());
-                double scale = qMin(xscale, yscale);
-                painter.translate(printer.paperRect().x() + printer.pageRect().width()/2, printer.paperRect().y() + printer.pageRect().height()/2);
-                painter.scale(scale, scale);
-                painter.translate(-b.width()/2, -b.height()/2);
-
-                b.render(&painter, QPoint(0,0));
-                painter.end();
-
+    } else if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
+        Statistics::printReport(this);
 #ifndef helpless
-            } else if (ui->tabWidget->currentWidget() == help) {
-                help->print(&printer);
+    } else if (ui->tabWidget->currentWidget() == help) {
+        help->print(&printer);  // **** THIS DID NOT SURVIVE REFACTORING STATISTICS PRINT
 #endif
-            }
-
-        }
     }
 }
 
@@ -2366,14 +2315,13 @@ void MainWindow::GenerateStatistics()
     ui->statEndDate->setMaximumDate(last);
 
     Statistics stats;
-    QString html = stats.GenerateHTML();
+    QString htmlStats = stats.GenerateHTML();
+    QString htmlRecords = stats.UpdateRecordsBox();
 
     updateFavourites();
 
-    //QWebFrame *frame=ui->statisticsView->page()->currentFrame();
-    //frame->addToJavaScriptWindowObject("mainwin",this);
-    //ui->statisticsView->setHtml(html);
-    ui->statisticsView->setHtml(html);
+    setStatsHTML(htmlStats);
+    setRecBoxHTML(htmlRecords);
 
 }
 

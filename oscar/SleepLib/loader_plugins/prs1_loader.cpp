@@ -214,13 +214,13 @@ struct PRS1TestedModel
 };
 
 static const PRS1TestedModel s_PRS1TestedModels[] = {
-    { "251P", 0, 2 },
-    { "450P", 0, 3 },
-    { "451P", 0, 3 },
-    { "550P", 0, 2 },
-    { "550P", 0, 3 },
-    { "551P", 0, 2 },
-    { "750P", 0, 2 },
+    { "251P", 0, 2 },  // "REMstar Plus (Philips Respironics)" (brick)
+    { "450P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
+    { "451P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
+    { "550P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
+    { "550P", 0, 3 },  // "REMstar Auto (Philips Respironics)"
+    { "551P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
+    { "750P", 0, 2 },  // "BiPAP Auto (Philips Respironics)"
 
     { "460P",   0, 4 },
     { "461P",   0, 4 },
@@ -230,15 +230,15 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "660P",   0, 4 },
     { "760P",   0, 4 },
     
-    { "200X110", 0, 6 },
-    { "400G110", 0, 6 },
-    { "400X110", 0, 6 },
+    { "200X110", 0, 6 },  // "DreamStation CPAP" (brick)
+    { "400G110", 0, 6 },  // "DreamStation Go"
+    { "400X110", 0, 6 },  // "DreamStation CPAP Pro"
     { "400X150", 0, 6 },
-    { "500X110", 0, 6 },
+    { "500X110", 0, 6 },  // "DreamStation Auto CPAP"
     { "500X150", 0, 6 },
-    { "502G150", 0, 6 },
-    { "600X110", 0, 6 },
-    { "700X110", 0, 6 },
+    { "502G150", 0, 6 },  // "DreamStation Go Auto"
+    { "600X110", 0, 6 },  // "DreamStation BiPAP Pro"
+    { "700X110", 0, 6 },  // "DreamStation Auto BiPAP"
     
     { "950P", 5, 0 },
     { "960P", 5, 1 },
@@ -275,6 +275,14 @@ bool PRS1ModelInfo::IsSupported(int family, int familyVersion) const
 bool PRS1ModelInfo::IsTested(const QString & model, int family, int familyVersion) const
 {
     if (m_testedModels.value(family).value(familyVersion).contains(model)) {
+        return true;
+    }
+    // Some 500X150 C0/C1 folders have contained this bogus model number in their PROP.TXT file,
+    // with the same serial number seen in the main PROP.TXT file that shows the real model number.
+    if (model == "100X100") {
+#ifndef UNITTEST_MODE
+        qDebug() << "Ignoring 100X100 for untested alert";
+#endif
         return true;
     }
     return false;
@@ -978,6 +986,10 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             QString path = fi.canonicalFilePath();
             bool ok;
 
+            if (fi.fileName() == ".DS_Store") {
+                continue;
+            }
+
             QString ext_s = fi.fileName().section(".", -1);
             ext = ext_s.toInt(&ok);
             if (!ok) {
@@ -1003,7 +1015,10 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             }
             */
 
-
+            // TODO: BUG: This isn't right, since files can have multiple session
+            // chunks, which might not correspond to the filename. But before we can
+            // fix this we need to come up with a reasonably fast way to filter previously
+            // imported files without re-reading all of them.
             if (m->SessionExists(sid)) {
                 // Skip already imported session
                 qDebug() << path << "session already exists, skipping" << sid;
@@ -1036,13 +1051,6 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
             }
 
             // Parse the data chunks and read the files..
-            if (fi.canonicalFilePath().isEmpty()) {
-#if QT_VERSION < QT_VERSION_CHECK(5,12,0)
-                qWarning() << fi.fileName() << "canonicalFilePath is empty";
-#else
-                qWarning() << fi << "cannonicalFilePath is empty";
-#endif
-            }
             QList<PRS1DataChunk *> Chunks = ParseFile(fi.canonicalFilePath());
 
             for (int i=0; i < Chunks.size(); ++i) {
@@ -1053,22 +1061,11 @@ void PRS1Loader::ScanFiles(const QStringList & paths, int sessionid_base, Machin
 
                 PRS1DataChunk * chunk = Chunks.at(i);
 
-                if (ext <= 1) {
-                    const unsigned char * data = (unsigned char *)chunk->m_data.constData();
-
-                    if (data[0x00] != 0) {
-                        // 5 length 5, 6 length 1, 7 length 3, 8 length 3 seen on 960P
-                        qWarning() << path << "data doesn't start with 0, skipping:" << data[0x00] << chunk->m_data.size();
-                        delete chunk;
-                        continue;
-                    }
-                }
-
                 SessionID chunk_sid = chunk->sessionid;
-                if (i > 0 || chunk_sid != sid) {  // log multiple chunks in non-waveform files and session ID mismatches
+                if (i == 0 && chunk_sid != sid) {  // log session ID mismatches
                     qDebug() << fi.canonicalFilePath() << chunk_sid;
                 }
-                if (m->SessionExists(sid)) {  // BUG: this should presumably be chunk_sid, but any change needs to be tested.
+                if (m->SessionExists(chunk_sid)) {
                     qDebug() << path << "session already exists, skipping" << sid << chunk_sid;
                     delete chunk;
                     continue;
@@ -1316,7 +1313,7 @@ public:
     {
         m_pos = pos;
         m_data = data.mid(pos, len);
-        Q_ASSERT(m_data.size() >= 3);
+        Q_ASSERT(m_data.size() >= 1);
         m_code = m_data.at(0);
     }
 };
@@ -1382,19 +1379,18 @@ public:
     }
 };
 
-class PRS1ParsedSliceEvent : public PRS1ParsedDurationEvent
+class PRS1ParsedSliceEvent : public PRS1ParsedValueEvent
 {
 public:
     virtual QMap<QString,QString> contents(void)
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
-        out["duration"] = timeStr(m_duration);
         QString s;
-        switch (m_status) {
-            case EquipmentOn: s = "EquipmentOn"; break;
+        switch ((SliceStatus) m_value) {
+            case MaskOn: s = "MaskOn"; break;
+            case MaskOff: s = "MaskOff"; break;
             case EquipmentOff: s = "EquipmentOff"; break;
-            case EquipmentLeaking: s = "EquipmentLeaking"; break;
             case UnknownStatus: s = "Unknown"; break;
         }
         out["status"] = s;
@@ -1402,9 +1398,8 @@ public:
     }
 
     static const PRS1ParsedEventType TYPE = EV_PRS1_SLICE;
-    SliceStatus m_status;
     
-    PRS1ParsedSliceEvent(int start, int duration, SliceStatus status) : PRS1ParsedDurationEvent(TYPE, start, duration), m_status(status) {}
+    PRS1ParsedSliceEvent(int start, SliceStatus status) : PRS1ParsedValueEvent(TYPE, start, (int) status) {}
 };
 
 
@@ -1717,7 +1712,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
 {
     if (this->family != 5 || this->familyVersion != 3) {
         qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     EventDataType data0, data1, data2, data3, data4, data5;
@@ -2437,7 +2432,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
 
     if (this->family != 3 || this->familyVersion != 6) {
         qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     int t = 0;
@@ -2623,7 +2618,7 @@ bool PRS1DataChunk::ParseEventsF3V3(void)
 {
     if (this->family != 3 || this->familyVersion != 3) {
         qWarning() << "ParseEventsF3V3 called with family" << this->family << "familyVersion" << this->familyVersion;
-        //break;  // don't break to avoid changing behavior (for now)
+        return false;
     }
     
     int t = 0, tt;
@@ -3079,7 +3074,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
 
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1UnknownValueEvent(code, t - data1, data0));
+            this->AddEvent(new PRS1UnknownValueEvent(code, t - data1, data0));  // TODO: start time should probably match PB below
             break;
 
         case 0x0f: // Cheyne Stokes Respiration
@@ -3090,7 +3085,11 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             }
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));
+            if (this->familyVersion == 2 || this->familyVersion == 3) {
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1 - data0, data0));  // PB event appears data1 seconds after conclusion
+            } else {
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));  // TODO: this should probably be the same as F0V23, but it hasn't been tested
+            }
             break;
 
         case 0x10: // Large Leak
@@ -3101,7 +3100,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             }
             pos += 2;
             data1 = buffer[pos++];
-            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));
+            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));  // TODO: start time should probably match PB above
             break;
 
         case 0x11: // Leak Rate & Snore Graphs
@@ -3156,7 +3155,7 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
 }
 
 
-bool PRS1Import::ParseCompliance()
+bool PRS1Import::ImportCompliance()
 {
     bool ok;
     ok = compliance->ParseCompliance();
@@ -3167,9 +3166,11 @@ bool PRS1Import::ParseCompliance()
         if (e->m_type == PRS1ParsedSliceEvent::TYPE) {
             PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
             qint64 tt = start + qint64(s->m_start) * 1000L;
-            qint64 duration = qint64(s->m_duration) * 1000L;
-            session->m_slices.append(SessionSlice(tt, tt + duration, s->m_status));
-            qDebug() << compliance->sessionid << "Added Slice" << tt << (tt+duration) << s->m_status;
+            if (!session->m_slices.isEmpty()) {
+                SessionSlice & prevSlice = session->m_slices.last();
+                prevSlice.end = tt;
+            }
+            session->m_slices.append(SessionSlice(tt, tt, (SliceStatus) s->m_value));
             continue;
         } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Compliance had non-setting event:" << (int) e->m_type;
@@ -3210,6 +3211,11 @@ bool PRS1Import::ParseCompliance()
     if (!ok) {
         return false;
     }
+    if (compliance->duration == 0) {
+        // This does occasionally happen and merely indicates a brief session with no useful data.
+        //qDebug() << compliance->sessionid << "duration == 0";
+        return false;
+    }
     session->setSummaryOnly(true);
     session->set_first(start);
     session->set_last(qint64(compliance->timestamp + compliance->duration) * 1000L);
@@ -3218,77 +3224,160 @@ bool PRS1Import::ParseCompliance()
 }
 
 
+// TODO: have UNEXPECTED_VALUE set a flag in the importer/machine that this data set is unusual
+#define UNEXPECTED_VALUE(SRC, VALS) { qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VALS); }
+#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) UNEXPECTED_VALUE(SRC, VAL)
+#define CHECK_VALUES(SRC, VAL1, VAL2) if ((SRC) != (VAL1) && (SRC) != (VAL2)) UNEXPECTED_VALUE(SRC, #VAL1 " or " #VAL2)
+// for more than 2 values, just write the test manually and use UNEXPECTED_VALUE if it fails
+
 bool PRS1DataChunk::ParseCompliance(void)
 {
-    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    switch (this->family) {
+    case 0:
+        if (this->familyVersion == 6) {
+            return this->ParseComplianceF0V6();
+        } else if (this->familyVersion == 2 || this->familyVersion == 3) {
+            return this->ParseComplianceF0V23();
+        }
+    default:
+        ;
+    }
 
-    if (data[0x00] > 0) {
+    qWarning() << "unexpected family" << this->family << "familyVersion" << this->familyVersion;
+    return false;
+}
+
+
+bool PRS1DataChunk::ParseComplianceF0V23(void)
+{
+    if (this->family != 0 || (this->familyVersion != 2 && this->familyVersion != 3)) {
+        qWarning() << "ParseComplianceF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
         return false;
     }
+    // F0V3 is untested, but since summary and events seem to be the same for F0V2 and F0V3,
+    // we'll assume this one is for now, but flag it as unexpected.
+    CHECK_VALUE(this->familyVersion, 2);
+    
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 0x13) {
+        qWarning() << this->sessionid << "compliance data too short:" << this->m_data.size();
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+
+    CHECK_VALUE(data[0x00], 0);
+    if (data[0x00] != 0) {
+        if (data[0x00] != 5) {
+            qDebug() << this->sessionid << "compliance first byte" << data[0x00] <<" != 0, skipping";
+        }
+        return false;
+    }
+    CHECK_VALUES(data[0x01], 1, 0);  // usually 1, occasionally 0, no visible difference in report
+    CHECK_VALUE(data[0x02], 0);
 
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_CPAP));
 
     int min_pressure = data[0x03];
    // EventDataType max_pressure = EventDataType(data[0x04]) / 10.0;
+    CHECK_VALUE(data[0x04], 0);
+    CHECK_VALUE(data[0x05], 0);
 
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
 
-
     int ramp_time = data[0x06];
     int ramp_pressure = data[0x07];
-
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
-
-    quint8 flex = data[0x09];
+    quint8 flex = data[0x08];  // TODO: why was this 0x09 originally? could the position vary?
     this->ParseFlexSetting(flex, MODE_CPAP);
 
-    int humid = data[0x0A];
-    this->ParseHumidifierSetting(humid, false);
+    int humid = data[0x09];  // TODO: why was this 0x0A originally? could the position vary?
+    this->ParseHumidifierSettingV2(humid, false);
 
-    // TODO: What are slices, and why would only bricks have them? That seems very weird.
-    // TODO: The below seems not to work on 200X models.
+    // TODO: Where is Auto Off/On set? (both off)
+    // TODO: Where is "Altitude Compensation" set? (seems to be 1)
+    // TODO: Where are Mask Alert/Reminder Period set? (both off)
+    CHECK_VALUE(data[0x0a], 0x80);
+    CHECK_VALUE(data[0x0b], 1);
+    CHECK_VALUE(data[0x0c], 0);
+    CHECK_VALUE(data[0x0d], 0);
     
-    // need to parse a repeating structure here containing lengths of mask on/off..
-    // 0x03 = mask on
-    // 0x01 = mask off
-
+    // List of slices, really session-related events:
     int start = 0;
     int tt = start;
 
     int len = this->size()-3;
-    int pos = 0x11;
+    int pos = 0x0e;
     do {
         quint8 c = data[pos++];
-        int duration = data[pos] | data[pos+1] << 8;
+        // These aren't really slices as originally thought, they're events with a delta offset.
+        // We'll convert them to slices in the importer.
+        int delta = data[pos] | data[pos+1] << 8;
         pos+=2;
         SliceStatus status;
-        if (c == 0x03) {
-            status = EquipmentOn;
-        } else if (c == 0x02) {
-            status = EquipmentLeaking;
+        if (c == 0x02) {
+            status = MaskOn;
+            if (tt == 0) {
+                CHECK_VALUE(delta, 0);  // we've never seen the initial MaskOn have any delta
+            } else {
+                if (delta % 60) UNEXPECTED_VALUE(delta, "even minutes");  // mask-off events seem to be whole minutes?
+            }
+        } else if (c == 0x03) {
+            status = MaskOff;
         } else if (c == 0x01) {
             status = EquipmentOff;
+            // This has a delta if the mask was removed before the machine was shut off.
         } else {
-            qDebug() << this->sessionid << "Wasn't expecting" << c;
+            qDebug() << this->sessionid << "unknown slice status" << c;
             break;
         }
-        this->AddEvent(new PRS1ParsedSliceEvent(tt, duration, status));
-
-        tt += duration;
+        tt += delta;
+        this->AddEvent(new PRS1ParsedSliceEvent(tt, status));
     } while (pos < len);
+
+    // also seems to be a trailing 01 00 81 after the slices?
+    if (pos == len) {
+        CHECK_VALUES(data[pos], 1, 0);  // usually 1, occasionally 0, no visible difference in report
+        //CHECK_VALUE(data[pos+1], 0);  // sometimes 1, 2, or 5, no visible difference in report
+        //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
+        if (data[pos+2] && (((data[pos+2] & 0x80) == 0) || (data[pos+2] & 0x07) > 5)) {
+            UNEXPECTED_VALUE(data[pos+2], "valid humidifier setting");
+        }
+    } else {
+        qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
+    }
 
     this->duration = tt;
 
-    // Bleh!! There is probably 10 different formats for these useless piece of junk machines
     return true;
 }
 
 
 bool PRS1DataChunk::ParseSummaryF0V23()
 {
+    if (this->family != 0 || (this->familyVersion != 2 && this->familyVersion != 3)) {
+        qWarning() << "ParseSummaryF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 59) {
+        qWarning() << this->sessionid << "summary data too short:" << this->m_data.size();
+        return false;
+    }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
+
+    CHECK_VALUE(data[0x00], 0);
+    if (data[0x00] != 0) {
+        if (data[0x00] != 5) {
+            qDebug() << this->sessionid << "summary first byte" << data[0x00] <<" != 0, skipping";
+        }
+        return false;
+    }
+    CHECK_VALUES(data[0x01] & 0xF0, 0x60, 0x70);  // TODO: what are these?
+    if ((data[0x01] & 0x0F) != 1) {  // This is the most frequent value.
+        CHECK_VALUES(data[0x01] & 0x0F, 3, 0);  // TODO: what are these? 0 seems to be related to errors.
+    }
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
@@ -3304,60 +3393,126 @@ bool PRS1DataChunk::ParseSummaryF0V23()
         break;
     case 0x03:
         cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS;
+        break;
+    default:
+        qWarning() << this->sessionid << "unknown cpap mode" << data[0x02];
+        return false;
     }
+
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
 
     int min_pressure = data[0x03];
     int max_pressure = data[0x04];
-    int ps  = data[0x05]; // pressure support
+    int ps  = data[0x05];  // max pressure support (for variable), seems to be zero otherwise
 
     if (cpapmode == MODE_CPAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, min_pressure));
+        CHECK_VALUE(max_pressure, 0);
+        CHECK_VALUE(ps, 0);
     } else if (cpapmode == MODE_APAP) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+        CHECK_VALUE(ps, 0);
     } else if (cpapmode == MODE_BILEVEL_FIXED) {
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, max_pressure - min_pressure));
+        CHECK_VALUE(ps, 0);  // this seems to be unused on fixed bilevel
     } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
         int min_ps = 20;  // 2.0 cmH2O
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure - min_ps));
+        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_pressure - min_ps));  // TODO: not yet confirmed
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_pressure + min_ps));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps));
         this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, ps));
     }
 
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-
-
     int ramp_time = data[0x06];
     int ramp_pressure = data[0x07];
-
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, ramp_time));
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
-
-    // Tubing lock has no setting byte
-
-    // Menu Options
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_LOCK, (data[0x0a] & 0x80) != 0)); // System One Resistance Lock Setting
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[0x0a] & 7));       // SYstem One Resistance setting value
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_STATUS, (data[0x0a] & 0x40) != 0));  // System One Resistance Status bit
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_ON, (data[0x0b] & 0x40) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_OFF, (data[0x0c] & 0x10) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_MASK_ALERT, (data[0x0c] & 0x08) != 0));
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SHOW_AHI, (data[0x0c] & 0x04) != 0));
-    int humid = data[0x09];
-    this->ParseHumidifierSetting(humid, false);
-
-   // session->
 
     quint8 flex = data[0x08];
     this->ParseFlexSetting(flex, cpapmode);
 
-    this->duration = data[0x14] | data[0x15] << 8;
+    int humid = data[0x09];
+    this->ParseHumidifierSettingV2(humid, false);
+    
+    // Tubing lock has no setting byte
+
+    // Menu Options
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_LOCK, (data[0x0a] & 0x80) != 0)); // System One Resistance Lock Setting
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_STATUS, (data[0x0a] & 0x40) != 0));  // System One Resistance Status bit
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HOSE_DIAMETER, (data[0x0a] & 0x08) ? 15 : 22));  // TODO: unconfirmed
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[0x0a] & 7));       // System One Resistance setting value
+    CHECK_VALUE(data[0x0a] & (0x20 | 0x10), 0);
+
+    CHECK_VALUE(data[0x0b], 1);
+    
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_ON, (data[0x0c] & 0x40) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_AUTO_OFF, (data[0x0c] & 0x10) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_MASK_ALERT, (data[0x0c] & 0x04) != 0));
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SHOW_AHI, (data[0x0c] & 0x02) != 0));
+    CHECK_VALUE(data[0x0c] & (0xA0 | 0x09), 0);
+
+    CHECK_VALUE(data[0x0d], 0);
+    //CHECK_VALUES(data[0x0e], ramp_pressure, min_pressure);  // initial CPAP/EPAP, can be minimum pressure or ramp, or whatever auto decides to use
+    if (cpapmode == MODE_BILEVEL_FIXED) {  // initial IPAP for bilevel modes
+        CHECK_VALUE(data[0x0f], max_pressure);
+    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
+        CHECK_VALUE(data[0x0f], min_pressure + 20);
+    }
+
+    // List of slices, really session-related events:
+    int start = 0;
+    int tt = start;
+
+    int len = this->size()-3;
+    int pos = 0x10;
+    do {
+        quint8 c = data[pos++];
+        int delta = data[pos] | data[pos+1] << 8;
+        pos+=2;
+        SliceStatus status;
+        if (c == 0x02) {
+            status = MaskOn;
+            if (tt == 0) {
+                CHECK_VALUE(delta, 0);  // we've never seen the initial MaskOn have any delta
+            } else {
+                if (delta % 60) UNEXPECTED_VALUE(delta, "even minutes");  // mask-off events seem to be whole minutes?
+            }
+        } else if (c == 0x03) {
+            status = MaskOff;
+            // These are 0x22 bytes in a summary vs. 3 bytes in compliance data
+            // TODO: What are these values?
+            pos += 0x1F;
+        } else if (c == 0x01) {
+            status = EquipmentOff;
+            // This has a delta if the mask was removed before the machine was shut off.
+        } else {
+            qDebug() << this->sessionid << "unknown slice status" << c;
+            break;
+        }
+        tt += delta;
+        this->AddEvent(new PRS1ParsedSliceEvent(tt, status));
+    } while (pos < len);
+
+    // seems to be trailing 01 [01 or 02] 83 after the slices?
+    if (pos == len) {
+        if (data[pos] != 1) {  // This is the usual value.
+            CHECK_VALUES(data[pos], 0, 3);  // 0 seems to be related to errors, 3 seen after 90 sec large leak before turning off?
+        }
+        //CHECK_VALUES(data[pos+1], 0, 1);  // TODO: may be related to ramp? 1-5 seems to have a ramp start or two
+        //CHECK_VALUES(data[pos+2], 0x81, 0x80);  // seems to be humidifier setting at end of session
+        if (data[pos+2] && (((data[pos+2] & 0x80) == 0) || (data[pos+2] & 0x07) > 5)) {
+            UNEXPECTED_VALUE(data[pos+2], "valid humidifier setting");
+        }
+    } else {
+        qWarning() << this->sessionid << (this->size() - pos) << "trailing bytes";
+    }
+
+    this->duration = tt;
 
     return true;
 }
@@ -3417,7 +3572,7 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
     int humid = data[0x0b];
-    this->ParseHumidifierSetting(humid);
+    this->ParseHumidifierSettingV2(humid);
 
     this->duration = data[0x14] | data[0x15] << 8;
 
@@ -3464,7 +3619,7 @@ bool PRS1DataChunk::ParseSummaryF3(void)
     if ((it=this->hbdata.find(5)) != this->hbdata.end()) {
         this->duration = (it.value()[1] << 8 ) + it.value()[0];
     } else {
-        qWarning() << "missing summary duration";
+        qWarning() << this->sessionid << "missing summary duration";
     }
 
     return true;
@@ -3503,7 +3658,7 @@ bool PRS1DataChunk::ParseSummaryF5V012(void)
     this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, ramp_pressure));
 
     int humid = data[0x0d];
-    this->ParseHumidifierSetting(humid);
+    this->ParseHumidifierSettingV2(humid);
 
     this->duration = data[0x18] | data[0x19] << 8;
 
@@ -3521,6 +3676,8 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
     // 00 NoFlex
     // c0 Split CFlex then None
     // c8 Split CFlex+ then None
+
+    if (flex & (0x20 | 0x04)) UNEXPECTED_VALUE(flex, "known bits");
 
     flex &= 0xf8;
     bool split = false;
@@ -3548,13 +3705,21 @@ void PRS1DataChunk::ParseFlexSetting(quint8 flex, CPAPMode cpapmode)
 }
 
 
-void PRS1DataChunk::ParseHumidifierSetting(int humid, bool supportsHeatedTubing)
+void PRS1DataChunk::ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing)
 {
+    if (humid & (0x40 | 0x08)) UNEXPECTED_VALUE(humid, "known bits");
+    
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));        // Humidifier Connected
     if (supportsHeatedTubing) {
         this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));        // Heated Hose??
+        // TODO: 0x20 is seen on machines with System One humidification & heated tubing, not sure which setting it represents.
+    } else {
+        CHECK_VALUE(humid & 0x30, 0);
     }
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, (humid & 7)));          // Humidifier Value
+    int humidlevel = humid & 7;
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, humidlevel));          // Humidifier Value
+
+    if (humidlevel > 5) UNEXPECTED_VALUE(humidlevel, "<= 5");
 }
 
 
@@ -3590,168 +3755,555 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
 }
 
 
-bool PRS1DataChunk::ParseSummaryF0V6()
+// The below is based on fixing the fileVersion == 3 parsing in ParseSummary() based
+// on our understanding of slices from F0V23. The switch values come from sample files.
+bool PRS1DataChunk::ParseComplianceF0V6(void)
 {
-    // DreamStation machines...
-
-    // APAP models..
-
+    if (this->family != 0 || this->familyVersion != 6) {
+        qWarning() << "ParseComplianceF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (this->m_data.size() < 82) {
+        qWarning() << this->sessionid << "compliance data too short:" << this->m_data.size();
+        return false;
+    }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int expected_sizes[] = { 1, 0x34, 9, 4, 2, 2, 4, 8 };
+    static const int ncodes = sizeof(expected_sizes) / sizeof(int);
+    for (int i = 0; i < ncodes; i++) {
+        if (this->hblock.contains(i)) {
+            CHECK_VALUE(this->hblock[i], expected_sizes[i]);
+        } else {
+            UNEXPECTED_VALUE(this->hblock.contains(i), true);
+        }
+    }
+
+    bool ok = true;
+    int pos = 0;
+    int code, size;
+    int tt = 0;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (size < expected_sizes[code]) {
+            qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << expected_sizes[code];
+            ok = false;
+            break;
+        }
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0:
+                // always first? Maybe equipmenton? Maybe 0 was always equipmenton, even in F0V23?
+                CHECK_VALUE(pos, 1);
+                //CHECK_VALUES(data[pos], 1, 3);  // sometimes 7?
+                break;
+            case 1:  // Settings
+                // This is where ParseSummaryF0V6 started (after "3 bytes that don't follow the pattern")
+                // Both compliance and summary files seem to have the same length for this slice, so maybe the
+                // settings are the same?
+                ok = this->ParseSettingsF0V6(data + pos, size);
+                break;
+            case 3:  // Mask On
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            case 4:  // Mask Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
+                break;
+            case 7:
+                // Always follows mask off?
+                //CHECK_VALUES(data[pos], 0x01, 0x00);  // sometimes 32, 4
+                CHECK_VALUE(data[pos+1], 0x00);
+                //CHECK_VALUES(data[pos+2], 0x00, 0x01);  // sometimes 11, 3, 15
+                CHECK_VALUE(data[pos+3], 0x00);
+                //CHECK_VALUE(data[pos+4], 0x05, 0x0A);  // 00
+                CHECK_VALUE(data[pos+5], 0x00);
+                //CHECK_VALUE(data[pos+6], 0x64, 0x69);  // 6E, 6D, 6E, 6E, 80
+                //CHECK_VALUE(data[pos+7], 0x3d, 0x5c);  // 6A, 6A, 6B, 6C, 80
+                break;
+            case 2:  // Equipment Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
+                //CHECK_VALUE(data[pos+2], 0x08);  // 0x01
+                //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
+                //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
+                //CHECK_VALUE(data[pos+5], 0x22);  // 0x28
+                //CHECK_VALUE(data[pos+6], 0x02);  // sometimes 1, 0
+                CHECK_VALUE(data[pos+7], 0x00);  // 0x00
+                CHECK_VALUE(data[pos+8], 0x00);  // 0x00
+                break;
+            case 6:  // Humidier setting change
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            default:
+                UNEXPECTED_VALUE(code, "known slice code");
+                break;
+        }
+        pos += size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = tt;
+
+    return ok;
+}
+
+
+void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting)
+{
+    // Byte 1: 0x90 (no humidifier data), 0x50 (15ht, tube 4/5, humid 4), 0x54 (15ht, tube 5, humid 5) 0x4c (15ht, tube temp 3, humidifier 3)
+    // 0x0c (15, tube 3, humid 3, fixed)
+    // 0b10010000 no humidifier data
+    // 0b01010000 tube 4 and 5, humidifier 4
+    // 0b01010100 15ht, tube 5, humidifier 5
+    // 0b01001100 15ht, tube 3, humidifier 3
+    //      xxx   = humidifier setting
+    //   xxx      = humidifier status
+    //         ??
+    CHECK_VALUE(byte1 & 3, 0);
+    int humid = byte1 >> 5;
+    switch (humid) {
+    case 0: break;  // fixed
+    case 1: break;  // adaptive
+    case 2: break;  // heated tube
+    case 4: break;  // no humidifier, possibly a bit flag rather than integer value
+    default:
+        UNEXPECTED_VALUE(humid, "known value");
+        break;
+    }
+    bool humidifier_present = ((byte1 & 0x80) == 0);
+    int humidlevel = (byte1 >> 2) & 7;
+
+    // Byte 2: 0xB4 (15ht, tube 5, humid 5), 0xB0 (15ht, tube 5, humid 4), 0x90 (tube 4, humid 4), 0x6C (15ht, tube temp 3, humidifier 3)
+    // 0x80?
+    // 0b10110100 15ht, tube 5, humidifier 5
+    // 0b10110000 15ht, tube 5, humidifier 4
+    // 0b10010000 tube 4, humidifier 4
+    // 0b01101100 15ht, tube 3, humidifier 3
+    //      xxx   = humidifier setting
+    //   xxx      = tube setting
+    //         ??
+    CHECK_VALUE(byte2 & 3, 0);
+    CHECK_VALUE(humidlevel, ((byte2 >> 2) & 7));
+    int tubelevel = (byte2 >> 5) & 7;
+    if (humidifier_present) {
+        if (humidlevel > 5 || humidlevel < 0) UNEXPECTED_VALUE(humidlevel, "0-5");  // 0=off is valid when a humidifier is attached
+        if (humid == 2) {  // heated tube
+            if (tubelevel > 5 || tubelevel < 0) UNEXPECTED_VALUE(tubelevel, "0-5");  // TODO: maybe this is only if heated tube? 0=off is valid even in heated tube mode
+        }
+    }
+
+    if (add_setting) {
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_STATUS, (humid & 0x80) != 0));  // this is F0V23 version, doesn't match F0V6
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HEATED_TUBING, (humid & 0x10) != 0));  // this is F0V23 version, doesn't match F0V6
+        this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_HUMID_LEVEL, humidlevel));
+        
+        // TODO: add a channel for PRS1 heated tubing
+        //this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_TUBE_LEVEL, tubelevel));
+    }
+}
+
+
+// The below is based on a combination of the mainblock parsing for fileVersion == 3
+// in ParseSummary() and the switch statements of ParseSummaryF0V6.
+//
+// Both compliance and summary files (at least for 200X and 400X machines) seem to have
+// the same length for this slice, so maybe the settings are the same? At least 0x0a
+// looks like a pressure in compliance files.
+bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
+{
+    static const QMap<int,int> expected_lengths = { {0x0c,3}, {0x0d,2}, {0x0e,2}, {0x0f,4}, {0x10,3}, {0x35,2} };
+    bool ok = true;
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
-    int imin_epap = 0;
-    //int imax_epap = 0;
+    int pressure = 0;
     int imin_ps   = 0;
     int imax_ps   = 0;
-    //int imax_pressure = 0;
     int min_pressure = 0;
     int max_pressure = 0;
-    int duration  = 0;
 
-    // in 'data', we start with 3 bytes that don't follow the pattern
-    // pattern is varNumber, dataSize, dataValue(dataSize)
-    // examples, 0x0d 0x02 0x28 0xC8  , or 0x0a 0x01 0x64,
-    // first, verify that this dataSize is where we expect
-    //     each var pair in headerblock should be (indexByte, valueByte)
+    // Parse the nested data structure which contains settings
+    int pos = 0;
+    do {
+        int code = data[pos++];
+        int len = data[pos++];
 
-    if ((int)this->m_headerblock[(1 * 2)] != 0x01) {
-        return false;  //nope, not here
-        qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad datablock length";
-    }
-    int dataBlockSize = this->m_headerblock[(1 * 2) + 1];
-    //int zero = 0;
-    const unsigned char *dataPtr;
-
-    //      start at 3rd byte ; did we go past the end? ; increment for dataSize + varNumberByte + dataSizeByte
-    for ( dataPtr = data + 3; dataPtr < (data + 3 + dataBlockSize); dataPtr+= dataPtr[1] + 2) {
-        switch( *dataPtr) {
-        case 00: // mode?
-            break;
-        case 01: // ???
-            break;
-        case 10: // 0x0a
-            cpapmode = MODE_CPAP;
-            if (dataPtr[1] != 1) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad CPAP value";
-            imin_epap = dataPtr[2];
-            break;
-        case 13: // 0x0d
-            cpapmode = MODE_APAP;
-            if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            break;
-        case 14: // 0x0e  // <--- this is a total guess.. might be 3 and have a pressure support value
-            cpapmode = MODE_BILEVEL_FIXED;
-            if (dataPtr[1] != 2) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            imin_ps = max_pressure - min_pressure;
-            break;
-        case 15: // 0x0f
-            cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; //might be C_CHECK?
-            if (dataPtr[1] != 4) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[2];
-            max_pressure = dataPtr[3];
-            imin_ps = dataPtr[4];
-            imax_ps = dataPtr[5];
-            break;
-        case 0x10: // Auto Trial mode
-            cpapmode = MODE_APAP;
-            if (dataPtr[1] != 3) qDebug() << "PRS1DataChunk::ParseSummaryF0V6=" << "Bad APAP value";
-            min_pressure = dataPtr[3];
-            max_pressure = dataPtr[4];
-            break;
-
-        case 0x35:
-            duration += ( dataPtr[3] << 8 ) + dataPtr[2];
-            break;
-//        case 3:
-//            break;
-        default:
-            // have not found this before
-            ;
-         //   qDebug() << "PRS1Loader::ParseSummaryF0V6=" << "Unknown datablock value:" << (zero + *dataPtr) ;
+        int expected_len = 1;
+        if (expected_lengths.contains(code)) {
+            expected_len = expected_lengths[code];
         }
-    }
-    // now we encounter yet a different format of data
-  /*  const unsigned char *data2Ptr = data + 3 + dataBlockSize;
-    // pattern is byte/data, where length of data depends on value of 'byte'
-    bool data2Done = false;
-    while (!data2Done) {
-        switch(*data2Ptr){
-        case 0:
-            //this appears to be the last one.  '0' plus 5 bytes **eats crc** without checking
-            data2Ptr += 4;
-            data2Ptr += 2; //this is the **CRC**??
-            data2Done = true; //hope this is always there, since we don't have blocksize from header
-            break;
-        case 1:
-            //don't know yet.  data size is the '1' plus 16 bytes
-            data2Ptr += 5;
-            break;
-        case 2:
-            //don't know yet.  data size is the '2' plus 16 bytes
-            data2Ptr += 3;
-            break;
-        case 3:
-            //don't know yet.  data size is the '3' plus 4 bytes
-            // have seen multiple of these....may have to add them?
-            data2Ptr += 5;
-            break;
-        case 4:
-            // have seen multiple of these....may have to add them?
-            duration = ( data2Ptr[3] << 8 ) + data2Ptr[2];
-            data2Ptr += 3;
-            break;
-        case 5:
-            //don't know yet.  data size is the '5' plus 4 bytes
-            data2Ptr += 5;
-            break;
-        case 6:
-            //don't know yet.  data size is the '5' plus 1 byte
-            data2Ptr += 2;
-            break;
-        case 8:
-            //don't know yet.  data size is the '8' plus 27 bytes (might be a '0' in here...not enough different types found yet)
-            data2Ptr += 28;
-            break;
-        default:
-            qDebug() << "PRS1Loader::ParseSummaryF0V6=" << "Unknown datablock2 value:" << (zero + *data2Ptr) ;
+        //CHECK_VALUE(len, expected_len);
+        if (len < expected_len) {
+            qWarning() << this->sessionid << "setting" << code << "too small" << len << "<" << expected_len;
+            ok = false;
             break;
         }
-    }*/
-// need to populate summary->
+        if (pos + len > size) {
+            qWarning() << this->sessionid << "setting" << code << "@" << pos << "longer than remaining slice";
+            ok = false;
+            break;
+        }
 
-    this->duration = duration;
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-    if (cpapmode == MODE_CPAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, imin_epap));
+        switch (code) {
+            case 0: // Device Mode
+                CHECK_VALUE(pos, 2);  // always first?
+                switch (data[pos]) {
+                case 0: cpapmode = MODE_CPAP; break;
+                case 2: cpapmode = MODE_APAP; break;
+                case 1: cpapmode = MODE_BILEVEL_FIXED; break;
+                case 3: cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS; break;
+                case 4: cpapmode = MODE_CPAP; break;  // "CPAP-Check" in report, but seems like CPAP
+                default:
+                    UNEXPECTED_VALUE(data[pos], "known device mode");
+                    break;
+                }
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
+                break;
+            case 1: // ???
+                if (data[pos] != 0 && data[pos] != 3) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 1 when EZ-Start is enabled? 2 when Auto-Trial? 3 when Auto-Trial is off or Opti-Start isn't off?
+                }
+                if (len == 2) {  // 400G has extra byte
+                    CHECK_VALUE(data[pos+1], 0);
+                }
+                break;
+            case 0x0a:  // CPAP pressure setting
+                CHECK_VALUE(cpapmode, MODE_CPAP);
+                pressure = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, pressure));
+                break;
+            case 0x0c:  // CPAP-Check pressure setting
+                CHECK_VALUE(cpapmode, MODE_CPAP);
+                min_pressure = data[pos];  // Min Setting on pressure graph
+                max_pressure = data[pos+1];  // Max Setting on pressure graph
+                pressure = data[pos+2];  // CPAP on pressure graph and CPAP-Check Pressure on settings detail
+                // This seems to be the initial pressure. If the pressure changes mid-session, the pressure
+                // graph will show either the changed pressure or the majority pressure, not sure which.
+                // The time of change is most likely in the events file. See slice 6 for ending pressure.
+                //CHECK_VALUE(pressure, 0x5a);
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, pressure));
+                break;
+            case 0x0d:  // AutoCPAP pressure setting
+                CHECK_VALUE(cpapmode, MODE_APAP);
+                min_pressure = data[pos];
+                max_pressure = data[pos+1];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+                break;
+            case 0x0e:  // Bi-Level pressure setting
+                CHECK_VALUE(cpapmode, MODE_BILEVEL_FIXED);
+                min_pressure = data[pos];
+                max_pressure = data[pos+1];
+                imin_ps = max_pressure - min_pressure;
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
+                break;
+            case 0x0f:  // Auto Bi-Level pressure setting
+                CHECK_VALUE(cpapmode, MODE_BILEVEL_AUTO_VARIABLE_PS);
+                min_pressure = data[pos];
+                max_pressure = data[pos+1];
+                imin_ps = data[pos+2];
+                imax_ps = data[pos+3];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
+                break;
+            case 0x10: // Auto-Trial mode
+                CHECK_VALUE(cpapmode, MODE_CPAP);  // the mode setting is CPAP, even though it's operating in APAP mode
+                cpapmode = MODE_APAP;  // but categorize it now as APAP, since that's what it's really doing
+                CHECK_VALUES(data[pos], 30, 5);  // Auto-Trial Duration
+                min_pressure = data[pos+1];
+                max_pressure = data[pos+2];
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
+                break;
+            case 0x2a:  // EZ-Start
+                CHECK_VALUE(data[pos], 0x80);  // EZ-Start enabled
+                break;
+            case 0x2b:  // Ramp Type
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0 == "Linear", 0x80 = "SmartRamp"
+                break;
+            case 0x2c:  // Ramp Time
+                if (data[pos] != 0) {  // 0 == ramp off, and ramp pressure setting doesn't appear
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
+                }
+                break;
+            case 0x2d:  // Ramp Pressure
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
+                break;
+            case 0x2e:
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 0x80, 0x90);  // maybe flex related? 0x80 when c-flex? 0x90 when c-flex+ or A-flex?, 0x00 when no flex
+                }
+                break;
+            case 0x2f:  // Flex lock
+                CHECK_VALUES(data[pos], 0, 0x80);
+                break;
+            case 0x30:  // Flex level
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, data[pos]));
+                break;
+            case 0x35:  // Humidifier setting
+                this->ParseHumidifierSettingF0V6(data[pos], data[pos+1], true);
+                break;
+            case 0x36:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x38:  // Mask Resistance
+                if (data[pos] != 0) {  // 0 == mask resistance off
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
+                }
+                break;
+            case 0x39:
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-trial?
+                break;
+            case 0x3b:
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1, 22 = 0?
+                }
+                break;
+            case 0x40:  // new to 400G, also seen on 500X110, alternate tubing type? appears after 0x39 and before 0x3c
+                if (data[pos] != 3) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 1 = 15mm, 2 = 15HT, 3 = 12mm
+                }
+                break;
+            case 0x3c:
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe show AHI?
+                break;
+            case 0x3e:
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-on?
+                break;
+            case 0x3f:
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe auto-off?
+                break;
+            case 0x43:  // new to 502G, sessions 3-8, Auto-Trial is off, Opti-Start is missing
+                CHECK_VALUE(data[pos], 0x3C);
+                break;
+            case 0x44:  // new to 502G, sessions 3-8, Auto-Trial is off, Opti-Start is missing
+                CHECK_VALUE(data[pos], 0xFF);
+                break;
+            case 0x45:  // new to 400G, only in last session?
+                CHECK_VALUE(data[pos], 1);
+                break;
+            default:
+                qDebug() << "Unknown setting:" << hex << code << "in" << this->sessionid << "at" << pos;
+                this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data, size), pos, len));
+                break;
+        }
 
-    } else if (cpapmode == MODE_APAP) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
-    } else if (cpapmode == MODE_BILEVEL_FIXED) {
-        // Guessing here.. haven't seen BIPAP data.
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, imin_ps));
-    } else if (cpapmode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_pressure));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, imin_ps));
-        this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, imax_ps));
+        pos += len;
+    } while (ok && pos + 2 <= size);
+
+    return ok;
+}
+
+
+bool PRS1DataChunk::ParseSummaryF0V6(void)
+{
+    if (this->family != 0 || this->familyVersion != 6) {
+        qWarning() << "ParseSummaryF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
     }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int minimum_sizes[] = { 1, 0x2b, 9, 4, 2, 4, 1, 4, 0x1b, 2, 4, 0x0b, 1, 2, 6 };
+    static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
+    // NOTE: The sizes contained in hblock can vary, even within a single machine, as can the length of hblock itself!
 
-    return true;
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (chunk_size < minimum_sizes[0] + minimum_sizes[1] + minimum_sizes[2]) {
+        qWarning() << this->sessionid << "summary data too short:" << chunk_size;
+        return false;
+    }
+    if (chunk_size < 60) UNEXPECTED_VALUE(chunk_size, ">= 60");
+
+    bool ok = true;
+    int pos = 0;
+    int code, size;
+    int tt = 0;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (code < ncodes) {
+            // make sure the handlers below don't go past the end of the buffer
+            if (size < minimum_sizes[code]) {
+                qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << minimum_sizes[code];
+                ok = false;
+                break;
+            }
+        } // else if it's past ncodes, we'll log its information below (rather than handle it)
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0:  // Equipment On
+                CHECK_VALUE(pos, 1);  // Always first?
+                //CHECK_VALUES(data[pos], 1, 7);  // or 3?
+                if (size == 4) {  // 400G has 3 more bytes?
+                    //CHECK_VALUE(data[pos+1], 0);  // or 2, 14, 4, etc.
+                    //CHECK_VALUES(data[pos+2], 8, 65);  // or 1
+                    //CHECK_VALUES(data[pos+3], 0, 20);  // or 21, 22, etc.
+                }
+                break;
+            case 1:  // Settings
+                ok = this->ParseSettingsF0V6(data + pos, size);
+                break;
+            case 3:  // Mask On
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            case 4:  // Mask Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
+                break;
+            case 8:  // vs. 7 in compliance, always follows mask off (except when there's a 5, see below), also longer
+                // Maybe statistics of some kind, given the pressure stats that seem to appear before it on AutoCPAP machines?
+                //CHECK_VALUES(data[pos], 0x02, 0x01);  // probably 16-bit value
+                CHECK_VALUE(data[pos+1], 0x00);
+                //CHECK_VALUES(data[pos+2], 0x0d, 0x0a);  // probably 16-bit value, maybe OA count?
+                CHECK_VALUE(data[pos+3], 0x00);
+                //CHECK_VALUES(data[pos+4], 0x09, 0x0b);  // probably 16-bit value
+                CHECK_VALUE(data[pos+5], 0x00);
+                //CHECK_VALUES(data[pos+6], 0x1e, 0x35);  // probably 16-bit value
+                CHECK_VALUE(data[pos+7], 0x00);
+                //CHECK_VALUES(data[pos+8], 0x8c, 0x4c);  // 16-bit value, not sure what
+                //CHECK_VALUE(data[pos+9], 0x00);
+                //CHECK_VALUES(data[pos+0xa], 0xbb, 0x00);  // 16-bit minutes in large leak
+                //CHECK_VALUE(data[pos+0xb], 0x00);
+                //CHECK_VALUES(data[pos+0xc], 0x15, 0x02);  // probably 16-bit value
+                CHECK_VALUE(data[pos+0xd], 0x00);
+                //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // 16-bit VS count
+                //CHECK_VALUE(data[pos+0xf], 0x00);
+                //CHECK_VALUES(data[pos+0x10], 0x21, 5);  // probably 16-bit value, maybe H count?
+                CHECK_VALUE(data[pos+0x11], 0x00);
+                //CHECK_VALUES(data[pos+0x12], 0x13, 0);  // probably 16-bit value
+                CHECK_VALUE(data[pos+0x13], 0x00);
+                //CHECK_VALUES(data[pos+0x14], 0x05, 0);  // probably 16-bit value, maybe RE count?
+                CHECK_VALUE(data[pos+0x15], 0x00);
+                //CHECK_VALUE(data[pos+0x16], 0x00, 4);  // probably a 16-bit value, PB or FL count?
+                CHECK_VALUE(data[pos+0x17], 0x00);
+                //CHECK_VALUES(data[pos+0x18], 0x69, 0x23);
+                //CHECK_VALUES(data[pos+0x19], 0x44, 0x18);
+                //CHECK_VALUES(data[pos+0x1a], 0x80, 0x49);
+                if (size >= 0x1f) {  // 500X is only 0x1b long!
+                    //CHECK_VALUES(data[pos+0x1b], 0x00, 6);
+                    CHECK_VALUE(data[pos+0x1c], 0x00);
+                    //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
+                    //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
+                    // TODO: 400G has 8 more bytes?
+                    // TODO: 400G sometimes has another 4 on top of that?
+                }
+                break;
+            case 2:  // Equipment Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
+                //CHECK_VALUE(data[pos+2], 0x08);  // 0x01
+                //CHECK_VALUE(data[pos+3], 0x14);  // 0x12
+                //CHECK_VALUE(data[pos+4], 0x01);  // 0x00
+                //CHECK_VALUE(data[pos+5], 0x22);  // 0x28
+                //CHECK_VALUE(data[pos+6], 0x02);  // sometimes 1, 0
+                CHECK_VALUE(data[pos+7], 0x00);  // 0x00
+                CHECK_VALUE(data[pos+8], 0x00);  // 0x00
+                if (size == 0x0c) {  // 400G has 3 more bytes, seem to match Equipment On bytes
+                    //CHECK_VALUE(data[pos+1], 0);
+                    //CHECK_VALUES(data[pos+2], 8, 65);
+                    //CHECK_VALUE(data[pos+3], 0);
+                }
+                break;
+            case 0x0a:  // Humidier setting change
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                this->ParseHumidifierSettingF0V6(data[pos+2], data[pos+3]);
+                break;
+            case 0x0e:
+                // only seen once on 400G?
+                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos+1], 0);
+                CHECK_VALUE(data[pos+2], 7);
+                CHECK_VALUE(data[pos+3], 7);
+                CHECK_VALUE(data[pos+4], 7);
+                CHECK_VALUE(data[pos+5], 0);
+                break;
+            case 0x05:
+                // AutoCPAP-related? First appeared on 500X, follows 4, before 8, look like pressure values
+                //CHECK_VALUE(data[pos], 0x4b);    // maybe min pressure? (matches ramp pressure, see ramp on pressure graph)
+                //CHECK_VALUE(data[pos+1], 0x5a);  // maybe max pressure? (close to max on pressure graph, time at pressure graph)
+                //CHECK_VALUE(data[pos+2], 0x5a);  // seems to match Average 90% Pressure
+                //CHECK_VALUE(data[pos+3], 0x58);  // seems to match Average CPAP
+                break;
+            case 0x07:
+                // AutoBiLevel-related? First appeared on 700X, follows 4, before 8, looks like pressure values
+                //CHECK_VALUE(data[pos], 0x50);    // maybe min IPAP or max titrated EPAP? (matches time at pressure graph, auto bi-level summary)
+                //CHECK_VALUE(data[pos+1], 0x64);  // maybe max IPAP or max titrated IPAP? (matches time at pressure graph, auto bi-level summary)
+                //CHECK_VALUE(data[pos+2], 0x4b);  // seems to match 90% EPAP
+                //CHECK_VALUE(data[pos+3], 0x64);  // seems to match 90% IPAP
+                break;
+            case 0x0b:
+                // CPAP-Check related? follows 3 in CPAP-Check mode
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                //CHECK_VALUE(data[pos+2], 0);  // probably 16-bit value
+                CHECK_VALUE(data[pos+3], 0);
+                //CHECK_VALUE(data[pos+4], 0);  // probably 16-bit value
+                CHECK_VALUE(data[pos+5], 0);
+                //CHECK_VALUE(data[pos+6], 0);  // probably 16-bit value
+                CHECK_VALUE(data[pos+7], 0);
+                //CHECK_VALUE(data[pos+8], 0);  // probably 16-bit value
+                CHECK_VALUE(data[pos+9], 0);
+                //CHECK_VALUES(data[pos+0xa], 20, 60);  // or 0? 44 when changed pressure mid-session?
+                break;
+            case 0x06:
+                // Maybe starting pressure? follows 4, before 8, looks like a pressure value, seen with CPAP-Check and EZ-Start
+                // Maybe ending pressure: matches ending CPAP-Check pressure if it changes mid-session.
+                // TODO: The daily details will show when it changed, so maybe there's an event that indicates a pressure change.
+                //CHECK_VALUES(data[pos], 90, 60);  // maybe CPAP-Check pressure, also matches EZ-Start Pressure
+                break;
+            default:
+                UNEXPECTED_VALUE(code, "known slice code");
+                break;
+        }
+        pos += size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = tt;
+
+    return ok;
 }
 
 
 bool PRS1Import::ImportSummary()
 {
-    if (!summary) return false;
+    if (!summary) {
+        qWarning() << "ImportSummary() called with no summary?";
+        return false;
+    }
 
-    session->set_first(qint64(summary->timestamp) * 1000L);
+    qint64 start = qint64(summary->timestamp) * 1000L;
+    session->set_first(start);
 
     session->setPhysMax(CPAP_LeakTotal, 120);
     session->setPhysMin(CPAP_LeakTotal, 0);
@@ -3769,7 +4321,16 @@ bool PRS1Import::ImportSummary()
     
     for (int i=0; i < summary->m_parsedData.count(); i++) {
         PRS1ParsedEvent* e = summary->m_parsedData.at(i);
-        if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
+        if (e->m_type == PRS1ParsedSliceEvent::TYPE) {
+            PRS1ParsedSliceEvent* s = (PRS1ParsedSliceEvent*) e;
+            qint64 tt = start + qint64(s->m_start) * 1000L;
+            if (!session->m_slices.isEmpty()) {
+                SessionSlice & prevSlice = session->m_slices.last();
+                prevSlice.end = tt;
+            }
+            session->m_slices.append(SessionSlice(tt, tt, (SliceStatus) s->m_value));
+            continue;
+        } else if (e->m_type != PRS1ParsedSettingEvent::TYPE) {
             qWarning() << "Summary had non-setting event:" << (int) e->m_type;
             continue;
         }
@@ -3868,19 +4429,42 @@ bool PRS1Import::ImportSummary()
     if (!ok) {
         return false;
     }
+    
     summary_duration = summary->duration;
 
+    if (summary->duration == 0) {
+        // This does occasionally happen and merely indicates a brief session with no useful data.
+        //qDebug() << summary->sessionid << "duration == 0";
+        return true;  // Don't bail for now, since some summary parsers are still very broken, so we want to proceed to events/waveforms.
+    }
+    
+    // Intentionally don't set the session's duration based on the summary duration.
+    // That only happens in PRS1Import::ParseSession() as a last resort.
+    // TODO: Revisit this once summary parsing is reliable.
+    //session->set_last(...);
+    
     return true;
 }
 
 
 bool PRS1DataChunk::ParseSummary()
 {
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    
+    // TODO: 7 length 3, 8 length 3 have been seen on 960P, add those value checks once we look more closely at the data.
+    if (data[0] == 5) {
+        CHECK_VALUE(this->m_data.size(), 5);  // 4 more bytes before CRC, looks like a timestamp
+    } else if (data[0] == 6) {
+        CHECK_VALUE(this->m_data.size(), 1);  // 0 more bytes before CRC
+    } else {
+        CHECK_VALUE(data[0], 0);
+    }
     // All machines have a first byte zero for clean summary
-    if (this->m_data.constData()[0] != 0) {
-        qDebug() << "Non zero hblock[0] indicator";
+    // TODO: this check should move down into the individual family parsers once the V3 parsing below has been relocated.
+    if (data[0] != 0) {
+        //qDebug() << this->sessionid << "summary first byte" << data[0] << "!= 0, skipping";
         return false;
-    }    
+    }
 
     // TODO: The below mainblock creation is probably wrong. It should move to to its own function when it gets fixed.
     /* Example data block
@@ -3894,7 +4478,6 @@ bool PRS1DataChunk::ParseSummary()
     000000c6@0070: 1a 00 38 04]  */
     if (this->fileVersion == 3) {
         // Parse summary structures into bytearray map according to size given in header block
-        const unsigned char * data = (unsigned char *)this->m_data.constData();
         int size = this->m_data.size();
 
         int pos = 0;
@@ -3910,14 +4493,24 @@ bool PRS1DataChunk::ParseSummary()
             bsize = it.value();
 
             if (val != 1) {
+                if (this->hbdata.contains(val)) {
+                    // We know this is entirely wrong. It will be removed after F3V6 is updated.
+                    //qWarning() << this->sessionid << "duplicate hbdata val" << val;
+                }
                 // store the data block for later reference
                 this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
             } else {
+                if (!this->mainblock.isEmpty()) {
+                    qWarning() << this->sessionid << "duplicate mainblock";
+                }
                 // Parse the nested data structure which contains settings
                 int p2 = 0;
                 do {
                     val = data[pos + p2++];
                     len = data[pos + p2++];
+                    if (this->mainblock.contains(val)) {
+                        qWarning() << this->sessionid << "duplicate mainblock val" << val;
+                    }
                     this->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
                     p2 += len;
                 } while ((p2 < bsize) && ((pos+p2) < size));
@@ -4076,6 +4669,7 @@ bool PRS1Import::ParseEvents()
 
         } else {
             if (!session->settings.contains(CPAP_Pressure) && !session->settings.contains(CPAP_PressureMin)) {
+                qWarning() << session->session() << "broken summary, missing pressure";
                 session->settings[CPAP_BrokenSummary] = true;
 
                 //session->set_last(session->first());
@@ -4169,7 +4763,7 @@ QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *>
 }
 
 
-bool PRS1Import::ParseOximetery()
+bool PRS1Import::ParseOximetry()
 {
     int size = oximetry.size();
 
@@ -4214,12 +4808,21 @@ bool PRS1Import::ParseOximetery()
     return true;
 }
 
+
+static QString ts(qint64 msecs)
+{
+    // TODO: make this UTC so that tests don't vary by where they're run
+    return QDateTime::fromMSecsSinceEpoch(msecs).toString(Qt::ISODate);
+}
+
+
 bool PRS1Import::ParseWaveforms()
 {
     int size = waveforms.size();
     quint64 s1, s2;
 
 
+    int discontinuities = 0;
     qint64 lastti=0;
     EventList * bnd = nullptr; // Breathing Not Detected
 
@@ -4235,13 +4838,38 @@ bool PRS1Import::ParseWaveforms()
         quint64 ti = quint64(waveform->timestamp) * 1000L;
         quint64 dur = qint64(waveform->duration) * 1000L;
 
-        quint64 diff = ti - lastti;
-        if ((lastti != 0) && diff > 0) {
-            qDebug() << waveform->sessionid << waveform->timestamp << "BND?" << (diff / 1000L) << "=" << waveform->timestamp << "-" << (lastti / 1000L);
+        qint64 diff = ti - lastti;
+        if ((lastti != 0) && (diff == 1000 || diff == -1000)) {
+            // TODO: Evidently the machines' internal clock drifts slightly, and in some sessions that
+            // means two adjacent (5-minute) waveform chunks have have a +/- 1 second difference in
+            // their notion of the correct time, since the machines only record time at 1-second
+            // resolution. Presumably the real drift is fractional, but there's no way to tell from
+            // the data.
+            //
+            // Encore apparently drops the second chunk entirely if it overlaps with the first
+            // (even by 1 second), and inserts a 1-second gap in the data if it's 1 second later than
+            // the first ended.
+            //
+            // At worst in the former case it seems preferable to drop the overlap and then one
+            // additional second to mark the discontinuity. But depending how often these drifts
+            // occur, it may be possible to adjust all the data so that it's continuous. Alternatively,
+            // if it turns out overlapping waveform data always has overlapping identical values,
+            // it might be possible to drop the duplicated sample. Though that would mean that
+            // gaps are real, though potentially only by a single sample.
+            //
+            qDebug() << waveform->sessionid << "waveform discontinuity:" << (diff / 1000L) << "s @" << ts(waveform->timestamp * 1000L);
+            discontinuities++;
         }
-        if ((diff > 500) && (lastti != 0)) {
+        if ((diff > 1000) && (lastti != 0)) {
             if (!bnd) {
                 bnd = session->AddEventList(PRS1_BND, EVL_Event);
+            }
+            // TODO: The machines' notion of BND appears to derive from the summary (maskoff/maskon)
+            // slices, but the waveform data (when present) does seem to agree. This should be confirmed
+            // once all summary parsers support slices.
+            if ((diff / 1000L) % 60) {
+                // Thus far all maskoff/maskon gaps have been multiples of 1 minute.
+                qDebug() << waveform->sessionid << "BND?" << (diff / 1000L) << "=" << ts(waveform->timestamp * 1000L) << "-" << ts(lastti);
             }
             bnd->AddEvent(ti, double(diff)/1000.0);
         }
@@ -4280,6 +4908,10 @@ bool PRS1Import::ParseWaveforms()
         }
         lastti = dur+ti;
     }
+    
+    if (discontinuities > 1) {
+        qWarning() << session->session() << "multiple discontinuities!" << discontinuities;
+    }
 
     return true;
 }
@@ -4297,39 +4929,95 @@ void PRS1Import::run()
 
 bool PRS1Import::ParseSession(void)
 {
+    bool ok = false;
     bool save = false;
     session = new Session(mach, sessionid);
 
-    if ((compliance && ParseCompliance()) || (summary && ImportSummary())) {
-        if (event && !ParseEvents()) {
-        }
-
-        // Parse .005 Waveform file
-        waveforms = loader->ParseFile(wavefile);
-        waveforms = CoalesceWaveformChunks(waveforms);
-        if (session->eventlist.contains(CPAP_FlowRate)) {
-            if (waveforms.size() > 0) {
-                // Delete anything called "Flow rate" picked up in the events file if real data is present
-                session->destroyEvent(CPAP_FlowRate);
+    do {
+        // TODO: There should be a way to distinguish between no-data-to-import vs. parsing errors
+        // (once we figure out what's benign and what isn't).
+        if (compliance != nullptr) {
+            ok = ImportCompliance();
+            if (!ok) {
+                //qWarning() << sessionid << "Error parsing compliance, skipping session";
+                break;
             }
         }
-        ParseWaveforms();
+        if (summary != nullptr) {
+            if (compliance != nullptr) {
+                qWarning() << sessionid << "Has both compliance and summary?!";
+                // Never seen this, but try the summary anyway.
+            }
+            ok = ImportSummary();
+            if (!ok) {
+                //qWarning() << sessionid << "Error parsing summary, skipping session";
+                break;
+            }
+        }
+        if (compliance == nullptr && summary == nullptr) {
+            qWarning() << sessionid << "No compliance or summary, skipping session";
+            break;
+        }
+        
+        if (event != nullptr) {
+            ok = ParseEvents();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing events, proceeding anyway?";
+            }
+        }
 
-        // Parse .006 Waveform file
-        oximetry = loader->ParseFile(oxifile);
-        oximetry = CoalesceWaveformChunks(oximetry);
-        ParseOximetery();
+        if (!wavefile.isEmpty()) {
+            // Parse .005 Waveform file
+            waveforms = loader->ParseFile(wavefile);
+            waveforms = CoalesceWaveformChunks(waveforms);
+            if (session->eventlist.contains(CPAP_FlowRate)) {
+                if (waveforms.size() > 0) {
+                    // Delete anything called "Flow rate" picked up in the events file if real data is present
+                    session->destroyEvent(CPAP_FlowRate);
+                }
+            }
+            ok = ParseWaveforms();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing waveforms, proceeding anyway?";
+            }
+        }
+
+        if (!oxifile.isEmpty()) {
+            // Parse .006 Waveform file
+            oximetry = loader->ParseFile(oxifile);
+            oximetry = CoalesceWaveformChunks(oximetry);
+            ok = ParseOximetry();
+            if (!ok) {
+                qWarning() << sessionid << "Error parsing oximetry, proceeding anyway?";
+            }
+        }
 
         if (session->first() > 0) {
             if (session->last() < session->first()) {
-                // if last isn't set, duration couldn't be gained from summary, parsing events or waveforms..
-                // This session is dodgy, so kill it
+                // Compliance uses set_last() to set the session's last timestamp, so it
+                // won't reach this point.
+                if (compliance != nullptr) {
+                    qWarning() << sessionid << "compliance didn't set session end?";
+                }
+
+                // Events and waveforms use updateLast() to set the session's last timestamp,
+                // so they should only reach this point if there was a problem parsing them.
+                if (event != nullptr || !wavefile.isEmpty() || !oxifile.isEmpty()) {
+                    qWarning() << sessionid << "Downgrading session to summary only";
+                }
                 session->setSummaryOnly(true);
+
+                // Only use the summary's duration if the session's duration couldn't be
+                // derived from events or waveforms.
+                // TODO: Revisit this once summary parsing is reliable.
                 session->really_set_last(session->first()+(qint64(summary_duration) * 1000L));
             }
             save = true;
+        } else {
+            qWarning() << sessionid << "missing start time";
         }
-    }
+    } while (false);
+    
     return save;
 }
 
@@ -4492,8 +5180,8 @@ PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
         // Make sure the calculated CRC over the entire chunk (header and data) matches the stored CRC.
         if (chunk->calcCrc != chunk->storedCrc) {
             // corrupt data block.. bleh..
-            qDebug() << chunk->m_path << "@" << chunk->m_filepos << "block CRC calc" << hex << chunk->calcCrc << "!= stored" << hex << chunk->storedCrc;
-            //break;  // don't break to avoid changing behavior (for now)
+            qWarning() << chunk->m_path << "@" << chunk->m_filepos << "block CRC calc" << hex << chunk->calcCrc << "!= stored" << hex << chunk->storedCrc;
+            break;
         }
 
         // Only return the chunk if it has passed all tests above.
@@ -4538,7 +5226,7 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         }
         if (this->htype != PRS1_HTYPE_NORMAL && this->htype != PRS1_HTYPE_INTERVAL) {
             qWarning() << this->m_path << "unexpected htype:" << this->htype;
-            //break;  // don't break to avoid changing behavior (for now)
+            break;
         }
 
         // Read format-specific variable-length header data.
@@ -4675,6 +5363,7 @@ bool PRS1DataChunk::ReadWaveformHeader(QFile & f)
         header = (unsigned char *)this->m_header.data();
 
         // Parse the variable-length waveform information.
+        // TODO: move these checks into the parser, after the header checksum has been verified
         int pos = 0x13;
         for (int i = 0; i < wvfm_signals; ++i) {
             quint8 kind = header[pos];

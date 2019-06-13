@@ -11,6 +11,6 @@
 
 #include "../SleepLib/session.h"
 
-void SessionToYaml(QString filepath, Session* session);
+void SessionToYaml(QString filepath, Session* session, bool ok);
 
 #endif // SESSIONTESTS_H
