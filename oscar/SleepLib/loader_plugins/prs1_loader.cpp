@@ -3903,7 +3903,7 @@ void PRS1DataChunk::ParseHumidifierSettingF0V6(unsigned char byte1, unsigned cha
     if (humidifier_present) {
         if (humidlevel > 5 || humidlevel < 0) UNEXPECTED_VALUE(humidlevel, "0-5");  // 0=off is valid when a humidifier is attached
         if (humid == 2) {  // heated tube
-            if (tubelevel > 5 || tubelevel < 1) UNEXPECTED_VALUE(tubelevel, "1-5");  // TODO: maybe this is only if heated tube?
+            if (tubelevel > 5 || tubelevel < 0) UNEXPECTED_VALUE(tubelevel, "0-5");  // TODO: maybe this is only if heated tube? 0=off is valid even in heated tube mode
         }
     }
 
@@ -3975,8 +3975,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 break;
             case 1: // ???
-                if (data[pos] != 0) {
-                    CHECK_VALUES(data[pos], 1, 2);  // 1 when EZ-Start is enabled? 2 when Auto-Trial?
+                if (data[pos] != 0 && data[pos] != 3) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 1 when EZ-Start is enabled? 2 when Auto-Trial? 3 when Auto-Trial is off or Opti-Start isn't off?
                 }
                 if (len == 2) {  // 400G has extra byte
                     CHECK_VALUE(data[pos+1], 0);
@@ -3992,7 +3992,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 min_pressure = data[pos];  // Min Setting on pressure graph
                 max_pressure = data[pos+1];  // Max Setting on pressure graph
                 pressure = data[pos+2];  // CPAP on pressure graph and CPAP-Check Pressure on settings detail
-                CHECK_VALUE(pressure, 0x5a);
+                // This seems to be the initial pressure. If the pressure changes mid-session, the pressure
+                // graph will show either the changed pressure or the majority pressure, not sure which.
+                // The time of change is most likely in the events file. See slice 6 for ending pressure.
+                //CHECK_VALUE(pressure, 0x5a);
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE, pressure));
                 break;
             case 0x0d:  // AutoCPAP pressure setting
@@ -4025,9 +4028,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x10: // Auto-Trial mode
                 CHECK_VALUE(cpapmode, MODE_CPAP);  // the mode setting is CPAP, even though it's operating in APAP mode
                 cpapmode = MODE_APAP;  // but categorize it now as APAP, since that's what it's really doing
-                CHECK_VALUE(data[pos], 30);  // Auto-Trial Duration
+                CHECK_VALUES(data[pos], 30, 5);  // Auto-Trial Duration
                 min_pressure = data[pos+1];
                 max_pressure = data[pos+2];
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MIN, min_pressure));
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PRESSURE_MAX, max_pressure));
                 break;
@@ -4047,11 +4051,11 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 break;
             case 0x2e:
                 if (data[pos] != 0) {
-                    CHECK_VALUES(data[pos], 0x80, 0x90);  // maybe flex related? 0x80 when c-flex? 0x90 when c-flex+?, 0x00 when no flex
+                    CHECK_VALUES(data[pos], 0x80, 0x90);  // maybe flex related? 0x80 when c-flex? 0x90 when c-flex+ or A-flex?, 0x00 when no flex
                 }
                 break;
-            case 0x2f:
-                CHECK_VALUE(data[pos], 0);  // maybe flex related? 0x00 when c-flex and c-flex+?
+            case 0x2f:  // Flex lock
+                CHECK_VALUES(data[pos], 0, 0x80);
                 break;
             case 0x30:  // Flex level
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_FLEX_LEVEL, data[pos]));
@@ -4075,8 +4079,10 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                     CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1, 22 = 0?
                 }
                 break;
-            case 0x40:  // new to 400G, alternate tubing type? appears after 0x39 and before 0x3c, 12mm = 3?
-                CHECK_VALUE(data[pos], 3);
+            case 0x40:  // new to 400G, also seen on 500X110, alternate tubing type? appears after 0x39 and before 0x3c
+                if (data[pos] != 3) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 1 = 15mm, 2 = 15HT, 3 = 12mm
+                }
                 break;
             case 0x3c:
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe show AHI?
@@ -4186,10 +4192,10 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 CHECK_VALUE(data[pos+5], 0x00);
                 //CHECK_VALUES(data[pos+6], 0x1e, 0x35);  // probably 16-bit value
                 CHECK_VALUE(data[pos+7], 0x00);
-                //CHECK_VALUES(data[pos+8], 0x8c, 0x4c);  // probably 16-bit value
-                CHECK_VALUE(data[pos+9], 0x00);
-                //CHECK_VALUES(data[pos+0xa], 0xbb, 0x00);  // probably 16-bit value
-                CHECK_VALUE(data[pos+0xb], 0x00);
+                //CHECK_VALUES(data[pos+8], 0x8c, 0x4c);  // 16-bit value, not sure what
+                //CHECK_VALUE(data[pos+9], 0x00);
+                //CHECK_VALUES(data[pos+0xa], 0xbb, 0x00);  // 16-bit minutes in large leak
+                //CHECK_VALUE(data[pos+0xb], 0x00);
                 //CHECK_VALUES(data[pos+0xc], 0x15, 0x02);  // probably 16-bit value
                 CHECK_VALUE(data[pos+0xd], 0x00);
                 //CHECK_VALUES(data[pos+0xe], 0x01, 0x00);  // 16-bit VS count
@@ -4258,22 +4264,23 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 //CHECK_VALUE(data[pos+3], 0x64);  // seems to match 90% IPAP
                 break;
             case 0x0b:
-                // CPAP-Check related? follows 3, so first two bytes may be time delta
-                CHECK_VALUE(data[pos], 3);
-                CHECK_VALUE(data[pos+1], 0);
-                CHECK_VALUE(data[pos+2], 0);
+                // CPAP-Check related? follows 3 in CPAP-Check mode
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                //CHECK_VALUE(data[pos+2], 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+3], 0);
-                CHECK_VALUE(data[pos+4], 0);
+                //CHECK_VALUE(data[pos+4], 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+5], 0);
-                CHECK_VALUE(data[pos+6], 0);
+                //CHECK_VALUE(data[pos+6], 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+7], 0);
-                CHECK_VALUE(data[pos+8], 0);
+                //CHECK_VALUE(data[pos+8], 0);  // probably 16-bit value
                 CHECK_VALUE(data[pos+9], 0);
-                CHECK_VALUE(data[pos+0xa], 0);
+                //CHECK_VALUES(data[pos+0xa], 20, 60);  // or 0? 44 when changed pressure mid-session?
                 break;
             case 0x06:
-                // CPAP-Check related? follows 4, before 8, looks like a pressure value
-                CHECK_VALUES(data[pos], 90, 60);  // maybe CPAP-Check pressure, also matches EZ-Start Pressure
+                // Maybe starting pressure? follows 4, before 8, looks like a pressure value, seen with CPAP-Check and EZ-Start
+                // Maybe ending pressure: matches ending CPAP-Check pressure if it changes mid-session.
+                // TODO: The daily details will show when it changed, so maybe there's an event that indicates a pressure change.
+                //CHECK_VALUES(data[pos], 90, 60);  // maybe CPAP-Check pressure, also matches EZ-Start Pressure
                 break;
             default:
                 UNEXPECTED_VALUE(code, "known slice code");
