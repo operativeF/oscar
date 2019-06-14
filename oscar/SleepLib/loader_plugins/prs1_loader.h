@@ -164,8 +164,8 @@ public:
     //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for fileversion 2 machines: F0V234, F5V012, and maybe others
     void ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing=true);
 
-    //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for family 0 CPAP/APAP family version 6 machines
-    void ParseHumidifierSettingF0V6(unsigned char byte1, unsigned char byte2, bool add_setting=false);
+    //! \brief Parse humidifier setting bytes from a .000 or .001 containing compliance/summary data for fileversion 3 machines
+    void ParseHumidifierSettingV3(unsigned char byte1, unsigned char byte2, bool add_setting=false);
 
     //! \brief Figures out which Event Parser to call, based on machine family/version and calls it.
     bool ParseEvents(CPAPMode mode);
@@ -201,8 +201,11 @@ protected:
     //! \brief Extract the stored CRC from the end of the data of a PRS1 chunk
     bool ExtractStoredCrc(int size);
 
-    //! \brief Parse a settings slice from a .000 (and maybe .001) file
+    //! \brief Parse a settings slice from a .000 and .001 file
     bool ParseSettingsF0V6(const unsigned char* data, int size);
+
+    //! \brief Parse a settings slice from a .000 and .001 file
+    bool ParseSettingsF5V3(const unsigned char* data, int size);
 };
 
 
