@@ -245,7 +245,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "961P", 5, 1 },
     { "960T", 5, 2 },
     { "900X110", 5, 3 },  // "DreamStation BiPAP autoSV"
-    { "900X120", 5, 3 },
+    { "900X120", 5, 3 },  // "DreamStation BiPAP autoSV"
     
     { "1061T", 3, 3 },
     { "1160P", 3, 3 },
@@ -3748,40 +3748,6 @@ void PRS1DataChunk::ParseHumidifierSettingV2(int humid, bool supportsHeatedTubin
 }
 
 
-#if 0
-bool PRS1DataChunk::ParseSummaryF5V3(void)
-{
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_ASV_VARIABLE_EPAP));
-
-    unsigned char * pressureBlock = (unsigned char *)mainblock[0x0a].data();
-
-    int epapHi = pressureBlock[0];
-    int epapRange = pressureBlock[2];
-    int epapLo = epapHi - epapRange;
-
-    int minps = pressureBlock[3] ;
-    int maxps = pressureBlock[4]+epapLo;
-
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, epapHi));
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, epapLo));
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, minps));
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, maxps));
-    
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, epapLo + minps));
-    this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, qMin(250, epapHi + maxps)));  // 25.0 cmH2O max
-
-    if (hbdata[4].size() < 2) {
-        qDebug() << "summary missing duration section:" << this->sessionid;
-        return false;
-    }
-    unsigned char * durBlock = (unsigned char *)hbdata[4].data();
-    this->duration = durBlock[0] | durBlock[1] << 8;
-
-    return true;
-}
-#endif
-
-
 // The below is based on fixing the fileVersion == 3 parsing in ParseSummary() based
 // on our understanding of slices from F0V23. The switch values come from sample files.
 bool PRS1DataChunk::ParseComplianceF0V6(void)
@@ -4346,7 +4312,8 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
         qWarning() << this->sessionid << "summary data too short:" << chunk_size;
         return false;
     }
-    if (chunk_size < 120) UNEXPECTED_VALUE(chunk_size, ">= 120");
+    // We've once seen a short summary with no mask-on/off: just equipment-on, settings, 9, equipment-off
+    if (chunk_size < 75) UNEXPECTED_VALUE(chunk_size, ">= 75");
 
     bool ok = true;
     int pos = 0;
@@ -4412,11 +4379,11 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
             case 6:  // Patient statistics per mask-on slice
                 // These get averaged on a time-weighted basis in the final report.
                 // Where is H count?
-                CHECK_VALUE(data[pos], 0x00);  // probably 16-bit value
+                //CHECK_VALUE(data[pos], 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+1], 0x00);
                 //CHECK_VALUE(data[pos+2], 0x00);  // 16-bit OA count
                 //CHECK_VALUE(data[pos+3], 0x00);
-                CHECK_VALUE(data[pos+4], 0x00);  // probably 16-bit value
+                //CHECK_VALUE(data[pos+4], 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+5], 0x00);
                 //CHECK_VALUE(data[pos+6], 0x00);  // 16-bit CA count
                 //CHECK_VALUE(data[pos+7], 0x00);
@@ -4426,9 +4393,9 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
                 //CHECK_VALUE(data[pos+0xb], 0x00);
                 //CHECK_VALUE(data[pos+0xc], 0x14);  // 16-bit VS count
                 //CHECK_VALUE(data[pos+0xd], 0x00);
-                CHECK_VALUE(data[pos+0xe], 0x05);  // probably 16-bit value (VS count in F0V6)?
+                //CHECK_VALUE(data[pos+0xe], 0x05);  // probably 16-bit value (VS count in F0V6)?
                 CHECK_VALUE(data[pos+0xf], 0x00);
-                CHECK_VALUE(data[pos+0x10], 0x00);  // probably 16-bit value (maybe H count in F0V6?)
+                //CHECK_VALUE(data[pos+0x10], 0x00);  // probably 16-bit value (maybe H count in F0V6?)
                 CHECK_VALUE(data[pos+0x11], 0x00);
                 //CHECK_VALUE(data[pos+0x12], 0x02);  // 16-bit FL count
                 //CHECK_VALUE(data[pos+0x13], 0x00);
@@ -4448,7 +4415,7 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
                 //CHECK_VALUE(data[pos+2], 0x01);  // 0x08
                 //CHECK_VALUE(data[pos+3], 0x17);  // 0x16, 0x18
-                CHECK_VALUE(data[pos+4], 0x00);
+                //CHECK_VALUE(data[pos+4], 0x00);
                 //CHECK_VALUE(data[pos+5], 0x29);  // 0x2a, 0x28, 0x26, 0x36
                 //CHECK_VALUE(data[pos+6], 0x01);  // 0x00
                 CHECK_VALUE(data[pos+7], 0x00);
@@ -4556,7 +4523,7 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 break;
             */
             case 0x2b:  // Ramp Type
-                CHECK_VALUE(data[pos], 0);  // 0 == "Linear", 0x80 = "SmartRamp"? (it was for F0V6)
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0 == "Linear", 0x80 = "SmartRamp"
                 break;
             case 0x2c:  // Ramp Time
                 if (data[pos] != 0) {  // 0 == ramp off, and ramp pressure setting doesn't appear
@@ -4586,27 +4553,21 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
             case 0x35:  // Humidifier setting
                 this->ParseHumidifierSettingV3(data[pos], data[pos+1], true);
                 break;
-            case 0x36:
-                CHECK_VALUE(data[pos], 0);
+            case 0x36:  // Mask Resistance Lock
+                CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 = locked
                 break;
-            case 0x38:  // Mask Resistance?
-                CHECK_VALUE(data[pos], 0);
-                /*
+            case 0x38:  // Mask Resistance
                 if (data[pos] != 0) {  // 0 == mask resistance off
                     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
                 }
-                */
                 break;
             case 0x39:
                 CHECK_VALUE(data[pos], 0);  // 0x80 maybe auto-trial in F0V6?
                 break;
-            case 0x3b:
-                CHECK_VALUE(data[pos], 1);  // 15mm = 1 on ASV
-                /*
+            case 0x3b:  // Tubing Type
                 if (data[pos] != 0) {
-                    CHECK_VALUES(data[pos], 2, 1);  // tubing type? 15HT = 2, 15 = 1, 22 = 0?
+                    CHECK_VALUES(data[pos], 2, 1);  // 15HT = 2, 15 = 1, 22 = 0, though report only says "15" for 15HT
                 }
-                */
                 break;
             case 0x3c:
                 CHECK_VALUES(data[pos], 0, 0x80);  // 0x80 maybe show AHI?
