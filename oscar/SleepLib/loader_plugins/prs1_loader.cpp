@@ -4403,53 +4403,54 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
                 tt += data[pos] | (data[pos+1] << 8);
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
                 break;
-            case 5:  // new to F5V3 vs. F0V6, comes right after mask off
-                //CHECK_VALUE(data[pos], 0x28);  // looks like 90% EPAP * 8.0
-                //CHECK_VALUE(data[pos+1], 0x23);  // looks like average EPAP * 8.0
-                //CHECK_VALUE(data[pos+2], 0x24);  // looks like 90% PS * 8.0
-                //CHECK_VALUE(data[pos+3], 0x17);  // looks like average PS * 8.0
+            case 5:  // ASV pressure stats per mask-on slice
+                //CHECK_VALUE(data[pos], 0x28);  // 90% EPAP
+                //CHECK_VALUE(data[pos+1], 0x23);  // average EPAP
+                //CHECK_VALUE(data[pos+2], 0x24);  // 90% PS
+                //CHECK_VALUE(data[pos+3], 0x17);  // average PS
                 break;
-            case 6:
-                // Maybe statistics of some kind, given similarity in length to F0V6 slice 8?
+            case 6:  // Patient statistics per mask-on slice
+                // These get averaged on a time-weighted basis in the final report.
+                // Where is H count?
                 CHECK_VALUE(data[pos], 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+1], 0x00);
-                CHECK_VALUE(data[pos+2], 0x00);  // probably 16-bit value (maybe OA count in F0V6?)
-                CHECK_VALUE(data[pos+3], 0x00);
+                //CHECK_VALUE(data[pos+2], 0x00);  // 16-bit OA count
+                //CHECK_VALUE(data[pos+3], 0x00);
                 CHECK_VALUE(data[pos+4], 0x00);  // probably 16-bit value
                 CHECK_VALUE(data[pos+5], 0x00);
-                CHECK_VALUE(data[pos+6], 0x00);  // probably 16-bit value
-                CHECK_VALUE(data[pos+7], 0x00);
-                CHECK_VALUE(data[pos+8], 0x00);  // probably 16-bit value
-                CHECK_VALUE(data[pos+9], 0x00);
-                CHECK_VALUE(data[pos+0xa], 0x0f);  // 16-bit (minutes in large leak in F0V6)? (minutes in PB?)
-                CHECK_VALUE(data[pos+0xb], 0x00);
-                CHECK_VALUE(data[pos+0xc], 0x14);  // probably 16-bit value (VS?)
-                CHECK_VALUE(data[pos+0xd], 0x00);
-                CHECK_VALUE(data[pos+0xe], 0x05);  // 16-bit (VS count in F0V6)?
+                //CHECK_VALUE(data[pos+6], 0x00);  // 16-bit CA count
+                //CHECK_VALUE(data[pos+7], 0x00);
+                //CHECK_VALUE(data[pos+8], 0x00);  // 16-bit minutes in LL
+                //CHECK_VALUE(data[pos+9], 0x00);
+                //CHECK_VALUE(data[pos+0xa], 0x0f);  // 16-bit minutes in PB
+                //CHECK_VALUE(data[pos+0xb], 0x00);
+                //CHECK_VALUE(data[pos+0xc], 0x14);  // 16-bit VS count
+                //CHECK_VALUE(data[pos+0xd], 0x00);
+                CHECK_VALUE(data[pos+0xe], 0x05);  // probably 16-bit value (VS count in F0V6)?
                 CHECK_VALUE(data[pos+0xf], 0x00);
                 CHECK_VALUE(data[pos+0x10], 0x00);  // probably 16-bit value (maybe H count in F0V6?)
                 CHECK_VALUE(data[pos+0x11], 0x00);
-                CHECK_VALUE(data[pos+0x12], 0x02);  // probably 16-bit value (FL?)
-                CHECK_VALUE(data[pos+0x13], 0x00);
-                CHECK_VALUE(data[pos+0x14], 0x28);  // 0x69 (105)
-                //CHECK_VALUE(data[pos+0x15], 0x17);  // maybe average total leak?
-                CHECK_VALUE(data[pos+0x16], 0x5b);  // 0x7d (125)
-                CHECK_VALUE(data[pos+0x17], 0x09);  // 0x00
+                //CHECK_VALUE(data[pos+0x12], 0x02);  // 16-bit FL count
+                //CHECK_VALUE(data[pos+0x13], 0x00);
+                //CHECK_VALUE(data[pos+0x14], 0x28);  // 0x69 (105)
+                //CHECK_VALUE(data[pos+0x15], 0x17);  // average total leak
+                //CHECK_VALUE(data[pos+0x16], 0x5b);  // 0x7d (125)
+                //CHECK_VALUE(data[pos+0x17], 0x09);  // 0x00
                 CHECK_VALUE(data[pos+0x18], 0x00);
-                //CHECK_VALUE(data[pos+0x19], 0x10);  // maybe average breath rate?
-                //CHECK_VALUE(data[pos+0x1a], 0x2d);  // maybe average TV / 10?
-                //CHECK_VALUE(data[pos+0x1b], 0x63);  // maybe average % PTB?
-                //CHECK_VALUE(data[pos+0x1c], 0x07);  // maybe average minute vent?
-                CHECK_VALUE(data[pos+0x1d], 0x06);  // 0x51 (81)
+                //CHECK_VALUE(data[pos+0x19], 0x10);  // average breath rate
+                //CHECK_VALUE(data[pos+0x1a], 0x2d);  // average TV / 10
+                //CHECK_VALUE(data[pos+0x1b], 0x63);  // average % PTB
+                //CHECK_VALUE(data[pos+0x1c], 0x07);  // average minute vent
+                //CHECK_VALUE(data[pos+0x1d], 0x06);  // 0x51 (81)
                 break;
             case 2:  // Equipment Off
                 tt += data[pos] | (data[pos+1] << 8);
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
-                CHECK_VALUE(data[pos+2], 0x01);  // 0x08
-                CHECK_VALUE(data[pos+3], 0x17);  // 0x16, 0x18
+                //CHECK_VALUE(data[pos+2], 0x01);  // 0x08
+                //CHECK_VALUE(data[pos+3], 0x17);  // 0x16, 0x18
                 CHECK_VALUE(data[pos+4], 0x00);
-                CHECK_VALUE(data[pos+5], 0x29);  // 0x2a, 0x28, 0x26
-                CHECK_VALUE(data[pos+6], 0x01);  // 0x00
+                //CHECK_VALUE(data[pos+5], 0x29);  // 0x2a, 0x28, 0x26, 0x36
+                //CHECK_VALUE(data[pos+6], 0x01);  // 0x00
                 CHECK_VALUE(data[pos+7], 0x00);
                 CHECK_VALUE(data[pos+8], 0x00);
                 break;
@@ -4567,7 +4568,7 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 break;
             case 0x2e:
                 CHECK_VALUE(data[pos], 0);
-                CHECK_VALUE(data[pos+1], 3);  // Bi-Flex level?
+                //CHECK_VALUES(data[pos+1], 2, 3);  // Bi-Flex level
                 /*
                 if (data[pos] != 0) {
                     CHECK_VALUES(data[pos], 0x80, 0x90);  // maybe flex related? 0x80 when c-flex? 0x90 when c-flex+ or A-flex?, 0x00 when no flex
