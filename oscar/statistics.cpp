@@ -596,7 +596,7 @@ QString Statistics::getUserInfo () {
     QString address = p_profile->user->address();
     address.replace("\n", "<br/>");
 
-    QString userinfo;
+    QString userinfo = "";
 
     if (!p_profile->user->firstName().isEmpty()) {
         userinfo = tr("Name: %1, %2").arg(p_profile->user->lastName()).arg(p_profile->user->firstName()) + "<br/>";
@@ -613,6 +613,9 @@ QString Statistics::getUserInfo () {
             userinfo +=  tr("Address:")+"<br/>"+address;
         }
     }
+
+    while (userinfo.length() > 0 && userinfo.endsWith("<br/>"))  // Strip trailing newlines
+        userinfo = userinfo.mid(0, userinfo.length()-5);
 
     return userinfo;
 }
@@ -633,15 +636,15 @@ QString Statistics::generateHeader(bool showheader)
         html += "<div align=center><table class=curved width='99%'>"
             "<tr>"
                 "<td align='left' valign='middle'>" + getUserInfo() + "</td>"
-                "<td align='right' valign='middle' width='150'>"
+                "<td align='right' valign='middle' width='200'>"
                     "<font size='+2'>" + STR_TR_OSCAR + "&nbsp;&nbsp;&nbsp;</font><br/>"
                     "<font size='+1'>" + QObject::tr("Usage Statistics") + "&nbsp;&nbsp;&nbsp;</font>"
                 "</td>"
-                "<td align='right' valign='middle' width='150'>" + resizeHTMLPixmap(logoPixmap,120,120)+"&nbsp;&nbsp;&nbsp;<br/>"
+                "<td align='right' valign='middle' width='110'>" + resizeHTMLPixmap(logoPixmap,80,80)+"&nbsp;&nbsp;&nbsp;<br/>"
                 "</td>"
             "</tr>"
             "</table>"
-            "</div><br/>";
+            "</div>";
         }
     return html;
 }
@@ -1194,36 +1197,10 @@ QString Statistics::GenerateHTML()
     return htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
 }
 
-int Statistics::printBlock (QString text, QPrinter *printer, QPainter *painter, int yPos) {
-    QTextEdit block;
-    block.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    QRect rect = printer->pageRect();
-
-    block.setHtml(text);
-    qDebug() << "initial text dimensions, width" << block.size().width() << "height" << block.size().height();
-    block.resize(rect.width()/4, rect.height()/4);
-    block.setFrameShape(QFrame::NoFrame);
-    QSize dims = block.size();
-    qDebug() << "resized text dimensions, width" << dims.width() << "height" << dims.height();
-
-    double xscale = printer->pageRect().width()/double(block.width());
-    double yscale = printer->pageRect().height()/double(block.height());
-    double scale = qMin(xscale, yscale);
-    painter->translate(printer->paperRect().x() + printer->pageRect().width()/2,
-                       printer->paperRect().y() + printer->pageRect().height()/2);
-    painter->scale(scale, scale);
-    painter->translate(-block.width()/2, -block.height()/2);
-
-    block.render(painter, QPoint(0,yPos));
-
-    return yPos;
-}
-
 // Print the Statistics page on printer
 void Statistics::printReport(QWidget * parent) {
 
-    QPrinter printer(QPrinter::HighResolution);     //The QPrinter class is a paint device that paints on a printer
+    QPrinter printer(QPrinter::ScreenResolution); // ScreenResolution required for graphics sizing
 
 #ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
@@ -1243,49 +1220,25 @@ void Statistics::printReport(QWidget * parent) {
 
     printer.setPrintRange(QPrinter::AllPages);
     printer.setOrientation(QPrinter::Portrait);
-
-// Setting default page orientation to landscape for statistics view?
-//        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//            printer.setOrientation(QPrinter::Landscape);
-//        }
-
-//  printer.setPageSize(QPrinter::A4);   // Could be QPrinter::Letter
-//  printer.setOutputFormat(QPrinter::PdfFormat);
-
-    printer.setFullPage(false); // Print only on printable area of page and not in non-printable margins
-//    printer.setFullPage(true); // Print only on printable area of page and not in non-printable margins
+    printer.setFullPage(false);     // Print only on printable area of page and not in non-printable margins
     printer.setNumCopies(1);
-    printer.setResolution(1200);
-    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter); // Set physical margins to 5 mm, which must be within printable area
-                                                              // 5 mm is pretty small and less than most laser printers allow, so
-                                                              // this will amount to default printer margins
+    printer.setPageMargins(10, 10, 10, 10, QPrinter::Millimeter);
 
     // Show print dialog to user and allow them to change settings as desired
     QPrintDialog pdlg(&printer, parent);
 
     if (pdlg.exec() == QPrintDialog::Accepted) {
 
-//        QString size = "";
-        QPainter painter;
-        painter.begin(&printer);
-        int yPos = 0;
-/*        QTextDocument doc;
-        doc.setPageSize(QSizeF(printer.pageRect().size()));
-        doc.setDocumentMargin((qreal) 0.5);
-        QFont font("Times New Roman", 12);
-        doc.setDefaultFont(font);
+        QTextDocument doc;
+        QSizeF printArea = printer.pageRect().size();
+    qDebug() << "print area" << printArea;
+        doc.setPageSize(printArea);  // Set document to print area, removing default 2cm margins
+        QFont sansFont;
+        sansFont.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
+        doc.setDefaultFont(sansFont);
+    qDebug() << "Default print font is" << doc.defaultFont();
         doc.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
-        doc.setDefaultFont(font);
         doc.print(&printer);
-*/
-        yPos = Statistics::printBlock(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter, &printer, &painter, yPos);
-/*        yPos = Statistics::printBlock(size+htmlReportHeader, &printer, &painter, yPos);
-        yPos = Statistics::printBlock(size+htmlUsage, &printer, &painter, yPos);
-        yPos = Statistics::printBlock(size+htmlMachineSettings, &printer, &painter, yPos);
-        yPos = Statistics::printBlock(size+htmlMachines, &printer, &painter, yPos);
-        yPos = Statistics::printBlock(size+htmlReportFooter, &printer, &painter, yPos);
-*/
-        painter.end();
     }
 }
 

@@ -185,8 +185,6 @@ class Statistics : public QObject
     QString GenerateRXChanges();
     QString GenerateCPAPUsage();
 
-    static int printBlock (QString text, QPrinter *printer, QPainter *painter, int yPos);
-
     // Using a map to maintain order
     QList<StatisticsRow> rows;
     QMap<StatCalcType, QString> calcnames;
