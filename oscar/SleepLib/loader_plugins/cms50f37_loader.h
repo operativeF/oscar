@@ -82,14 +82,10 @@ protected slots:
     virtual void resetImportTimeout();
     virtual void startImportTimeout();
     virtual void shutdownPorts();
-
-
-
     void nextCommand();
 
 
 protected:
-
     bool readSpoRFile(const QString & path);
     virtual void processBytes(QByteArray bytes);
 
@@ -100,11 +96,8 @@ protected:
     void sendCommand(quint8 c);
     void sendCommand(quint8 c, quint8 c2);
 
-
     // Switch device to live streaming mode
     virtual void resetDevice();
-
-
 
   private:
 
@@ -125,6 +118,7 @@ protected:
     int cb_reset,imp_callbacks;
 
     int received_bytes;
+    int importCount;
 
     int m_itemCnt;
     int m_itemTotal;

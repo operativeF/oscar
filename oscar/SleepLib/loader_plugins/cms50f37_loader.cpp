@@ -578,9 +578,11 @@ void CMS50F37Loader::processBytes(QByteArray bytes)
 
         if (!started_import) {
           //  startTimer.singleShot(2000, this, SLOT(requestData()));
+            importCount = 0;
             qDebug() << "cms50f37 - pB: Read:" << len << size << str.join(",");
         } else {
-            qDebug() << "cms50f37 - pB: Import:" << len << size << str.join(",");
+            importCount++;
+//            qDebug() << "cms50f37 - pB: Import:" << len << size << str.join(",");
         }
 
         idx += len;
@@ -827,9 +829,11 @@ void CMS50F37Loader::resetImportTimeout()
         if (resetTimer.isActive())
             resetTimer.stop();
 
-        if (!finished_import) resetTimer.singleShot(2000, this, SLOT(resetImportTimeout()));
+        if (!finished_import)
+            resetTimer.singleShot(2000, this, SLOT(resetImportTimeout()));
     } else {
         qDebug() << "cms50f37 - Oximeter device stopped transmitting.. Transfer complete";
+        qDebug() << "cms50f37 - Import packet count: " << importCount;
         // We were importing, but now are done
         if (!finished_import && (started_import && started_reading)) {
             qDebug() << "cms50f37 - Switching CMS50F37 back to live mode and finalizing import";

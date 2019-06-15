@@ -647,11 +647,11 @@ void OximeterImport::on_radioSyncOximeter_clicked()
     ui->syncCPAPGroup->setVisible(false);
     if ( oximodule ) {
     	if (oximodule->isStartTimeValid()) {
-    		qDebug() << "oximod - Oximeter time is valid " << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ssap");
+    		qDebug() << "oximod - Oximeter time is " << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ssap");
         	ui->calendarWidget->setSelectedDate(oximodule->startTime().date());
         	ui->dateTimeEdit->setDateTime(oximodule->startTime());
         } else {
-        	qDebug() << "oximod - Oximeter time is not valid" << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ssap");
+        	qDebug() << "oximod - Oximeter time is faked" << oximodule->startTime().toString("yyyy-MMM-dd HH:mm:ssap");
         	ui->calendarWidget->setSelectedDate(oximodule->startTime().date());
         	ui->dateTimeEdit->setDateTime(oximodule->startTime());
         }
