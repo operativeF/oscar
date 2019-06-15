@@ -596,7 +596,7 @@ QString Statistics::getUserInfo () {
     QString address = p_profile->user->address();
     address.replace("\n", "<br/>");
 
-    QString userinfo;
+    QString userinfo = "";
 
     if (!p_profile->user->firstName().isEmpty()) {
         userinfo = tr("Name: %1, %2").arg(p_profile->user->lastName()).arg(p_profile->user->firstName()) + "<br/>";
@@ -614,13 +614,16 @@ QString Statistics::getUserInfo () {
         }
     }
 
+    while (userinfo.length() > 0 && userinfo.endsWith("<br/>"))  // Strip trailing newlines
+        userinfo = userinfo.mid(0, userinfo.length()-5);
+
     return userinfo;
 }
 
 const QString table_width = "width=99%";
 
 // Create the page header in HTML.  Includes everything from <head> through <body>
-QString Statistics::htmlHeader(bool showheader)
+QString Statistics::generateHeader(bool showheader)
 {
     QString html = QString("<html><head>")+
     "</head>"
@@ -633,21 +636,21 @@ QString Statistics::htmlHeader(bool showheader)
         html += "<div align=center><table class=curved width='99%'>"
             "<tr>"
                 "<td align='left' valign='middle'>" + getUserInfo() + "</td>"
-                "<td align='right' valign='middle' width='150'>"
+                "<td align='right' valign='middle' width='200'>"
                     "<font size='+2'>" + STR_TR_OSCAR + "&nbsp;&nbsp;&nbsp;</font><br/>"
                     "<font size='+1'>" + QObject::tr("Usage Statistics") + "&nbsp;&nbsp;&nbsp;</font>"
                 "</td>"
-                "<td align='right' valign='middle' width='150'>" + resizeHTMLPixmap(logoPixmap,120,120)+"&nbsp;&nbsp;&nbsp;<br/>"
+                "<td align='right' valign='middle' width='110'>" + resizeHTMLPixmap(logoPixmap,80,80)+"&nbsp;&nbsp;&nbsp;<br/>"
                 "</td>"
             "</tr>"
             "</table>"
-            "</div><br/>";
+            "</div>";
         }
     return html;
 }
 
 // HTML for page footer
-QString Statistics::htmlFooter(bool showinfo)
+QString Statistics::generateFooter(bool showinfo)
 {
     QString html;
 
@@ -1177,8 +1180,8 @@ QString Statistics::GenerateCPAPUsage()
 // Create the HTML that will be the Statistics page.
 QString Statistics::GenerateHTML()
 {
-    htmlReportHeader = htmlHeader(true);
-    htmlReportFooter = htmlFooter(true);
+    htmlReportHeader = generateHeader(true);
+    htmlReportFooter = generateFooter(true);
 
     htmlUsage = GenerateCPAPUsage();
 
@@ -1189,16 +1192,16 @@ QString Statistics::GenerateHTML()
     htmlMachineSettings = GenerateRXChanges();
     htmlMachines = GenerateMachineList();
 
-    UpdateRecordsBox();
-
     QString htmlScript = "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
 
     return htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
 }
 
+// Print the Statistics page on printer
 void Statistics::printReport(QWidget * parent) {
 
-    QPrinter printer(QPrinter::HighResolution);
+    QPrinter printer(QPrinter::ScreenResolution); // ScreenResolution required for graphics sizing
+
 #ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
     printer.setOutputFormat(QPrinter::PdfFormat);
@@ -1217,41 +1220,28 @@ void Statistics::printReport(QWidget * parent) {
 
     printer.setOutputFileName(filename);
 #endif
+
     printer.setPrintRange(QPrinter::AllPages);
-//        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//            printer.setOrientation(QPrinter::Landscape);
-//        } else {
-        printer.setOrientation(QPrinter::Portrait);
-    //}
-    printer.setFullPage(false); // This has nothing to do with scaling
+    printer.setOrientation(QPrinter::Portrait);
+    printer.setFullPage(false);     // Print only on printable area of page and not in non-printable margins
     printer.setNumCopies(1);
-    printer.setResolution(1200);
-    //printer.setPaperSize(QPrinter::A4);
-    //printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter);
+    printer.setPageMargins(10, 10, 10, 10, QPrinter::Millimeter);
+
+    // Show print dialog to user and allow them to change settings as desired
     QPrintDialog pdlg(&printer, parent);
 
     if (pdlg.exec() == QPrintDialog::Accepted) {
 
-            QTextBrowser b;
-            QPainter painter;
-            painter.begin(&printer);
-
-            QRect rect = printer.pageRect();
-            b.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
-            b.resize(rect.width()/4, rect.height()/4);
-            b.setFrameShape(QFrame::NoFrame);
-
-            double xscale = printer.pageRect().width()/double(b.width());
-            double yscale = printer.pageRect().height()/double(b.height());
-            double scale = qMin(xscale, yscale);
-            painter.translate(printer.paperRect().x() + printer.pageRect().width()/2, printer.paperRect().y() + printer.pageRect().height()/2);
-            painter.scale(scale, scale);
-            painter.translate(-b.width()/2, -b.height()/2);
-
-            b.render(&painter, QPoint(0,0));
-            painter.end();
-
+        QTextDocument doc;
+        QSizeF printArea = printer.pageRect().size();
+    qDebug() << "print area" << printArea;
+        doc.setPageSize(printArea);  // Set document to print area, removing default 2cm margins
+        QFont sansFont;
+        sansFont.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
+        doc.setDefaultFont(sansFont);
+    qDebug() << "Default print font is" << doc.defaultFont();
+        doc.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
+        doc.print(&printer);
     }
 }
 
