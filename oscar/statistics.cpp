@@ -620,7 +620,7 @@ QString Statistics::getUserInfo () {
 const QString table_width = "width=99%";
 
 // Create the page header in HTML.  Includes everything from <head> through <body>
-QString Statistics::htmlHeader(bool showheader)
+QString Statistics::generateHeader(bool showheader)
 {
     QString html = QString("<html><head>")+
     "</head>"
@@ -647,7 +647,7 @@ QString Statistics::htmlHeader(bool showheader)
 }
 
 // HTML for page footer
-QString Statistics::htmlFooter(bool showinfo)
+QString Statistics::generateFooter(bool showinfo)
 {
     QString html;
 
@@ -1177,8 +1177,8 @@ QString Statistics::GenerateCPAPUsage()
 // Create the HTML that will be the Statistics page.
 QString Statistics::GenerateHTML()
 {
-    htmlReportHeader = htmlHeader(true);
-    htmlReportFooter = htmlFooter(true);
+    htmlReportHeader = generateHeader(true);
+    htmlReportFooter = generateFooter(true);
 
     htmlUsage = GenerateCPAPUsage();
 
@@ -1189,69 +1189,103 @@ QString Statistics::GenerateHTML()
     htmlMachineSettings = GenerateRXChanges();
     htmlMachines = GenerateMachineList();
 
-    UpdateRecordsBox();
-
     QString htmlScript = "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
 
     return htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
 }
 
+int Statistics::printBlock (QString text, QPrinter *printer, QPainter *painter, int yPos) {
+    QTextEdit block;
+    block.setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    QRect rect = printer->pageRect();
+
+    block.setHtml(text);
+    qDebug() << "initial text dimensions, width" << block.size().width() << "height" << block.size().height();
+    block.resize(rect.width()/4, rect.height()/4);
+    block.setFrameShape(QFrame::NoFrame);
+    QSize dims = block.size();
+    qDebug() << "resized text dimensions, width" << dims.width() << "height" << dims.height();
+
+    double xscale = printer->pageRect().width()/double(block.width());
+    double yscale = printer->pageRect().height()/double(block.height());
+    double scale = qMin(xscale, yscale);
+    painter->translate(printer->paperRect().x() + printer->pageRect().width()/2,
+                       printer->paperRect().y() + printer->pageRect().height()/2);
+    painter->scale(scale, scale);
+    painter->translate(-block.width()/2, -block.height()/2);
+
+    block.render(painter, QPoint(0,yPos));
+
+    return yPos;
+}
+
+// Print the Statistics page on printer
 void Statistics::printReport(QWidget * parent) {
 
-    QPrinter printer(QPrinter::HighResolution);
+    QPrinter printer(QPrinter::HighResolution);     //The QPrinter class is a paint device that paints on a printer
+
 #ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
     printer.setOutputFormat(QPrinter::PdfFormat);
-    QString name = "Statistics";
-    QString datestr = QDate::currentDate().toString(Qt::ISODate);
+    QString name;
+    QString datestr;
 
-//    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//        name = "Statistics";
-//        datestr = QDate::currentDate().toString(Qt::ISODate);
-//    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
-//        name = "Help";
-//        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
-//    } else { name = "Unknown"; }
+    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
+        name = "Statistics";
+        datestr = QDate::currentDate().toString(Qt::ISODate);
+    } else { name = "Unknown"; }
 
-    QString filename = p_pref->Get("{home}/") + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf";
+    QString filename = p_pref->Get("{home}/" + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf");
 
     printer.setOutputFileName(filename);
 #endif
+
     printer.setPrintRange(QPrinter::AllPages);
+    printer.setOrientation(QPrinter::Portrait);
+
+// Setting default page orientation to landscape for statistics view?
 //        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
 //            printer.setOrientation(QPrinter::Landscape);
-//        } else {
-        printer.setOrientation(QPrinter::Portrait);
-    //}
-    printer.setFullPage(false); // This has nothing to do with scaling
+//        }
+
+//  printer.setPageSize(QPrinter::A4);   // Could be QPrinter::Letter
+//  printer.setOutputFormat(QPrinter::PdfFormat);
+
+    printer.setFullPage(false); // Print only on printable area of page and not in non-printable margins
+//    printer.setFullPage(true); // Print only on printable area of page and not in non-printable margins
     printer.setNumCopies(1);
     printer.setResolution(1200);
-    //printer.setPaperSize(QPrinter::A4);
-    //printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter);
+    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter); // Set physical margins to 5 mm, which must be within printable area
+                                                              // 5 mm is pretty small and less than most laser printers allow, so
+                                                              // this will amount to default printer margins
+
+    // Show print dialog to user and allow them to change settings as desired
     QPrintDialog pdlg(&printer, parent);
 
     if (pdlg.exec() == QPrintDialog::Accepted) {
 
-            QTextBrowser b;
-            QPainter painter;
-            painter.begin(&printer);
-
-            QRect rect = printer.pageRect();
-            b.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
-            b.resize(rect.width()/4, rect.height()/4);
-            b.setFrameShape(QFrame::NoFrame);
-
-            double xscale = printer.pageRect().width()/double(b.width());
-            double yscale = printer.pageRect().height()/double(b.height());
-            double scale = qMin(xscale, yscale);
-            painter.translate(printer.paperRect().x() + printer.pageRect().width()/2, printer.paperRect().y() + printer.pageRect().height()/2);
-            painter.scale(scale, scale);
-            painter.translate(-b.width()/2, -b.height()/2);
-
-            b.render(&painter, QPoint(0,0));
-            painter.end();
-
+//        QString size = "";
+        QPainter painter;
+        painter.begin(&printer);
+        int yPos = 0;
+/*        QTextDocument doc;
+        doc.setPageSize(QSizeF(printer.pageRect().size()));
+        doc.setDocumentMargin((qreal) 0.5);
+        QFont font("Times New Roman", 12);
+        doc.setDefaultFont(font);
+        doc.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
+        doc.setDefaultFont(font);
+        doc.print(&printer);
+*/
+        yPos = Statistics::printBlock(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter, &printer, &painter, yPos);
+/*        yPos = Statistics::printBlock(size+htmlReportHeader, &printer, &painter, yPos);
+        yPos = Statistics::printBlock(size+htmlUsage, &printer, &painter, yPos);
+        yPos = Statistics::printBlock(size+htmlMachineSettings, &printer, &painter, yPos);
+        yPos = Statistics::printBlock(size+htmlMachines, &printer, &painter, yPos);
+        yPos = Statistics::printBlock(size+htmlReportFooter, &printer, &painter, yPos);
+*/
+        painter.end();
     }
 }
 
