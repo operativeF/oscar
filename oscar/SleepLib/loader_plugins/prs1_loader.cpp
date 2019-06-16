@@ -1624,6 +1624,7 @@ bool PRS1Import::ParseF5EventsFV3()
     EventDataType ppm = lpm / 16.0;
 
 
+    qint64 duration;
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
 
@@ -1653,7 +1654,12 @@ bool PRS1Import::ParseF5EventsFV3()
                 PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
                 break;
             case PRS1TimedBreathEvent::TYPE:
-                TB->AddEvent(t, e->m_duration);
+                // The duration appears to correspond to the length of the timed breath in seconds when multiplied by 0.1 (100ms)!
+                // TODO: consider changing parsers to use milliseconds for time, since it turns out there's at least one way
+                // they can express durations less than 1 second.
+                // TODO: consider allowing OSCAR to record millisecond durations so that the display will say "2.1" instead of "21" or "2".
+                duration = e->m_duration * 100L;  // for now do this here rather than in parser, since parser events don't use milliseconds
+                TB->AddEvent(t - duration, e->m_duration);
                 break;
             case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
@@ -1668,10 +1674,15 @@ bool PRS1Import::ParseF5EventsFV3()
                 FL->AddEvent(t, e->m_duration);
                 break;
             case PRS1PeriodicBreathingEvent::TYPE:
-                PB->AddEvent(t, e->m_duration);
+                // TODO: The graphs silently treat the timestamp of a span as an end time rather than start (see gFlagsLine::paint).
+                // Decide whether to preserve that behavior or change it universally and update either this code or comment.
+                duration = e->m_duration * 1000L;
+                PB->AddEvent(t + duration, e->m_duration);
                 break;
             case PRS1LargeLeakEvent::TYPE:
-                LL->AddEvent(t, e->m_duration);
+                // TODO: see PB comment above.
+                duration = e->m_duration * 1000L;
+                LL->AddEvent(t + duration, e->m_duration);
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
@@ -1966,13 +1977,13 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
-                this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));  // TODO: PB drawn at wrong time, maybe OSCAR is compensating for duration starting offset somewhere?
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));
                 break;
             case 0x0b:  // Large Leak
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
-                this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));  // TODO: LL drawn at wrong time, maybe OSCAR is compensating for duration starting offset somewhere?
+                this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
                 break;
             //case 0x0d:  // TODO: find sample
             case 0x0e:  // Hypopnea
@@ -3226,6 +3237,8 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
             pos += 2;
             data1 = buffer[pos++];
             if (this->familyVersion == 2 || this->familyVersion == 3) {
+                // TODO: this fixed some timing errors on parsing/import, but may have broken drawing, since OSCAR
+                // apparently does treat a span's timestamp as an endpoint (at least when drawing, see gFlagsLine::paint)!
                 this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1 - data0, data0));  // PB event appears data1 seconds after conclusion
             } else {
                 this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));  // TODO: this should probably be the same as F0V23, but it hasn't been tested
