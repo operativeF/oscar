@@ -551,6 +551,7 @@ Statistics::Statistics(QObject *parent) :
     rows.push_back(StatisticsRow("IPAP",       SC_MIN,     MT_CPAP));
     rows.push_back(StatisticsRow("IPAP",       SC_MAX,     MT_CPAP));
 
+    rows.push_back(StatisticsRow("", SC_HEADING, MT_OXIMETER));         // Just adds some space
     rows.push_back(StatisticsRow(tr("Oximeter Statistics"), SC_HEADING, MT_OXIMETER));
     rows.push_back(StatisticsRow("",           SC_DAYS,    MT_OXIMETER));
     rows.push_back(StatisticsRow("",           SC_COLUMNHEADERS, MT_OXIMETER));
@@ -1018,7 +1019,7 @@ QString Statistics::GenerateCPAPUsage()
 
     // Prepare top of table
     html += "<div align=center>";
-    html += "<table class=curved "+table_width+">";
+    html += "<table class=curved width="+table_width+">";
 
     // Compute number of monthly periods for a monthly rather than standard time distribution
     int number_periods = 0;
@@ -1149,14 +1150,14 @@ QString Statistics::GenerateCPAPUsage()
             name = calcnames[row.calc].arg(schema::channel[id].fullname());
         }
         QString line;
-        line += QString("<tr class=datarow><td width=25%>%1</td>").arg(name);
+        line += QString("<tr class=datarow><td width=24%>%1</td>").arg(name);
         int np = periods.size();
         int width;
         for (int j=0; j < np; j++) {
             if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
-                width = j < np-1 ? 6 : 100 - (25 + 6*(np-1));
+                width = j < np-1 ? 6 : 100 - (24 + 6*(np-1));
             } else {
-                width = 75/np;
+                width = 76/np;
             }
 
             line += QString("<td width=%1%>").arg(width);
@@ -1208,14 +1209,6 @@ void Statistics::printReport(QWidget * parent) {
     QString name = "Statistics";
     QString datestr = QDate::currentDate().toString(Qt::ISODate);
 
-//    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//        name = "Statistics";
-//        datestr = QDate::currentDate().toString(Qt::ISODate);
-//    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
-//        name = "Help";
-//        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
-//    } else { name = "Unknown"; }
-
     QString filename = p_pref->Get("{home}/") + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf";
 
     printer.setOutputFileName(filename);
@@ -1234,13 +1227,16 @@ void Statistics::printReport(QWidget * parent) {
 
         QTextDocument doc;
         QSizeF printArea = printer.pageRect().size();
-    qDebug() << "print area" << printArea;
         doc.setPageSize(printArea);  // Set document to print area, removing default 2cm margins
-        QFont sansFont;
-        sansFont.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
-        doc.setDefaultFont(sansFont);
-    qDebug() << "Default print font is" << doc.defaultFont();
+    qDebug() << "print area" << printArea;
+
+        QFont font = doc.defaultFont();
+        font.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
+        doc.setDefaultFont(font);
+    qDebug() << "selected printer font is" << doc.defaultFont();
+
         doc.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
+
         doc.print(&printer);
     }
 }
