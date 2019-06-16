@@ -1324,24 +1324,11 @@ public:
     static constexpr float GAIN = 0.1;
     static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_CMH2O;
     
-    PRS1PressureEvent(PRS1ParsedEventType type, int start, int value) 
+    PRS1PressureEvent(PRS1ParsedEventType type, int start, int value, float gain=GAIN)
         : PRS1ParsedValueEvent(type, start, value) 
     { 
-        m_gain = GAIN;
+        m_gain = gain;
         m_unit = UNIT;
-    }
-};
-
-class PRS1ASVPressureEvent : public PRS1PressureEvent
-{
-public:
-    static constexpr float GAIN = 0.125;  // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
-    static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_CMH2O;
-    
-    PRS1ASVPressureEvent(PRS1ParsedEventType type, int start, int value)
-        : PRS1PressureEvent(type, start, value)
-    {
-        m_gain = GAIN;
     }
 };
 
@@ -1384,23 +1371,11 @@ public:
     static constexpr float GAIN = PRS1PressureEvent::GAIN;
     static const PRS1ParsedEventUnit UNIT = PRS1PressureEvent::UNIT;
     
-    PRS1PressureSettingEvent(PRS1ParsedSettingType setting, int value) 
+    PRS1PressureSettingEvent(PRS1ParsedSettingType setting, int value, float gain=GAIN)
         : PRS1ParsedSettingEvent(setting, value) 
     { 
-        m_gain = GAIN;
+        m_gain = gain;
         m_unit = UNIT;
-    }
-};
-
-class PRS1ASVPressureSettingEvent : public PRS1PressureSettingEvent
-{
-public:
-    static constexpr float GAIN = PRS1ASVPressureEvent::GAIN;
-    
-    PRS1ASVPressureSettingEvent(PRS1ParsedSettingType setting, int value)
-        : PRS1PressureSettingEvent(setting, value)
-    {
-        m_gain = GAIN;
     }
 };
 
@@ -1438,7 +1413,14 @@ public: \
 const PRS1ParsedEventType T::TYPE
 #define PRS1_DURATION_EVENT(T, E) _PRS1_EVENT(T, E, PRS1ParsedDurationEvent, duration)
 #define PRS1_VALUE_EVENT(T, E)    _PRS1_EVENT(T, E, PRS1ParsedValueEvent, value)
-#define PRS1_PRESSURE_EVENT(T, E) _PRS1_EVENT(T, E, PRS1PressureEvent, value)
+#define PRS1_PRESSURE_EVENT(T, E) \
+class T : public PRS1PressureEvent \
+{ \
+public: \
+    static const PRS1ParsedEventType TYPE = E; \
+    T(int start, int value, float gain=PRS1PressureEvent::GAIN) : PRS1PressureEvent(TYPE, start, value, gain) {} \
+}; \
+const PRS1ParsedEventType T::TYPE
 
 PRS1_DURATION_EVENT(PRS1TimedBreathEvent, EV_PRS1_TB);
 PRS1_DURATION_EVENT(PRS1ObstructiveApneaEvent, EV_PRS1_OA);
@@ -1603,6 +1585,9 @@ void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
 
 bool PRS1Import::ParseF5EventsFV3()
 {
+    // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+    static const float GAIN = 0.125F;  // TODO: parameterize this somewhere better
+    
     // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
@@ -1617,14 +1602,15 @@ bool PRS1Import::ParseF5EventsFV3()
     EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
     EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
     EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
-    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
-    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
-    EventList *PS = session->AddEventList(CPAP_PS, EVL_Event, 0.1F);
-    EventList *IPAPLo = session->AddEventList(CPAP_IPAPLo, EVL_Event, 0.1F);
-    EventList *IPAPHi = session->AddEventList(CPAP_IPAPHi, EVL_Event, 0.1F);
+    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, GAIN);
+    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, GAIN);
+    EventList *PS = session->AddEventList(CPAP_PS, EVL_Event, GAIN);
+    EventList *IPAPLo = session->AddEventList(CPAP_IPAPLo, EVL_Event, GAIN);
+    EventList *IPAPHi = session->AddEventList(CPAP_IPAPHi, EVL_Event, GAIN);
     EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
     EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
+    EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
 
 
     // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
@@ -1696,11 +1682,14 @@ bool PRS1Import::ParseF5EventsFV3()
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case PRS1SnoreEvent::TYPE:
+            case PRS1SnoreEvent::TYPE:  // snore count that shows up in flags but not waveform
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
-                    VS->AddEvent(t, 0); //data2); // VSnore
+                    VS2->AddEvent(t, 0);
                 }
+                break;
+            case PRS1VibratorySnoreEvent::TYPE:  // real VS marker on waveform
+                VS->AddEvent(t, 0);
                 break;
             case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
@@ -1732,6 +1721,7 @@ bool PRS1Import::ParseF5EventsFV3()
 }
 
 
+#if 0
 // 900X series
 bool PRS1DataChunk::ParseEventsF5V3(void)
 {
@@ -1877,6 +1867,131 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
     }
 
     return true;
+}
+#endif
+
+
+// Outer loop based on ParseSummaryF5V3 along with hint as to event codes from old ParseEventsF5V3,
+// except this actually does something with the data.
+bool PRS1DataChunk::ParseEventsF5V3(void)
+{
+    if (this->family != 5 || this->familyVersion != 3) {
+        qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int minimum_sizes[] = { 2, 3, 3, 0xd, 3, 3, 3, 4, 3, 2, 5, 5, 3, 3, 3, 3 };
+    static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
+
+    if (chunk_size < 1) {
+        // This does occasionally happen.
+        qDebug() << this->sessionid << "event data too short:" << chunk_size;
+        return false;
+    }
+
+    // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+    static const float GAIN = 0.125;  // TODO: this should be parameterized somewhere more logical
+    bool ok = true;
+    int pos = 0, startpos;
+    int code, size;
+    int t = 0;
+    int elapsed, duration;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for event" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (code < ncodes) {
+            // make sure the handlers below don't go past the end of the buffer
+            if (size < minimum_sizes[code]) {
+                qWarning() << this->sessionid << "event" << code << "too small" << size << "<" << minimum_sizes[code];
+                ok = false;
+                break;
+            }
+        } // else if it's past ncodes, we'll log its information below (rather than handle it)
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "event" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+        startpos = pos;
+        t += data[pos] | (data[pos+1] << 8);
+        pos += 2;
+
+        switch (code) {
+            case 1:  // Pressure adjustment
+                // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
+                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
+                break;
+            case 2:  // Timed Breath
+                this->AddEvent(new PRS1TimedBreathEvent(t, data[pos++]));  // TODO: what is value? maybe target breath duration in 5Hz samples? look at zoomed in pressure graph
+                break;
+            case 3:  // Statistics
+                // These appear every 2 minutes, so presumably summarize the preceding period.
+                this->AddEvent(new PRS1IPAPEvent(t, data[pos++], GAIN));               // 00=IPAP (average?)
+                this->AddEvent(new PRS1IPAPLowEvent(t, data[pos++], GAIN));            // 01=IAP Low
+                this->AddEvent(new PRS1IPAPHighEvent(t, data[pos++], GAIN));           // 02=IAP High
+                this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));                // 03=LEAK (average?)
+                this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos++]));          // 04=Breaths Per Minute (average?)
+                this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos++]));  // 05=Patient Triggered Breaths (average?)
+                this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos++]));        // 06=Minute Ventilation (average?)
+                this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos++]));              // 07=Tidal Volume (average?)
+                this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 08=Snore (count?) TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));               // 09=EPAP (average? see event 1 above)
+                //data0 = data[pos++];  // 0A = ???  TODO: what is this? should probably graph it as a test channel
+                break;
+            //case 0x04:   // TODO: find sample
+            case 0x05:  // Obstructive Apnea
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1ObstructiveApneaEvent(t - elapsed, 0));
+                break;
+            case 0x06:  // Clear Airway Apnea
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1ClearAirwayEvent(t - elapsed, 0));
+                break;
+            //case 0x07:  // TODO: find sample
+            case 0x08:  // Flow Limitation
+                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a FL marker like OA/CA?
+                this->AddEvent(new PRS1FlowLimitationEvent(t - duration, duration));
+                break;
+            case 0x09:  // Vibratory Snore
+                // no data bytes
+                this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));  // TODO: this is different than the snore stat above, corresponds to VS on official waveform?
+                break;
+            case 0x0a:  // Periodic Breathing
+                duration = 2 * (data[pos] | (data[pos+1] << 8));
+                pos += 2;
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));  // TODO: PB drawn at wrong time, maybe OSCAR is compensating for duration starting offset somewhere?
+                break;
+            case 0x0b:  // Large Leak
+                duration = 2 * (data[pos] | (data[pos+1] << 8));
+                pos += 2;
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));  // TODO: LL drawn at wrong time, maybe OSCAR is compensating for duration starting offset somewhere?
+                break;
+            //case 0x0d:  // TODO: find sample
+            case 0x0e:  // Hypopnea
+                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a FL marker?
+                this->AddEvent(new PRS1HypopneaEvent(t - duration, duration));
+                break;
+            //case 0x0f:  // TODO: find sample
+            default:
+                qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                //UNEXPECTED_VALUE(code, "known event code");
+                break;
+        }
+        pos = startpos + size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = t;
+
+    return ok;
 }
 
 
@@ -4449,6 +4564,9 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
 
     CPAPMode cpapmode = MODE_UNKNOWN;
 
+    // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+    static const float GAIN = 0.125;  // TODO: parameterize this somewhere better
+
     int max_pressure = 0;
     int min_ps   = 0;
     int max_ps   = 0;
@@ -4503,14 +4621,12 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 max_epap = data[pos+2];
                 min_ps = data[pos+3];
                 max_ps = data[pos+4];
-                // Note the use of PRS1ASVPressureSettingEvent: pressures here are encoded with a gain of 0.125 instead
-                // of 0.1, allowing for a maximum value of 30 cmH2O instead of 25 cmH2O.
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_epap));
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_epap));
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_epap + min_ps));
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_IPAP_MAX, qMin(max_pressure, max_epap + max_ps)));
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps));
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_PS_MAX, max_ps));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MIN, min_epap, GAIN));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP_MAX, max_epap, GAIN));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_epap + min_ps, GAIN));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, qMin(max_pressure, max_epap + max_ps), GAIN));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps, GAIN));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, max_ps, GAIN));
                 break;
             case 0x14:  // new to ASV, ???
                 CHECK_VALUE(data[pos], 1);
@@ -4531,7 +4647,7 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 }
                 break;
             case 0x2d:  // Ramp Pressure (with ASV pressure encoding)
-                this->AddEvent(new PRS1ASVPressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos]));
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos], GAIN));
                 break;
             case 0x2e:
                 CHECK_VALUE(data[pos], 0);
@@ -5185,6 +5301,12 @@ bool PRS1Import::ParseWaveforms()
         }
 
         if (num > 1) {
+            float pressure_gain = 0.1F;  // standard pressure gain
+            if (waveform->family == 5 && waveform->familyVersion == 3) {
+                // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+                pressure_gain = 0.125F;  // TODO: this should be parameterized somewhere better, once we have a clear idea of which machines use this
+            }
+            
             // Process interleaved samples
             QVector<QByteArray> data;
             data.resize(num);
@@ -5207,7 +5329,7 @@ bool PRS1Import::ParseWaveforms()
             }
 
             if (s2 > 0) {
-                EventList * pres = session->AddEventList(CPAP_MaskPressureHi, EVL_Waveform, 0.1f, 0.0f, 0.0f, 0.0f, double(dur) / double(s2));
+                EventList * pres = session->AddEventList(CPAP_MaskPressureHi, EVL_Waveform, pressure_gain, 0.0f, 0.0f, 0.0f, double(dur) / double(s2));
                 pres->AddWaveform(ti, (unsigned char *)data[1].data(), data[1].size(), dur);
             }
 
