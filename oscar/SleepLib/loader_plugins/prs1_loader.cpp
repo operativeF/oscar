@@ -1601,7 +1601,7 @@ bool PRS1Import::ParseF5EventsFV3()
     EventList *MV = session->AddEventList(CPAP_MinuteVent, EVL_Event);
     EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
     EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
-    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
+    EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event, 0.1F);  // TODO: a gain of 0.1 should affect display, but it doesn't
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, GAIN);
     EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, GAIN);
     EventList *PS = session->AddEventList(CPAP_PS, EVL_Event, GAIN);
@@ -1659,7 +1659,7 @@ bool PRS1Import::ParseF5EventsFV3()
                 // they can express durations less than 1 second.
                 // TODO: consider allowing OSCAR to record millisecond durations so that the display will say "2.1" instead of "21" or "2".
                 duration = e->m_duration * 100L;  // for now do this here rather than in parser, since parser events don't use milliseconds
-                TB->AddEvent(t - duration, e->m_duration);
+                TB->AddEvent(t - duration, e->m_duration * 0.1F);  // TODO: a gain of 0.1 should render this unnecessary, but gain doesn't seem to work currently
                 break;
             case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
@@ -1694,12 +1694,21 @@ bool PRS1Import::ParseF5EventsFV3()
                 }
                 break;
             case PRS1SnoreEvent::TYPE:  // snore count that shows up in flags but not waveform
+                // TODO: The numeric snore graph is the right way to present this information,
+                // but it needs to be shifted left 2 minutes, since it's not a starting value
+                // but a past statistic.
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
+                    // TODO: currently these get drawn on our waveforms, but they probably shouldn't,
+                    // since they don't have a precise timestamp. They should continue to be drawn
+                    // on the flags overview.
                     VS2->AddEvent(t, 0);
                 }
                 break;
             case PRS1VibratorySnoreEvent::TYPE:  // real VS marker on waveform
+                // TODO: These don't need to be drawn separately on the flag overview, since
+                // they're presumably included in the overall snore count statistic. They should
+                // continue to be drawn on the waveform, due to their precise timestamp.
                 VS->AddEvent(t, 0);
                 break;
             case PRS1RespiratoryRateEvent::TYPE:
@@ -1939,7 +1948,11 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
                 break;
             case 2:  // Timed Breath
-                this->AddEvent(new PRS1TimedBreathEvent(t, data[pos++]));  // TODO: what is value? maybe target breath duration in 5Hz samples? look at zoomed in pressure graph
+                // TB events have a duration in 0.1s, based on the review of pressure waveforms.
+                // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
+                // currently assume integer seconds rather than ms, so that's done at import.
+                duration = data[pos++];
+                this->AddEvent(new PRS1TimedBreathEvent(t, duration));  // TODO: what is value? maybe target breath duration in 5Hz samples? look at zoomed in pressure graph
                 break;
             case 3:  // Statistics
                 // These appear every 2 minutes, so presumably summarize the preceding period.
@@ -1951,16 +1964,22 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos++]));  // 05=Patient Triggered Breaths (average?)
                 this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos++]));        // 06=Minute Ventilation (average?)
                 this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos++]));              // 07=Tidal Volume (average?)
-                this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 08=Snore (count?) TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
+                this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 08=Snore count  // TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
                 this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));               // 09=EPAP (average? see event 1 above)
                 //data0 = data[pos++];  // 0A = ???  TODO: what is this? should probably graph it as a test channel
                 break;
             //case 0x04:   // TODO: find sample
             case 0x05:  // Obstructive Apnea
+                // OA events are instantaneous flags with no duration: reviewing waveforms
+                // shows that the time elapsed between the flag and reporting often includes
+                // non-apnea breathing.
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1ObstructiveApneaEvent(t - elapsed, 0));
                 break;
             case 0x06:  // Clear Airway Apnea
+                // CA events are instantaneous flags with no duration: reviewing waveforms
+                // shows that the time elapsed between the flag and reporting often includes
+                // non-apnea breathing.
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1ClearAirwayEvent(t - elapsed, 0));
                 break;
@@ -1970,16 +1989,22 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 this->AddEvent(new PRS1FlowLimitationEvent(t - duration, duration));
                 break;
             case 0x09:  // Vibratory Snore
+                // VS events are instantaneous flags with no duration, drawn on the official waveform.
+                // The current thinking is that these are the snores that cause a change in auto-titrating
+                // pressure. The snoring statistic above seems to be a total count. It's unclear whether
+                // the trigger for pressure change is severity or count or something else.
                 // no data bytes
-                this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));  // TODO: this is different than the snore stat above, corresponds to VS on official waveform?
+                this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
                 break;
             case 0x0a:  // Periodic Breathing
+                // PB events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));
                 break;
             case 0x0b:  // Large Leak
+                // LL events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
@@ -1987,7 +2012,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 break;
             //case 0x0d:  // TODO: find sample
             case 0x0e:  // Hypopnea
-                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a FL marker?
+                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a HY marker?
                 this->AddEvent(new PRS1HypopneaEvent(t - duration, duration));
                 break;
             //case 0x0f:  // TODO: find sample
@@ -6161,7 +6186,7 @@ void PRS1Loader::initChannels()
         QObject::tr("Timed Breath"),
         QObject::tr("Machine Initiated Breath"),
         QObject::tr("TB"),
-        STR_UNIT_Unknown,
+        STR_UNIT_Seconds,
         DEFAULT,    QColor("black")));
 }
 
