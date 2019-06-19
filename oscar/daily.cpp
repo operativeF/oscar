@@ -1457,6 +1457,9 @@ void Daily::Load(QDate date)
                     val = day->count(code) / hours;
                     data = QString("%1").arg(val,0,'f',2);
                 }
+                // TODO: percentage would be another useful option here for things like
+                // percentage of patient-triggered breaths, which is much more useful
+                // than the duration of timed breaths per hour.
                 values[code] = val;
                 QColor altcolor = (brightness(chan.defaultColor()) < 0.3) ? Qt::white : Qt::black; // pick a contrasting color
                 html+=QString("<tr><td align='left' bgcolor='%1'><b><font color='%2'><a href='event=%5' style='text-decoration:none;color:%2'>%3</a></font></b></td><td width=20% bgcolor='%1'><b><font color='%2'>%4</font></b></td></tr>\n")

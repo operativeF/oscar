@@ -5343,8 +5343,11 @@ bool PRS1Import::ParseSession(void)
                     qWarning() << sessionid << "compliance didn't set session end?";
                 }
 
-                // Events and waveforms use updateLast() to set the session's last timestamp,
+                // Events and  use updateLast() to set the session's last timestamp,
                 // so they should only reach this point if there was a problem parsing them.
+
+                // TODO: It turns out waveforms *don't* update the timestamp, so this
+                // is depending entirely on events. See TODO below.
                 if (event != nullptr || !wavefile.isEmpty() || !oxifile.isEmpty()) {
                     qWarning() << sessionid << "Downgrading session to summary only";
                 }
@@ -5352,7 +5355,10 @@ bool PRS1Import::ParseSession(void)
 
                 // Only use the summary's duration if the session's duration couldn't be
                 // derived from events or waveforms.
-                // TODO: Revisit this once summary parsing is reliable.
+                
+                // TODO: Change this once summary parsing is reliable: event duration is less
+                // accurate than either waveforms or correctly-parsed summaries, since there
+                // won't necessarily be events at the very end of a session.
                 session->really_set_last(session->first()+(qint64(summary_duration) * 1000L));
             }
             save = true;
