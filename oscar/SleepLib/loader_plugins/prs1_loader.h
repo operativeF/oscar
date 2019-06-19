@@ -276,7 +276,7 @@ public:
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV machine (which has a different format)
     bool ParseF5Events();
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV file version 3 machine (which has a different format again)
-    bool ParseF5EventsFV3();
+    bool ParseEventsF5V3();
 
 
 protected:

@@ -1590,7 +1590,7 @@ void PRS1DataChunk::AddEvent(PRS1ParsedEvent* const event)
     m_parsedData.push_back(event);
 }
 
-bool PRS1Import::ParseF5EventsFV3()
+bool PRS1Import::ParseEventsF5V3()
 {
     // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
     static const float GAIN = 0.125F;  // TODO: parameterize this somewhere better
@@ -1622,16 +1622,7 @@ bool PRS1Import::ParseF5EventsFV3()
     // On-demand channels
     EventList *PP = nullptr;
 
-    // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
-    EventDataType currentPressure=0, leak;
-
-    bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
-    EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
-    EventDataType lpm20 = p_profile->cpap->custom20cmH2OLeaks();
-
-    EventDataType lpm = lpm20 - lpm4;
-    EventDataType ppm = lpm / 16.0;
-
+    EventDataType currentPressure=0;
 
     qint64 duration;
     qint64 t = qint64(event->timestamp) * 1000L;
@@ -1695,12 +1686,9 @@ bool PRS1Import::ParseF5EventsFV3()
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
-                leak = e->m_value;
-                if (calcLeaks) { // Much Quicker doing this here than the recalc method.
-                    leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
-                    if (leak < 0) leak = 0;
-                    LEAK->AddEvent(t, leak);
-                }
+                break;
+            case PRS1LeakEvent::TYPE:
+                LEAK->AddEvent(t, e->m_value);
                 break;
             case PRS1SnoreEvent::TYPE:  // snore count that shows up in flags but not waveform
                 // TODO: The numeric snore graph is the right way to present this information,
@@ -1758,156 +1746,6 @@ bool PRS1Import::ParseF5EventsFV3()
 
     return true;
 }
-
-
-#if 0
-// 900X series
-bool PRS1DataChunk::ParseEventsF5V3(void)
-{
-    if (this->family != 5 || this->familyVersion != 3) {
-        qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
-        return false;
-    }
-    
-    EventDataType data0, data1, data2, data3, data4, data5;
-    Q_UNUSED(data3)
-
-    int t = 0;
-    int pos = 0;
-    //int cnt = 0;
-    short delta;//,duration;
-    //bool badcode = false;
-    unsigned char lastcode3 = 0, lastcode2 = 0, lastcode = 0, code = 0;
-    int lastpos = 0, startpos = 0, lastpos2 = 0, lastpos3 = 0;
-
-    int size = this->m_data.size();
-    unsigned char * buffer = (unsigned char *)this->m_data.data();
-
-    while (pos < size) {
-        lastcode3 = lastcode2;
-        lastcode2 = lastcode;
-        lastcode = code;
-        lastpos3 = lastpos2;
-        lastpos2 = lastpos;
-        lastpos = startpos;
-        startpos = pos;
-        code = buffer[pos++];
-
-        if (code >= 0x12) {
-            qDebug() << "Illegal PRS1 code " << hex << int(code) << " appeared at " << hex << startpos << "in" << this->sessionid;;
-            qDebug() << "1: (" << int(lastcode) << hex << lastpos << ")";
-            qDebug() << "2: (" << int(lastcode2) << hex << lastpos2 << ")";
-            qDebug() << "3: (" << int(lastcode3) << hex << lastpos3 << ")";
-            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
-            return false;
-        }
-        delta = buffer[pos];
-        //delta=buffer[pos+1] << 8 | buffer[pos];
-        pos += 2;
-        t += delta;
-
-        switch(code) {
-        case 0x01: // Leak ???
-            data0 = buffer[pos++];
-            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
-            break;
-        case 0x02: // Meh??? Timed Breath??
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1TimedBreathEvent(t - data0, data0));
-            break;
-        case 0x03: // Graph Data
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1IPAPEvent(t, data0));                             // 00=IAP
-            data4 = buffer[pos++];
-            this->AddEvent(new PRS1IPAPLowEvent(t, data4));                          // 01=IAP Low
-            data5 = buffer[pos++];
-            this->AddEvent(new PRS1IPAPHighEvent(t, data5));                         // 02=IAP High
-            this->AddEvent(new PRS1TotalLeakEvent(t, buffer[pos++]));                // 03=LEAK
-
-
-            this->AddEvent(new PRS1RespiratoryRateEvent(t, buffer[pos++]));          // 04=Breaths Per Minute
-            this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, buffer[pos++]));  // 05=Patient Triggered Breaths
-            this->AddEvent(new PRS1MinuteVentilationEvent(t, buffer[pos++]));        // 06=Minute Ventilation
-            //tmp=buffer[pos++] * 10.0;
-            this->AddEvent(new PRS1TidalVolumeEvent(t, buffer[pos++]));              // 07=Tidal Volume
-            this->AddEvent(new PRS1SnoreEvent(t, buffer[pos++]));                    // 08=Snore
-            this->AddEvent(new PRS1EPAPEvent(t, buffer[pos++]));                     // 09=EPAP
-            data0 = buffer[pos++];
-
-
-            break;
-        case 0x05:
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1ObstructiveApneaEvent(t - data0, data0));
-
-//            PS->AddEvent(tt, data0);
-            break;
-        case 0x06: // Clear Airway
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1ClearAirwayEvent(t - data0, data0));
-
-//            PTB->AddEvent(tt, data0);
-            break;
-        case 0x07:
-            data0 = buffer[pos++];
-            data1 = buffer[pos++];
-            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
-
-
-            break;
-        case 0x08: // Flow Limitation
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1FlowLimitationEvent(t - data0, data0));
-            break;
-        case 0x09:
-            data0 = buffer[pos++];
-            data1 = buffer[pos++];
-            data2 = buffer[pos++];
-            data3 = buffer[pos++];
-            //tt -= qint64(data0) * 1000L; // Subtract Time Offset
-
-
-          //  TB->AddEvent(tt, data0);
-            break;
-        case 0x0a: // Periodic Breathing?
-            data0 = (buffer[pos + 1] << 8 | buffer[pos]);
-            data0 *= 2;
-            pos += 2;
-            data1 = buffer[pos++];
-            this->AddEvent(new PRS1PeriodicBreathingEvent(t - data1, data0));
-
-            break;
-        case 0x0b: // Large Leak
-            data0 = (buffer[pos + 1] << 8 | buffer[pos]);
-            data0 *= 2;
-            pos += 2;
-            data1 = buffer[pos++];
-            this->AddEvent(new PRS1LargeLeakEvent(t - data1, data0));
-
-            break;
-        case 0x0d: // flag ??
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
-
-
-            break;
-        case 0x0e:
-            data0 = buffer[pos++];
-            this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
-
-            break;
-        default:
-            qDebug() << "Unknown code:" << hex << code << "in" << this->sessionid << "at" << startpos;
-            this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos));
-
-
-        }
-
-    }
-
-    return true;
-}
-#endif
 
 
 // Outer loop based on ParseSummaryF5V3 along with hint as to event codes from old ParseEventsF5V3,
@@ -1979,14 +1817,14 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 this->AddEvent(new PRS1IPAPEvent(t, data[pos++], GAIN));               // 00=IPAP (average?)
                 this->AddEvent(new PRS1IPAPLowEvent(t, data[pos++], GAIN));            // 01=IAP Low
                 this->AddEvent(new PRS1IPAPHighEvent(t, data[pos++], GAIN));           // 02=IAP High
-                this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));                // 03=LEAK (average?)
+                this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));                // 03=Total leak (average?)
                 this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos++]));          // 04=Breaths Per Minute (average?)
                 this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos++]));  // 05=Patient Triggered Breaths (average?)
                 this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos++]));        // 06=Minute Ventilation (average?)
                 this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos++]));              // 07=Tidal Volume (average?)
                 this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 08=Snore count  // TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
                 this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));               // 09=EPAP (average? see event 1 above)
-                //data0 = data[pos++];  // 0A = ???  TODO: what is this? should probably graph it as a test channel
+                this->AddEvent(new PRS1LeakEvent(t, data[pos++]));                     // 0A=Leak (average?)
                 break;
             case 0x04:  // Pressure Pulse
                 duration = data[pos++];  // TODO: is this a duration?
@@ -2061,7 +1899,6 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
             default:
                 qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
-                //UNEXPECTED_VALUE(code, "known event code");
                 break;
         }
         pos = startpos + size;
@@ -4582,22 +4419,22 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
                 //CHECK_VALUE(data[pos+0xb], 0x00);
                 //CHECK_VALUE(data[pos+0xc], 0x14);  // 16-bit VS count
                 //CHECK_VALUE(data[pos+0xd], 0x00);
-                //CHECK_VALUE(data[pos+0xe], 0x05);  // probably 16-bit value (VS count in F0V6)?
-                CHECK_VALUE(data[pos+0xf], 0x00);
-                //CHECK_VALUE(data[pos+0x10], 0x00);  // probably 16-bit value (maybe H count in F0V6?)
-                CHECK_VALUE(data[pos+0x11], 0x00);
+                //CHECK_VALUE(data[pos+0xe], 0x05);  // 16-bit H count for type 0xd
+                //CHECK_VALUE(data[pos+0xf], 0x00);
+                //CHECK_VALUE(data[pos+0x10], 0x00);  // 16-bit H count for type 7
+                //CHECK_VALUE(data[pos+0x11], 0x00);
                 //CHECK_VALUE(data[pos+0x12], 0x02);  // 16-bit FL count
                 //CHECK_VALUE(data[pos+0x13], 0x00);
                 //CHECK_VALUE(data[pos+0x14], 0x28);  // 0x69 (105)
                 //CHECK_VALUE(data[pos+0x15], 0x17);  // average total leak
                 //CHECK_VALUE(data[pos+0x16], 0x5b);  // 0x7d (125)
-                //CHECK_VALUE(data[pos+0x17], 0x09);  // 0x00
-                CHECK_VALUE(data[pos+0x18], 0x00);
+                //CHECK_VALUE(data[pos+0x17], 0x09);  // 16-bit H count for type 0xe
+                //CHECK_VALUE(data[pos+0x18], 0x00);
                 //CHECK_VALUE(data[pos+0x19], 0x10);  // average breath rate
                 //CHECK_VALUE(data[pos+0x1a], 0x2d);  // average TV / 10
                 //CHECK_VALUE(data[pos+0x1b], 0x63);  // average % PTB
                 //CHECK_VALUE(data[pos+0x1c], 0x07);  // average minute vent
-                //CHECK_VALUE(data[pos+0x1d], 0x06);  // 0x51 (81)
+                //CHECK_VALUE(data[pos+0x1d], 0x06);  // average leak
                 break;
             case 2:  // Equipment Off
                 tt += data[pos] | (data[pos+1] << 8);
@@ -5132,7 +4969,7 @@ bool PRS1Import::ParseEvents()
         break;
     case 5:
         if (event->fileVersion==3) {
-            res = ParseF5EventsFV3();
+            res = ParseEventsF5V3();
         } else {
             res = ParseF5Events();
         }
