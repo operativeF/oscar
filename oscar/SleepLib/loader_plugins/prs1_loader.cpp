@@ -192,6 +192,13 @@ static crc32_t CRC32wchar(const unsigned char *data, size_t data_len, crc32_t cr
 }
 
 
+// TODO: have UNEXPECTED_VALUE set a flag in the importer/machine that this data set is unusual
+#define UNEXPECTED_VALUE(SRC, VALS) { qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VALS); }
+#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) UNEXPECTED_VALUE(SRC, VAL)
+#define CHECK_VALUES(SRC, VAL1, VAL2) if ((SRC) != (VAL1) && (SRC) != (VAL2)) UNEXPECTED_VALUE(SRC, #VAL1 " or " #VAL2)
+// for more than 2 values, just write the test manually and use UNEXPECTED_VALUE if it fails
+
+
 enum FlexMode { FLEX_None, FLEX_CFlex, FLEX_CFlexPlus, FLEX_AFlex, FLEX_RiseTime, FLEX_BiFlex, FLEX_Unknown  };
 
 ChannelID PRS1_TimedBreath = 0, PRS1_HeatedTubing = 0;
@@ -1612,6 +1619,8 @@ bool PRS1Import::ParseF5EventsFV3()
     EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
     EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
 
+    // On-demand channels
+    EventList *PP = nullptr;
 
     // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
     EventDataType currentPressure=0, leak;
@@ -1722,6 +1731,16 @@ bool PRS1Import::ParseF5EventsFV3()
                 break;
             case PRS1TidalVolumeEvent::TYPE:
                 TV->AddEvent(t, e->m_value);
+                break;
+            case PRS1PressurePulseEvent::TYPE:
+                if (!PP) {
+                    if (!(PP = session->AddEventList(CPAP_PressurePulse, EVL_Event))) { return false; }
+                }
+                PP->AddEvent(t, e->m_value);
+                break;
+            case PRS1UnknownDataEvent::TYPE:
+                // These will show up in chunk YAML and any user alerts will be driven
+                // by the parser.
                 break;
             default:
                 qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
@@ -1906,7 +1925,7 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
 
     if (chunk_size < 1) {
         // This does occasionally happen.
-        qDebug() << this->sessionid << "event data too short:" << chunk_size;
+        qDebug() << this->sessionid << "Empty event data";
         return false;
     }
 
@@ -1946,13 +1965,14 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
             case 1:  // Pressure adjustment
                 // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
                 //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
                 break;
             case 2:  // Timed Breath
                 // TB events have a duration in 0.1s, based on the review of pressure waveforms.
                 // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
                 // currently assume integer seconds rather than ms, so that's done at import.
                 duration = data[pos++];
-                this->AddEvent(new PRS1TimedBreathEvent(t, duration));  // TODO: what is value? maybe target breath duration in 5Hz samples? look at zoomed in pressure graph
+                this->AddEvent(new PRS1TimedBreathEvent(t, duration));
                 break;
             case 3:  // Statistics
                 // These appear every 2 minutes, so presumably summarize the preceding period.
@@ -1968,7 +1988,10 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));               // 09=EPAP (average? see event 1 above)
                 //data0 = data[pos++];  // 0A = ???  TODO: what is this? should probably graph it as a test channel
                 break;
-            //case 0x04:   // TODO: find sample
+            case 0x04:  // Pressure Pulse
+                duration = data[pos++];  // TODO: is this a duration?
+                this->AddEvent(new PRS1PressurePulseEvent(t, duration));
+                break;
             case 0x05:  // Obstructive Apnea
                 // OA events are instantaneous flags with no duration: reviewing waveforms
                 // shows that the time elapsed between the flag and reporting often includes
@@ -1983,10 +2006,19 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1ClearAirwayEvent(t - elapsed, 0));
                 break;
-            //case 0x07:  // TODO: find sample
+            case 0x07:  // Hypopnea
+                // TODO: How is this hypopnea different from events 0xd and 0xe?
+                // TODO: What is the first byte?
+                pos++;  // unknown first byte?
+                elapsed = data[pos++];  // based on sample waveform, the hypopnea is over after this
+                this->AddEvent(new PRS1HypopneaEvent(t - elapsed, 0));
+                break;
             case 0x08:  // Flow Limitation
-                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a FL marker like OA/CA?
-                this->AddEvent(new PRS1FlowLimitationEvent(t - duration, duration));
+                // TODO: We should revisit whether this is elapsed or duration once (if)
+                // we start calculating flow limitations ourselves. Flow limitations aren't
+                // as obvious as OA/CA when looking at a waveform.
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1FlowLimitationEvent(t - elapsed, 0));
                 break;
             case 0x09:  // Vibratory Snore
                 // VS events are instantaneous flags with no duration, drawn on the official waveform.
@@ -2010,12 +2042,22 @@ bool PRS1DataChunk::ParseEventsF5V3(void)
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
                 break;
-            //case 0x0d:  // TODO: find sample
+            case 0x0d:  // Hypopnea
+                // TODO: Why does this hypopnea have a different event code?
+                // fall through
             case 0x0e:  // Hypopnea
-                duration = data[pos++];  // TODO: is this really duration, or is it time elapsed since a HY marker?
-                this->AddEvent(new PRS1HypopneaEvent(t - duration, duration));
+                // TODO: We should revisit whether this is elapsed or duration once (if)
+                // we start calculating hypopneas ourselves. Their official definition
+                // is 40% reduction in flow lasting at least 10s.
+                duration = data[pos++];
+                this->AddEvent(new PRS1HypopneaEvent(t - duration, 0));
                 break;
-            //case 0x0f:  // TODO: find sample
+            case 0x0f:
+                // TODO: some other pressure adjustment?
+                // Appears near the beginning and end of a session when Opti-Start is on, at least once in middle
+                //CHECK_VALUES(data[pos], 0x20, 0x28);
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                break;
             default:
                 qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
@@ -3401,12 +3443,6 @@ bool PRS1Import::ImportCompliance()
     return true;
 }
 
-
-// TODO: have UNEXPECTED_VALUE set a flag in the importer/machine that this data set is unusual
-#define UNEXPECTED_VALUE(SRC, VALS) { qWarning() << this->sessionid << QString("%1: %2 = %3 != %4").arg(__func__).arg(#SRC).arg(SRC).arg(VALS); }
-#define CHECK_VALUE(SRC, VAL) if ((SRC) != (VAL)) UNEXPECTED_VALUE(SRC, VAL)
-#define CHECK_VALUES(SRC, VAL1, VAL2) if ((SRC) != (VAL1) && (SRC) != (VAL2)) UNEXPECTED_VALUE(SRC, #VAL1 " or " #VAL2)
-// for more than 2 values, just write the test manually and use UNEXPECTED_VALUE if it fails
 
 bool PRS1DataChunk::ParseCompliance(void)
 {
