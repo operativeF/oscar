@@ -218,48 +218,49 @@ struct PRS1TestedModel
     QString model;
     int family;
     int familyVersion;
+    QString name;
 };
 
 static const PRS1TestedModel s_PRS1TestedModels[] = {
-    { "251P", 0, 2 },  // "REMstar Plus (Philips Respironics)" (brick)
-    { "450P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
-    { "451P", 0, 3 },  // "REMstar Pro (Philips Respironics)"
-    { "550P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
-    { "550P", 0, 3 },  // "REMstar Auto (Philips Respironics)"
-    { "551P", 0, 2 },  // "REMstar Auto (Philips Respironics)"
-    { "750P", 0, 2 },  // "BiPAP Auto (Philips Respironics)"
+    { "251P", 0, 2, QObject::tr("REMstar Plus (Philips Respironics)") },  // (brick)
+    { "450P", 0, 3, QObject::tr("REMstar Pro (Philips Respironics)") },
+    { "451P", 0, 3, QObject::tr("REMstar Pro (Philips Respironics)") },
+    { "550P", 0, 2, QObject::tr("REMstar Auto (Philips Respironics)") },
+    { "550P", 0, 3, QObject::tr("REMstar Auto (Philips Respironics)") },
+    { "551P", 0, 2, QObject::tr("REMstar Auto (Philips Respironics)") },
+    { "750P", 0, 2, QObject::tr("BiPAP Auto (Philips Respironics)") },
 
-    { "460P",   0, 4 },
-    { "461P",   0, 4 },
-    { "560P",   0, 4 },
-    { "560PBT", 0, 4 },
-    { "561P",   0, 4 },
-    { "660P",   0, 4 },
-    { "760P",   0, 4 },
+    { "460P",   0, 4, QObject::tr("REMstar Pro (System One 60 Series)") },
+    { "461P",   0, 4, QObject::tr("REMstar Pro (System One 60 Series)") },
+    { "560P",   0, 4, QObject::tr("REMstar Auto (System One 60 Series)") },
+    { "560PBT", 0, 4, QObject::tr("REMstar Auto (System One 60 Series)") },
+    { "561P",   0, 4, QObject::tr("REMstar Auto (System One 60 Series)") },
+    { "660P",   0, 4, QObject::tr("BiPAP Pro (System One 60 Series)") },
+    { "760P",   0, 4, QObject::tr("BiPAP Auto (System One 60 Series)") },
     
-    { "200X110", 0, 6 },  // "DreamStation CPAP" (brick)
-    { "400G110", 0, 6 },  // "DreamStation Go"
-    { "400X110", 0, 6 },  // "DreamStation CPAP Pro"
-    { "400X150", 0, 6 },  // "DreamStation CPAP Pro"
-    { "500X110", 0, 6 },  // "DreamStation Auto CPAP"
-    { "500X150", 0, 6 },  // "DreamStation Auto CPAP"
-    { "502G150", 0, 6 },  // "DreamStation Go Auto"
-    { "600X110", 0, 6 },  // "DreamStation BiPAP Pro"
-    { "700X110", 0, 6 },  // "DreamStation Auto BiPAP"
+    { "200X110", 0, 6, QObject::tr("DreamStation CPAP") },  // (brick)
+    { "400G110", 0, 6, QObject::tr("DreamStation Go") },
+    { "400X110", 0, 6, QObject::tr("DreamStation CPAP Pro") },
+    { "400X150", 0, 6, QObject::tr("DreamStation CPAP Pro") },
+    { "500X110", 0, 6, QObject::tr("DreamStation Auto CPAP") },
+    { "500X150", 0, 6, QObject::tr("DreamStation Auto CPAP") },
+    { "502G150", 0, 6, QObject::tr("DreamStation Go Auto") },
+    { "600X110", 0, 6, QObject::tr("DreamStation BiPAP Pro") },
+    { "700X110", 0, 6, QObject::tr("DreamStation Auto BiPAP") },
     
-    { "950P", 5, 0 },
-    { "960P", 5, 1 },
-    { "961P", 5, 1 },
-    { "960T", 5, 2 },
-    { "900X110", 5, 3 },  // "DreamStation BiPAP autoSV"
-    { "900X120", 5, 3 },  // "DreamStation BiPAP autoSV"
+    { "950P",    5, 0, QObject::tr("BiPAP AutoSV Advanced System One") },
+    { "960P",    5, 1, QObject::tr("BiPAP autoSV Advanced (System One 60 Series)") },
+    { "961P",    5, 1, QObject::tr("BiPAP autoSV Advanced (System One 60 Series)") },
+    { "960T",    5, 2, QObject::tr("BiPAP autoSV Advanced 30") },
+    { "900X110", 5, 3, QObject::tr("DreamStation BiPAP autoSV") },
+    { "900X120", 5, 3, QObject::tr("DreamStation BiPAP autoSV") },
     
-    { "1061T", 3, 3 },
-    { "1160P", 3, 3 },
-    { "1030X110", 3, 6 },
-    { "1130X110", 3, 6 },
+    { "1061T",    3, 3, QObject::tr("BiPAP S/T 30 (System One 60 Series)") },
+    { "1160P",    3, 3, QObject::tr("BiPAP AVAPS 30 (System One 60 Series)") },
+    { "1030X110", 3, 6, QObject::tr("DreamStation BiPAP S/T 30") },
+    { "1130X110", 3, 6, QObject::tr("DreamStation BiPAP AVAPS 30") },
     
-    { "", 0, 0 },
+    { "", 0, 0, "" },
 };
 PRS1ModelInfo s_PRS1ModelInfo;
 
@@ -268,7 +269,11 @@ PRS1ModelInfo::PRS1ModelInfo()
     for (int i = 0; !s_PRS1TestedModels[i].model.isEmpty(); i++) {
         const PRS1TestedModel & model = s_PRS1TestedModels[i];
         m_testedModels[model.family][model.familyVersion].append(model.model);
+        
+        m_modelNames[model.model] = model.name;
     }
+    
+    m_bricks = { "251P", "200X110" };
 }
 
 bool PRS1ModelInfo::IsSupported(int family, int familyVersion) const
@@ -321,8 +326,30 @@ bool PRS1ModelInfo::IsTested(const QHash<QString,QString> & props) const
     return ok;
 };
 
-// TODO: add brick list, IsBrick() test
-// TODO: add model name, Name() function
+bool PRS1ModelInfo::IsBrick(const QString & model) const
+{
+    bool is_brick;
+    
+    if (m_modelNames.contains(model)) {
+        is_brick = m_bricks.contains(model);
+    } else {
+        // If we haven't seen it before, assume any 2xx is a brick.
+        is_brick = (model.at(0) == QChar('2'));
+    }
+    
+    return is_brick;
+};
+
+QString PRS1ModelInfo::Name(const QString & model) const
+{
+    QString name;
+    if (m_modelNames.contains(model)) {
+        name = m_modelNames[model];
+    } else {
+        name = QString(QObject::tr("Unknown Model (%1)")).arg(model);
+    }
+    return name;
+};
 
 
 PRS1Loader::PRS1Loader()
@@ -442,9 +469,12 @@ void parseModel(MachineInfo & info, const QString & modelnum)
 
     int series = ((num / 10) % 10);
     int type = (num / 100);
-    int country = num % 10;
 
 
+    // TODO: Replace the below with s_PRS1ModelInfo.Name(modelnum), but
+    // first sort out the display of manufacturer/series/model in the
+    // various views, reports, and menus. Those displays should include
+    // the model number as well.
     switch (type) {
     case 1: // cpap
     case 2: // cpap
@@ -473,6 +503,10 @@ void parseModel(MachineInfo & info, const QString & modelnum)
         info.model = QObject::tr("Unknown Model");
     }
 
+    // TODO: Series is used to select which icon to use, so leave it for now.
+    // TODO: The below isn't even complete, since the DreamStation logic is broken
+    // and it gets set again elsewhere.
+    // TODO: The series is redundant with the model name, but both generally get displayed.
     switch (series) {
     case 5:
         info.series = QObject::tr("System One");
@@ -481,20 +515,13 @@ void parseModel(MachineInfo & info, const QString & modelnum)
         info.series = QObject::tr("System One (60 Series)");
         break;
     case 7:
+        // TODO: this is wrong.
         info.series = QObject::tr("DreamStation");
         break;
     default:
         info.series = QObject::tr("unknown");
         break;
 
-    }
-    switch (country) {
-    case '0':
-        break;
-    case '1':
-        break;
-    default:
-        break;
     }
 }
 
@@ -587,6 +614,8 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
     
     if (!modelnum.isEmpty()) {
         parseModel(info, modelnum);
+    } else {
+        qWarning() << "missing model number" << filename;
     }
 
     if (ptype > 0) {
@@ -862,25 +891,9 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
     MachineInfo info = newInfo();
     // Have a peek first to get the model number.
     PeekProperties(info, propertyfile);
-    
-    QString modelstr;
-    bool fnd = false;
-    for (int i=0; i<info.modelnumber.size(); i++) {
-        QChar c = info.modelnumber.at(i);
-        if (c.isDigit()) {
-            modelstr += c;
-            fnd = true;
-        } else if (fnd) break;
-    }
 
-    bool ok;
-    int model = modelstr.toInt(&ok);
-    if (ok) {
-        int series = ((model / 10) % 10);
-        int type = (model / 100);
-
-        // Assumption is made here all PRS1 machines less than 450P are not data capable.. this could be wrong one day.
-        if ((type < 4) && p_profile->cpap->brickWarning()) {
+    if (true) {
+        if (s_PRS1ModelInfo.IsBrick(info.modelnumber) && p_profile->cpap->brickWarning()) {
 #ifndef UNITTEST_MODE
             QApplication::processEvents();
             QMessageBox::information(QApplication::activeWindow(),
@@ -893,9 +906,8 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 
         }
 
-        // A bit of protection against future annoyances..
-        if (!s_PRS1ModelInfo.IsSupported(props) || ((series != 5) && (series != 6) && (series != 0) && (series != 3))) { // || (type >= 10)) {
-            qDebug() << model << type << series << info.modelnumber << "unsupported";
+        if (!s_PRS1ModelInfo.IsSupported(props)) {
+            qWarning() << info.modelnumber << "unsupported";
 #ifndef UNITTEST_MODE
             QMessageBox::information(QApplication::activeWindow(),
                                      QObject::tr("Machine Unsupported"),
@@ -906,16 +918,7 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 #endif
             return nullptr;
         }
-    } else {
-        // model number didn't parse.. Meh... Silently ignore it
-//        QMessageBox::information(QApplication::activeWindow(),
-//                                 QObject::tr("Machine Unsupported"),
-//                                 QObject::tr("OSCAR could not parse the model number, this machine can not be imported..") +"\n\n"+
-//                                 QObject::tr("The developers needs a .zip copy of this machines' SD card and matching Encore .pdf reports to make it work with OSCAR.")
-//                                ,QMessageBox::Ok);
-        return nullptr;
     }
-
 
     // Which is needed to get the right machine record..
     Machine *m = p_profile->CreateMachine(info);
@@ -936,7 +939,7 @@ Machine* PRS1Loader::CreateMachineFromProperties(QString propertyfile)
 #endif
     }
 
-    // TODO: Replace much of the above logic with PRS1ModelInfo logic.
+    // Mark the machine in the profile as unsupported.
     if (!s_PRS1ModelInfo.IsSupported(props)) {
         if (!m->unsupported()) {
             unsupported(m);
