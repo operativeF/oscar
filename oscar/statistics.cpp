@@ -24,6 +24,7 @@ extern MainWindow *mainwin;
 
 // HTML components that make up Statistics page and printed report
 QString htmlReportHeader = "";      // Page header
+QString htmlReportHeaderPrint = "";      // Page header
 QString htmlUsage = "";             // CPAP and Oximetry
 QString htmlMachineSettings = "";   // Machine (formerly Rx) changes
 QString htmlMachines = "";          // Machines used in this profile
@@ -624,17 +625,53 @@ QString Statistics::getUserInfo () {
 const QString table_width = "width=99%";
 
 // Create the page header in HTML.  Includes everything from <head> through <body>
-QString Statistics::generateHeader(bool showheader)
+QString Statistics::generateHeader(bool onScreen)
 {
     QString html = QString("<html><head>")+
+            "<style type='text/css'>";
+    if (onScreen) {
+        html += "p,a,td,body { font-family: '" + QApplication::font().family() + "'; }"
+                "p,a,td,body { font-size: " + QString::number(QApplication::font().pointSize() + 2) + "px; }";
+    } else {
+        html += "p,a,td,body { font-family: 'Helvetica'; }";
+//                "p,a,td,body { font-size: 10px; }";
+    }
+    qDebug() << "generateHeader font" << html;
+    html += "table.curved {"  // Borders not supported without webkit
+//            "border: 1px solid gray;"
+//            "border-radius:10px;"
+//            "-moz-border-radius:10px;"
+//            "-webkit-border-radius:10px;"
+//            "page-break-after:auto;"
+//            "-fs-table-paginate: paginate;"
+            "}"
+
+            "tr.datarow:nth-child(even) {"
+            "background-color: #f8f8f8;"
+            "}"
+            "table { page-break-after:auto; -fs-table-paginate: paginate; }"
+            "tr    { page-break-inside:avoid; page-break-after:auto }"
+            "td    { page-break-inside:avoid; page-break-after:auto }"
+            "thead { display:table-header-group; }"
+            "tfoot { display:table-footer-group; }"
+
+            "</style>"
+
+            "<link rel='stylesheet' type='text/css' href='qrc:/docs/tooltips.css' />"
+
+            "<script type='text/javascript'>"
+            "function ChangeColor(tableRow, highLight)"
+            "{ tableRow.style.backgroundColor = highLight; }"
+            "function Go(url) { throw(url); }"
+            "</script>"
+
     "</head>"
 
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
 
     QPixmap logoPixmap(":/icons/logo-lg.png");
 
-    if (showheader) {
-        html += "<div align=center><table class=curved width='99%'>"
+        html += "<div align=center><table class=curved width='100%'>"
             "<tr>"
                 "<td align='left' valign='middle'>" + getUserInfo() + "</td>"
                 "<td align='right' valign='middle' width='200'>"
@@ -646,7 +683,7 @@ QString Statistics::generateHeader(bool showheader)
             "</tr>"
             "</table>"
             "</div>";
-        }
+
     return html;
 }
 
@@ -1182,6 +1219,7 @@ QString Statistics::GenerateCPAPUsage()
 QString Statistics::GenerateHTML()
 {
     htmlReportHeader = generateHeader(true);
+    htmlReportHeaderPrint = generateHeader(false);
     htmlReportFooter = generateFooter(true);
 
     htmlUsage = GenerateCPAPUsage();
@@ -1230,12 +1268,13 @@ void Statistics::printReport(QWidget * parent) {
         doc.setPageSize(printArea);  // Set document to print area, removing default 2cm margins
     qDebug() << "print area" << printArea;
 
-        QFont font = doc.defaultFont();
+//        QFont font = doc.defaultFont();
+        QFont font = QFont("Helvetica");
         font.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
         doc.setDefaultFont(font);
     qDebug() << "selected printer font is" << doc.defaultFont();
 
-        doc.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
+        doc.setHtml(htmlReportHeaderPrint + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
 
         doc.print(&printer);
     }
