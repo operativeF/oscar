@@ -403,7 +403,7 @@ class PRS1ModelInfo
 {
 protected:
     QHash<int, QHash<int, QStringList>> m_testedModels;
-    QHash<QString,QString> m_modelNames;
+    QHash<QString,const char*> m_modelNames;
     QSet<QString> m_bricks;
     
 public:
@@ -413,7 +413,7 @@ public:
     bool IsTested(const QHash<QString,QString> & properties) const;
     bool IsTested(const QString & modelNumber, int family, int familyVersion) const;
     bool IsBrick(const QString & model) const;
-    QString Name(const QString & model) const;
+    const char* Name(const QString & model) const;
 };
 
 
