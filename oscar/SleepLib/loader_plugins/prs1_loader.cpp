@@ -203,16 +203,6 @@ enum FlexMode { FLEX_None, FLEX_CFlex, FLEX_CFlexPlus, FLEX_AFlex, FLEX_RiseTime
 
 ChannelID PRS1_TimedBreath = 0, PRS1_HeatedTubing = 0;
 
-#if 0  // Apparently unused
-PRS1::PRS1(Profile *profile, MachineID id): CPAP(profile, id)
-{
-}
-PRS1::~PRS1()
-{
-
-}
-#endif
-
 struct PRS1TestedModel
 {
     QString model;
@@ -222,13 +212,14 @@ struct PRS1TestedModel
 };
 
 static const PRS1TestedModel s_PRS1TestedModels[] = {
-    { "251P", 0, 2, QObject::tr("REMstar Plus (Philips Respironics)") },  // (brick)
-    { "450P", 0, 3, QObject::tr("REMstar Pro (Philips Respironics)") },
-    { "451P", 0, 3, QObject::tr("REMstar Pro (Philips Respironics)") },
-    { "550P", 0, 2, QObject::tr("REMstar Auto (Philips Respironics)") },
-    { "550P", 0, 3, QObject::tr("REMstar Auto (Philips Respironics)") },
-    { "551P", 0, 2, QObject::tr("REMstar Auto (Philips Respironics)") },
-    { "750P", 0, 2, QObject::tr("BiPAP Auto (Philips Respironics)") },
+    // This first set says "(Philips Respironics)" intead of "(System One)" on official reports.
+    { "251P", 0, 2, QObject::tr("REMstar Plus (System One)") },  // (brick)
+    { "450P", 0, 3, QObject::tr("REMstar Pro (System One)") },
+    { "451P", 0, 3, QObject::tr("REMstar Pro (System One)") },
+    { "550P", 0, 2, QObject::tr("REMstar Auto (System One)") },
+    { "550P", 0, 3, QObject::tr("REMstar Auto (System One)") },
+    { "551P", 0, 2, QObject::tr("REMstar Auto (System One)") },
+    { "750P", 0, 2, QObject::tr("BiPAP Auto (System One)") },
 
     { "460P",   0, 4, QObject::tr("REMstar Pro (System One 60 Series)") },
     { "461P",   0, 4, QObject::tr("REMstar Pro (System One 60 Series)") },
@@ -251,7 +242,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "950P",    5, 0, QObject::tr("BiPAP AutoSV Advanced System One") },
     { "960P",    5, 1, QObject::tr("BiPAP autoSV Advanced (System One 60 Series)") },
     { "961P",    5, 1, QObject::tr("BiPAP autoSV Advanced (System One 60 Series)") },
-    { "960T",    5, 2, QObject::tr("BiPAP autoSV Advanced 30") },
+    { "960T",    5, 2, QObject::tr("BiPAP autoSV Advanced 30 (System One 60 Series)") },  // omits "(System One 60 Series)" on official reports
     { "900X110", 5, 3, QObject::tr("DreamStation BiPAP autoSV") },
     { "900X120", 5, 3, QObject::tr("DreamStation BiPAP autoSV") },
     
@@ -618,6 +609,7 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
         qWarning() << "missing model number" << filename;
     }
 
+    // TODO: Replace this with PRS1ModelInfo.
     if (ptype > 0) {
         if (ModelMap.contains(ptype)) {
             info.model = ModelMap[ptype];
@@ -721,64 +713,6 @@ int PRS1Loader::Open(const QString & dirpath)
     return c;
 }
 
-/*bool PRS1Loader::ParseProperties(Machine *m, QString filename)
-{
-    QFile f(filename);
-
-    if (!f.open(QIODevice::ReadOnly)) {
-        return false;
-    }
-
-    QString line;
-    QHash<QString, QString> prop;
-
-    QString s = f.readLine();
-    QChar sep = '=';
-    QString key, value;
-
-    MachineInfo info = newInfo();
-    bool ok;
-
-    while (!f.atEnd()) {
-        key = s.section(sep, 0, 0);
-
-        if (key == s) { continue; }
-
-        value = s.section(sep, 1).trimmed();
-
-        if (value == s) { continue; }
-
-        if (key.contains("serialnumber",Qt::CaseInsensitive)) {
-            info.serial = value;
-        } else if (key.contains("modelnumber",Qt::CaseInsensitive)) {
-            parseModel(info, value);
-        } else {
-            if (key.contains("producttype", Qt::CaseInsensitive)) {
-                int i = value.toInt(&ok, 16);
-
-                if (ok) {
-                    if (ModelMap.find(i) != ModelMap.end()) {
-                        info.model = ModelMap[i];
-                    }
-                }
-            }
-            prop[key] = value;
-        }
-        s = f.readLine();
-    }
-
-    if (info.serial != m->serial()) {
-        qDebug() << "Serial Number in PRS1 properties.txt doesn't match machine record";
-    }
-    m->setInfo(info);
-
-    for (QHash<QString, QString>::iterator i = prop.begin(); i != prop.end(); i++) {
-        m->properties[i.key()] = i.value();
-    }
-
-    f.close();
-    return true;
-}*/
 
 int PRS1Loader::OpenMachine(const QString & path)
 {
