@@ -30,7 +30,7 @@ bool SerialOximeter::scanDevice(QString keyword, quint16 vendor_id, quint16 prod
     static bool dumponce = true;
     QStringList ports;
 
-    qDebug() << "Scanning for USB Serial devices";
+    qDebug() << "seroxi - Scanning for USB Serial devices";
     QList<QSerialPortInfo> list=QSerialPortInfo::availablePorts();
 
     // How does the mac detect this as a SPO2 device?
@@ -51,7 +51,7 @@ bool SerialOximeter::scanDevice(QString keyword, quint16 vendor_id, quint16 prod
             if (info->hasVendorIdentifier()) // 4292
                 dbg += QString(" VID: %1").arg(info->vendorIdentifier());
 
-            qDebug() << dbg.toLocal8Bit().data();
+            qDebug() << "seroxi - " << dbg.toLocal8Bit().data();
             break;
         } else if (dumponce) {
             QString dbg=QString("Other Serial Port: Name: %1 Desc: %2 Manufacturer: %3 Location: %4").arg(name).arg(desc).arg(info->manufacturer()).arg(info->systemLocation());
@@ -61,7 +61,7 @@ bool SerialOximeter::scanDevice(QString keyword, quint16 vendor_id, quint16 prod
             if (info->hasVendorIdentifier()) // 4292
                 dbg += QString(" VID: %1").arg(info->vendorIdentifier());
 
-            qDebug() << dbg.toLocal8Bit().data();
+            qDebug() << "seroxi - " << dbg.toLocal8Bit().data();
         }
     }
     dumponce = false;
@@ -69,7 +69,7 @@ bool SerialOximeter::scanDevice(QString keyword, quint16 vendor_id, quint16 prod
         return false;
     }
     if (ports.size()>1) {
-        qDebug() << "More than one serial device matching these parameters was found, choosing the first by default";
+        qDebug() << "seroxi - More than one serial device matching these parameters was found, choosing the first by default";
     }
     port=ports.at(0);
     return true;
@@ -81,7 +81,7 @@ void SerialOximeter::closeDevice()
     disconnect(&serial,SIGNAL(readyRead()), this, SLOT(dataAvailable()));
     serial.close();
     m_streaming = false;
-    qDebug() << "Port" << port << "closed";
+    qDebug() << "seroxi - Port" << port << "closed";
 }
 
 bool SerialOximeter::openDevice()

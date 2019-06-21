@@ -918,7 +918,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
              </property>
              <item>
               <property name="text">
-               <string>CMS50Fv3.7+/H/I, Pulox PO-400/500</string>
+               <string>CMS50Fv3.7+/H/I, CMS50D+v4.6, Pulox PO-400/500</string>
               </property>
              </item>
              <item>
@@ -1033,7 +1033,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
                </size>
               </property>
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="inputMask">
                <string notr="true">nnnnnnn</string>
@@ -1074,7 +1074,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             <item>
              <widget class="QCheckBox" name="cms50EraseAfterwards">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won't get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  because if something goes wrong before OSCAR saves your session, you can't get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Erase session after successful upload</string>
@@ -1103,7 +1103,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
          <item>
           <widget class="QPushButton" name="directImportButton">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, some oximeters will require you to do something in the devices menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, old Contec oximeters will require you to use the device's menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="styleSheet">
             <string notr="true"/>
@@ -1316,7 +1316,7 @@ background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 white, stop:1 #cccccc)
             </font>
            </property>
            <property name="text">
-            <string>Please connect your oximeter device</string>
+            <string>Please connect your oximeter device, turn it on, and enter the menu</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>

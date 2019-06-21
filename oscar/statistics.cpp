@@ -24,6 +24,7 @@ extern MainWindow *mainwin;
 
 // HTML components that make up Statistics page and printed report
 QString htmlReportHeader = "";      // Page header
+QString htmlReportHeaderPrint = "";      // Page header
 QString htmlUsage = "";             // CPAP and Oximetry
 QString htmlMachineSettings = "";   // Machine (formerly Rx) changes
 QString htmlMachines = "";          // Machines used in this profile
@@ -551,6 +552,7 @@ Statistics::Statistics(QObject *parent) :
     rows.push_back(StatisticsRow("IPAP",       SC_MIN,     MT_CPAP));
     rows.push_back(StatisticsRow("IPAP",       SC_MAX,     MT_CPAP));
 
+    rows.push_back(StatisticsRow("", SC_HEADING, MT_OXIMETER));         // Just adds some space
     rows.push_back(StatisticsRow(tr("Oximeter Statistics"), SC_HEADING, MT_OXIMETER));
     rows.push_back(StatisticsRow("",           SC_DAYS,    MT_OXIMETER));
     rows.push_back(StatisticsRow("",           SC_COLUMNHEADERS, MT_OXIMETER));
@@ -596,7 +598,7 @@ QString Statistics::getUserInfo () {
     QString address = p_profile->user->address();
     address.replace("\n", "<br/>");
 
-    QString userinfo;
+    QString userinfo = "";
 
     if (!p_profile->user->firstName().isEmpty()) {
         userinfo = tr("Name: %1, %2").arg(p_profile->user->lastName()).arg(p_profile->user->firstName()) + "<br/>";
@@ -614,40 +616,79 @@ QString Statistics::getUserInfo () {
         }
     }
 
+    while (userinfo.length() > 0 && userinfo.endsWith("<br/>"))  // Strip trailing newlines
+        userinfo = userinfo.mid(0, userinfo.length()-5);
+
     return userinfo;
 }
 
 const QString table_width = "width=99%";
 
 // Create the page header in HTML.  Includes everything from <head> through <body>
-QString Statistics::htmlHeader(bool showheader)
+QString Statistics::generateHeader(bool onScreen)
 {
     QString html = QString("<html><head>")+
+            "<style type='text/css'>";
+    if (onScreen) {
+        html += "p,a,td,body { font-family: '" + QApplication::font().family() + "'; }"
+                "p,a,td,body { font-size: " + QString::number(QApplication::font().pointSize() + 2) + "px; }";
+    } else {
+        html += "p,a,td,body { font-family: 'Helvetica'; }";
+//                "p,a,td,body { font-size: 10px; }";
+    }
+    qDebug() << "generateHeader font" << html;
+    html += "table.curved {"  // Borders not supported without webkit
+//            "border: 1px solid gray;"
+//            "border-radius:10px;"
+//            "-moz-border-radius:10px;"
+//            "-webkit-border-radius:10px;"
+//            "page-break-after:auto;"
+//            "-fs-table-paginate: paginate;"
+            "}"
+
+            "tr.datarow:nth-child(even) {"
+            "background-color: #f8f8f8;"
+            "}"
+            "table { page-break-after:auto; -fs-table-paginate: paginate; }"
+            "tr    { page-break-inside:avoid; page-break-after:auto }"
+            "td    { page-break-inside:avoid; page-break-after:auto }"
+            "thead { display:table-header-group; }"
+            "tfoot { display:table-footer-group; }"
+
+            "</style>"
+
+            "<link rel='stylesheet' type='text/css' href='qrc:/docs/tooltips.css' />"
+
+            "<script type='text/javascript'>"
+            "function ChangeColor(tableRow, highLight)"
+            "{ tableRow.style.backgroundColor = highLight; }"
+            "function Go(url) { throw(url); }"
+            "</script>"
+
     "</head>"
 
     "<body leftmargin=0 topmargin=5 rightmargin=0>";
 
     QPixmap logoPixmap(":/icons/logo-lg.png");
 
-    if (showheader) {
-        html += "<div align=center><table class=curved width='99%'>"
+        html += "<div align=center><table class=curved width='100%'>"
             "<tr>"
                 "<td align='left' valign='middle'>" + getUserInfo() + "</td>"
-                "<td align='right' valign='middle' width='150'>"
+                "<td align='right' valign='middle' width='200'>"
                     "<font size='+2'>" + STR_TR_OSCAR + "&nbsp;&nbsp;&nbsp;</font><br/>"
                     "<font size='+1'>" + QObject::tr("Usage Statistics") + "&nbsp;&nbsp;&nbsp;</font>"
                 "</td>"
-                "<td align='right' valign='middle' width='150'>" + resizeHTMLPixmap(logoPixmap,120,120)+"&nbsp;&nbsp;&nbsp;<br/>"
+                "<td align='right' valign='middle' width='110'>" + resizeHTMLPixmap(logoPixmap,80,80)+"&nbsp;&nbsp;&nbsp;<br/>"
                 "</td>"
             "</tr>"
             "</table>"
-            "</div><br/>";
-        }
+            "</div>";
+
     return html;
 }
 
 // HTML for page footer
-QString Statistics::htmlFooter(bool showinfo)
+QString Statistics::generateFooter(bool showinfo)
 {
     QString html;
 
@@ -1015,7 +1056,7 @@ QString Statistics::GenerateCPAPUsage()
 
     // Prepare top of table
     html += "<div align=center>";
-    html += "<table class=curved "+table_width+">";
+    html += "<table class=curved width="+table_width+">";
 
     // Compute number of monthly periods for a monthly rather than standard time distribution
     int number_periods = 0;
@@ -1146,14 +1187,14 @@ QString Statistics::GenerateCPAPUsage()
             name = calcnames[row.calc].arg(schema::channel[id].fullname());
         }
         QString line;
-        line += QString("<tr class=datarow><td width=25%>%1</td>").arg(name);
+        line += QString("<tr class=datarow><td width=24%>%1</td>").arg(name);
         int np = periods.size();
         int width;
         for (int j=0; j < np; j++) {
             if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
-                width = j < np-1 ? 6 : 100 - (25 + 6*(np-1));
+                width = j < np-1 ? 6 : 100 - (24 + 6*(np-1));
             } else {
-                width = 75/np;
+                width = 76/np;
             }
 
             line += QString("<td width=%1%>").arg(width);
@@ -1177,8 +1218,9 @@ QString Statistics::GenerateCPAPUsage()
 // Create the HTML that will be the Statistics page.
 QString Statistics::GenerateHTML()
 {
-    htmlReportHeader = htmlHeader(true);
-    htmlReportFooter = htmlFooter(true);
+    htmlReportHeader = generateHeader(true);
+    htmlReportHeaderPrint = generateHeader(false);
+    htmlReportFooter = generateFooter(true);
 
     htmlUsage = GenerateCPAPUsage();
 
@@ -1189,69 +1231,52 @@ QString Statistics::GenerateHTML()
     htmlMachineSettings = GenerateRXChanges();
     htmlMachines = GenerateMachineList();
 
-    UpdateRecordsBox();
-
     QString htmlScript = "<script type='text/javascript' language='javascript' src='qrc:/docs/script.js'></script>";
 
     return htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlScript + htmlReportFooter;
 }
 
+// Print the Statistics page on printer
 void Statistics::printReport(QWidget * parent) {
 
-    QPrinter printer(QPrinter::HighResolution);
+    QPrinter printer(QPrinter::ScreenResolution); // ScreenResolution required for graphics sizing
+
 #ifdef Q_OS_LINUX
     printer.setPrinterName("Print to File (PDF)");
     printer.setOutputFormat(QPrinter::PdfFormat);
     QString name = "Statistics";
     QString datestr = QDate::currentDate().toString(Qt::ISODate);
 
-//    if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//        name = "Statistics";
-//        datestr = QDate::currentDate().toString(Qt::ISODate);
-//    } else if (ui->tabWidget->currentWidget() == ui->helpTab) {
-//        name = "Help";
-//        datestr = QDateTime::currentDateTime().toString(Qt::ISODate);
-//    } else { name = "Unknown"; }
-
     QString filename = p_pref->Get("{home}/") + name + "_" + p_profile->user->userName() + "_" + datestr + ".pdf";
 
     printer.setOutputFileName(filename);
 #endif
+
     printer.setPrintRange(QPrinter::AllPages);
-//        if (ui->tabWidget->currentWidget() == ui->statisticsTab) {
-//            printer.setOrientation(QPrinter::Landscape);
-//        } else {
-        printer.setOrientation(QPrinter::Portrait);
-    //}
-    printer.setFullPage(false); // This has nothing to do with scaling
+    printer.setOrientation(QPrinter::Portrait);
+    printer.setFullPage(false);     // Print only on printable area of page and not in non-printable margins
     printer.setNumCopies(1);
-    printer.setResolution(1200);
-    //printer.setPaperSize(QPrinter::A4);
-    //printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPageMargins(5, 5, 5, 5, QPrinter::Millimeter);
+    printer.setPageMargins(10, 10, 10, 10, QPrinter::Millimeter);
+
+    // Show print dialog to user and allow them to change settings as desired
     QPrintDialog pdlg(&printer, parent);
 
     if (pdlg.exec() == QPrintDialog::Accepted) {
 
-            QTextBrowser b;
-            QPainter painter;
-            painter.begin(&printer);
+        QTextDocument doc;
+        QSizeF printArea = printer.pageRect().size();
+        doc.setPageSize(printArea);  // Set document to print area, removing default 2cm margins
+    qDebug() << "print area" << printArea;
 
-            QRect rect = printer.pageRect();
-            b.setHtml(htmlReportHeader + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
-            b.resize(rect.width()/4, rect.height()/4);
-            b.setFrameShape(QFrame::NoFrame);
+//        QFont font = doc.defaultFont();
+        QFont font = QFont("Helvetica");
+        font.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
+        doc.setDefaultFont(font);
+    qDebug() << "Printer font set to" << font << "and printer default font is now" << doc.defaultFont();
 
-            double xscale = printer.pageRect().width()/double(b.width());
-            double yscale = printer.pageRect().height()/double(b.height());
-            double scale = qMin(xscale, yscale);
-            painter.translate(printer.paperRect().x() + printer.pageRect().width()/2, printer.paperRect().y() + printer.pageRect().height()/2);
-            painter.scale(scale, scale);
-            painter.translate(-b.width()/2, -b.height()/2);
+        doc.setHtml(htmlReportHeaderPrint + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
 
-            b.render(&painter, QPoint(0,0));
-            painter.end();
-
+        doc.print(&printer);
     }
 }
 

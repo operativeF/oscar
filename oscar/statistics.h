@@ -11,6 +11,8 @@
 
 #include <QObject>
 #include <QMainWindow>
+#include <QPrinter>
+#include <QPainter>
 #include <QHash>
 #include <QList>
 #include "SleepLib/schema.h"
@@ -164,12 +166,7 @@ class Statistics : public QObject
     void saveRXChanges();
     void updateRXChanges();
 
-    QString getUserInfo();
-    QString getRDIorAHIText();
     QString GenerateHTML();
-    QString GenerateMachineList();
-    QString GenerateRXChanges();
-    QString GenerateCPAPUsage();
 
     QString UpdateRecordsBox();
 
@@ -177,9 +174,16 @@ class Statistics : public QObject
 
 
   protected:
+    QString getUserInfo();
+    QString getRDIorAHIText();
+
     QString htmlNoData();
-    QString htmlHeader(bool showheader);
-    QString htmlFooter(bool showinfo=true);
+    QString generateHeader(bool showheader);
+    QString generateFooter(bool showinfo=true);
+
+    QString GenerateMachineList();
+    QString GenerateRXChanges();
+    QString GenerateCPAPUsage();
 
     // Using a map to maintain order
     QList<StatisticsRow> rows;
