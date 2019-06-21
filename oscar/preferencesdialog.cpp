@@ -1,5 +1,6 @@
-﻿/* OSCAR Preferences Dialog Implementation
+/* OSCAR Preferences Dialog Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -165,7 +166,16 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
 
     ui->LockSummarySessionSplitting->setChecked(profile->session->lockSummarySessions());
 
-    ui->applicationFont->setCurrentFont(QApplication::font());
+    // macOS default system fonts are not in QFontCombobox because they are "private":
+    // See https://github.com/musescore/MuseScore/commit/0eecb165664a0196c2eee12e42fb273dcfc9c637
+    // The below makes sure any default system font is present in QFontComboBox.
+    QString systemFontFamily = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
+    if (-1 == ui->applicationFont->findText(systemFontFamily)) {
+        ui->applicationFont->addItem(systemFontFamily);
+    }
+    // If the current font is the system font, setCurrentFont() won't work as intended,
+    // so select the font by searching for its name, which will always work.
+    ui->applicationFont->setCurrentIndex(ui->applicationFont->findText(QApplication::font().family()));
     //ui->applicationFont->setFont(QApplication::font());
     ui->applicationFontSize->setValue(QApplication::font().pointSize());
     ui->applicationFontBold->setChecked(QApplication::font().weight() == QFont::Bold);
