@@ -1272,7 +1272,7 @@ void Statistics::printReport(QWidget * parent) {
         QFont font = QFont("Helvetica");
         font.setPointSize(10 * (printArea.width()/1200.0)); // Scale the font
         doc.setDefaultFont(font);
-    qDebug() << "selected printer font is" << doc.defaultFont();
+    qDebug() << "Printer font set to" << font << "and printer default font is now" << doc.defaultFont();
 
         doc.setHtml(htmlReportHeaderPrint + htmlUsage + htmlMachineSettings + htmlMachines + htmlReportFooter);
 
