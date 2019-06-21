@@ -39,8 +39,6 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
         return;
     }
 
-    //QString username = p_profile->Get(QString("_{") + QString(STR_UI_UserName) + "}_");
-
     bool print_bookmarks = false;
 
     if (name == STR_TR_Daily) {
@@ -69,7 +67,8 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
 
     printer = new QPrinter(QPrinter::HighResolution);
 
-#ifdef Q_WS_X11
+#ifdef Q_OS_LINUX
+    QString username = p_profile->Get(QString("_{") + QString(STR_UI_UserName) + "}_");
     printer->setPrinterName("Print to File (PDF)");
     printer->setOutputFormat(QPrinter::PdfFormat);
     QString filename = p_pref->Get("{home}/") + name + username + date.toString(Qt::ISODate) + ".pdf";

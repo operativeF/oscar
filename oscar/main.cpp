@@ -42,11 +42,6 @@
 #include "SleepLib/loader_plugins/icon_loader.h"
 #include "SleepLib/loader_plugins/weinmann_loader.h"
 
-
-#ifdef Q_WS_X11
-#include <X11/Xlib.h>
-#endif
-
 MainWindow *mainwin = nullptr;
 
 int compareVersion(QString version);
@@ -257,9 +252,6 @@ int main(int argc, char* argv[])
 #else
 
 int main(int argc, char *argv[]) {
-#ifdef Q_WS_X11
-    XInitThreads();
-#endif
 
     QString homeDocs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/";
     QCoreApplication::setApplicationName(getAppName());
