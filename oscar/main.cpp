@@ -340,6 +340,7 @@ int main(int argc, char *argv[]) {
     QString relinfo = "";
 #endif
     relinfo = "("+QSysInfo::kernelType()+" "+QSysInfo::currentCpuArchitecture()+relinfo+")";
+    qDebug() << "OSCAR starting" << QDateTime::currentDateTime();
     qDebug().noquote() << STR_AppName << VersionString << relinfo << "Built with Qt" << QT_VERSION_STR << __DATE__ << __TIME__;
 
     ////////////////////////////////////////////////////////////////////////////////////////////
