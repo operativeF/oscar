@@ -1931,6 +1931,7 @@ void MainWindow::purgeMachine(Machine * mach)
         mach->day.clear();
         QDir dir;
         QString path = mach->getDataPath();
+        qDebug() << "path to machine" << path;
         path.chop(1);
 
         p_profile->DelMachine(mach);
@@ -1943,7 +1944,10 @@ void MainWindow::purgeMachine(Machine * mach)
             SetFileAttributes(directoryPtr, GetFileAttributes(directoryPtr) & ~FILE_ATTRIBUTE_READONLY);
             if (!::RemoveDirectory(directoryPtr)) {
                DWORD lastError = ::GetLastError();
-               qDebug() << "RemoveDirectory GetLastError: " << lastError;
+               qDebug() << "RemoveDirectory" << path << "GetLastError: " << lastError << "(Error 145 is expected)";
+               if (lastError == 145) {
+                   qDebug() << path << "remaining directory contents are" << QDir(path).entryList();
+               }
 
             } else {
                qDebug() << "Success on second attempt deleting folder with windows API " << path;
