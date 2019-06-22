@@ -564,7 +564,6 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
     }
     QString modelnum;
     int ptype=0;
-    int dfv=0;
     bool ok;
     for (auto & key : props.keys()) {
         bool skip = false;
@@ -580,11 +579,6 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
         if (key == "ProductType") {
             ptype = props[key].toInt(&ok, 16);
             if (!ok) qWarning() << "ProductType" << props[key];
-            skip = true;
-        }
-        if (key == "DataFormatVersion") {
-            dfv = props[key].toInt(&ok, 10);
-            if (!ok) qWarning() << "DataFormatVersion" << props[key];
             skip = true;
         }
         if (!mach || skip) continue;
@@ -1997,7 +1991,7 @@ bool PRS1Import::ParseF5Events()
 // 950P is F5V0, 960P and 961P are F5V1, 960T is F5V2
 bool PRS1DataChunk::ParseEventsF5V012(void)
 {
-    EventDataType data0, data1, data2, data4, data5;
+    EventDataType data0, data1, data4, data5;
 
     int t = 0;
     int pos = 0;
@@ -2055,7 +2049,8 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
             }
 
             if (!buffer[pos - 1]) {
-                data2 = buffer[pos++];
+                //data2 = buffer[pos++];
+                pos++;
                 fc++;
             }
 
@@ -2260,7 +2255,7 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
             qDebug() << "0x12 Observed in ASV data!!????";
             data0 = buffer[pos++];
             data1 = buffer[pos++];
-            data2 = buffer[pos + 1] << 8 | buffer[pos];
+            //data2 = buffer[pos + 1] << 8 | buffer[pos];
             pos += 2;
             //session->AddEvent(new Event(t,cpapcode, 0, data,3));
             break;
