@@ -994,7 +994,7 @@ QString Statistics::GenerateRXChanges()
 QString Statistics::htmlNoData()
 {
             QString html = "<div align=center>";
-            html += QString( "<p><font size=\"+3\"><br />" + tr("I can haz data?!?") + "</font></p>"+
+            html += QString( "<p><font size=\"+3\"><br />" + tr("No data found?!?") + "</font></p>"+
                     "<p><img src='qrc:/icons/logo-lm.png' width=\"100\" height=\"100\"></p>"
                     "<p><i>"+tr("Oscar has no data to report :(")+"</i></p>");
             return html;
