@@ -170,7 +170,7 @@ class Session
     //! \brief Set last time to higher of 'd' and existing s_last.  Throw warning if 'd' less than s_first.
     void set_last(qint64 d) {
         if (d <= s_first) {
-            qWarning() << s_session << "Session::set_last() d<=s_first";
+            qWarning() << s_session << "Session::set_last() d<=s_first, d" << d << "s_first" << s_first;
             return;
         }
 
