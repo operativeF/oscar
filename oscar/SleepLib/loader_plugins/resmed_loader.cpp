@@ -1611,7 +1611,7 @@ int ResmedLoader::Open(const QString & dirpath)
         path = path.section("/", 0, -2);
     }
 
-    // Strip off DATALOG from path, and set newpath to the path contianing DATALOG
+    // Strip off DATALOG from path, and set newpath to the path containing DATALOG
     if (path.endsWith(RMS9_STR_datalog)) {
         newpath = path + "/";
         path = path.section("/", 0, -2);

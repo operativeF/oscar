@@ -114,8 +114,14 @@ bool Machine::saveSessionInfo()
     out << (int)sessionlist.size();
     for (s = sessionlist.begin(); s != sessionlist.end(); ++s) {
         Session * sess = s.value();
-        out << (quint32) sess->session();
-        out << (bool)(sess->enabled());
+        if (sess->s_first != 0) {
+            out << (quint32) sess->session();
+            out << (bool)(sess->enabled());
+        } else {
+            qWarning() << "Machine::SaveSessionInfo discarding session" << sess->s_session
+                       << "["+QDateTime::fromTime_t(sess->s_session).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                       << "from machine" << serial() << "with first=0";
+        }
 
         //out << sess->m_availableChannels;
     }
@@ -548,7 +554,8 @@ void Machine::setInfo(MachineInfo inf)
 
 const QString Machine::getDataPath()
 {    
-    m_dataPath = p_pref->Get("{home}/Profiles/")+profile->user->userName()+"/"+info.loadername + "_" + (info.serial.isEmpty() ? hexid() : info.serial) + "/";
+    m_dataPath = p_pref->Get("{home}/Profiles/")+profile->user->userName()+"/"+info.loadername + "_"
+                 + (info.serial.isEmpty() ? hexid() : info.serial) + "/";
 
     //if (m_dataPath.isEmpty()) {
  //       m_dataPath = profile->Get("{" + STR_GEN_DataFolder + "}/" + info.loadername + "_" + (info.serial.isEmpty() ? hexid() : info.serial)) + "/";
@@ -740,7 +747,7 @@ bool Machine::SaveSession(Session *sess)
 {
     QString path = getDataPath();
 
-    if (sess->IsChanged()) { sess->Store(path); }
+    if (sess->IsChanged() && sess->first() != 0) { sess->Store(path); }
 
     return true;
 }

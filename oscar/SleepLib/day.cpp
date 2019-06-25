@@ -107,15 +107,24 @@ void Day::addSession(Session *s)
     auto mi = machines.find(s->type());
     if (mi != machines.end()) {
         if (mi.value() != s->machine()) {
-            qDebug() << "OSCAR can't add session" << s->session() << "to this day record, as it already contains a different machine of the same MachineType";
+            qDebug() << "OSCAR can't add session" << s->session()
+                     << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                     << "from machine" << mi.value()->serial() << "to machine" << s->machine()->serial()
+                     << "to this day record, as it already contains a different machine of the same MachineType" << s->type();
             return;
         }
     } else {
         machines[s->type()] = s->machine();
     }
 
-    sessions.push_back(s);
+    if (s->first() == 0)
+        qWarning() << "Discarding session" << s->session()
+                 << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                 << "from machine" << s->machine()->serial() << "with first=0";
+    else
+        sessions.push_back(s);
 }
+
 EventDataType Day::calcMiddle(ChannelID code)
 {
     int c = p_profile->general->prefCalcMiddle();

@@ -299,6 +299,13 @@ QDataStream & operator<<(QDataStream & out, const SessionSlice & slice)
 
 bool Session::StoreSummary()
 {
+    if (s_first == 0) {
+        qWarning() << "Session::StoreSummary discarding session" << s_session
+                 << "["+QDateTime::fromTime_t(s_session).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                 << "from machine" << machine()->serial() << "with first=0";
+        return false;
+    }
+
     QString filename = s_machine->getSummariesPath() + QString().sprintf("%08lx.000", s_session);
 
     QFile file(filename);
