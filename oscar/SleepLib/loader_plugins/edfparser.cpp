@@ -106,6 +106,8 @@ bool EDFParser::Parse()
 
     startdate = qint64(startdate_orig.toTime_t()) * 1000L;
     //startdate-=timezoneOffset();
+    if (startdate == 0)
+        qDebug() << "EDFParser::Parse startdate = 0";
 
     //qDebug() << startDate.toString("yyyy-MM-dd HH:mm:ss");
 
