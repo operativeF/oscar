@@ -1068,7 +1068,6 @@ bool Machine::LoadSummary(ProgressDialog * progress)
                 sess->m_availableSettings = available_settings;
             }
 
-
             sess_order[first] = sess;
         }
     }
@@ -1076,8 +1075,8 @@ bool Machine::LoadSummary(ProgressDialog * progress)
     QMap<qint64, Session *>::iterator it;
     int cnt = 0;
     bool loadSummaries = profile->session->preloadSummaries();
-    qDebug() << "PreloadSummaries is " << (loadSummaries ? "true" : "false");
-    qDebug() << "Queue task loader is " << (loader() ? "" : "not ") << "available";
+    qDebug() << "PreloadSummaries is" << (loadSummaries ? "true" : "false");
+    qDebug() << "Queue task loader is" << (loader() ? "" : "not ") << "available";
 //  sleep(1);
 
 //  progress->setMessage(QObject::tr("Queueing Open Tasks"));
