@@ -118,7 +118,7 @@ void Day::addSession(Session *s)
     }
 
     if (s->first() == 0)
-        qWarning() << "Discarding session" << s->session()
+        qWarning() << "Day::addSession discarding session" << s->session()
                  << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
                  << "from machine" << s->machine()->serial() << "with first=0";
     else
