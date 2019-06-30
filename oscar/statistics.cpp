@@ -182,6 +182,11 @@ void Statistics::updateRXChanges()
         if (mach == nullptr)
             continue;
 
+        if (day->first() == 0) {  // Ignore invalid dates
+            qDebug() << "Statistics::updateRXChanges ignoring day with first=0";
+            continue;
+        }
+
         bool fnd = false;
 
 
