@@ -100,14 +100,16 @@ bool EDFParser::Parse()
     }
 
     if (!startdate_orig.isValid()) {
-        qDebug() << "Invalid date time retreieved parsing EDF File " << filename;
+        qDebug() << "Invalid date time retreieved parsing EDF File" << filename;
         return false;
     }
 
     startdate = qint64(startdate_orig.toTime_t()) * 1000L;
     //startdate-=timezoneOffset();
-    if (startdate == 0)
-        qDebug() << "EDFParser::Parse startdate = 0";
+    if (startdate == 0) {
+        qDebug() << "Invalid startdate = 0 in EDF File" << filename;
+        return false;
+    }
 
     //qDebug() << startDate.toString("yyyy-MM-dd HH:mm:ss");
 
