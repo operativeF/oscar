@@ -1307,6 +1307,7 @@ void MainWindow::on_action_Preferences_triggered()
     prefdialog = &pd;
 
     if (pd.exec() == PreferencesDialog::Accepted) {
+        // Apply any updates from preference changes (notably fonts)
         if (daily) {
             daily->RedrawGraphs();
         }
@@ -1314,6 +1315,18 @@ void MainWindow::on_action_Preferences_triggered()
         if (overview) {
             overview->RebuildGraphs(true);
         }
+
+        if (welcome)
+            welcome->refreshPage();
+
+        if (profileSelector)
+            profileSelector->updateProfileList();
+
+// These attempts to update calendar after a change to application font do NOT work, and I can find no QT documentation suggesting
+// that changing the font after Calendar is created is even possible.
+//        qDebug() << "application font family set to" << QApplication::font().family() << "and font" << QApplication::font();
+//        ui->statStartDate->calendarWidget()->setFont(QApplication::font());
+//        ui->statStartDate->calendarWidget()->repaint();
     }
 
     prefdialog = nullptr;
@@ -1994,7 +2007,8 @@ void MainWindow::purgeMachine(Machine * mach)
         daily->clearLastDay(); // otherwise Daily will crash
         daily->ReloadGraphs();
     }
-    if (welcome) welcome->refreshPage();
+    if (welcome)
+        welcome->refreshPage();
 
     QApplication::processEvents();
 }
