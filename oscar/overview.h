@@ -46,6 +46,9 @@ class Overview : public QWidget
     //! \brief Recalculates Overview chart info
     void ReloadGraphs();
 
+    //! \brief Resets font in date display
+    void ResetFont();
+
     //! \brief Recalculates Overview chart info, but keeps the date set
     void ResetGraphs();
 

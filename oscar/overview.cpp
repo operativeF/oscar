@@ -144,6 +144,13 @@ Overview::~Overview()
     delete ui;
 }
 
+void Overview::ResetFont()
+{
+    QFont font = QApplication::font();
+    font.setPointSizeF(font.pointSizeF()*1.3F);
+    dateLabel->setFont(font);
+}
+
 void Overview::RebuildGraphs(bool reset)
 {
     qint64 minx, maxx;

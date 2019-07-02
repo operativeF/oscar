@@ -1313,6 +1313,7 @@ void MainWindow::on_action_Preferences_triggered()
         }
 
         if (overview) {
+            overview->ResetFont();
             overview->RebuildGraphs(true);
         }
 
