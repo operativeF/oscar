@@ -1907,6 +1907,9 @@ void Daily::RedrawGraphs()
         schema::channel[CPAP_Leak].setUpperThreshold(0); // switch it off
     }
 
+    QFont appFont = QApplication::font();
+    dateDisplay->setFont(appFont);
+
     GraphView->redraw();
 }
 
