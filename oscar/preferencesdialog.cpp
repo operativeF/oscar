@@ -180,24 +180,28 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
     ui->applicationFontSize->setValue(QApplication::font().pointSize());
     ui->applicationFontBold->setChecked(QApplication::font().weight() == QFont::Bold);
     ui->applicationFontItalic->setChecked(QApplication::font().italic());
+//    ui->applicationFont->setEditable(false);
 
     ui->graphFont->setCurrentFont(*defaultfont);
     //ui->graphFont->setFont(*defaultfont);
     ui->graphFontSize->setValue(defaultfont->pointSize());
     ui->graphFontBold->setChecked(defaultfont->weight() == QFont::Bold);
     ui->graphFontItalic->setChecked(defaultfont->italic());
+//    ui->graphFont->setEditable(false);
 
     ui->titleFont->setCurrentFont(*mediumfont);
     //ui->titleFont->setFont(*mediumfont);
     ui->titleFontSize->setValue(mediumfont->pointSize());
     ui->titleFontBold->setChecked(mediumfont->weight() == QFont::Bold);
     ui->titleFontItalic->setChecked(mediumfont->italic());
+//    ui->titleFont->setEditable(false);
 
     ui->bigFont->setCurrentFont(*bigfont);
     //ui->bigFont->setFont(*bigfont);
     ui->bigFontSize->setValue(bigfont->pointSize());
     ui->bigFontBold->setChecked(bigfont->weight() == QFont::Bold);
     ui->bigFontItalic->setChecked(bigfont->italic());
+//    ui->bigFont->setEditable(false);
 
     ui->lineThicknessSlider->setValue(AppSetting->lineThickness()*2.0);
 
@@ -901,7 +905,6 @@ bool PreferencesDialog::Save()
     (*p_pref)["Fonts_Application_Bold"] = ui->applicationFontBold->isChecked();
     (*p_pref)["Fonts_Application_Italic"] = ui->applicationFontItalic->isChecked();
 
-
     (*p_pref)["Fonts_Graph_Name"] = ui->graphFont->currentText();
     (*p_pref)["Fonts_Graph_Size"] = ui->graphFontSize->value();
     (*p_pref)["Fonts_Graph_Bold"] = ui->graphFontBold->isChecked();
@@ -917,28 +920,25 @@ bool PreferencesDialog::Save()
     (*p_pref)["Fonts_Big_Bold"] = ui->bigFontBold->isChecked();
     (*p_pref)["Fonts_Big_Italic"] = ui->bigFontItalic->isChecked();
 
-    QFont font = ui->applicationFont->currentFont();
-    font.setPointSize(ui->applicationFontSize->value());
-    font.setWeight(ui->applicationFontBold->isChecked() ? QFont::Bold : QFont::Normal);
-    font.setItalic(ui->applicationFontItalic->isChecked());
-    QApplication::setFont(font);
-    mainwin->menuBar()->setFont(font);
+    validateAllFonts();     // Make sure fonts are valid and reset to default values if not
 
-    *defaultfont = ui->graphFont->currentFont();
-    defaultfont->setPointSize(ui->graphFontSize->value());
-    defaultfont->setWeight(ui->graphFontBold->isChecked() ? QFont::Bold : QFont::Normal);
-    defaultfont->setItalic(ui->graphFontItalic->isChecked());
+    // Changes to the application font will be set by the caller (mainwindow.cpp)
 
-    *mediumfont = ui->titleFont->currentFont();
-    mediumfont->setPointSize(ui->titleFontSize->value());
-    mediumfont->setWeight(ui->titleFontBold->isChecked() ? QFont::Bold : QFont::Normal);
-    mediumfont->setItalic(ui->titleFontItalic->isChecked());
+    // Set other fonts for use by graph etc. pages
+    defaultfont = new QFont(((*p_pref)["Fonts_Graph_Name"]).toString());
+    defaultfont->setPointSize(((*p_pref)["Fonts_Graph_Size"]).toInt());
+    defaultfont->setWeight(((*p_pref)["Fonts_Graph_Bold"]).toBool() ? QFont::Bold : QFont::Normal);
+    defaultfont->setItalic(((*p_pref)["Fonts_Graph_Italic"]).toBool());
 
-    *bigfont = ui->bigFont->currentFont();
-    bigfont->setPointSize(ui->bigFontSize->value());
-    bigfont->setWeight(ui->bigFontBold->isChecked() ? QFont::Bold : QFont::Normal);
-    bigfont->setItalic(ui->bigFontItalic->isChecked());
+    mediumfont = new QFont(((*p_pref)["Fonts_Title_Name"]).toString());
+    mediumfont->setPointSize(((*p_pref)["Fonts_Title_Size"]).toInt());
+    mediumfont->setWeight(((*p_pref)["Fonts_Title_Bold"]).toBool() ? QFont::Bold : QFont::Normal);
+    mediumfont->setItalic(((*p_pref)["Fonts_Title_Italic"]).toBool());
 
+    bigfont = new QFont(((*p_pref)["Fonts_Big_Name"]).toString());
+    bigfont->setPointSize(((*p_pref)["Fonts_Big_Size"]).toInt());
+    bigfont->setWeight(((*p_pref)["Fonts_Big_Bold"]).toBool() ? QFont::Bold : QFont::Normal);
+    bigfont->setItalic(((*p_pref)["Fonts_Big_Italic"]).toBool());
 
     saveChanInfo();
     saveWaveInfo();
