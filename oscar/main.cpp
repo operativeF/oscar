@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include "SleepLib/profiles.h"
 #include "translation.h"
+#include "SleepLib/common.h"
 
 #include <ctime>
 #include <chrono>
@@ -501,6 +502,10 @@ int main(int argc, char *argv[]) {
     QString language = settings.value(LangSetting, "").toString();
     AppSetting->setLanguage(language);
 
+    // Set fonts from preferences file
+    validateAllFonts();
+    setApplicationFont();
+
 //    Clean up some legacy crap
 //    QFile lf(p_pref->Get("{home}/Layout.xml"));
 //    if (lf.exists()) {
@@ -551,35 +556,6 @@ int main(int argc, char *argv[]) {
     }
 
     AppSetting->setVersionString(VersionString);
-
-//    int id=QFontDatabase::addApplicationFont(":/fonts/FreeSans.ttf");
-//    QFontDatabase fdb;
-//    QStringList ffam=fdb.families();
-//    for (QStringList::iterator i=ffam.begin();i!=ffam.end();i++) {
-//        qDebug() << "Loaded Font: " << (*i);
-//    }
-
-
-    if (!p_pref->contains("Fonts_Application_Name")) {
-#ifdef Q_OS_WIN
-        // Windows default Sans Serif interpretation sucks
-        // Segoe UI is better, but that requires OS/font detection
-        (*p_pref)["Fonts_Application_Name"] = "Arial";
-#else
-        (*p_pref)["Fonts_Application_Name"] = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
-#endif
-        (*p_pref)["Fonts_Application_Size"] = 10;
-        (*p_pref)["Fonts_Application_Bold"] = false;
-        (*p_pref)["Fonts_Application_Italic"] = false;
-    }
-
-
-    QApplication::setFont(QFont((*p_pref)["Fonts_Application_Name"].toString(),
-                                (*p_pref)["Fonts_Application_Size"].toInt(),
-                                (*p_pref)["Fonts_Application_Bold"].toBool() ? QFont::Bold : QFont::Normal,
-                                (*p_pref)["Fonts_Application_Italic"].toBool()));
-
-    qDebug() << "Selected Font" << QApplication::font().family();
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Register Importer Modules for autoscanner

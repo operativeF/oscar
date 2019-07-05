@@ -16,7 +16,10 @@
 #include <QDebug>
 #include <QDir>
 #include <QCoreApplication>
+#include <QApplication>
 #include <QSettings>
+#include <QFontDatabase>
+#include <QMenuBar>
 
 #include "SleepLib/common.h"
 
@@ -30,6 +33,9 @@
 #include "git_info.h"
 #include "version.h"
 #include "profiles.h"
+#include "mainwindow.h"
+
+extern MainWindow * mainwin;
 
 // Used by internal settings
 
@@ -191,6 +197,8 @@ QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
         branch = QObject::tr("Branch:") + " " + GIT_BRANCH + ", ";
     }
     buildInfo << branch + (QObject::tr("Revision")) + " " + GIT_REVISION;
+    if (GIT_BRANCH != "master")
+        buildInfo << (QObject::tr("App key:") + " " + getAppName());
     buildInfo << QString("");
     buildInfo << (QObject::tr("Operating system:") + " " + QSysInfo::prettyProductName());
     buildInfo << (QObject::tr("Graphics Engine:") + " " + getOpenGLVersionString());
@@ -281,6 +289,83 @@ QString formatRelief (QString relief)
 bool operator <(const ValueCount &a, const ValueCount &b)
 {
     return a.value < b.value;
+}
+
+static QStringList installedFontFamilies;
+
+// Validate all fonts
+void validateAllFonts () {
+    validateFont("Application");
+    validateFont("Graph");
+    validateFont("Title");
+    validateFont("Big");
+}
+
+// Validate font from preference settings, and substitute system font if font in preferences cannot be found on this system
+void validateFont (QString which) {
+
+    // Get list of installed font families, including system font
+    // Do this just once so we don't have to call font functions repeatedly
+    if (installedFontFamilies.length() <= 0) {
+        QFontDatabase database;
+        installedFontFamilies = database.families();
+        qDebug() << "validateFont found" << installedFontFamilies.count() << "families";
+
+        // macOS default system fonts are not in QFontCombobox because they are "private":
+        // See https://github.com/musescore/MuseScore/commit/0eecb165664a0196c2eee12e42fb273dcfc9c637
+        // The below makes sure any default system font is present in installedFontFamilies
+        QString systemFontFamily = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
+        if (installedFontFamilies.indexOf(systemFontFamily) < 0) {
+            installedFontFamilies.insert(0, systemFontFamily);
+        }
+    }
+
+    bool forceFont = false;
+    QString prefPrefix = "Fonts_" + which + "_";
+
+    // If a font is specified, make sure it is a valid font on this platform
+    if (p_pref->contains(prefPrefix + "Name")) {
+        QString desiredFont = (*p_pref)[prefPrefix + "Name"].toString();
+        if (desiredFont == "")
+            forceFont = true;
+        else {
+            if (installedFontFamilies.indexOf(desiredFont) == -1) {
+                forceFont = true;
+                qDebug() << "Desired font" << desiredFont << "not found in font database," << QFontDatabase::systemFont(QFontDatabase::GeneralFont) << "(system default) font used instead";
+            }
+        }
+    }
+
+    // Font not valid or not specified.  Set system font in its place
+    if (!p_pref->contains(prefPrefix + "Name") || forceFont) {
+        (*p_pref)[prefPrefix + "Name"] = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
+        if (which == "Application") {
+            (*p_pref)[prefPrefix + "Size"] = 10;
+            (*p_pref)[prefPrefix + "Bold"] = false;
+            (*p_pref)[prefPrefix + "Italic"] = false;
+        } else if (which == "Graphs") {
+            (*p_pref)[prefPrefix + "Size"] = 10;
+            (*p_pref)[prefPrefix + "Bold"] = false;
+            (*p_pref)[prefPrefix + "Italic"] = false;
+        } else if (which == "Title") {
+            (*p_pref)[prefPrefix + "Size"] = 14;
+            (*p_pref)[prefPrefix + "Bold"] = true;
+            (*p_pref)[prefPrefix + "Italic"] = false;
+        } else if (which == "Big") {
+            (*p_pref)[prefPrefix + "Size"] = 35;
+            (*p_pref)[prefPrefix + "Bold"] = false;
+            (*p_pref)[prefPrefix + "Italic"] = false;
+        }
+    }
+}
+
+void setApplicationFont () {
+    QFont font = QFont(((*p_pref)["Fonts_Application_Name"]).toString());
+    font.setPointSize(((*p_pref)["Fonts_Application_Size"]).toInt());
+    font.setWeight(((*p_pref)["Fonts_Application_Bold"]).toBool() ? QFont::Bold : QFont::Normal);
+    font.setItalic(((*p_pref)["Fonts_Application_Italic"]).toBool());
+    QApplication::setFont(font);
+    mainwin->menuBar()->setFont(font);
 }
 
 bool removeDir(const QString &path)
