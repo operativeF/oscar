@@ -54,10 +54,22 @@ void Welcome::refreshPage()
 //        sleep(3);
         ui->cpapIcon->setPixmap(pixmap);
     }
+
+    // Copy application font to tool buttons
+    ui->importButton->setFont(QApplication::font());
+    ui->dailyButton->setFont(QApplication::font());
+    ui->overviewButton->setFont(QApplication::font());
+    ui->statisticsButton->setFont(QApplication::font());
+    ui->oximetryButton->setFont(QApplication::font());
+
+
+    // Enable buttons that might be disabled
     ui->dailyButton->setEnabled(b);
+    ui->oximetryButton->setEnabled(b);  // looks like this was omitted from the list (gts 7/4/2019)
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
     mainwin->EnableTabs(b);
+
 /** MainWindow::ui->tabWidget->setTabEnabled(2, b);********* need to find some other way
 *** MainWindow::ui->tabWidget->setTabEnabled(3, b);********* to enable these tabs ******
 *** MainWindow::ui->tabWidget->setTabEnabled(4, b);************************************/
