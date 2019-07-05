@@ -45,6 +45,8 @@ extern MainWindow * mainwin;
 // This was Sean Stangl's idea.. but I couldn't apply that patch.
 inline QString channelInfo(ChannelID code) {
     return schema::channel[code].fullname()+"\n"+schema::channel[code].description()+"\n("+schema::channel[code].units()+")";
+//    return schema::channel[code].fullname()+"\n"+schema::channel[code].description()
+//            + (schema::channel[code].units() != "0" ? "\n("+schema::channel[code].units()+")" : "");
 }
 
 void Daily::setCalendarVisible(bool visible)
@@ -658,7 +660,10 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
                     }
                     QStringList a;
                     QDateTime d=QDateTime::fromMSecsSinceEpoch(t); // Localtime
-                    QString s=QString("#%1: %2 (%3)").arg((int)(++mccnt[code]),(int)3,(int)10,QChar('0')).arg(d.toString("HH:mm:ss")).arg(m.value()[z]->raw(o));
+                    QString s=QString("#%1: %2").arg((int)(++mccnt[code]),(int)3,(int)10,QChar('0')).arg(d.toString("HH:mm:ss"));
+                    if (m.value()[z]->raw(o) > 0)
+                            s += QString(" (%3)").arg(m.value()[z]->raw(o));
+
                     a.append(s);
                     QTreeWidgetItem *item=new QTreeWidgetItem(a);
                     item->setData(0,Qt::UserRole,t);
@@ -1166,6 +1171,8 @@ QString Daily::getStatisticsInfo(Day * day)
         QString tooltip=schema::channel[code].description();
 
         if (!schema::channel[code].units().isEmpty()) tooltip+=" ("+schema::channel[code].units()+")";
+//        if (!schema::channel[code].units().isEmpty() && schema::channel[code].units() != "0")
+//            tooltip+=" ("+schema::channel[code].units()+")";
 
         if (ST_max == ST_MAX) {
             mx=day->Max(code);
