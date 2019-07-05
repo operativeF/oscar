@@ -1308,6 +1308,9 @@ void MainWindow::on_action_Preferences_triggered()
 
     if (pd.exec() == PreferencesDialog::Accepted) {
         // Apply any updates from preference changes (notably fonts)
+
+        setApplicationFont();
+
         if (daily) {
             daily->RedrawGraphs();
         }
