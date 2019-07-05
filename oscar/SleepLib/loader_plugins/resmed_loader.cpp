@@ -2385,7 +2385,7 @@ bool ResmedLoader::LoadEVE(Session *sess, const QString & path)
 
                         if (sess->checkInside(tt)) OA->AddEvent(tt, duration);
                     } else if (matchSignal(CPAP_Hypopnea, t)) {
-                        if (sess->checkInside(tt)) HY->AddEvent(tt, duration + 10); // Only Hyponea's Need the extra duration???
+                        if (sess->checkInside(tt)) HY->AddEvent(tt, duration /*+ 10*/); // Only Hyponea's Need the extra duration???
                     } else if (matchSignal(CPAP_Apnea, t)) {
                         if (sess->checkInside(tt)) UA->AddEvent(tt, duration);
                     } else if (matchSignal(CPAP_RERA, t)) {
