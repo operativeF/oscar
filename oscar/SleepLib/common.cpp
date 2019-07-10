@@ -295,67 +295,55 @@ static QStringList installedFontFamilies;
 
 // Validate all fonts
 void validateAllFonts () {
-    validateFont("Application");
-    validateFont("Graph");
-    validateFont("Title");
-    validateFont("Big");
+    validateFont("Application", 10, false, false);
+    validateFont("Graph", 10, false, false);
+    validateFont("Title", 12, true, false);
+    validateFont("Big", 35, false, false);
 }
 
 // Validate font from preference settings, and substitute system font if font in preferences cannot be found on this system
-void validateFont (QString which) {
+void validateFont (QString which, int size, bool bold, bool italic) {
 
     // Get list of installed font families, including system font
     // Do this just once so we don't have to call font functions repeatedly
-    if (installedFontFamilies.length() <= 0) {
-        QFontDatabase database;
-        installedFontFamilies = database.families();
-        qDebug() << "validateFont found" << installedFontFamilies.count() << "families";
-
-        // macOS default system fonts are not in QFontCombobox because they are "private":
-        // See https://github.com/musescore/MuseScore/commit/0eecb165664a0196c2eee12e42fb273dcfc9c637
-        // The below makes sure any default system font is present in installedFontFamilies
-        QString systemFontFamily = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
-        if (installedFontFamilies.indexOf(systemFontFamily) < 0) {
-            installedFontFamilies.insert(0, systemFontFamily);
+    // (This list includes private fonts)
+    QFontDatabase fontdatabase;
+    if (installedFontFamilies.isEmpty()) {
+        installedFontFamilies = fontdatabase.families();
+        qDebug() << "validateFont found" << installedFontFamilies.count() << "installed font families";
         }
-    }
 
-    bool forceFont = false;
     QString prefPrefix = "Fonts_" + which + "_";
+
+    // start off assuming we don't have a font specified, and system font is desired font
+    QString desiredFont = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
+    bool forceFont = true;
 
     // If a font is specified, make sure it is a valid font on this platform
     if (p_pref->contains(prefPrefix + "Name")) {
-        QString desiredFont = (*p_pref)[prefPrefix + "Name"].toString();
-        if (desiredFont == "")
-            forceFont = true;
-        else {
-            if (installedFontFamilies.indexOf(desiredFont) == -1) {
-                forceFont = true;
-                qDebug() << "Desired font" << desiredFont << "not found in font database," << QFontDatabase::systemFont(QFontDatabase::GeneralFont) << "(system default) font used instead";
-            }
+        // We already have a font, so it becomes desired font (if valid)
+        QString testFont = (*p_pref)[prefPrefix + "Name"].toString();
+        // Is this a good font?
+        if (installedFontFamilies.indexOf(testFont) >= 0) {
+            desiredFont = testFont;
+            forceFont = false;
         }
     }
 
-    // Font not valid or not specified.  Set system font in its place
-    if (!p_pref->contains(prefPrefix + "Name") || forceFont) {
-        (*p_pref)[prefPrefix + "Name"] = QFontDatabase::systemFont(QFontDatabase::GeneralFont).family();
-        if (which == "Application") {
-            (*p_pref)[prefPrefix + "Size"] = 10;
-            (*p_pref)[prefPrefix + "Bold"] = false;
-            (*p_pref)[prefPrefix + "Italic"] = false;
-        } else if (which == "Graphs") {
-            (*p_pref)[prefPrefix + "Size"] = 10;
-            (*p_pref)[prefPrefix + "Bold"] = false;
-            (*p_pref)[prefPrefix + "Italic"] = false;
-        } else if (which == "Title") {
-            (*p_pref)[prefPrefix + "Size"] = 14;
-            (*p_pref)[prefPrefix + "Bold"] = true;
-            (*p_pref)[prefPrefix + "Italic"] = false;
-        } else if (which == "Big") {
-            (*p_pref)[prefPrefix + "Size"] = 35;
-            (*p_pref)[prefPrefix + "Bold"] = false;
-            (*p_pref)[prefPrefix + "Italic"] = false;
-        }
+#ifdef Q_OS_MAC
+    // Don't allow private font to be set for anything other than Application font (Mac restricts use to UI)
+    if (which != "Application" && fontdatabase.isPrivateFamily(desiredFont)) {
+        desiredFont = "Arial";              // We assume "Arial" is universally available on Mac
+        forceFont = true;
+    }
+#endif
+
+    // Font not valid or not specified.  Set a default font in its place
+    if (forceFont) {
+        (*p_pref)[prefPrefix + "Name"]   = desiredFont;
+        (*p_pref)[prefPrefix + "Size"]   = size;
+        (*p_pref)[prefPrefix + "Bold"]   = bold;
+        (*p_pref)[prefPrefix + "Italic"] = italic;
     }
 }
 
