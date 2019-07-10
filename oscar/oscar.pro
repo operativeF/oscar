@@ -465,11 +465,13 @@ test {
 
     SOURCES += \
         tests/prs1tests.cpp \
+        tests/resmedtests.cpp \
         tests/sessiontests.cpp
 
     HEADERS += \
         tests/AutoTest.h \
         tests/prs1tests.h \
+        tests/resmedtests.h \
         tests/sessiontests.h
 }
 

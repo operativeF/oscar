@@ -1,5 +1,6 @@
-﻿/* SleepLib ResMed Loader Implementation
+/* SleepLib ResMed Loader Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -566,6 +567,7 @@ void ResmedLoader::ParseSTR(Machine *mach, QMap<QDate, STRFile> & STRmap)
 
 ResmedLoader::ResmedLoader()
 {
+#ifndef UNITTEST_MODE
     const QString RMS9_ICON = ":/icons/rms9.png";
     const QString RM10_ICON = ":/icons/airsense10.png";
     const QString RM10C_ICON = ":/icons/aircurve.png";
@@ -576,6 +578,7 @@ ResmedLoader::ResmedLoader()
     m_pixmap_paths[STR_ResMed_AirSense10] = RM10_ICON;
     m_pixmaps[STR_ResMed_AirCurve10] = QPixmap(RM10C_ICON);
     m_pixmap_paths[STR_ResMed_AirCurve10] = RM10C_ICON;
+#endif
     m_type = MT_CPAP;
 
     timeInTimeDelta = timeInLoadBRP = timeInLoadPLD = timeInLoadEVE = 0;
@@ -797,7 +800,7 @@ int PeekAnnotations(const QString & path, quint32 &start, quint32 &end)
 
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
@@ -2244,7 +2247,7 @@ bool ResmedLoader::LoadCSL(Session *sess, const QString & path)
                 // pos++;
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
@@ -2420,7 +2423,7 @@ bool ResmedLoader::LoadEVE(Session *sess, const QString & path)
                 // pos++;
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
