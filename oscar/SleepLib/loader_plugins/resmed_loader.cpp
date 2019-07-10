@@ -800,7 +800,7 @@ int PeekAnnotations(const QString & path, quint32 &start, quint32 &end)
 
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
@@ -2247,7 +2247,7 @@ bool ResmedLoader::LoadCSL(Session *sess, const QString & path)
                 // pos++;
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
@@ -2423,7 +2423,7 @@ bool ResmedLoader::LoadEVE(Session *sess, const QString & path)
                 // pos++;
             }
 
-            while ((data[pos] == 0) && (pos < recs)) { pos++; }
+            while ((pos < recs) && (data[pos] == 0)) { pos++; }
 
             if (pos >= recs) { break; }
         }
