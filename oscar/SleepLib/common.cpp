@@ -324,7 +324,7 @@ void validateFont (QString which, int size, bool bold, bool italic) {
         // We already have a font, so it becomes desired font (if valid)
         QString testFont = (*p_pref)[prefPrefix + "Name"].toString();
         // Is this a good font?
-        if (installedFontFamilies.indexOf(testFont) >= 0) {
+        if (testFont.length() > 0 && installedFontFamilies.indexOf(testFont) >= 0) {
             desiredFont = testFont;
             forceFont = false;
         }
@@ -333,7 +333,7 @@ void validateFont (QString which, int size, bool bold, bool italic) {
 #ifdef Q_OS_MAC
     // Don't allow private font to be set for anything other than Application font (Mac restricts use to UI)
     if (which != "Application" && fontdatabase.isPrivateFamily(desiredFont)) {
-        desiredFont = "Arial";              // We assume "Arial" is universally available on Mac
+        desiredFont = "Helvetica";              // We assume "Helvetica" is universally available on Mac
         forceFont = true;
     }
 #endif
