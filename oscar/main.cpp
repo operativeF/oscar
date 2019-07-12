@@ -308,7 +308,7 @@ int main(int argc, char *argv[]) {
             QString datadir ;
             if ((i+1) < args.size()) {
                 datadir = args[++i];
-                if (datadir.length() < 2 || datadir.at(1) != ":")  // Allow a Windows drive letter (but not UNC)
+                if (datadir.length() < 2 || datadir.at(1) != QLatin1Char(':'))  // Allow a Windows drive letter (but not UNC)
                     datadir = homeDocs+datadir;
                 settings.setValue("Settings/AppData", datadir);
 //            force_data_dir = true;
