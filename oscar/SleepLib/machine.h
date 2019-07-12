@@ -41,24 +41,24 @@ class Machine;
 /*! \class SaveThread
     \brief This class is used in the multithreaded save code.. It accelerates the indexing of summary data.
     */
-class SaveThread: public QThread
-{
-    Q_OBJECT
-  public:
-    SaveThread(Machine *m, QString p) { machine = m; path = p; }
-
-    //! \brief Static millisecond sleep function.. Can be used from anywhere
-    static void msleep(unsigned long msecs) { QThread::msleep(msecs); }
-
-    //! \brief Start Save processing thread running
-    virtual void run();
-  protected:
-    Machine *machine;
-    QString path;
-  signals:
-    //! \brief Signal sent to update the Progress Bar
-    void UpdateProgress(int i);
-};
+//class SaveThread: public QThread
+//{
+//    Q_OBJECT
+//  public:
+//    SaveThread(Machine *m, QString p) { machine = m; path = p; }
+//
+//    //! \brief Static millisecond sleep function.. Can be used from anywhere
+//    static void msleep(unsigned long msecs) { QThread::msleep(msecs); }
+//
+//    //! \brief Start Save processing thread running
+//    virtual void run();
+//  protected:
+//    Machine *machine;
+//    QString path;
+//  signals:
+//    //! \brief Signal sent to update the Progress Bar
+//    void UpdateProgress(int i);
+//};
 
 class ImportTask:public QRunnable
 {
@@ -68,15 +68,39 @@ public:
     virtual void run() {}
 };
 
-class MachineLoader;
+class SaveTask:public ImportTask
+{
+public:
+    SaveTask(Session * s, Machine * m): sess(s), mach(m) {}
+    virtual ~SaveTask() {}
+    virtual void run();
+
+protected:
+    Session * sess;
+    Machine * mach;
+};
+
+class LoadTask:public ImportTask
+{
+public:
+    LoadTask(Session * s, Machine * m): sess(s), mach(m) {}
+    virtual ~LoadTask() {}
+    virtual void run();
+
+protected:
+    Session * sess;
+    Machine * mach;
+};
+
+class MachineLoader;    // forward
+
 /*! \class Machine
     \brief This Machine class is the Heart of SleepyLib, representing a single Machine and holding it's data
-
     */
 class Machine
 {
     friend class SaveThread;
-    friend class MachineLaoder;
+//  friend class MachineLaoder;
 
   public:
     /*! \fn Machine(MachineID id=0);
@@ -115,15 +139,6 @@ class Machine
         return m_availableSettings.contains(code);
     }
 
-    //! \brief Contains a secondary index of day data, containing just this machines sessions
-    QMap<QDate, Day *> day;
-
-    //! \brief Contains all sessions for this machine, indexed by SessionID
-    QHash<SessionID, Session *> sessionlist;
-
-    //! \brief List of text machine properties, like brand, model, etc...
-    QHash<QString, QString> properties;
-
     //! \brief Returns a pointer to a valid Session object if SessionID exists
     Session *SessionExists(SessionID session);
 
@@ -160,49 +175,12 @@ class Machine
     //! \brief Returns the date of the most recent loaded Session
     const QDate &LastDay() { return lastday; }
 
-    // //! \brief Add a new task to the multithreaded save code
-    //void queSaveList(Session * sess);
-
     bool hasModifiedSessions();
-
-    //! \brief Grab the next task in the multithreaded save code
-    Session *popSaveList();
-
-    // //! \brief Start the save threads which handle indexing, file storage and waveform processing
-    //void StartSaveThreads();
-
-    // //! \brief Finish the save threads and safely close them
-    //void FinishSaveThreads();
-
-    //! \brief The list of sessions that need saving (for multithreaded save code)
-    QList<Session *> m_savelist;
-
-    //yuck
-    QVector<SaveThread *>thread;
-    volatile int savelistCnt;
-    int savelistSize;
-    QMutex listMutex;
-    QSemaphore *savelistSem;
-
-    bool m_unsupported;
-    bool m_untested;
 
     bool unsupported() { return m_unsupported; }
     void setUnsupported(bool b) { m_unsupported = b; }
     bool untested() { return m_untested; }
     void setUntested(bool b) { m_untested = b; }
-
-    void lockSaveMutex() { listMutex.lock(); }
-    void unlockSaveMutex() { listMutex.unlock(); }
-    void skipSaveTask() { lockSaveMutex(); m_donetasks++; unlockSaveMutex(); }
-
-    void clearSkipped() { skipped_sessions = 0; }
-    int skippedSessions() { return skipped_sessions; }
-
-    inline int totalTasks() { return m_totaltasks; }
-    inline void setTotalTasks(int value) { m_totaltasks = value; }
-    inline int doneTasks() { return m_donetasks; }
-
 
     inline MachineType type() const { return info.type; }
     inline QString brand() const { return info.brand; }
@@ -231,23 +209,69 @@ class Machine
 
     MachineLoader * loader() { return m_loader; }
 
-    // much more simpler multithreading...
-    void queTask(ImportTask * task);
-    void runTasks();
-    QMutex saveMutex;
-
     void setInfo(MachineInfo inf);
     const MachineInfo getInfo() { return info; }
 
     void updateChannels(Session * sess);
 
-
     QString getPixmapPath();
     QPixmap & getPixmap();
 
+    // //! \brief The multi-threading methods follow
+    // //! \brief Add a new task to the multithreaded save code
+    //void queSaveList(Session * sess);
+
+    //! \brief Grab the next task in the multithreaded save code
+    //Session *popSaveList();
+
+    // //! \brief Start the save threads which handle indexing, file storage and waveform processing
+    //void StartSaveThreads();
+
+    // //! \brief Finish the save threads and safely close them
+    //void FinishSaveThreads();
+
+//    void lockSaveMutex() { listMutex.lock(); }
+//    void unlockSaveMutex() { listMutex.unlock(); }
+//    void skipSaveTask() { lockSaveMutex(); m_donetasks++; unlockSaveMutex(); }
+//
+//    void clearSkipped() { skipped_sessions = 0; }
+//    int skippedSessions() { return skipped_sessions; }
+//
+//    inline int totalTasks() { return m_totaltasks; }
+//    inline void setTotalTasks(int value) { m_totaltasks = value; }
+//    inline int doneTasks() { return m_donetasks; }
+
+    // much more simpler multithreading...(no such thing - pholynyk)
+    void queTask(ImportTask * task);
+    void runTasks();
+
+//  Public Data Members follow
     MachineInfo info;
 
-  protected:
+    bool m_unsupported;
+    bool m_untested;
+
+    //! \brief Contains a secondary index of day data, containing just this machines sessions
+    QMap<QDate, Day *> day;
+
+    //! \brief Contains all sessions for this machine, indexed by SessionID
+    QHash<SessionID, Session *> sessionlist;
+
+    //! \brief List of text machine properties, like brand, model, etc...
+    QHash<QString, QString> properties;
+
+    //! \brief The list of sessions that need saving (for multithreaded save code)
+//  QList<Session *> m_savelist;
+
+    // Following are the items related to multi-threading
+//  QVector<SaveThread *>thread;
+//  volatile int savelistCnt;
+//  int savelistSize;
+    QMutex listMutex;
+    QMutex saveMutex;
+//  QSemaphore *savelistSem;
+
+  protected:        // only Data Memebers here
     QDate firstday, lastday;
     SessionID highest_sessionid;
     MachineID m_id;
@@ -258,13 +282,6 @@ class Machine
 
     bool changed;
     bool firstsession;
-    int m_totaltasks;
-    int m_donetasks;
-
-    int skipped_sessions;
-    volatile bool m_save_threads_running;
-
-    QList<ImportTask *> m_tasklist;
 
     QHash<ChannelID, bool> m_availableChannels;
     QHash<ChannelID, bool> m_availableSettings;
@@ -274,6 +291,15 @@ class Machine
     QString m_dataPath;
 
     Profile * profile;
+
+    // The following are the multi-threading data members
+    int m_totaltasks;
+    int m_donetasks;
+
+    int skipped_sessions;
+    volatile bool m_save_threads_running;
+
+    QList<ImportTask *> m_tasklist;
 };
 
 

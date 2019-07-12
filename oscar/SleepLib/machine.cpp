@@ -38,6 +38,48 @@
 
 extern MainWindow * mainwin;
 
+//void SaveThread::run()
+//{
+//    bool running = true;
+//    while (running) {
+//        Session //sess = machine->popSaveList();
+//        if (sess) {
+//            if (machine->m_donetasks % 20 == 0) {
+//                int i = (float(machine->m_donetasks) / float(machine->m_totaltasks) * 100.0);
+//                emit UpdateProgress(i);
+//            }
+//            sess->UpdateSummaries();
+//            //machine->saveMutex.lock();
+//            sess->Store(path);
+//            //machine->saveMutex.unlock();
+//
+//            sess->TrashEvents();
+//        } else {
+//            if (!machine->m_save_threads_running) {
+//                break; // done
+//            } else {
+//                yieldCurrentThread(); // go do something else for a while
+//            }
+//        }
+//    }
+//
+//    machine->savelistSem->release(1);
+//}
+
+void SaveTask::run()
+{
+    sess->UpdateSummaries();
+    mach->saveMutex.lock();
+    sess->Store(mach->getDataPath());
+    mach->saveMutex.unlock();
+    sess->TrashEvents();
+}
+
+void LoadTask::run()
+{
+    sess->LoadSummary();
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Machine Base-Class implmementation
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -549,17 +591,10 @@ void Machine::setInfo(MachineInfo inf)
     m_loader = GetLoader(inf.loadername);
 }
 
-
-//const quint32 channel_version=1;
-
 const QString Machine::getDataPath()
 {    
     m_dataPath = p_pref->Get("{home}/Profiles/")+profile->user->userName()+"/"+info.loadername + "_"
                  + (info.serial.isEmpty() ? hexid() : info.serial) + "/";
-
-    //if (m_dataPath.isEmpty()) {
- //       m_dataPath = profile->Get("{" + STR_GEN_DataFolder + "}/" + info.loadername + "_" + (info.serial.isEmpty() ? hexid() : info.serial)) + "/";
-   // }
     return m_dataPath;
 }
 const QString Machine::getSummariesPath()
@@ -633,8 +668,6 @@ bool Machine::Load(ProgressDialog *progress)
         progress->setMessage(QObject::tr("Scanning Files"));
         progress->setProgressValue(0);
         QApplication::processEvents();
-
-
 
         QTime time;
         time.start();
@@ -752,147 +785,20 @@ bool Machine::SaveSession(Session *sess)
     return true;
 }
 
-/*void Machine::queSaveList(Session * sess)
-{
-    if (!m_save_threads_running) {
-        // Threads aren't being used.. so run the actual immediately...
-
-         int i = (float(m_donetasks) / float(m_totaltasks) * 100.0);
-        //qprogress->setValue(i);
-        //QApplication::processEvents();
-
-        sess->UpdateSummaries();
-        sess->Store(getDataPath());
-
-        if (!AppSetting->cacheSessions()) {
-            sess->TrashEvents();
-        }
-
-    } else {
-        listMutex.lock();
-        m_savelist.append(sess);
-        listMutex.unlock();
-    }
-}*/
-
-Session *Machine::popSaveList()
-{
-    Session *sess = nullptr;
-    listMutex.lock();
-
-    if (!m_savelist.isEmpty()) {
-        sess = m_savelist.at(0);
-        m_savelist.pop_front();
-        m_donetasks++;
-    }
-
-    listMutex.unlock();
-    return sess;
-}
-
-/*// Call any time queing starts
-void Machine::StartSaveThreads()
-{
-    m_savelist.clear();
-    if (!AppSetting->multithreading()) return;
-
-    QString path = getDataPath();
-
-    int threads = QThread::idealThreadCount();
-    savelistSem = new QSemaphore(threads);
-    savelistSem->acquire(threads);
-
-    m_save_threads_running = true;
-    m_donetasks=0;
-    m_totaltasks=0;
-
-    for (int i = 0; i < threads; i++) {
-        SaveThread * thr = new SaveThread(this, path);
-        QObject::connect(thr, SIGNAL(UpdateProgress(int)), qprogress, SLOT(setValue(int)));
-        thread.push_back(thr);
-        thread[i]->start();
-    }
-
-}
-
-// Call when all queing is completed
-void Machine::FinishSaveThreads()
-{
-    if (!m_save_threads_running)
-        return;
-
-    m_save_threads_running = false;
-
-    // Wait for all tasks to finish
-    while (!savelistSem->tryAcquire(thread.size(), 250)) {
-        if (qprogress) {
-            QApplication::processEvents();
-        }
-    }
-
-    for (int i = 0; i < thread.size(); ++i) {
-        while (thread[i]->isRunning()) {
-            SaveThread::msleep(250);
-            QApplication::processEvents();
-        }
-        QObject::disconnect(thread[i], SIGNAL(UpdateProgress(int)), qprogress, SLOT(setValue(int)));
-
-        delete thread[i];
-    }
-
-    delete savelistSem;
-} */
-
-void SaveThread::run()
-{
-    bool running = true;
-    while (running) {
-        Session *sess = machine->popSaveList();
-        if (sess) {
-            if (machine->m_donetasks % 20 == 0) {
-                int i = (float(machine->m_donetasks) / float(machine->m_totaltasks) * 100.0);
-                emit UpdateProgress(i);
-            }
-            sess->UpdateSummaries();
-            //machine->saveMutex.lock();
-            sess->Store(path);
-            //machine->saveMutex.unlock();
-
-            sess->TrashEvents();
-        } else {
-            if (!machine->m_save_threads_running) {
-                break; // done
-            } else {
-                yieldCurrentThread(); // go do something else for a while
-            }
-        }
-    }
-
-    machine->savelistSem->release(1);
-}
-
-
-
-class SaveTask:public ImportTask
-{
-public:
-    SaveTask(Session * s, Machine * m): sess(s), mach(m) {}
-    virtual ~SaveTask() {}
-    virtual void run();
-
-protected:
-    Session * sess;
-    Machine * mach;
-};
-
-void SaveTask::run()
-{
-    sess->UpdateSummaries();
-    mach->saveMutex.lock();
-    sess->Store(mach->getDataPath());
-    mach->saveMutex.unlock();
-    sess->TrashEvents();
-}
+//Session *Machine::popSaveList()
+//{
+//    Session *sess = nullptr;
+//    listMutex.lock();
+//
+//    if (!m_savelist.isEmpty()) {
+//        sess = m_savelist.at(0);
+//        m_savelist.pop_front();
+//        m_donetasks++;
+//    }
+//
+//    listMutex.unlock();
+//    return sess;
+//}
 
 void Machine::queTask(ImportTask * task)
 {
@@ -913,24 +819,23 @@ void Machine::runTasks()
 
     QThreadPool * threadpool = QThreadPool::globalInstance();
 /***********************************************************
-    int m_totaltasks=m_tasklist.size();
-    int m_currenttask=0;
-    if (loader())
-        emit loader()->setProgressMax(m_totaltasks);
+//  int m_totaltasks=m_tasklist.size();
+//  int m_currenttask=0;
+//  if (loader())
+//      emit loader()->setProgressMax(m_totaltasks);
 ***********************************************************/
     while (!m_tasklist.isEmpty()) {
         if (threadpool->tryStart(m_tasklist.at(0))) {
             m_tasklist.pop_front();
 /************************************************************
-            if (loader()) {
-                emit loader()->setProgressValue(++m_currenttask);
-                QApplication::processEvents();
-            }
+//          if (loader()) {
+//              emit loader()->setProgressValue(++m_currenttask);
+//              QApplication::processEvents();
+//          }
 ***************************************************************/
         }
     }
     QThreadPool::globalInstance()->waitForDone(-1);
-
 }
 
 bool Machine::hasModifiedSessions()
@@ -947,23 +852,6 @@ bool Machine::hasModifiedSessions()
 
 const QString summaryFileName = "Summaries.xml";
 const int summaryxml_version=1;
-
-class LoadTask:public ImportTask
-{
-public:
-    LoadTask(Session * s, Machine * m): sess(s), mach(m) {}
-    virtual ~LoadTask() {}
-    virtual void run();
-
-protected:
-    Session * sess;
-    Machine * mach;
-};
-
-void LoadTask::run()
-{
-    sess->LoadSummary();
-}
 
 bool Machine::LoadSummary(ProgressDialog * progress)
 {
@@ -1073,7 +961,6 @@ bool Machine::LoadSummary(ProgressDialog * progress)
     }
     QMap<qint64, Session *>::iterator it_end = sess_order.end();
     QMap<qint64, Session *>::iterator it;
-    int cnt = 0;
     bool loadSummaries = profile->session->preloadSummaries();
     qDebug() << "PreloadSummaries is" << (loadSummaries ? "true" : "false");
     qDebug() << "Queue task loader is" << (loader() ? "" : "not ") << "available";
@@ -1081,15 +968,16 @@ bool Machine::LoadSummary(ProgressDialog * progress)
 
 //  progress->setMessage(QObject::tr("Queueing Open Tasks"));
 //  QApplication::processEvents();
+//  int cnt = 0;
 
 //  progress->setMaximum(sess_order.size());
 
-    for (it = sess_order.begin(); it != it_end; ++it, ++cnt) {
+    for (it = sess_order.begin(); it != it_end; ++it /*, ++cnt*/ ) {
 /****************************************************************
-        if ((cnt % 100) == 0) {
-            progress->setValue(cnt);
-            //QApplication::processEvents();
-        } 
+//      if ((cnt % 100) == 0) {
+//          progress->setValue(cnt);
+//          //QApplication::processEvents();
+//      } 
 *****************************************************************/
         Session * sess = it.value();
         if (!AddSession(sess)) {
@@ -1212,7 +1100,7 @@ bool Machine::Save()
 
     QHash<SessionID, Session *>::iterator s;
 
-    m_savelist.clear();
+//  m_savelist.clear();
 
     // store any event summaries..
     for (s = sessionlist.begin(); s != sessionlist.end(); s++) {
