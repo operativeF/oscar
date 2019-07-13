@@ -57,7 +57,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="importTab">
       <attribute name="title">
@@ -2648,20 +2648,6 @@ Try it and see if you like it.</string>
               </property>
               <property name="text">
                <string>Square Wave Plots</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="enableGraphSnapshots">
-              <property name="toolTip">
-               <string>Allows graphs to be &quot;screenshotted&quot; for display purposes.
-The Event Breakdown PIE chart uses this method, as does
-the printing code.
-Unfortunately some older computers/versions of Qt can cause
-this application to be unstable with this feature enabled.</string>
-              </property>
-              <property name="text">
-               <string>Show event breakdown pie chart</string>
               </property>
              </widget>
             </item>

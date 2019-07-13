@@ -2838,7 +2838,8 @@ p, li { white-space: pre-wrap; }
     <addaction name="separator"/>
     <addaction name="action_Reset_Graph_Layout"/>
     <addaction name="separator"/>
-    <addaction name="actionToggle_Line_Cursor"/>
+    <addaction name="actionLine_Cursor"/>
+    <addaction name="actionPie_Chart"/>
     <addaction name="actionLeft_Daily_Sidebar"/>
     <addaction name="actionDaily_Calendar"/>
     <addaction name="action_Sidebar_Toggle"/>
@@ -2932,6 +2933,9 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>View &amp;Daily</string>
    </property>
+   <property name="toolTip">
+    <string>Show Daily view</string>
+   </property>
    <property name="shortcut">
     <string notr="true">F5</string>
    </property>
@@ -2939,6 +2943,9 @@ p, li { white-space: pre-wrap; }
   <action name="actionView_Overview">
    <property name="text">
     <string>View &amp;Overview</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Overview view</string>
    </property>
    <property name="shortcut">
     <string notr="true">F6</string>
@@ -2980,6 +2987,9 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>&amp;Maximize Toggle</string>
    </property>
+   <property name="toolTip">
+    <string>Maximize window</string>
+   </property>
    <property name="shortcut">
     <string notr="true">F11</string>
    </property>
@@ -2998,6 +3008,9 @@ p, li { white-space: pre-wrap; }
   <action name="action_Reset_Graph_Layout">
    <property name="text">
     <string>&amp;Reset Graph Layout</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset sizes of graphs</string>
    </property>
   </action>
   <action name="action_Screenshot">
@@ -3055,11 +3068,11 @@ p, li { white-space: pre-wrap; }
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
    <property name="text">
     <string>Right &amp;Sidebar</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Right Sidebar</string>
    </property>
    <property name="shortcut">
     <string notr="true">F10</string>
@@ -3073,7 +3086,7 @@ p, li { white-space: pre-wrap; }
     <string>View Statistics</string>
    </property>
    <property name="toolTip">
-    <string>View Statistics</string>
+    <string>Show Statistics view</string>
    </property>
    <property name="shortcut">
     <string notr="true">F4</string>
@@ -3114,7 +3127,7 @@ p, li { white-space: pre-wrap; }
     <string>Current Days</string>
    </property>
   </action>
-  <action name="actionToggle_Line_Cursor">
+  <action name="actionLine_Cursor">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -3135,10 +3148,13 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Daily Sidebar</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Daily Left Sidebar</string>
    </property>
    <property name="shortcut">
     <string notr="true">F8</string>
@@ -3149,10 +3165,13 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Daily Calendar</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Daily Calendar</string>
    </property>
    <property name="shortcut">
     <string notr="true">F9</string>
@@ -3189,6 +3208,23 @@ p, li { white-space: pre-wrap; }
   <action name="actionSystem_Information">
    <property name="text">
     <string>System Information</string>
+   </property>
+  </action>
+  <action name="actionPie_Chart">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Toggle &amp;Pie Chart</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Pie Chart on Daily page</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>
