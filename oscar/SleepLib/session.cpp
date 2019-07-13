@@ -620,6 +620,9 @@ bool Session::LoadSummary()
         }
         if (version >= 18) {
             in >> s_noSettings;
+//            qDebug() << "Session::LoadSummary" << s_session << "["
+//                     << QDateTime::fromTime_t(s_session).toString("MM/dd/yyyy hh:mm:ss")
+//                     << "] s_noSettings" << s_noSettings << "size" << settings.size();
         } else {
             s_noSettings = (settings.size() == 0);
         }
