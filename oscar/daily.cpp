@@ -179,9 +179,9 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     SF->setPinned(true);
 
     ChannelID cpapcodes[] = {
-        CPAP_FlowRate, CPAP_MaskPressure, CPAP_Pressure, CPAP_Leak, CPAP_Snore,  CPAP_FLG, CPAP_RespRate,
-        CPAP_TidalVolume, CPAP_MinuteVent,CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
-      /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
+        CPAP_FlowRate, CPAP_Pressure, CPAP_Leak, CPAP_FLG, CPAP_Snore, CPAP_TidalVolume,
+        CPAP_MaskPressure, CPAP_RespRate, CPAP_MinuteVent, CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
+        /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
     };
 
     int cpapsize = sizeof(cpapcodes) / sizeof(ChannelID);
