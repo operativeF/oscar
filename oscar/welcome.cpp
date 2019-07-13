@@ -68,6 +68,13 @@ void Welcome::refreshPage()
     ui->oximetryButton->setEnabled(b);  // looks like this was omitted from the list (gts 7/4/2019)
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
+
+    ui->importButton->repaint();
+    ui->dailyButton->repaint();
+    ui->overviewButton->repaint();
+    ui->statisticsButton->repaint();
+    ui->oximetryButton->repaint();
+
     mainwin->EnableTabs(b);
 
 /** MainWindow::ui->tabWidget->setTabEnabled(2, b);********* need to find some other way
