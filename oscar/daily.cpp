@@ -1477,7 +1477,7 @@ void Daily::Load(QDate date)
 
             html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
             // Show Event Breakdown pie chart
-            if ((hours > 0) && AppSetting->graphSnapshots()) {  // AHI Pie Chart
+            if ((hours > 0) && AppSetting->showPieChart()) {  // AHI Pie Chart
                 if ((values[CPAP_Obstructive] + values[CPAP_Hypopnea] + values[CPAP_ClearAirway] + values[CPAP_Apnea] + values[CPAP_RERA] + values[CPAP_FlowLimit] + values[CPAP_SensAwake])>0) {
                     html+="<tr><td align=center>&nbsp;</td></tr>";
                     html+=QString("<tr><td align=center><b>%1</b></td></tr>").arg(tr("Event Breakdown"));

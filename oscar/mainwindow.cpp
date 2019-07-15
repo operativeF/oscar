@@ -123,7 +123,7 @@ void MainWindow::SetupGUI()
 #endif
 
     ui->actionLine_Cursor->setChecked(AppSetting->lineCursorMode());
-    ui->actionPie_Chart->setChecked(AppSetting->graphSnapshots());
+    ui->actionPie_Chart->setChecked(AppSetting->showPieChart());
     ui->actionDebug->setChecked(AppSetting->showDebug());
     ui->actionShow_Performance_Counters->setChecked(AppSetting->showPerformance());
 
@@ -210,6 +210,10 @@ void MainWindow::SetupGUI()
     bool b = AppSetting->rightSidebarVisible();
     ui->action_Sidebar_Toggle->setChecked(b);
     ui->toolBox->setVisible(b);
+
+    ui->actionPie_Chart->setChecked(AppSetting->showPieChart());
+
+    ui->actionDaily_Calendar->setChecked(AppSetting->calendarVisible());
 
     on_tabWidget_currentChanged(0);
 
@@ -2464,7 +2468,7 @@ void MainWindow::on_actionLine_Cursor_toggled(bool b)
 
 void MainWindow::on_actionPie_Chart_toggled(bool visible)
 {
-    AppSetting->setGraphSnapshots(visible);
+    AppSetting->setShowPieChart(visible);
     if (daily && ui->tabWidget->currentWidget() == daily) {
         daily->ReloadGraphs();
     }
