@@ -93,10 +93,10 @@ void parseAndEmitSessionYaml(const QString & path)
 
     s_loader->ScanFiles(paths, sessionid_base, m);
     
-    // Each session now has a PRS1Import object in m_tasklist
+    // Each session now has a PRS1Import object in m_MLtasklist
     QList<ImportTask*>::iterator i;
-    while (!s_loader->m_tasklist.isEmpty()) {
-        ImportTask* task = s_loader->m_tasklist.takeFirst();
+    while (!s_loader->m_MLtasklist.isEmpty()) {
+        ImportTask* task = s_loader->m_MLtasklist.takeFirst();
 
         // Run the parser
         PRS1Import* import = dynamic_cast<PRS1Import*>(task);

@@ -1,5 +1,6 @@
 /* SleepLib Machine Loader Class Implementation
  *
+ * Copyright (c) 2019 The  OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -13,11 +14,139 @@
 
 #include "machine_loader.h"
 
+// GLOBALS:
 bool genpixmapinit = false;
+QList<MachineLoader *> m_loaders;
+
 QPixmap * MachineLoader::genericCPAPPixmap;
 
-// This crap moves to Profile
-QList<MachineLoader *> m_loaders;
+MachineLoader::MachineLoader() :QObject(nullptr)
+{
+#ifndef UNITTEST_MODE  // no QPixmap without a QGuiApplication
+    if (!genpixmapinit) {
+        genericCPAPPixmap = new QPixmap(genericPixmapPath);
+        genpixmapinit = true;
+    }
+#endif
+    m_abort = false;
+    m_type = MT_UNKNOWN;
+    m_status = NEUTRAL;
+}
+
+MachineLoader::~MachineLoader()
+{
+}
+
+void MachineLoader::unsupported(Machine * m)
+{
+    if (m == nullptr) {
+        qCritical("MachineLoader::unsupported(Machine *) called with null machine object");
+        return;
+    }
+
+    m->setUnsupported(true);
+    emit machineUnsupported(m);
+}
+
+void MachineLoader::addSession(Session * sess)
+{
+    sessionMutex.lock();
+    new_sessions[sess->session()] = sess;
+    sessionMutex.unlock();
+}
+
+void MachineLoader::finishAddingSessions()
+{
+    // Using a map specifically so they are inserted in order.
+    for (auto it=new_sessions.begin(), end=new_sessions.end(); it != end; ++it) {
+        Session * sess = it.value();
+        Machine * mach = sess->machine();
+        mach->AddSession(sess);
+    }
+    new_sessions.clear();
+}
+
+QPixmap & MachineLoader::getPixmap(QString series)
+{
+    QHash<QString, QPixmap>::iterator it = m_pixmaps.find(series);
+    if (it != m_pixmaps.end()) {
+        return it.value();
+    }
+    return *genericCPAPPixmap;
+}
+
+QString MachineLoader::getPixmapPath(QString series)
+{
+    QHash<QString, QString>::iterator it = m_pixmap_paths.find(series);
+    if (it != m_pixmap_paths.end()) {
+        return it.value();
+    }
+    return genericPixmapPath;
+}
+
+void MachineLoader::queTask(ImportTask * task)
+{
+    m_MLtasklist.push_back(task);
+}
+
+void MachineLoader::runTasks(bool threaded)
+{
+
+    m_totalMLtasks=m_MLtasklist.size();
+    if (m_totalMLtasks == 0) 
+        return;
+    emit setProgressMax(m_totalMLtasks);
+    m_currentMLtask=0;
+
+    threaded=AppSetting->multithreading();
+
+    if (!threaded) {
+        while (!m_MLtasklist.isEmpty() && !m_abort) {
+            ImportTask * task = m_MLtasklist.takeFirst();
+            task->run();
+
+            // update progress bar
+            m_currentMLtask++;
+            emit setProgressValue(m_currentMLtask);
+            QApplication::processEvents();
+
+            delete task;
+        }
+    } else {
+        ImportTask * task = m_MLtasklist[0];
+
+        QThreadPool * threadpool = QThreadPool::globalInstance();
+
+        while (!m_abort) {
+
+            if (threadpool->tryStart(task)) {
+                m_MLtasklist.pop_front();
+
+                if (!m_MLtasklist.isEmpty()) {
+                    // next task to be run
+                    task = m_MLtasklist[0];
+
+                    // update progress bar
+                    emit setProgressValue(++m_currentMLtask);
+                    QApplication::processEvents();
+                } else {
+                    // job list finished
+                    break;
+                }
+            }
+            //QThread::sleep(100);
+        }
+        QThreadPool::globalInstance()->waitForDone(-1);
+    }
+    if (m_abort) {
+        // delete remaining tasks and clear task list
+        for (auto & task : m_MLtasklist) {
+            delete task;
+        }
+        m_MLtasklist.clear();
+    }
+}
+
 
 QList<MachineLoader *> GetLoaders(MachineType mt)
 {
@@ -60,6 +189,7 @@ void RegisterLoader(MachineLoader *loader)
     loader->initChannels();
     m_loaders.push_back(loader);
 }
+
 void DestroyLoaders()
 {
     for (auto & loader : m_loaders) {
@@ -69,32 +199,23 @@ void DestroyLoaders()
     m_loaders.clear();
 }
 
-MachineLoader::MachineLoader() :QObject(nullptr)
+QList<ChannelID> CPAPLoader::eventFlags(Day * day)
 {
-#ifndef UNITTEST_MODE  // no QPixmap without a QGuiApplication
-    if (!genpixmapinit) {
-        genericCPAPPixmap = new QPixmap(genericPixmapPath);
-        genpixmapinit = true;
-    }
-#endif
-    m_abort = false;
-    m_type = MT_UNKNOWN;
-    m_status = NEUTRAL;
-}
+    Machine * mach = day->machine(MT_CPAP);
 
-MachineLoader::~MachineLoader()
-{
-}
+    QList<ChannelID> list;
 
-void MachineLoader::finishAddingSessions()
-{
-    // Using a map specifically so they are inserted in order.
-    for (auto it=new_sessions.begin(), end=new_sessions.end(); it != end; ++it) {
-        Session * sess = it.value();
-        Machine * mach = sess->machine();
-        mach->AddSession(sess);
+    if (mach->loader() != this) {
+        qDebug() << "Trying to ask" << loaderName() << "for" << mach->loaderName() << "data";
+        return list;
     }
-    new_sessions.clear();
+
+    list.push_back(CPAP_ClearAirway);
+    list.push_back(CPAP_Obstructive);
+    list.push_back(CPAP_Hypopnea);
+    list.push_back(CPAP_Apnea);
+
+    return list;
 }
 
 bool uncompressFile(QString infile, QString outfile)
@@ -194,165 +315,3 @@ bool compressFile(QString infile, QString outfile)
     return true;
 }
 
-void MachineLoader::queTask(ImportTask * task)
-{
-    m_tasklist.push_back(task);
-}
-
-void MachineLoader::runTasks(bool threaded)
-{
-
-    m_totaltasks=m_tasklist.size();
-    if (m_totaltasks == 0) return;
-    emit setProgressMax(m_totaltasks);
-    m_currenttask=0;
-
-    threaded=AppSetting->multithreading();
-
-    if (!threaded) {
-        while (!m_tasklist.isEmpty() && !m_abort) {
-            ImportTask * task = m_tasklist.takeFirst();
-            task->run();
-
-            // update progress bar
-            m_currenttask++;
-            emit setProgressValue(++m_currenttask);
-            QApplication::processEvents();
-
-            delete task;
-        }
-    } else {
-        ImportTask * task = m_tasklist[0];
-
-        QThreadPool * threadpool = QThreadPool::globalInstance();
-
-        while (!m_abort) {
-
-            if (threadpool->tryStart(task)) {
-                m_tasklist.pop_front();
-
-                if (!m_tasklist.isEmpty()) {
-                    // next task to be run
-                    task = m_tasklist[0];
-
-                    // update progress bar
-                    emit setProgressValue(++m_currenttask);
-                    QApplication::processEvents();
-                } else {
-                    // job list finished
-                    break;
-                }
-            }
-            //QThread::sleep(100);
-        }
-        QThreadPool::globalInstance()->waitForDone(-1);
-    }
-    if (m_abort) {
-        // delete remaining tasks and clear task list
-        for (auto & task : m_tasklist) {
-            delete task;
-        }
-        m_tasklist.clear();
-    }
-}
-
-
-QList<ChannelID> CPAPLoader::eventFlags(Day * day)
-{
-    Machine * mach = day->machine(MT_CPAP);
-
-    QList<ChannelID> list;
-
-    if (mach->loader() != this) {
-        qDebug() << "Trying to ask" << loaderName() << "for" << mach->loaderName() << "data";
-        return list;
-    }
-
-    list.push_back(CPAP_ClearAirway);
-    list.push_back(CPAP_Obstructive);
-    list.push_back(CPAP_Hypopnea);
-    list.push_back(CPAP_Apnea);
-
-    return list;
-}
-
-/*const QString machine_profile_name="MachineList.xml";
-
-void MachineLoader::LoadMachineList()
-{
-}
-
-void MachineLoader::StoreMachineList()
-{
-}
-void MachineLoader::LoadSummary(Machine *m, QString &filename)
-{
-    QFile f(filename);
-    if (!f.exists())
-        return;
-    f.open(QIODevice::ReadOnly);
-    if (!f.isReadable())
-        return;
-
-
-}
-void MachineLoader::LoadSummaries(Machine *m)
-{
-    QString path=(*profile)["ProfileDirectory"]+"/"+m_classname+"/"+mach->hexid();
-    QDir dir(path);
-    if (!dir.exists() || !dir.isReadable())
-        return false;
-
-    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    dir.setSorting(QDir::Name);
-
-    QString fullpath,ext_s,sesstr;
-    int ext;
-    SessionID sessid;
-    bool ok;
-    QMap<SessionID, int> sessions;
-    QFileInfoList list=dir.entryInfoList();
-    for (int i=0;i<list.size();i++) {
-        QFileInfo fi=list.at(i);
-        fullpath=fi.canonicalFilePath();
-        ext_s=fi.fileName().section(".",-1);
-        ext=ext_s.toInt(&ok,10);
-        if (!ok) continue;
-        sesstr=fi.fileName().section(".",0,-2);
-        sessid=sesstr.toLong(&ok,16);
-        if (!ok) continue;
-
-    }
-}
-
-void MachineLoader::LoadAllSummaries()
-{
-    for (int i=0;i<m_machlist.size();i++)
-        LoadSummaries(m_machlist[i]);
-}
-void MachineLoader::LoadAllEvents()
-{
-    for (int i=0;i<m_machlist.size();i++)
-        LoadEvents(m_machlist[i]);
-}
-void MachineLoader::LoadAllWaveforms()
-{
-    for (int i=0;i<m_machlist.size();i++)
-        LoadWaveforms(m_machlist[i]);
-}
-void MachineLoader::LoadAll()
-{
-    LoadAllSummaries();
-    LoadAllEvents();
-    LoadAllWaveforms();
-}
-
-void MachineLoader::Save(Machine *m)
-{
-}
-void MachineLoader::SaveAll()
-{
-    for (int i=0;i<m_machlist.size();i++)
-        Save(m_machlist[i]);
-}
-*/

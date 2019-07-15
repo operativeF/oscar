@@ -1,5 +1,6 @@
 /* SleepLib MachineLoader Base Class Header
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -27,7 +28,8 @@
 #define protected public
 #endif
 
-class MachineLoader;
+class MachineLoader;    // forward
+
 enum DeviceStatus { NEUTRAL, IMPORTING, LIVE, DETECTING };
 
 const QString genericPixmapPath = ":/icons/mask.png";
@@ -61,59 +63,34 @@ class MachineLoader: public QObject
     virtual MachineInfo newInfo() { return MachineInfo(); }
 
     //! \brief Override to returns the class name of this MachineLoader
-    virtual const QString &loaderName() = 0;
-    inline MachineType type() { return m_type; }
-
-    void unsupported(Machine * m) {
-        if (m == nullptr) {
-            qCritical("MachineLoader::unsupported(Machine *) called with null machine object");
-            return;
-        }
-
-        m->setUnsupported(true);
-        emit machineUnsupported(m);
-    }
-
-    void queTask(ImportTask * task);
-
-    void addSession(Session * sess)
-    {
-        sessionMutex.lock();
-        new_sessions[sess->session()] = sess;
-        sessionMutex.unlock();
-    }
-
-    //! \brief Process Task list using all available threads.
-    void runTasks(bool threaded=true);
-
-    int countTasks() { return m_tasklist.size(); }
-
-    inline bool isAborted() { return m_abort; }
-    void abort() { m_abort = true; }
+    virtual const QString & loaderName() = 0;
 
     virtual void process() {}
 
-    DeviceStatus status() { return m_status; }
-    void setStatus(DeviceStatus status) { m_status = status; }
+    virtual void initChannels() {}
+
+    void unsupported(Machine * m);
+
+    void addSession(Session * sess);
+
+    inline MachineType type() { return m_type; }
+    inline DeviceStatus status() { return m_status; }
+    inline void setStatus(DeviceStatus status) { m_status = status; }
+
+    QPixmap & getPixmap(QString series);
+    QString getPixmapPath(QString series);
+
+    void queTask(ImportTask * task);
+    //! \brief Process Task list using all available threads.
+    void runTasks(bool threaded = false);
+
+    inline int countTasks() { return m_MLtasklist.size(); }
+
+    inline bool isAborted() { return m_abort; }
+    inline void abort() { m_abort = true; }
 
     QMutex sessionMutex;
     QMutex saveMutex;
-
-    virtual void initChannels() {}
-    QPixmap & getPixmap(QString series) {
-        QHash<QString, QPixmap>::iterator it = m_pixmaps.find(series);
-        if (it != m_pixmaps.end()) {
-            return it.value();
-        }
-        return *genericCPAPPixmap;
-    }
-    QString getPixmapPath(QString series) {
-        QHash<QString, QString>::iterator it = m_pixmap_paths.find(series);
-        if (it != m_pixmap_paths.end()) {
-            return it.value();
-        }
-        return genericPixmapPath;
-    }
 public slots:
     void abortImport() { abort(); }
 
@@ -125,27 +102,26 @@ signals:
     void machineUnsupported(Machine *);
 
 protected:
+    void finishAddingSessions();
 
     static QPixmap * genericCPAPPixmap;
 
-    MachineType m_type;
-    QString m_class;
-
-    int m_currenttask;
-    int m_totaltasks;
+    int m_currentMLtask;
+    int m_totalMLtasks;
 
     bool m_abort;
 
     DeviceStatus m_status;
+    MachineType m_type;
+    QString m_class;
 
-    void finishAddingSessions();
     QMap<SessionID, Session *> new_sessions;
 
     QHash<QString, QPixmap> m_pixmaps;
     QHash<QString, QString> m_pixmap_paths;
 
   private:
-    QList<ImportTask *> m_tasklist;
+    QList<ImportTask *> m_MLtasklist;
 };
 
 class CPAPLoader:public MachineLoader
@@ -167,15 +143,17 @@ public:
 
 };
 
-struct ImportPath
+class ImportPath
 {
+public:
     ImportPath() {
+        path = QString();
         loader = nullptr;
     }
-    ImportPath(const ImportPath & copy) {
-        loader = copy.loader;
-        path = copy.path;
-    }
+//  ImportPath(const ImportPath & copy) {
+//      loader = copy.loader;
+//      path = copy.path;
+//  }
     ImportPath(QString path, MachineLoader * loader) :
         path(path), loader(loader) {}
 
@@ -186,14 +164,15 @@ struct ImportPath
 
 // Put in machine loader class as static??
 void RegisterLoader(MachineLoader *loader);
+QList<MachineLoader *> GetLoaders(MachineType mt = MT_UNKNOWN);
 MachineLoader * lookupLoader(Machine * m);
 MachineLoader * lookupLoader(QString loaderName);
 
 void DestroyLoaders();
 
+// Why here? Where are these called?
 bool compressFile(QString inpath, QString outpath = "");
 bool uncompressFile(QString infile, QString outfile);
 
-QList<MachineLoader *> GetLoaders(MachineType mt = MT_UNKNOWN);
 
 #endif //MACHINE_LOADER_H
