@@ -179,9 +179,9 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     SF->setPinned(true);
 
     ChannelID cpapcodes[] = {
-        CPAP_FlowRate, CPAP_MaskPressure, CPAP_Pressure, CPAP_Leak, CPAP_Snore,  CPAP_FLG, CPAP_RespRate,
-        CPAP_TidalVolume, CPAP_MinuteVent,CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
-      /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
+        CPAP_FlowRate, CPAP_Pressure, CPAP_Leak, CPAP_FLG, CPAP_Snore, CPAP_TidalVolume,
+        CPAP_MaskPressure, CPAP_RespRate, CPAP_MinuteVent, CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
+        /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
     };
 
     int cpapsize = sizeof(cpapcodes) / sizeof(ChannelID);
@@ -1477,7 +1477,7 @@ void Daily::Load(QDate date)
 
             html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
             // Show Event Breakdown pie chart
-            if ((hours > 0) && AppSetting->graphSnapshots()) {  // AHI Pie Chart
+            if ((hours > 0) && AppSetting->showPieChart()) {  // AHI Pie Chart
                 if ((values[CPAP_Obstructive] + values[CPAP_Hypopnea] + values[CPAP_ClearAirway] + values[CPAP_Apnea] + values[CPAP_RERA] + values[CPAP_FlowLimit] + values[CPAP_SensAwake])>0) {
                     html+="<tr><td align=center>&nbsp;</td></tr>";
                     html+=QString("<tr><td align=center><b>%1</b></td></tr>").arg(tr("Event Breakdown"));

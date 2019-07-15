@@ -305,11 +305,13 @@ class MainWindow : public QMainWindow
 
     void on_importButton_clicked();
 
-    void on_actionToggle_Line_Cursor_toggled(bool arg1);
+    void on_actionLine_Cursor_toggled(bool arg1);
 
     void on_actionLeft_Daily_Sidebar_toggled(bool arg1);
 
     void on_actionDaily_Calendar_toggled(bool arg1);
+
+    void on_actionPie_Chart_toggled(bool arg1);
 
     void on_actionExport_Journal_triggered();
 

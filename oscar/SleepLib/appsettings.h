@@ -28,7 +28,8 @@ const QString STR_AS_GraphHeight = "GraphHeight";
 const QString STR_AS_DailyPanelWidth = "DailyPanelWidth";
 const QString STR_AS_RightPanelWidth = "RightPanelWidth";
 const QString STR_AS_AntiAliasing = "UseAntiAliasing";
-const QString STR_AS_GraphSnapshots = "EnableGraphSnapshots";
+const QString STR_AS_GraphSnapshots = "EnableGraphSnapshots";  // Obsolete, replaced by ShowPieChart
+const QString STR_AS_ShowPieChart = "EnablePieChart";
 const QString STR_AS_Animations = "AnimationsAndTransitions";
 const QString STR_AS_SquareWave = "SquareWavePlots";
 const QString STR_AS_OverlayType = "OverlayType";
@@ -80,7 +81,8 @@ public:
       initPref(STR_AS_DailyPanelWidth, 250.0);
       initPref(STR_AS_RightPanelWidth, 230.0);
       m_antiAliasing=initPref(STR_AS_AntiAliasing, true).toBool();
-      initPref(STR_AS_GraphSnapshots, true);
+//      initPref(STR_AS_GraphSnapshots, true);
+      initPref(STR_AS_ShowPieChart, false);
       m_animations = initPref(STR_AS_Animations, true).toBool();
       m_squareWavePlots = initPref(STR_AS_SquareWave, false).toBool();
       initPref(STR_AS_AllowYAxisScaling, true);
@@ -151,7 +153,7 @@ public:
   //! \brief Returns true if AntiAliasing (the graphical smoothing method) is enabled
   inline bool antiAliasing() const { return m_antiAliasing; }
   //! \brief Returns true if renderPixmap function is in use, which takes snapshots of graphs
-  bool graphSnapshots() const { return getPref(STR_AS_GraphSnapshots).toBool(); }
+  bool showPieChart() const { return getPref(STR_AS_ShowPieChart).toBool(); }
   //! \brief Returns true if Graphical animations & Transitions will be drawn
   bool animations() const { return m_animations; }
   //! \brief Returns true if PixmapCaching acceleration will be used
@@ -200,7 +202,7 @@ public:
   //! \brief Set to true to turn on AntiAliasing (the graphical smoothing method)
   void setAntiAliasing(bool aa) { setPref(STR_AS_AntiAliasing, m_antiAliasing=aa); }
   //! \brief Set to true if renderPixmap functions are in use, which takes snapshots of graphs.
-  void setGraphSnapshots(bool gs) { setPref(STR_AS_GraphSnapshots, gs); }
+  void setShowPieChart(bool gs) { setPref(STR_AS_ShowPieChart, gs); }
   //! \brief Set to true if Graphical animations & Transitions will be drawn
   void setAnimations(bool anim) { setPref(STR_AS_Animations, m_animations=anim); }
   //! \brief Set to true to use Pixmap Caching of Text and other graphics caching speedup techniques

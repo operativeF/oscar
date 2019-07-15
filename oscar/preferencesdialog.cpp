@@ -210,7 +210,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
     ui->useAntiAliasing->setChecked(AppSetting->antiAliasing());
     ui->usePixmapCaching->setChecked(AppSetting->usePixmapCaching());
     ui->useSquareWavePlots->setChecked(AppSetting->squareWavePlots());
-    ui->enableGraphSnapshots->setChecked(AppSetting->graphSnapshots());
+//    ui->enableGraphSnapshots->setChecked(AppSetting->graphSnapshots());
     ui->graphTooltips->setChecked(AppSetting->graphTooltips());
     ui->allowYAxisScaling->setChecked(AppSetting->allowYAxisScaling());
 
@@ -808,7 +808,7 @@ bool PreferencesDialog::Save()
     AppSetting->setAntiAliasing(ui->useAntiAliasing->isChecked());
     AppSetting->setUsePixmapCaching(ui->usePixmapCaching->isChecked());
     AppSetting->setSquareWavePlots(ui->useSquareWavePlots->isChecked());
-    AppSetting->setGraphSnapshots(ui->enableGraphSnapshots->isChecked());
+//    AppSetting->setGraphSnapshots(ui->enableGraphSnapshots->isChecked());
     AppSetting->setLineThickness(float(ui->lineThicknessSlider->value()) / 2.0);
 
     profile->general->setSkipEmptyDays(ui->skipEmptyDays->isChecked());

@@ -493,7 +493,7 @@ int main(int argc, char *argv[]) {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
-    // Initialize preferences system (Don't use p_pref before this point)
+    // Initialize preferences system (Don't use p_pref before this point!)
     ///////////////////////////////////////////////////////////////////////////////////////////
     p_pref = new Preferences("Preferences");
     p_pref->Open();
@@ -506,11 +506,8 @@ int main(int argc, char *argv[]) {
     validateAllFonts();
     setApplicationFont();
 
-//    Clean up some legacy crap
-//    QFile lf(p_pref->Get("{home}/Layout.xml"));
-//    if (lf.exists()) {
-//        lf.remove();
-//    }
+    // one-time translate GraphSnapshots to ShowPieChart
+    p_pref->Rename(STR_AS_GraphSnapshots, STR_AS_ShowPieChart);
 
     p_pref->Erase(STR_AppName);
     p_pref->Erase(STR_GEN_SkipLogin);

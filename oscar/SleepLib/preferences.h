@@ -86,6 +86,15 @@ class Preferences
         }
     }
 
+    //! \brief Rename a preference
+    void Rename (QString oldname, QString newname) {
+        if (contains(oldname)) {
+            QVariant val = Get(oldname);
+            Set(newname, val);
+            Erase(oldname);
+        }
+    }
+
     //! \brief Opens, processes the XML for this Preferences group, loading all preferences stored therein.
     //! \note If filename is empty, it will use the one specified in the constructor
     //! \returns true if succesful
