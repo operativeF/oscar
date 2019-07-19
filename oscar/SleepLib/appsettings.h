@@ -74,7 +74,7 @@ public:
       m_multithreading = false;     // too dangerous to allow 
       m_showPerformance = initPref(STR_US_ShowPerformance, false).toBool();
       m_showDebug = initPref(STR_US_ShowDebug, false).toBool();
-      initPref(STR_AS_CalendarVisible, true);
+      initPref(STR_AS_CalendarVisible, false);
       m_scrollDampening = initPref(STR_US_ScrollDampening, (int)50).toInt();
       m_tooltipTimeout = initPref(STR_US_TooltipTimeout, (int)2500).toInt();
       m_graphHeight=initPref(STR_AS_GraphHeight, 180).toInt();
@@ -92,7 +92,7 @@ public:
       m_olm = (OverviewLinechartModes)initPref(STR_AS_OverviewLinechartMode, (int)OLC_Bartop).toInt();
       m_lineThickness=initPref(STR_AS_LineThickness, 1.0).toFloat();
       m_lineCursorMode = initPref(STR_AS_LineCursorMode, true).toBool();
-      initPref(STR_AS_RightSidebarVisible, true);
+      initPref(STR_AS_RightSidebarVisible, false);
       initPref(STR_CS_UserEventPieChart, false);
       initPref(STR_US_ShowSerialNumbers, false);
       initPref(STR_US_OpenTabAtStart, 1);
