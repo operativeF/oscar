@@ -1068,14 +1068,16 @@ QString Statistics::GenerateCPAPUsage()
     if (p_profile->general->statReportMode() == STAT_MODE_MONTHLY) {
         int firstMonth = firstcpap.month();
         int lastMonth = lastcpap.month();
-        if (lastMonth <= firstMonth && firstcpap.year() != lastcpap.year())
-            lastMonth += 12; // handle time extending to next year
+        int years = lastcpap.year() - firstcpap.year();
+        if (lastMonth <= firstMonth)
+            lastMonth += (12 * years); // handle time extending to next year
         number_periods = lastMonth - firstMonth + 1;
 
         if (number_periods < 1) {
             qDebug() << "*** Begin" << firstcpap << "beginMonth" << firstMonth << "lastMonth" << lastMonth << "periods" << number_periods;
             number_periods = 1;
         }
+        qDebug() << "Number of months for stats (trim to 12 max)" << number_periods;
         // But not more than one year
         if (number_periods > 12) {
             number_periods = 12;
