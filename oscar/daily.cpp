@@ -42,6 +42,20 @@
 
 extern MainWindow * mainwin;
 
+QString htmlLeftHeader;
+QString htmlLeftAHI;
+QString htmlLeftMachineInfo;
+QString htmlLeftSleepTime;
+QString htmlLeftIndices;
+QString htmlLeftPieChart = "";
+QString htmlLeftNoHours = "";
+QString htmlLeftStatistics;
+QString htmlLeftOximeter;
+QString htmlLeftMachineSettings;
+QString htmlLeftSessionInfo;
+QString htmlLeftFooter;
+
+
 // This was Sean Stangl's idea.. but I couldn't apply that patch.
 inline QString channelInfo(ChannelID code) {
     return schema::channel[code].fullname()+"\n"+schema::channel[code].description()+"\n("+schema::channel[code].units()+")";
@@ -579,11 +593,17 @@ void Daily::hideSpaceHogs()
     if (AppSetting->calendarVisible()) {
         ui->calendarFrame->setVisible(false);
     }
+    if (AppSetting->showPieChart()) {
+        webView->setHtml(getLeftSidebar(false));
+    }
 }
 void Daily::showSpaceHogs()
 {
     if (AppSetting->calendarVisible()) {
         ui->calendarFrame->setVisible(true);
+    }
+    if (AppSetting->showPieChart()) {
+        webView->setHtml(getLeftSidebar(true));
     }
 }
 
@@ -1307,6 +1327,63 @@ QString Daily::getSleepTime(Day * day)
     return html;
 }
 
+QString Daily::getPieChart (float values, Day * day) {
+    qDebug() << "Daily:getPieChart, values" << values;
+    QString html = "<table cellspacing=0 cellpadding=0 border=0 width='100%'>";
+    if (values > 0) {
+//        html += "<tr><td align=center>&nbsp;</td></tr>";
+        html += QString("<tr><td align=center><b>%1</b></td></tr>").arg(tr("Event Breakdown"));
+        eventBreakdownPie()->setShowTitle(false);
+
+        int w=155;
+        int h=155;
+        QPixmap pixmap=eventBreakdownPie()->renderPixmap(w,h,false);
+        if (!pixmap.isNull()) {
+            QByteArray byteArray;
+            QBuffer buffer(&byteArray); // use buffer to store pixmap into byteArray
+            buffer.open(QIODevice::WriteOnly);
+            pixmap.save(&buffer, "PNG");
+            html += "<tr><td align=center><img src=\"data:image/png;base64," + byteArray.toBase64() + "\"></td></tr>\n";
+        } else {
+            html += "<tr><td align=center>"+tr("Unable to display Pie Chart on this system")+"</td></tr>\n";
+        }
+    } else if (   day->channelHasData(CPAP_Obstructive)
+               || day->channelHasData(CPAP_Hypopnea)
+               || day->channelHasData(CPAP_ClearAirway)
+               || day->channelHasData(CPAP_RERA)
+               || day->channelHasData(CPAP_Apnea)
+               || day->channelHasData(CPAP_FlowLimit)
+               || day->channelHasData(CPAP_SensAwake)
+               ) {
+            html += "<tr><td align=center><img src=\"qrc:/docs/0.0.gif\"></td></tr>\n";
+    }
+    html+="</table>\n";
+    html+="<hr/>\n";
+
+    return html;
+}
+
+// honorPieChart true - show pie chart if it is enabled.  False, do not show pie chart
+QString Daily::getLeftSidebar (bool honorPieChart) {
+    QString html =   htmlLeftHeader
+                   + htmlLeftAHI
+                   + htmlLeftMachineInfo
+                   + htmlLeftSleepTime
+                   + htmlLeftIndices;
+    // Include pie chart if wanted and enabled.
+    if (honorPieChart && AppSetting->showPieChart())
+        html += htmlLeftPieChart;
+
+    html +=   htmlLeftNoHours
+            + htmlLeftStatistics
+            + htmlLeftOximeter
+            + htmlLeftMachineSettings
+            + htmlLeftSessionInfo
+            + htmlLeftFooter;
+
+    return html;
+}
+
 QVariant MyTextBrowser::loadResource(int type, const QUrl &url)
 {
     if (type == QTextDocument::ImageResource && url.scheme().compare(QLatin1String("data"), Qt::CaseInsensitive) == 0) {
@@ -1355,7 +1432,19 @@ void Daily::Load(QDate date)
 
     lastcpapday=day;
 
-    QString html="<html>"
+    // Clear the components of the left sidebar prior to recreating them
+    htmlLeftAHI.clear();
+    htmlLeftMachineInfo.clear();
+    htmlLeftSleepTime.clear();
+    htmlLeftIndices.clear();
+    htmlLeftPieChart.clear();
+    htmlLeftNoHours.clear();
+    htmlLeftStatistics.clear();
+    htmlLeftOximeter.clear();
+    htmlLeftMachineSettings.clear();
+    htmlLeftSessionInfo.clear();
+
+    htmlLeftHeader = "<html><head>"
     "</head>"
     "<body leftmargin=0 rightmargin=0 topmargin=0 marginwidth=0 marginheight=0>";
 
@@ -1420,8 +1509,8 @@ void Daily::Load(QDate date)
         ahi/=hours;
 
         if (hours>0) {
-            html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
-            html+="<tr>";
+            htmlLeftAHI="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
+            htmlLeftAHI+="<tr>";
             if (!isBrick) {
                 ChannelID ahichan=CPAP_AHI;
                 QString ahiname=STR_TR_AHI;
@@ -1429,19 +1518,20 @@ void Daily::Load(QDate date)
                     ahichan=CPAP_RDI;
                     ahiname=STR_TR_RDI;
                 }
-                html+=QString("<td colspan=4 bgcolor='%1' align=center><p title='%4'><font size=+4 color='%2'><b>%3</b></font></p> &nbsp; <font size=+4 color='%2'><b>%5</b></font></td>\n")
+                htmlLeftAHI+=QString("<td colspan=4 bgcolor='%1' align=center><p title='%4'><font size=+4 color='%2'><b>%3</b></font></p> &nbsp; <font size=+4 color='%2'><b>%5</b></font></td>\n")
                         .arg("#F88017").arg(COLOR_Text.name()).arg(ahiname).arg(schema::channel[ahichan].fullname()).arg(ahi,0,'f',2);
             } else {
-                html+=QString("<td colspan=5 bgcolor='%1' align=center><font size=+4 color='yellow'>%2</font></td>\n")
+                htmlLeftAHI+=QString("<td colspan=5 bgcolor='%1' align=center><font size=+4 color='yellow'>%2</font></td>\n")
                         .arg("#F88017").arg(tr("BRICK! :("));
             }
-            html+="</tr>\n";
-            html+="</table>\n";
-            html+=getCPAPInformation(day);
-            html+=getSleepTime(day);
+            htmlLeftAHI+="</tr>\n";
+            htmlLeftAHI+="</table>\n";
 
-            html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
+            htmlLeftMachineInfo = getCPAPInformation(day);
 
+            htmlLeftSleepTime = getSleepTime(day);
+
+            htmlLeftIndices = "<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
 
             quint32 zchans = schema::SPAN | schema::FLAG;
             bool show_minors = true;
@@ -1469,97 +1559,66 @@ void Daily::Load(QDate date)
                 // than the duration of timed breaths per hour.
                 values[code] = val;
                 QColor altcolor = (brightness(chan.defaultColor()) < 0.3) ? Qt::white : Qt::black; // pick a contrasting color
-                html+=QString("<tr><td align='left' bgcolor='%1'><b><font color='%2'><a href='event=%5' style='text-decoration:none;color:%2'>%3</a></font></b></td><td width=20% bgcolor='%1'><b><font color='%2'>%4</font></b></td></tr>\n")
+                htmlLeftIndices+=QString("<tr><td align='left' bgcolor='%1'><b><font color='%2'><a href='event=%5' style='text-decoration:none;color:%2'>%3</a></font></b></td><td width=20% bgcolor='%1'><b><font color='%2'>%4</font></b></td></tr>")
                         .arg(chan.defaultColor().name()).arg(altcolor.name()).arg(chan.fullname()).arg(data).arg(code);
             }
 
-            html+="</table>";
+            htmlLeftIndices+="</table><hr/>";
 
-            html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
-            // Show Event Breakdown pie chart
-            if ((hours > 0) && AppSetting->showPieChart()) {  // AHI Pie Chart
-                if ((values[CPAP_Obstructive] + values[CPAP_Hypopnea] + values[CPAP_ClearAirway] + values[CPAP_Apnea] + values[CPAP_RERA] + values[CPAP_FlowLimit] + values[CPAP_SensAwake])>0) {
-                    html+="<tr><td align=center>&nbsp;</td></tr>";
-                    html+=QString("<tr><td align=center><b>%1</b></td></tr>").arg(tr("Event Breakdown"));
-                    eventBreakdownPie()->setShowTitle(false);
+            htmlLeftPieChart = getPieChart((values[CPAP_Obstructive] + values[CPAP_Hypopnea] +
+                                            values[CPAP_ClearAirway] + values[CPAP_Apnea] + values[CPAP_RERA] +
+                                            values[CPAP_FlowLimit] + values[CPAP_SensAwake]), day);
 
-                    int w=155;
-                    int h=155;
-                    QPixmap pixmap=eventBreakdownPie()->renderPixmap(w,h,false);
-                    if (!pixmap.isNull()) {
-                        QByteArray byteArray;
-                        QBuffer buffer(&byteArray); // use buffer to store pixmap into byteArray
-                        buffer.open(QIODevice::WriteOnly);
-                        pixmap.save(&buffer, "PNG");
-                        html += "<tr><td align=center><img src=\"data:image/png;base64," + byteArray.toBase64() + "\"></td></tr>\n";
-                    } else {
-                        html += "<tr><td align=center>"+tr("Unable to display Pie Chart on this system")+"</td></tr>\n";
-                    }
-                } else if (day->channelHasData(CPAP_Obstructive)
-                           || day->channelHasData(CPAP_Hypopnea)
-                           || day->channelHasData(CPAP_ClearAirway)
-                           || day->channelHasData(CPAP_RERA)
-                           || day->channelHasData(CPAP_Apnea)
-                           || day->channelHasData(CPAP_FlowLimit)
-                           || day->channelHasData(CPAP_SensAwake)
-                           ) {
-                        html += "<tr><td align=center><img src=\"qrc:/docs/0.0.gif\"></td></tr>\n";
-                }
-            }
-
-            html+="</table>\n";
-            html+="<hr/>\n";
-
-        } else {
-            html+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
+        } else {  // No hours
+            htmlLeftNoHours+="<table cellspacing=0 cellpadding=0 border=0 width='100%'>\n";
             if (!isBrick) {
-                html+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
+                htmlLeftNoHours+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
                 if (day->size()>0) {
-                    html+="<tr><td colspan=5 align='center'><font size='+3'>"+tr("Sessions all off!")+"</font></td></tr>";
-                    html+="<tr><td colspan=5 align='center><img src='qrc:/icons/logo-md.png'></td></tr>";
-                    html+="<tr bgcolor='#89abcd'><td colspan=5 align='center'><i><font color=white size=+1>"+tr("Sessions exist for this day but are switched off.")+"</font></i></td></tr>\n";
+                    htmlLeftNoHours+="<tr><td colspan=5 align='center'><font size='+3'>"+tr("Sessions all off!")+"</font></td></tr>";
+                    htmlLeftNoHours+="<tr><td colspan=5 align='center><img src='qrc:/icons/logo-md.png'></td></tr>";
+                    htmlLeftNoHours+="<tr bgcolor='#89abcd'><td colspan=5 align='center'><i><font color=white size=+1>"+tr("Sessions exist for this day but are switched off.")+"</font></i></td></tr>\n";
                     GraphView->setEmptyText(STR_Empty_NoSessions);
                 } else {
-                    html+="<tr><td colspan=5 align='center'><b><h2>"+tr("Impossibly short session")+"</h2></b></td></tr>";
-                    html+="<tr><td colspan=5 align='center'><i>"+tr("Zero hours??")+"</i></td></tr>\n";
+                    htmlLeftNoHours+="<tr><td colspan=5 align='center'><b><h2>"+tr("Impossibly short session")+"</h2></b></td></tr>";
+                    htmlLeftNoHours+="<tr><td colspan=5 align='center'><i>"+tr("Zero hours??")+"</i></td></tr>\n";
                 }
             } else { // machine is a brick
-                html+="<tr><td colspan=5 align='center'><b><h2>"+tr("BRICK :(")+"</h2></b></td></tr>";
-                html+="<tr><td colspan=5 align='center'><i>"+tr("Sorry, this machine only provides compliance data.")+"</i></td></tr>\n";
-                html+="<tr><td colspan=5 align='center'><i>"+tr("Complain to your Equipment Provider!")+"</i></td></tr>\n";
+                htmlLeftNoHours+="<tr><td colspan=5 align='center'><b><h2>"+tr("BRICK :(")+"</h2></b></td></tr>";
+                htmlLeftNoHours+="<tr><td colspan=5 align='center'><i>"+tr("Sorry, this machine only provides compliance data.")+"</i></td></tr>\n";
+                htmlLeftNoHours+="<tr><td colspan=5 align='center'><i>"+tr("Complain to your Equipment Provider!")+"</i></td></tr>\n";
             }
-            html+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
-            html+="</table>\n";
+            htmlLeftNoHours+="<tr><td colspan='5'>&nbsp;</td></tr>\n";
+            htmlLeftNoHours+="</table>\n";
         }
 
     } // if (!CPAP)
-    else html+=getSleepTime(day);
+    else htmlLeftSleepTime = getSleepTime(day);
 
     if ((cpap && !isBrick && (day->hours()>0)) || oxi || posit) {
 
-        html+=getStatisticsInfo(day);
+        htmlLeftStatistics = getStatisticsInfo(day);
 
     } else {
         if (cpap && day->hours(MT_CPAP)<0.0000001) {
         } else if (!isBrick) {
-            html+="<table cellspacing=0 cellpadding=0 border=0 height=100% width=100%>";
-            html+="<tr height=25%><td align=center></td></tr>";
-            html+="<tr><td align=center><font size='+3'>"+tr("\"Nothing's here!\"")+"</font></td></tr>";
-            html+="<tr><td align=center><img src='qrc:/icons/logo-md.png'></td></tr>";
-            html+="<tr height=5px><td align=center></td></tr>";
-            html+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("No data is available for this day.")+"</font></i></td></tr>";
-            html+="<tr height=25%><td align=center></td></tr>";
-            html+="</table>\n";
+            htmlLeftStatistics ="<table cellspacing=0 cellpadding=0 border=0 height=100% width=100%>";
+            htmlLeftStatistics+="<tr height=25%><td align=center></td></tr>";
+            htmlLeftStatistics+="<tr><td align=center><font size='+3'>"+tr("\"Nothing's here!\"")+"</font></td></tr>";
+            htmlLeftStatistics+="<tr><td align=center><img src='qrc:/icons/logo-md.png'></td></tr>";
+            htmlLeftStatistics+="<tr height=5px><td align=center></td></tr>";
+            htmlLeftStatistics+="<tr bgcolor='#89abcd'><td align=center><i><font size=+1 color=white>"+tr("No data is available for this day.")+"</font></i></td></tr>";
+            htmlLeftStatistics+="<tr height=25%><td align=center></td></tr>";
+            htmlLeftStatistics+="</table>\n";
         }
 
     }
     if (day) {
-        html+=getOximeterInformation(day);
-        html+=getMachineSettings(day);
-        html+=getSessionInformation(day);
+        htmlLeftOximeter = getOximeterInformation(day);
+        htmlLeftMachineSettings = getMachineSettings(day);
+        htmlLeftSessionInfo= getSessionInformation(day);
     }
 
-    html+="</body></html>";
+    htmlLeftFooter ="</body></html>";
 
     QColor cols[]={
         COLOR_Gold,
@@ -1592,7 +1651,7 @@ void Daily::Load(QDate date)
     }
 #endif
 
-    webView->setHtml(html);
+    webView->setHtml(getLeftSidebar(true));
 
     ui->JournalNotes->clear();
 

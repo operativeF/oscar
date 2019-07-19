@@ -296,13 +296,17 @@ private:
     void updateCube();
 
 
+    QString getLeftAHI (Day * day);
     QString getSessionInformation(Day *);
     QString getMachineSettings(Day *);
     QString getStatisticsInfo(Day *);
     QString getCPAPInformation(Day *);
     QString getOximeterInformation(Day *);
     QString getEventBreakdown(Day *);
+    QString getPieChart(float values, Day *);
+    QString getIndicesAndPie(Day *, float hours, bool isBrick);
     QString getSleepTime(Day *);
+    QString getLeftSidebar (bool honorPieChart);
 
     QHash<QString, gGraph *> graphlist;
 

@@ -3135,7 +3135,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Toggle &amp;Line Cursor</string>
+    <string>Show &amp;Line Cursor</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+L</string>
@@ -3221,7 +3221,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Toggle &amp;Pie Chart</string>
+    <string>Show &amp;Pie Chart</string>
    </property>
    <property name="toolTip">
     <string>Show Pie Chart on Daily page</string>
