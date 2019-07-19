@@ -1069,8 +1069,7 @@ QString Statistics::GenerateCPAPUsage()
         int firstMonth = firstcpap.month();
         int lastMonth = lastcpap.month();
         int years = lastcpap.year() - firstcpap.year();
-        if (lastMonth <= firstMonth)
-            lastMonth += (12 * years); // handle time extending to next year
+        lastMonth += (12 * years); // handle time extending to next year
         number_periods = lastMonth - firstMonth + 1;
 
         if (number_periods < 1) {
