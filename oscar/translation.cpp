@@ -50,6 +50,7 @@ void initTranslations()
     langNames["en_UK"] = "English (UK)";
     langNames["nl"] = "Nederlands";
     langNames["pt_BR"] = "Portugues (BR)";
+    langNames["ro"] = "Romanian";
 
     langNames[DefaultLanguage]="English (US)";
 
