@@ -4303,7 +4303,7 @@ bool PRS1DataChunk::ParseSummaryF5V3(void)
                 CHECK_VALUE(data[pos+5], 0);
                 CHECK_VALUE(data[pos+6], 2);
                 CHECK_VALUE(data[pos+7], 1);
-                CHECK_VALUE(data[pos+8], 0);
+                CHECK_VALUES(data[pos+8], 0, 1);  // 1 = patient disconnect alarm of 15 sec, not sure where time is encoded
                 break;
             case 3:  // Mask On
                 tt += data[pos] | (data[pos+1] << 8);
@@ -4457,10 +4457,11 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ps, GAIN));
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, max_ps, GAIN));
                 break;
-            case 0x14:  // new to ASV, ???
-                CHECK_VALUE(data[pos], 1);
-                CHECK_VALUE(data[pos+1], 0);
-                CHECK_VALUE(data[pos+2], 0);
+            case 0x14:  // ASV backup rate
+                CHECK_VALUE(cpapmode, MODE_ASV_VARIABLE_EPAP);
+                CHECK_VALUES(data[pos], 1, 2);  // 1 = auto, 2 = fixed BPM
+                //CHECK_VALUE(data[pos+1], 0);  // 0 for auto, BPM for mode 2
+                //CHECK_VALUE(data[pos+2], 0);  // 0 for auto, timed inspiration for mode 2 (gain 0.1)
                 break;
             /*
             case 0x2a:  // EZ-Start
@@ -4479,7 +4480,9 @@ bool PRS1DataChunk::ParseSettingsF5V3(const unsigned char* data, int size)
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos], GAIN));
                 break;
             case 0x2e:
-                CHECK_VALUE(data[pos], 0);
+                // [0x00, N] for Bi-Flex level N
+                // [0x20, 0x03] for no flex, rise time setting = 3, no rise lock
+                CHECK_VALUES(data[pos], 0, 0x20);
                 //CHECK_VALUES(data[pos+1], 2, 3);  // Bi-Flex level
                 /*
                 if (data[pos] != 0) {
