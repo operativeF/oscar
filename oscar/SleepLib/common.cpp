@@ -177,6 +177,11 @@ QString getGraphicsEngine()
 QString getBranchVersion()
 {
     QString version = STR_TR_AppVersion;
+
+    if (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) ||
+       (ReleaseStatus.compare("release", Qt::CaseInsensitive)==0)))
+        version += " ("+GIT_REVISION + ")";
+
     if (GIT_BRANCH != "master") {
         version += " [Branch: " + GIT_BRANCH + "]";
     }
