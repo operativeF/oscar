@@ -149,8 +149,8 @@ public:
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 6 machine
     bool ParseSummaryF0V6(void);
     
-    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 3 ventilator (family version 6?) machine
-    bool ParseSummaryF3(void);
+    //! \brief Parse a single data chunk from a .001 file containing summary data for a family 3 ventilator (family version 6) machine
+    bool ParseSummaryF3V6(void);
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 0-2 machine
     bool ParseSummaryF5V012(void);

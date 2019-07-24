@@ -3549,11 +3549,65 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
 }
 
 
-// TODO: This is probably only F3V6, as it uses mainblock, only present in fileVersion 3.
-bool PRS1DataChunk::ParseSummaryF3(void)
+bool PRS1DataChunk::ParseSummaryF3V6(void)
 {
     CPAPMode mode = MODE_UNKNOWN;
     EventDataType epap, ipap;
+
+    // TODO: The below mainblock creation is wrong. It should be removed when the summary
+    // parsing is fixed.
+    /* Example data block
+    000000c6@0000: 00 [10] 01 [00 01 02 01 01 00 02 01 00 04 01 40 07
+    000000c6@0010: 01 60 1e 03 02 0c 14 2c 01 14 2d 01 40 2e 01 02
+    000000c6@0020: 2f 01 00 35 02 28 68 36 01 00 38 01 00 39 01 00
+    000000c6@0030: 3b 01 01 3c 01 80] 02 [00 01 00 01 01 00 02 01 00]
+    000000c6@0040: 04 [00 00 28 68] 0c [78 00 2c 6c] 05 [e4 69] 07 [40 40]
+    000000c6@0050: 08 [61 60] 0a [00 00 00 00 03 00 00 00 02 00 02 00
+    000000c6@0060: 05 00 2b 11 00 10 2b 5c 07 12 00 00] 03 [00 00 01
+    000000c6@0070: 1a 00 38 04]  */
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    if (this->fileVersion == 3) {
+        // Parse summary structures into bytearray map according to size given in header block
+        int size = this->m_data.size();
+
+        int pos = 0;
+        int bsize;
+        short val, len;
+        do {
+            val = data[pos++];
+            auto it = this->hblock.find(val);
+            if (it == this->hblock.end()) {
+                qDebug() << "Block parse error in ParseSummary" << this->sessionid;
+                break;
+            }
+            bsize = it.value();
+
+            if (val != 1) {
+                if (this->hbdata.contains(val)) {
+                    // We know this is entirely wrong. It will be removed after F3V6 is updated.
+                    //qWarning() << this->sessionid << "duplicate hbdata val" << val;
+                }
+                // store the data block for later reference
+                this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
+            } else {
+                if (!this->mainblock.isEmpty()) {
+                    qWarning() << this->sessionid << "duplicate mainblock";
+                }
+                // Parse the nested data structure which contains settings
+                int p2 = 0;
+                do {
+                    val = data[pos + p2++];
+                    len = data[pos + p2++];
+                    if (this->mainblock.contains(val)) {
+                        qWarning() << this->sessionid << "duplicate mainblock val" << val;
+                    }
+                    this->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
+                    p2 += len;
+                } while ((p2 < bsize) && ((pos+p2) < size));
+            }
+            pos += bsize;
+        } while (pos < size);
+    }
 
     QMap<unsigned char, QByteArray>::iterator it;
 
@@ -3856,7 +3910,7 @@ void PRS1DataChunk::ParseHumidifierSettingV3(unsigned char byte1, unsigned char 
 }
 
 
-// The below is based on a combination of the mainblock parsing for fileVersion == 3
+// The below is based on a combination of the old mainblock parsing for fileVersion == 3
 // in ParseSummary() and the switch statements of ParseSummaryF0V6.
 //
 // Both compliance and summary files (at least for 200X and 400X machines) seem to have
@@ -4724,58 +4778,6 @@ bool PRS1DataChunk::ParseSummary()
         return false;
     }
 
-    // TODO: The below mainblock creation is probably wrong. It should move to to its own function when it gets fixed.
-    /* Example data block
-    000000c6@0000: 00 [10] 01 [00 01 02 01 01 00 02 01 00 04 01 40 07
-    000000c6@0010: 01 60 1e 03 02 0c 14 2c 01 14 2d 01 40 2e 01 02
-    000000c6@0020: 2f 01 00 35 02 28 68 36 01 00 38 01 00 39 01 00
-    000000c6@0030: 3b 01 01 3c 01 80] 02 [00 01 00 01 01 00 02 01 00]
-    000000c6@0040: 04 [00 00 28 68] 0c [78 00 2c 6c] 05 [e4 69] 07 [40 40]
-    000000c6@0050: 08 [61 60] 0a [00 00 00 00 03 00 00 00 02 00 02 00
-    000000c6@0060: 05 00 2b 11 00 10 2b 5c 07 12 00 00] 03 [00 00 01
-    000000c6@0070: 1a 00 38 04]  */
-    if (this->fileVersion == 3) {
-        // Parse summary structures into bytearray map according to size given in header block
-        int size = this->m_data.size();
-
-        int pos = 0;
-        int bsize;
-        short val, len;
-        do {
-            val = data[pos++];
-            auto it = this->hblock.find(val);
-            if (it == this->hblock.end()) {
-                qDebug() << "Block parse error in ParseSummary" << this->sessionid;
-                break;
-            }
-            bsize = it.value();
-
-            if (val != 1) {
-                if (this->hbdata.contains(val)) {
-                    // We know this is entirely wrong. It will be removed after F3V6 is updated.
-                    //qWarning() << this->sessionid << "duplicate hbdata val" << val;
-                }
-                // store the data block for later reference
-                this->hbdata[val] = QByteArray((const char *)(&data[pos]), bsize);
-            } else {
-                if (!this->mainblock.isEmpty()) {
-                    qWarning() << this->sessionid << "duplicate mainblock";
-                }
-                // Parse the nested data structure which contains settings
-                int p2 = 0;
-                do {
-                    val = data[pos + p2++];
-                    len = data[pos + p2++];
-                    if (this->mainblock.contains(val)) {
-                        qWarning() << this->sessionid << "duplicate mainblock val" << val;
-                    }
-                    this->mainblock[val] = QByteArray((const char *)(&data[pos+p2]), len);
-                    p2 += len;
-                } while ((p2 < bsize) && ((pos+p2) < size));
-            }
-            pos += bsize;
-        } while (pos < size);
-    }
     // Family 0 = XPAP
     // Family 3 = BIPAP AVAPS
     // Family 5 = BIPAP AutoSV
@@ -4790,7 +4792,9 @@ bool PRS1DataChunk::ParseSummary()
             return this->ParseSummaryF0V23();
         }
     case 3:
-        return this->ParseSummaryF3();
+        if (this->familyVersion == 6) {
+            return this->ParseSummaryF3V6();
+        }
         break;
     case 5:
         if (this->familyVersion == 1) {
