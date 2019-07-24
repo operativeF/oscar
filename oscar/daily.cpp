@@ -1550,7 +1550,7 @@ void Daily::Load(QDate date)
             for (int i=0; i < available.size(); ++i) {
                 ChannelID code = available.at(i);
                 schema::Channel & chan = schema::channel[code];
-                if (!chan.enabled()) continue;
+//                if (!chan.enabled()) continue;
                 QString data;
                 if (chan.type() == schema::SPAN) {
                     val = (100.0 / hours)*(day->sum(code)/3600.0);
