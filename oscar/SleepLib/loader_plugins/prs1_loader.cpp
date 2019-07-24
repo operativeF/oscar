@@ -3549,6 +3549,15 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
 }
 
 
+// TODO: Add support for F3V3 (1061T, 1160P). This is just a stub.
+bool PRS1DataChunk::ParseSummaryF3V3(void)
+{
+    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) MODE_UNKNOWN));
+    this->duration = 0;
+    return true;
+}
+
+
 bool PRS1DataChunk::ParseSummaryF3V6(void)
 {
     CPAPMode mode = MODE_UNKNOWN;
@@ -4794,6 +4803,8 @@ bool PRS1DataChunk::ParseSummary()
     case 3:
         if (this->familyVersion == 6) {
             return this->ParseSummaryF3V6();
+        } else if (this->familyVersion == 3) {
+            return this->ParseSummaryF3V3();
         }
         break;
     case 5:
