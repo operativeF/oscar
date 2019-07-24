@@ -398,7 +398,7 @@ void NewProfile::edit(const QString name)
         ui->heightEdit->setValue(v);
         ui->heightEdit2->setVisible(false);
         ui->heightEdit->setDecimals(2);
-        ui->heightEdit->setSuffix(STR_UNIT_M);
+        ui->heightEdit->setSuffix(STR_UNIT_CM);
     }
 }
 
