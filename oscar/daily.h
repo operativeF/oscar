@@ -66,6 +66,11 @@ public:
         */
     void ResetGraphLayout();
 
+    /*! \fn updateLeftSidebar()
+        /brief Updtes left sidebar to reflect changes in pie chart visibility
+        */
+    void updateLeftSidebar();
+
     /*! \fn graphView()
         \returns the main graphView area for the Daily View
         */

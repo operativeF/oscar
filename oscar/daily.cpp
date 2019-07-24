@@ -588,6 +588,11 @@ void Daily::ReloadGraphs()
 //    sleep(3);
 }
 
+void Daily::updateLeftSidebar() {
+    if (webView && !htmlLeftHeader.isEmpty())
+        webView->setHtml(getLeftSidebar(true));
+}
+
 void Daily::hideSpaceHogs()
 {
     if (AppSetting->calendarVisible()) {
@@ -2276,6 +2281,10 @@ void Daily::on_weightSpinBox_valueChanged(double arg1)
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
 }
 
@@ -2306,11 +2315,15 @@ void Daily::on_weightSpinBox_editingFinished()
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
         journal->settings[Journal_BMI]=bmi;
         if (gv) {
             g=gv->findGraph(STR_GRAPH_BMI);
             if (g) g->setDay(nullptr);
         }
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
     journal->SetChanged(true);
 }
@@ -2324,6 +2337,10 @@ void Daily::on_ouncesSpinBox_valueChanged(int arg1)
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
 }
 
@@ -2348,12 +2365,16 @@ void Daily::on_ouncesSpinBox_editingFinished()
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
 
         journal->settings[Journal_BMI]=bmi;
         if (mainwin->getOverview()) {
             g=mainwin->getOverview()->graphView()->findGraph(STR_GRAPH_BMI);
             if (g) g->setDay(nullptr);
         }
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
     journal->SetChanged(true);
 }
