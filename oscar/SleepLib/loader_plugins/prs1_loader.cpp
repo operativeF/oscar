@@ -3558,6 +3558,291 @@ bool PRS1DataChunk::ParseSummaryF3V3(void)
 }
 
 
+// Originally based on ParseSummaryF5V3, with changes observed in ventilator sample data
+//
+// TODO: surely there will be a way to merge ParseSummary (FV3) loops and abstract the machine-specific
+// encodings into another function or class, but that's probably worth pursuing only after
+// the details have been figured out.
+bool PRS1DataChunk::ParseSummaryF3V6(void)
+{
+    if (this->family != 3 || this->familyVersion != 6) {
+        qWarning() << "ParseSummaryF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int minimum_sizes[] = { 1, 0x2e, 9, 7, 4, 2, 1, 2, 2, 1, 0x18, 2, 4 };  // F5V3 = { 1, 0x38, 4, 2, 4, 0x1e, 2, 4, 9 };
+    static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
+    // NOTE: The sizes contained in hblock can vary, even within a single machine, as can the length of hblock itself!
+
+    // TODO: hardcoding this is ugly, think of a better approach
+    if (chunk_size < minimum_sizes[0] + minimum_sizes[1] + minimum_sizes[2]) {
+        qWarning() << this->sessionid << "summary data too short:" << chunk_size;
+        return false;
+    }
+    // We've once seen a short summary with no mask-on/off: just equipment-on, settings, 9, equipment-off
+    if (chunk_size < 75) UNEXPECTED_VALUE(chunk_size, ">= 75");
+
+    bool ok = true;
+    int pos = 0;
+    int code, size;
+    int tt = 0;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (code < ncodes) {
+            // make sure the handlers below don't go past the end of the buffer
+            if (size < minimum_sizes[code]) {
+                qWarning() << this->sessionid << "slice" << code << "too small" << size << "<" << minimum_sizes[code];
+                ok = false;
+                break;
+            }
+        } // else if it's past ncodes, we'll log its information below (rather than handle it)
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "slice" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0:  // Equipment On
+                CHECK_VALUE(pos, 1);  // Always first?
+                //CHECK_VALUE(data[pos], 0x10);  // usually 0x10 for 1030X, sometimes 0x40 or 0x80 are set in addition or instead
+                CHECK_VALUE(size, 1);
+                break;
+            case 1:  // Settings
+                ok = this->ParseSettingsF3V6(data + pos, size);
+                break;
+            case 2:  // seems equivalent to F5V3 #9, comes right after settings, 9 bytes, identical values
+                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos+1], 1);
+                CHECK_VALUE(data[pos+2], 0);
+                CHECK_VALUE(data[pos+3], 1);
+                CHECK_VALUE(data[pos+4], 1);
+                CHECK_VALUE(data[pos+5], 0);
+                CHECK_VALUE(data[pos+6], 2);
+                CHECK_VALUE(data[pos+7], 1);
+                CHECK_VALUES(data[pos+8], 0, 1);  // 1 = patient disconnect alarm of 15 sec on F5V3, not sure where time is encoded
+                break;
+            case 4:  // Mask On
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOn));
+                this->ParseHumidifierSettingV3(data[pos+2], data[pos+3]);
+                break;
+            case 5:  // Mask Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, MaskOff));
+                break;
+            case 7:  // Ventilator EPAP stats, presumably per mask-on slice
+                //CHECK_VALUE(data[pos], 0x69);  // Average EPAP
+                //CHECK_VALUE(data[pos+1], 0x80);  // Average 90% EPAP
+                break;
+            case 8:  // Ventilator IPAP stats, presumably per mask-on slice
+                //CHECK_VALUE(data[pos], 0x86);  // Average IPAP
+                //CHECK_VALUE(data[pos+1], 0xA8);  // Average 90% IPAP
+                break;
+            case 0xa:  // Patient statistics, presumably per mask-on slice
+                //CHECK_VALUE(data[pos], 0x00);  // 16-bit OA count
+                CHECK_VALUE(data[pos+1], 0x00);
+                //CHECK_VALUE(data[pos+2], 0x00);  // 16-bit CA count
+                CHECK_VALUE(data[pos+3], 0x00);
+                //CHECK_VALUE(data[pos+4], 0x00);  // 16-bit minutes in LL
+                CHECK_VALUE(data[pos+5], 0x00);
+                //CHECK_VALUE(data[pos+6], 0x0A);  // 16-bit VS count
+                CHECK_VALUE(data[pos+7], 0x00);
+                //CHECK_VALUE(data[pos+8], 0x01);  // 16-bit H count (partial)
+                CHECK_VALUE(data[pos+9], 0x00);
+                //CHECK_VALUE(data[pos+0xa], 0x00);  // 16-bit H count (partial)
+                CHECK_VALUE(data[pos+0xb], 0x00);
+                //CHECK_VALUE(data[pos+0xc], 0x00);  // 16-bit RE count
+                CHECK_VALUE(data[pos+0xd], 0x00);
+                //CHECK_VALUE(data[pos+0xe], 0x3e);  // average total leak
+                //CHECK_VALUE(data[pos+0xf], 0x03);  // 16-bit H count (partial)
+                CHECK_VALUE(data[pos+0x10], 0x00);
+                //CHECK_VALUE(data[pos+0x11], 0x11);  // average breath rate
+                //CHECK_VALUE(data[pos+0x12], 0x41);  // average TV / 10
+                //CHECK_VALUE(data[pos+0x13], 0x60);  // average % PTB
+                //CHECK_VALUE(data[pos+0x14], 0x0b);  // average minute vent
+                //CHECK_VALUE(data[pos+0x15], 0x1d);  // average leak? (similar position to F5V3, similar delta to total leak)
+                //CHECK_VALUE(data[pos+0x16], 0x00);  // 16-bit minutes in PB
+                CHECK_VALUE(data[pos+0x17], 0x00);
+                break;
+            case 3:  // Equipment Off
+                tt += data[pos] | (data[pos+1] << 8);
+                this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
+                //CHECK_VALUES(data[pos+2], 1, 4);  // bitmask, have seen 1, 4, 6, 0x41
+                //CHECK_VALUE(data[pos+3], 0x17);  // 0x16, etc.
+                CHECK_VALUES(data[pos+4], 0, 1);
+                //CHECK_VALUE(data[pos+5], 0x15);  // 0x16, etc.
+                //CHECK_VALUES(data[pos+6], 0, 1);  // or 2
+                break;
+            case 0xc:  // Humidier setting change
+                tt += data[pos] | (data[pos+1] << 8);  // This adds to the total duration (otherwise it won't match report)
+                this->ParseHumidifierSettingV3(data[pos+2], data[pos+3]);
+                break;
+            default:
+                UNEXPECTED_VALUE(code, "known slice code");
+                break;
+        }
+        pos += size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = tt;
+
+    return ok;
+}
+
+
+// Based initially on ParseSettingsF5V3. Many of the codes look the same, like always starting with 0, 0x35 looking like
+// a humidifier setting, etc., but the contents are sometimes a bit different, such as mode values and pressure settings.
+//
+// new settings to find: ...
+bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
+{
+    static const QMap<int,int> expected_lengths = { {0x1e,3}, {0x35,2} };
+    bool ok = true;
+
+    CPAPMode cpapmode = MODE_UNKNOWN;
+
+    // F5V3 and F3V6 use a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+    static const float GAIN = 0.125;  // TODO: parameterize this somewhere better
+
+    int fixed_epap = 0;
+    int fixed_ipap = 0;
+    int min_ipap = 0;
+    int max_ipap = 0;
+
+    // Parse the nested data structure which contains settings
+    int pos = 0;
+    do {
+        int code = data[pos++];
+        int len = data[pos++];
+
+        int expected_len = 1;
+        if (expected_lengths.contains(code)) {
+            expected_len = expected_lengths[code];
+        }
+        //CHECK_VALUE(len, expected_len);
+        if (len < expected_len) {
+            qWarning() << this->sessionid << "setting" << code << "too small" << len << "<" << expected_len;
+            ok = false;
+            break;
+        }
+        if (pos + len > size) {
+            qWarning() << this->sessionid << "setting" << code << "@" << pos << "longer than remaining slice";
+            ok = false;
+            break;
+        }
+
+        switch (code) {
+            case 0: // Device Mode
+                CHECK_VALUE(pos, 2);  // always first?
+                // TODO: We may need additional enums for these modes, the below are just a rough guess mapping for now.
+                switch (data[pos]) {
+                case 1: cpapmode = MODE_BILEVEL_FIXED; break;  // TODO This is marked "S - Bi-Flex" on reports.
+                case 2: cpapmode = MODE_ASV; break;  // TODO: This is marked as "S/T" on reports, is that spontaneous/timed? Pressure also seems variable!
+                case 4: cpapmode = MODE_AVAPS; break;  // "PC - AVAPS" on reports
+                default:
+                    UNEXPECTED_VALUE(data[pos], "known device mode");
+                    break;
+                }
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
+                break;
+            case 1: // ???
+                if (cpapmode == MODE_AVAPS) {
+                    CHECK_VALUE(data[pos], 2);  // 2 when in AVAPS
+                } else {
+                    CHECK_VALUES(data[pos], 0, 1);  // 1 when in S - Bi-Flex, 0 when in S/T
+                }
+                break;
+            case 2: // ???
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 4: // EPAP Pressure
+                // pressures seem variable on practice, maybe due to ramp or leaks?
+                fixed_epap = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_EPAP, fixed_epap, GAIN));
+                break;
+            case 7: // IPAP Pressure
+                // pressures seem variable on practice, maybe due to ramp or leaks?
+                fixed_ipap = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, fixed_ipap, GAIN));
+                break;
+            case 8:  // Min IPAP
+                min_ipap = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_ipap, GAIN));
+                break;
+            case 9:  // Max IPAP
+                max_ipap = data[pos];
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_ipap, GAIN));
+                break;
+            case 0x19:  // Tidal Volume (AVAPS)
+                CHECK_VALUE(data[pos], 47);  // gain 10.0
+                break;
+            case 0x1e:  // Backup rate (S/T and AVAPS)
+                CHECK_VALUES(cpapmode, MODE_ASV, MODE_AVAPS);
+                // TODO: Does mode breath rate off mean this is essentially bilevel? The pressure graphs are confusing.
+                CHECK_VALUES(data[pos], 0, 2);  // 0 = Breath Rate off (S), 2 = fixed BPM (1 = auto on F5V3 setting 0x14)
+                //CHECK_VALUE(data[pos+1], 10);  // BPM for mode 2
+                //CHECK_VALUE(data[pos+2], 10);  // timed inspiration for mode 2 (gain 0.1)
+                break;
+            case 0x2c:  // Ramp Time
+                if (data[pos] != 0) {  // 0 == ramp off, and ramp pressure setting doesn't appear
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
+                }
+                break;
+            case 0x2d:  // Ramp Pressure (with ASV/ventilator pressure encoding)
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos], GAIN));
+                break;
+            case 0x2e:  // Bi-Flex level or Rise Time
+                // On F5V3 the first byte could specify Bi-Flex or Rise Time, and second byte contained the value.
+                // On F3V6 there's only one byte, which seems to correspond to Rise Time on the reports in modes 2 and 4,
+                // and to Bi-Flex Setting (level) on mode 1.
+                break;
+            case 0x2f:  // Rise Time lock? (was flex lock on F0V6, 0x80 for locked)
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x35:  // Humidifier setting
+                this->ParseHumidifierSettingV3(data[pos], data[pos+1], true);
+                break;
+            case 0x36:  // Mask Resistance Lock
+                CHECK_VALUE(data[pos], 0);  // 0x80 = locked on F5V3, not yet observed on F3V6
+                break;
+            case 0x38:  // Mask Resistance
+                if (data[pos] != 0) {  // 0 == mask resistance off
+                    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_SYSTEMONE_RESIST_SETTING, data[pos]));
+                }
+                break;
+            case 0x39:
+                CHECK_VALUE(data[pos], 0);
+                break;
+            case 0x3b:  // Tubing Type
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 2, 1);  // 15HT = 2, 15 = 1, 22 = 0, though report only says "15" for 15HT
+                }
+                break;
+            case 0x3c:  // View Optional Screens
+                CHECK_VALUES(data[pos], 0, 0x80);
+                break;
+            default:
+                qDebug() << "Unknown setting:" << hex << code << "in" << this->sessionid << "at" << pos;
+                this->AddEvent(new PRS1UnknownDataEvent(QByteArray((const char*) data, size), pos, len));
+                break;
+        }
+
+        pos += len;
+    } while (ok && pos + 2 <= size);
+
+    return ok;
+}
+
+
+#if 0
 bool PRS1DataChunk::ParseSummaryF3V6(void)
 {
     CPAPMode mode = MODE_UNKNOWN;
@@ -3656,6 +3941,7 @@ bool PRS1DataChunk::ParseSummaryF3V6(void)
 
     return true;
 }
+#endif
 
 
 bool PRS1DataChunk::ParseSummaryF5V012(void)

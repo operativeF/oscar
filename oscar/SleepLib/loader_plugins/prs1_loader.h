@@ -209,6 +209,9 @@ protected:
 
     //! \brief Parse a settings slice from a .000 and .001 file
     bool ParseSettingsF5V3(const unsigned char* data, int size);
+
+    //! \brief Parse a settings slice from a .000 and .001 file
+    bool ParseSettingsF3V6(const unsigned char* data, int size);
 };
 
 
