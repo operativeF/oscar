@@ -2277,8 +2277,12 @@ bool PRS1DataChunk::ParseEventsF5V012(void)
 
 }
 
-bool PRS1Import::ParseF3EventsV3()
+
+bool PRS1Import::ParseEventsF3V6()
 {
+    // F3V6 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+    static const float GAIN = 0.125F;  // TODO: parameterize this somewhere better
+    
     // Required channels
     EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
@@ -2292,8 +2296,8 @@ bool PRS1Import::ParseF3EventsV3()
     EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
     EventList *PTB = session->AddEventList(CPAP_PTB, EVL_Event);
     EventList *TB = session->AddEventList(PRS1_TimedBreath, EVL_Event);
-    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, 0.1F);
-    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, 0.1F);
+    EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, GAIN);
+    EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, GAIN);
     EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
     EventList *ZZ = session->AddEventList(CPAP_NRI, EVL_Event);
     EventList *TMV = session->AddEventList(CPAP_Test1, EVL_Event);
@@ -5081,14 +5085,16 @@ bool PRS1Import::ParseEvents()
         res = ParseF0Events();
         break;
     case 3:
-        if (event->fileVersion == 3) {
-            res = ParseF3EventsV3();
+        // NOTE: The original comment in the header for ParseF3EventsV3 said there was a 1060P with fileVersion 3.
+        // We've never seen that, so we're reverting to checking familyVersion.
+        if (event->familyVersion == 6) {
+            res = ParseEventsF3V6();
         } else {
             res = ParseF3Events();
         }
         break;
     case 5:
-        if (event->fileVersion==3) {
+        if (event->familyVersion == 3) {
             res = ParseEventsF5V3();
         } else {
             res = ParseF5Events();
@@ -5333,8 +5339,9 @@ bool PRS1Import::ParseWaveforms()
 
         if (num > 1) {
             float pressure_gain = 0.1F;  // standard pressure gain
-            if (waveform->family == 5 && waveform->familyVersion == 3) {
-                // F5V3 uses a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
+            if ((waveform->family == 5 && waveform->familyVersion == 3) ||
+                (waveform->family == 3 && waveform->familyVersion == 6)){
+                // F5V3 and F3V6 use a gain of 0.125 rather than 0.1 to allow for a maximum value of 30 cmH2O
                 pressure_gain = 0.125F;  // TODO: this should be parameterized somewhere better, once we have a clear idea of which machines use this
             }
             
