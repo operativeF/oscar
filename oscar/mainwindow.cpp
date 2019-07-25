@@ -111,8 +111,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+bool setupRunning = false;
+
 void MainWindow::SetupGUI()
 {
+    setupRunning = true;
     QString version = getBranchVersion();
     setWindowTitle(STR_TR_OSCAR + QString(" %1").arg(version));
 
@@ -241,6 +244,7 @@ void MainWindow::SetupGUI()
     help = new Help(this);
     ui->tabWidget->addTab(help, tr("Help Browser"));
 #endif
+    setupRunning = false;
 }
 
 void MainWindow::logMessage(QString msg)
@@ -2469,8 +2473,9 @@ void MainWindow::on_actionLine_Cursor_toggled(bool b)
 void MainWindow::on_actionPie_Chart_toggled(bool visible)
 {
     AppSetting->setShowPieChart(visible);
-    if (daily && ui->tabWidget->currentWidget() == daily) {
-        daily->ReloadGraphs();
+    if (!setupRunning && daily) {
+        daily->updateLeftSidebar();
+//        daily->ReloadGraphs();
     }
 }
 
