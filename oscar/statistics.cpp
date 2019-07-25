@@ -16,6 +16,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QMainWindow>
+#include <QProgressDialog>
 
 #include "mainwindow.h"
 #include "statistics.h"
@@ -158,6 +159,7 @@ bool rxAHILessThan(const RXItem * rx1, const RXItem * rx2)
 
 void Statistics::updateRXChanges()
 {
+//    qDebug() << "updateRXChanges called";
     rxitems.clear();
 
     // Read the cache from disk
@@ -172,6 +174,23 @@ void Statistics::updateRXChanges()
 
 
     quint64 tmp;
+
+    int numDays = p_profile->daylist.count();
+    int daysProcessed = 0;
+    int lastPctDone = 0;
+    bool showProgress = (numDays > 180);  // Show progress dialog if more than about 6 months of data
+
+    QProgressDialog * progress = nullptr;
+
+    if (showProgress) {  // arbitrary guess about when we should bother with a progress dialog
+        progress = new QProgressDialog(QObject::tr("Updating Statistics cache"),
+                                QString(), 0, numDays, 0,
+                                Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+        progress->setValue(0);
+        progress->setMinimumWidth(250);
+        progress->show();
+//        qDebug() << "Updating statistics rx cache dialog shown";
+    }
 
     // Scan through each daylist in ascending date order
     for (it = p_profile->daylist.begin(); it != it_end; ++it) {
@@ -480,10 +499,24 @@ void Statistics::updateRXChanges()
             rxitems.insert(date, rx);
         }
 
+        // Update progress bar every percent change
+        if (showProgress) {
+            daysProcessed++;
+            int pctDone = (100 * daysProcessed) / numDays;
+            if (pctDone != lastPctDone) {
+                lastPctDone = pctDone;
+                progress->setValue(daysProcessed);
+                QCoreApplication::processEvents();
+            }
+        }
+
     }
     // Store RX cache to disk
     saveRXChanges();
 
+
+    if (showProgress)
+        progress->setValue(numDays);  // Force progress bar to stop
 
     // Now do the setup for the best worst highlighting
     QList<RXItem *> list;
@@ -641,7 +674,7 @@ QString Statistics::generateHeader(bool onScreen)
         html += "p,a,td,body { font-family: 'Helvetica'; }";
 //                "p,a,td,body { font-size: 10px; }";
     }
-    qDebug() << "generateHeader font" << html;
+//    qDebug() << "generateHeader font" << html;
     html += "table.curved {"  // Borders not supported without webkit
 //            "border: 1px solid gray;"
 //            "border-radius:10px;"
