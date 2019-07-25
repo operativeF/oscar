@@ -48,7 +48,7 @@ NewProfile::NewProfile(QWidget *parent, const QString *user) :
     on_cpapModeCombo_activated(0);
     m_passwordHashed = false;
     ui->heightEdit2->setVisible(false);
-    ui->heightEdit->setDecimals(2);
+    ui->heightEdit->setDecimals(0);
     ui->heightEdit->setSuffix(STR_UNIT_CM);
 
     {
@@ -397,7 +397,7 @@ void NewProfile::edit(const QString name)
     } else { // good wholesome metric
         ui->heightEdit->setValue(v);
         ui->heightEdit2->setVisible(false);
-        ui->heightEdit->setDecimals(2);
+        ui->heightEdit->setDecimals(0);
         ui->heightEdit->setSuffix(STR_UNIT_CM);
     }
 }
@@ -417,7 +417,7 @@ void NewProfile::on_heightCombo_currentIndexChanged(int index)
     if (index == 0) {
         //metric
         ui->heightEdit2->setVisible(false);
-        ui->heightEdit->setDecimals(2);
+        ui->heightEdit->setDecimals(0);
         ui->heightEdit->setSuffix(STR_UNIT_CM);
         double v = ui->heightEdit->value() * 30.48;
         v += ui->heightEdit2->value() * 2.54;

@@ -1320,7 +1320,7 @@ QSlider::handle:horizontal  {
                  <bool>false</bool>
                 </property>
                 <property name="digitCount">
-                 <number>5</number>
+                 <number>4</number>
                 </property>
                 <property name="segmentStyle">
                  <enum>QLCDNumber::Flat</enum>

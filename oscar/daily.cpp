@@ -432,7 +432,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         ui->ouncesSpinBox->setSuffix(STR_UNIT_OUNCE);
     } else {
         ui->ouncesSpinBox->setVisible(false);
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
 
@@ -835,7 +835,7 @@ void Daily::on_ReloadDay()
         ui->ouncesSpinBox->setSuffix(STR_UNIT_OUNCE);
     } else {
         ui->ouncesSpinBox->setVisible(false);
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
     this->setCursor(Qt::ArrowCursor);
@@ -1693,7 +1693,7 @@ void Daily::Load(QDate date)
             double kg=journal->settings[Journal_Weight].toDouble(&ok);
 
             if (p_profile->general->unitSystem()==US_Metric) {
-                ui->weightSpinBox->setDecimals(3);
+                ui->weightSpinBox->setDecimals(1);
                 ui->weightSpinBox->blockSignals(true);
                 ui->weightSpinBox->setValue(kg);
                 ui->weightSpinBox->blockSignals(false);
@@ -1783,7 +1783,7 @@ void Daily::UnitsChanged()
     } else {
         kg=(ui->weightSpinBox->value()*(ounce_convert*16.0))+(ui->ouncesSpinBox->value()*ounce_convert);
         kg/=1000.0;
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setValue(kg);
         ui->ouncesSpinBox->setVisible(false);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
