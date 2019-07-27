@@ -2449,8 +2449,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
-    static const int minimum_sizes[] = { 2,      3, 0xe, 3, 3, 3, 4, 5, 3, 5, 3, 3, 2, 2, 2, 2 };
-                              // F5V3: { 2, [3,] 3, 0xd, 3, 3, 3, 4, 3, 2, 5, 5, 3, 3, 3, 3 };
+    static const int minimum_sizes[] = { 2, 3, 0xe, 3, 3, 3, 4, 5, 3, 5, 3, 3, 2, 2, 2, 2 };
     static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
 
     if (chunk_size < 1) {
@@ -2492,13 +2491,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
         pos += 2;
 
         switch (code) {
-            /*
-            case 1:  // Pressure adjustment
-                // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
-                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
-                break;
-            */
+            // case 0x00?
             case 1:  // Timed Breath
                 // TB events have a duration in 0.1s, based on the review of pressure waveforms.
                 // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
@@ -2547,24 +2540,6 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
                 elapsed = data[pos++];  // based on sample waveform, the hypopnea is over after this
                 this->AddEvent(new PRS1HypopneaEvent(t - elapsed, 0));
                 break;
-            /*
-            case 0x08:  // Flow Limitation
-                // TODO: We should revisit whether this is elapsed or duration once (if)
-                // we start calculating flow limitations ourselves. Flow limitations aren't
-                // as obvious as OA/CA when looking at a waveform.
-                elapsed = data[pos++];
-                this->AddEvent(new PRS1FlowLimitationEvent(t - elapsed, 0));
-                break;
-            case 0x09:  // Vibratory Snore
-                // VS events are instantaneous flags with no duration, drawn on the official waveform.
-                // The current thinking is that these are the snores that cause a change in auto-titrating
-                // pressure. The snoring statistic above seems to be a total count. It's unclear whether
-                // the trigger for pressure change is severity or count or something else.
-                // no data bytes
-                this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
-                break;
-            case 0x0a:  // Periodic Breathing
-            */
             case 0x07:  // Periodic Breathing
                 // PB events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
@@ -2593,14 +2568,10 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
                 duration = data[pos++];
                 this->AddEvent(new PRS1HypopneaEvent(t - duration, 0));
                 break;
-            /*
-            case 0x0f:
-                // TODO: some other pressure adjustment?
-                // Appears near the beginning and end of a session when Opti-Start is on, at least once in middle
-                //CHECK_VALUES(data[pos], 0x20, 0x28);
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
-                break;
-            */
+            // case 0x0c?
+            // case 0x0d?
+            // case 0x0e?
+            // case 0x0f?
             default:
                 qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
@@ -2613,114 +2584,6 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
 
     return ok;
 }
-
-
-#if 0
-bool PRS1DataChunk::ParseEventsF3V6(void)
-{
-    if (this->family != 3 || this->familyVersion != 6) {
-        qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
-        return false;
-    }
-    
-    int t = 0;
-    int pos = 0;
-    int datasize = this->m_data.size();
-
-    unsigned char * data = (unsigned char *)this->m_data.data();
-    unsigned char code;
-    unsigned short delta;
-    bool failed = false;
-
-    unsigned char val, val2;
-    QString dump;
-
-    do {
-        int startpos = pos;
-        code = data[pos++];
-        delta = (data[pos+1] < 8) | data[pos];
-        pos += 2;
-#ifdef DEBUG_EVENTS
-        if (code == 0x00) {
-            this->AddEvent(new PRS1UnknownDataEvent(this->m_data, startpos));
-        }
-#endif
-        unsigned short epap;
-
-        switch(code) {
-        case 0x01: // Who knows
-            val = data[pos++];
-            this->AddEvent(new PRS1TimedBreathEvent(t, val));
-            break;
-        case 0x02:
-            this->AddEvent(new PRS1LeakEvent(t, data[pos+3]));  // TODO: F3V6, is this really unintentional leak rather than total leak?
-            this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos+5]));
-            this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos+6]));
-            this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos+7]));
-
-
-            this->AddEvent(new PRS1EPAPEvent(t, epap=data[pos+0]));
-            this->AddEvent(new PRS1IPAPEvent(t, data[pos+1]));
-            this->AddEvent(new PRS1Test2Event(t, data[pos+4]));  // Flow???
-            this->AddEvent(new PRS1Test1Event(t, data[pos+8]));  // TMV???
-            this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos+9]));
-            pos += 12;
-
-            break;
-        case 0x04: // ???
-            val = data[pos++];
-            this->AddEvent(new PRS1TimedBreathEvent(t, val));
-            break;
-        case 0x05: // ???
-            val = data[pos++];
-            this->AddEvent(new PRS1ClearAirwayEvent(t, val));
-            break;
-        case 0x06: // Obstructive Apnea
-            val = data[pos++];
-            val2 = data[pos++];
-            this->AddEvent(new PRS1ObstructiveApneaEvent(t + val2, val));  // ??? shouldn't this be t - val2?
-            break;
-        case 0x07: // PB
-            val = data[pos+1] << 8 | data[pos];
-            pos += 2;
-            val2 = data[pos++];
-            this->AddEvent(new PRS1PeriodicBreathingEvent(t - val2, val));
-            break;
-        case 0x08: // RERA
-            val = data[pos++];
-            this->AddEvent(new PRS1RERAEvent(t, val));
-            break;
-        case 0x09: // ???
-            val = data[pos+1] << 8 | data[pos];
-            pos += 2;
-            val2 = data[pos++];
-            this->AddEvent(new PRS1LargeLeakEvent(t - val, val2));
-            break;
-
-        case 0x0a: // ???
-            val = data[pos++];
-            this->AddEvent(new PRS1NonRespondingEvent(t, val));
-            break;
-        case 0x0b: // Hypopnea
-            val = data[pos++];
-            this->AddEvent(new PRS1HypopneaEvent(t, val));
-            break;
-
-        default:
-            this->AddEvent(new PRS1UnknownDataEvent(this->m_data, startpos));
-            failed = true;
-            break;
-        };
-        t += delta;
-
-    } while ((pos < datasize) && !failed);
-
-    if (failed) {
-        return false;
-    }
-    return true;
-}
-#endif
 
 
 bool PRS1Import::ParseF3Events()
