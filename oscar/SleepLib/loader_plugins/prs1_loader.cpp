@@ -2305,6 +2305,8 @@ bool PRS1Import::ParseEventsF3V6()
     EventList *TMV = session->AddEventList(CPAP_Test1, EVL_Event);
     EventList *FLOW = session->AddEventList(CPAP_Test2, EVL_Event);
 
+    // On-demand channels
+    EventList *PP = nullptr;
     
     qint64 duration;
     qint64 t = qint64(event->timestamp) * 1000L;
@@ -2391,6 +2393,12 @@ bool PRS1Import::ParseEventsF3V6()
             case PRS1Test2Event::TYPE:
                 FLOW->AddEvent(t, e->m_value);
                 break;
+            case PRS1PressurePulseEvent::TYPE:
+                if (!PP) {
+                    if (!(PP = session->AddEventList(CPAP_PressurePulse, EVL_Event))) { return false; }
+                }
+                PP->AddEvent(t, e->m_value);
+                break;
             case PRS1UnknownDataEvent::TYPE:
             {
                 PRS1UnknownDataEvent* unk = (PRS1UnknownDataEvent*) e;
@@ -2457,7 +2465,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
     int pos = 0, startpos;
     int code, size;
     int t = 0;
-    int /*elapsed,*/ duration;
+    int elapsed, duration;
     do {
         code = data[pos++];
         if (!this->hblock.contains(code)) {
@@ -2514,32 +2522,32 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
                 this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 0A=Snore count  // TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
                 this->AddEvent(new PRS1LeakEvent(t, data[pos++]));                     // 0B=Leak (average?)
                 break;
-            /*
-            case 0x04:  // Pressure Pulse
+            case 0x03:  // Pressure Pulse
                 duration = data[pos++];  // TODO: is this a duration?
                 this->AddEvent(new PRS1PressurePulseEvent(t, duration));
                 break;
-            case 0x05:  // Obstructive Apnea
+            case 0x04:  // Obstructive Apnea
                 // OA events are instantaneous flags with no duration: reviewing waveforms
                 // shows that the time elapsed between the flag and reporting often includes
                 // non-apnea breathing.
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1ObstructiveApneaEvent(t - elapsed, 0));
                 break;
-            case 0x06:  // Clear Airway Apnea
+            case 0x05:  // Clear Airway Apnea
                 // CA events are instantaneous flags with no duration: reviewing waveforms
                 // shows that the time elapsed between the flag and reporting often includes
                 // non-apnea breathing.
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1ClearAirwayEvent(t - elapsed, 0));
                 break;
-            case 0x07:  // Hypopnea
+            case 0x06:  // Hypopnea
                 // TODO: How is this hypopnea different from events 0xd and 0xe?
                 // TODO: What is the first byte?
                 pos++;  // unknown first byte?
                 elapsed = data[pos++];  // based on sample waveform, the hypopnea is over after this
                 this->AddEvent(new PRS1HypopneaEvent(t - elapsed, 0));
                 break;
+            /*
             case 0x08:  // Flow Limitation
                 // TODO: We should revisit whether this is elapsed or duration once (if)
                 // we start calculating flow limitations ourselves. Flow limitations aren't
@@ -2556,24 +2564,28 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
                 this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
                 break;
             case 0x0a:  // Periodic Breathing
+            */
+            case 0x07:  // Periodic Breathing
                 // PB events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));
                 break;
-            case 0x0b:  // Large Leak
+            case 0x08:  // RERA
+                elapsed = data[pos++];  // based on sample waveform, the RERA is over after this
+                this->AddEvent(new PRS1RERAEvent(t - elapsed, 0));
+                break;
+            case 0x09:  // Large Leak
                 // LL events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
                 pos += 2;
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
                 break;
-            case 0x0d:  // Hypopnea
+            case 0x0a:  // Hypopnea
                 // TODO: Why does this hypopnea have a different event code?
                 // fall through
-            case 0x0e:  // Hypopnea
-            */
             case 0x0b:  // Hypopnea
                 // TODO: We should revisit whether this is elapsed or duration once (if)
                 // we start calculating hypopneas ourselves. Their official definition
