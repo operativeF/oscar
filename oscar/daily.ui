@@ -1227,6 +1227,9 @@ QToolButton:pressed {
               </item>
               <item row="2" column="1" colspan="2">
                <widget class="QDoubleSpinBox" name="weightSpinBox">
+                <property name="toolTip">
+                 <string>If height is greater than zero in Preferences Dialog, setting weight here will show Body Mass Index (BMI) value</string>
+                </property>
                 <property name="maximum">
                  <double>1499.000000000000000</double>
                 </property>
@@ -1314,10 +1317,10 @@ QSlider::handle:horizontal  {
                  <enum>QFrame::NoFrame</enum>
                 </property>
                 <property name="smallDecimalPoint">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                 <property name="digitCount">
-                 <number>5</number>
+                 <number>4</number>
                 </property>
                 <property name="segmentStyle">
                  <enum>QLCDNumber::Flat</enum>

@@ -379,11 +379,10 @@ bool Session::StoreSummary()
 
 bool Session::LoadSummary()
 {
-    //static int sumcnt = 0;
+//    static int sumcnt = 0;
 
     if (s_summary_loaded) return true;
     QString filename = s_machine->getSummariesPath() + QString().sprintf("%08lx.000", s_session);
-
 
     if (filename.isEmpty()) {
         qDebug() << "Empty summary filename";
@@ -398,7 +397,7 @@ bool Session::LoadSummary()
     }
 
 
-   // qDebug() << "Loading" << s_machine->loaderName() << "Summary" << filename << sumcnt++;
+//    qDebug() << "Loading" << s_machine->loaderName() << "Summary" << filename << sumcnt++;
 
     QDataStream in(&file);
     in.setVersion(QDataStream::Qt_4_6);

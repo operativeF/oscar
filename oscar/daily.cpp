@@ -432,7 +432,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         ui->ouncesSpinBox->setSuffix(STR_UNIT_OUNCE);
     } else {
         ui->ouncesSpinBox->setVisible(false);
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
 
@@ -586,6 +586,11 @@ void Daily::ReloadGraphs()
     graphView()->redraw();
 //    qDebug() << "Finished ReloadGraphs in Daily object";
 //    sleep(3);
+}
+
+void Daily::updateLeftSidebar() {
+    if (webView && !htmlLeftHeader.isEmpty())
+        webView->setHtml(getLeftSidebar(true));
 }
 
 void Daily::hideSpaceHogs()
@@ -830,7 +835,7 @@ void Daily::on_ReloadDay()
         ui->ouncesSpinBox->setSuffix(STR_UNIT_OUNCE);
     } else {
         ui->ouncesSpinBox->setVisible(false);
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
     }
     this->setCursor(Qt::ArrowCursor);
@@ -1545,7 +1550,7 @@ void Daily::Load(QDate date)
             for (int i=0; i < available.size(); ++i) {
                 ChannelID code = available.at(i);
                 schema::Channel & chan = schema::channel[code];
-                if (!chan.enabled()) continue;
+//                if (!chan.enabled()) continue;
                 QString data;
                 if (chan.type() == schema::SPAN) {
                     val = (100.0 / hours)*(day->sum(code)/3600.0);
@@ -1688,7 +1693,7 @@ void Daily::Load(QDate date)
             double kg=journal->settings[Journal_Weight].toDouble(&ok);
 
             if (p_profile->general->unitSystem()==US_Metric) {
-                ui->weightSpinBox->setDecimals(3);
+                ui->weightSpinBox->setDecimals(1);
                 ui->weightSpinBox->blockSignals(true);
                 ui->weightSpinBox->setValue(kg);
                 ui->weightSpinBox->blockSignals(false);
@@ -1778,7 +1783,7 @@ void Daily::UnitsChanged()
     } else {
         kg=(ui->weightSpinBox->value()*(ounce_convert*16.0))+(ui->ouncesSpinBox->value()*ounce_convert);
         kg/=1000.0;
-        ui->weightSpinBox->setDecimals(3);
+        ui->weightSpinBox->setDecimals(1);
         ui->weightSpinBox->setValue(kg);
         ui->ouncesSpinBox->setVisible(false);
         ui->weightSpinBox->setSuffix(STR_UNIT_KG);
@@ -2276,6 +2281,10 @@ void Daily::on_weightSpinBox_valueChanged(double arg1)
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
 }
 
@@ -2306,11 +2315,15 @@ void Daily::on_weightSpinBox_editingFinished()
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
         journal->settings[Journal_BMI]=bmi;
         if (gv) {
             g=gv->findGraph(STR_GRAPH_BMI);
             if (g) g->setDay(nullptr);
         }
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
     journal->SetChanged(true);
 }
@@ -2324,6 +2337,10 @@ void Daily::on_ouncesSpinBox_valueChanged(int arg1)
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
 }
 
@@ -2348,12 +2365,16 @@ void Daily::on_ouncesSpinBox_editingFinished()
         double bmi=kg/(height * height);
         ui->BMI->display(bmi);
         ui->BMI->setVisible(true);
+        ui->BMIlabel->setVisible(true);
 
         journal->settings[Journal_BMI]=bmi;
         if (mainwin->getOverview()) {
             g=mainwin->getOverview()->graphView()->findGraph(STR_GRAPH_BMI);
             if (g) g->setDay(nullptr);
         }
+    } else {
+        ui->BMI->setVisible(false);
+        ui->BMIlabel->setVisible(false);
     }
     journal->SetChanged(true);
 }
