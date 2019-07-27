@@ -1371,7 +1371,7 @@ PRS1_VALUE_EVENT(PRS1SnoreEvent, EV_PRS1_SNORE);
 PRS1_VALUE_EVENT(PRS1VibratorySnoreEvent, EV_PRS1_VS);
 PRS1_VALUE_EVENT(PRS1PressurePulseEvent, EV_PRS1_PP);
 PRS1_VALUE_EVENT(PRS1RERAEvent, EV_PRS1_RERA);  // TODO: should this really be a duration event?
-PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a single event or an index/hour?
+//PRS1_VALUE_EVENT(PRS1NonRespondingEvent, EV_PRS1_NRI);  // TODO: is this a single event or an index/hour?
 PRS1_VALUE_EVENT(PRS1FlowRateEvent, EV_PRS1_FLOWRATE);  // TODO: is this a single event or an index/hour?
 PRS1_VALUE_EVENT(PRS1Test1Event, EV_PRS1_TEST1);
 PRS1_VALUE_EVENT(PRS1Test2Event, EV_PRS1_TEST2);
@@ -2300,8 +2300,8 @@ bool PRS1Import::ParseEventsF3V6()
     EventList *IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, GAIN);
     EventList *EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, GAIN);
     EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
-    EventList *ZZ = session->AddEventList(CPAP_NRI, EVL_Event);
     EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
+    EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
     EventList *TMV = session->AddEventList(CPAP_Test1, EVL_Event);
     EventList *FLOW = session->AddEventList(CPAP_Test2, EVL_Event);
 
@@ -2368,6 +2368,9 @@ bool PRS1Import::ParseEventsF3V6()
                 // but it needs to be shifted left 2 minutes, since it's not a starting value
                 // but a past statistic.
                 SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS->AddEvent(t, 0);  // VSnore flag on overview
+                }
                 break;
             case PRS1RespiratoryRateEvent::TYPE:
                 RR->AddEvent(t, e->m_value);
@@ -2383,9 +2386,6 @@ bool PRS1Import::ParseEventsF3V6()
                 break;
             case PRS1RERAEvent::TYPE:
                 RE->AddEvent(t, e->m_value);
-                break;
-            case PRS1NonRespondingEvent::TYPE:
-                ZZ->AddEvent(t, e->m_value);
                 break;
             case PRS1Test1Event::TYPE:
                 TMV->AddEvent(t, e->m_value);
