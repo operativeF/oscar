@@ -3736,7 +3736,7 @@ bool PRS1DataChunk::ParseSummaryF3V6(void)
                 //CHECK_VALUE(data[pos+4], 0x00);  // 16-bit minutes in LL
                 CHECK_VALUE(data[pos+5], 0x00);
                 //CHECK_VALUE(data[pos+6], 0x0A);  // 16-bit VS count
-                CHECK_VALUE(data[pos+7], 0x00);
+                //CHECK_VALUE(data[pos+7], 0x00);  // We've actually seen someone with more than 255 VS in a night!
                 //CHECK_VALUE(data[pos+8], 0x01);  // 16-bit H count (partial)
                 CHECK_VALUE(data[pos+9], 0x00);
                 //CHECK_VALUE(data[pos+0xa], 0x00);  // 16-bit H count (partial)
@@ -3824,11 +3824,11 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
         switch (code) {
             case 0: // Device Mode
                 CHECK_VALUE(pos, 2);  // always first?
-                // TODO: We may need additional enums for these modes, the below are just a rough guess mapping for now.
+                // TODO: We probably need additional enums for these modes, the below are just a rough guess mapping for now.
                 switch (data[pos]) {
-                case 1: cpapmode = MODE_BILEVEL_FIXED; break;  // TODO This is marked "S - Bi-Flex" on reports.
-                case 2: cpapmode = MODE_ASV; break;  // TODO: This is marked as "S/T" on reports, is that spontaneous/timed? Pressure also seems variable!
-                case 4: cpapmode = MODE_AVAPS; break;  // "PC - AVAPS" on reports
+                case 1: cpapmode = MODE_BILEVEL_FIXED; break;  // "S" mode
+                case 2: cpapmode = MODE_ASV; break;  // "S/T" mode; pressure seems variable?
+                case 4: cpapmode = MODE_AVAPS; break;  // "PC" mode? Usually "PC - AVAPS", see setting 1 below
                 default:
                     UNEXPECTED_VALUE(data[pos], "known device mode");
                     break;
@@ -3836,10 +3836,9 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 break;
             case 1: // ???
-                if (cpapmode == MODE_AVAPS) {
-                    CHECK_VALUE(data[pos], 2);  // 2 when in AVAPS
-                } else {
-                    CHECK_VALUES(data[pos], 0, 1);  // 1 when in S - Bi-Flex, 0 when in S/T
+                // How do these interact with the mode above?
+                if (data[pos] != 2) {  // 2 = AVAPS: usually "PC - AVAPS", sometimes "S/T - AVAPS"
+                    CHECK_VALUES(data[pos], 0, 1);  // 0 = None, 1 = Bi-Flex
                 }
                 break;
             case 2: // ???
@@ -3864,7 +3863,8 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_ipap, GAIN));
                 break;
             case 0x19:  // Tidal Volume (AVAPS)
-                CHECK_VALUE(data[pos], 47);  // gain 10.0
+                //CHECK_VALUE(data[pos], 47);  // gain 10.0
+                // TODO: add a setting for this
                 break;
             case 0x1e:  // Backup rate (S/T and AVAPS)
                 CHECK_VALUES(cpapmode, MODE_ASV, MODE_AVAPS);
