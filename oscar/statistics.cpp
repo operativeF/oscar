@@ -17,6 +17,7 @@
 #include <QPainter>
 #include <QMainWindow>
 #include <QProgressDialog>
+#include <QElapsedTimer>
 
 #include "mainwindow.h"
 #include "statistics.h"
@@ -159,7 +160,18 @@ bool rxAHILessThan(const RXItem * rx1, const RXItem * rx2)
 
 void Statistics::updateRXChanges()
 {
-//    qDebug() << "updateRXChanges called";
+    // We may want a progress bar.  Start time to see how long it is taking.
+    QProgressDialog * progress = nullptr;
+    int lastPctDone = 0;
+    bool showProgress = false;
+    QElapsedTimer timer;
+    timer.start();
+    int numDays = p_profile->daylist.count();
+    int daysProcessed = 0;
+    int timerLimit = 2000;  // If it takes 2 seconds for less than half the work, we will start a progress bar
+    bool timeChecked = false;
+    qDebug() << "UpdateRXChanges called for" << numDays << "days";
+
     rxitems.clear();
 
     // Read the cache from disk
@@ -174,23 +186,6 @@ void Statistics::updateRXChanges()
 
 
     quint64 tmp;
-
-    int numDays = p_profile->daylist.count();
-    int daysProcessed = 0;
-    int lastPctDone = 0;
-    bool showProgress = (numDays > 180);  // Show progress dialog if more than about 6 months of data
-
-    QProgressDialog * progress = nullptr;
-
-    if (showProgress) {  // arbitrary guess about when we should bother with a progress dialog
-        progress = new QProgressDialog(QObject::tr("Updating Statistics cache"),
-                                QString(), 0, numDays, 0,
-                                Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
-        progress->setValue(0);
-        progress->setMinimumWidth(250);
-        progress->show();
-//        qDebug() << "Updating statistics rx cache dialog shown";
-    }
 
     // Scan through each daylist in ascending date order
     for (it = p_profile->daylist.begin(); it != it_end; ++it) {
@@ -499,9 +494,28 @@ void Statistics::updateRXChanges()
             rxitems.insert(date, rx);
         }
 
-        // Update progress bar every percent change
+        daysProcessed++;
+
+        // See if it is time to show a progress bar: we don't have a progress bar, we haven't checked the timer yet
+        if (!progress && !timeChecked && (timer.elapsed() > timerLimit)) {
+            timeChecked = true;  // Flag to prevent future calls to timer
+            {
+                qDebug() << "updateRXChanges starting progress bar with" << daysProcessed << "days processed of" << numDays << "total";
+                progress = new QProgressDialog(QObject::tr("Updating Statistics cache"),
+                                        QString(), 0, numDays, 0,
+                                        Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
+                progress->setValue(0);
+                progress->setMinimumWidth(250);
+                progress->show();
+                numDays -= daysProcessed;       // numDays now is number of days to go
+                daysProcessed = 1;              // None processed yet for remaining days
+                QCoreApplication::processEvents();
+                showProgress = true;
+            }
+        }
+
+        // Update progress bar if one is displayed
         if (showProgress) {
-            daysProcessed++;
             int pctDone = (100 * daysProcessed) / numDays;
             if (pctDone != lastPctDone) {
                 lastPctDone = pctDone;
@@ -514,9 +528,8 @@ void Statistics::updateRXChanges()
     // Store RX cache to disk
     saveRXChanges();
 
-
-    if (showProgress)
-        progress->setValue(numDays);  // Force progress bar to stop
+    if (showProgress)      // Force progress bar to stop (if we have a progress bar)
+        progress->setValue(numDays);
 
     // Now do the setup for the best worst highlighting
     QList<RXItem *> list;
