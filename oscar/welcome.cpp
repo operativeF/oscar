@@ -198,11 +198,12 @@ QString Welcome::GenerateCPAPHTML()
 
             int averagedays = 7; // how many days to look back
 
-            QDate starttime = date.addDays(-(averagedays-1));
+            QDate starttime = date.addDays(-averagedays);
+            QDate endtime = date.addDays(-1);
 
 
             EventDataType ahi = (day->count(CPAP_Obstructive) + day->count(CPAP_Hypopnea) + day->count(CPAP_ClearAirway) + day->count(CPAP_Apnea)) / hours;
-            EventDataType ahidays = calcAHI(starttime, date);
+            EventDataType ahidays = calcAHI(starttime, endtime);
 
             const QString under = tr("under");
             const QString over = tr("over");
@@ -261,7 +262,7 @@ QString Welcome::GenerateCPAPHTML()
             //EventDataType leaks = 1.0/hours * lat;
 
             EventDataType leak = day->avg(CPAP_Leak);
-            EventDataType leakdays = p_profile->calcAvg(CPAP_Leak, MT_CPAP, starttime, date);
+            EventDataType leakdays = p_profile->calcAvg(CPAP_Leak, MT_CPAP, starttime, endtime);
 
             if ((leak < leakdays) && ((leakdays - leak) >= 0.1)) {
                 comp = under;
