@@ -1300,6 +1300,13 @@ void MainWindow::on_action_Reset_Graph_Layout_triggered()
     if (overview && (ui->tabWidget->currentWidget() == overview)) { overview->ResetGraphLayout(); }
 }
 
+void MainWindow::on_action_Reset_Graph_Order_triggered()
+{
+    if (daily && (ui->tabWidget->currentWidget() == daily)) { daily->ResetGraphOrder(); }
+
+    if (overview && (ui->tabWidget->currentWidget() == overview)) { overview->ResetGraphOrder(); }
+}
+
 void MainWindow::on_action_Preferences_triggered()
 {
     if (!p_profile) {

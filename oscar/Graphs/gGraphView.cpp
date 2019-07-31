@@ -3287,6 +3287,14 @@ void gGraphView::timedRedraw(int ms)
     timer->setSingleShot(true);
     timer->start(ms);
 }
+
+void gGraphView::deselect()
+{
+    for (auto & graph : m_graphs) {
+        if (graph) graph->deselect();
+    }
+}
+
 void gGraphView::resetLayout()
 {
     int default_height = AppSetting->graphHeight();
@@ -3298,11 +3306,13 @@ void gGraphView::resetLayout()
     updateScale();
     timedRedraw(0);
 }
-void gGraphView::deselect()
-{
-    for (auto & graph : m_graphs) {
-        if (graph) graph->deselect();
-    }
+// Reset order of current graphs to match defaults
+void gGraphView::resetGraphOrder() {
+   m_graphs = m_default_graphs;
+}
+
+void gGraphView::SaveDefaultSettings() {
+    m_default_graphs = m_graphs;
 }
 
 const quint32 gvmagic = 0x41756728;

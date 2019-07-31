@@ -373,6 +373,12 @@ class gGraphView
     //! \brief Loads the current graph order, heights, min & max Y values from disk
     bool LoadSettings(QString title);
 
+    //! \brief Saves the current (initial) graph order, heights, min & Max Y values for future recovery
+    void SaveDefaultSettings();
+
+    //! \brief Reset the current graph order, heights, min & max Y values to match default values
+    void resetGraphOrder();
+
     //! \brief Returns the graph object matching the supplied name, nullptr if it does not exist.
     gGraph *findGraph(QString name);
 
@@ -605,6 +611,9 @@ class gGraphView
 
     //! \brief List of all graphs contained, indexed by title
     QHash<QString, gGraph *> m_graphsbyname;
+
+    //! \brief List of initial settings of all graphs contained in this area
+    QList<gGraph *> m_default_graphs;
 
     //! \variable Vertical scroll offset (adjusted when scrollbar gets moved)
     int m_offsetY;

@@ -2836,6 +2836,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_Fullscreen"/>
     <addaction name="action_Screenshot"/>
     <addaction name="separator"/>
+    <addaction name="action_Reset_Graph_Order"/>
     <addaction name="action_Reset_Graph_Layout"/>
     <addaction name="separator"/>
     <addaction name="actionLine_Cursor"/>
@@ -3007,7 +3008,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_Reset_Graph_Layout">
    <property name="text">
-    <string>&amp;Reset Graph Layout</string>
+    <string>Reset Graph &amp;Heights</string>
    </property>
    <property name="toolTip">
     <string>Reset sizes of graphs</string>
@@ -3228,6 +3229,14 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="action_Reset_Graph_Order">
+   <property name="text">
+    <string>&amp;Reset Graphs</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset order of graphs page to initial order</string>
    </property>
   </action>
  </widget>

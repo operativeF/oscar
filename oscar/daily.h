@@ -60,11 +60,17 @@ public:
     /*! \fn ReloadGraphs()
         \brief Reload all graph information from disk and updates the view.
         */
+
     void ReloadGraphs();
     /*! \fn ResetGraphLayout()
         \brief Resets all graphs in the main gGraphView back to constant heights.
         */
     void ResetGraphLayout();
+
+    /*! \fn ResetGraphOrder()
+        \brief Resets all graphs in the main gGraphView back to their initial order.
+        */
+    void ResetGraphOrder();
 
     /*! \fn updateLeftSidebar()
         /brief Updtes left sidebar to reflect changes in pie chart visibility
@@ -342,7 +348,7 @@ private:
 
     bool ZombieMeterMoved;
     bool BookmarksChanged;
-};
 
+};
 
 #endif // DAILY_H

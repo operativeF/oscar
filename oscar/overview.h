@@ -55,6 +55,11 @@ class Overview : public QWidget
     //! \brief Reset graphs to uniform heights
     void ResetGraphLayout();
 
+    /*! \fn ResetGraphOrder()
+        \brief Resets all graphs in the main gGraphView back to their initial order.
+        */
+    void ResetGraphOrder();
+
     //! \brief Calls updateGL to redraw the overview charts
     void RedrawGraphs();
 

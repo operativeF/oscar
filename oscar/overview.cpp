@@ -121,6 +121,7 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     icon_off = new QIcon(":/icons/session-off.png");
 
     GraphView->resetLayout();
+    GraphView->SaveDefaultSettings();
     GraphView->LoadSettings("Overview"); //no trans
 
     GraphView->setEmptyImage(QPixmap(":/icons/logo-md.png"));
@@ -413,6 +414,12 @@ void Overview::on_toolButton_clicked()
 void Overview::ResetGraphLayout()
 {
     GraphView->resetLayout();
+}
+
+void Overview::ResetGraphOrder()
+{
+    GraphView->resetGraphOrder();
+    ResetGraphLayout();
 }
 
 void Overview::on_rangeCombo_activated(int index)

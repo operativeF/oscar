@@ -200,20 +200,20 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
 
     int cpapsize = sizeof(cpapcodes) / sizeof(ChannelID);
 
-    ChannelID oxicodes[] = {
-        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
-    };
-    int oxisize = sizeof(oxicodes) / sizeof(ChannelID);
-
-
     for (int i=0; i < cpapsize; ++i) {
         ChannelID code = cpapcodes[i];
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
     }
 
+    ChannelID oximetercodes[] = {
+        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
+    };
+
+    int oxisize = sizeof(oximetercodes) / sizeof(ChannelID);
+
     //int oxigrp=p_profile->ExistsAndTrue("SyncOximetry") ? 0 : 1; // Contemplating killing this setting...
     for (int i=0; i < oxisize; ++i) {
-        ChannelID code = oxicodes[i];
+        ChannelID code = oximetercodes[i];
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
     }
 
@@ -444,6 +444,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     on_calButton_toggled(AppSetting->calendarVisible());
 
     GraphView->resetLayout();
+    GraphView->SaveDefaultSettings();
     GraphView->LoadSettings("Daily");
 
     connect(GraphView, SIGNAL(updateCurrentTime(double)), this, SLOT(on_LineCursorUpdate(double)));
@@ -848,6 +849,12 @@ void Daily::ResetGraphLayout()
 {
     GraphView->resetLayout();
 }
+void Daily::ResetGraphOrder()
+{
+    GraphView->resetGraphOrder();
+    ResetGraphLayout();
+}
+
 void Daily::graphtogglebutton_toggled(bool b)
 {
     Q_UNUSED(b)
