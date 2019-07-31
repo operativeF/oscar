@@ -851,7 +851,7 @@ void Daily::ResetGraphLayout()
 }
 void Daily::ResetGraphOrder()
 {
-    GraphView->resetGraphOrder();
+    GraphView->resetGraphOrder(true);
     ResetGraphLayout();
 }
 

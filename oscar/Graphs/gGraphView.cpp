@@ -3306,9 +3306,16 @@ void gGraphView::resetLayout()
     updateScale();
     timedRedraw(0);
 }
-// Reset order of current graphs to match defaults
-void gGraphView::resetGraphOrder() {
-   m_graphs = m_default_graphs;
+// Reset order of current graphs to match defaults, remove pinning
+void gGraphView::resetGraphOrder(bool pinFirst) {
+    m_graphs = m_default_graphs;
+    for (auto & graph : m_graphs) {
+        if (!graph) continue;
+        if (graph->isSnapshot()) continue;
+        graph->setPinned(false);
+    }
+    if (pinFirst)
+        m_graphs[0]->setPinned(true);
 }
 
 void gGraphView::SaveDefaultSettings() {

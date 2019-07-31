@@ -377,7 +377,7 @@ class gGraphView
     void SaveDefaultSettings();
 
     //! \brief Reset the current graph order, heights, min & max Y values to match default values
-    void resetGraphOrder();
+    void resetGraphOrder(bool pinFirst);
 
     //! \brief Returns the graph object matching the supplied name, nullptr if it does not exist.
     gGraph *findGraph(QString name);

@@ -418,7 +418,7 @@ void Overview::ResetGraphLayout()
 
 void Overview::ResetGraphOrder()
 {
-    GraphView->resetGraphOrder();
+    GraphView->resetGraphOrder(false);
     ResetGraphLayout();
 }
 
