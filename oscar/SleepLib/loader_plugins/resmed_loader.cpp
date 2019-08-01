@@ -1344,7 +1344,7 @@ void ResDayTask::run()
         for (int i=0;i<resday->str.maskon.size();++i) {
             quint32 maskon = resday->str.maskon[i];
             quint32 maskoff = resday->str.maskoff[i];
-            if ((maskon>0) && (maskoff>0)) {
+            if (((maskon>0) && (maskoff>0)) && (maskon != maskoff)) {   //ignore very short sessions
                 Session * sess = new Session(mach, maskon);
                 sess->set_first(quint64(maskon) * 1000L);
                 sess->set_last(quint64(maskoff) * 1000L);
