@@ -216,7 +216,7 @@ QString Welcome::GenerateCPAPHTML()
                 comp = under;
             } else if ((ahi > ahidays) && ((ahi - ahidays) >= 0.1)) {
                 comp = over;
-            } else if ((fabs(ahi > ahidays) >= 0.01) ) {
+            } else if ((fabs(ahi - ahidays) >= 0.01) ) {
                 comp = close;
             } else {
                 comp = equal;
