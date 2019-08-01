@@ -1594,8 +1594,8 @@ QString Statistics::UpdateRecordsBox()
                 tr("Date: %1 - %2").arg(rxbest.start.toString(Qt::SystemLocaleShortDate)).arg(rxbest.end.toString(Qt::SystemLocaleShortDate)) + "</a><br/>";
             html += QString("%1").arg(rxbest.machine->model()) + "<br/>";
             html += QString("Serial: %1").arg(rxbest.machine->serial()) + "<br/>";
-            html += tr("Culminative AHI: %1").arg(double(rxbest.ahi) / rxbest.hours, 0, 'f', 2) + "<br/>";
-            html += tr("Culminative Hours: %1").arg(rxbest.hours, 0, 'f', 2) + "<br/>";
+            html += tr("AHI: %1").arg(double(rxbest.ahi) / rxbest.hours, 0, 'f', 2) + "<br/>";
+            html += tr("Total Hours: %1").arg(rxbest.hours, 0, 'f', 2) + "<br/>";
             html += QString("%1").arg(rxbest.pressure) + "<br/>";
             html += QString("%1").arg(formatRelief(rxbest.relief)) + "<br/>";
             html += "<br/>";
@@ -1606,8 +1606,8 @@ QString Statistics::UpdateRecordsBox()
                     tr("Date: %1 - %2").arg(rxworst.start.toString(Qt::SystemLocaleShortDate)).arg(rxworst.end.toString(Qt::SystemLocaleShortDate)) + "</a><br/>";
             html += QString("%1").arg(rxworst.machine->model()) + "<br/>";
             html += QString("Serial: %1").arg(rxworst.machine->serial()) + "<br/>";
-            html += tr("Culminative AHI: %1").arg(double(rxworst.ahi) / rxworst.hours, 0, 'f', 2) + "<br/>";
-            html += tr("Culminative Hours: %1").arg(rxworst.hours, 0, 'f', 2) + "<br/>";
+            html += tr("AHI: %1").arg(double(rxworst.ahi) / rxworst.hours, 0, 'f', 2) + "<br/>";
+            html += tr("Total Hours: %1").arg(rxworst.hours, 0, 'f', 2) + "<br/>";
 
             html += QString("%1").arg(rxworst.pressure) + "<br/>";
             html += QString("%1").arg(formatRelief(rxworst.relief)) + "<br/>";
