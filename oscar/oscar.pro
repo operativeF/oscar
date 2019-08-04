@@ -231,6 +231,7 @@ lessThan(QT_MAJOR_VERSION,5)|lessThan(QT_MINOR_VERSION,12) {
 
 SOURCES += \
     common_gui.cpp \
+    cprogressbar.cpp \
     daily.cpp \
     exportcsv.cpp \
     main.cpp \
@@ -299,6 +300,7 @@ SOURCES += \
 
 HEADERS  += \
     common_gui.h \
+    cprogressbar.h \
     daily.h \
     exportcsv.h \
     mainwindow.h \
