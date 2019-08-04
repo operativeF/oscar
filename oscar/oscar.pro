@@ -450,6 +450,15 @@ DISTFILES += help/default.css \
     help/index.qhcp
 }
 
+# Create a debug GUI build by adding "CONFIG+=debug" to your qmake command
+debug {
+    !win32 {  # add memory checking on Linux and macOS debug builds
+        QMAKE_CFLAGS += -g -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
+        QMAKE_CXXFLAGS += -g -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
+        QMAKE_LFLAGS += -fsanitize=address
+    }
+}
+
 # Turn on unit testing by adding "CONFIG+=test" to your qmake command
 test {
     TARGET = test
