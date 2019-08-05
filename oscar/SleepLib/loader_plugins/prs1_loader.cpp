@@ -2984,7 +2984,7 @@ bool PRS1Import::ParseF0Events()
 }
 
 
-bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
+bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 {
     unsigned char code=0;
 
@@ -3209,6 +3209,168 @@ bool PRS1DataChunk::ParseEventsF0(CPAPMode mode)
     this->duration = t;
 
     return true;
+}
+
+
+// DreamStation family 0 CPAP/APAP machines (400X-700X)
+// Originally derived from F5V3 parsing + (incomplete/broken) F0V234 parsing + sample data
+bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
+{
+    if (this->family != 0 || this->familyVersion != 6) {
+        qWarning() << "ParseEventsF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
+    const unsigned char * data = (unsigned char *)this->m_data.constData();
+    int chunk_size = this->m_data.size();
+    static const int minimum_sizes[] = { 2, 3, 4, 3, 3, 3, 3, 3, 3, 2, 3, 4, 3, 2, 5, 5, 5, 5, 4, 3, 3, 3 };
+    static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
+
+    if (chunk_size < 1) {
+        // This does occasionally happen.
+        qDebug() << this->sessionid << "Empty event data";
+        return false;
+    }
+
+    bool ok = true;
+    int pos = 0, startpos;
+    int code, size;
+    int t = 0;
+    //int elapsed, duration;
+    do {
+        code = data[pos++];
+        if (!this->hblock.contains(code)) {
+            qWarning() << this->sessionid << "missing hblock entry for event" << code;
+            ok = false;
+            break;
+        }
+        size = this->hblock[code];
+        if (code < ncodes) {
+            // make sure the handlers below don't go past the end of the buffer
+            if (size < minimum_sizes[code]) {
+                qWarning() << this->sessionid << "event" << code << "too small" << size << "<" << minimum_sizes[code];
+                ok = false;
+                break;
+            }
+        } // else if it's past ncodes, we'll log its information below (rather than handle it)
+        if (pos + size > chunk_size) {
+            qWarning() << this->sessionid << "event" << code << "@" << pos << "longer than remaining chunk";
+            ok = false;
+            break;
+        }
+        startpos = pos;
+        t += data[pos] | (data[pos+1] << 8);
+        pos += 2;
+
+        switch (code) {
+            /*
+            case 1:  // Pressure adjustment
+                // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
+                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                break;
+            case 2:  // Timed Breath
+                // TB events have a duration in 0.1s, based on the review of pressure waveforms.
+                // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
+                // currently assume integer seconds rather than ms, so that's done at import.
+                duration = data[pos++];
+                this->AddEvent(new PRS1TimedBreathEvent(t, duration));
+                break;
+            case 3:  // Statistics
+                // These appear every 2 minutes, so presumably summarize the preceding period.
+                this->AddEvent(new PRS1IPAPEvent(t, data[pos++], GAIN));               // 00=IPAP (average?)
+                this->AddEvent(new PRS1IPAPLowEvent(t, data[pos++], GAIN));            // 01=IAP Low
+                this->AddEvent(new PRS1IPAPHighEvent(t, data[pos++], GAIN));           // 02=IAP High
+                this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));                // 03=Total leak (average?)
+                this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos++]));          // 04=Breaths Per Minute (average?)
+                this->AddEvent(new PRS1PatientTriggeredBreathsEvent(t, data[pos++]));  // 05=Patient Triggered Breaths (average?)
+                this->AddEvent(new PRS1MinuteVentilationEvent(t, data[pos++]));        // 06=Minute Ventilation (average?)
+                this->AddEvent(new PRS1TidalVolumeEvent(t, data[pos++]));              // 07=Tidal Volume (average?)
+                this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));                    // 08=Snore count  // TODO: not a VS on official waveform, but appears in flags and contributes to overall VS index
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));               // 09=EPAP (average? see event 1 above)
+                this->AddEvent(new PRS1LeakEvent(t, data[pos++]));                     // 0A=Leak (average?)
+                break;
+            case 0x04:  // Pressure Pulse
+                duration = data[pos++];  // TODO: is this a duration?
+                this->AddEvent(new PRS1PressurePulseEvent(t, duration));
+                break;
+            case 0x05:  // Obstructive Apnea
+                // OA events are instantaneous flags with no duration: reviewing waveforms
+                // shows that the time elapsed between the flag and reporting often includes
+                // non-apnea breathing.
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1ObstructiveApneaEvent(t - elapsed, 0));
+                break;
+            case 0x06:  // Clear Airway Apnea
+                // CA events are instantaneous flags with no duration: reviewing waveforms
+                // shows that the time elapsed between the flag and reporting often includes
+                // non-apnea breathing.
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1ClearAirwayEvent(t - elapsed, 0));
+                break;
+            case 0x07:  // Hypopnea
+                // TODO: How is this hypopnea different from events 0xd and 0xe?
+                // TODO: What is the first byte?
+                pos++;  // unknown first byte?
+                elapsed = data[pos++];  // based on sample waveform, the hypopnea is over after this
+                this->AddEvent(new PRS1HypopneaEvent(t - elapsed, 0));
+                break;
+            case 0x08:  // Flow Limitation
+                // TODO: We should revisit whether this is elapsed or duration once (if)
+                // we start calculating flow limitations ourselves. Flow limitations aren't
+                // as obvious as OA/CA when looking at a waveform.
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1FlowLimitationEvent(t - elapsed, 0));
+                break;
+            case 0x09:  // Vibratory Snore
+                // VS events are instantaneous flags with no duration, drawn on the official waveform.
+                // The current thinking is that these are the snores that cause a change in auto-titrating
+                // pressure. The snoring statistic above seems to be a total count. It's unclear whether
+                // the trigger for pressure change is severity or count or something else.
+                // no data bytes
+                this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
+                break;
+            case 0x0a:  // Periodic Breathing
+                // PB events are reported some time after they conclude, and they do have a reported duration.
+                duration = 2 * (data[pos] | (data[pos+1] << 8));
+                pos += 2;
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));
+                break;
+            case 0x0b:  // Large Leak
+                // LL events are reported some time after they conclude, and they do have a reported duration.
+                duration = 2 * (data[pos] | (data[pos+1] << 8));
+                pos += 2;
+                elapsed = data[pos++];
+                this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
+                break;
+            case 0x0d:  // Hypopnea
+                // TODO: Why does this hypopnea have a different event code?
+                // fall through
+            case 0x0e:  // Hypopnea
+                // TODO: We should revisit whether this is elapsed or duration once (if)
+                // we start calculating hypopneas ourselves. Their official definition
+                // is 40% reduction in flow lasting at least 10s.
+                duration = data[pos++];
+                this->AddEvent(new PRS1HypopneaEvent(t - duration, 0));
+                break;
+            case 0x0f:
+                // TODO: some other pressure adjustment?
+                // Appears near the beginning and end of a session when Opti-Start is on, at least once in middle
+                //CHECK_VALUES(data[pos], 0x20, 0x28);
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                break;
+            */
+            default:
+                qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
+                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                break;
+        }
+        pos = startpos + size;
+    } while (ok && pos < chunk_size);
+
+    this->duration = t;
+
+    return ok;
 }
 
 
@@ -5130,7 +5292,11 @@ bool PRS1DataChunk::ParseEvents(CPAPMode mode)
     bool ok = false;
     switch (this->family) {
         case 0:
-            ok = this->ParseEventsF0(mode);
+            if (this->familyVersion == 6) {
+                ok = this->ParseEventsF0V6(mode);
+            } else if (this->familyVersion >= 2 && this->familyVersion <= 4) {
+                ok = this->ParseEventsF0V234(mode);
+            }
             break;
         case 3:
             if (this->familyVersion == 6) {
