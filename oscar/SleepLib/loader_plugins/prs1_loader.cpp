@@ -3258,16 +3258,18 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
             break;
         }
         startpos = pos;
-        t += data[pos] | (data[pos+1] << 8);
-        pos += 2;
+        if (code != 0x12) {  // TODO: Some events have no timestamp?
+            t += data[pos] | (data[pos+1] << 8);
+            pos += 2;
+        }
 
         switch (code) {
-            /*
             case 1:  // Pressure adjustment
+                // Matches pressure setting, both initial and when ramp button pressed.
                 // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
-                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++], GAIN));
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
                 break;
+            /*
             case 2:  // Timed Breath
                 // TB events have a duration in 0.1s, based on the review of pressure waveforms.
                 // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
@@ -3277,7 +3279,11 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 break;
             */
             case 0x11:  // Statistics
-                this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
+                this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));
+                this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));
+                // pressure? usually lower, but on a brief session was exactly set pressure
+                // also lower on session where pressure was at ramp most of the time
+                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
                 break;
             /*
             case 3:  // Statistics
@@ -3341,6 +3347,14 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
                 break;
             */
+            case 0x0e:  // ???
+                // 5 bytes like PB and LL, but what is it?
+                duration = 2 * (data[pos] | (data[pos+1] << 8));  // this looks like a 16-bit value, so may be duration like PB?
+                pos += 2;
+                elapsed = data[pos++];  // this is always 60 seconds unless it's at the end, so it seems like elapsed
+                CHECK_VALUES(elapsed, 60, 0);
+                //this->AddEvent(new PRS1PeriodicBreathingEvent(t - elapsed - duration, duration));
+                break;
             case 0x0f:  // Periodic Breathing
                 // PB events are reported some time after they conclude, and they do have a reported duration.
                 duration = 2 * (data[pos] | (data[pos+1] << 8));
@@ -3355,12 +3369,10 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
                 break;
-            /*
-            case 0x0d:  // Hypopnea
+            case 0x14:  // Hypopnea
                 // TODO: Why does this hypopnea have a different event code?
                 // fall through
-            */
-            case 0x14:  // Hypopnea
+            case 0x15:  // Hypopnea
                 // TODO: We should revisit whether this is elapsed or duration once (if)
                 // we start calculating hypopneas ourselves. Their official definition
                 // is 40% reduction in flow lasting at least 10s.
@@ -3375,6 +3387,12 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
                 break;
             */
+            case 0x12:  // Summary
+                CHECK_VALUE(data[pos], 0);
+                CHECK_VALUE(data[pos+1], 0x78);  // pressure?
+                //CHECK_VALUE(data[pos+2], 1);  // Total snore count
+                CHECK_VALUE(data[pos+3], 0);
+                break;
             default:
                 qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
