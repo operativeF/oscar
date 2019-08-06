@@ -450,8 +450,13 @@ DISTFILES += help/default.css \
     help/index.qhcp
 }
 
-# Create a debug GUI build by adding "CONFIG+=debug" to your qmake command
-debug {
+
+# Always treat warnings as errors, even (especially!) in release
+QMAKE_CFLAGS += -Werror
+QMAKE_CXXFLAGS += -Werror
+
+# Create a debug GUI build by adding "CONFIG+=memdebug" to your qmake command
+memdebug {
     !win32 {  # add memory checking on Linux and macOS debug builds
         QMAKE_CFLAGS += -g -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
         QMAKE_CXXFLAGS += -g -Werror -fsanitize=address -fno-omit-frame-pointer -fno-common -fsanitize-address-use-after-scope
