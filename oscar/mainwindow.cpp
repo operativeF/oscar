@@ -1221,7 +1221,7 @@ void MainWindow::updateFavourites()
                     if (notes.size() > 0) {
                         tmp += QString("<tr><td><b><a href='daily=%1'>%2</a></b><br/>")
                                .arg(date.toString(Qt::ISODate))
-                               .arg(date.toString());
+                               .arg(date.toString(MedDateFormat));
 
                         tmp += "<list>";
 

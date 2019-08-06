@@ -469,6 +469,7 @@ void Overview::on_rangeCombo_activated(int index)
 
     setRange(start, end);
 }
+
 void Overview::setRange(QDate start, QDate end)
 {
     ui->dateEnd->blockSignals(true);
@@ -481,7 +482,6 @@ void Overview::setRange(QDate start, QDate end)
     ui->dateStart->blockSignals(false);
     this->on_toolButton_clicked();
     updateGraphCombo();
-
 }
 
 void Overview::on_graphCombo_activated(int index)

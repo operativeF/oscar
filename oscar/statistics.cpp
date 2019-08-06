@@ -20,6 +20,7 @@
 #include "mainwindow.h"
 #include "statistics.h"
 #include "CProgressBar.h"
+#include "SleepLib/common.h"
 
 extern MainWindow *mainwin;
 
@@ -613,7 +614,7 @@ QString Statistics::getUserInfo () {
     if (!p_profile->user->firstName().isEmpty()) {
         userinfo = tr("Name: %1, %2").arg(p_profile->user->lastName()).arg(p_profile->user->firstName()) + "<br/>";
         if (!p_profile->user->DOB().isNull()) {
-            userinfo += tr("DOB: %1").arg(p_profile->user->DOB().toString()) + "<br/>";
+            userinfo += tr("DOB: %1").arg(p_profile->user->DOB().toString(MedDateFormat)) + "<br/>";
         }
         if (!p_profile->user->phone().isEmpty()) {
             userinfo += tr("Phone: %1").arg(p_profile->user->phone()) + "<br/>";
@@ -897,8 +898,10 @@ QString Statistics::GenerateMachineList()
                     .arg(m->model() +
                          (mn.isEmpty() ? "" : QString(" (") + mn + QString(")")))
                     .arg(m->serial())
-                    .arg(d1.toString(Qt::SystemLocaleShortDate))
-                    .arg(d2.toString(Qt::SystemLocaleShortDate));
+                    .arg(d1.toString(MedDateFormat))
+                    .arg(d2.toString(MedDateFormat));
+//            .arg(d1.toString(Qt::SystemLocaleShortDate))
+//            .arg(d2.toString(Qt::SystemLocaleShortDate));
 
         }
 
@@ -984,8 +987,8 @@ QString Statistics::GenerateRXChanges()
         double ahi = rdi ? (double(rx.rdi) / rx.hours) : (double(rx.ahi) /rx.hours);
         double fli = double(rx.count(CPAP_FlowLimit)) / rx. hours;
 
-        html += QString("<td>%1</td>").arg(rx.start.toString())+
-                QString("<td>%1</td>").arg(rx.end.toString())+
+        html += QString("<td>%1</td>").arg(rx.start.toString(MedDateFormat))+
+                QString("<td>%1</td>").arg(rx.end.toString(MedDateFormat))+
                 QString("<td>%1</td>").arg(rx.days)+
                 QString("<td>%1</td>").arg(ahi, 0, 'f', 2)+
                 QString("<td>%1</td>").arg(fli, 0, 'f', 2)+
@@ -1174,14 +1177,14 @@ QString Statistics::GenerateCPAPUsage()
                         arg(tr("%1 day of %2 Data on %3")
                             .arg(value)
                             .arg(machine)
-                            .arg(last.toString()));
+                            .arg(last.toString(MedDateFormat)));
             } else {
                 html+=QString("<tr><td colspan=%1 align=center>%2</td></tr>\n").arg(periods.size()+1).
                         arg(tr("%1 days of %2 Data, between %3 and %4")
                             .arg(value)
                             .arg(machine)
-                            .arg(first.toString())
-                            .arg(last.toString()));
+                            .arg(first.toString(MedDateFormat))
+                            .arg(last.toString(MedDateFormat)));
             }
             continue;
         } else if (row.calc == SC_SUBHEADING) {  // subheading..

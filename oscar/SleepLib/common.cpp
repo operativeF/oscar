@@ -37,8 +37,36 @@
 
 extern MainWindow * mainwin;
 
-// Used by internal settings
+QString MedDateFormat = "ddd MMM d yyyy";  // QT default value, which we override if we can
+bool dayFirst = false;
 
+// System locale and regional settings support only a "short" date (m/d/yyy) and a "long"
+// date (day of week, month, day, year -- all spelled out fully).  We get the formatting
+// for the long format, shorten day and month name, and remove excess commas.
+void SetDateFormat () {
+    QLocale sysLocale = QLocale::system();
+    QString dfmt = sysLocale.dateFormat();
+    qDebug() << "system locale date format" << dfmt;
+
+    QString s = dfmt.replace("dddd", "ddd");
+    if (!s.isEmpty()) s = s.replace("MMMM", "MMM");
+    if (!s.isEmpty()) s = s.replace(",", "");
+    if (!s.isEmpty()) {
+        QDate testDate (2018, 12, 31);
+        QString testresult = testDate.toString(s);
+        if (!testresult.isEmpty())  // make sure we can translate a date
+            MedDateFormat = s;     // If we can, save the format for future use
+    }
+
+    // Record whether month or day is first in the formatting
+    QString s2 = MedDateFormat;
+    s2 = s2.replace("ddd","");
+    int monthidx = s2.indexOf("MMM");
+    if (s2.indexOf("d") < monthidx)
+        dayFirst = true;
+
+    qDebug() << "shortened date format" << MedDateFormat << "dayFirst" << dayFirst;
+}
 
 const QString & gitRevision()
 {

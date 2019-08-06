@@ -346,6 +346,8 @@ int main(int argc, char *argv[]) {
     qDebug() << "OSCAR starting" << QDateTime::currentDateTime();
     qDebug().noquote() << STR_AppName << VersionString << relinfo << "Built with Qt" << QT_VERSION_STR << __DATE__ << __TIME__;
 
+    SetDateFormat();
+
     ////////////////////////////////////////////////////////////////////////////////////////////
     // Language Selection
     ////////////////////////////////////////////////////////////////////////////////////////////

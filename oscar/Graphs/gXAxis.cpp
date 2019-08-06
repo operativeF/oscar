@@ -13,6 +13,7 @@
 
 #include "Graphs/gXAxis.h"
 #include "SleepLib/profiles.h"
+#include "SleepLib/common.h"
 #include "Graphs/glcommon.h"
 #include "Graphs/gGraph.h"
 #include "Graphs/gGraphView.h"
@@ -303,7 +304,8 @@ void gXAxis::paint(QPainter &painter, gGraph &w, const QRegion &region)
                 //dt.toString("MMM dd");
 
                 // Doing it this way instead because it's MUUUUUUCH faster
-                tmpstr = QString("%1 %2").arg(months[date.month() - 1]).arg(date.day());
+                tmpstr = QString(dayFirst?"%1 %2":"%2 %1").arg(date.day()).arg(months[date.month() - 1]);
+
                 //} else if (fitmode==0) {
                 //            tmpstr=QString("%1 %2:%3").arg(dow[d]).arg(h,2,10,QChar('0')).arg(m,2,10,QChar('0'));
             } else if (fitmode == 1) { // minute
@@ -435,7 +437,7 @@ void gXAxisDay::paint(QPainter &painter, gGraph &graph, const QRegion &region)
         if ((lastx + barw) > (left + width + 1))
             break;
 
-        QString tmpstr = QString("%1 %2").arg(months[date.month() - 1]).arg(date.day(), 2, 10, QChar('0'));
+        QString tmpstr = QString(dayFirst?"%2 %1":"%1 %2").arg(months[date.month() - 1]).arg(date.day(), 2, 10, QChar('0'));
 
         float x1 = lastx + xpos;
         //lines.append(QLine(lastx, top, lastx, top+6));
