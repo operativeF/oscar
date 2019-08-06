@@ -455,6 +455,11 @@ DISTFILES += help/default.css \
 QMAKE_CFLAGS += -Werror
 QMAKE_CXXFLAGS += -Werror
 
+# Make deprecation warnings just warnings
+QMAKE_CFLAGS += -Wno-error=deprecated-declarations
+QMAKE_CXXFLAGS += -Wno-error=deprecated-declarations
+
+
 # Create a debug GUI build by adding "CONFIG+=memdebug" to your qmake command
 memdebug {
     !win32 {  # add memory checking on Linux and macOS debug builds
