@@ -5719,7 +5719,7 @@ PRS1DataChunk* PRS1DataChunk::ParseNext(QFile & f)
             int sessionid_base = (chunk->fileVersion == 2 ? 10 : 16);
             if (chunk->family == 3 && chunk->familyVersion >= 3) sessionid_base = 16;
             QString session_s = fi.fileName().section(".", 0, -2);
-            quint32 sid = session_s.toInt(&numeric, sessionid_base);
+            qint32 sid = session_s.toInt(&numeric, sessionid_base);
             if (!numeric || sid != chunk->sessionid) {
                 qDebug() << chunk->m_path << chunk->sessionid;
             }

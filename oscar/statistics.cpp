@@ -19,7 +19,7 @@
 
 #include "mainwindow.h"
 #include "statistics.h"
-#include "cprogressBar.h"
+#include "cprogressbar.h"
 #include "SleepLib/common.h"
 
 extern MainWindow *mainwin;
