@@ -3275,20 +3275,23 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 // subsequent "adjustment" of 7.3 at 30:09 followed by 8.0 at 30:19.
                 this->AddEvent(new PRS1CPAPEvent(t, data[pos++]));
                 break;
-            /*
-            case 2:  // Timed Breath
-                // TB events have a duration in 0.1s, based on the review of pressure waveforms.
-                // TODO: Ideally the starting time here would be adjusted here, but PRS1ParsedEvents
-                // currently assume integer seconds rather than ms, so that's done at import.
-                duration = data[pos++];
-                this->AddEvent(new PRS1TimedBreathEvent(t, duration));
+            case 2:  // Pressure adjustment (bi-level)
+                // TODO: Have OSCAR treat pressure adjustment events differently than (average?) stats below.
+                // See notes above on interpolation.
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
+                this->AddEvent(new PRS1IPAPEvent(t, data[pos++]));
                 break;
-            */
+            case 3:  // Pressure adjustment? (auto-CPAP)
+                // This seems to correspond to the minimum auto-CPAP pressure setting, and
+                // seems to stay fixed throughout the session.
+                //this->AddEvent(new PRS1CPAPEvent(t, data[pos]));
+                break;
             case 0x11:  // Statistics
                 this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));
                 this->AddEvent(new PRS1SnoreEvent(t, data[pos++]));
-                // pressure? usually lower, but on a brief session was exactly set pressure
-                // also lower on session where pressure was at ramp most of the time
+                // Average pressure: this reads lower than the current CPAP set point when
+                // a flex mode is on, and exactly the current CPAP set point when off. For
+                // bi-level it's presumably an average of the actual pressures.
                 //this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
                 break;
             /*
@@ -3398,7 +3401,9 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 // Some sessions (with lots of ramps) have multiple of these, each with a
                 // different pressure. The total snore count across all of them matches the
                 // total found in the stats event.
-                CHECK_VALUE(data[pos], 0);
+                if (data[pos] != 0) {
+                    CHECK_VALUES(data[pos], 1, 2);  // 0 = CPAP pressure, 1 = bi-level EPAP, 2 = bi-level IPAP
+                }
                 //CHECK_VALUE(data[pos+1], 0x78);  // pressure
                 //CHECK_VALUE(data[pos+2], 1);  // 16-bit snore count
                 //CHECK_VALUE(data[pos+3], 0);
