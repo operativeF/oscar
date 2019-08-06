@@ -3267,8 +3267,13 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
         switch (code) {
             case 1:  // Pressure adjustment
                 // Matches pressure setting, both initial and when ramp button pressed.
-                // TODO: Have OSCAR treat EPAP adjustment events differently than (average?) stats below.
-                //this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
+                // TODO: Have OSCAR treat CPAP adjustment events differently than (average?) stats below.
+                // TODO: Based on waveform reports, it looks like the pressure graph is drawn by
+                // interpolating between these pressure adjustments, by 0.5 cmH2O spaced evenly between
+                // adjustments. E.g. 6 at 28:11 and 7.3 at 29:05 results in the following dots:
+                // 6 at 28:11, 6.5 around 28:30, 7.0 around 28:50, 7(.3) at 29:05. That holds until
+                // subsequent "adjustment" of 7.3 at 30:09 followed by 8.0 at 30:19.
+                this->AddEvent(new PRS1CPAPEvent(t, data[pos++]));
                 break;
             /*
             case 2:  // Timed Breath
@@ -3331,15 +3336,14 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 elapsed = data[pos++];  // based on sample waveform, the hypopnea is over after this
                 this->AddEvent(new PRS1HypopneaEvent(t - elapsed, 0));
                 break;
-            /*
-            case 0x08:  // Flow Limitation
+            case 0x0c:  // Flow Limitation
                 // TODO: We should revisit whether this is elapsed or duration once (if)
                 // we start calculating flow limitations ourselves. Flow limitations aren't
                 // as obvious as OA/CA when looking at a waveform.
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1FlowLimitationEvent(t - elapsed, 0));
                 break;
-            case 0x09:  // Vibratory Snore
+            case 0x0d:  // Vibratory Snore
                 // VS events are instantaneous flags with no duration, drawn on the official waveform.
                 // The current thinking is that these are the snores that cause a change in auto-titrating
                 // pressure. The snoring statistic above seems to be a total count. It's unclear whether
@@ -3347,7 +3351,6 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 // no data bytes
                 this->AddEvent(new PRS1VibratorySnoreEvent(t, 0));
                 break;
-            */
             case 0x0e:  // ???
                 // 5 bytes like PB and LL, but what is it?
                 duration = 2 * (data[pos] | (data[pos+1] << 8));  // this looks like a 16-bit value, so may be duration like PB?
@@ -3370,6 +3373,9 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 elapsed = data[pos++];
                 this->AddEvent(new PRS1LargeLeakEvent(t - elapsed - duration, duration));
                 break;
+            case 0x0a:  // Hypopnea
+                // TODO: Why does this hypopnea have a different event code?
+                // fall through
             case 0x14:  // Hypopnea
                 // TODO: Why does this hypopnea have a different event code?
                 // fall through
@@ -3388,11 +3394,14 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 this->AddEvent(new PRS1UnknownDataEvent(m_data, startpos-1, size+1));
                 break;
             */
-            case 0x12:  // Summary
+            case 0x12:  // Snore count per pressure
+                // Some sessions (with lots of ramps) have multiple of these, each with a
+                // different pressure. The total snore count across all of them matches the
+                // total found in the stats event.
                 CHECK_VALUE(data[pos], 0);
-                CHECK_VALUE(data[pos+1], 0x78);  // pressure?
-                //CHECK_VALUE(data[pos+2], 1);  // Total snore count
-                CHECK_VALUE(data[pos+3], 0);
+                //CHECK_VALUE(data[pos+1], 0x78);  // pressure
+                //CHECK_VALUE(data[pos+2], 1);  // 16-bit snore count
+                //CHECK_VALUE(data[pos+3], 0);
                 break;
             default:
                 qWarning() << "Unknown event:" << code << "in" << this->sessionid << "at" << startpos-1;
