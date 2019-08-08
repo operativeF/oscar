@@ -69,11 +69,7 @@ struct ValueCount {
     ValueCount( EventDataType val, qint64 cnt, double pp)
         :value(val), count(cnt), p(pp) {}
 
-    ValueCount(const ValueCount &copy) {
-        value = copy.value;
-        count = copy.count;
-        p = copy.p;
-    }
+    ValueCount(const ValueCount &copy) = default;
     EventDataType value;
     qint64 count;
     double p;

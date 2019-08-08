@@ -22,18 +22,7 @@ struct PressureInfo
         peaktime = peakevents = 0;
         min_pressure = max_pressure = 0;
     }
-    PressureInfo(PressureInfo &copy) {
-        code = copy.code;
-        minx = copy.minx;
-        maxx = copy.maxx;
-        peaktime = copy.peaktime;
-        peakevents = copy.peakevents;
-        min_pressure = copy.min_pressure;
-        max_pressure = copy.max_pressure;
-        times = copy.times;
-        events = copy.events;
-        chans = copy.chans;
-    }
+    PressureInfo(PressureInfo &copy) = default;
 
     PressureInfo(ChannelID code, qint64 minx, qint64 maxx) : code(code), minx(minx), maxx(maxx)
     {
