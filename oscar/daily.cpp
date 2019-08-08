@@ -583,7 +583,7 @@ void Daily::ReloadGraphs()
     ui->calendar->setSelectedDate(d);
     ui->calendar->blockSignals(false);
     Load(d);
-    ui->calButton->setText(ui->calendar->selectedDate().toString(Qt::TextDate));
+    ui->calButton->setText(ui->calendar->selectedDate().toString(MedDateFormat));
     graphView()->redraw();
 //    qDebug() << "Finished ReloadGraphs in Daily object";
 //    sleep(3);
@@ -826,7 +826,7 @@ void Daily::on_ReloadDay()
 
     //GraphView->fadeIn(fadedir);
     GraphView->redraw();
-    ui->calButton->setText(ui->calendar->selectedDate().toString(Qt::TextDate));
+    ui->calButton->setText(ui->calendar->selectedDate().toString(MedDateFormat));
     ui->calendar->setFocus(Qt::ActiveWindowFocusReason);
 
     if (p_profile->general->unitSystem()==US_English) {
