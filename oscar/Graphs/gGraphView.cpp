@@ -3239,7 +3239,6 @@ void gGraphView::keyPressEvent(QKeyEvent *event)
     //qDebug() << "Keypress??";
 }
 
-
 void gGraphView::setDay(Day *day)
 {
 
@@ -3251,6 +3250,7 @@ void gGraphView::setDay(Day *day)
 
     ResetBounds(false);
 }
+
 bool gGraphView::isEmpty()
 {
     bool res = true;
