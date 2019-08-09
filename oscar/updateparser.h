@@ -43,14 +43,7 @@ class Update
   */
 struct Release {
     Release() {}
-    Release(const Release &copy) {
-        version = copy.version;
-        codename = copy.version;
-        notes = copy.notes;
-        info_url = copy.info_url;
-        status = copy.status;
-        updates = copy.updates;
-    }
+    Release(const Release &copy) = default;
 
     Release(QString ver, QString code, UpdateStatus stat) { version = ver; codename = code; status = stat; }
     QString version;
@@ -94,26 +87,7 @@ class UpdateParser: public QXmlDefaultHandler
 class PackageUpdate {
 public:
     PackageUpdate() {}
-    PackageUpdate(const PackageUpdate & copy) {
-        // Seriously, why do I still have to do this crud by hand
-        // Where is the shortcut to save time here in the latest C++ extensions?
-        name = copy.name;
-        displayName = copy.displayName;
-        description = copy.description;
-        versionString = copy.versionString;
-        releaseDate = copy.releaseDate;
-        defaultInstall = copy.defaultInstall;
-        installScript = copy.installScript;
-        dependencies = copy.dependencies;
-        script = copy.script;
-        forcedInstall = copy.forcedInstall;
-        downloadArchives = copy.downloadArchives;
-        license = copy.license;
-        sha1 = copy.sha1;
-        compressedSize = copy.compressedSize;
-        uncompressedSize = copy.uncompressedSize;
-        os = copy.os;
-    }
+    PackageUpdate(const PackageUpdate & copy) = default;
 
     QString name;
     QString displayName;
