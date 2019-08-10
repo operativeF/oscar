@@ -1559,12 +1559,14 @@ QString gGraphView::getRangeString()
 
     QDate std = st.date();
     QDate etd = et.date();
+
     // Format if Begin and End are on different days
     if (std != etd) {
         QString txt = st.toString(" d MMM [ HH:mm:ss") + " - " +  et.toString("HH:mm:ss ] d MMM yyyy");
         return txt;
     }
 
+    // Range is within one (local) day
     qint64 diff = m_maxx - m_minx;
     QString fmt;
 
