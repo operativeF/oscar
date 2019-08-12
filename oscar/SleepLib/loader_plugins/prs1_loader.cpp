@@ -3446,7 +3446,7 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
             case 1:  // Pressure adjustment
                 // Matches pressure setting, both initial and when ramp button pressed.
                 // TODO: Have OSCAR treat CPAP adjustment events differently than (average?) stats below.
-                // TODO: Based on waveform reports, it looks like the pressure graph is drawn by
+                // Based on waveform reports, it looks like the pressure graph is drawn by
                 // interpolating between these pressure adjustments, by 0.5 cmH2O spaced evenly between
                 // adjustments. E.g. 6 at 28:11 and 7.3 at 29:05 results in the following dots:
                 // 6 at 28:11, 6.5 around 28:30, 7.0 around 28:50, 7(.3) at 29:05. That holds until
@@ -3457,12 +3457,13 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 // TODO: Have OSCAR treat pressure adjustment events differently than (average?) stats below.
                 // See notes above on interpolation.
                 this->AddEvent(new PRS1IPAPEvent(t, data[pos+1]));
-                this->AddEvent(new PRS1EPAPEvent(t, data[pos]));
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos]));  // EPAP needs to be added second to calculate PS
                 break;
             case 3:  // Pressure adjustment? (auto-CPAP)
                 // This seems to correspond to the minimum auto-CPAP pressure setting, and
                 // seems to stay fixed throughout the session.
                 //this->AddEvent(new PRS1CPAPEvent(t, data[pos]));
+                CHECK_VALUE(data[pos++], 4);
                 break;
             case 0x11:  // Statistics
                 this->AddEvent(new PRS1TotalLeakEvent(t, data[pos++]));
@@ -3470,6 +3471,7 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 // Average pressure: this reads lower than the current CPAP set point when
                 // a flex mode is on, and exactly the current CPAP set point when off. For
                 // bi-level it's presumably an average of the actual pressures.
+                // TODO: What to do with this average pressure? Actual pressure adjustments are handled above.
                 //this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
                 break;
             /*
