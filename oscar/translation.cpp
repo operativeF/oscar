@@ -50,7 +50,7 @@ void initTranslations()
     langNames["en_UK"] = "English (UK)";
     langNames["nl"] = "Nederlands";
     langNames["pt_BR"] = "Portugues (BR)";
-    langNames["ro"] = "Romanian";
+    langNames["ro"] = "Românește";
 
     langNames[DefaultLanguage]="English (US)";
 
@@ -176,7 +176,7 @@ void initTranslations()
         QString qtLang = language.left(2);
         if ( qtLang.compare("zh") == 0 )
             qtLang.append("_CN");
-        qDebug() << "Loading" << langname << "translation" << "qt_" + qtLang + ".qm" << "from" << qtLangPath.toLocal8Bit().data();
+        qDebug() << "Loading" << langname << "QT translation" << "qt_" + qtLang + ".qm" << "from" << qtLangPath.toLocal8Bit().data();
         QTranslator * qtranslator = new QTranslator();
 
         if (!langfile.isEmpty() && !qtranslator->load("qt_" + qtLang + ".qm", qtLangPath)) {
@@ -186,7 +186,7 @@ void initTranslations()
         qApp->installTranslator(qtranslator);
 
         // Install OSCAR translation files
-        qDebug() << "Loading" << langname << "translation" << langfile.toLocal8Bit().data() << "from" << langpath.toLocal8Bit().data();
+        qDebug() << "Loading" << langname << "OSCAR translation" << langfile.toLocal8Bit().data() << "from" << langpath.toLocal8Bit().data();
         QTranslator * translator = new QTranslator();
 
         if (!langfile.isEmpty() && !translator->load(langfile, langpath)) {
