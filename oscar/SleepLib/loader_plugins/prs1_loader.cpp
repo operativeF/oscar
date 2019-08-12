@@ -2817,7 +2817,6 @@ void SmoothEventList(Session * session, EventList * ev, ChannelID code)
 
 
 // 750P is F0V2; 550P is F0V2/F0V3; 450P is F0V3; 460P, 560P[BT], 660P, 760P are F0V4
-// 200X, 400X, 400G, 500X, 502G, 600X, 700X are F0V6
 bool PRS1Import::ParseF0Events()
 {
     // Required channels
@@ -3208,6 +3207,175 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
         }
     }
     this->duration = t;
+
+    return true;
+}
+
+
+// 200X, 400X, 400G, 500X, 502G, 600X, 700X are F0V6
+// Originally a copy of PRS1Import::ParseF0Events, modified based on F5V3/F3V6 importers and comparison to reports
+bool PRS1Import::ParseEventsF0V6()
+{
+    // Required channels
+    EventList *OA = session->AddEventList(CPAP_Obstructive, EVL_Event);
+    EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
+    EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
+
+    EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
+    EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
+    EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
+    EventList *FL = session->AddEventList(CPAP_FlowLimit, EVL_Event);
+    EventList *SNORE = session->AddEventList(CPAP_Snore, EVL_Event);
+    EventList *VS = session->AddEventList(CPAP_VSnore, EVL_Event);
+    EventList *VS2 = session->AddEventList(CPAP_VSnore2, EVL_Event);
+    EventList *PP = session->AddEventList(CPAP_PressurePulse, EVL_Event);
+    EventList *RE = session->AddEventList(CPAP_RERA, EVL_Event);
+
+
+    // On-demand channels
+    ChannelID Codes[] = {
+        PRS1_00, PRS1_01, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        PRS1_0B, 0, 0, PRS1_0E
+    };
+
+    int ncodes = sizeof(Codes) / sizeof(ChannelID);
+    EventList *Code[0x20] = {0};
+
+    Code[0x0e] = session->AddEventList(PRS1_0E, EVL_Event);
+    EventList * LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
+
+    EventList *PRESSURE = nullptr;
+    EventList *EPAP = nullptr;
+    EventList *IPAP = nullptr;
+    EventList *PS = nullptr;
+
+
+    // Unintentional leak calculation, see zMaskProfile:calcLeak in calcs.cpp for explanation
+    EventDataType currentPressure=0, leak;
+
+    bool calcLeaks = p_profile->cpap->calculateUnintentionalLeaks();
+    EventDataType lpm4 = p_profile->cpap->custom4cmH2OLeaks();
+    EventDataType lpm20 = p_profile->cpap->custom20cmH2OLeaks();
+
+    EventDataType lpm = lpm20 - lpm4;
+    EventDataType ppm = lpm / 16.0;
+
+    CPAPMode mode = (CPAPMode) session->settings[CPAP_Mode].toInt();
+
+    qint64 t = qint64(event->timestamp) * 1000L;
+    session->updateFirst(t);
+
+    bool ok;
+    ok = event->ParseEvents(mode);
+    
+    for (int i=0; i < event->m_parsedData.count(); i++) {
+        PRS1ParsedEvent* e = event->m_parsedData.at(i);
+        t = qint64(event->timestamp + e->m_start) * 1000L;
+        
+        switch (e->m_type) {
+            case PRS1CPAPEvent::TYPE:
+                if (!PRESSURE) {
+                    if (!(PRESSURE = session->AddEventList(CPAP_Pressure, EVL_Event, e->m_gain))) { return false; }
+                }
+                PRESSURE->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case PRS1IPAPEvent::TYPE:
+                if(!IPAP) {
+                    if (!(IPAP = session->AddEventList(CPAP_IPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                IPAP->AddEvent(t, e->m_value);
+                currentPressure = e->m_value;
+                break;
+            case PRS1EPAPEvent::TYPE:
+                if (!EPAP) {
+                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                if(!PS) {
+                    if (!(PS = session->AddEventList(CPAP_PS, EVL_Event, e->m_gain))) { return false; }
+                }
+                EPAP->AddEvent(t, e->m_value);
+                PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
+                break;
+            case PRS1PressureReliefEvent::TYPE:
+                if (!EPAP) {
+                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
+                }
+                EPAP->AddEvent(t, e->m_value);
+                break;
+            case PRS1ObstructiveApneaEvent::TYPE:
+                OA->AddEvent(t, e->m_duration);
+                break;
+            case PRS1ClearAirwayEvent::TYPE:
+                CA->AddEvent(t, e->m_duration);
+                break;
+            case PRS1HypopneaEvent::TYPE:
+                HY->AddEvent(t, e->m_duration);
+                break;
+            case PRS1FlowLimitationEvent::TYPE:
+                FL->AddEvent(t, e->m_duration);
+                break;
+            case PRS1PeriodicBreathingEvent::TYPE:
+                PB->AddEvent(t, e->m_duration);
+                break;
+            case PRS1LargeLeakEvent::TYPE:
+                LL->AddEvent(t, e->m_duration);
+                break;
+            case PRS1TotalLeakEvent::TYPE:
+                TOTLEAK->AddEvent(t, e->m_value);
+                leak = e->m_value;
+                if (calcLeaks) { // Much Quicker doing this here than the recalc method.
+                    leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
+                    if (leak < 0) leak = 0;
+                    LEAK->AddEvent(t, leak);
+                }
+                break;
+            case PRS1SnoreEvent::TYPE:
+                SNORE->AddEvent(t, e->m_value);
+                if (e->m_value > 0) {
+                    VS2->AddEvent(t, e->m_value);
+                }
+                break;
+            case PRS1VibratorySnoreEvent::TYPE:  // F0: Is this really distinct from SNORE and VS2?
+                VS->AddEvent(t, 0);
+                break;
+            case PRS1RERAEvent::TYPE:
+                RE->AddEvent(t, e->m_value);
+                break;
+            case PRS1PressurePulseEvent::TYPE:
+                PP->AddEvent(t, e->m_value);
+                break;
+            case PRS1UnknownValueEvent::TYPE:
+            {
+                int code = ((PRS1UnknownValueEvent*) e)->m_code;
+                Q_ASSERT(code < ncodes);
+                if (!Code[code]) {
+                    ChannelID cpapcode = Codes[(int)code];
+                    Q_ASSERT(cpapcode);  // any unknown codes returned by chunk parser should be given a channel above
+                    if (!(Code[code] = session->AddEventList(cpapcode, EVL_Event, e->m_gain))) { return false; }
+                }
+                Code[code]->AddEvent(t, e->m_value);
+                break;
+            }
+            default:
+                qWarning() << "Unknown PRS1 event type" << (int) e->m_type;
+                break;
+        }
+    }
+
+    if (!ok) {
+        return false;
+    }
+    
+    t = qint64(event->timestamp + event->duration) * 1000L;
+    session->updateLast(t);
+    session->m_cnt.clear();
+    session->m_cph.clear();
+
+    session->m_lastchan.clear();
+    session->m_firstchan.clear();
+    session->m_valuesummary[CPAP_Pressure].clear();
+    session->m_valuesummary.erase(session->m_valuesummary.find(CPAP_Pressure));
 
     return true;
 }
@@ -5374,7 +5542,11 @@ bool PRS1Import::ParseEvents()
     if (!event) return false;
     switch (event->family) {
     case 0:
-        res = ParseF0Events();
+        if (event->familyVersion == 6) {
+            res = this->ParseEventsF0V6();
+        } else {
+            res = this->ParseF0Events();
+        }
         break;
     case 3:
         // NOTE: The original comment in the header for ParseF3EventsV3 said there was a 1060P with fileVersion 3.

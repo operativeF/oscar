@@ -278,6 +278,8 @@ public:
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine
     bool ParseF0Events();
+    //! \brief Parse a single data chunk from a .002 file containing event data for a standard system one machine (family version 6)
+    bool ParseEventsF0V6();
     //! \brief Parse a single data chunk from a .002 file containing event data for a AVAPS 1060P machine
     bool ParseF3Events();
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator machine (family version 6)
