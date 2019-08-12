@@ -3221,6 +3221,7 @@ bool PRS1Import::ParseEventsF0V6()
     EventList *HY = session->AddEventList(CPAP_Hypopnea, EVL_Event);
     EventList *CA = session->AddEventList(CPAP_ClearAirway, EVL_Event);
 
+    EventList *LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
     EventList *TOTLEAK = session->AddEventList(CPAP_LeakTotal, EVL_Event);
     EventList *LEAK = session->AddEventList(CPAP_Leak, EVL_Event);
     EventList *PB = session->AddEventList(CPAP_PB, EVL_Event);
@@ -3234,15 +3235,14 @@ bool PRS1Import::ParseEventsF0V6()
 
     // On-demand channels
     ChannelID Codes[] = {
-        PRS1_00, PRS1_01, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        PRS1_0B, 0, 0, PRS1_0E
+        PRS1_00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, PRS1_0E
     };
 
     int ncodes = sizeof(Codes) / sizeof(ChannelID);
     EventList *Code[0x20] = {0};
 
     Code[0x0e] = session->AddEventList(PRS1_0E, EVL_Event);
-    EventList * LL = session->AddEventList(CPAP_LargeLeak, EVL_Event);
 
     EventList *PRESSURE = nullptr;
     EventList *EPAP = nullptr;
@@ -3262,6 +3262,7 @@ bool PRS1Import::ParseEventsF0V6()
 
     CPAPMode mode = (CPAPMode) session->settings[CPAP_Mode].toInt();
 
+    qint64 duration;
     qint64 t = qint64(event->timestamp) * 1000L;
     session->updateFirst(t);
 
@@ -3297,12 +3298,6 @@ bool PRS1Import::ParseEventsF0V6()
                 EPAP->AddEvent(t, e->m_value);
                 PS->AddEvent(t, currentPressure - e->m_value);           // Pressure Support
                 break;
-            case PRS1PressureReliefEvent::TYPE:
-                if (!EPAP) {
-                    if (!(EPAP = session->AddEventList(CPAP_EPAP, EVL_Event, e->m_gain))) { return false; }
-                }
-                EPAP->AddEvent(t, e->m_value);
-                break;
             case PRS1ObstructiveApneaEvent::TYPE:
                 OA->AddEvent(t, e->m_duration);
                 break;
@@ -3316,27 +3311,42 @@ bool PRS1Import::ParseEventsF0V6()
                 FL->AddEvent(t, e->m_duration);
                 break;
             case PRS1PeriodicBreathingEvent::TYPE:
-                PB->AddEvent(t, e->m_duration);
+                // TODO: The graphs silently treat the timestamp of a span as an end time rather than start (see gFlagsLine::paint).
+                // Decide whether to preserve that behavior or change it universally and update either this code or comment.
+                duration = e->m_duration * 1000L;
+                PB->AddEvent(t + duration, e->m_duration);
                 break;
             case PRS1LargeLeakEvent::TYPE:
-                LL->AddEvent(t, e->m_duration);
+                // TODO: see PB comment above.
+                duration = e->m_duration * 1000L;
+                LL->AddEvent(t + duration, e->m_duration);
                 break;
             case PRS1TotalLeakEvent::TYPE:
                 TOTLEAK->AddEvent(t, e->m_value);
                 leak = e->m_value;
+                // F0V6 doesn't appear to report non-total leak
                 if (calcLeaks) { // Much Quicker doing this here than the recalc method.
                     leak -= (((currentPressure/10.0f) - 4.0) * ppm + lpm4);
                     if (leak < 0) leak = 0;
                     LEAK->AddEvent(t, leak);
                 }
                 break;
-            case PRS1SnoreEvent::TYPE:
+            case PRS1SnoreEvent::TYPE:  // snore count that shows up in flags but not waveform
+                // TODO: The numeric snore graph is the right way to present this information,
+                // but it needs to be shifted left 2 minutes, since it's not a starting value
+                // but a past statistic.
                 SNORE->AddEvent(t, e->m_value);
                 if (e->m_value > 0) {
-                    VS2->AddEvent(t, e->m_value);
+                    // TODO: currently these get drawn on our waveforms, but they probably shouldn't,
+                    // since they don't have a precise timestamp. They should continue to be drawn
+                    // on the flags overview.
+                    VS2->AddEvent(t, 0);
                 }
                 break;
-            case PRS1VibratorySnoreEvent::TYPE:  // F0: Is this really distinct from SNORE and VS2?
+            case PRS1VibratorySnoreEvent::TYPE:  // real VS marker on waveform
+                // TODO: These don't need to be drawn separately on the flag overview, since
+                // they're presumably included in the overall snore count statistic. They should
+                // continue to be drawn on the waveform, due to their precise timestamp.
                 VS->AddEvent(t, 0);
                 break;
             case PRS1RERAEvent::TYPE:
@@ -3404,7 +3414,7 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
     int pos = 0, startpos;
     int code, size;
     int t = 0;
-    int elapsed/*, duration*/;
+    int elapsed, duration;
     do {
         code = data[pos++];
         if (!this->hblock.contains(code)) {
@@ -3446,8 +3456,8 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
             case 2:  // Pressure adjustment (bi-level)
                 // TODO: Have OSCAR treat pressure adjustment events differently than (average?) stats below.
                 // See notes above on interpolation.
-                this->AddEvent(new PRS1EPAPEvent(t, data[pos++]));
-                this->AddEvent(new PRS1IPAPEvent(t, data[pos++]));
+                this->AddEvent(new PRS1IPAPEvent(t, data[pos+1]));
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos]));
                 break;
             case 3:  // Pressure adjustment? (auto-CPAP)
                 // This seems to correspond to the minimum auto-CPAP pressure setting, and
