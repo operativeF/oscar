@@ -7,9 +7,9 @@
 
 #define MyAppVersion MyMajorVersion+"."+MyMinorVersion+"."+MyRevision+"-"+MyReleaseStatus
 #if MyReleaseStatus == "r"
-#define MyAppVersion MyAppVersion+MyBuildNumber
+  #define MyAppVersion MyAppVersion+MyBuildNumber
 #else
-#define MyAppVersion MyAppVersion+"-"+MyBuildNumber
+  #define MyAppVersion MyAppVersion+"-"+MyBuildNumber
 #endif
 
 #define MyAppName "OSCAR"
@@ -42,9 +42,9 @@ DefaultDirName={pf}\OSCAR
 DefaultGroupName={#MyAppName}
 OutputDir=.\Installer
 #if MyReleaseStatus == "r"
-OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}{#MySuffix}
+  OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}{#MySuffix}
 #else
-OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}-{#MyGitRevision}{#MySuffix}
+  OutputBaseFilename={#MyAppName}-{#MyAppVersion}-{#MyPlatform}-{#MyGitRevision}{#MySuffix}
 #endif
 SetupIconFile=setup.ico
 Compression=lzma
@@ -53,6 +53,9 @@ VersionInfoCompany={#MyAppPublisher}
 VersionInfoProductName={#MyAppName}
 UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
+
+VersionInfoVersion={#MyMajorVersion}.{#MyMinorVersion}.{#MyRevision}.{#MyBuildNumber}
+VersionInfoProductTextVersion={#MyAppVersion}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
