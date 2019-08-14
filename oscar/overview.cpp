@@ -83,7 +83,7 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     border->setAutoFillBackground(false);
 
     // Create the GraphView Object
-    GraphView = new gGraphView(ui->graphArea, m_shared);
+    GraphView = new gGraphView(ui->graphArea, m_shared, this);
     GraphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     GraphView->setEmptyText(STR_Empty_NoData);
@@ -404,7 +404,7 @@ void Overview::on_dateStart_dateChanged(const QDate &date)
     ui->dateEnd->setMinimumDate(date);
 }
 
-void Overview::on_toolButton_clicked()
+void Overview::on_zoomButton_clicked()
 {
     qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;
     qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 00, 0), Qt::UTC).toTime_t()) * 1000L;
@@ -480,7 +480,7 @@ void Overview::setRange(QDate start, QDate end)
     ui->dateEnd->setDate(end);
     ui->dateEnd->blockSignals(false);
     ui->dateStart->blockSignals(false);
-    this->on_toolButton_clicked();
+    this->on_zoomButton_clicked();
     updateGraphCombo();
 }
 

@@ -320,7 +320,7 @@ class gGraphView
         But this must not be shared with Printers snapshot gGraphView object,
         or it will lead to display/font corruption
         */
-    explicit gGraphView(QWidget *parent = 0, gGraphView *shared = 0);
+    explicit gGraphView(QWidget *parent = 0, gGraphView *shared = 0, QWidget *caller = 0);
     virtual ~gGraphView();
     void closeEvent(QCloseEvent * event) override;
 
@@ -689,6 +689,7 @@ class gGraphView
     QAction * snap_action;
 
     QAction * zoom100_action;
+    QWidget * caller;
 
     bool m_showAuthorMessage;
 
@@ -710,9 +711,7 @@ class gGraphView
     //! \brief Resets all contained graphs to have a uniform height.
     void resetLayout();
 
-    void resetZoom() {
-        ResetBounds(true);
-    }
+    void resetZoom();
 
     void dataChanged();
 

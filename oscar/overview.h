@@ -87,6 +87,9 @@ class Overview : public QWidget
   public slots:
     void onRebuildGraphs() { RebuildGraphs(true); }
 
+    //! \brief Resets view to currently shown start & end dates
+    void on_zoomButton_clicked();
+
   private slots:
     void updateGraphCombo();
 
@@ -101,9 +104,6 @@ class Overview : public QWidget
 
     //! \brief Updates the calendar highlighting when changing to a new month
     void dateEnd_currentPageChanged(int year, int month);
-
-    //! \brief Resets view to currently shown start & end dates
-    void on_toolButton_clicked();
 
     //void on_printDailyButton_clicked();
 

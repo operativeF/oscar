@@ -36,7 +36,7 @@
 #include "Graphs/gYAxis.h"
 #include "Graphs/gFlagsLine.h"
 #include "SleepLib/profiles.h"
-
+#include "overview.h"
 
 extern MainWindow *mainwin;
 
@@ -294,7 +294,7 @@ gGraph *gGraphView::popGraph()
     return g;
 }
 
-gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
+gGraphView::gGraphView(QWidget *parent, gGraphView *shared, QWidget *caller)
 #ifdef BROKEN_OPENGL_BUILD
     : QWidget(parent),
 #elif QT_VERSION < QT_VERSION_CHECK(5,4,0)
@@ -304,6 +304,7 @@ gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
 #endif
       m_offsetY(0), m_offsetX(0), m_scaleY(0.0), m_scrollbar(nullptr)
 {
+    this->caller = caller;
 
 //    this->grabGesture(Qt::SwipeGesture);
 //    this->grabGesture(Qt::PanGesture);
@@ -388,9 +389,11 @@ gGraphView::gGraphView(QWidget *parent, gGraphView *shared)
     snap_action = context_menu->addAction(QString(), this, SLOT(onSnapshotGraphToggle()));
     context_menu->addSeparator();
 
-
     zoom100_action = context_menu->addAction(tr("100% zoom level"), this, SLOT(resetZoom()));
-    zoom100_action->setToolTip(tr("Restore X-axis zoom too 100% to view entire days data."));
+    if (caller)
+        zoom100_action->setToolTip(tr("Restore X-axis zoom to 100% to view entire selected period."));
+    else
+        zoom100_action->setToolTip(tr("Restore X-axis zoom to 100% to view entire day's data."));
 
     QAction * action = context_menu->addAction(tr("Reset Graph Layout"), this, SLOT(resetLayout()));
     action->setToolTip(tr("Resets all graphs to a uniform height and default order."));
@@ -1065,6 +1068,16 @@ void gGraphView::GetRXBounds(qint64 &st, qint64 &et)
             break;
         }
     }
+}
+
+void gGraphView::resetZoom() {
+    Overview *overvw = qobject_cast<Overview*>(caller);
+    if (overvw) {
+        overvw->on_zoomButton_clicked();
+        return;
+    }
+
+    ResetBounds(true);
 }
 
 void gGraphView::ResetBounds(bool refresh) //short group)
