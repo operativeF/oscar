@@ -3464,11 +3464,15 @@ bool PRS1DataChunk::ParseEventsF0V6(CPAPMode /*mode*/)
                 this->AddEvent(new PRS1IPAPEvent(t, data[pos+1]));
                 this->AddEvent(new PRS1EPAPEvent(t, data[pos]));  // EPAP needs to be added second to calculate PS
                 break;
-            case 0x03:  // Pressure adjustment? (auto-CPAP)
-                // This seems to correspond to the minimum auto-CPAP pressure setting, and
-                // seems to stay fixed throughout the session.
-                //this->AddEvent(new PRS1CPAPEvent(t, data[pos]));
-                CHECK_VALUE(data[pos++], 4);
+            case 0x03:  // Auto-CPAP starting pressure
+                // Most of the time this occurs, it's at the start and end of a session with
+                // the same pressure at both. Occasionally an additional event shows up in the
+                // middle of a session, and then the pressure at the end matches that.
+                // In these cases, the new pressure corresponds to the next night's starting
+                // pressure for auto-CPAP. It does not appear to have any effect on the current
+                // night's pressure, unless there's a substantial gap between sessions, in
+                // which case the next session may use the new starting pressure.
+                //CHECK_VALUE(data[pos], 40);
                 break;
             case 0x04:  // Pressure Pulse
                 duration = data[pos++];  // TODO: is this a duration?
