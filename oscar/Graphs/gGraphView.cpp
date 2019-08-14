@@ -1567,6 +1567,32 @@ void gGraphView::paintGL()
 
 QString gGraphView::getRangeString()
 {
+    QDateTime st = QDateTime::fromMSecsSinceEpoch(m_minx);
+    QDateTime et = QDateTime::fromMSecsSinceEpoch(m_maxx);
+
+    QDate std = st.date();
+    QDate etd = et.date();
+
+    // Format if Begin and End are on different days
+    if (std != etd) {
+        QString txt = st.toString(" d MMM [ HH:mm:ss") + " - " +  et.toString("HH:mm:ss ] d MMM yyyy");
+        return txt;
+    }
+
+    // Range is within one (local) day
+    qint64 diff = m_maxx - m_minx;
+    QString fmt;
+
+    if (diff > 60000) {
+            fmt = "HH:mm:ss";
+        } else {
+            fmt = "HH:mm:ss:zzz";
+        }
+    QString txt = st.toString(QObject::tr("d MMM yyyy [ %1 - %2 ]").arg(fmt).arg(et.toString(fmt))) ;
+
+    return txt;
+
+/***** WTF is this code trying to do?  Replaced by above 8/9/2019
     // a note about time zone usage here
     // even though this string will be displayed to the user
     // the graph is drawn using UTC times, so no conversion
@@ -1579,7 +1605,7 @@ QString gGraphView::getRangeString()
 
     qint64 diff = m_maxx - m_minx;
 
-    if (diff > 86400000) {
+    if (diff > 86400000) {                  // 86400000 is one day, in milliseconds
         int days = ceil(double(m_maxx-m_minx) / 86400000.0);
 
         qint64 minx = floor(double(m_minx)/86400000.0);
@@ -1597,12 +1623,11 @@ QString gGraphView::getRangeString()
     } else {
         fmt = "HH:mm:ss:zzz";
     }
-    QDateTime st = QDateTime::fromMSecsSinceEpoch(m_minx, Qt::UTC);
-    QDateTime et = QDateTime::fromMSecsSinceEpoch(m_maxx, Qt::UTC);
 
     QString txt = st.toString(QObject::tr("d MMM [ %1 - %2 ]").arg(fmt).arg(et.toString(fmt))) ;
 
     return txt;
+*/
 }
 
 void gGraphView::leaveEvent(QEvent * event)
@@ -3252,7 +3277,6 @@ void gGraphView::keyPressEvent(QKeyEvent *event)
     //qDebug() << "Keypress??";
 }
 
-
 void gGraphView::setDay(Day *day)
 {
 
@@ -3264,6 +3288,7 @@ void gGraphView::setDay(Day *day)
 
     ResetBounds(false);
 }
+
 bool gGraphView::isEmpty()
 {
     bool res = true;

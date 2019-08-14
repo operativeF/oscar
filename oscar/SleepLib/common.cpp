@@ -90,23 +90,35 @@ const QString getDeveloperDomain()
 const QString getAppName()
 {
     QString name = STR_AppName;
-    if ((GIT_BRANCH != "master") || 
-           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+
+    // Append branch if there is a branch specified
+    if (GIT_BRANCH != "master") {
         name += "-"+GIT_BRANCH;
+//        qDebug() << "getAppName, not master, name is" << name << "branch is" << GIT_BRANCH;
     }
+
+    // Append "-test" if not release
+    else if (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) ||
+               (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) )) {
+        name += "-test";
+//        qDebug() << "getAppName, not release, name is" << name << "release type is" << ReleaseStatus;
+    }
+
     return name;
 }
 
 const QString getModifiedAppData()
 {
     QString appdata = STR_AppData;
-    if ((GIT_BRANCH != "master") || 
-           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+
+    // Append branch if there is a branch specified
+    if (GIT_BRANCH != "master")
         appdata += "-"+GIT_BRANCH;
+
+    // Append "-test" if not release
+    else if (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) ||
+               (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) )) {
+        appdata += "-test";
     }
     return appdata;
 }
@@ -230,7 +242,7 @@ QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
         branch = QObject::tr("Branch:") + " " + GIT_BRANCH + ", ";
     }
     buildInfo << branch + (QObject::tr("Revision")) + " " + GIT_REVISION;
-    if (GIT_BRANCH != "master")
+    if (getAppName() != STR_AppName)        // Report any non-standard app key
         buildInfo << (QObject::tr("App key:") + " " + getAppName());
     buildInfo << QString("");
     buildInfo << (QObject::tr("Operating system:") + " " + QSysInfo::prettyProductName());
