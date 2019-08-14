@@ -502,7 +502,9 @@ void parseModel(MachineInfo & info, const QString & modelnum)
         }
     }
     if (series == nullptr) {
-        qWarning() << "unknown series for" << name << modelnum;
+        if (modelnum != "100X100") {  // Bogus model number seen in empty C0/Clear0 directories.
+            qWarning() << "unknown series for" << name << modelnum;
+        }
         series = "unknown";
     }
     info.series = QObject::tr(series);
@@ -2986,6 +2988,10 @@ bool PRS1Import::ParseF0Events()
 
 bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 {
+    if (this->family != 0 || this->familyVersion < 2 || this->familyVersion > 4) {
+        qWarning() << "ParseEventsF0V234 called with family" << this->family << "familyVersion" << this->familyVersion;
+        return false;
+    }
     unsigned char code=0;
 
     EventDataType data0, data1, data2;
@@ -3000,7 +3006,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 
     int size = this->m_data.size();
 
-    bool FV3 = (this->fileVersion == 3);
+    CHECK_VALUE(this->fileVersion, 2);
     unsigned char * buffer = (unsigned char *)this->m_data.data();
 
     for (pos = 0; pos < size;) {
@@ -3035,13 +3041,13 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 
         case 0x00: // Unknown 00
             this->AddEvent(new PRS1UnknownValueEvent(code, t, buffer[pos++]));
-            if (((this->family == 0) && (this->familyVersion >= 4)) || (this->fileVersion == 3)){
+            if (((this->family == 0) && (this->familyVersion == 4))){
                 pos++;
             }
             break;
 
         case 0x01: // Unknown
-            if ((this->family == 0) && (this->familyVersion >= 4)) {
+            if ((this->family == 0) && (this->familyVersion == 4)) {
                 this->AddEvent(new PRS1CPAPEvent(t, buffer[pos++]));
             } else {
                 this->AddEvent(new PRS1UnknownValueEvent(code, t, 0));
@@ -3049,7 +3055,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             break;
 
         case 0x02: // Pressure
-            if ((this->family == 0) && (this->familyVersion >= 4)) {  // BiPAP Pressure
+            if ((this->family == 0) && (this->familyVersion == 4)) {  // BiPAP Pressure
                 data0 = buffer[pos++];
                 data1 = buffer[pos++];
                 this->AddEvent(new PRS1IPAPEvent(t, data1));
@@ -3060,9 +3066,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             break;
 
         case 0x03: // BIPAP Pressure
-            if (FV3) {
-                this->AddEvent(new PRS1CPAPEvent(t, buffer[pos++]));
-            } else {
+            {
                 data0 = buffer[pos++];
                 data1 = buffer[pos++];
                 this->AddEvent(new PRS1IPAPEvent(t, data1));
@@ -3105,7 +3109,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             data1 = buffer[pos+1];
             pos += 2;
 
-            if (this->familyVersion >= 4) {
+            if (this->familyVersion == 4) {
                  // might not doublerize on older machines?
               //  data0 *= 2;
             }
@@ -3122,7 +3126,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 
         case 0x0e: // Unknown
             data0 = buffer[pos + 1] << 8 | buffer[pos];
-            if (this->familyVersion >= 4) {
+            if (this->familyVersion == 4) {
                  // might not doublerize on older machines?
                 data0 *= 2;
             }
@@ -3134,7 +3138,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 
         case 0x0f: // Cheyne Stokes Respiration
             data0 = (buffer[pos + 1] << 8 | buffer[pos]);
-            if (this->familyVersion >= 4) {
+            if (this->familyVersion == 4) {
                  // might not doublerize on older machines
                 data0 *= 2;
             }
@@ -3151,7 +3155,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
 
         case 0x10: // Large Leak
             data0 = buffer[pos + 1] << 8 | buffer[pos];
-            if (this->familyVersion >= 4) {
+            if (this->familyVersion == 4) {
                  // might not doublerize on older machines
                 data0 *= 2;
             }
@@ -3166,7 +3170,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             this->AddEvent(new PRS1TotalLeakEvent(t, data0));
             this->AddEvent(new PRS1SnoreEvent(t, data1));
 
-            if ((this->family == 0) && (this->familyVersion >= 4))  {
+            if ((this->family == 0) && (this->familyVersion == 4))  {
                 // EPAP / Flex Pressure
                 data0 = buffer[pos++];
 
@@ -3187,7 +3191,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             // Could end here, but I've seen data sets valid data after!!!
 
             break;
-
+        /*
         case 0x14:  // DreamStation Hypopnea
             data0 = buffer[pos++];
             this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
@@ -3197,7 +3201,7 @@ bool PRS1DataChunk::ParseEventsF0V234(CPAPMode mode)
             data0 = buffer[pos++];
             this->AddEvent(new PRS1HypopneaEvent(t - data0, data0));
             break;
-
+        */
         default:
             // ERROR!!!
             qWarning() << "Some new fandangled PRS1 code detected in" << this->sessionid << hex
