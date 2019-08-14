@@ -37,8 +37,36 @@
 
 extern MainWindow * mainwin;
 
-// Used by internal settings
+QString MedDateFormat = "ddd MMM d yyyy";  // QT default value, which we override if we can
+bool dayFirst = false;
 
+// System locale and regional settings support only a "short" date (m/d/yyy) and a "long"
+// date (day of week, month, day, year -- all spelled out fully).  We get the formatting
+// for the long format, shorten day and month name, and remove excess commas.
+void SetDateFormat () {
+    QLocale sysLocale = QLocale::system();
+    QString dfmt = sysLocale.dateFormat();
+    qDebug() << "system locale date format" << dfmt;
+
+    QString s = dfmt.replace("dddd", "ddd");
+    if (!s.isEmpty()) s = s.replace("MMMM", "MMM");
+    if (!s.isEmpty()) s = s.replace(",", "");
+    if (!s.isEmpty()) {
+        QDate testDate (2018, 12, 31);
+        QString testresult = testDate.toString(s);
+        if (!testresult.isEmpty())  // make sure we can translate a date
+            MedDateFormat = s;     // If we can, save the format for future use
+    }
+
+    // Record whether month or day is first in the formatting
+    QString s2 = MedDateFormat;
+    s2 = s2.replace("ddd","");
+    int monthidx = s2.indexOf("MMM");
+    if (s2.indexOf("d") < monthidx)
+        dayFirst = true;
+
+    qDebug() << "shortened date format" << MedDateFormat << "dayFirst" << dayFirst;
+}
 
 const QString & gitRevision()
 {
@@ -62,23 +90,35 @@ const QString getDeveloperDomain()
 const QString getAppName()
 {
     QString name = STR_AppName;
-    if ((GIT_BRANCH != "master") || 
-           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+
+    // Append branch if there is a branch specified
+    if (GIT_BRANCH != "master") {
         name += "-"+GIT_BRANCH;
+//        qDebug() << "getAppName, not master, name is" << name << "branch is" << GIT_BRANCH;
     }
+
+    // Append "-test" if not release
+    else if (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) ||
+               (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) )) {
+        name += "-test";
+//        qDebug() << "getAppName, not release, name is" << name << "release type is" << ReleaseStatus;
+    }
+
     return name;
 }
 
 const QString getModifiedAppData()
 {
     QString appdata = STR_AppData;
-    if ((GIT_BRANCH != "master") || 
-           (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) || 
-              (ReleaseStatus.compare("beta", Qt::CaseInsensitive)==0)))) {
+
+    // Append branch if there is a branch specified
+    if (GIT_BRANCH != "master")
         appdata += "-"+GIT_BRANCH;
+
+    // Append "-test" if not release
+    else if (!((ReleaseStatus.compare("r", Qt::CaseInsensitive)==0) ||
+               (ReleaseStatus.compare("rc", Qt::CaseInsensitive)==0) )) {
+        appdata += "-test";
     }
     return appdata;
 }
@@ -202,7 +242,7 @@ QStringList makeBuildInfo (QString relinfo, QString forcedEngine){
         branch = QObject::tr("Branch:") + " " + GIT_BRANCH + ", ";
     }
     buildInfo << branch + (QObject::tr("Revision")) + " " + GIT_REVISION;
-    if (GIT_BRANCH != "master")
+    if (getAppName() != STR_AppName)        // Report any non-standard app key
         buildInfo << (QObject::tr("App key:") + " " + getAppName());
     buildInfo << QString("");
     buildInfo << (QObject::tr("Operating system:") + " " + QSysInfo::prettyProductName());

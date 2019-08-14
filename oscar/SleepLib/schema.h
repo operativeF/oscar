@@ -36,12 +36,7 @@ public:
         color = Qt::black;
         type = Calc_Zero;
     }
-    ChannelCalc(const ChannelCalc & copy) {
-        code = copy.code;
-        color = copy.color;
-        enabled = copy.enabled;
-        type = copy.type;
-    }
+    ChannelCalc(const ChannelCalc & copy) = default;
     ChannelCalc(ChannelID code, ChannelCalcType type, QColor color, bool enabled):
         code(code), type(type), color(color), enabled(enabled) {}
 

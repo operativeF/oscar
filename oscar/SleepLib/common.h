@@ -27,6 +27,8 @@ const QString CSTR_GFX_ANGLE = "ANGLE";
 const QString CSTR_GFX_OpenGL = "OpenGL";
 const QString CSTR_GFX_BrokenGL = "LegacyGFX";
 
+extern QString MedDateFormat;
+extern bool dayFirst;
 
 //! \brief Gets the first day of week from the system locale, to show in the calendars.
 Qt::DayOfWeek firstDayOfWeekFromLocale();
@@ -49,6 +51,8 @@ QStringList makeBuildInfo(QString relinfo, QString forcedEngine);
 QStringList getBuildInfo();
 QStringList addBuildInfo (QString value);
 
+void SetDateFormat ();
+
 QByteArray gCompress(const QByteArray& data);
 QByteArray gUncompress(const QByteArray &data);
 
@@ -65,11 +69,7 @@ struct ValueCount {
     ValueCount( EventDataType val, qint64 cnt, double pp)
         :value(val), count(cnt), p(pp) {}
 
-    ValueCount(const ValueCount &copy) {
-        value = copy.value;
-        count = copy.count;
-        p = copy.p;
-    }
+    ValueCount(const ValueCount &copy) = default;
     EventDataType value;
     qint64 count;
     double p;

@@ -583,7 +583,7 @@ void Daily::ReloadGraphs()
     ui->calendar->setSelectedDate(d);
     ui->calendar->blockSignals(false);
     Load(d);
-    ui->calButton->setText(ui->calendar->selectedDate().toString(Qt::TextDate));
+    ui->calButton->setText(ui->calendar->selectedDate().toString(MedDateFormat));
     graphView()->redraw();
 //    qDebug() << "Finished ReloadGraphs in Daily object";
 //    sleep(3);
@@ -826,7 +826,7 @@ void Daily::on_ReloadDay()
 
     //GraphView->fadeIn(fadedir);
     GraphView->redraw();
-    ui->calButton->setText(ui->calendar->selectedDate().toString(Qt::TextDate));
+    ui->calButton->setText(ui->calendar->selectedDate().toString(MedDateFormat));
     ui->calendar->setFocus(Qt::ActiveWindowFocusReason);
 
     if (p_profile->general->unitSystem()==US_English) {
@@ -852,6 +852,28 @@ void Daily::ResetGraphLayout()
 void Daily::ResetGraphOrder()
 {
     GraphView->resetGraphOrder(true);
+
+    // Enable all graphs (make them not hidden)
+    for (int i=0;i<ui->graphCombo->count();i++) {
+        // If disabled, emulate a click to enable the graph
+        if (!ui->graphCombo->itemData(i,Qt::UserRole).toBool()) {
+            qDebug() << "resetting graph" << i;
+            Daily::on_graphCombo_activated(i);
+        }
+    }
+
+    // Mark all events as active
+    for (int i=0;i<ui->eventsCombo->count();i++) {
+        // If disabled, emulate a click to enable the event
+        ChannelID code = ui->eventsCombo->itemData(i, Qt::UserRole).toUInt();
+        schema::Channel * chan = &schema::channel[code];
+        if (!chan->enabled()) {
+            qDebug() << "resetting event" << i;
+            Daily::on_eventsCombo_activated(i);
+        }
+    }
+
+    // Reset graph heights (and repaint)
     ResetGraphLayout();
 }
 
@@ -2416,6 +2438,7 @@ void Daily::on_graphCombo_activated(int index)
     GraphView->updateScale();
     GraphView->redraw();
 }
+
 void Daily::updateCube()
 {
     //brick..
@@ -2495,7 +2518,6 @@ void Daily::updateGraphCombo()
     }
     ui->graphCombo->setCurrentIndex(0);
 
-
     updateCube();
 }
 
@@ -2503,7 +2525,6 @@ void Daily::on_eventsCombo_activated(int index)
 {
     if (index<0)
         return;
-
 
     ChannelID code = ui->eventsCombo->itemData(index, Qt::UserRole).toUInt();
     schema::Channel * chan = &schema::channel[code];

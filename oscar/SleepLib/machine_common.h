@@ -52,6 +52,7 @@ enum SummaryType { ST_CNT, ST_SUM, ST_AVG, ST_WAVG, ST_PERC, ST_90P, ST_MIN, ST_
 enum MachineType { MT_UNKNOWN = 0, MT_CPAP, MT_OXIMETER, MT_SLEEPSTAGE, MT_JOURNAL, MT_POSITION, MT_UNCATEGORIZED = 99};
 //void InitMapsWithoutAwesomeInitializerLists();
 
+/***** NEVER USED ---
 // PAP Device Capabilities
 const quint32 CAP_Fixed               = 0x0000001;  // Constant PAP
 const quint32 CAP_Variable            = 0x0000002;  // Variable Base (EPAP) pressure
@@ -69,7 +70,7 @@ const quint32 PAP_BiLevelAutoVariable     = 0x0010;  // Auto BiLevel with full r
 const quint32 PAP_ASV_Fixed               = 0x0020;  // ASV with fixed EPAP
 const quint32 PAP_ASV_Variable            = 0x0040;  // ASV with full ranging capabilities
 const quint32 PAP_SplitNight              = 0x8000;  // Split night capabilities
-
+*****/
 
 
 /*! \enum CPAPMode
@@ -92,18 +93,7 @@ enum PRTimeModes { //:short
 
 struct MachineInfo {
     MachineInfo() { type = MT_UNKNOWN; version = 0; cap=0; }
-    MachineInfo(const MachineInfo & copy) {
-        type = copy.type;
-        loadername = copy.loadername;
-        brand = copy.brand;
-        model = copy.model;
-        modelnumber = copy.modelnumber;
-        serial = copy.serial;
-        series = copy.series;
-        version = copy.version;
-        lastimported = copy.lastimported;
-        cap = copy.cap;
-    }
+    MachineInfo(const MachineInfo & copy) = default;
 
     MachineInfo(MachineType type, quint32 cap, QString loadername, QString brand, QString model, QString modelnumber, QString serial, QString series, QDateTime lastimported, int version) :
         type(type), cap(cap), loadername(loadername), brand(brand), model(model), modelnumber(modelnumber), serial(serial), series(series), lastimported(lastimported), version(version) {}

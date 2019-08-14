@@ -125,82 +125,8 @@ struct STRRecord
 
         date=QDate();
     }
-    STRRecord(const STRRecord & copy) {
-        maskon = copy.maskon;
-        maskoff = copy.maskoff;
-        maskdur = copy.maskdur;
-        maskevents = copy.maskevents;
-        mode = copy.mode;
-        rms9_mode = copy.rms9_mode;
-        set_pressure = copy.set_pressure;
-        epap = copy.epap;
-        max_pressure = copy.max_pressure;
-        min_pressure = copy.min_pressure;
-        max_ps = copy.max_ps;
-        min_ps = copy.min_ps;
-        ps = copy.ps;
-        max_epap = copy.max_epap;
-        min_epap = copy.min_epap;
-        ipap = copy.ipap;
-        max_ipap = copy.max_ipap;
-        min_ipap = copy.min_ipap;
-        epr = copy.epr;
-        epr_level = copy.epr_level;
-        sessionid = copy.sessionid;
-        ahi = copy.ahi;
-        ai = copy.ai;
-        oai = copy.oai;
-        hi = copy.hi;
-        uai = copy.uai;
-        cai = copy.cai;
-        csr = copy.csr;
+    STRRecord(const STRRecord & copy) = default;
 
-        date = copy.date;
-        leak50 = copy.leak50;
-        leak95 = copy.leak95;
-        leakmax = copy.leakmax;
-        rr50 = copy.rr50;
-        rr95 = copy.rr95;
-        rrmax = copy.rrmax;
-        mv50 = copy.mv50;
-        mv95 = copy.mv95;
-        mvmax = copy.mvmax;
-        ie50 = copy.ie50;
-        ie95 = copy.ie95;
-        iemax = copy.iemax;
-        tv50 = copy.tv50;
-        tv95 = copy.tv95;
-        tvmax = copy.tvmax;
-        mp50 = copy.mp50;
-        mp95 = copy.mp95;
-        mpmax = copy.mpmax;
-
-
-        tgtepap50 = copy.tgtepap50;
-        tgtepap95 = copy.tgtepap95;
-        tgtepapmax = copy.tgtepapmax;
-        tgtipap50 = copy.tgtipap50;
-        tgtipap95 = copy.tgtipap95;
-        tgtipapmax = copy.tgtipapmax;
-
-        s_EPREnable = copy.s_EPREnable;
-        s_EPR_ClinEnable = copy.s_EPREnable;
-        s_RampEnable = copy.s_RampEnable;
-        s_RampTime = copy.s_RampTime;
-
-        s_SmartStart = copy.s_SmartStart;
-        s_PtAccess = copy.s_PtAccess;
-        s_ABFilter = copy.s_ABFilter;
-        s_Mask = copy.s_Mask;
-
-        s_Tube = copy.s_Tube;
-        s_ClimateControl = copy.s_ClimateControl;
-        s_HumEnable = copy.s_HumEnable;
-        s_HumLevel = copy.s_HumLevel;
-        s_TempEnable = copy.s_TempEnable;
-        s_Temp = copy.s_Temp;
-        ramp_pressure = copy.ramp_pressure;
-    }
     QVector<quint32> maskon;
     QVector<quint32> maskoff;
 
@@ -347,10 +273,7 @@ struct STRFile {
         filename(QString()), edf(nullptr) {}
     STRFile(QString name, ResMedEDFParser *str) :
         filename(name), edf(str) {}
-    STRFile(const STRFile & copy) {
-        filename = copy.filename;
-        edf = copy.edf;
-    }
+    STRFile(const STRFile & copy) = default;
     ~STRFile() {
     }
 
