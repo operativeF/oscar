@@ -237,7 +237,6 @@ class Profile : public Preferences
     QDate m_last;
 
     bool m_opened;
-    bool m_machopened;
 
     QHash<QString, QHash<QString, Machine *> > MachineList;
 

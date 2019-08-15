@@ -37,8 +37,7 @@ Profile *p_profile;
 
 Profile::Profile(QString path)
   : is_first_day(true),
-     m_opened(false),
-     m_machopened(false)
+     m_opened(false)
 {
     p_name = STR_GEN_Profile;
 
@@ -146,8 +145,10 @@ void Profile::addLock()
 
 bool Profile::OpenMachines()
 {
-    if (m_machopened)
+    if (m_machlist.size() > 0) {
+        qCritical() << "Skipping redundant call to Profile::OpenMachines";
         return true;
+    }
 
     QString filename = p_path+"machines.xml";
     QFile file(filename);
@@ -239,7 +240,6 @@ bool Profile::OpenMachines()
         elem = elem.nextSiblingElement();
     }
 
-    m_machopened = true;
     return true;
 }
 
