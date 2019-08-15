@@ -285,6 +285,10 @@ bool Machine::AddSession(Session *s)
         qCritical() << "AddSession() called without a valid profile";
         return false;
     }
+    if (sessionlist.contains(s->session())) {
+        qCritical() << "Machine::AddSession called with duplicate session" << s->session() << "for machine" << serial();
+        return false;
+    }
 
     if (profile->session->ignoreOlderSessions()) {
         qint64 ignorebefore = profile->session->ignoreOlderSessionsDate().toMSecsSinceEpoch();
