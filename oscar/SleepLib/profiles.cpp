@@ -576,11 +576,6 @@ void Profile::DataFormatError(Machine *m)
 }
 void Profile::UnloadMachineData()
 {
-    if (!m_machopened) {
-        qCritical() << "Profile::UnloadMachineData() called with m_machopened==false";
-        return;
-    }
-
     for (auto & mach : m_machlist) {
         mach->saveSessionInfo();
         mach->sessionlist.clear();
