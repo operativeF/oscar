@@ -109,7 +109,7 @@ void Day::addSession(Session *s)
     if (mi != machines.end()) {
         if (mi.value() != s->machine()) {
             qDebug() << "OSCAR can't add session" << s->session()
-                     << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                     << "["+QDateTime::fromTime_t(s->first()).toString("MMM dd, yyyy hh:mm:ss")+"]"
                      << "from machine" << mi.value()->serial() << "to machine" << s->machine()->serial()
                      << "to this day record, as it already contains a different machine of the same MachineType" << s->type();
             return;
@@ -118,12 +118,22 @@ void Day::addSession(Session *s)
         machines[s->type()] = s->machine();
     }
 
-    if (s->first() == 0)
+    if (s->first() == 0) {
         qWarning() << "Day::addSession discarding session" << s->session()
-                 << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
                  << "from machine" << s->machine()->serial() << "with first=0";
-    else
-        sessions.push_back(s);
+        return;
+    }
+    
+    for (auto & sess : sessions) {
+        if (sess->session() == s->session() && sess->type() == s->type()) {
+            // This usually indicates a problem in purging or cleanup somewhere,
+            // unless there's a problem with a parser.
+            qCritical() << "Day object" << this->date().toString() << "adding duplicate session" << s->session();
+            // Don't skip this one, since it might have replaced the original elsewhere already.
+            //return;
+        }
+    }
+    sessions.push_back(s);
 }
 
 EventDataType Day::calcMiddle(ChannelID code)
