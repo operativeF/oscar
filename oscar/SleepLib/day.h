@@ -1,5 +1,6 @@
-﻿/* SleepLib Day Class Header
+/* SleepLib Day Class Header
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (C) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -99,6 +100,9 @@ class Day
 
     //! \brief Returns true if any sessions have records matching specific machine type
     bool searchMachine(MachineType mt);
+
+    //! \brief Removes any lingering references to a specific machine record and emits a warning if there were any
+    void removeMachine(Machine * mach);
 
     //! \brief Returns the Average of all Sessions setting 'code' for this day
     EventDataType settings_avg(ChannelID code);

@@ -519,6 +519,7 @@ bool Machine::Purge(int secret)
 
     // Create a copy of the list so the hash can be manipulated
     QList<Session *> sessions = sessionlist.values();
+    QList<Day *> days = day.values();
 
     // Clean up any loaded sessions from memory first..
     //bool success = true;
@@ -532,6 +533,10 @@ bool Machine::Purge(int secret)
         }
 
         delete sess;
+    }
+    // Make sure there aren't any dangling references to this machine
+    for (auto & d : days) {
+        d->removeMachine(this);
     }
 
     // Remove EVERYTHING under Events folder..

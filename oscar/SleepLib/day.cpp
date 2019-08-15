@@ -1,5 +1,6 @@
 /* SleepLib Day Class Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -1339,6 +1340,35 @@ bool Day::hasMachine(Machine * mach)
             return true;
     }
     return false;
+}
+
+void Day::removeMachine(Machine * mach)
+{
+    // Yell about and fix any dangling references rather than possibly crashing later.
+    //
+    // This has no functional use and can be removed when the data structures are cleaned up
+    // with better encapsulation and fewer unnecessary references between each other.
+    
+    QList<Session*> list = sessions;  // make a copy so the iterator doesn't get broken by removals
+    for (auto & sess : list) {
+        if (sess->machine() == mach) {
+            // This indicates a problem with the Machine class not tracking all of its sessions, for
+            // example if there's a duplicate session ID.
+            qCritical() << "Day object" << this->date().toString()
+                        << "session" << sess->session() << "refers to machine" << mach->serial();
+            removeSession(sess);
+        }
+    }
+    
+    for (auto & m : machines.keys()) {
+        if (machines[m] == mach) {
+            // This indicates a problem internal to the Day class, since removeSession should remove
+            // machines from this list if there are no longer any sessions pointing to it.
+            qCritical() << "Day object" << this->date().toString()
+                        << "refers to machine" << mach->serial();
+            machines.remove(m);
+        }
+    }
 }
 
 QString Day::getCPAPMode()
