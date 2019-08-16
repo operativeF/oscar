@@ -1,5 +1,6 @@
-﻿/* Multilingual Support files
+/* Multilingual Support files
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -176,11 +177,12 @@ void initTranslations()
         QString qtLang = language.left(2);
         if ( qtLang.compare("zh") == 0 )
             qtLang.append("_CN");
-        qDebug() << "Loading" << langname << "QT translation" << "qt_" + qtLang + ".qm" << "from" << qtLangPath.toLocal8Bit().data();
+        QString qtLangFile = "qt_" + qtLang + ".qm";
+        qDebug() << "Loading" << langname << "QT translation" << qtLangFile.toLocal8Bit().data() << "from" << qtLangPath.toLocal8Bit().data();
         QTranslator * qtranslator = new QTranslator();
 
-        if (!langfile.isEmpty() && !qtranslator->load("qt_" + qtLang + ".qm", qtLangPath)) {
-             qWarning() << "Could not load QT translation" << langfile << "reverting to english :(";
+        if (!qtLangFile.isEmpty() && !qtranslator->load(qtLangFile, qtLangPath)) {
+             qWarning() << "Could not load QT translation" << qtLangFile << "reverting to english :(";
         }
 
         qApp->installTranslator(qtranslator);

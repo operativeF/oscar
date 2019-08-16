@@ -165,7 +165,18 @@ macx {
         HelpFiles.path = Contents/Resources/Help
         QMAKE_BUNDLE_DATA += HelpFiles
     }
+
+    QtTransFiles.files = $$files($$[QT_INSTALL_TRANSLATIONS]/qt*.qm)
+    QtTransFiles.path = Contents/translations
+    QMAKE_BUNDLE_DATA += QtTransFiles
+
+    TransFiles.files = $$files($$PWD/translations/*.qm)
+    TransFiles.path = Contents/Resources/translations
     QMAKE_BUNDLE_DATA += TransFiles
+
+    HtmlFiles.files = $${HTML_FILES}
+    HtmlFiles.path = Contents/Resources/html
+    QMAKE_BUNDLE_DATA += HtmlFiles
 } else {
     !contains(DEFINES, helpless) {
         HELPDIR = $$OUT_PWD/Help
