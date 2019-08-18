@@ -193,7 +193,12 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
             cpapinfo += STR_TR_Machine + ": ";
 
 
-            cpapinfo += cpap->brand() + " " + cpap->model() + "\n";
+            cpapinfo += cpap->brand() + " " + cpap->model();
+            QString mn = cpap->modelnumber();
+            if (!mn.isEmpty()) {
+                cpapinfo += " (" + mn + ")";
+            }
+            cpapinfo += "\n";
 
             cpapinfo += STR_TR_Mode + ": " + day->getCPAPMode() + "\n";
             cpapinfo += day->getPressureSettings() + "\n";
