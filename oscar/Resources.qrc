@@ -57,19 +57,5 @@
         <file>icons/dv64.png</file>
         <file>icons/overview-page.png</file>
         <file>icons/fp_icon.png</file>
-        <file>translations/Afrikaans.af.qm</file>
-        <file>translations/Arabic.ar.qm</file>
-        <file>translations/Bulgarian.bg.qm</file>
-        <file>translations/Chinese.zh.qm</file>
-        <file>translations/Deutsch.de.qm</file>
-        <file>translations/English.en_UK.qm</file>
-        <file>translations/Espaniol.es.qm</file>
-        <file>translations/Francais.fr.qm</file>
-        <file>translations/Greek.el.qm</file>
-        <file>translations/Italiano.it.qm</file>
-        <file>translations/Nederlands.nl.qm</file>
-        <file>translations/Portugues.pt.qm</file>
-        <file>translations/Suomi.fi.qm</file>
-        <file>translations/Svenska.se.qm</file>
     </qresource>
 </RCC>
