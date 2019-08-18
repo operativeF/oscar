@@ -629,6 +629,7 @@ MachineInfo ResmedLoader::PeekInfo(const QString & path)
     }
     MachineInfo info = newInfo();
 
+    // TODO: Refactor this into a separate function that can be used by PeekInfo and Open, see PRS1Loader::PeekProperties for an example.
     // Parse # entries into idmap.
     while (!f.atEnd()) {
         QString line = f.readLine().trimmed();
@@ -644,15 +645,16 @@ MachineInfo ResmedLoader::PeekInfo(const QString & path)
                 value.replace("_"," ");
 
                 if (value.contains(STR_ResMed_S9)) {
-                    value.replace(STR_ResMed_S9, "");
+                    //value.replace(STR_ResMed_S9, "");
                     info.series = STR_ResMed_S9;
                 } else if (value.contains(STR_ResMed_AirSense10)) {
-                    value.replace(STR_ResMed_AirSense10, "");
+                    //value.replace(STR_ResMed_AirSense10, "");
                     info.series = STR_ResMed_AirSense10;
                 } else if (value.contains(STR_ResMed_AirCurve10)) {
-                    value.replace(STR_ResMed_AirCurve10, "");
+                    //value.replace(STR_ResMed_AirCurve10, "");
                     info.series = STR_ResMed_AirCurve10;
                 }
+                /*
                 value.replace("(","");
                 value.replace(")","");
                 if (value.contains("Adapt", Qt::CaseInsensitive)) {
@@ -660,6 +662,7 @@ MachineInfo ResmedLoader::PeekInfo(const QString & path)
                         value.replace("Adapt", QObject::tr("VPAP Adapt"));
                     }
                 }
+                */
                 info.model = value.trimmed();
             } else if (key == "PCD") { // Product Code
                 info.modelnumber = value;
@@ -1647,6 +1650,7 @@ int ResmedLoader::Open(const QString & dirpath)
     emit updateMessage(QObject::tr("Parsing Identification File"));
     QApplication::processEvents();
 
+    // TODO: Refactor this into a separate function that can be used by PeekInfo and Open, see PRS1Loader::PeekProperties for an example.
     // Parse # entries into idmap.
     while (!f.atEnd()) {
         line = f.readLine().trimmed();
@@ -1662,15 +1666,16 @@ int ResmedLoader::Open(const QString & dirpath)
             } else if (key == "PNA") {  // Product Name
                 value.replace("_"," ");
                 if (value.contains(STR_ResMed_S9)) {
-                    value.replace(STR_ResMed_S9, "");
+                    //value.replace(STR_ResMed_S9, "");
                     info.series = STR_ResMed_S9;
                 } else if (value.contains(STR_ResMed_AirSense10)) {
-                    value.replace(STR_ResMed_AirSense10, "");
+                    //value.replace(STR_ResMed_AirSense10, "");
                     info.series = STR_ResMed_AirSense10;
                 } else if (value.contains(STR_ResMed_AirCurve10)) {
-                    value.replace(STR_ResMed_AirCurve10, "");
+                    //value.replace(STR_ResMed_AirCurve10, "");
                     info.series = STR_ResMed_AirCurve10;
                 }
+                /*
                 value.replace("(","");
                 value.replace(")","");
 
@@ -1679,6 +1684,7 @@ int ResmedLoader::Open(const QString & dirpath)
                         value.replace("Adapt", QObject::tr("VPAP Adapt"));
                     }
                 }
+                */
                 info.model = value.trimmed();
                 continue;
 
