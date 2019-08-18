@@ -1,5 +1,6 @@
 /* Daily Panel
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -1153,7 +1154,7 @@ QString Daily::getCPAPInformation(Day * day)
 
     QString tooltip=tr("Model %1 - %2").arg(info.modelnumber).arg(info.serial);
     tooltip=tooltip.replace(" ","&nbsp;");
-    html+="<tr><td align=center><p title=\""+tooltip+"\">"+info.brand + " "+ info.series+"<br/> "+info.model+"</p></td></tr>\n";
+    html+="<tr><td align=center><p title=\""+tooltip+"\">"+info.brand+"<br/>"+info.model+"</p></td></tr>\n";
     html+="<tr><td align=center>";
 
     html+=tr("PAP Mode: %1").arg(day->getCPAPMode())+"<br/>";

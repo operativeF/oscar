@@ -1,5 +1,6 @@
 /* gDailySummary Graph Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -108,7 +109,7 @@ void gDailySummary::SetDay(Day *day)
         info_background.append(QColor("orange"));
 
 
-        settings.append(cpap->brand()+ " " + cpap->series());
+        settings.append(cpap->brand());
         settings.append(cpap->model()+ " " + cpap->modelnumber());
         settings.append(schema::channel[CPAP_Mode].option(mode));
 

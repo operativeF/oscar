@@ -1,5 +1,6 @@
-﻿/* Welcome page Implementation
+/* Welcome page Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -173,7 +174,7 @@ QString Welcome::GenerateCPAPHTML()
 
             ui->cpapIcon->setPixmap(QPixmap(cpapimage));
 
-            html+= "<b>"+tr("The last time you used your %1...").arg(cpap->brand()+" "+cpap->series()+" "+cpap->model())+"</b><br/>";
+            html+= "<b>"+tr("The last time you used your %1...").arg(cpap->brand()+" "+cpap->model())+"</b><br/>";
 
             int daysto = date.daysTo(QDate::currentDate());
             QString daystring;

@@ -1,5 +1,6 @@
 /* Statistics Report Generator Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -872,9 +873,8 @@ QString Statistics::GenerateMachineList()
         html += "<thead>";
         html += "<tr bgcolor='"+heading_color+"'><th colspan=7 align=center><font size=+2>" + tr("Machine Information") + "</font></th></tr>";
 
-        html += QString("<tr><td><b>%1</b></td><td><b>%2</b></td><td><b>%3</b></td><td><b>%4</b></td><td><b>%5</b></td><td><b>%6</b></td></tr>")
+        html += QString("<tr><td><b>%1</b></td><td><b>%2</b></td><td><b>%3</b></td><td><b>%4</b></td><td><b>%5</b></td></tr>")
                 .arg(STR_TR_Brand)
-                .arg(STR_TR_Series)
                 .arg(STR_TR_Model)
                 .arg(STR_TR_Serial)
                 .arg(tr("First Use"))
@@ -892,9 +892,8 @@ QString Statistics::GenerateMachineList()
             QDate d1 = m->FirstDay();
             QDate d2 = m->LastDay();
             QString mn = m->modelnumber();
-            html += QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td><td>%5</td><td>%6</td></tr>")
+            html += QString("<tr><td>%1</td><td>%2</td><td>%3</td><td>%4</td><td>%5</td></tr>")
                     .arg(m->brand())
-                    .arg(m->series())
                     .arg(m->model() +
                          (mn.isEmpty() ? "" : QString(" (") + mn + QString(")")))
                     .arg(m->serial())

@@ -1,5 +1,6 @@
 /* Profile Selector Implementation
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -139,7 +140,7 @@ void ProfileSelector::updateProfileList()
         model->setData(model->index(row, 5, QModelIndex()), usersname);
         if (mach) {
             model->setData(model->index(row, 1, QModelIndex()), mach->brand());
-            model->setData(model->index(row, 2, QModelIndex()), mach->series()+" "+mach->model());
+            model->setData(model->index(row, 2, QModelIndex()), mach->model());
             model->setData(model->index(row, 4, QModelIndex()), mach->lastImported().toString(Qt::SystemLocaleShortDate));
         }
         QBrush bg = QColor(Qt::black);

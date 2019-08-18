@@ -1013,7 +1013,7 @@ bool Machine::LoadSummary(ProgressDialog * progress)
     progress->setProgressValue(sess_order.size());
     QApplication::processEvents();
 
-    qDebug() << "Loaded" << info.series.toLocal8Bit().data() << info.model.toLocal8Bit().data() << "data in" << time.elapsed() << "ms";
+    qDebug() << "Loaded" << info.model.toLocal8Bit().data() << "data in" << time.elapsed() << "ms";
 
     return true;
 }

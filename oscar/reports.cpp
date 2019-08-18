@@ -1,5 +1,6 @@
-﻿/* Reports/Printing Module
+/* Reports/Printing Module
  *
+ * Copyright (c) 2019 The OSCAR Team
  * Copyright (c) 2011-2018 Mark Watkins <mark@jedimark.net>
  *
  * This file is subject to the terms and conditions of the GNU General Public
@@ -189,11 +190,10 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
             cpapinfo += STR_TR_MaskTime + QObject::tr(": %1 hours, %2 minutes, %3 seconds\n").arg(h).arg(m).arg(s);
             cpapinfo += STR_TR_BedTime + ": " + QDateTime::fromTime_t(f).time().toString("HH:mm:ss") + " ";
             cpapinfo += STR_TR_WakeUp + ": " + QDateTime::fromTime_t(l).time().toString("HH:mm:ss") + "\n\n";
-            QString submodel;
             cpapinfo += STR_TR_Machine + ": ";
 
 
-            cpapinfo += cpap->brand() + " " + cpap->series() + " " + cpap->model() + submodel + "\n";
+            cpapinfo += cpap->brand() + " " + cpap->model() + "\n";
 
             cpapinfo += STR_TR_Mode + ": " + day->getCPAPMode() + "\n";
             cpapinfo += day->getPressureSettings() + "\n";
