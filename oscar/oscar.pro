@@ -96,7 +96,7 @@ QMAKE_TARGET_DESCRIPTION = "OpenSource CPAP Analysis Reporter"
 VERSION = 0.0.0.0
 RC_ICONS = ./icons/logo.ico
 
-macx {
+macx  {
   QMAKE_TARGET_BUNDLE_PREFIX = "org.oscar-team"
 # QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.12
   LIBS             += -lz
@@ -136,6 +136,7 @@ macx {
 }
 
 TRANSLATIONS = $$files($$PWD/../Translations/*.ts)
+TRANSLATIONS += $$files($$PWD/../Translations/qt/*.ts)
 
 qtPrepareTool(LRELEASE, lrelease)
 
@@ -145,7 +146,6 @@ for(file, TRANSLATIONS) {
  qmfile ~= s,.ts$,.qm,
 
  qmdir = $$PWD/translations
-
  !exists($$qmdir) {
      mkpath($$qmdir)|error("Aborting.")
  }
@@ -166,9 +166,10 @@ macx {
         QMAKE_BUNDLE_DATA += HelpFiles
     }
 
-    QtTransFiles.files = $$files($$[QT_INSTALL_TRANSLATIONS]/qt*.qm)
-    QtTransFiles.path = Contents/translations
-    QMAKE_BUNDLE_DATA += QtTransFiles
+# Removed because we are not using QT's translation files
+#    QtTransFiles.files = $$files($$[QT_INSTALL_TRANSLATIONS]/qt*.qm)
+#    QtTransFiles.path = Contents/translations
+#    QMAKE_BUNDLE_DATA += QtTransFiles
 
     TransFiles.files = $$files($$PWD/translations/*.qm)
     TransFiles.path = Contents/Resources/translations
@@ -185,7 +186,7 @@ macx {
     DDIR = $$OUT_PWD/Translations
     HTMLDIR = $$OUT_PWD/Html
 
-    TRANS_FILES += $$PWD/translations/*.qm
+    TRANS_FILES = $$PWD/translations/*.qm
 
     win32 {
         TRANS_FILES_WIN = $${TRANS_FILES}
