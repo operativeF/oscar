@@ -189,7 +189,7 @@ void initTranslations()
         QString qtLangFile = "qt_" + qtLang + ".qm";
         if (!QFileInfo(qtLangFile).exists()) {
             qtLang = qtLang.left(2);        // Undo QT suffix for zh; we don't use that for our file
-            qtLangFile = "Oscar_qt_" + qtLang + ".qm";
+            qtLangFile = "oscar_qt_" + qtLang + ".qm";
         }
         qDebug() << "Loading" << langname << "QT translation" << qtLangFile.toLocal8Bit().data() << "from" << langpath.toLocal8Bit().data();
         QTranslator * qtranslator = new QTranslator();
