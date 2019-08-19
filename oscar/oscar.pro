@@ -171,7 +171,7 @@ macx {
 #    QtTransFiles.path = Contents/translations
 #    QMAKE_BUNDLE_DATA += QtTransFiles
 
-    TransFiles.files = $$files($$PWD/translations/*.qm)
+    TransFiles.files = $${TRANSLATIONS_FILES}
     TransFiles.path = Contents/Resources/translations
     QMAKE_BUNDLE_DATA += TransFiles
 
@@ -186,7 +186,7 @@ macx {
     DDIR = $$OUT_PWD/Translations
     HTMLDIR = $$OUT_PWD/Html
 
-    TRANS_FILES = $$PWD/translations/*.qm
+    TRANS_FILES = $${TRANSLATIONS_FILES}
 
     win32 {
         TRANS_FILES_WIN = $${TRANS_FILES}
