@@ -518,8 +518,6 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
         return false;
     }
     QString modelnum;
-    int ptype=0;
-    bool ok;
     for (auto & key : props.keys()) {
         bool skip = false;
 
@@ -532,7 +530,8 @@ bool PRS1Loader::PeekProperties(MachineInfo & info, const QString & filename, Ma
             skip = true;
         }
         if (key == "ProductType") {
-            ptype = props[key].toInt(&ok, 16);
+            bool ok;
+            props[key].toInt(&ok, 16);
             if (!ok) qWarning() << "ProductType" << props[key];
             skip = true;
         }
