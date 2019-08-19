@@ -438,7 +438,11 @@
     </message>
     <message>
         <source>No data is available for this day.</source>
-        <translation type="unfinished"></translation>
+        <translation>Für diesen Tag sind keine Daten verfügbar.</translation>
+    </message>
+    <message>
+        <source>If height is greater than zero in Preferences Dialog, setting weight here will show Body Mass Index (BMI) value</source>
+        <translation>Wenn die Größe im Einstellungsdialog größer als Null ist, zeigt die Gewichtseinstellung hier den Wert des Body Mass Index (BMI) an</translation>
     </message>
 </context>
 <context>
@@ -692,10 +696,6 @@
         <translation>-</translation>
     </message>
     <message>
-        <source>CPAP</source>
-        <translation>CPAP</translation>
-    </message>
-    <message>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
@@ -714,10 +714,6 @@
     <message>
         <source>Donations are not implemented</source>
         <translation>Spenden werden nicht umgesetzt</translation>
-    </message>
-    <message>
-        <source>DISCLAIMER:</source>
-        <translation>HAFTUNGSAUSSCHLUSS:</translation>
     </message>
     <message>
         <source>%1 %2</source>
@@ -760,20 +756,12 @@
         <translation>OSCAR</translation>
     </message>
     <message>
-        <source>Note:</source>
-        <translation>Hinweis:</translation>
-    </message>
-    <message>
         <source>Loading profile &quot;%1&quot;</source>
         <translation>Profil laden &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Import &amp;ZEO Data</source>
         <translation>Import &amp;ZEO Daten</translation>
-    </message>
-    <message>
-        <source>Copyright:</source>
-        <translation>Urheberrecht:</translation>
     </message>
     <message>
         <source>MSeries Import complete</source>
@@ -792,32 +780,16 @@
         <translation>Eine%1 Dateistruktur für eine %2 wurde in:</translation>
     </message>
     <message>
-        <source>This software has been created to assist you in reviewing the data produced by CPAP Machines, used in the treatment of various Sleep Disorders.</source>
-        <translation>Diese Software wurde entwickelt, um Sie bei der Überprüfung der Daten zu unterstützen, die von CPAP-Geräten zur Behandlung verschiedener Schlafstörungen erzeugt werden.</translation>
-    </message>
-    <message>
         <source>Importing Data</source>
         <translation>Importieren von Daten</translation>
-    </message>
-    <message>
-        <source>The authors will NOT be held liable by anyone who harms themselves or others by use or misuse of this software.</source>
-        <translation>Die Autoren übernehmen KEINE Haftung für Personen, die sich oder Anderen durch Verwendung oder Missbrauch dieser Software schaden.</translation>
     </message>
     <message>
         <source>Online Users &amp;Guide</source>
         <translation>Online &amp;Handbuch</translation>
     </message>
     <message>
-        <source>Online Help Resources</source>
-        <translation>Online Hilfe</translation>
-    </message>
-    <message>
         <source>View &amp;Welcome</source>
         <translation>&amp;Willkommensansicht</translation>
-    </message>
-    <message>
-        <source>Currenly supported machines:</source>
-        <translation>Derzeit unterstützte Geräte:</translation>
     </message>
     <message>
         <source>Show Performance Information</source>
@@ -828,28 +800,12 @@
         <translation>Es gab ein Problem beim Öffnen einer M-Serie Block-Datei: </translation>
     </message>
     <message>
-        <source>&lt;a href=&apos;http://www.cpaptalk.com&apos;&gt;CPAPTalk Forum&lt;/a&gt;,</source>
-        <translation>&lt;a href=&apos;http://www.apneuvereniging.nl/forum&apos;&gt;ApneuVereinigung&lt;/a&gt;,</translation>
-    </message>
-    <message>
         <source>Current Days</source>
         <translation>Aktueller Tag</translation>
     </message>
     <message>
-        <source>Contec CMS50D+, CMS50E and CMS50F (not 50FW) Oximeters</source>
-        <translation>Contec CMS50D +, CMS50E und CMS50F (nicht 50FW) Pulsoxymeter</translation>
-    </message>
-    <message>
-        <source>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV models)</source>
-        <translation>Philips Respironics System One (CPAP Pro, Auto, BiPAP &amp; ASV-Modelle)</translation>
-    </message>
-    <message>
         <source>&amp;About</source>
         <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>Further Information</source>
-        <translation>Weitere Informationen</translation>
     </message>
     <message>
         <source>View &amp;Daily</source>
@@ -892,16 +848,8 @@
         <translation>%1&apos;s Journal</translation>
     </message>
     <message>
-        <source>Plus a few &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt;usage notes&lt;/a&gt;, and some important information for Mac users.</source>
-        <translation>Plus ein paar &lt;a href=&apos;qrc:/docs/usage.html&apos;&gt; Verwendungshinweise &lt;/ a&gt;, und einige wichtige Informationen für Mac-Nutzer.</translation>
-    </message>
-    <message>
         <source>Import Problem</source>
         <translation>Importproblem</translation>
-    </message>
-    <message>
-        <source>Friendly forums to talk and learn about Sleep Apnea:</source>
-        <translation>Bitte sprechen Sie freundlich in den Foren um mehr über OSCAR zu erfahren:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Please be aware you can not undo this operation!&lt;/b&gt;</source>
@@ -956,14 +904,6 @@
         <translation>O&amp;xymetrie Assistent</translation>
     </message>
     <message>
-        <source>ResMed S9 Oximeter Attachment</source>
-        <translation>ResMed S9 Oxymeter Adapter</translation>
-    </message>
-    <message>
-        <source>About OSCAR</source>
-        <translation>Über OSCAR</translation>
-    </message>
-    <message>
         <source>Bookmarks</source>
         <translation>Lesezeichen</translation>
     </message>
@@ -1000,10 +940,6 @@
         <translation>Ein Problem melden</translation>
     </message>
     <message>
-        <source>Please report any bugs you find to the OSCAR developer&apos;s group.</source>
-        <translation>Bitte melden Sie alle Fehler, die Sie finden, an die OSCAR-Entwicklergruppe.</translation>
-    </message>
-    <message>
         <source>Date Range</source>
         <translation>Datumsbereich</translation>
     </message>
@@ -1028,10 +964,6 @@
         <translation>Schlafstörungen Nutzungswörterbuch &amp;Wörterverzeichnis</translation>
     </message>
     <message>
-        <source>This is a beta release, some features may not yet behave as expected.</source>
-        <translation>Dies ist eine Beta-Version und einige Funktionen funktionieren noch nicht wie erwartet.</translation>
-    </message>
-    <message>
         <source>Are you really sure you want to do this?</source>
         <translation>Sind Sie wirklich sicher, dass Sie das tun wollen?</translation>
     </message>
@@ -1044,10 +976,6 @@
         <translation>Oxymetriedaten löschen</translation>
     </message>
     <message>
-        <source>*** &lt;u&gt;Use at your own risk&lt;/u&gt; ***</source>
-        <translation>*** &lt;u&gt; Benutzung auf eigene Gefahr&lt;/u&gt; ***</translation>
-    </message>
-    <message>
         <source>Records</source>
         <translation>Zusammenfassung</translation>
     </message>
@@ -1056,20 +984,8 @@
         <translation>Verwenden Sie &amp;Antialiasing</translation>
     </message>
     <message>
-        <source>I don&apos;t recommend using this built in web browser to do any major surfing in, it will work, but it&apos;s mainly meant as a help browser.</source>
-        <translation>Ich empfehle, nicht mit diesem Browser zu Surfen. Es wird funktionieren, aber er ist vor allem als Hilfe-Browser gedacht.</translation>
-    </message>
-    <message>
-        <source>About &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt;Sleep Apnea&lt;/a&gt; on Wikipedia</source>
-        <translation>Über &lt;a href=&apos;http://en.wikipedia.org/wiki/Sleep_apnea&apos;&gt; Schlafapnoe&lt;/a&gt; auf Wikipedia</translation>
-    </message>
-    <message>
         <source>Would you like to import from this location?</source>
         <translation>Möchten Sie von diesem Ort impoertieren?</translation>
-    </message>
-    <message>
-        <source>This is &lt;font color=&apos;red&apos;&gt;&lt;u&gt;NOT&lt;/u&gt;&lt;/font&gt; medical software. This application is merely a data viewer, and no guarantee is made regarding accuracy or correctness of any calculations or data displayed.</source>
-        <translation>Dies ist &lt;font color=&apos;red&apos;&gt;&lt;u&gt;KEINE&lt;/u&gt;&lt;/font&gt; medizinische Software. Bei dieser Anwendung handelt es sich lediglich um einen Datenbetrachter, und es wird keine Garantie für die Richtigkeit oder Richtigkeit der angezeigten Berechnungen oder Daten übernommen.</translation>
     </message>
     <message>
         <source>Somnopause Data Import complete</source>
@@ -1094,10 +1010,6 @@
     <message>
         <source>CSV Export Wizard</source>
         <translation>CSV-Export-Assistent</translation>
-    </message>
-    <message>
-        <source>DeVilbiss Intellipap (Auto)</source>
-        <translation>DeVilbiss Intellipap (Auto)</translation>
     </message>
     <message>
         <source>&amp;Automatic Oximetry Cleanup</source>
@@ -1144,10 +1056,6 @@
         <translation>Denken Sie daran, den Importer auf den Stammordner oder den Laufwerksbuchstaben Ihrer Datenkarte zu verweisen und nicht auf einen Unterordner.</translation>
     </message>
     <message>
-        <source>Welcome to OSCAR</source>
-        <translation>Willkommen bei OSCAR</translation>
-    </message>
-    <message>
         <source>Backup &amp;Journal</source>
         <translation>Sicherungskopie &amp;Journal</translation>
     </message>
@@ -1160,10 +1068,6 @@
 %2</translation>
     </message>
     <message>
-        <source>This software is released freely under the &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</source>
-        <translation>Diese Software wird frei veröffentlicht unter &lt;a href=&quot;qrc:/COPYING&quot;&gt;GNU Public License version 3&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <source>Reporting issues is not yet implemented</source>
         <translation>Berichterstattungsprobleme sind noch nicht implementiert</translation>
     </message>
@@ -1174,14 +1078,6 @@
     <message>
         <source>Provided you have made &lt;i&gt;your &lt;b&gt;own&lt;/b&gt; backups for ALL of your CPAP data&lt;/i&gt;, you can still complete this operation, but you will have to restore from your backups manually.</source>
         <translation>Vorausgesetzt, Sie haben &lt;i&gt;&lt;b&gt;eigene &lt;/b&gt; Backups für ALLE Ihre CPAP-Daten&lt;/i&gt;, die Sie noch vervollständigen können erstellt. Aber Sie müssen die Backups manuell wiederherstellen.</translation>
-    </message>
-    <message>
-        <source>ResMed S9 models (CPAP, Auto, VPAP)</source>
-        <translation>ResMed S9 Modellen (CPAP, AutoPAP, VPAP)</translation>
-    </message>
-    <message>
-        <source>Your doctor should always be your first and best source of guidance regarding the important matter of managing your health.</source>
-        <translation>Ihr Arzt sollte immer die erste und beste Informationsquelle für das wichtige Management Ihrer Gesundheit sein.</translation>
     </message>
     <message>
         <source>&amp;Advanced</source>
@@ -1260,20 +1156,8 @@
         <translation>&amp;Einstellungen</translation>
     </message>
     <message>
-        <source>Fisher &amp; Paykel ICON (CPAP, Auto)</source>
-        <translation>Fisher &amp; Paykel ICON (CPAP, Auto)</translation>
-    </message>
-    <message>
         <source>You are about to &lt;font size=+2&gt;obliterate&lt;/font&gt; OSCAR&apos;s machine database for the following machine:&lt;/p&gt;</source>
         <translation>Du bist dabei &lt;font size=+2&gt;zu löschen&lt;/font&gt; OSCAR-Gerätedatenbank für folgende Geräte:&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</source>
-        <translation>&lt;a href=&apos;http://www.apneaboard.com/forums/&apos;&gt;Apnea Board&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Toggle &amp;Line Cursor</source>
-        <translation>Ein/Aus &amp;Linienbeschreibung</translation>
     </message>
     <message>
         <source>Are you &lt;b&gt;absolutely sure&lt;/b&gt; you want to proceed?</source>
@@ -1300,20 +1184,8 @@
         <translation>Eine%1 Dateistruktur befindet sich unter:</translation>
     </message>
     <message>
-        <source>(It doesn&apos;t support SSL encryption, so it&apos;s not a good idea to type your passwords or personal details anywhere.)</source>
-        <translation>(Das Programm unterstützt keine SSL-Verschlüsselung, so dass es keine gute Idee ist, Ihre Passwörter oder persönliche Daten irgendwo einzugeben.)</translation>
-    </message>
-    <message>
         <source>Change &amp;Data Folder</source>
         <translation>&amp;Datenordner ändern</translation>
-    </message>
-    <message>
-        <source>License:</source>
-        <translation>Lizenz:</translation>
-    </message>
-    <message>
-        <source>OSCAR has been designed by a software developer with personal experience with a sleep disorder, and shaped by the feedback of many other willing testers dealing with similar conditions.</source>
-        <translation>OSCAR wurde von einem Softwareentwickler mit persönlicher Erfahrung mit einer Schlafstörung entwickelt und durch das Feedback vieler anderer freiwilliger Tester geprägt, die sich mit ähnlichen Bedingungen befassen.</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -1332,10 +1204,6 @@
         <translation>Es wurde kein Profil für den Import ausgewählt.</translation>
     </message>
     <message>
-        <source>The release notes for this version can be found in the About OSCAR menu item.</source>
-        <translation>Die Versionshinweise für diese Version finden Sie im Menüpunkt Über OSCAR.</translation>
-    </message>
-    <message>
         <source>Please note, that this could result in loss of data if OSCAR&apos;s backups have been disabled.</source>
         <translation>Bitte beachten Sie, dass dies zu Datenverlust führen kann, wenn die Backups von OSCAR deaktiviert wurden.</translation>
     </message>
@@ -1345,15 +1213,71 @@
     </message>
     <message>
         <source>&amp;Import SDcard Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Import von SD-Kartendaten</translation>
     </message>
     <message>
         <source>The User&apos;s Guide will open in your default browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Benutzerhandbuch wird in Ihrem Standardbrowser geöffnet</translation>
     </message>
     <message>
         <source>The Glossary will open in your default browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Glossar wird in Ihrem Standardbrowser geöffnet</translation>
+    </message>
+    <message>
+        <source>Show Daily view</source>
+        <translation>Tagesansicht anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Overview view</source>
+        <translation>Übersichtsansicht anzeigen</translation>
+    </message>
+    <message>
+        <source>Maximize window</source>
+        <translation>Fenster maximieren</translation>
+    </message>
+    <message>
+        <source>Reset sizes of graphs</source>
+        <translation>Größen von Diagrammen zurücksetzen</translation>
+    </message>
+    <message>
+        <source>Show Right Sidebar</source>
+        <translation>Rechte Seitenleiste anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Statistics view</source>
+        <translation>Statistikansicht anzeigen</translation>
+    </message>
+    <message>
+        <source>Show &amp;Line Cursor</source>
+        <translation>Zeigt &amp;Cursorlinie an</translation>
+    </message>
+    <message>
+        <source>Show Daily Left Sidebar</source>
+        <translation>Tägliche Ansicht in linker Sidebar anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Daily Calendar</source>
+        <translation>Tageskalender anzeigen</translation>
+    </message>
+    <message>
+        <source>System Information</source>
+        <translation>Systeminformationen</translation>
+    </message>
+    <message>
+        <source>Show &amp;Pie Chart</source>
+        <translation>Torten -&amp;Diagramm anzeigen</translation>
+    </message>
+    <message>
+        <source>Show Pie Chart on Daily page</source>
+        <translation>Tortendiagramm auf der Tagesseite anzeigen</translation>
+    </message>
+    <message>
+        <source>Ctrl+P</source>
+        <translation>Ctrl+P</translation>
+    </message>
+    <message>
+        <source>OSCAR Information</source>
+        <translation>OSCAR Information</translation>
     </message>
 </context>
 <context>
@@ -1518,10 +1442,6 @@
         <translation>Die Software ist nichts für Kinder.</translation>
     </message>
     <message>
-        <source>metric</source>
-        <translation>metrisch</translation>
-    </message>
-    <message>
         <source>OSCAR is copyright &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nightowl Software</source>
         <translation>OSCAR ist urheberrechtlich geschützt &amp;copy;2011-2018 Mark Watkins and portions &amp;copy;2019 Nachteule Software</translation>
     </message>
@@ -1540,10 +1460,6 @@
     <message>
         <source>about:blank</source>
         <translation>Leere Seite</translation>
-    </message>
-    <message>
-        <source>archiac</source>
-        <translation>archaïsch</translation>
     </message>
     <message>
         <source>RX Pressure</source>
@@ -1644,6 +1560,14 @@
     <message>
         <source>Welcome to the Open Source CPAP Analysis Reporter</source>
         <translation>Willkommen beim Open Source CPAP Analysis Reporter</translation>
+    </message>
+    <message>
+        <source>Metric</source>
+        <translation>Metrisch</translation>
+    </message>
+    <message>
+        <source>English</source>
+        <translation>Englisch</translation>
     </message>
 </context>
 <context>
@@ -1828,10 +1752,6 @@ Index</translation>
     <message>
         <source>You need to tell your oximeter to begin sending data to the computer.</source>
         <translation>Sie müssen im Menü Ihres Oxymeters den Upload starten.</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character pet name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier können Sie Ihr Oxymeter bezeichnen (7 Zeichen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>No Oximetry module could parse the given file:</source>
@@ -2062,10 +1982,6 @@ Index</translation>
         <translation>Löschen der Sitzung nach erfolgreichem Upload</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, some oximeters will require you to do something in the devices menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option ermöglicht den Import (über Kabel) aus Ihrem Oxymeter.&lt;/p&gt;&lt;p&gt;Nach der Auswahl dieser Option, werden einige Einstellungen im Oxymeter erforderlich sein um den Upload zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Live Oximetry Mode</source>
         <translation>Live-Oxymetriemodus</translation>
     </message>
@@ -2138,14 +2054,6 @@ Index</translation>
         <translation>&quot;%1&quot;, Sitzung %2</translation>
     </message>
     <message>
-        <source>CMS50Fv3.7+/H/I, Pulox PO-400/500</source>
-        <translation>CMS50Fv3.7+/H/I, Pulox PO-400/500</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  becauseif something goes wrong before OSCAR saves your session, you won&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option löscht die importierte Sitzung von Ihrem Oxymeter, nachdem der Import abgeschlossen ist. &lt;/p&gt;&lt;p&gt;Seien Sie vorsichtig, denn wenn etwas nicht funktioniert, bevor OSCAR Ihre Sitzung speichert, erhalten Sie die Daten nicht zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Show Live Graphs</source>
         <translation>Live-Diagramme anzeigen</translation>
     </message>
@@ -2196,6 +2104,26 @@ Index</translation>
     <message>
         <source>OSCAR is currently compatible with Contec CMS50D+, CMS50E, CMS50F and CMS50I serial oximeters.&lt;br/&gt;(Note: Direct importing from bluetooth models is &lt;span style=&quot; font-weight:600;&quot;&gt;probably not&lt;/span&gt; possible yet)</source>
         <translation>OSCAR ist derzeit kompatibel mit den seriellen Oximetern Contec CMS50D+, CMS50E, CMS50F und CMS50I.&lt;br/&gt;(Hinweis: Der direkte Import aus Bluetooth-Modellen ist möglich. &lt;span style=&quot; font-weight:600;&quot;&gt;wahrscheinlich noch nicht&lt;/span&gt; möglich)</translation>
+    </message>
+    <message>
+        <source>CMS50Fv3.7+/H/I, CMS50D+v4.6, Pulox PO-400/500</source>
+        <translation>CMS50Fv3.7+/H/I, CMS50D+v4.6, Pulox PO-400/500</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here you can enter a 7 character name for this oximeter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier können Sie einen 7-stelligen Namen für dieses Oximeter eingeben.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will erase the imported session from your oximeter after import has completed. &lt;/p&gt;&lt;p&gt;Use with caution,  because if something goes wrong before OSCAR saves your session, you can&apos;t get it back.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Option löscht die importierte Sitzung aus Ihrem Oximeter, nachdem der Import abgeschlossen ist. &lt;/p&gt;&lt;p&gt;Seien Sie vorsichtig, denn wenn etwas schief geht, bevor OSCAR Ihre Sitzung speichert, können Sie es nicht zurückbekommen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option allows you to import (via cable) from your oximeters internal recordings.&lt;/p&gt;&lt;p&gt;After selecting on this option, old Contec oximeters will require you to use the device&apos;s menu to initiate the upload.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mit dieser Option können Sie (per Kabel) interne Aufzeichnungen aus dem Oximeter importieren.&lt;/p&gt;&lt;p&gt;Nachdem Sie diese Option ausgewählt haben, müssen Sie bei alten Contec-Oximetern das Menü des Geräts verwenden, um den Upload zu starten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Please connect your oximeter device, turn it on, and enter the menu</source>
+        <translation>Bitte schließen Sie Ihr Oximetergerät an, schalten Sie es ein und öffnen Sie das Menü</translation>
     </message>
 </context>
 <context>
@@ -2462,38 +2390,6 @@ Are you sure you want to make these changes?</source>
 Möchten Sie diese Änderungen wirklich vornehmen?</translation>
     </message>
     <message>
-        <source>Show event breakdown pie chart</source>
-        <translation>Zeige Ereignis Aufschlüsselung im Kreisdiagramm</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Oxymetrie- und CPAP-Daten synchronisieren&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50-Daten, die aus SpO2 Review (aus .spoR-Dateien) oder der seriellen Importmethode importiert wurden, sind nicht zulässig und haben &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;nicht&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; den richtigen Zeitstempel zum Synchronisieren.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Der Live-View-Modus (über ein serielles Kabel) ist eine Möglichkeit, um eine genaue Synchronisierung mit CMS 50-Oxymetern zu erreichen, zielt jedoch nicht auf die CPAP-Clock-Drift ab.&lt;/span&gt;&lt;/p
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Wenn Sie Ihren Oxymeter-Aufnahmemodus exakt zur gleichen Zeit starten &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;wie Ihr CPAP-Gerät, können Sie jetzt auch eine Synchronisierung durchführen. &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Der serielle Importvorgang benötigt die Startzeit der ersten CPAP-Sitzung der letzten Nacht. (Denken Sie daran, zuerst Ihre CPAP-Daten zu importieren!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Enable/disable experimental event flagging enhancements. 
 It allows detecting borderline events, and some the machine missed.
 This option must be enabled before import, otherwise a purge is required.</source>
@@ -2532,18 +2428,6 @@ Diese Option muss vor dem Import aktiviert werden, da sonst eine Reinigung erfor
     <message>
         <source>Pixmap caching is an graphics acceleration technique. May cause problems with font drawing in graph display area on your platform.</source>
         <translation>Pixmap-Caching ist eine Grafikbeschleunigungstechnik, welche zu Problemen mit der Anzeige von Schrift in dem Grafik-Anzeigebereich auf Ihrer Plattform führen kann.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Changing SD Backup compression options doesn&apos;t automatically recompress backup data.  &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Das Ändern der SD Backup-Komprimierungsoptionen ist nicht automatisch eine Backup-Datenkomprimierung.  &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Reset &amp;Defaults</source>
@@ -2903,20 +2787,12 @@ Vor allem wirkt sich das auf den Import von Daten aus.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;True Maximum liegt das Maximum des Datensatzes.&lt;/p&gt;&lt;p&gt;99. Perzentile filtert den seltensten Ausreißer heraus.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Your masks vent rate at 4cmH2O pressure</source>
-        <translation>Ihre Masken Entlüftungsrate bei 4cmH2O Druck</translation>
-    </message>
-    <message>
         <source>Profile</source>
         <translation>Profile</translation>
     </message>
     <message>
         <source>Flag Type</source>
         <translation>Markierungstyp</translation>
-    </message>
-    <message>
-        <source>Your masks vent rate at 20cmH2O pressure</source>
-        <translation>Ihre Masken Entlüftungsrate bei 20cmH2O Druck</translation>
     </message>
     <message>
         <source>Calculate Unintentional Leaks When Not Present</source>
@@ -3181,18 +3057,6 @@ Um es mit ResScan zu verwenden, müssen die .gz-Dateien zuerst dekomprimiert wer
         <translation>Alle auf neue Version prüfen</translation>
     </message>
     <message>
-        <source>Allows graphs to be &quot;screenshotted&quot; for display purposes.
-The Event Breakdown PIE chart uses this method, as does
-the printing code.
-Unfortunately some older computers/versions of Qt can cause
-this application to be unstable with this feature enabled.</source>
-        <translation>Ermöglicht die Darstellung von Diagrammen zu Anzeigezwecken.
-Das PIE-Diagramm für Ereignisaufgliederungen verwendet diese Methode ebenso wie
-der Druckcode.
-Leider können einige ältere Computer / Qt-Versionen dazu führen
-das diese Anwendung instabil wird, wenn diese Funktion aktiviert ist.</translation>
-    </message>
-    <message>
         <source>Waveforms</source>
         <translation>Wellenformen</translation>
     </message>
@@ -3339,6 +3203,46 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
     <message>
         <source>Line Thickness</source>
         <translation>Linienstärke</translation>
+    </message>
+    <message>
+        <source>Changing SD Backup compression options doesn&apos;t automatically recompress backup data.</source>
+        <translation>Das Ändern der SD Backup-Komprimierungsoptionen führt nicht automatisch zu einer Neukomprimierung der Backup-Daten.</translation>
+    </message>
+    <message>
+        <source>Your masks vent rate at 20 cmH2O pressure</source>
+        <translation>Ihre Maskenlüftungsrate bei 20 cmH2O Druck</translation>
+    </message>
+    <message>
+        <source>Your masks vent rate at 4 cmH2O pressure</source>
+        <translation>Ihre Maskenlüftungsrate bei 4 cmH2O Druck</translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Syncing Oximetry and CPAP Data&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50 data imported from SpO2Review (from .spoR files) or the serial import method does &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;not&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; have the correct timestamp needed to sync.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Live view mode (using a serial cable) is one way to acheive an accurate sync on CMS50 oximeters, but does not counter for CPAP clock drift.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;If you start your Oximeters recording mode at &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;exactly &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;the same time you start your CPAP machine, you can now also achieve sync. &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;The serial import process takes the starting time from last nights first CPAP session. (Remember to import your CPAP data first!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600;&quot;&gt;Synchronisation von Oximetrie- und CPAP-Daten&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;CMS50-Daten, die aus SpO2Review importiert wurden (aus.spoR-Dateien) oder die serielle Importmethode führt zu folgenden Ergebnissen &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:600; text-decoration: underline;&quot;&gt;nicht&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt; über den richtigen Zeitstempel verfügen, der für die Synchronisierung benötigt wird..&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Der Live-View-Modus (unter Verwendung eines seriellen Kabels) ist eine Möglichkeit, eine genaue Synchronisation auf CMS50-Oximetern zu erreichen, setzt aber der CPAP-Taktdrift keinen entgegen.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Wenn Sie Ihren Oximeter-Aufnahmemodus bei &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-style:italic;&quot;&gt;genau &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Wenn Sie gleichzeitig mit Ihrem CPAP-Gerät starten, können Sie nun auch die Synchronisation erreichen.. &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Der serielle Importprozess dauert die Startzeit der ersten CPAP-Sitzung von gestern Abend. (Denken Sie daran, zuerst Ihre CPAP-Daten zu importieren!)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -4329,10 +4233,6 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
         <translation>cmH2O</translation>
     </message>
     <message>
-        <source>The developers needs a .zip copy of this machines&apos; SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
-        <translation>Die Entwickler benötigen eine ZIP-Kopie der SD-Karte dieser Geräte und entsprechende Encore-PDF-Berichte, damit OSCAR verwendet werden kann.</translation>
-    </message>
-    <message>
         <source>Pressure Support</source>
         <translation>Druckunterstützung</translation>
     </message>
@@ -4799,10 +4699,6 @@ Sind Sie sicher, dass Sie diese Änderungen vornehmen wollen?</translation>
     <message>
         <source>Somnopose</source>
         <translation>Somnopose</translation>
-    </message>
-    <message>
-        <source>System One (60 Series)</source>
-        <translation>System One (60 Series)</translation>
     </message>
     <message>
         <source>AHI %1</source>
@@ -5861,10 +5757,6 @@ TTIA: %1</translation>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
-    <message>
         <source>Finishing Up...</source>
         <translation>Beenden...</translation>
     </message>
@@ -6055,10 +5947,6 @@ Stunden: %1</translation>
     <message>
         <source>Upper Threshold</source>
         <translation>obere Schwelle</translation>
-    </message>
-    <message>
-        <source>DreamStation</source>
-        <translation>Dream Station</translation>
     </message>
     <message>
         <source>OSCAR will not touch this folder, and will create a new one instead.</source>
@@ -6390,6 +6278,62 @@ Stunden: %1</translation>
         <source>Click [OK] to go to the next screen or [No] if you do not wish to use any SleepyHead data.</source>
         <translation>Klicken Sie auf [OK], um zum nächsten Bildschirm zu gelangen, oder auf[Nein], wenn Sie keine SleepyHead-Daten verwenden möchten.</translation>
     </message>
+    <message>
+        <source>Built with Qt</source>
+        <translation>Gebaut mit Qt</translation>
+    </message>
+    <message>
+        <source>Branch:</source>
+        <translation>Niederlassung:</translation>
+    </message>
+    <message>
+        <source>Revision</source>
+        <translation>Revision</translation>
+    </message>
+    <message>
+        <source>App key:</source>
+        <translation>App-Taste:</translation>
+    </message>
+    <message>
+        <source>Operating system:</source>
+        <translation>Betriebssystem:</translation>
+    </message>
+    <message>
+        <source>Graphics Engine:</source>
+        <translation>Grafik-Modul:</translation>
+    </message>
+    <message>
+        <source>Graphics Engine type:</source>
+        <translation>Typ der Grafik-Engine:</translation>
+    </message>
+    <message>
+        <source>The developers needs a .zip copy of this machine&apos;s SD card and matching Encore .pdf reports to make it work with OSCAR.</source>
+        <translation>Die Entwickler benötigen eine.zip-Kopie der SD-Karte dieses Geräts und passende Encore.pdf-Berichte, damit es mit OSCAR funktioniert.</translation>
+    </message>
+    <message>
+        <source>Machine Untested</source>
+        <translation>Geräteüberprüfung</translation>
+    </message>
+    <message>
+        <source>Your Philips Respironics CPAP machine (Model %1) has not been tested yet.</source>
+        <translation>Ihr Philips Respironics CPAP-Gerät (Modell %1) wurde noch nicht getestet.</translation>
+    </message>
+    <message>
+        <source>It seems similar enough to other machines that it might work, but the developers would like a .zip copy of this machine&apos;s SD card and matching Encore .pdf reports to make sure it works with OSCAR.</source>
+        <translation>Es scheint ähnlich genug zu anderen Maschinen zu sein, dass es funktionieren könnte, aber die Entwickler möchten eine.zip-Kopie der SD-Karte dieser Maschine und passende Encore.pdf-Berichte, um sicherzustellen, dass es mit OSCAR funktioniert.</translation>
+    </message>
+    <message>
+        <source>Data directory:</source>
+        <translation>Datenverzeichnis:</translation>
+    </message>
+    <message>
+        <source>Updating Statistics cache</source>
+        <translation>Aktualisieren des Statistik-Cache</translation>
+    </message>
+    <message>
+        <source>Usage Statistics</source>
+        <translation>Statistik der Anwendung</translation>
+    </message>
 </context>
 <context>
     <name>Report</name>
@@ -6484,10 +6428,6 @@ Stunden: %1</translation>
         <translation>%1 Tage %2 Daten über %3</translation>
     </message>
     <message>
-        <source>Changes to Prescription Settings</source>
-        <translation>Änderungen an den Einstellungen nur nach Absprache mit Ihrem Arzt vornehmen</translation>
-    </message>
-    <message>
         <source>Date: %1 CSR: %2%</source>
         <translation>Datum: %1 CSR: %2%</translation>
     </message>
@@ -6540,10 +6480,6 @@ Stunden: %1</translation>
         <translation>Druck-Statistik</translation>
     </message>
     <message>
-        <source>Compliance</source>
-        <translation>Therapietreue</translation>
-    </message>
-    <message>
         <source>Culminative AHI: %1</source>
         <translation>Culminative AHI: %1</translation>
     </message>
@@ -6562,10 +6498,6 @@ Stunden: %1</translation>
     <message>
         <source>Average %1</source>
         <translation>Durchschnittliche(r) %1</translation>
-    </message>
-    <message>
-        <source>Usage Statistics</source>
-        <translation>Statistik der Anwendung</translation>
     </message>
     <message>
         <source>No %1 data available.</source>
@@ -6610,10 +6542,6 @@ Stunden: %1</translation>
     <message>
         <source>Best Flow Limitation</source>
         <translation>Beste Flusslimitierung</translation>
-    </message>
-    <message>
-        <source>I can haz data?!?</source>
-        <translation>Ich kann keine Daten erkennen?!?</translation>
     </message>
     <message>
         <source>Address:</source>
@@ -6706,6 +6634,18 @@ Stunden: %1</translation>
     <message>
         <source>Oscar has no data to report :(</source>
         <translation>Oscar hat keine Daten zu melden :(</translation>
+    </message>
+    <message>
+        <source>Compliance (%1 hrs/day)</source>
+        <translation>Einhaltung (%1 Std./Tag)</translation>
+    </message>
+    <message>
+        <source>Changes to Machine Settings</source>
+        <translation>Änderungen an den Geräteeinstellungen</translation>
+    </message>
+    <message>
+        <source>No data found?!?</source>
+        <translation>Keine Daten gefunden?!??</translation>
     </message>
 </context>
 <context>
@@ -6894,10 +6834,6 @@ Stunden: %1</translation>
         <translation>vor %2 Tagen</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;need &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;to be locked &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;before &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Warnung: &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;ResMed S9 SDCards &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;müssen &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;gesperrt sein. &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ff0000;&quot;&gt;Vor &lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;dem Einfügen in Ihren Computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; color:#000000;&quot;&gt;Einige Betriebssysteme schreiben Cache-Dateien, die ihr spezielles Dateisystem Journal beschädigen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>yesterday</source>
         <translation>gestern</translation>
     </message>
@@ -6960,6 +6896,10 @@ Stunden: %1</translation>
     <message>
         <source>Your EPAP pressure was under %1 %2 for %3% of the time.</source>
         <translation>Ihre EPAP- Druck war unter %1 %2 für %3% diese Zeit.</translation>
+    </message>
+    <message>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Warning: &lt;/span&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;ResMed S9 SDCards need to be locked &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;before inserting into your computer&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Some operating systems write cache files which break their special filesystem Journal&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Warnung: &lt;/span&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;ResMed S9 SDCards müssen gesperrt werden. &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;vor dem Einfügen in Ihren Computerr&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Einige Betriebssysteme schreiben Cache-Dateien, die ihr spezielles Dateisystem Journal unterbrechen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
