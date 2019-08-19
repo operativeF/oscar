@@ -87,7 +87,7 @@ mkdir Translations
 copy ..\translations Translations || exit 84
 
 ::: Run deployment tool
-windeployqt.exe --release --force --compiler-runtime OSCAR.exe || exit 87
+windeployqt.exe --release --force --compiler-runtime --no-translations --verbose 1 OSCAR.exe || exit 87
 
 ::: Clean up unwanted translation files
 :::For unknown reasons, Win64 build copies the .ts files into the release directory, while Win32 does not
