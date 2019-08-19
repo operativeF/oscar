@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(logger, SIGNAL(outputLog(QString)), this, SLOT(logMessage(QString)));
     }
 
-    // Bring window to top (useful when language is changed) - GTS 3/31/2019
+    // Bring window to top (useful when language is changed)
     this->activateWindow();
     this->raise();
 

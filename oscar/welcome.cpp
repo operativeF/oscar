@@ -66,7 +66,7 @@ void Welcome::refreshPage()
 
     // Enable buttons that might be disabled
     ui->dailyButton->setEnabled(b);
-    ui->oximetryButton->setEnabled(b);  // looks like this was omitted from the list (gts 7/4/2019)
+    ui->oximetryButton->setEnabled(b);
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
 
