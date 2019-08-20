@@ -2446,7 +2446,7 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
             case 2:  // Statistics
                 // These appear every 2 minutes, so presumably summarize the preceding period.
                 //data[pos+0];  // TODO: 0 = ???
-                this->AddEvent(new PRS1EPAPEvent(t, data[pos+1], GAIN));               // 01=EPAP (average?)
+                this->AddEvent(new PRS1EPAPEvent(t, data[pos+1], GAIN));               // 01=EPAP (average?)  // TODO: needs to be added second if we decide to calculate PS
                 this->AddEvent(new PRS1IPAPEvent(t, data[pos+2], GAIN));               // 02=IPAP (average?)
                 this->AddEvent(new PRS1TotalLeakEvent(t, data[pos+3]));                // 03=Total leak (average?)
                 this->AddEvent(new PRS1RespiratoryRateEvent(t, data[pos+4]));          // 04=Breaths Per Minute (average?)
@@ -4167,14 +4167,26 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                 // pressures seem variable on practice, maybe due to ramp or leaks?
                 fixed_ipap = data[pos];
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP, fixed_ipap, GAIN));
+                // TODO: We need to revisit whether PS should be shown as a setting.
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS, fixed_ipap - fixed_epap, GAIN));
+                if (fixed_epap == 0) UNEXPECTED_VALUE(fixed_epap, ">0");
                 break;
             case 8:  // Min IPAP
+                CHECK_VALUE(fixed_ipap, 0);
                 min_ipap = data[pos];
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MIN, min_ipap, GAIN));
+                // TODO: We need to revisit whether PS should be shown as a setting.
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MIN, min_ipap - fixed_epap, GAIN));
+                if (fixed_epap == 0) UNEXPECTED_VALUE(fixed_epap, ">0");
                 break;
             case 9:  // Max IPAP
+                CHECK_VALUE(fixed_ipap, 0);
+                if (min_ipap == 0) UNEXPECTED_VALUE(min_ipap, ">0");
                 max_ipap = data[pos];
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_IPAP_MAX, max_ipap, GAIN));
+                // TODO: We need to revisit whether PS should be shown as a setting.
+                this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_PS_MAX, max_ipap - fixed_epap, GAIN));
+                if (fixed_epap == 0) UNEXPECTED_VALUE(fixed_epap, ">0");
                 break;
             case 0x19:  // Tidal Volume (AVAPS)
                 //CHECK_VALUE(data[pos], 47);  // gain 10.0
