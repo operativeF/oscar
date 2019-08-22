@@ -74,7 +74,9 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     border->setFrameShape(QFrame::StyledPanel);
     framelayout->addWidget(border,1);
 
+    ///////////////////////////////////////////////////////////////////////////////
     // Create the horizontal layout to hold the GraphView object and it's scrollbar
+    ///////////////////////////////////////////////////////////////////////////////
     layout = new QHBoxLayout(border);
     layout->setSpacing(0); // remove the ugly margins/spacing
     layout->setMargin(0);
@@ -82,7 +84,9 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     border->setLayout(layout);
     border->setAutoFillBackground(false);
 
+    ///////////////////////////////////////////////////////////////////////////////
     // Create the GraphView Object
+    ///////////////////////////////////////////////////////////////////////////////
     GraphView = new gGraphView(ui->graphArea, m_shared, this);
     GraphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -95,12 +99,14 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
     scrollbar->setMaximumWidth(20);
     GraphView->setScrollBar(scrollbar);
 
-
     // Add the graphView and scrollbar to the layout.
     layout->addWidget(GraphView, 1);
     layout->addWidget(scrollbar, 0);
     layout->layout();
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Create date display at bottom of page
+    ///////////////////////////////////////////////////////////////////////////////
     dateLabel = new MyLabel(this);
     dateLabel->setAlignment(Qt::AlignVCenter);
     dateLabel->setText("[Date Widget]");
@@ -113,6 +119,9 @@ Overview::Overview(QWidget *parent, gGraphView *shared) :
 
     ui->dateLayout->addWidget(dateLabel,1);
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Rebuild contents
+    ///////////////////////////////////////////////////////////////////////////////
     RebuildGraphs(false);
 
     ui->rangeCombo->setCurrentIndex(p_profile->general->lastOverviewRange());
@@ -152,14 +161,16 @@ void Overview::ResetFont()
     dateLabel->setFont(font);
 }
 
-void Overview::RebuildGraphs(bool reset)
-{
-    qint64 minx, maxx;
-    if (reset) {
-        GraphView->GetXBounds(minx, maxx);
-    }
+// Create all the graphs for the Overview page
+void Overview::CreateAllGraphs() {
 
-    GraphView->trashGraphs(true);
+    ///////////////////////////////////////////////////////////////////////////////
+    // Add all the graphs
+    // Process is to createGraph() to make the graph object, then add a layer
+    // that provides the contents for that graph.
+    ///////////////////////////////////////////////////////////////////////////////
+
+    // Add graphs that are always included
     ChannelID ahicode = p_profile->general->calculateRDI() ? CPAP_RDI : CPAP_AHI;
 
     if (ahicode == CPAP_RDI) {
@@ -186,6 +197,7 @@ void Overview::RebuildGraphs(bool reset)
     ttia = new gTTIAChart();
     TTIA->AddLayer(ttia);
 
+    // Add graphs for all channels that have been marked in Preferences Dialog as wanting a graph
     QHash<ChannelID, schema::Channel *>::iterator chit;
     QHash<ChannelID, schema::Channel *>::iterator chit_end = schema::channel.channels.end();
     for (chit = schema::channel.channels.begin(); chit != chit_end; ++chit) {
@@ -195,9 +207,10 @@ void Overview::RebuildGraphs(bool reset)
             ChannelID code = chan->id();
             QString name = chan->fullname();
             if (name.length() > 16) name = chan->label();
+//            qDebug() << "Channel" << name << "type" << chan->type() << "machine type" << chan->machtype();
             gGraph *G = createGraph(chan->code(), name, chan->description());
             if ((chan->type() == schema::FLAG) || (chan->type() == schema::MINOR_FLAG)) {
-                gSummaryChart * sc = new gSummaryChart(chan->code(), MT_CPAP);
+                gSummaryChart * sc = new gSummaryChart(chan->code(), chan->machtype()); // gts was MT_CPAP
                 sc->addCalc(code, ST_CPH, schema::channel[code].defaultColor());
                 G->AddLayer(sc);
             } else if (chan->type() == schema::SPAN) {
@@ -211,13 +224,25 @@ void Overview::RebuildGraphs(bool reset)
                 sc->addCalc(code, ST_CPH, schema::channel[code].defaultColor());
                 G->AddLayer(sc);
             }
-        }
-
-    }
+        } // if showInOverview()
+    } // for chit
 
     WEIGHT = createGraph(STR_GRAPH_Weight, STR_TR_Weight, STR_TR_Weight, YT_Weight);
     BMI = createGraph(STR_GRAPH_BMI, STR_TR_BMI, tr("Body\nMass\nIndex"));
     ZOMBIE = createGraph(STR_GRAPH_Zombie, STR_TR_Zombie, tr("How you felt\n(0-10)"));
+}
+
+// Recalculates Overview chart info
+void Overview::RebuildGraphs(bool reset)
+{
+    qint64 minx, maxx;
+    if (reset) {
+        GraphView->GetXBounds(minx, maxx);
+    }
+
+    GraphView->trashGraphs(true);       // Remove all existing graphs
+
+    CreateAllGraphs();
 
     if (reset) {
         GraphView->resetLayout();
@@ -228,6 +253,9 @@ void Overview::RebuildGraphs(bool reset)
     }
 }
 
+// Create an overview graph, adding it to the overview gGraphView object
+// param QString name  The title of the graph
+// param QString units The units of measurements to show in the popup
 gGraph *Overview::createGraph(QString code, QString name, QString units, YTickerType yttype)
 {
     int default_height = AppSetting->graphHeight();
@@ -404,10 +432,11 @@ void Overview::on_dateStart_dateChanged(const QDate &date)
     ui->dateEnd->setMinimumDate(date);
 }
 
+// Zoom to 100% button clicked or called back from 100% zoom in popup menu
 void Overview::on_zoomButton_clicked()
 {
-    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;
-    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 00, 0), Qt::UTC).toTime_t()) * 1000L;
+    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;  // GTS why UTC?
+    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 00, 0), Qt::UTC).toTime_t()) * 1000L;  // Interesting: start date set to 10 min after midnight, ending at 11 pm
     GraphView->SetXBounds(d1, d2);
 }
 
@@ -422,10 +451,11 @@ void Overview::ResetGraphOrder()
     ResetGraphLayout();
 }
 
+// Process new range selection from combo button
 void Overview::on_rangeCombo_activated(int index)
 {
-    p_profile->general->setLastOverviewRange(index);
-    ui->dateStart->setMinimumDate(p_profile->FirstDay());
+    p_profile->general->setLastOverviewRange(index);  // type of range in last use
+    ui->dateStart->setMinimumDate(p_profile->FirstDay());  // first and last dates for ANY machine type
     ui->dateEnd->setMaximumDate(p_profile->LastDay());
 
     QDate end = p_profile->LastDay();
@@ -467,9 +497,11 @@ void Overview::on_rangeCombo_activated(int index)
 
     if (start < p_profile->FirstDay()) { start = p_profile->FirstDay(); }
 
+    // first and last dates for ANY machine type
     setRange(start, end);
 }
 
+// Saves dates in UI, clicks zoom button, and updates combo box
 void Overview::setRange(QDate start, QDate end)
 {
     ui->dateEnd->blockSignals(true);
@@ -480,7 +512,7 @@ void Overview::setRange(QDate start, QDate end)
     ui->dateEnd->setDate(end);
     ui->dateEnd->blockSignals(false);
     ui->dateStart->blockSignals(false);
-    this->on_zoomButton_clicked();
+    this->on_zoomButton_clicked();  // Click on zoom-out to 100% button
     updateGraphCombo();
 }
 

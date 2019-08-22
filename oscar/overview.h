@@ -77,7 +77,7 @@ class Overview : public QWidget
 
     gSummaryChart * stg, *uc, *ahi, * pres, *lk, *npb, *rr, *mv, *tv, *nll, *sn, *ttia;
 
-    //! \breif List of SummaryCharts shown on the overview page
+    //! \brief List of SummaryCharts shown on the overview page
     QVector<SummaryChart *> OverviewCharts;
 
     void ResetGraph(QString name);
@@ -118,6 +118,8 @@ class Overview : public QWidget
 
 
   private:
+    void CreateAllGraphs();
+
     Ui::Overview *ui;
     gGraphView *GraphView;
     MyScrollBar *scrollbar;
