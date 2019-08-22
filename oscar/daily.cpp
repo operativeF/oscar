@@ -1003,7 +1003,7 @@ QString Daily::getMachineSettings(Day * day) {
         html+="<tr><td colspan=5>&nbsp;</td></tr>";
 
         if (day->noSettings(cpap)) {
-            html+="<tr><td colspan=5 align=center><i>"+tr("<b>Please Note:</b> All settings shown below are based on assumptions that nothing's changed since previous days.")+"</i></td></tr>\n";
+            html+="<tr><td colspan=5 align=center><i>"+tr("<b>Please Note:</b> All settings shown below are based on assumptions that nothing has changed since previous days.")+"</i></td></tr>\n";
         } else if ((day->settingExists(CPAP_BrokenSummary))) {
             html+="<tr><td colspan=5 align=center><i>"+tr("Machine Settings Unavailable")+"</i></td></tr></table><hr/>\n";
             return html;
@@ -2198,7 +2198,7 @@ void Daily::on_bookmarkTable_itemClicked(QTableWidgetItem *item)
         et2=et3;
     } else if (!day) return;
     if ((et<st2) || (st>et2)) {
-        mainwin->Notify(tr("This bookmarked is in a currently disabled area.."));
+        mainwin->Notify(tr("This bookmark is in a currently disabled area.."));
         return;
     }
 
