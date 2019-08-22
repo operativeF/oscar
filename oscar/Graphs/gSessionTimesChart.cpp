@@ -422,6 +422,11 @@ void gSummaryChart::paint(QPainter &painter, gGraph &graph, const QRegion &regio
 
     int idx = idx_start;
 
+    int numDaysOffset = 0;
+    if (firstday > date) {
+        numDaysOffset = date.daysTo(firstday);
+    }
+
     auto ite = dayindex.find(enddate);
     idx_end = daylist.size()-1;
     if (ite != dayindex.end()) {
@@ -466,6 +471,7 @@ void gSummaryChart::paint(QPainter &painter, gGraph &graph, const QRegion &regio
     preCalc();
 
     float lastx1 = rect.left();
+    lastx1 += numDaysOffset * barw;
     float right_edge = (rect.left()+rect.width()+1);
 
 
@@ -515,6 +521,7 @@ void gSummaryChart::paint(QPainter &painter, gGraph &graph, const QRegion &regio
     float ymult = float(rect.height()) / (maxy-miny);
 
     lastx1 = rect.left();
+    lastx1 += numDaysOffset * barw;
 
     /////////////////////////////////////////////////////////////////////
     /// Main drawing loop
@@ -822,9 +829,6 @@ void gSessionTimesChart::paint(QPainter &painter, gGraph &graph, const QRegion &
 
     QDateTime splittime;
 
-//    float lasty1 = rect.bottom();
-    float lastx1 = rect.left();
-
     auto it = dayindex.find(date);
     int idx=0;
 
@@ -833,6 +837,15 @@ void gSessionTimesChart::paint(QPainter &painter, gGraph &graph, const QRegion &
     } else {
         idx = it.value();
     }
+
+    int numDaysOffset = 0;
+    if (firstday > date) {
+        numDaysOffset = date.daysTo(firstday);
+    }
+
+    //    float lasty1 = rect.bottom();
+    float lastx1 = rect.left();
+    lastx1 += numDaysOffset * barw;
 
     auto ite = dayindex.find(enddate);
     int idx_end = daylist.size()-1;
@@ -953,6 +966,7 @@ void gSessionTimesChart::paint(QPainter &painter, gGraph &graph, const QRegion &
     nousedays = 0;
 
     lastx1 = rect.left();
+    lastx1 += numDaysOffset * barw;
 
     /////////////////////////////////////////////////////////////////////
     /// Main Loop scaling
