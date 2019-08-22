@@ -1122,6 +1122,7 @@ void gGraphView::GetXBounds(qint64 &st, qint64 &et)
     et = m_maxx;
 }
 
+// Supplies time range to all graph objects in linked group, refreshing if requested
 void gGraphView::SetXBounds(qint64 minx, qint64 maxx, short group, bool refresh)
 {
     for (auto & graph : m_graphs) {
@@ -1130,7 +1131,7 @@ void gGraphView::SetXBounds(qint64 minx, qint64 maxx, short group, bool refresh)
         }
     }
 
-    m_minx = minx;
+    m_minx = minx;  // left and right edges of graph, in msec in epoch
     m_maxx = maxx;
 
     if (refresh) { timedRedraw(0); }
@@ -3277,6 +3278,7 @@ void gGraphView::keyPressEvent(QKeyEvent *event)
     //qDebug() << "Keypress??";
 }
 
+// Sends day object to be distributed to all Graphs Layers objects
 void gGraphView::setDay(Day *day)
 {
 

@@ -247,10 +247,8 @@ bool gGraph::isEmpty()
     return empty;
 }
 
-
 float gGraph::printScaleX() { return m_graphview->printScaleX(); }
 float gGraph::printScaleY() { return m_graphview->printScaleY(); }
-
 
 //void gGraph::drawGLBuf()
 //{
@@ -264,6 +262,7 @@ float gGraph::printScaleY() { return m_graphview->printScaleY(); }
 //    }
 
 //}
+
 void gGraph::setDay(Day *day)
 {
     // Don't update for snapshots..
@@ -527,7 +526,7 @@ QPixmap gGraph::renderPixmap(int w, int h, bool printing)
     return pm;
 }
 
-// Sets a new Min & Max X clipping, refreshing the graph and all it's layers.
+// Sets a new Min & Max X dates for clipping data (refresh done by caller)
 void gGraph::SetXBounds(qint64 minx, qint64 maxx)
 {
     invalidate_xAxisImage = true;

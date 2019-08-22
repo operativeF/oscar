@@ -655,6 +655,7 @@ class gGraphView
 
     bool m_showsplitter;
 
+    // msec in epoch of first day and last day of range
     qint64 m_minx, m_maxx;
 
     QVector<SelectionHistoryItem> fwd_history;
