@@ -23,6 +23,7 @@
 #include "Graphs/gXAxis.h"
 #include "Graphs/gLineChart.h"
 #include "Graphs/gYAxis.h"
+#include "cprogressbar.h"
 
 #include "mainwindow.h"
 extern MainWindow *mainwin;
@@ -496,6 +497,26 @@ void Overview::on_rangeCombo_activated(int index)
     }
 
     if (start < p_profile->FirstDay()) { start = p_profile->FirstDay(); }
+
+    // Ensure that all summary files are available and update version numbers if required
+    int size = start.daysTo(end);
+    qDebug() << "Overview range combo from" << start << "to" << end << "with" << size << "days";
+    QDate dateback = end;
+    CProgressBar * progress = new CProgressBar (QObject::tr("Loading summaries"), mainwin, size);
+    for (int i=1; i < size; ++i) {
+        progress->add(1);
+        auto di = p_profile->daylist.find(dateback);
+        dateback = dateback.addDays(-1);
+        if (di == p_profile->daylist.end())  // Check for no Day entry
+           continue;
+        Day * day = di.value();
+        if (!day)
+            continue;
+        if (day->size() <= 0)
+            continue;
+        day->OpenSummary();     // This can be slow if summary needs to be updated to new version
+    }
+    progress->close();
 
     // first and last dates for ANY machine type
     setRange(start, end);
