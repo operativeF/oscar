@@ -55,6 +55,9 @@ void CProgressBar::add (long count) {
 
     // See if timer limit has passed
     if (!progress && !timeChecked && (timer.elapsed() > timerLimit)) {
+        maxSteps -= numDone;       // maxSteps now is number of steps remaining
+        numDone = 1;               // and we figure only one processed so far
+
         progress = new QProgressDialog(savedTitle,
                                 QString(), 0, maxSteps, parent,
                                 Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
@@ -62,8 +65,7 @@ void CProgressBar::add (long count) {
         progress->setValue(0);
         progress->setMinimumWidth(width);
         progress->show();
-        maxSteps -= numDone;       // maxSteps now is number of steps remaining
-        numDone = 1;               // and we figure only one processed so far
+
         QCoreApplication::processEvents();
         showProgress = true;
     }
