@@ -1566,7 +1566,7 @@ void gGraphView::paintGL()
 
 }
 
-QString gGraphView::getRangeString()
+QString gGraphView::getRangeString(bool daysOnly)
 {
     QDateTime st = QDateTime::fromMSecsSinceEpoch(m_minx);
     QDateTime et = QDateTime::fromMSecsSinceEpoch(m_maxx);
@@ -1574,10 +1574,20 @@ QString gGraphView::getRangeString()
     QDate std = st.date();
     QDate etd = et.date();
 
+    // If just a day range wanted (as used by Overview)
+    if (daysOnly) {
+        if (std.year() == etd.year())
+            return st.toString(" d MMM") + " - " +  et.toString("d MMM yyyy");
+        else
+            return st.toString(" d MMM yyyy") + " - " +  et.toString("d MMM yyyy");
+    }
+
     // Format if Begin and End are on different days
-    if (std != etd) {
-        QString txt = st.toString(" d MMM [ HH:mm:ss") + " - " +  et.toString("HH:mm:ss ] d MMM yyyy");
-        return txt;
+    if (std != etd) {  // further adjust formatting if on different years
+        if (std.year() == etd.year())
+            return st.toString(" d MMM [ HH:mm:ss") + " - " +  et.toString("HH:mm:ss ] d MMM yyyy");
+        else
+            return st.toString(" d MMM yyyy [ HH:mm:ss") + " - " +  et.toString("HH:mm:ss ] d MMM yyyy");
     }
 
     // Range is within one (local) day

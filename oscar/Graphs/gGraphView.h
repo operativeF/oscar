@@ -512,7 +512,7 @@ class gGraphView
     inline double currentTime() { return m_currenttime; }
 
     //! \brief Returns a context formatted text string with the currently selected time range
-    QString getRangeString();
+    QString getRangeString(bool daysOnly = false);
 
     Layer * findLayer(gGraph * graph, LayerType type);
 

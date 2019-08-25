@@ -291,7 +291,7 @@ void Overview::on_LineCursorUpdate(double time)
         // even though the generated string is displayed to the user
         // no time zone conversion is neccessary, so pass UTC
         // to prevent QT from automatically converting to local time
-        QDateTime dt = QDateTime::fromMSecsSinceEpoch(time, Qt::UTC);
+        QDateTime dt = QDateTime::fromMSecsSinceEpoch(time/*, Qt::UTC*/);
         QString txt = dt.toString("dd MMM yyyy (dddd)");
         dateLabel->setText(txt);
     } else dateLabel->setText(QString(GraphView->emptyText()));
@@ -300,7 +300,7 @@ void Overview::on_LineCursorUpdate(double time)
 void Overview::on_RangeUpdate(double minx, double /* maxx */)
 {
     if (minx > 1) {
-        dateLabel->setText(GraphView->getRangeString());
+        dateLabel->setText(GraphView->getRangeString(true));
     } else {
         dateLabel->setText(QString(GraphView->emptyText()));
     }
@@ -419,16 +419,16 @@ void Overview::dateEnd_currentPageChanged(int year, int month)
 
 void Overview::on_dateEnd_dateChanged(const QDate &date)
 {
-    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;
-    qint64 d2 = qint64(QDateTime(date, QTime(23, 0, 0), Qt::UTC).toTime_t()) * 1000L;
+    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;
+    qint64 d2 = qint64(QDateTime(date, QTime(23, 0, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;
     GraphView->SetXBounds(d1, d2);
     ui->dateStart->setMaximumDate(date);
 }
 
 void Overview::on_dateStart_dateChanged(const QDate &date)
 {
-    qint64 d1 = qint64(QDateTime(date, QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;
-    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 0, 0), Qt::UTC).toTime_t()) * 1000L;
+    qint64 d1 = qint64(QDateTime(date, QTime(0, 10, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;
+    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 0, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;
     GraphView->SetXBounds(d1, d2);
     ui->dateEnd->setMinimumDate(date);
 }
@@ -436,8 +436,8 @@ void Overview::on_dateStart_dateChanged(const QDate &date)
 // Zoom to 100% button clicked or called back from 100% zoom in popup menu
 void Overview::on_zoomButton_clicked()
 {
-    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0), Qt::UTC).toTime_t()) * 1000L;  // GTS why UTC?
-    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 00, 0), Qt::UTC).toTime_t()) * 1000L;  // Interesting: start date set to 10 min after midnight, ending at 11 pm
+    qint64 d1 = qint64(QDateTime(ui->dateStart->date(), QTime(0, 10, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;  // GTS why UTC?
+    qint64 d2 = qint64(QDateTime(ui->dateEnd->date(), QTime(23, 0, 0)/*, Qt::UTC*/).toTime_t()) * 1000L;  // Interesting: start date set to 10 min after midnight, ending at 11 pm
     GraphView->SetXBounds(d1, d2);
 }
 
