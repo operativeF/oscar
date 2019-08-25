@@ -511,8 +511,11 @@ class gGraphView
     //! \brief The current time the mouse pointer is hovering over
     inline double currentTime() { return m_currenttime; }
 
+    //! \brief Returns a context formatted text string with the currently selected time range in days
+    QString getRangeInDaysString();
+
     //! \brief Returns a context formatted text string with the currently selected time range
-    QString getRangeString(bool daysOnly = false);
+    QString getRangeString();
 
     Layer * findLayer(gGraph * graph, LayerType type);
 

@@ -300,7 +300,7 @@ void Overview::on_LineCursorUpdate(double time)
 void Overview::on_RangeUpdate(double minx, double /* maxx */)
 {
     if (minx > 1) {
-        dateLabel->setText(GraphView->getRangeString(true));
+        dateLabel->setText(GraphView->getRangeInDaysString());
     } else {
         dateLabel->setText(QString(GraphView->emptyText()));
     }
