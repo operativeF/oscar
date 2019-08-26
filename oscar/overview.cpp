@@ -149,6 +149,11 @@ Overview::~Overview()
     disconnect(ui->dateEnd->calendarWidget(), SIGNAL(currentPageChanged(int, int)), this, SLOT(dateEnd_currentPageChanged(int, int)));
     disconnect(ui->dateStart->calendarWidget(), SIGNAL(currentPageChanged(int, int)), this, SLOT(dateStart_currentPageChanged(int, int)));
 
+    // Don't save custom date range.  Default to last 3 months
+    if (p_profile->general->lastOverviewRange() == 8) {
+        p_profile->general->setLastOverviewRange(4);
+    }
+
     // Save graph orders and pin status, etc...
     GraphView->SaveSettings("Overview");//no trans
 
@@ -470,6 +475,7 @@ void Overview::on_rangeCombo_activated(int index)
 
         ui->dateStart->setMaximumDate(ui->dateEnd->date());
         ui->dateEnd->setMinimumDate(ui->dateStart->date());
+        p_profile->general->setLastOverviewRange(8);
         return;
     }
 
