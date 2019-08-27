@@ -151,7 +151,7 @@ void NewProfile::on_nextButton_clicked()
         break;
 
     case 1:
-        if (ui->userNameEdit->text().isEmpty()) {
+        if (ui->userNameEdit->text().trimmed().isEmpty()) {
             QMessageBox::information(this, STR_MessageBox_Error, tr("Please provide a username for this profile"), QMessageBox::Ok);
             return;
         }
@@ -190,7 +190,7 @@ void NewProfile::on_nextButton_clicked()
         ui->stackedWidget->setCurrentIndex(index);
     } else {
         // Finish button clicked.
-        QString username = ui->userNameEdit->text();
+        QString username = ui->userNameEdit->text().trimmed();
 
         if (QMessageBox::question(this, tr("Profile Changes"), tr("Accept and save this information?"),
                                   QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
