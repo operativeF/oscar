@@ -61,8 +61,6 @@ void Welcome::refreshPage()
 
     b = !noMachines;
 
-    qDebug() << "Welcome::refreshPae b =" << b << "noMachines" << noMachines;
-
     // Copy application font to tool buttons
     ui->importButton->setFont(QApplication::font());
     ui->dailyButton->setFont(QApplication::font());

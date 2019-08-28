@@ -533,7 +533,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     QList<Machine *> posmachines = p_profile->GetMachines(MT_POSITION);
     QList<Machine *> stgmachines = p_profile->GetMachines(MT_SLEEPSTAGE);
     bool noMachines = machines.isEmpty() && posmachines.isEmpty() && oximachines.isEmpty() && stgmachines.isEmpty();
-    qDebug() << "OpenProfile: noMachines" << noMachines;
+
     ui->importButton->setDisabled(false);
     ui->oximetryButton->setDisabled(false);
     ui->dailyButton->setDisabled(noMachines);
