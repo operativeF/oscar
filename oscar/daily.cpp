@@ -679,6 +679,7 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
             for (int z=0;z<m.value().size();z++) {
                 EventList & ev=*(m.value()[z]);
 
+                int numDigits = ceil(log10(ev.count()+1));
                 for (quint32 o=0;o<ev.count();o++) {
                     qint64 t=ev.time(o)+drift;
 
@@ -687,7 +688,7 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
                     }
                     QStringList a;
                     QDateTime d=QDateTime::fromMSecsSinceEpoch(t); // Localtime
-                    QString s=QString("#%1: %2").arg((int)(++mccnt[code]),(int)3,(int)10,QChar('0')).arg(d.toString("HH:mm:ss"));
+                    QString s=QString("#%1: %2").arg((int)(++mccnt[code]),(int)numDigits,(int)10,QChar('0')).arg(d.toString("HH:mm:ss"));
                     if (m.value()[z]->raw(o) > 0)
                             s += QString(" (%3)").arg(m.value()[z]->raw(o));
 
