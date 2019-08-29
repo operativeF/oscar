@@ -4206,17 +4206,15 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
         switch (code) {
             case 0: // Device Mode
                 CHECK_VALUE(pos, 2);  // always first?
-                // TODO: We probably need additional enums for these modes, the below are just a rough guess mapping for now.
                 switch (data[pos]) {
                 case 1: cpapmode = PRS1_MODE_S; break;   // "S" mode
                 case 2: cpapmode = PRS1_MODE_ST; break;  // "S/T" mode; pressure seems variable?
                 case 4: cpapmode = PRS1_MODE_PC; break;  // "PC" mode? Usually "PC - AVAPS", see setting 1 below
-                // TODO: fixed vs. variable PS seems to be independent from ventilator mode, for example
-                // S/T can be fixed (single IPAP pressure) or variable (IPAP min/max).
                 default:
                     UNEXPECTED_VALUE(data[pos], "known device mode");
                     break;
                 }
+                this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
                 break;
             case 1: // ???
                 // How do these interact with the mode above?
@@ -4258,11 +4256,12 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                 if (fixed_epap == 0) UNEXPECTED_VALUE(fixed_epap, ">0");
                 break;
             case 0x19:  // Tidal Volume (AVAPS)
+                CHECK_VALUES(cpapmode, PRS1_MODE_ST, PRS1_MODE_PC);
                 //CHECK_VALUE(data[pos], 47);  // gain 10.0
-                // TODO: add a setting for this
+                // TODO: add a setting for this, and maybe mark the imported mode as AVAPS on import?
                 break;
-            case 0x1e:  // Backup rate (S/T and AVAPS)
-                //CHECK_VALUES(cpapmode, MODE_BILEVEL_FIXED, MODE_AVAPS);  // TODO: this should be testing for S/T rather than bilevel
+            case 0x1e:  // Backup rate (S/T and PC)
+                CHECK_VALUES(cpapmode, PRS1_MODE_ST, PRS1_MODE_PC);
                 // TODO: Does mode breath rate off mean this is essentially bilevel? The pressure graphs are confusing.
                 CHECK_VALUES(data[pos], 0, 2);  // 0 = Breath Rate off (S), 2 = fixed BPM (1 = auto on F5V3 setting 0x14)
                 //CHECK_VALUE(data[pos+1], 10);  // BPM for mode 2
@@ -4315,8 +4314,6 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
         pos += len;
     } while (ok && pos + 2 <= size);
     
-    this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
-
     return ok;
 }
 
@@ -5365,7 +5362,6 @@ bool PRS1Import::ImportSummary()
                 break;
             case PRS1_SETTING_IPAP_MIN:
                 session->settings[CPAP_IPAPLo] = e->value();
-                // TODO: the below test doesn't work here because the mode setting is happening at the end of the event stream...
                 if (cpapmode == MODE_BILEVEL_FIXED) {
                     cpapmode = MODE_BILEVEL_AUTO_VARIABLE_PS;  // TODO: this isn't quite right, on ventilators it's actually fixed EPAP with variable PS
                 }
