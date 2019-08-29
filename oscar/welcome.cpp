@@ -35,19 +35,22 @@ void Welcome::refreshPage()
 {
     bool b;
 
-//    if (p_profile != nullptr) {
-        const auto & mlist = p_profile->GetMachines(MT_CPAP);
-        b = mlist.size() > 0;
-//    } else 
-//        b = false;
+    const auto & mlist = p_profile->GetMachines(MT_CPAP);
+    b = mlist.size() > 0;
 
-    bool showCardWarning = !b;
+    QList<Machine *> oximachines = p_profile->GetMachines(MT_OXIMETER);
+    QList<Machine *> posmachines = p_profile->GetMachines(MT_POSITION);
+    QList<Machine *> stgmachines = p_profile->GetMachines(MT_SLEEPSTAGE);
 
+    bool noMachines = mlist.isEmpty() && posmachines.isEmpty() && oximachines.isEmpty() && stgmachines.isEmpty();
+
+    bool showCardWarning = !noMachines;
 
     // The SDCard warning does not need to be seen anymore for people who DON'T use ResMed S9's.. show first import and only when S9 is present
     for (auto & mach :mlist) {
         if (mach->series().compare("S9") == 0) showCardWarning = true;
     }
+
     ui->S9Warning->setVisible(showCardWarning);
 
     if (!b) {
@@ -56,6 +59,10 @@ void Welcome::refreshPage()
         ui->cpapIcon->setPixmap(pixmap);
     }
 
+    b = !noMachines;
+
+    qDebug() << "Welcome::refreshPae b =" << b << "noMachines" << noMachines;
+
     // Copy application font to tool buttons
     ui->importButton->setFont(QApplication::font());
     ui->dailyButton->setFont(QApplication::font());
@@ -63,10 +70,9 @@ void Welcome::refreshPage()
     ui->statisticsButton->setFont(QApplication::font());
     ui->oximetryButton->setFont(QApplication::font());
 
-
     // Enable buttons that might be disabled
     ui->dailyButton->setEnabled(b);
-    ui->oximetryButton->setEnabled(b);
+    ui->oximetryButton->setEnabled(true);  // Import features always enabled
     ui->overviewButton->setEnabled(b);
     ui->statisticsButton->setEnabled(b);
 
@@ -78,13 +84,8 @@ void Welcome::refreshPage()
 
     mainwin->EnableTabs(b);
 
-/** MainWindow::ui->tabWidget->setTabEnabled(2, b);********* need to find some other way
-*** MainWindow::ui->tabWidget->setTabEnabled(3, b);********* to enable these tabs ******
-*** MainWindow::ui->tabWidget->setTabEnabled(4, b);************************************/
-
     ui->cpapInfo->setHtml(GenerateCPAPHTML());
     ui->oxiInfo->setHtml(GenerateOxiHTML());
-//    qDebug() << "CPAPhtml" << GenerateCPAPHTML();
 }
 
 void Welcome::on_dailyButton_clicked()

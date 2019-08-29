@@ -529,7 +529,11 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     AppSetting->setProfileName(p_profile->user->userName());
     setWindowTitle(STR_TR_OSCAR + QString(" %1 (" + tr("Profile") + ": %2)").arg(getBranchVersion()).arg(AppSetting->profileName()));
 
-    bool noMachines = (machines.isEmpty());
+    QList<Machine *> oximachines = p_profile->GetMachines(MT_OXIMETER);                // Machines of any type except Journal
+    QList<Machine *> posmachines = p_profile->GetMachines(MT_POSITION);
+    QList<Machine *> stgmachines = p_profile->GetMachines(MT_SLEEPSTAGE);
+    bool noMachines = machines.isEmpty() && posmachines.isEmpty() && oximachines.isEmpty() && stgmachines.isEmpty();
+    qDebug() << "OpenProfile: noMachines" << noMachines;
     ui->importButton->setDisabled(false);
     ui->oximetryButton->setDisabled(false);
     ui->dailyButton->setDisabled(noMachines);
@@ -537,7 +541,7 @@ bool MainWindow::OpenProfile(QString profileName, bool skippassword)
     ui->statisticsButton->setDisabled(noMachines);
     ui->tabWidget->setTabEnabled(2, !noMachines);       // daily, STR_TR_Daily);
     ui->tabWidget->setTabEnabled(3, !noMachines);       // overview, STR_TR_Overview);
-    ui->tabWidget->setTabEnabled(4, !noMachines);       // overview, STR_TR_Overview);
+    ui->tabWidget->setTabEnabled(4, !noMachines);       // statistics, STR_TR_Statistics);
 
     int srm = 0;
     if (p_profile) {
@@ -1360,6 +1364,8 @@ void MainWindow::on_oximetryButton_clicked()
     if (p_profile) {
         OximeterImport oxiimp(this);
         oxiimp.exec();
+        if (overview) overview->ReloadGraphs();
+        if (welcome) welcome->refreshPage();
     }
 }
 

@@ -911,6 +911,11 @@ QString Statistics::GenerateMachineList()
 }
 QString Statistics::GenerateRXChanges()
 {
+    // Generate list only if there are CPAP machines
+    QList<Machine *> cpap_machines = p_profile->GetMachines(MT_CPAP);
+    if (cpap_machines.isEmpty())
+        return "";
+
     // do the actual data sorting...
     updateRXChanges();
 
