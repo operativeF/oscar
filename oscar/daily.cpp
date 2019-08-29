@@ -695,7 +695,6 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
                     a.append(s);
                     QTreeWidgetItem *item=new QTreeWidgetItem(a);
                     item->setData(0,Qt::UserRole,t);
-                    //a.append(d.toString("yyyy-MM-dd HH:mm:ss"));
                     mcr->addChild(item);
                 }
             }

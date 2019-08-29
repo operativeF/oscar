@@ -16,7 +16,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QCalendarWidget>
-#include <QMenuBar>
+//#include <QMenuBar>
 #include <QDebug>
 
 #include <cmath>
