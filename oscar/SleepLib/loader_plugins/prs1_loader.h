@@ -162,7 +162,7 @@ public:
     bool ParseSummaryF5V3(void);
 
     //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
-    void ParseFlexSetting(quint8 flex, CPAPMode cpapmode);
+    void ParseFlexSetting(quint8 flex, int prs1mode);
     
     //! \brief Parse an humidifier setting byte from a .000 or .001 containing compliance/summary data for fileversion 2 machines: F0V234, F5V012, and maybe others
     void ParseHumidifierSettingV2(int humid, bool supportsHeatedTubing=true);
@@ -298,6 +298,8 @@ protected:
 
     int summary_duration;
 
+    //! \brief Translate the PRS1-specific machine mode to the importable vendor-neutral enum.
+    CPAPMode importMode(int mode);
     //! \brief Parse all the chunks in a single machine session
     bool ParseSession(void);
     //! \brief Save parsed session data to the database
