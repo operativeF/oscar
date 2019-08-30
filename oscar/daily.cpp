@@ -643,10 +643,12 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
     if (p_profile->general->showUnknownFlags()) chantype |= schema::UNKNOWN;
     QList<ChannelID> chans = day->getSortedMachineChannels(chantype);
 
+    // Go through all the enabled sessions of the day
     for (QList<Session *>::iterator s=day->begin();s!=day->end();++s) {
         Session * sess = *s;
         if (!sess->enabled()) continue;
 
+        // For each session, go through all the channels
         QHash<ChannelID,QVector<EventList *> >::iterator m;
         for (int c=0; c < chans.size(); ++c) {
             ChannelID code = chans.at(c);
@@ -655,6 +657,7 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
 
             drift=(sess->type() == MT_CPAP) ? clockdrift : 0;
 
+            // Prepare title for this code, if there are any events
             QTreeWidgetItem *mcr;
             if (mcroot.find(code)==mcroot.end()) {
                 int cnt=day->count(code);
@@ -676,10 +679,13 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
                 mcr=mcroot[code];
             }
 
+            // number of digits required for count depends on total for day
+            int numDigits = ceil(log10(day->count(code)+1));
+
+            // Now we go through the event list for the *session* (not for the day)
             for (int z=0;z<m.value().size();z++) {
                 EventList & ev=*(m.value()[z]);
 
-                int numDigits = ceil(log10(ev.count()+1));
                 for (quint32 o=0;o<ev.count();o++) {
                     qint64 t=ev.time(o)+drift;
 
