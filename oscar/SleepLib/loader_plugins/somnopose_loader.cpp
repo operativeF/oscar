@@ -32,8 +32,6 @@ int SomnoposeLoader::Open(const QString & dirpath)
 
     QString dirtag = "somnopose";
 
-    // Could Scan the ZEO folder for a list of CSVs
-
     QString path(dirpath);
     path = path.replace("\\", "/");
 
@@ -91,11 +89,13 @@ int SomnoposeLoader::OpenFile(const QString & filename)
 
     // Check we have all fields available
     if ((col_timestamp < 0) || (col_inclination < 0) || (col_orientation < 0)) {
+        qDebug() << "Header missing one of timestamp, inclination, or orientation";
         return 0;
     }
 
-    QDateTime epoch(QDate(2001, 1, 1), QTime(0, 0, 0));
-    qint64 ep = qint64(epoch.toTime_t()) * 1000, time;
+    QDateTime epoch(QDate(2001, 1, 1));
+    qint64 ep = qint64(epoch.toTime_t()+epoch.offsetFromUtc()) * 1000, time;
+    qDebug() << "Epoch starts at" << epoch.toString();
 
     double timestamp, orientation, inclination;
     QString data;
@@ -134,6 +134,7 @@ int SomnoposeLoader::OpenFile(const QString & filename)
 
         if (first) {
             sid = time / 1000;
+            qDebug() << "First timestamp is" << QDateTime::fromMSecsSinceEpoch(time).toString();
 
             if (mach->SessionExists(sid)) {
                 return 0; // Already imported
