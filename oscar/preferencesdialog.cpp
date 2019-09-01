@@ -213,6 +213,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
 //    ui->enableGraphSnapshots->setChecked(AppSetting->graphSnapshots());
     ui->graphTooltips->setChecked(AppSetting->graphTooltips());
     ui->allowYAxisScaling->setChecked(AppSetting->allowYAxisScaling());
+    ui->includeSerial->setChecked(AppSetting->includeSerial());
 
     ui->autoLaunchImporter->setChecked(AppSetting->autoLaunchImport());
 #ifndef NO_UPDATER
@@ -803,6 +804,7 @@ bool PreferencesDialog::Save()
     AppSetting->setOpenTabAfterImport(ui->importTabCombo->currentIndex());
 
     AppSetting->setAllowYAxisScaling(ui->allowYAxisScaling->isChecked());
+    AppSetting->setIncludeSerial(ui->includeSerial->isChecked());
     AppSetting->setGraphTooltips(ui->graphTooltips->isChecked());
 
     AppSetting->setAntiAliasing(ui->useAntiAliasing->isChecked());

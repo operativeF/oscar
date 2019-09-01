@@ -36,6 +36,7 @@ const QString STR_AS_OverlayType = "OverlayType";
 const QString STR_AS_OverviewLinechartMode = "OverviewLinechartMode";
 const QString STR_AS_UsePixmapCaching = "UsePixmapCaching";
 const QString STR_AS_AllowYAxisScaling = "AllowYAxisScaling";
+const QString STR_AS_IncludeSerial = "IncludeSerial";
 const QString STR_AS_GraphTooltips = "GraphTooltips";
 const QString STR_AS_LineThickness = "LineThickness";
 const QString STR_AS_LineCursorMode = "LineCursorMode";
@@ -82,6 +83,7 @@ public:
       initPref(STR_AS_RightPanelWidth, 230.0);
       m_antiAliasing=initPref(STR_AS_AntiAliasing, true).toBool();
 //      initPref(STR_AS_GraphSnapshots, true);
+      initPref(STR_AS_IncludeSerial, false);
       initPref(STR_AS_ShowPieChart, false);
       m_animations = initPref(STR_AS_Animations, true).toBool();
       m_squareWavePlots = initPref(STR_AS_SquareWave, false).toBool();
@@ -162,6 +164,8 @@ public:
   inline bool squareWavePlots() const { return m_squareWavePlots; }
   //! \brief Whether to allow double clicking on Y-Axis labels to change vertical scaling mode
   bool allowYAxisScaling() const { return getPref(STR_AS_AllowYAxisScaling).toBool(); }
+  //! \brief Whether to include serial number in machine settings changes report
+  bool includeSerial() const { return getPref(STR_AS_IncludeSerial).toBool(); }
   //! \brief Whether to show graph tooltips
   inline bool graphTooltips() const { return m_graphTooltips; }
   //! \brief Pen width of line plots
@@ -213,6 +217,8 @@ public:
   void setOverlayType(OverlayDisplayType odt) { setPref(STR_AS_OverlayType, (int)(m_odt=odt)); }
   //! \brief Sets whether to allow double clicking on Y-Axis labels to change vertical scaling mode
   void setAllowYAxisScaling(bool b) { setPref(STR_AS_AllowYAxisScaling, b); }
+  //! \brief Sets whether to include machine serial number on machine settings report
+  void setIncludeSerial(bool b) { setPref(STR_AS_IncludeSerial, b); }
   //! \brief Sets whether to allow double clicking on Y-Axis labels to change vertical scaling mode
   void setGraphTooltips(bool b) { setPref(STR_AS_GraphTooltips, m_graphTooltips=b); }
   //! \brief Sets the type of overlay flags (which are displayed over the Flow Waveform)

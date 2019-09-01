@@ -57,7 +57,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>6</number>
      </property>
      <widget class="QWidget" name="importTab">
       <attribute name="title">
@@ -2688,6 +2688,16 @@ Try it and see if you like it.</string>
               </property>
               <property name="text">
                <string>Allow YAxis Scaling</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="includeSerial">
+              <property name="toolTip">
+               <string>Whether to include machine serial number on machine settings changes report</string>
+              </property>
+              <property name="text">
+               <string>Include Serial Number</string>
               </property>
              </widget>
             </item>

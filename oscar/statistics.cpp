@@ -991,12 +991,19 @@ QString Statistics::GenerateRXChanges()
         double ahi = rdi ? (double(rx.rdi) / rx.hours) : (double(rx.ahi) /rx.hours);
         double fli = double(rx.count(CPAP_FlowLimit)) / rx. hours;
 
+        QString machid = QString("<td>%1 (%2)</td>").arg(rx.machine->model())
+                                                       .arg(rx.machine->modelnumber());
+        if (AppSetting->includeSerial())
+            machid = QString("<td>%1 (%2) [%3]</td>").arg(rx.machine->model())
+                                                           .arg(rx.machine->modelnumber())
+                                                           .arg(rx.machine->serial());
+
         html += QString("<td>%1</td>").arg(rx.start.toString(MedDateFormat))+
                 QString("<td>%1</td>").arg(rx.end.toString(MedDateFormat))+
                 QString("<td>%1</td>").arg(rx.days)+
                 QString("<td>%1</td>").arg(ahi, 0, 'f', 2)+
                 QString("<td>%1</td>").arg(fli, 0, 'f', 2)+
-                QString("<td>%1 (%2)</td>").arg(rx.machine->model()).arg(rx.machine->modelnumber())+
+                machid +
                 QString("<td>%1</td>").arg(formatRelief(rx.relief))+
                 QString("<td>%1</td>").arg(rx.mode)+
                 QString("<td>%1</td>").arg(rx.pressure)+
