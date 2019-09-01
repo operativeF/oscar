@@ -64,6 +64,24 @@ inline QString channelInfo(ChannelID code) {
 //            + (schema::channel[code].units() != "0" ? "\n("+schema::channel[code].units()+")" : "");
 }
 
+
+
+const QString standardGraphOrder[] = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_FlowLimitation, STR_GRAPH_Snore,
+                                STR_GRAPH_TidalVolume, STR_GRAPH_MaskPressure, STR_GRAPH_RespRate, STR_GRAPH_MinuteVent, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
+                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
+                                STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
+                                STR_GRAPH_AHI, STR_GRAPH_EventBreakdown, STR_GRAPH_TAP
+                               };
+
+const QString advancedGraphOrder[] = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_MaskPressure, STR_GRAPH_TidalVolume, STR_GRAPH_MinuteVent,
+                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_FlowLimitation, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_Snore,
+                                STR_GRAPH_RespRate, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
+                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
+                                STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
+                                STR_GRAPH_AHI, STR_GRAPH_EventBreakdown, STR_GRAPH_TAP
+                               };
+
+
 void Daily::setCalendarVisible(bool visible)
 {
     on_calButton_toggled(visible);
@@ -182,8 +200,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
             *SF = nullptr,
             *AHI = nullptr;
 
-    const QString STR_GRAPH_DailySummary = "DailySummary";
-    const QString STR_GRAPH_TAP = "TimeAtPressure";
+//    const QString STR_GRAPH_DailySummary = "DailySummary";
 
 //    gGraph * SG;
 //    graphlist[STR_GRAPH_DailySummary] = SG = new gGraph(STR_GRAPH_DailySummary, GraphView, tr("Summary"), tr("Summary of this daily information"), default_height);
@@ -199,17 +216,20 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
     };
 
+    ChannelID oximetercodes[] = {
+        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
+    };
+
+    // Create graphs from the cpap code list
     int cpapsize = sizeof(cpapcodes) / sizeof(ChannelID);
 
     for (int i=0; i < cpapsize; ++i) {
         ChannelID code = cpapcodes[i];
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
+        qDebug() << "Creating graph for code" << code << schema::channel[code].code();
     }
 
-    ChannelID oximetercodes[] = {
-        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
-    };
-
+    // Add graphs from the Oximeter code list
     int oxisize = sizeof(oximetercodes) / sizeof(ChannelID);
 
     //int oxigrp=p_profile->ExistsAndTrue("SyncOximetry") ? 0 : 1; // Contemplating killing this setting...
@@ -218,6 +238,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
     }
 
+    // Check for some impossible conditions
     if ( p_profile == nullptr ) {
         qDebug() << "In daily, p_profile is NULL";
         return;
@@ -226,14 +247,17 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         qDebug() << "In daily, p_profile->general is NULL";
         return;
     }
+
+    // Decide whether we are using AHI or RDI and create graph for the one we are using
     if (p_profile->general->calculateRDI()) {
-        AHI=new gGraph("AHI", GraphView,STR_TR_RDI, channelInfo(CPAP_RDI), default_height);
+        AHI=new gGraph(STR_GRAPH_AHI, GraphView,STR_TR_RDI, channelInfo(CPAP_RDI), default_height);
     } else {
-        AHI=new gGraph("AHI", GraphView,STR_TR_AHI, channelInfo(CPAP_AHI), default_height);
+        AHI=new gGraph(STR_GRAPH_AHI, GraphView,STR_TR_AHI, channelInfo(CPAP_AHI), default_height);
     }
 
-    graphlist["AHI"] = AHI;
+    graphlist[STR_GRAPH_AHI] = AHI;
 
+    // Event breakdown graph
     graphlist[STR_GRAPH_EventBreakdown] = GAHI = new gGraph(STR_GRAPH_EventBreakdown, snapGV,tr("Breakdown"),tr("events"),172);
     gSegmentChart * evseg=new gSegmentChart(GST_Pie);
     evseg->AddSlice(CPAP_Hypopnea,QColor(0x40,0x40,0xff,0xff),STR_TR_H);
@@ -249,14 +273,12 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         evseg->AddSlice(CPAP_UserFlag2,QColor(0xc0,0xc0,0xe0,0xff),tr("UF2"));
     }
 
-
-
     GAHI->AddLayer(evseg);
     GAHI->setMargins(0,0,0,0);
 
+    // Add event flags to the event flags graph
     gFlagsGroup *fg=new gFlagsGroup();
     SF->AddLayer(fg);
-
 
     SF->setBlockZoom(true);
     SF->AddLayer(new gShadowArea());
@@ -267,11 +289,13 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     SF->AddLayer(new gXAxis(COLOR_Text,false),LayerBottom,0,gXAxis::Margin);
 
 
+    // Now take care of xgrid/yaxis labels for all graphs
+
     // The following list contains graphs that don't have standard xgrid/yaxis labels
     QStringList skipgraph;
     skipgraph.push_back(STR_GRAPH_EventBreakdown);
     skipgraph.push_back(STR_GRAPH_SleepFlags);
-    skipgraph.push_back(STR_GRAPH_DailySummary);
+//    skipgraph.push_back(STR_GRAPH_DailySummary);
     skipgraph.push_back(STR_GRAPH_TAP);
 
     QHash<QString, gGraph *>::iterator it;
@@ -304,6 +328,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     pc->addPlot(CPAP_IPAP, square);
     pc->addPlot(CPAP_IPAPHi, square);
 
+    // Create Timea at Pressure graph
     gGraph * TAP2;
     graphlist[STR_GRAPH_TAP] = TAP2 = new gGraph(STR_GRAPH_TAP, GraphView, tr("Time at Pressure"), tr("Time at Pressure"), default_height);
     MinutesAtPressure * map;
@@ -312,6 +337,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     TAP2->AddLayer(new gXAxisPressure(),LayerBottom,gXAxisPressure::Margin);
     TAP2->setBlockSelect(true);
 
+    // Fill in the AHI graph
     if (p_profile->general->calculateRDI()) {
         AHI->AddLayer(new gLineChart(CPAP_RDI, square));
 //        AHI->AddLayer(AddCPAP(new AHIChart(QColor("#37a24b"))));

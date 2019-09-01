@@ -3399,7 +3399,7 @@ void gGraphView::SaveSettings(QString title)
     for (auto & graph : m_graphs) {
         if (!graph) continue;
         if (graph->isSnapshot()) continue;
-
+qDebug() << "Saving graph" << title << graph->name();
         out << graph->name();
         out << graph->height();
         out << graph->visible();
@@ -3473,7 +3473,7 @@ bool gGraphView::LoadSettings(QString title)
         in >> vis;
         in >> recminy;
         in >> recmaxy;
-
+qDebug() << "Loading graph" << title << name;
         if (gvversion >= 1) {
             in >> zoomy;
         }
