@@ -1381,7 +1381,23 @@ void Day::removeMachine(Machine * mach)
     }
 }
 
-QString Day::getCPAPMode()
+int Day::getCPAPMode()
+{
+    Machine * mach = machine(MT_CPAP);
+    if (!mach) return 0;
+
+    CPAPLoader * loader = qobject_cast<CPAPLoader *>(mach->loader());
+
+    ChannelID modechan = loader->CPAPModeChannel();
+
+//    schema::Channel & chan = schema::channel[modechan];
+
+    int mode = (CPAPMode)(int)qRound(settings_wavg(modechan));
+
+    return mode;
+}
+
+QString Day::getCPAPModeStr()
 {
     Machine * mach = machine(MT_CPAP);
     if (!mach) return STR_MessageBox_Error;
@@ -1395,7 +1411,6 @@ QString Day::getCPAPMode()
     int mode = (CPAPMode)(int)qRound(settings_wavg(modechan));
 
     return chan.option(mode);
-
 
 //    if (mode == MODE_CPAP) {
 //        return QObject::tr("Fixed");

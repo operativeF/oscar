@@ -64,22 +64,26 @@ inline QString channelInfo(ChannelID code) {
 //            + (schema::channel[code].units() != "0" ? "\n("+schema::channel[code].units()+")" : "");
 }
 
+// Standard graph order
+const QList<QString> standardGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_FlowLimitation,
+                                           STR_GRAPH_Snore, STR_GRAPH_TidalVolume, STR_GRAPH_MaskPressure, STR_GRAPH_RespRate, STR_GRAPH_MinuteVent,
+                                           STR_GRAPH_PTB, STR_GRAPH_RespEvent, STR_GRAPH_Ti, STR_GRAPH_Te,
+                                           STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
+                                           STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
+                                           STR_GRAPH_AHI, STR_GRAPH_TAP
+                                          };
 
+// Advanced graph order
+const QList<QString> advancedGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_MaskPressure, STR_GRAPH_TidalVolume, STR_GRAPH_MinuteVent,
+                                           STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_FlowLimitation, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_Snore,
+                                           STR_GRAPH_RespRate, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
+                                           STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
+                                           STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
+                                           STR_GRAPH_AHI, STR_GRAPH_TAP
+                                          };
 
-const QString standardGraphOrder[] = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_FlowLimitation, STR_GRAPH_Snore,
-                                STR_GRAPH_TidalVolume, STR_GRAPH_MaskPressure, STR_GRAPH_RespRate, STR_GRAPH_MinuteVent, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
-                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
-                                STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
-                                STR_GRAPH_AHI, STR_GRAPH_EventBreakdown, STR_GRAPH_TAP
-                               };
-
-const QString advancedGraphOrder[] = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_MaskPressure, STR_GRAPH_TidalVolume, STR_GRAPH_MinuteVent,
-                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_FlowLimitation, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_Snore,
-                                STR_GRAPH_RespRate, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
-                                STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
-                                STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
-                                STR_GRAPH_AHI, STR_GRAPH_EventBreakdown, STR_GRAPH_TAP
-                               };
+// CPAP modes that should have Advanced graphs
+const QList<int> useAdvancedGraphs = {MODE_ASV, MODE_ASV_VARIABLE_EPAP, MODE_AVAPS};
 
 
 void Daily::setCalendarVisible(bool visible)
@@ -884,7 +888,15 @@ void Daily::ResetGraphLayout()
 }
 void Daily::ResetGraphOrder()
 {
-    GraphView->resetGraphOrder(true);
+    Day * day = p_profile->GetDay(previous_date,MT_CPAP);
+
+    int cpapMode = day->getCPAPMode();
+    qDebug() << "Daily::ResetGraphOrder cpapMode" << cpapMode;
+
+    if (useAdvancedGraphs.contains(cpapMode))
+        GraphView->resetGraphOrder(true, advancedGraphOrder);
+    else
+        GraphView->resetGraphOrder(true, standardGraphOrder);
 
     // Enable all graphs (make them not hidden)
     for (int i=0;i<ui->graphCombo->count();i++) {
@@ -1059,7 +1071,7 @@ QString Daily::getMachineSettings(Day * day) {
         first[cpapmode] = QString("<tr><td><p title='%2'>%1</p></td><td colspan=4>%3</td></tr>")
                 .arg(chan.label())
                 .arg(chan.description())
-                .arg(day->getCPAPMode());
+                .arg(day->getCPAPModeStr());
 
         if (sess) for (; it != it_end; ++it) {
             ChannelID code = it.key();
@@ -1189,7 +1201,7 @@ QString Daily::getCPAPInformation(Day * day)
     html+="<tr><td align=center><p title=\""+tooltip+"\">"+info.brand+"<br/>"+info.model+"</p></td></tr>\n";
     html+="<tr><td align=center>";
 
-    html+=tr("PAP Mode: %1").arg(day->getCPAPMode())+"<br/>";
+    html+=tr("PAP Mode: %1").arg(day->getCPAPModeStr())+"<br/>";
     html+= day->getPressureSettings();
     html+="</td></tr>\n";
     if (day->noSettings(cpap)) {

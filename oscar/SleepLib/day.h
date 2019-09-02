@@ -235,7 +235,8 @@ class Day
     QList<ChannelID> getSortedMachineChannels(MachineType type, quint32 chantype);
 
     // Some ugly CPAP specific stuff
-    QString getCPAPMode();
+    int getCPAPMode();
+    QString getCPAPModeStr();
     QString getPressureRelief();
     QString getPressureSettings();
 

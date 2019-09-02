@@ -457,7 +457,7 @@ public:
     virtual void populate(Day * day, int idx);
 
     virtual QString tooltipData(Day * day, int idx) {
-        return day->getCPAPMode() + "\n" + day->getPressureSettings() + gSummaryChart::tooltipData(day, idx);
+        return day->getCPAPModeStr() + "\n" + day->getPressureSettings() + gSummaryChart::tooltipData(day, idx);
     }
 
 };

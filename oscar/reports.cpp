@@ -200,7 +200,7 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
             }
             cpapinfo += "\n";
 
-            cpapinfo += STR_TR_Mode + ": " + day->getCPAPMode() + "\n";
+            cpapinfo += STR_TR_Mode + ": " + day->getCPAPModeStr() + "\n";
             cpapinfo += day->getPressureSettings() + "\n";
             QString pressurerelief = day->getPressureRelief();
             if (pressurerelief.compare(STR_TR_None)) {

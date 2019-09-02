@@ -223,7 +223,7 @@ void Statistics::updateRXChanges()
 
                 // Generate the pressure/mode/relief strings
                 QString relief = day->getPressureRelief();
-                QString mode = day->getCPAPMode();
+                QString mode = day->getCPAPModeStr();
                 QString pressure = day->getPressureSettings();
 
                 // Do this days settings match this rx cache entry?
@@ -405,7 +405,7 @@ void Statistics::updateRXChanges()
 
         // Generate pressure/mode/`strings
         QString relief = day->getPressureRelief();
-        QString mode = day->getCPAPMode();
+        QString mode = day->getCPAPModeStr();
         QString pressure = day->getPressureSettings();
 
         // Now scan the rxcache to find the most previous entry, and the right place to insert

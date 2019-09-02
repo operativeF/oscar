@@ -3362,9 +3362,47 @@ void gGraphView::resetLayout()
     updateScale();
     timedRedraw(0);
 }
+// Reset order of current graphs to new order, remove pinning
+void gGraphView::resetGraphOrder(bool pinFirst, const QList<QString> graphOrder) {
+    qDebug() << "gGraphView::resetGraphOrder new order" << graphOrder;
+    QList<gGraph *> new_graphs;
+    QList<gGraph *> old_graphs = m_graphs;
+
+    // Create new_graphs in order specified by graphOrder
+    for (int i = 0; i < graphOrder.size(); ++i) {
+        QString nextGraph = graphOrder.at(i);
+        auto it = m_graphsbyname.find(nextGraph);
+        if (it == m_graphsbyname.end()) {
+            qDebug() << "resetGraphOrder could not find" << nextGraph;
+            continue;  // should not happen
+        }
+        gGraph * graph = it.value();
+        new_graphs.append(graph);
+        int idx = old_graphs.indexOf(graph);
+        old_graphs.removeAt(idx);
+        qDebug() << "resetGraphOrder added to new graphs" << nextGraph;
+    }
+    // If we didn't find everything, append anything extra we have
+    for (int i = 0; i < old_graphs.size(); i++) {
+        qDebug() << "resetGraphOrder added leftover" << old_graphs.at(i)->name();
+        new_graphs.append(old_graphs.at(i));
+    }
+
+    m_graphs = new_graphs;
+
+    for (auto & graph : m_graphs) {
+        if (!graph) continue;
+        if (graph->isSnapshot()) continue;
+        graph->setPinned(false);
+    }
+    if (pinFirst)
+        m_graphs[0]->setPinned(true);
+}
+
 // Reset order of current graphs to match defaults, remove pinning
 void gGraphView::resetGraphOrder(bool pinFirst) {
     m_graphs = m_default_graphs;
+
     for (auto & graph : m_graphs) {
         if (!graph) continue;
         if (graph->isSnapshot()) continue;
