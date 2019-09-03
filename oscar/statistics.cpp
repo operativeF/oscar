@@ -888,7 +888,7 @@ QString Statistics::GenerateMachineList()
             m = mach.at(i);
 
             if (m->type() == MT_JOURNAL) { continue; }
-
+//qDebug() << "Machine" << m->brand() << "series" << m->series() << "model" << m->model() << "model number" << m->modelnumber();
             QDate d1 = m->FirstDay();
             QDate d2 = m->LastDay();
             QString mn = m->modelnumber();
@@ -899,8 +899,6 @@ QString Statistics::GenerateMachineList()
                     .arg(m->serial())
                     .arg(d1.toString(MedDateFormat))
                     .arg(d2.toString(MedDateFormat));
-//            .arg(d1.toString(Qt::SystemLocaleShortDate))
-//            .arg(d2.toString(Qt::SystemLocaleShortDate));
 
         }
 

@@ -3364,7 +3364,7 @@ void gGraphView::resetLayout()
 }
 // Reset order of current graphs to new order, remove pinning
 void gGraphView::resetGraphOrder(bool pinFirst, const QList<QString> graphOrder) {
-    qDebug() << "gGraphView::resetGraphOrder new order" << graphOrder;
+//    qDebug() << "gGraphView::resetGraphOrder new order" << graphOrder;
     QList<gGraph *> new_graphs;
     QList<gGraph *> old_graphs = m_graphs;
 
@@ -3380,7 +3380,7 @@ void gGraphView::resetGraphOrder(bool pinFirst, const QList<QString> graphOrder)
         new_graphs.append(graph);
         int idx = old_graphs.indexOf(graph);
         old_graphs.removeAt(idx);
-        qDebug() << "resetGraphOrder added to new graphs" << nextGraph;
+//        qDebug() << "resetGraphOrder added to new graphs" << nextGraph;
     }
     // If we didn't find everything, append anything extra we have
     for (int i = 0; i < old_graphs.size(); i++) {
@@ -3437,7 +3437,7 @@ void gGraphView::SaveSettings(QString title)
     for (auto & graph : m_graphs) {
         if (!graph) continue;
         if (graph->isSnapshot()) continue;
-qDebug() << "Saving graph" << title << graph->name();
+// qDebug() << "Saving graph" << title << graph->name();
         out << graph->name();
         out << graph->height();
         out << graph->visible();
@@ -3511,7 +3511,7 @@ bool gGraphView::LoadSettings(QString title)
         in >> vis;
         in >> recminy;
         in >> recmaxy;
-qDebug() << "Loading graph" << title << name;
+//qDebug() << "Loading graph" << title << name;
         if (gvversion >= 1) {
             in >> zoomy;
         }

@@ -64,6 +64,7 @@ inline QString channelInfo(ChannelID code) {
 //            + (schema::channel[code].units() != "0" ? "\n("+schema::channel[code].units()+")" : "");
 }
 
+
 // Standard graph order
 const QList<QString> standardGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_FlowLimitation,
                                            STR_GRAPH_Snore, STR_GRAPH_TidalVolume, STR_GRAPH_MaskPressure, STR_GRAPH_RespRate, STR_GRAPH_MinuteVent,
@@ -214,13 +215,13 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     graphlist[STR_GRAPH_SleepFlags] = SF = new gGraph(STR_GRAPH_SleepFlags, GraphView, STR_TR_EventFlags, STR_TR_EventFlags, default_height);
     SF->setPinned(true);
 
-    ChannelID cpapcodes[] = {
+    const ChannelID cpapcodes[] = {
         CPAP_FlowRate, CPAP_Pressure, CPAP_Leak, CPAP_FLG, CPAP_Snore, CPAP_TidalVolume,
         CPAP_MaskPressure, CPAP_RespRate, CPAP_MinuteVent, CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
         /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
     };
 
-    ChannelID oximetercodes[] = {
+    const ChannelID oximetercodes[] = {
         OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
     };
 
@@ -230,7 +231,7 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     for (int i=0; i < cpapsize; ++i) {
         ChannelID code = cpapcodes[i];
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
-        qDebug() << "Creating graph for code" << code << schema::channel[code].code();
+//        qDebug() << "Creating graph for code" << code << schema::channel[code].code();
     }
 
     // Add graphs from the Oximeter code list
@@ -779,6 +780,7 @@ void Daily::UpdateCalendarDay(QDate date)
     cpaponly.setFontWeight(QFont::Normal);
     cpapjour.setForeground(QBrush(COLOR_Blue, Qt::SolidPattern));
     cpapjour.setFontWeight(QFont::Bold);
+//    cpapjour.setFontUnderline(true);
     oxiday.setForeground(QBrush(COLOR_Red, Qt::SolidPattern));
     oxiday.setFontWeight(QFont::Normal);
     oxicpap.setForeground(QBrush(COLOR_Red, Qt::SolidPattern));
@@ -816,6 +818,9 @@ void Daily::UpdateCalendarDay(QDate date)
     } else {
         ui->calendar->setDateTextFormat(date, nodata);
     }
+//    if (hasjournal) {
+//        ui->calendar->setDateTextFormat(date, cpapjour);
+//    }
     ui->calendar->setHorizontalHeaderFormat(QCalendarWidget::ShortDayNames);
 }
 void Daily::LoadDate(QDate date)
@@ -891,7 +896,7 @@ void Daily::ResetGraphOrder()
     Day * day = p_profile->GetDay(previous_date,MT_CPAP);
 
     int cpapMode = day->getCPAPMode();
-    qDebug() << "Daily::ResetGraphOrder cpapMode" << cpapMode;
+//    qDebug() << "Daily::ResetGraphOrder cpapMode" << cpapMode;
 
     if (useAdvancedGraphs.contains(cpapMode))
         GraphView->resetGraphOrder(true, advancedGraphOrder);
@@ -902,7 +907,7 @@ void Daily::ResetGraphOrder()
     for (int i=0;i<ui->graphCombo->count();i++) {
         // If disabled, emulate a click to enable the graph
         if (!ui->graphCombo->itemData(i,Qt::UserRole).toBool()) {
-            qDebug() << "resetting graph" << i;
+//            qDebug() << "resetting graph" << i;
             Daily::on_graphCombo_activated(i);
         }
     }
@@ -913,7 +918,7 @@ void Daily::ResetGraphOrder()
         ChannelID code = ui->eventsCombo->itemData(i, Qt::UserRole).toUInt();
         schema::Channel * chan = &schema::channel[code];
         if (!chan->enabled()) {
-            qDebug() << "resetting event" << i;
+//            qDebug() << "resetting event" << i;
             Daily::on_eventsCombo_activated(i);
         }
     }
@@ -1407,7 +1412,7 @@ QString Daily::getSleepTime(Day * day)
 }
 
 QString Daily::getPieChart (float values, Day * day) {
-    qDebug() << "Daily:getPieChart, values" << values;
+//    qDebug() << "Daily:getPieChart, values" << values;
     QString html = "<table cellspacing=0 cellpadding=0 border=0 width='100%'>";
     if (values > 0) {
 //        html += "<tr><td align=center>&nbsp;</td></tr>";
