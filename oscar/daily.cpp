@@ -64,7 +64,10 @@ inline QString channelInfo(ChannelID code) {
 //            + (schema::channel[code].units() != "0" ? "\n("+schema::channel[code].units()+")" : "");
 }
 
-
+//
+// List here the graph codes in the order they are to be displayed.
+// Do NOT list a code twice, or Oscar will crash when the profile is closed!
+//
 // Standard graph order
 const QList<QString> standardGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_FlowLimitation,
                                            STR_GRAPH_Snore, STR_GRAPH_TidalVolume, STR_GRAPH_MaskPressure, STR_GRAPH_RespRate, STR_GRAPH_MinuteVent,
@@ -78,7 +81,7 @@ const QList<QString> standardGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowR
 const QList<QString> advancedGraphOrder = {STR_GRAPH_SleepFlags, STR_GRAPH_FlowRate, STR_GRAPH_MaskPressure, STR_GRAPH_TidalVolume, STR_GRAPH_MinuteVent,
                                            STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_FlowLimitation, STR_GRAPH_Pressure, STR_GRAPH_LeakRate, STR_GRAPH_Snore,
                                            STR_GRAPH_RespRate, STR_GRAPH_PTB, STR_GRAPH_RespEvent,
-                                           STR_GRAPH_Ti, STR_GRAPH_Te, STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
+                                           STR_GRAPH_SleepStage, STR_GRAPH_Inclination, STR_GRAPH_Orientation, STR_GRAPH_TestChan1,
                                            STR_GRAPH_Oxi_Pulse, STR_GRAPH_Oxi_SPO2, STR_GRAPH_Oxi_Perf, STR_GRAPH_Oxi_Plethy,
                                            STR_GRAPH_AHI, STR_GRAPH_TAP
                                           };
@@ -215,14 +218,17 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     graphlist[STR_GRAPH_SleepFlags] = SF = new gGraph(STR_GRAPH_SleepFlags, GraphView, STR_TR_EventFlags, STR_TR_EventFlags, default_height);
     SF->setPinned(true);
 
+    //============================================
+    // Create graphs from 'interesting' CPAP codes
+    //
+    // If this list of codes is changed, you must
+    // also adjust the standard and advanced graph
+    // order at the beginning of daily.cpp.
+    //============================================
     const ChannelID cpapcodes[] = {
         CPAP_FlowRate, CPAP_Pressure, CPAP_Leak, CPAP_FLG, CPAP_Snore, CPAP_TidalVolume,
         CPAP_MaskPressure, CPAP_RespRate, CPAP_MinuteVent, CPAP_PTB, CPAP_RespEvent, CPAP_Ti, CPAP_Te,
         /*  CPAP_IE, */   ZEO_SleepStage, POS_Inclination, POS_Orientation, CPAP_Test1
-    };
-
-    const ChannelID oximetercodes[] = {
-        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
     };
 
     // Create graphs from the cpap code list
@@ -233,6 +239,10 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
         graphlist[schema::channel[code].code()] = new gGraph(schema::channel[code].code(), GraphView, schema::channel[code].label(), channelInfo(code), default_height);
 //        qDebug() << "Creating graph for code" << code << schema::channel[code].code();
     }
+
+    const ChannelID oximetercodes[] = {
+        OXI_Pulse, OXI_SPO2, OXI_Perf, OXI_Plethy
+    };
 
     // Add graphs from the Oximeter code list
     int oxisize = sizeof(oximetercodes) / sizeof(ChannelID);
