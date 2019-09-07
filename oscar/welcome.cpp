@@ -48,7 +48,7 @@ void Welcome::refreshPage()
 
     // The SDCard warning does not need to be seen anymore for people who DON'T use ResMed S9's.. show first import and only when S9 is present
     for (auto & mach :mlist) {
-        if (mach->brand().contains("ResMed") && mach->series().contains("S9")) showCardWarning = true;
+        if (mach->brand().contains(STR_MACH_ResMed) && mach->series().contains("S9")) showCardWarning = true;
     }
 
     ui->S9Warning->setVisible(showCardWarning);
