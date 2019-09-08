@@ -44,11 +44,11 @@ void Welcome::refreshPage()
 
     bool noMachines = mlist.isEmpty() && posmachines.isEmpty() && oximachines.isEmpty() && stgmachines.isEmpty();
 
-    bool showCardWarning = !noMachines;
+    bool showCardWarning = noMachines;
 
     // The SDCard warning does not need to be seen anymore for people who DON'T use ResMed S9's.. show first import and only when S9 is present
     for (auto & mach :mlist) {
-        if (mach->series().compare("S9") == 0) showCardWarning = true;
+        if (mach->brand().contains(STR_MACH_ResMed) && mach->series().contains("S9")) showCardWarning = true;
     }
 
     ui->S9Warning->setVisible(showCardWarning);
