@@ -556,7 +556,10 @@ void Report::PrintReport(gGraphView *gv, QString name, QDate date)
         }
 
         if (first) {
-            QString footer = QObject::tr("OSCAR v%1").arg(VersionString);
+            QDateTime timestamp = QDateTime::currentDateTime();
+            QString footer = QObject::tr("%1 OSCAR v%2").arg(timestamp.toString(MedDateFormat+" hh:mm"))
+                                                           .arg(ReleaseStatus == "r" ? ShortVersionString : VersionString+" (" + gitRevision() + ")");
+
 
             QRectF bounds = painter.boundingRect(QRectF(0, virt_height, virt_width, normal_height), footer,
                                                  QTextOption(Qt::AlignHCenter));

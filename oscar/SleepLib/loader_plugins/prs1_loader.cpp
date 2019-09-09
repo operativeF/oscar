@@ -234,6 +234,7 @@ static const PRS1TestedModel s_PRS1TestedModels[] = {
     { "400X150", 0, 6, "DreamStation CPAP Pro" },
     { "500X110", 0, 6, "DreamStation Auto CPAP" },
     { "500X150", 0, 6, "DreamStation Auto CPAP" },
+    { "500G110", 0, 6, "DreamStation Go Auto" },
     { "502G150", 0, 6, "DreamStation Go Auto" },
     { "600X110", 0, 6, "DreamStation BiPAP Pro" },
     { "700X110", 0, 6, "DreamStation Auto BiPAP" },
@@ -4653,8 +4654,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
                 if (data[pos] != 0 && data[pos] != 3) {
                     CHECK_VALUES(data[pos], 1, 2);  // 1 when EZ-Start is enabled? 2 when Auto-Trial? 3 when Auto-Trial is off or Opti-Start isn't off?
                 }
-                if (len == 2) {  // 400G has extra byte
-                    CHECK_VALUE(data[pos+1], 0);
+                if (len == 2) {  // 400G, 500G has extra byte
+                    CHECK_VALUES(data[pos+1], 0, 0x20);  // Maybe related to Opti-Start?
                 }
                 break;
             case 0x0a:  // CPAP pressure setting
@@ -4736,8 +4737,8 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
             case 0x35:  // Humidifier setting
                 this->ParseHumidifierSettingV3(data[pos], data[pos+1], true);
                 break;
-            case 0x36:
-                CHECK_VALUE(data[pos], 0);
+            case 0x36:  // Mask Resistance Lock
+                CHECK_VALUES(data[pos], 0, 0x80);
                 break;
             case 0x38:  // Mask Resistance
                 if (data[pos] != 0) {  // 0 == mask resistance off
@@ -4889,7 +4890,7 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                     CHECK_VALUE(data[pos+0x1c], 0x00);
                     //CHECK_VALUES(data[pos+0x1d], 0x0c, 0x0d);
                     //CHECK_VALUES(data[pos+0x1e], 0x31, 0x3b);
-                    // TODO: 400G has 8 more bytes?
+                    // TODO: 400G and 500G has 8 more bytes?
                     // TODO: 400G sometimes has another 4 on top of that?
                 }
                 break;
@@ -4914,13 +4915,13 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
                 this->ParseHumidifierSettingV3(data[pos+2], data[pos+3]);
                 break;
             case 0x0e:
-                // only seen once on 400G?
-                CHECK_VALUE(data[pos], 0);
+                // only seen once on 400G, many times on 500G
+                CHECK_VALUES(data[pos], 0, 6);
                 CHECK_VALUE(data[pos+1], 0);
-                CHECK_VALUE(data[pos+2], 7);
-                CHECK_VALUE(data[pos+3], 7);
-                CHECK_VALUE(data[pos+4], 7);
-                CHECK_VALUE(data[pos+5], 0);
+                //CHECK_VALUES(data[pos+2], 7, 9);
+                //CHECK_VALUES(data[pos+3], 7, 15);
+                //CHECK_VALUES(data[pos+4], 7, 12);
+                //CHECK_VALUES(data[pos+5], 0, 3);
                 break;
             case 0x05:
                 // AutoCPAP-related? First appeared on 500X, follows 4, before 8, look like pressure values
