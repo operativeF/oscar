@@ -1721,9 +1721,11 @@ void Daily::Load(QDate date)
 
     htmlLeftFooter ="</body></html>";
 
+    // SessionBar colors.  Colors alternate.
     QColor cols[]={
         COLOR_Gold,
-        QColor("light blue"),
+//      QColor("light blue"),
+        QColor("skyblue"),
     };
     const int maxcolors=sizeof(cols)/sizeof(QColor);
     QList<Session *>::iterator i;
