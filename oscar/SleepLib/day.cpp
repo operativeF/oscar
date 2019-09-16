@@ -109,7 +109,7 @@ void Day::addSession(Session *s)
     if (mi != machines.end()) {
         if (mi.value() != s->machine()) {
             qDebug() << "OSCAR can't add session" << s->session()
-                     << "["+QDateTime::fromTime_t(s->first()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                     << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
                      << "from machine" << mi.value()->serial() << "to machine" << s->machine()->serial()
                      << "to this day record, as it already contains a different machine of the same MachineType" << s->type();
             return;
@@ -803,6 +803,23 @@ qint64 Day::total_time(MachineType type)
     return total; //d_totaltime;
 }
 
+ChannelID Day::getPressureChannelID() {
+    // Determined the preferred pressure channel (CPAP_IPAP or CPAP_Pressure)
+    CPAPMode cpapmode = (CPAPMode)(int)settings_max(CPAP_Mode);
+    ChannelID preferredID = CPAP_Pressure;
+    if (cpapmode == MODE_ASV || cpapmode == MODE_ASV_VARIABLE_EPAP || cpapmode == MODE_AVAPS)
+        preferredID = CPAP_IPAP;
+
+    // If preferred channel has data, return it
+    if (channelHasData(preferredID))
+        return preferredID;
+
+    // Otherwise return the other pressure channel
+    if (preferredID == CPAP_IPAP)
+        return CPAP_Pressure;
+    else
+        return CPAP_IPAP;
+}
 
 bool Day::hasEnabledSessions()
 {
@@ -1479,7 +1496,7 @@ QString Day::getPressureSettings()
     } else if (mode == MODE_BILEVEL_AUTO_VARIABLE_PS) {
         return QObject::tr("Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)").arg(settings_min(CPAP_EPAPLo),0,'f',1).arg(settings_max(CPAP_IPAPHi),0,'f',1).arg(settings_min(CPAP_PSMin),0,'f',1).arg(settings_max(CPAP_PSMax),0,'f',1).arg(units);
     } else if (mode == MODE_ASV) {
-        return QObject::tr("EPAP %1 PS %2-%3 (%6)").arg(settings_min(CPAP_EPAP),0,'f',1).arg(settings_min(CPAP_PSMin),0,'f',1).arg(settings_max(CPAP_PSMax),0,'f',1).arg(units);
+        return QObject::tr("EPAP %1 PS %2-%3 (%4)").arg(settings_min(CPAP_EPAP),0,'f',1).arg(settings_min(CPAP_PSMin),0,'f',1).arg(settings_max(CPAP_PSMax),0,'f',1).arg(units);
     } else if (mode == MODE_ASV_VARIABLE_EPAP) {
         return QObject::tr("Min EPAP %1 Max IPAP %2 PS %3-%4 (%5)").
                 arg(settings_min(CPAP_EPAPLo),0,'f',1).

@@ -213,6 +213,9 @@ class Day
     //! \brief Closes all Events files for this Days Sessions
     void CloseEvents();
 
+    //! \brief Get the ChannelID to be used for reporting pressure
+    ChannelID getPressureChannelID();
+
     //! \brief Returns true if this Day contains loaded Event Data for this channel.
     bool channelExists(ChannelID id);
 
