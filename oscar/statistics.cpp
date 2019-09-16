@@ -707,7 +707,7 @@ QString Statistics::generateFooter(bool showinfo)
     if (showinfo) {
         html += "<hr><div align=center><font size='-1'><i>";
         QDateTime timestamp = QDateTime::currentDateTime();
-        html += tr("This report was generated on %1 by OSCAR v%2").arg(timestamp.toString(MedDateFormat + " hh:mm"))
+        html += tr("This report was prepared on %1 by OSCAR v%2").arg(timestamp.toString(MedDateFormat + " hh:mm"))
                                                                      .arg(ReleaseStatus == "r" ? ShortVersionString : VersionString + " (" + gitRevision() + ")")
                 + "<br/>"
                 + tr("OSCAR is free open-source CPAP report software");
@@ -858,14 +858,24 @@ const QString heading_color="#ffffff";
 const QString subheading_color="#e0e0e0";
 //const int rxthresh = 5;
 
+// Sort machines by first day of use
+bool machineCompareFirstDay(Machine* left, Machine *right) {
+  return left->FirstDay() > right->FirstDay();
+}
+
+
 QString Statistics::GenerateMachineList()
 {
     QList<Machine *> cpap_machines = p_profile->GetMachines(MT_CPAP);
     QList<Machine *> oximeters = p_profile->GetMachines(MT_OXIMETER);
     QList<Machine *> mach;
 
+    std::sort(cpap_machines.begin(), cpap_machines.end(), machineCompareFirstDay);
+    std::sort(oximeters.begin(), oximeters.end(), machineCompareFirstDay);
+
     mach.append(cpap_machines);
     mach.append(oximeters);
+
 
     QString html;
     if (mach.size() > 0) {
