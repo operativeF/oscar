@@ -286,7 +286,16 @@ bool Machine::AddSession(Session *s)
         return false;
     }
     if (sessionlist.contains(s->session())) {
-        qCritical() << "Machine::AddSession called with duplicate session" << s->session() << "for machine" << serial();
+        qCritical() << "Machine::AddSession called with duplicate session" << s->session()
+                    << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                    << "for machine" << serial();
+        return false;
+    }
+
+    if (s->first() == 0) {
+        qWarning() << "Machine::AddSession called with session" << s->session()
+                   << "["+QDateTime::fromTime_t(s->session()).toString("MMM dd, yyyy hh:mm:ss")+"]"
+                   << "with first=0";
         return false;
     }
 
@@ -297,7 +306,6 @@ bool Machine::AddSession(Session *s)
             return false;
         }
     }
-
 
     updateChannels(s);
 
