@@ -15,15 +15,6 @@
 #include <QString>
 #include "machine_common.h"
 
-namespace GraphFlags {
-const quint32 Shadow = 1;
-const quint32 Foobar = 2;
-const quint32 XTicker = 4;
-const quint32 YTicker = 8;
-const quint32 XGrid = 16;
-const quint32 YGrid = 32;
-}
-
 enum ChannelCalcType {
     Calc_Zero, Calc_Min, Calc_Middle, Calc_Perc, Calc_Max, Calc_UpperThresh, Calc_LowerThresh
 };
@@ -57,6 +48,16 @@ enum Function {
     NONE = 0, AVG, WAVG, MIN, MAX, SUM, CNT, P90, CPH, SPH, HOURS, SET
 };
 
+///
+/// \brief The ChanType enum defines the type of data channel.  Bit flags so multiple settings are possible.
+/// DATA: A single number such as Height, ZombieMeter.
+/// SETTING: Machine setting, such as EPR, temperature, Ramp enabled.
+/// FLAG: Event flags reported by CPAP machine.  Each flag has its own channel.
+/// MINOR_FLAG: More event flags such as PressurePulse and TimedBreath.
+/// SPAN: A flag that has a timespan associated with it (CSR, LeakSpan, Ramp, ...).
+/// WAVEFORM: A waveform such as flow rate.
+/// UNKNOWN: Some PRS1 flags, but not sure what they are for.  Considered to be minor flags.
+///
 enum ChanType {
     DATA = 1,
     SETTING = 2,
@@ -91,26 +92,57 @@ class Channel
     void addColor(Function f, QColor color) { m_colors[f] = color; }
     void addOption(int i, QString option) { m_options[i] = option; }
 
+    //! \brief Unique identifier of channel.  Value set when channel is created.  See schema.cpp and loader modules.
     inline ChannelID id() const { return m_id; }
+
+    //! \brief Type of channel, such as WAVEFORM, FLAG, etc.  See ChanType enum.
     inline ChanType type() const { return m_type; }
+
+    //! \brief Data format such as integer vs RTF, called Field Type in channel initializers in schema.cpp
     inline DataType datatype() const { return m_datatype; }
+
+    //! \brief Type of machine (CPAP, Oximeter, Journal, etc.) as defined in machine_common.h. Set in channel initializers in schema.cpp
     inline MachineType machtype() const { return m_machtype; }
+
+    //! \brief Unique string identifier for this channel.  Must not be translated.  Later used as a unique key to identify graph derived from this channel.
     const QString &code() { return m_code; }
+
+    //! \brief Full name of channel.  Translatable.  Used generally for channel names such as rows on Statistics page.
     const QString &fullname() { return m_fullname; }
+
+    //! \brief Short description of what this channel does.  Translatable.  Used in tooltips for graphs to explain what the graph shows.
     const QString &description() { return m_description; }
+
+    //! \brief Short-form label to indicate this channel on screen.  Translatable.  Used for vertical labels in graphs.
+    //! Can be changed in Preferences dialog.
     const QString &label() { return m_label; }
+
+    //! \brief Units, such as cmH2O, events per hour, etc.  See STR_UNIT_* for possible values.
     const QString &units() { return m_unit; }
+
+    //! \brief Seems to be some kind of sort order for event flags.  Not sure this is used.
     inline short order() const { return m_order; }
 
+    //! \brief Whether or not chart of this channel is to be shown on Overview page
+    //! Initial settings of this flag for individual channels set in schema.cpp.
+    //! May be changed by user in Preferences Dialog.
     bool showInOverview() { return m_showInOverview; }
 
+    //! \brief Upper threshold for channel, apparently used in Statistics.cpp for calculation purposes.  Not sure if it is used elsewhere.
     inline EventDataType upperThreshold() const { return m_upperThreshold; }
+
+    //! \brief Lower threshold for channel, apparently used in Statistics.cpp for calculation purposes.  Not sure if it is used elsewhere.
     inline EventDataType lowerThreshold() const { return m_lowerThreshold; }
+
+    //! \brief Does not appear to be used?
     inline QColor upperThresholdColor() const { return m_upperThresholdColor; }
+
+    //! \brief Does not appear to be used?
     inline QColor lowerThresholdColor() const { return m_lowerThresholdColor; }
 
-    inline ChannelID linkid() const { return m_link; }
 
+    //! \brief Links channels.  Links to better versions of this data type.
+    inline ChannelID linkid() const { return m_link; }
 
     void setFullname(QString fullname) { m_fullname = fullname; }
     void setLabel(QString label) { m_label = label; }
@@ -125,6 +157,7 @@ class Channel
 
     void setShowInOverview(bool b) { m_showInOverview = b; }
 
+    //! \brief Retrieves options that may have been set for the channel.  Used for CPAP Mode, EPR level.
     QString option(int i) {
         if (m_options.contains(i)) {
             return m_options[i];
@@ -132,6 +165,8 @@ class Channel
 
         return QString();
     }
+
+    //! \brief Default color for plotting this channel
     inline QColor defaultColor() const { return m_defaultcolor; }
     inline void setDefaultColor(QColor color) { m_defaultcolor = color; }
     QHash<int, QString> m_options;
@@ -142,10 +177,10 @@ class Channel
     inline bool enabled() const { return m_enabled; }
     void setEnabled(bool value) { m_enabled = value; }
 
+    //! \brief Types of calculations that can be plotted on this channel and color to be used for plotting
     QHash<ChannelCalcType, ChannelCalc> calc;
 
   protected:
-
 
     int m_id;
 
@@ -226,102 +261,11 @@ class ChannelList
     QHash<QString, QHash<QString, Channel *> > groups;
     QString m_doctype;
 };
+
 extern ChannelList channel;
-
-/*enum LayerType {
-    UnspecifiedLayer, Waveform, Flag, Overlay, Group
-};
-
-
-// ?????
-class Layer
-{
-public:
-    Layer(ChannelID code, QColor colour, QString label=QString());
-    virtual ~Layer();
-    Layer *addLayer(Layer *layer);// { m_layers.push_back(layer); return layer; }
-    void setMin(EventDataType min) { m_min=min; m_hasmin=true; }
-    void setMax(EventDataType max) { m_max=max; m_hasmax=true; }
-    EventDataType Min() { return m_min; }
-    EventDataType Max() { return m_max; }
-    bool visible() { return m_visible; }
-    void setVisible(bool b) { m_visible=b; }
-protected:
-    LayerType m_type;
-    ChannelID m_code;
-    QColor m_colour;
-    QString m_label;
-    EventDataType m_min;
-    EventDataType m_max;
-    bool m_hasmin;
-    bool m_hasmax;
-    bool m_visible;
-    QVector<Layer *> m_layers;
-};
-
-class WaveformLayer: public Layer
-{
-public:
-    WaveformLayer(ChannelID code, QColor colour, float min=0, float max=0);
-    virtual ~WaveformLayer();
-};
-
-enum FlagVisual { Bar, Span, Dot };
-class OverlayLayer: public Layer
-{
-public:
-    OverlayLayer(ChannelID code, QColor colour, FlagVisual visual=Bar);
-    virtual ~OverlayLayer();
-protected:
-    FlagVisual m_visual;
-};
-class GroupLayer: public Layer // Effectively an empty Layer container
-{
-public:
-    GroupLayer();
-    virtual ~GroupLayer();
-};
-class FlagGroupLayer: public GroupLayer
-{
-public:
-    FlagGroupLayer();
-    virtual ~FlagGroupLayer();
-};
-class FlagLayer: public Layer
-{
-public:
-    FlagLayer(ChannelID code, QColor colour, FlagVisual visual=Bar);
-    virtual ~FlagLayer();
-protected:
-    FlagVisual m_visual;
-};
-class Graph
-{
-public:
-    Graph(QString name,quint32 flags=GraphFlags::XTicker | GraphFlags::YTicker | GraphFlags::XGrid);
-    Layer *addLayer(Layer *layer) { m_layers.push_back(layer); return layer; }
-    int height() { if (m_visible) return m_height; else return 0;}
-    void setHeight(int h) { m_height=h; }
-    bool visible() { return m_visible; }
-    void setVisible(bool b) { m_visible=b; }
-protected:
-    QString m_name;
-    int m_height;
-    QVector<Layer *> m_layers;
-    bool m_visible;
-};
-class GraphGroup
-{
-public:
-    GraphGroup(QString name);
-    GraphGroup();
-    Graph *addGraph(Graph *graph) { m_graphs.push_back(graph); return graph; }
-protected:
-    QVector<Graph *>m_graphs;
-}; */
 
 void init();
 
-} // namespace
+} // namespace schema
 
 #endif // SCHEMA_H

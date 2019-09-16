@@ -16,6 +16,7 @@
 #include <QString>
 #include <QDateTime>
 #include <QDebug>
+
 using namespace std;
 
 // Do not change these without considering the consequences.. For one the Loader needs changing & version increase
@@ -52,7 +53,7 @@ enum SummaryType { ST_CNT, ST_SUM, ST_AVG, ST_WAVG, ST_PERC, ST_90P, ST_MIN, ST_
 enum MachineType { MT_UNKNOWN = 0, MT_CPAP, MT_OXIMETER, MT_SLEEPSTAGE, MT_JOURNAL, MT_POSITION, MT_UNCATEGORIZED = 99};
 //void InitMapsWithoutAwesomeInitializerLists();
 
-/***** NEVER USED ---
+/***** NEVER USED --- 8/2019
 // PAP Device Capabilities
 const quint32 CAP_Fixed               = 0x0000001;  // Constant PAP
 const quint32 CAP_Variable            = 0x0000002;  // Variable Base (EPAP) pressure
