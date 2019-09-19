@@ -2553,7 +2553,10 @@ bool PRS1DataChunk::ParseEventsF3V6(void)
                 duration = data[pos];
                 this->AddEvent(new PRS1HypopneaEvent(t - duration, 0));
                 break;
-            // case 0x0c?
+            case 0x0c:  // Apnea Alarm
+                // no additional data
+                // TODO: add a PRS1Event for this
+                break;
             // case 0x0d?
             // case 0x0e?
             // case 0x0f?
@@ -4036,7 +4039,7 @@ bool PRS1DataChunk::ParseSummaryF3V6(void)
     }
     const unsigned char * data = (unsigned char *)this->m_data.constData();
     int chunk_size = this->m_data.size();
-    static const int minimum_sizes[] = { 1, 0x2e, 9, 7, 4, 2, 1, 2, 2, 1, 0x18, 2, 4 };  // F5V3 = { 1, 0x38, 4, 2, 4, 0x1e, 2, 4, 9 };
+    static const int minimum_sizes[] = { 1, 0x2b, 9, 7, 4, 2, 1, 2, 2, 1, 0x18, 2, 4 };  // F5V3 = { 1, 0x38, 4, 2, 4, 0x1e, 2, 4, 9 };
     static const int ncodes = sizeof(minimum_sizes) / sizeof(int);
     // NOTE: The sizes contained in hblock can vary, even within a single machine, as can the length of hblock itself!
 
@@ -4084,9 +4087,10 @@ bool PRS1DataChunk::ParseSummaryF3V6(void)
                 ok = this->ParseSettingsF3V6(data + pos, size);
                 break;
             case 2:  // seems equivalent to F5V3 #9, comes right after settings, 9 bytes, identical values
+                // TODO: This may be structurally similar to settings: a list of (code, length, value).
                 CHECK_VALUE(data[pos], 0);
                 CHECK_VALUE(data[pos+1], 1);
-                CHECK_VALUE(data[pos+2], 0);
+                //CHECK_VALUE(data[pos+2], 0);  // Apnea Alarm (0=off, 1=10, 2=20)
                 CHECK_VALUE(data[pos+3], 1);
                 CHECK_VALUE(data[pos+4], 1);
                 CHECK_VALUE(data[pos+5], 0);
@@ -4142,7 +4146,7 @@ bool PRS1DataChunk::ParseSummaryF3V6(void)
                 this->AddEvent(new PRS1ParsedSliceEvent(tt, EquipmentOff));
                 //CHECK_VALUES(data[pos+2], 1, 4);  // bitmask, have seen 1, 4, 6, 0x41
                 //CHECK_VALUE(data[pos+3], 0x17);  // 0x16, etc.
-                CHECK_VALUES(data[pos+4], 0, 1);
+                //CHECK_VALUES(data[pos+4], 0, 1);  // or 2
                 //CHECK_VALUE(data[pos+5], 0x15);  // 0x16, etc.
                 //CHECK_VALUES(data[pos+6], 0, 1);  // or 2
                 break;
@@ -4273,7 +4277,7 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_RAMP_TIME, data[pos]));
                 }
                 break;
-            case 0x2d:  // Ramp Pressure (with ASV/ventilator pressure encoding)
+            case 0x2d:  // Ramp Pressure (with ASV/ventilator pressure encoding), only present when ramp is on
                 this->AddEvent(new PRS1PressureSettingEvent(PRS1_SETTING_RAMP_PRESSURE, data[pos], GAIN));
                 break;
             case 0x2e:  // Bi-Flex level or Rise Time
@@ -4282,7 +4286,11 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
                 // and to Bi-Flex Setting (level) on mode 1.
                 break;
             case 0x2f:  // Rise Time lock? (was flex lock on F0V6, 0x80 for locked)
-                CHECK_VALUE(data[pos], 0);
+                if (cpapmode == PRS1_MODE_S) {
+                    CHECK_VALUES(data[pos], 0, 0x80);  // Bi-Flex Lock
+                } else {
+                    CHECK_VALUE(data[pos], 0);  // Rise Time Lock? not yet observed on F3V6
+                }
                 break;
             case 0x35:  // Humidifier setting
                 this->ParseHumidifierSettingV3(data[pos], data[pos+1], true);
@@ -6178,7 +6186,11 @@ bool PRS1DataChunk::ReadHeader(QFile & f)
         this->m_filepos = f.pos();
         this->m_header = f.read(15);
         if (this->m_header.size() != 15) {
-            qWarning() << this->m_path << "file too short?";
+            if (this->m_header.size() == 0) {
+                qWarning() << this->m_path << "empty, skipping";
+            } else {
+                qWarning() << this->m_path << "file too short?";
+            }
             break;
         }
         
