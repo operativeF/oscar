@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Qt 5.12.2] (the current LTS release as of OSCAR 1.0.0)
+- [Qt 5.12.5] (the current LTS release as of OSCAR 1.1.0)
 - [macOS 10.12 Sierra] or higher for building (required by Qt 5.12)
 - Command-Line Tools for Xcode 9.2, and optionally [Xcode] itself
     - Xcode 9.2 is the last version that runs on macOS 10.12
@@ -37,16 +37,16 @@ NOTE: Official builds are currently made with [macOS 10.14 Mojave] and Command-L
    _Alternatively, the command-line tools installer .dmg can be downloaded from the [Xcode] download site, but you will need a (free) developer account and will
    need to pick the appropriate download for your version of macOS._
 
-4. Install Qt 5.12.2 (as "build" user, if created), approx. 3GB:
-    1. Mount qt-opensource-mac-x64-5.12.2.dmg
-    2. Launch qt-opensource-mac-x64-5.12.2
+4. Install Qt (as "build" user, if created), approx. 3GB:
+    1. Mount qt-opensource-mac-x64-5.12.5.dmg
+    2. Launch qt-opensource-mac-x64-5.12.5
     3. Next, Skip, Continue, (optionally change the installation directory), Continue
-        * Qt is entirely self-contained and can be installed anywhere. It defaults to ~/Qt5.12.2.
+        * Qt is entirely self-contained and can be installed anywhere. It defaults to ~/Qt5.12.5.
         * If you only have the command-line tools installed, the Qt installer will complain that "You need to install Xcode and set up Xcode command line tools." Simply click OK.
-    4. Expand Qt 5.12.2 and select "macOS", Continue
+    4. Expand Qt 5.12.5 and select "macOS", Continue
     5. Select "I have read and agree..." and Continue, Install
     6. Uncheck "Launch Qt Creator", Done
-    7. Eject qt-opensource-mac-x64-5.12.2
+    7. Eject qt-opensource-mac-x64-5.12.5
 
 ## Build
 
@@ -56,20 +56,20 @@ NOTE: Official builds are currently made with [macOS 10.14 Mojave] and Command-L
         cd OSCAR-code
         mkdir build
         cd build
-        ~/Qt5.12.2/5.12.2/clang_64/bin/qmake ../oscar/oscar.pro
+        ~/Qt5.12.5/5.12.5/clang_64/bin/qmake ../oscar/oscar.pro
         make
 
    The application is in OSCAR.app.
 
 2. (Optional) Package for distribution:
 
-        ~/Qt5.12.2/5.12.2/clang_64/bin/macdeployqt OSCAR.app -dmg
+        ~/Qt5.12.5/5.12.5/clang_64/bin/macdeployqt OSCAR.app -dmg
 
    The dmg is at OSCAR.dmg.
 
 ## (Optional) Using Qt Creator
 
-1. Launch Qt Creator where you installed Qt above, by default ~/Qt5.12.2/Qt Creator.app.
+1. Launch Qt Creator where you installed Qt above, by default ~/Qt5.12.5/Qt Creator.app.
 2. File > Open File or Project... and select ~/OSCAR-code/oscar/oscar.pro (or wherever you cloned it above), then click "Configure Project".
 3. Configure building:
     1. Click on "Projects" in the left panel.
@@ -77,19 +77,19 @@ NOTE: Official builds are currently made with [macOS 10.14 Mojave] and Command-L
     3. Click to expand "Details" for the **qmake** build step.
     4. Uncheck "Enable Qt Quick Compiler", click "No" to defer recompiling.
 4. Configure packaging for distribution:
-    1. Copy the "Build directory" path from the **Build Settings** panel above. (Default is "/Users/build/OSCAR-code/build-oscar-Desktop_Qt_5_12_2_clang_64bit-Release")
+    1. Copy the "Build directory" path from the **Build Settings** panel above. (Default is "/Users/build/OSCAR-code/build-oscar-Desktop_Qt_5_12_5_clang_64bit-Release")
     2. Tools > External > Configure...
     3. Select "Add Tool" from the "Add" drop-down menu near the bottom of the window.
     4. Set the name to "Deploy".
     5. Set the Description to "Creates a distributable .dmg".
-    6. Set the Executable to the full path where you installed Qt: "/Users/build/Qt5.12.2/5.12.2/clang_64/bin/macdeployqt".
+    6. Set the Executable to the full path where you installed Qt: "/Users/build/Qt5.12.5/5.12.5/clang_64/bin/macdeployqt".
     7. Set the Arguments to "OSCAR.app -dmg".
     8. Set the working directory to the build directory path copied in step 1.
     9. Click OK.
 5. To compile, select Build > Build Project "oscar". The application is in OSCAR.app.
 6. To create a .dmg, select Tools > External > Deploy. The dmg is at OSCAR.dmg.
 
-[Qt 5.12.2]: http://download.qt.io/archive/qt/5.12/5.12.2/qt-opensource-mac-x64-5.12.2.dmg
+[Qt 5.12.5]: http://download.qt.io/archive/qt/5.12/5.12.5/qt-opensource-mac-x64-5.12.5.dmg
 [macOS 10.14 Mojave]: https://apps.apple.com/us/app/macos-mojave/id1398502828?ls=1&mt=12
 [macOS 10.13 High Sierra]: https://apps.apple.com/us/app/macos-high-sierra/id1246284741?ls=1&mt=12
 [macOS 10.12 Sierra]: https://apps.apple.com/us/app/macos-sierra/id1127487414?ls=1&mt=12
