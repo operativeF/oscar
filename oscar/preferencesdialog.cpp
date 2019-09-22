@@ -357,7 +357,7 @@ void SpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) c
 {
     double value = index.model()->data(index, Qt::EditRole).toDouble();
 
-    QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
+    QDoubleSpinBox *spinBox = dynamic_cast<QDoubleSpinBox*>(editor);
     spinBox->setMinimum(-9999999.0);
     spinBox->setMaximum(9999999.0);
 
@@ -366,7 +366,7 @@ void SpinBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) c
 
 void SpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QDoubleSpinBox *spinBox = static_cast<QDoubleSpinBox*>(editor);
+    QDoubleSpinBox *spinBox = dynamic_cast<QDoubleSpinBox*>(editor);
     spinBox->interpretText();
     double value = spinBox->value();
 
@@ -411,14 +411,14 @@ void ComboBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
 {
     QString value = index.model()->data(index, Qt::EditRole).toString();
 
-    QComboBox *combo = static_cast<QComboBox*>(editor);
+    QComboBox *combo = dynamic_cast<QComboBox*>(editor);
 
     combo->setCurrentText(value);
 }
 
 void ComboBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QComboBox *combo = static_cast<QComboBox*>(editor);
+    QComboBox *combo = dynamic_cast<QComboBox*>(editor);
 
     model->setData(index, combo->currentText(), Qt::EditRole);
 }

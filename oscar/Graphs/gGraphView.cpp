@@ -600,7 +600,7 @@ gGraphView::~gGraphView()
 bool gGraphView::event(QEvent * event)
 {
     if (event->type() == QEvent::Gesture) {
-        return gestureEvent(static_cast<QGestureEvent *>(event));
+        return gestureEvent(dynamic_cast<QGestureEvent *>(event));
     }
     return QWidget::event(event);
 }
@@ -608,7 +608,7 @@ bool gGraphView::event(QEvent * event)
 bool gGraphView::gestureEvent(QGestureEvent * event)
 {
     if (QGesture *pinch = event->gesture(Qt::PinchGesture))
-        pinchTriggered(static_cast<QPinchGesture *>(pinch));
+        pinchTriggered(dynamic_cast<QPinchGesture *>(pinch));
 
     return true;
 }
