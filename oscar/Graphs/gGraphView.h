@@ -94,7 +94,7 @@ public:
     void setText(QString text);
     void setAlignment(Qt::Alignment alignment);
 
-    void setFont(QFont & font);
+    void setFont(const QFont & font);
     QFont & font() { return m_font; }
 
     virtual void paintEvent(QPaintEvent *);

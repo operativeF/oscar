@@ -24,7 +24,7 @@ public:
 
     void addAbortButton();
 
-    void setPixmap(QPixmap &pixmap) { imglabel->setPixmap(pixmap); }
+    void setPixmap(const QPixmap &pixmap) { imglabel->setPixmap(pixmap); }
     QProgressBar * progress;
 public slots:
     void setMessage(QString msg);

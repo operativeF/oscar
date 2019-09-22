@@ -1143,7 +1143,7 @@ void DetectPAPMode(Session *sess)
 
 }
 
-void StoreSummarySettings(Session * sess, STRRecord & R)
+void StoreSummarySettings(Session * sess, const STRRecord & R)
 {
     if (R.mode >= 0) {
         if (R.mode == MODE_CPAP) {
@@ -1205,7 +1205,7 @@ void StoreSummarySettings(Session * sess, STRRecord & R)
 
 }
 
-void StoreSettings(Session * sess, STRRecord & R)
+void StoreSettings(Session * sess, const STRRecord & R)
 {
     if (R.mode >= 0) {
         sess->settings[CPAP_Mode] = R.mode;
@@ -2540,7 +2540,7 @@ bool ResmedLoader::LoadBRP(Session *sess, const QString & path)
 }
 
 // Convert EDFSignal data to OSCAR's Time-Delta Event format
-void ResmedLoader::ToTimeDelta(Session *sess, ResMedEDFParser &edf, EDFSignal &es, ChannelID code,
+void ResmedLoader::ToTimeDelta(Session *sess, const ResMedEDFParser &edf, EDFSignal &es, ChannelID code,
                                long recs, qint64 duration, EventDataType t_min, EventDataType t_max, bool square)
 {
     if (t_min == t_max) {

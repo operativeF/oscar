@@ -5664,7 +5664,7 @@ bool PRS1Import::ParseEvents()
 }
 
 
-QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(QList<PRS1DataChunk *> & allchunks)
+QList<PRS1DataChunk *> PRS1Import::CoalesceWaveformChunks(const QList<PRS1DataChunk *> & allchunks)
 {
     QList<PRS1DataChunk *> coalesced;
     PRS1DataChunk *chunk = nullptr, *lastchunk = nullptr;

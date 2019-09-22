@@ -54,7 +54,7 @@ void MyLabel::setText(QString text) {
     m_text = text;
     update();
 }
-void MyLabel::setFont(QFont & font)
+void MyLabel::setFont(const QFont & font)
 {
     m_font=font;
 }

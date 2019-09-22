@@ -36,10 +36,10 @@ class gSegmentChart : public Layer
     void AddSlice(ChannelID code, QColor col, QString name = "");
 
     //! \brief Sets the fade-out color to make the graphs look more attractive
-    void setGradientColor(QColor &color) { m_gradient_color = color; }
+    void setGradientColor(const QColor& color) { m_gradient_color = color; }
 
     //! \brief Sets the outline color for the edges drawn around the Pie slices
-    void setOutlineColor(QColor &color) { m_outline_color = color; }
+    void setOutlineColor(const QColor &color) { m_outline_color = color; }
     const GraphSegmentType &graphType() { return m_graph_type; }
     void setGraphType(GraphSegmentType type) { m_graph_type = type; }
 

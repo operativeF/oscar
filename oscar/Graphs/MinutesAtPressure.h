@@ -33,7 +33,7 @@ struct PressureInfo
         chans.append(c);
         events[c].resize(300);
     }
-    void AddChannels(QList<ChannelID> & chans)
+    void AddChannels(const QList<ChannelID> & chans)
     {
         for (int i=0; i<chans.size(); ++i) {
             AddChannel(chans.at(i));

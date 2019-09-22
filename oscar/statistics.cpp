@@ -33,7 +33,7 @@ QString htmlMachineSettings = "";   // Machine (formerly Rx) changes
 QString htmlMachines = "";          // Machines used in this profile
 QString htmlReportFooter = "";      // Page footer
 
-QString resizeHTMLPixmap(QPixmap &pixmap, int width, int height) {
+QString resizeHTMLPixmap(const QPixmap &pixmap, int width, int height) {
     QByteArray byteArray;
     QBuffer buffer(&byteArray); // use buffer to store pixmap into byteArray
     buffer.open(QIODevice::WriteOnly);

@@ -339,7 +339,7 @@ class ResmedLoader : public CPAPLoader
     virtual const QString &loaderName() { return resmed_class_name; }
 
     //! \brief Converts EDFSignal data to time delta packed EventList, and adds to Session
-    void ToTimeDelta(Session *sess, ResMedEDFParser &edf, EDFSignal &es, ChannelID code, long recs,
+    void ToTimeDelta(Session *sess, const ResMedEDFParser &edf, EDFSignal &es, ChannelID code, long recs,
                      qint64 duration, EventDataType min = 0, EventDataType max = 0, bool square = false);
 
     //! \brief Register the ResmedLoader with the list of other machine loaders
