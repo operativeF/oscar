@@ -262,11 +262,11 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
 
     // Check for some impossible conditions
     if ( p_profile == nullptr ) {
-        qDebug() << "In daily, p_profile is NULL";
+        qDebug() << "In daily, p_profile is nullptr";
         return;
     }
     else if (p_profile->general == nullptr ) {
-        qDebug() << "In daily, p_profile->general is NULL";
+        qDebug() << "In daily, p_profile->general is nullptr";
         return;
     }
 

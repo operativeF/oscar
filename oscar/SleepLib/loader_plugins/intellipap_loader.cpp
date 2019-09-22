@@ -678,7 +678,7 @@ int IntellipapLoader::OpenDV6(const QString & path)
     EventDataType max_pressure=0, min_pressure=0; //, starting_pressure;
 
     QByteArray str, dataBA;
-    unsigned char *data = NULL;
+    unsigned char *data = nullptr;
     /////////////////////////////////////////////////////////////////////////////////
     // Parse SET.BIN settings file
     /////////////////////////////////////////////////////////////////////////////////
@@ -851,7 +851,7 @@ int IntellipapLoader::OpenDV6(const QString & path)
     const int DV6_R_HeaderSize = 55;
     f.setFileName(newpath+"/R.BIN");
     int numRrecs = (f.size()-DV6_R_HeaderSize) / DV6_R_RecLength;
-    Session *sess = NULL;
+    Session *sess = nullptr;
     if (f.open(QIODevice::ReadOnly)) {
         // Let's not parse R all at once, it's huge
         dataBA = f.read(DV6_R_HeaderSize);
@@ -860,19 +860,19 @@ int IntellipapLoader::OpenDV6(const QString & path)
             return -1;
         }
 
-        sess = NULL;
-        EventList * flow = NULL;
-        EventList * pressure = NULL;
-//        EventList * leak = NULL;
-        EventList * OA  = NULL;
-        EventList * HY  = NULL;
-        EventList * NOA = NULL;
-        EventList * EXP = NULL;
-        EventList * FL  = NULL;
-        EventList * PB  = NULL;
-        EventList * VS  = NULL;
-        EventList * LL  = NULL;
-        EventList * RE  = NULL;
+        sess = nullptr;
+        EventList * flow = nullptr;
+        EventList * pressure = nullptr;
+//        EventList * leak = nullptr;
+        EventList * OA  = nullptr;
+        EventList * HY  = nullptr;
+        EventList * NOA = nullptr;
+        EventList * EXP = nullptr;
+        EventList * FL  = nullptr;
+        EventList * PB  = nullptr;
+        EventList * VS  = nullptr;
+        EventList * LL  = nullptr;
+        EventList * RE  = nullptr;
         bool inOA = false, inH = false, inCA = false, inExP = false, inVS = false, inFL = false, inPB = false, inRE = false, inLL = false;
         qint64 OAstart = 0, OAend = 0;
         qint64 Hstart = 0, Hend = 0;
@@ -1270,8 +1270,8 @@ int IntellipapLoader::OpenDV6(const QString & path)
             sess->setPhysMin(CPAP_FlowRate, max);
             sess->really_set_last(flow->last());
 
-            sess = NULL;
-            flow = NULL;
+            sess = nullptr;
+            flow = nullptr;
         }
 
         f.close();
@@ -1286,15 +1286,15 @@ int IntellipapLoader::OpenDV6(const QString & path)
     /// Parse L.BIN and extract per-minute data.
     /////////////////////////////////////////////////////////////////////////////////////////////
 
-    EventList *leak = NULL;
-    EventList *maxleak = NULL;
-    EventList * RR  = NULL;
-    EventList * Pressure  = NULL;
-    EventList * TV  = NULL;
-    EventList * MV = NULL;
+    EventList *leak = nullptr;
+    EventList *maxleak = nullptr;
+    EventList * RR  = nullptr;
+    EventList * Pressure  = nullptr;
+    EventList * TV  = nullptr;
+    EventList * MV = nullptr;
 
 
-    sess = NULL;
+    sess = nullptr;
     const int DV6_L_HeaderSize = 55;
     // Need to parse L.bin minute table to get graphs
     f.setFileName(newpath+"/L.BIN");

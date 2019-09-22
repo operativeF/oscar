@@ -10,7 +10,7 @@
 
 #define ASSERTS_SUCK
 
-QThreadPool * otherThreadPool = NULL;
+QThreadPool * otherThreadPool = nullptr;
 
 void MyOutputHandler(QtMsgType type, const QMessageLogContext &context, const QString &msgtxt)
 {
@@ -78,12 +78,12 @@ void shutdownLogger()
     if (logger) {
         logger->quit();
         otherThreadPool->waitForDone(-1);
-        logger = NULL;
+        logger = nullptr;
     }
     delete otherThreadPool;
 }
 
-LogThread * logger = NULL;
+LogThread * logger = nullptr;
 
 void LogThread::append(QString msg)
 {

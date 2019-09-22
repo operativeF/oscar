@@ -1431,9 +1431,9 @@ void gGraphView::paintGL()
 //        int tp2, tp1;
 
         if (this->m_emptyimage.isNull() )
-            qDebug() << "m_emptyimage is NULL";
+            qDebug() << "m_emptyimage is nullptr";
         else
-            qDebug() << "m_emptyimage is not NULL";
+            qDebug() << "m_emptyimage is not nullptr";
 //        sleep(3);
 
         if (! this->m_emptyimage.isNull()) {

@@ -435,7 +435,7 @@ void showInGraphicalShell(const QString & pathIn)
 
     // Mac, Windows support folder or file.
 #if defined(Q_OS_WIN)
-    QWidget * parent = NULL;
+    QWidget * parent = nullptr;
     Environment env;
     const QString explorer = env.searchInPath(QLatin1String("explorer.exe"));
     if (explorer.isEmpty()) {
