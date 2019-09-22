@@ -27,7 +27,7 @@
 
 #include "progressdialog.h"
 
-#include <time.h>
+#include <ctime>
 
 #include "machine.h"
 #include "profiles.h"

@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QFontMetrics>
 
-#include <math.h>
+#include <cmath>
 
 #include "Graphs/gXAxis.h"
 #include "SleepLib/profiles.h"

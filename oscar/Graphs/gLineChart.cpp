@@ -11,7 +11,7 @@
 #include <QString>
 #include <QDebug>
 
-#include <math.h>
+#include <cmath>
 
 #include "Graphs/glcommon.h"
 #include "Graphs/gGraph.h"

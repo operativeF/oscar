@@ -6,7 +6,7 @@
  * License. See the file COPYING in the main directory of the source code
  * for more details. */
 
-#include <math.h>
+#include <cmath>
 #include "SleepLib/profiles.h"
 #include "gLineOverlay.h"
 
