@@ -40,7 +40,7 @@ QHash<schema::ChanType, QString> channeltype;
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, Profile *_profile) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
-    ui(new Ui::PreferencesDialog),
+    ui(std::make_unique<Ui::PreferencesDialog>()),
     profile(_profile)
 {
     ui->setupUi(this);
@@ -692,7 +692,6 @@ void PreferencesDialog::InitWaveInfo()
 
 PreferencesDialog::~PreferencesDialog()
 {
-    delete ui;
 }
 
 bool PreferencesDialog::Save()

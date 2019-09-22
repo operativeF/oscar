@@ -104,8 +104,8 @@ private:
     SerialOximeter * oximodule;
     gGraphView * liveView;
     gGraph * plethyGraph;
-    Session * session;
-    Day * dummyday;
+    std::unique_ptr<Session> session;
+    std::unique_ptr<Day> dummyday;
     gLineChart * plethyChart;
     SessionBar * sessbar;
     EventList * ELplethy;

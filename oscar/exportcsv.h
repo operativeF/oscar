@@ -54,7 +54,7 @@ class ExportCSV : public QDialog
   private:
     void UpdateCalendarDay(QDateEdit *dateedit, QDate date);
 
-    Ui::ExportCSV *ui;
+    std::unique_ptr<Ui::ExportCSV> ui;
     QList<DumpField> fields;
 };
 

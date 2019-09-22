@@ -106,7 +106,7 @@ private:
     QHash<MachineType, QStandardItem *> toplevel;
     QHash<MachineType, QStandardItem *> machlevel;
 
-    Ui::PreferencesDialog *ui;
+    std::unique_ptr<Ui::PreferencesDialog> ui;
     Profile *profile;
     QHash<ChannelID, QColor> m_new_colors;
 

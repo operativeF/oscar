@@ -20,7 +20,7 @@
 
 Help::Help(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Help)
+    ui(std::make_unique<Ui::Help>())
 {
     ui->setupUi(this);
 
@@ -76,7 +76,7 @@ Help::Help(QWidget *parent) :
     if (QFile::exists(helpIndex))
         QFile::remove(helpIndex);
 
-    helpEngine = new QHelpEngine(helpIndex);
+    helpEngine = std::make_unique<QHelpEngine>(helpIndex);
     helpNamespace = "nightowlsoftware.ca.OSCAR_Guide";
 
     if (!helpFile.isEmpty()) {
@@ -154,9 +154,6 @@ Help::~Help()
     disconnect(helpEngine->indexWidget(), SIGNAL(linkActivated(QUrl, QString)), helpBrowser, SLOT(setSource(QUrl)));
     disconnect(helpBrowser, SIGNAL(backwardAvailable(bool)), this, SLOT(backwardAvailable(bool)));
     disconnect(helpBrowser, SIGNAL(forwardAvailable(bool)), this, SLOT(forwardAvailable(bool)));
-
-    delete helpEngine;
-    delete ui;
 }
 
 void Help::startup()

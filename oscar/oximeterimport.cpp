@@ -84,12 +84,9 @@ OximeterImport::OximeterImport(QWidget *parent) :
     connect(sessbar, SIGNAL(sessionClicked(Session*)), this, SLOT(onSessionSelected(Session*)));
     layout->addWidget(sessbar, 1);
 
-    dummyday = nullptr;
-    session = nullptr;
     ELplethy = nullptr;
-
-    pulse = spo2 = -1;
-
+    pulse = -1;
+    spo2 = -1;
 
     ui->skipWelcomeCheckbox->setChecked(p_profile->oxi->skipOxiIntroScreen());
     if (p_profile->oxi->skipOxiIntroScreen()) {
@@ -117,12 +114,6 @@ OximeterImport::OximeterImport(QWidget *parent) :
 
 OximeterImport::~OximeterImport()
 {
-    if (dummyday != nullptr) {
-        delete dummyday;
-    }
-    if (session != nullptr) {
-        delete session;
-    }
     if (ELplethy != nullptr) {
         delete ELplethy;
     }
@@ -484,13 +475,13 @@ void OximeterImport::on_liveImportButton_clicked()
     oximodule->Open("live");
     ui->stopButton->setVisible(true);
 
-    dummyday = new Day();
+    dummyday = std::make_unique<Day>();
 
     quint32 starttime = oximodule->startTime().toTime_t();
     ti = qint64(starttime) * 1000L;
     start_ti = ti;
 
-    session = new Session(mach, starttime);
+    session = std::make_unique<Session>(mach, starttime);
 
     ELplethy = session->AddEventList(OXI_Plethy, EVL_Waveform, 1.0, 0.0, 0.0, 0.0, 20);
 
@@ -498,12 +489,12 @@ void OximeterImport::on_liveImportButton_clicked()
     session->really_set_first(start_ti);
     session->setOpened(true);
 
-    dummyday->addSession(session);
+    dummyday->addSession(session.get());
 
     plethyChart->setMinX(start_ti);
     plethyGraph->SetMinX(start_ti);
 
-    liveView->setDay(dummyday);
+    liveView->setDay(dummyday.get());
 
     updateTimer.setParent(this);
     updateTimer.setInterval(50);
@@ -858,14 +849,13 @@ void OximeterImport::on_saveButton_clicked()
 
 
     if (!session) {
-        session = new Session(mach, sid);
+        session = std::make_unique<Session>(mach, sid);
         session->really_set_first(start);
     } else {
         // Live recording...
         if (dummyday) {
-            dummyday->removeSession(session);
-            delete dummyday;
-            dummyday = nullptr;
+            dummyday->removeSession(session.get());
+            dummyday.reset(nullptr);
         }
         session->SetSessionID(sid);
         session->really_set_first(start);
@@ -996,8 +986,8 @@ void OximeterImport::on_saveButton_clicked()
         session->Max(OXI_Perf);
     }
 
-    calcSPO2Drop(session);
-    calcPulseChange(session);
+    calcSPO2Drop(session.get());
+    calcPulseChange(session.get());
 
     qDebug() << "oximod - Setting up machine and session";
 
@@ -1035,7 +1025,7 @@ void OximeterImport::on_saveButton_clicked()
     session->setOpened(true);
 
     qDebug() << "oximod - Adding session to machine";
-    mach->AddSession(session);
+    mach->AddSession(session.get());
     qDebug() << "oximod - Saving machine";
     mach->Save();
     mach->SaveSummaryCache();
@@ -1047,7 +1037,7 @@ void OximeterImport::on_saveButton_clicked()
     mainwin->getOverview()->ReloadGraphs();
 
     ELplethy = nullptr;
-    session = nullptr;
+    session.reset(nullptr);
 
     oximodule->trashRecords();
     accept();

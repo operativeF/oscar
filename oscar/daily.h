@@ -335,8 +335,8 @@ private:
     MyScrollBar *scrollbar;
     QHBoxLayout *layout;
     QLabel *emptyToggleArea;
-    QIcon * icon_on;
-    QIcon * icon_off;
+    std::unique_ptr<QIcon> icon_on;
+    std::unique_ptr<QIcon> icon_off;
 
     SessionBar * sessionbar;
     MyLabel * dateDisplay;

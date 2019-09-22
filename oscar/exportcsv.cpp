@@ -21,7 +21,7 @@ extern MainWindow *mainwin;
 
 ExportCSV::ExportCSV(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ExportCSV)
+    ui(std::make_unique<Ui::ExportCSV>())
 {
     ui->setupUi(this);
     ui->rb1_Summary->setChecked(true);
@@ -65,7 +65,6 @@ ExportCSV::ExportCSV(QWidget *parent) :
 
 ExportCSV::~ExportCSV()
 {
-    delete ui;
 }
 
 void ExportCSV::on_filenameBrowseButton_clicked()

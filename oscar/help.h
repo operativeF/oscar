@@ -59,8 +59,8 @@ private slots:
     void on_languageWarningCheckbox_clicked(bool checked);
 
 private:
-    Ui::Help *ui;
-    QHelpEngine *helpEngine;
+    std::unique_ptr<Ui::Help> ui;
+    std::unique_ptr<QHelpEngine> helpEngine;
     QTabWidget * tabWidget;
     HelpBrowser * helpBrowser;
     MyTextBrowser * resultWidget;

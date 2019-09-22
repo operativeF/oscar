@@ -469,8 +469,8 @@ Daily::Daily(QWidget *parent,gGraphView * shared)
     ui->evViewLCD->display(ews);
 
 
-    icon_on=new QIcon(":/icons/session-on.png");
-    icon_off=new QIcon(":/icons/session-off.png");
+    icon_on = std::make_unique<QIcon>(":/icons/session-on.png");
+    icon_off = std::make_unique<QIcon>(":/icons/session-off.png");
 
     ui->splitter->setVisible(false);
 
@@ -517,9 +517,6 @@ Daily::~Daily()
 
     // Save graph orders and pin status, etc...
     GraphView->SaveSettings("Daily");
-
-    delete icon_on;
-    delete icon_off;
 }
 
 void Daily::showEvent(QShowEvent *)
