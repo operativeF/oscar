@@ -168,19 +168,19 @@ const int TIMEOUT = 2000;
 
 
 //const quint8 COMMAND_GET_VERSION = 0xA0;  // not sure of this one
-const quint8 COMMAND_CMS50_HELLO2 = 0xA2; // stop live data stream
-const quint8 COMMAND_GET_SESSION_COUNT = 0xA3;
-const quint8 COMMAND_GET_SESSION_DURATION = 0xA4;
-const quint8 COMMAND_GET_SESSION_TIME = 0xA5;
-const quint8 COMMAND_GET_SESSION_DATA = 0xA6;
-const quint8 COMMAND_CMS50_HELLO1 = 0xA7; // stop stored data stream
-const quint8 COMMAND_GET_OXIMETER_MODEL = 0xA8;
-const quint8 COMMAND_GET_OXIMETER_VENDOR = 0xA9;
-const quint8 COMMAND_GET_OXIMETER_DEVICEID = 0xAA;
-const quint8 COMMAND_GET_USER_INFO = 0xAB;
-const quint8 COMMAND_GET_USER_COUNT = 0xAD; // for future check and use
-const quint8 COMMAND_SESSION_ERASE = 0xAE;
-const quint8 COMMAND_GET_OXIMETER_INFO = 0xB0;
+constexpr quint8 COMMAND_CMS50_HELLO2 = 0xA2; // stop live data stream
+constexpr quint8 COMMAND_GET_SESSION_COUNT = 0xA3;
+constexpr quint8 COMMAND_GET_SESSION_DURATION = 0xA4;
+constexpr quint8 COMMAND_GET_SESSION_TIME = 0xA5;
+constexpr quint8 COMMAND_GET_SESSION_DATA = 0xA6;
+constexpr quint8 COMMAND_CMS50_HELLO1 = 0xA7; // stop stored data stream
+constexpr quint8 COMMAND_GET_OXIMETER_MODEL = 0xA8;
+constexpr quint8 COMMAND_GET_OXIMETER_VENDOR = 0xA9;
+constexpr quint8 COMMAND_GET_OXIMETER_DEVICEID = 0xAA;
+constexpr quint8 COMMAND_GET_USER_INFO = 0xAB;
+constexpr quint8 COMMAND_GET_USER_COUNT = 0xAD; // for future check and use
+constexpr quint8 COMMAND_SESSION_ERASE = 0xAE;
+constexpr quint8 COMMAND_GET_OXIMETER_INFO = 0xB0;
 
 
 int cms50_seqlength = sizeof(cms50_sequence);

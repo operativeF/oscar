@@ -1,1 +1,1 @@
-const int build_number = 4;
+constexpr int build_number = 4;

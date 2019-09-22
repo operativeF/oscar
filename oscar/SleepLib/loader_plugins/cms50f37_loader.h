@@ -12,7 +12,7 @@
 #include "SleepLib/serialoximeter.h"
 
 const QString cms50f37_class_name = "CMS50F37";
-const int cms50f37_data_version = 0;
+constexpr int cms50f37_data_version = 0;
 
 
 /*! \class CMS5037Loader

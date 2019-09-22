@@ -656,7 +656,7 @@ bool Session::LoadSummary()
     return true;
 }
 
-const quint16 compress_method = 1;
+constexpr quint16 compress_method = 1;
 
 bool Session::StoreEvents()
 {
