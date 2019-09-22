@@ -19,8 +19,6 @@
 #include "SleepLib/calcs.h"
 #include "SleepLib/profiles.h"
 
-using namespace std;
-
 // This is the uber important database version for OSCAR's internal storage
 // Increment this after stuffing with Session's save & load code.
 const quint16 summary_version = 18;
@@ -2165,7 +2163,7 @@ EventDataType Session::percentile(ChannelID id, EventDataType percent)
 
     if (n > array.size() - 1) { n--; }
 
-    nth_element(array.begin(), array.begin() + n, array.end());
+    std::nth_element(array.begin(), array.begin() + n, array.end());
 
     // slack, no averaging.. fixme if this function is ever used..
     return array[n] * gain;

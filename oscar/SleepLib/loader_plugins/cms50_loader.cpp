@@ -26,8 +26,6 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-using namespace std;
-
 #include "cms50_loader.h"
 #include "SleepLib/machine.h"
 #include "SleepLib/session.h"

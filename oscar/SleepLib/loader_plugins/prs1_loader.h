@@ -10,7 +10,7 @@
 #ifndef PRS1LOADER_H
 #define PRS1LOADER_H
 //#include <map>
-//using namespace std;
+
 #include "SleepLib/machine.h" // Base class: MachineLoader
 #include "SleepLib/machine_loader.h"
 #include "SleepLib/profiles.h"
@@ -129,37 +129,37 @@ public:
     bool ReadData(class QFile & f);
     
     //! \brief Figures out which Compliance Parser to call, based on machine family/version and calls it.
-    bool ParseCompliance(void);
+    bool ParseCompliance();
     
     //! \brief Parse a single data chunk from a .000 file containing compliance data for a P25x brick
-    bool ParseComplianceF0V23(void);
+    bool ParseComplianceF0V23();
     
     //! \brief Parse a single data chunk from a .000 file containing compliance data for a DreamStation 200X brick
-    bool ParseComplianceF0V6(void);
+    bool ParseComplianceF0V6();
     
     //! \brief Figures out which Summary Parser to call, based on machine family/version and calls it.
     bool ParseSummary();
 
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 2 or 3 machine
-    bool ParseSummaryF0V23(void);
+    bool ParseSummaryF0V23();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 4 machine
-    bool ParseSummaryF0V4(void);
+    bool ParseSummaryF0V4();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 0 CPAP/APAP family version 6 machine
-    bool ParseSummaryF0V6(void);
+    bool ParseSummaryF0V6();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 3 ventilator (family version 3) machine
-    bool ParseSummaryF3V3(void);
+    bool ParseSummaryF3V3();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 3 ventilator (family version 6) machine
-    bool ParseSummaryF3V6(void);
+    bool ParseSummaryF3V6();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 0-2 machine
-    bool ParseSummaryF5V012(void);
+    bool ParseSummaryF5V012();
     
     //! \brief Parse a single data chunk from a .001 file containing summary data for a family 5 ASV family version 3 machine
-    bool ParseSummaryF5V3(void);
+    bool ParseSummaryF5V3();
 
     //! \brief Parse a flex setting byte from a .000 or .001 containing compliance/summary data
     void ParseFlexSetting(quint8 flex, int prs1mode);
@@ -180,16 +180,16 @@ public:
     bool ParseEventsF0V6(CPAPMode mode);
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator family version 3 machine
-    bool ParseEventsF3V3(void);
+    bool ParseEventsF3V3();
     
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 3 ventilator family version 6 machine
-    bool ParseEventsF3V6(void);
+    bool ParseEventsF3V6();
     
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 0-2 machine
-    bool ParseEventsF5V012(void);
+    bool ParseEventsF5V012();
 
     //! \brief Parse a single data chunk from a .002 file containing event data for a family 5 ASV family version 3 machine
-    bool ParseEventsF5V3(void);
+    bool ParseEventsF5V3();
 
 protected:
     //! \brief Add a parsed event to the chunk
@@ -301,9 +301,9 @@ protected:
     //! \brief Translate the PRS1-specific machine mode to the importable vendor-neutral enum.
     CPAPMode importMode(int mode);
     //! \brief Parse all the chunks in a single machine session
-    bool ParseSession(void);
+    bool ParseSession();
     //! \brief Save parsed session data to the database
-    void SaveSessionToDatabase(void);
+    void SaveSessionToDatabase();
 };
 
 /*! \class PRS1Loader

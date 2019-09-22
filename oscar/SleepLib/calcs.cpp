@@ -156,14 +156,14 @@ void percentileFilter(EventDataType *input, EventDataType *output, int samples, 
 
         // If even percentile, or already max value..
         if ((val == fl) || (j >= width - 1)) {
-            nth_element(buf.begin(), buf.begin() + j, buf.begin() + width - 1);
+            std::nth_element(buf.begin(), buf.begin() + j, buf.begin() + width - 1);
             val = buf[j];
         } else {
             // Percentile lies between two points, interpolate.
             double v1, v2;
-            nth_element(buf.begin(), buf.begin() + j, buf.begin() + width - 1);
+            std::nth_element(buf.begin(), buf.begin() + j, buf.begin() + width - 1);
             v1 = buf[j];
-            nth_element(buf.begin(), buf.begin() + j + 1, buf.begin() + width - 1);
+            std::nth_element(buf.begin(), buf.begin() + j + 1, buf.begin() + width - 1);
             v2 = buf[j + 1];
 
             val = v1 + (v2 - v1) * (val - fl);
@@ -740,7 +740,7 @@ void FlowParser::flagUserEvents(ChannelID code, EventDataType restriction, Event
     // Look for the 60th percentile of the abs'ed min/max values
     const EventDataType perc = 0.6F;
     int idx = float(br.size()) * perc;
-    nth_element(br.begin(), br.begin() + idx, br.end() - 1);
+    std::nth_element(br.begin(), br.begin() + idx, br.end() - 1);
 
     // Take this value as the peak
     EventDataType peak = br[idx]; ;

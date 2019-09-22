@@ -17,8 +17,6 @@
 #include <QDateTime>
 #include <QDebug>
 
-using namespace std;
-
 // Do not change these without considering the consequences.. For one the Loader needs changing & version increase
 using ChannelID = quint32;
 using MachineID = long;

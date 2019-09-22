@@ -2220,7 +2220,6 @@ void gGraphView::populateMenu(gGraph * graph)
         oximeter_menu->clear();
         cpap_menu->clear();
 
-        using namespace schema;
         quint32 showflags = schema::FLAG | schema::MINOR_FLAG | schema::SPAN;
         if (p_profile->general->showUnknownFlags()) showflags |= schema::UNKNOWN;
         QList<ChannelID> chans = lc->m_day->getSortedMachineChannels(showflags);
