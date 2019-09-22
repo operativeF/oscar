@@ -6,7 +6,9 @@
  * License. See the file COPYING in the main directory of the source code
  * for more details. */
 
+#include <algorithm>
 #include <cmath>
+
 #include "gSegmentChart.h"
 
 gSegmentChart::gSegmentChart(GraphSegmentType type, QColor gradient_color, QColor outline_color)
@@ -85,7 +87,7 @@ void gSegmentChart::paint(QPainter &painter, gGraph &w, const QRegion &region)
     int start_py = top;
 
     width--;
-    float diameter = MIN(width, height);
+    float diameter = std::min(width, height);
     diameter -= 8;
     float radius = diameter / 2.0;
 

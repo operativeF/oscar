@@ -11,6 +11,7 @@
 #include <QString>
 #include <QDebug>
 
+#include <algorithm>
 #include <cmath>
 
 #include "Graphs/glcommon.h"
@@ -18,8 +19,6 @@
 #include "Graphs/gGraphView.h"
 #include "SleepLib/profiles.h"
 #include "Graphs/gLineOverlay.h"
-
-#define EXTRA_ASSERTS 1
 
 QDataStream & operator<<(QDataStream & stream, const DottedLine & dot)
 {
@@ -650,8 +649,8 @@ void gLineChart::paint(QPainter &painter, gGraph &w, const QRegion &region)
                     //x1=el.time(1);
 
                     double XR = xx / sr;
-                    double Z1 = MAX(x0, minx);
-                    double Z2 = MIN(xL, maxx);
+                    double Z1 = std::max(x0, minx);
+                    double Z2 = std::min(xL, maxx);
                     double ZD = Z2 - Z1;
                     double ZR = ZD / sr;
                     double ZQ = ZR / XR;

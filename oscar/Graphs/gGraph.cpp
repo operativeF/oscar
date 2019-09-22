@@ -10,6 +10,8 @@
 
 #include <QLabel>
 #include <QTimer>
+
+#include <algorithm>
 #include <cmath>
 #include <exception>
 
@@ -763,8 +765,8 @@ void gGraph::mouseMoveEvent(QMouseEvent *event)
         if (event->buttons() & Qt::LeftButton) {
 
             //qDebug() << m_title << "Moved" << x << y << left << right << top << bottom << m_width << h;
-            int a1 = MIN(x, x2);
-            int a2 = MAX(x, x2);
+            int a1 = std::min(x, x2);
+            int a2 = std::max(x, x2);
 
             if (a1 < left) { a1 = left; }
 
@@ -944,8 +946,8 @@ void gGraph::mouseReleaseEvent(QMouseEvent *event)
                 xmult = xx / double(w);
                 qint64 j1 = min_x + xmult * x;
                 qint64 j2 = min_x + xmult * x2;
-                qint64 a1 = MIN(j1, j2)
-                            qint64 a2 = MAX(j1, j2)
+                qint64 a1 = std::min(j1, j2);
+                qint64 a2 = std::max(j1, j2);
 
                                         //if (a1<rmin_x) a1=rmin_x;
                 if (a2 > rmax_x) { a2 = rmax_x; }
@@ -962,8 +964,8 @@ void gGraph::mouseReleaseEvent(QMouseEvent *event)
                 xmult = xx / double(w);
                 qint64 j1 = rmin_x + xmult * x;
                 qint64 j2 = rmin_x + xmult * x2;
-                qint64 a1 = MIN(j1, j2)
-                qint64 a2 = MAX(j1, j2)
+                qint64 a1 = std::min(j1, j2);
+                qint64 a2 = std::max(j1, j2);
 
                 //if (a1<rmin_x) a1=rmin_x;
                 if (a2 > rmax_x) { a2 = rmax_x; }
