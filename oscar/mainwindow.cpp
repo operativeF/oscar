@@ -66,7 +66,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(std::make_unique<Ui::MainWindow>())
 {
     ui->setupUi(this);
     ui->logText->setPlainText("00000: Startup: OSCAR Logger initialized");
@@ -298,7 +298,6 @@ void MainWindow::closeEvent(QCloseEvent * event)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     QCoreApplication::quit();
 }
 

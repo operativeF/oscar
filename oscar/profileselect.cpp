@@ -28,7 +28,7 @@ extern MainWindow * mainwin;
 
 ProfileSelect::ProfileSelect(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ProfileSelect)
+    ui(std::make_unique<Ui::ProfileSelect>())
 {
     ui->setupUi(this);
     QStringList str;
@@ -116,7 +116,6 @@ ProfileSelect::~ProfileSelect()
 {
     delete model; // why is this not being cleaned up by Qt?
     delete popupMenu;
-    delete ui;
 }
 void ProfileSelect::earlyExit()
 {

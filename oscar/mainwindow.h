@@ -349,7 +349,7 @@ private:
 //    QString getWelcomeHTML();
     void FreeSessions();
 
-    Ui::MainWindow *ui;
+    std::unique_ptr<Ui::MainWindow> ui;
     Daily *daily;
     Overview *overview;
     ProfileSelector *profileSelector;

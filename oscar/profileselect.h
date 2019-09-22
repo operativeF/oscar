@@ -51,7 +51,7 @@ class ProfileSelect : public QDialog
     void on_filter_textChanged(const QString &arg1);
 
 private:
-    Ui::ProfileSelect *ui;
+    std::unique_ptr<Ui::ProfileSelect> ui;
     QString m_selectedProfile;
     int m_tries;
     QMenu *popupMenu;

@@ -223,7 +223,7 @@ class Profile : public Preferences
 
     bool is_first_day;
 
-    UserInfo *user;
+    std::unique_ptr<UserInfo> user;
     CPAPSettings *cpap;
     OxiSettings *oxi;
     DoctorInfo *doctor;

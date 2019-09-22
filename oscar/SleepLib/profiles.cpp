@@ -36,7 +36,8 @@ Preferences *p_layout;
 Profile *p_profile;
 
 Profile::Profile(QString path)
-  : is_first_day(true),
+  : user(std::make_unique<UserInfo>(this)),
+	is_first_day(true),
      m_opened(false)
 {
     p_name = STR_GEN_Profile;
@@ -62,7 +63,6 @@ Profile::Profile(QString path)
     Set(STR_GEN_DataFolder, QString("{home}/Profiles/{UserName}"));
 
     doctor = new DoctorInfo(this);
-    user = new UserInfo(this);
     cpap = new CPAPSettings(this);
     oxi = new OxiSettings(this);
     appearance = new AppearanceSettings(this);
@@ -77,7 +77,6 @@ Profile::~Profile()
 {
     removeLock();
 
-    delete user;
     delete doctor;
     delete cpap;
     delete oxi;
@@ -1942,7 +1941,8 @@ bool Profile::hasChannel(ChannelID code)
     return found;
 }
 
-const quint16 chandata_version = 1;
+constexpr quint16 chandata_version = 1;
+
 void Profile::saveChannels()
 {
     // First save the XML version for Mobile versions

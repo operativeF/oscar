@@ -120,7 +120,7 @@ class Overview : public QWidget
   private:
     void CreateAllGraphs();
 
-    Ui::Overview *ui;
+    std::unique_ptr<Ui::Overview> ui;
     gGraphView *GraphView;
     MyScrollBar *scrollbar;
     QHBoxLayout *layout;

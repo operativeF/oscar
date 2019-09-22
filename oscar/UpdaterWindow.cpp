@@ -34,7 +34,7 @@ extern MainWindow *mainwin;
 
 UpdaterWindow::UpdaterWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::UpdaterWindow)
+    ui(std::make_unique<Ui::UpdaterWindow>())
 {
     ui->setupUi(this);
 
@@ -67,7 +67,6 @@ UpdaterWindow::UpdaterWindow(QWidget *parent) :
 UpdaterWindow::~UpdaterWindow()
 {
     disconnect(netmanager, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-    delete ui;
 }
 
 QString platformStr()

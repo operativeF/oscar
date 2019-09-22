@@ -25,7 +25,7 @@ extern MainWindow *mainwin;
 
 NewProfile::NewProfile(QWidget *parent, const QString *user) :
     QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
-    ui(new Ui::NewProfile)
+    ui(std::make_unique<Ui::NewProfile>())
 {
     ui->setupUi(this);
     if (user)
@@ -96,10 +96,8 @@ NewProfile::NewProfile(QWidget *parent, const QString *user) :
     ui->textBrowser->setHtml(getIntroHTML());
 }
 
-NewProfile::~NewProfile()
-{
-    delete ui;
-}
+
+NewProfile::~NewProfile() = default;
 
 
 QString NewProfile::getIntroHTML()

@@ -90,7 +90,7 @@ class UpdaterWindow : public QMainWindow
 
   private:
 
-    Ui::UpdaterWindow *ui;
+    std::unique_ptr<Ui::UpdaterWindow> ui;
     RequestMode requestmode;
     QNetworkAccessManager *netmanager;
     Update *update;

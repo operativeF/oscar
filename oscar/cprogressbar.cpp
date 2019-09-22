@@ -58,7 +58,7 @@ void CProgressBar::add (long count) {
         maxSteps -= numDone;       // maxSteps now is number of steps remaining
         numDone = 1;               // and we figure only one processed so far
 
-        progress = new QProgressDialog(savedTitle,
+        progress = std::make_unique<QProgressDialog>(savedTitle,
                                 QString(), 0, maxSteps, parent,
                                 Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
         progress->setWindowModality(Qt::WindowModal);

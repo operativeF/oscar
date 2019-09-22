@@ -117,7 +117,7 @@ void Daily::setSidebarVisible(bool visible)
 }
 
 Daily::Daily(QWidget *parent,gGraphView * shared)
-    :QWidget(parent), ui(new Ui::Daily)
+    :QWidget(parent), ui(std::make_unique<Ui::Daily>())
 {
     qDebug() << "Creating new Daily object";
     ui->setupUi(this);
@@ -518,7 +518,6 @@ Daily::~Daily()
     // Save graph orders and pin status, etc...
     GraphView->SaveSettings("Daily");
 
-    delete ui;
     delete icon_on;
     delete icon_off;
 }
@@ -545,7 +544,7 @@ void Daily::Link_clicked(const QUrl &url)
     QString code=url.toString().section("=",0,0).toLower();
     QString data=url.toString().section("=",1);
     int sid=data.toInt();
-    Day *day=nullptr;
+    Day *day = nullptr;
 
     if (code=="togglecpapsession") { // Enable/Disable CPAP session
         day=p_profile->GetDay(previous_date,MT_CPAP);

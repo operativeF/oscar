@@ -30,7 +30,7 @@ extern MainWindow *mainwin;
 
 Overview::Overview(QWidget *parent, gGraphView *shared) :
     QWidget(parent),
-    ui(new Ui::Overview),
+    ui(std::make_unique<Ui::Overview>()),
     m_shared(shared)
 {
     ui->setupUi(this);
@@ -156,8 +156,6 @@ Overview::~Overview()
 
     // Save graph orders and pin status, etc...
     GraphView->SaveSettings("Overview");//no trans
-
-    delete ui;
 }
 
 void Overview::ResetFont()

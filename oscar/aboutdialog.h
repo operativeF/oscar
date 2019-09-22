@@ -33,7 +33,7 @@ private:
     QString getLicense();
     QString getRelnotes();
 
-    Ui::AboutDialog *ui;
+    std::unique_ptr<Ui::AboutDialog> ui;
 };
 
 #endif // ABOUTDIALOG_H

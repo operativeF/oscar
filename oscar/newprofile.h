@@ -26,7 +26,7 @@ class NewProfile : public QDialog
 
   public:
     explicit NewProfile(QWidget *parent = 0, const QString *user = 0);
-    ~NewProfile();
+	~NewProfile();
 
     //! \brief When used in edit mode, this skips the first page
     void skipWelcomeScreen();
@@ -56,7 +56,7 @@ class NewProfile : public QDialog
   private:
     QString getIntroHTML();
 
-    Ui::NewProfile *ui;
+    std::unique_ptr<Ui::NewProfile> ui;
     bool m_editMode;
     int m_firstPage;
     bool m_passwordHashed;

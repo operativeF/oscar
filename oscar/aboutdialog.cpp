@@ -20,7 +20,7 @@
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AboutDialog)
+    ui(std::make_unique<Ui::AboutDialog>())
 {
     ui->setupUi(this);
 
@@ -57,7 +57,6 @@ AboutDialog::AboutDialog(QWidget *parent) :
 AboutDialog::~AboutDialog()
 {
     disconnect(ui->closeButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    delete ui;
 }
 
 /***************************************************

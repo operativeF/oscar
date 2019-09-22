@@ -100,7 +100,7 @@ protected:
     void setInformation();
 
 private:
-    Ui::OximeterImport *ui;
+    std::unique_ptr<Ui::OximeterImport> ui;
     SerialOximeter * oximodule;
     gGraphView * liveView;
     gGraph * plethyGraph;

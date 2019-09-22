@@ -31,7 +31,7 @@ QList<SerialOximeter *> GetOxiLoaders();
 
 OximeterImport::OximeterImport(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::OximeterImport)
+    ui(std::make_unique<Ui::OximeterImport>())
 {
     ui->setupUi(this);
     setWindowTitle(tr("Oximeter Import Wizard"));
@@ -128,7 +128,6 @@ OximeterImport::~OximeterImport()
     }
 
     disconnect(sessbar, SIGNAL(sessionClicked(Session*)), this, SLOT(onSessionSelected(Session*)));
-    delete ui;
 }
 
 void OximeterImport::on_nextButton_clicked()

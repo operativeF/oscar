@@ -327,7 +327,7 @@ private:
 
     QList<int> splitter_sizes;
 
-    Ui::Daily *ui;
+    std::unique_ptr<Ui::Daily> ui;
     QDate previous_date;
     QMenu *show_graph_menu;
 

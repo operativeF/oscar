@@ -48,7 +48,7 @@ private:
     QString savedTitle;
 
     QWidget * parent = nullptr;
-    QProgressDialog * progress = nullptr;
+    std::unique_ptr<QProgressDialog> progress;
     QElapsedTimer timer;
 };
 
