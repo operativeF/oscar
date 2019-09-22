@@ -254,7 +254,7 @@ int IntellipapLoader::OpenDV5(const QString & path)
 
 
     // Refresh properties data..
-    for (QHash<QString, QString>::iterator i = set1.begin(); i != set1.end(); i++) {
+    for (QHash<QString, QString>::iterator i = set1.begin(); i != set1.end(); ++i) {
         mach->properties[i.key()] = i.value();
     }
 
@@ -914,7 +914,7 @@ int IntellipapLoader::OpenDV6(const QString & path)
                     flow = nullptr;
                     pressure = nullptr;
                 }
-                SR++;
+                ++SR;
                 if (SR == summaryList.end()) break;
                 R = &SR.value();
             }
@@ -1341,7 +1341,7 @@ int IntellipapLoader::OpenDV6(const QString & path)
                     MV = TV = RR = nullptr;
                     Pressure = nullptr;
                 }
-                SR++;
+                ++SR;
                 if (SR == summaryList.end()) break;
                 R = &SR.value();
             }
@@ -1434,7 +1434,7 @@ int IntellipapLoader::OpenDV6(const QString & path)
                     sess = nullptr;
                     H = CA = RE = OA = nullptr;
                 }
-                SR++;
+                ++SR;
                 if (SR == summaryList.end()) break;
                 R = &SR.value();
             }

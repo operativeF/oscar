@@ -2201,7 +2201,7 @@ EventDataType Session::wavg(ChannelID id)
     QHash<EventStoreType, quint32>::iterator vi = timesum.begin();
     QHash<EventStoreType, quint32>::iterator ts_end = timesum.end();
 
-    for (; vi != ts_end; vi++) {
+    for (; vi != ts_end; ++vi) {
         val = vi.key() * gain;
         s2 = vi.value();
         s0 += s2;
@@ -2268,7 +2268,7 @@ void Session::offsetSession(qint64 offset)
 
     it = m_firstchan.begin();
     end = m_firstchan.end();
-    for (; it != end; it++) {
+    for (; it != end; ++it) {
         if (it.value() > 0) {
             it.value() += offset;
         }
@@ -2276,7 +2276,7 @@ void Session::offsetSession(qint64 offset)
 
     it = m_lastchan.begin();
     end = m_lastchan.end();
-    for (; it != end; it++) {
+    for (; it != end; ++it) {
         if (it.value() > 0) {
             it.value() += offset;
         }

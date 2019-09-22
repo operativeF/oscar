@@ -234,14 +234,14 @@ int FPIconLoader::OpenMachine(Machine *mach, const QString & path)
     if (Sessions.size() > 0) {
 
         QMap<SessionID, Session *>::iterator it = Sessions.end();
-        it--;
+        --it;
 
         dt = QDateTime::fromTime_t(qint64(it.value()->first()) / 1000L);
         QDate date = dt.date().addDays(-7);
-        it++;
+        ++it;
 
         do {
-            it--;
+            --it;
             Session *sess = it.value();
             sid = sess->session();
             hours = sess->hours();
@@ -508,7 +508,7 @@ bool FPIconLoader::OpenFLW(Machine *mach, const QString & filename)
         sit = Sessions.end();
         if (Sessions.begin() != sit) {
             do {
-                sit--;
+                --sit;
                 s1 = sit.value();
                 qint64 z = qAbs(qint64(sit.key()) - qint64(ts));
                 if (z < 3600) {

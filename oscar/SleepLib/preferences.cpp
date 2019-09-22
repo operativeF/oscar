@@ -337,7 +337,7 @@ bool Preferences::Save(QString filename)
     QDomElement root = doc.createElement(p_name);
     droot.appendChild(root);
 
-    for (QHash<QString, QVariant>::iterator i = p_preferences.begin(); i != p_preferences.end(); i++) {
+    for (QHash<QString, QVariant>::iterator i = p_preferences.begin(); i != p_preferences.end(); ++i) {
         QVariant::Type type = i.value().type();
 
         if (type == QVariant::Invalid) { continue; }

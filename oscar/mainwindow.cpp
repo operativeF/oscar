@@ -1584,7 +1584,7 @@ void MainWindow::on_action_Rebuild_Oximetry_Index_triggered()
 
         // For each Session
         for (QHash<SessionID, Session *>::iterator s = m->sessionlist.begin(); s != m->sessionlist.end();
-                s++) {
+                ++s) {
             Session *sess = s.value();
 
             if (!sess) { continue; }
@@ -1597,7 +1597,7 @@ void MainWindow::on_action_Rebuild_Oximetry_Index_triggered()
             l = 0;
 
             for (QHash<ChannelID, QVector<EventList *> >::iterator e = sess->eventlist.begin();
-                    e != sess->eventlist.end(); e++) {
+                    e != sess->eventlist.end(); ++e) {
 
                 // Discard any non data events.
                 if (!valid.contains(e.key())) {

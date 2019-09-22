@@ -751,7 +751,7 @@ void Daily::UpdateEventsTree(QTreeWidget *tree,Day *day)
         }
     }
     int cnt=0;
-    for (QHash<ChannelID,QTreeWidgetItem *>::iterator m=mcroot.begin();m!=mcroot.end();m++) {
+    for (QHash<ChannelID,QTreeWidgetItem *>::iterator m=mcroot.begin();m!=mcroot.end();++m) {
         tree->insertTopLevelItem(cnt++,m.value());
     }
 

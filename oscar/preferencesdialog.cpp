@@ -490,7 +490,7 @@ void PreferencesDialog::InitChanInfo()
     ui->chanView->setItemDelegateForColumn(3,combobox);
 
     int row = 0;
-    for (ci = schema::channel.names.begin(); ci != schema::channel.names.end(); ci++) {
+    for (ci = schema::channel.names.begin(); ci != schema::channel.names.end(); ++ci) {
         schema::Channel * chan = ci.value();
         if ((chan->type() == schema::DATA) || (chan->type() == schema::SETTING) || chan->type() == schema::WAVEFORM) continue;
 
@@ -622,7 +622,7 @@ void PreferencesDialog::InitWaveInfo()
     ui->waveView->setItemDelegateForColumn(4,spinbox);
 
     int row = 0;
-    for (ci = schema::channel.names.begin(); ci != schema::channel.names.end(); ci++) {
+    for (ci = schema::channel.names.begin(); ci != schema::channel.names.end(); ++ci) {
         schema::Channel * chan = ci.value();
         if (chan->type() != schema::WAVEFORM) continue;
 

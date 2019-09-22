@@ -259,7 +259,7 @@ bool Profile::StoreMachines()
         QDomElement pe = doc.createElement("properties");
         me.appendChild(pe);
 
-        for (QHash<QString, QString>::iterator j = m->properties.begin(); j != m->properties.end(); j++) {
+        for (QHash<QString, QString>::iterator j = m->properties.begin(); j != m->properties.end(); ++j) {
             QDomElement pp = doc.createElement(j.key());
             pp.appendChild(doc.createTextNode(j.value()));
             pe.appendChild(pp);

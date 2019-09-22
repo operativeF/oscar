@@ -624,13 +624,13 @@ int PRS1Loader::Open(const QString & dirpath)
 
     int c = 0;
 
-    for (sn = SerialNumbers.begin(); sn != SerialNumbers.end(); sn++) {
+    for (sn = SerialNumbers.begin(); sn != SerialNumbers.end(); ++sn) {
         if ((*sn)[0].isLetter()) {
             c += OpenMachine(newpath + "/" + *sn);
         }
     }
     // Serial numbers that don't start with a letter.
-    for (sn = SerialNumbers.begin(); sn != SerialNumbers.end(); sn++) {
+    for (sn = SerialNumbers.begin(); sn != SerialNumbers.end(); ++sn) {
         if (!(*sn)[0].isLetter()) {
             c += OpenMachine(newpath + "/" + *sn);
         }

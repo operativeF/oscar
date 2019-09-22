@@ -406,7 +406,7 @@ bool Machine::AddSession(Session *s)
     dd->addSession(s);
 
     if (combine_next_day) {
-        for (QList<Session *>::iterator i = nextday.value()->begin(); i != nextday.value()->end(); i++) {
+        for (QList<Session *>::iterator i = nextday.value()->begin(); i != nextday.value()->end(); ++i) {
             // i may need to do something here
             if (locksessions && (*i)->summaryOnly()) continue; // can't move summary only sessions..
             unlinkSession(*i);
@@ -859,7 +859,7 @@ bool Machine::hasModifiedSessions()
 {
     QHash<SessionID, Session *>::iterator s;
 
-    for (s = sessionlist.begin(); s != sessionlist.end(); s++) {
+    for (s = sessionlist.begin(); s != sessionlist.end(); ++s) {
         if (s.value()->IsChanged()) {
             return true;
         }
@@ -1120,7 +1120,7 @@ bool Machine::Save()
 //  m_savelist.clear();
 
     // store any event summaries..
-    for (s = sessionlist.begin(); s != sessionlist.end(); s++) {
+    for (s = sessionlist.begin(); s != sessionlist.end(); ++s) {
         cnt++;
 
         if ((*s)->IsChanged()) {
