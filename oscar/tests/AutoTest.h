@@ -9,7 +9,7 @@
 
 namespace AutoTest
 {
-    typedef QList<QObject*> TestList;
+    using TestList = QList<QObject*>;
 
     inline TestList& testList()
     {

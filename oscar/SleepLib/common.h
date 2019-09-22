@@ -62,7 +62,7 @@ const quint16 filetype_sessenabled = 5;
 
 enum UnitSystem { US_Undefined, US_Metric, US_English };
 
-typedef float EventDataType;
+using EventDataType = float;
 
 struct ValueCount {
     ValueCount() { value = 0; count = 0; p = 0; }

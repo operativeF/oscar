@@ -16,7 +16,7 @@
 
 #include "SleepLib/session.h"
 
-typedef qint64 SegType;
+using SegType = qint64;
 
 class SBSeg
 {

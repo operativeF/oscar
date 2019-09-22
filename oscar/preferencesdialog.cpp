@@ -33,8 +33,8 @@ extern QFont *mediumfont;
 extern QFont *bigfont;
 extern MainWindow *mainwin;
 
-typedef QMessageBox::StandardButton StandardButton;
-typedef QMessageBox::StandardButtons StandardButtons;
+using StandardButton = QMessageBox::StandardButton;
+using StandardButtons = QMessageBox::StandardButtons;
 
 QHash<schema::ChanType, QString> channeltype;
 

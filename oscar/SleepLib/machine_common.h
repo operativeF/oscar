@@ -20,11 +20,11 @@
 using namespace std;
 
 // Do not change these without considering the consequences.. For one the Loader needs changing & version increase
-typedef quint32 ChannelID;
-typedef long MachineID;
-typedef long SessionID;
-typedef float EventDataType;
-typedef qint16 EventStoreType;
+using ChannelID = quint32;
+using MachineID = long;
+using SessionID = long;
+using EventDataType = float;
+using EventStoreType = qint16;
 
 //! \brief Exception class for out of Bounds error.. Unused.
 class BoundsError {};
