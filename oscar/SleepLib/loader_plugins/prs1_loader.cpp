@@ -1090,13 +1090,13 @@ public:
     float m_gain;
     PRS1ParsedEventUnit m_unit;
 
-    inline float value(void) { return (m_value * m_gain) + m_offset; }
+    inline float value() { return (m_value * m_gain) + m_offset; }
     
     static const PRS1ParsedEventType TYPE = EV_PRS1_UNKNOWN;
     static constexpr float GAIN = 1.0;
     static const PRS1ParsedEventUnit UNIT = PRS1_UNIT_NONE;
     
-    virtual QMap<QString,QString> contents(void) = 0;
+    virtual QMap<QString,QString> contents() = 0;
 
 protected:
     PRS1ParsedEvent(PRS1ParsedEventType type, int start)
@@ -1113,7 +1113,7 @@ public:
 class PRS1ParsedDurationEvent : public PRS1ParsedEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
@@ -1132,7 +1132,7 @@ const PRS1ParsedEventUnit PRS1ParsedDurationEvent::UNIT;
 class PRS1ParsedValueEvent : public PRS1ParsedEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
@@ -1148,7 +1148,7 @@ protected:
 class PRS1UnknownValueEvent : public PRS1ParsedValueEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
@@ -1165,7 +1165,7 @@ public:
 class PRS1UnknownDataEvent : public PRS1ParsedEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         out["pos"] = QString::number(m_pos);
@@ -1223,7 +1223,7 @@ const PRS1ParsedEventType PRS1TidalVolumeEvent::TYPE;
 class PRS1ParsedSettingEvent : public PRS1ParsedValueEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         QString v;
@@ -1259,7 +1259,7 @@ public:
 class PRS1ParsedSliceEvent : public PRS1ParsedValueEvent
 {
 public:
-    virtual QMap<QString,QString> contents(void)
+    virtual QMap<QString,QString> contents()
     {
         QMap<QString,QString> out;
         out["start"] = timeStr(m_start);
@@ -1656,7 +1656,7 @@ bool PRS1Import::ParseEventsF5V3()
 
 // Outer loop based on ParseSummaryF5V3 along with hint as to event codes from old ParseEventsF5V3,
 // except this actually does something with the data.
-bool PRS1DataChunk::ParseEventsF5V3(void)
+bool PRS1DataChunk::ParseEventsF5V3()
 {
     if (this->family != 5 || this->familyVersion != 3) {
         qWarning() << "ParseEventsF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -1976,7 +1976,7 @@ bool PRS1Import::ParseF5Events()
 
 
 // 950P is F5V0, 960P and 961P are F5V1, 960T is F5V2
-bool PRS1DataChunk::ParseEventsF5V012(void)
+bool PRS1DataChunk::ParseEventsF5V012()
 {
     EventDataType data0, data1, data4, data5;
 
@@ -2428,7 +2428,7 @@ bool PRS1Import::ParseEventsF3V6()
 
 // 1030X, 11030X series
 // based on ParseEventsF5V3, updated for F3V6
-bool PRS1DataChunk::ParseEventsF3V6(void)
+bool PRS1DataChunk::ParseEventsF3V6()
 {
     if (this->family != 3 || this->familyVersion != 6) {
         qWarning() << "ParseEventsF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -2654,7 +2654,7 @@ bool PRS1Import::ParseF3Events()
 
 
 // 1061T, 1160P series
-bool PRS1DataChunk::ParseEventsF3V3(void)
+bool PRS1DataChunk::ParseEventsF3V3()
 {
     // NOTE: Older ventilators (BiPAP S/T and AVAPS) machines don't use timestamped events like everything else.
     // Instead, they use a fixed interval format like waveforms do (see PRS1_HTYPE_INTERVAL).
@@ -3665,7 +3665,7 @@ bool PRS1Import::ImportCompliance()
 }
 
 
-bool PRS1DataChunk::ParseCompliance(void)
+bool PRS1DataChunk::ParseCompliance()
 {
     switch (this->family) {
     case 0:
@@ -3683,7 +3683,7 @@ bool PRS1DataChunk::ParseCompliance(void)
 }
 
 
-bool PRS1DataChunk::ParseComplianceF0V23(void)
+bool PRS1DataChunk::ParseComplianceF0V23()
 {
     if (this->family != 0 || (this->familyVersion != 2 && this->familyVersion != 3)) {
         qWarning() << "ParseComplianceF0V23 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -3954,7 +3954,7 @@ bool PRS1DataChunk::ParseSummaryF0V23()
 }
 
 
-bool PRS1DataChunk::ParseSummaryF0V4(void)
+bool PRS1DataChunk::ParseSummaryF0V4()
 {
     const unsigned char * data = (unsigned char *)this->m_data.constData();
 
@@ -4017,7 +4017,7 @@ bool PRS1DataChunk::ParseSummaryF0V4(void)
 
 
 // TODO: Add support for F3V3 (1061T, 1160P). This is just a stub.
-bool PRS1DataChunk::ParseSummaryF3V3(void)
+bool PRS1DataChunk::ParseSummaryF3V3()
 {
     PRS1Mode cpapmode = PRS1_MODE_UNKNOWN;
     this->AddEvent(new PRS1ParsedSettingEvent(PRS1_SETTING_CPAP_MODE, (int) cpapmode));
@@ -4031,7 +4031,7 @@ bool PRS1DataChunk::ParseSummaryF3V3(void)
 // TODO: surely there will be a way to merge ParseSummary (FV3) loops and abstract the machine-specific
 // encodings into another function or class, but that's probably worth pursuing only after
 // the details have been figured out.
-bool PRS1DataChunk::ParseSummaryF3V6(void)
+bool PRS1DataChunk::ParseSummaryF3V6()
 {
     if (this->family != 3 || this->familyVersion != 6) {
         qWarning() << "ParseSummaryF3V6 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -4327,7 +4327,7 @@ bool PRS1DataChunk::ParseSettingsF3V6(const unsigned char* data, int size)
 }
 
 
-bool PRS1DataChunk::ParseSummaryF5V012(void)
+bool PRS1DataChunk::ParseSummaryF5V012()
 {
     const unsigned char * data = (unsigned char *)this->m_data.constData();
 
@@ -4440,7 +4440,7 @@ void PRS1DataChunk::ParseHumidifierSettingV2(int humid, bool supportsHeatedTubin
 
 // The below is based on fixing the fileVersion == 3 parsing in ParseSummary() based
 // on our understanding of slices from F0V23. The switch values come from sample files.
-bool PRS1DataChunk::ParseComplianceF0V6(void)
+bool PRS1DataChunk::ParseComplianceF0V6()
 {
     if (this->family != 0 || this->familyVersion != 6) {
         qWarning() << "ParseComplianceF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -4797,7 +4797,7 @@ bool PRS1DataChunk::ParseSettingsF0V6(const unsigned char* data, int size)
 }
 
 
-bool PRS1DataChunk::ParseSummaryF0V6(void)
+bool PRS1DataChunk::ParseSummaryF0V6()
 {
     if (this->family != 0 || this->familyVersion != 6) {
         qWarning() << "ParseSummaryF0V6 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -4983,7 +4983,7 @@ bool PRS1DataChunk::ParseSummaryF0V6(void)
 // TODO: surely there will be a way to merge these loops and abstract the machine-specific
 // encodings into another function or class, but that's probably worth pursuing only after
 // the details have been figured out.
-bool PRS1DataChunk::ParseSummaryF5V3(void)
+bool PRS1DataChunk::ParseSummaryF5V3()
 {
     if (this->family != 5 || this->familyVersion != 3) {
         qWarning() << "ParseSummaryF5V3 called with family" << this->family << "familyVersion" << this->familyVersion;
@@ -5906,7 +5906,7 @@ void PRS1Import::run()
 }
 
 
-bool PRS1Import::ParseSession(void)
+bool PRS1Import::ParseSession()
 {
     bool ok = false;
     bool save = false;
@@ -6007,7 +6007,7 @@ bool PRS1Import::ParseSession(void)
 }
 
 
-void PRS1Import::SaveSessionToDatabase(void)
+void PRS1Import::SaveSessionToDatabase()
 {
     // Make sure it's saved
     session->SetChanged(true);

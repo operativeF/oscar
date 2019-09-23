@@ -14,7 +14,7 @@
 static ResmedLoader* s_loader = nullptr;
 static void iterateTestCards(const QString & root, void (*action)(const QString &));
 
-void ResmedTests::initTestCase(void)
+void ResmedTests::initTestCase()
 {
     initializeStrings();
     qDebug() << STR_TR_OSCAR + " " + getBranchVersion();
@@ -29,7 +29,7 @@ void ResmedTests::initTestCase(void)
     s_loader = dynamic_cast<ResmedLoader*>(lookupLoader(resmed_class_name));
 }
 
-void ResmedTests::cleanupTestCase(void)
+void ResmedTests::cleanupTestCase()
 {
 }
 

@@ -16,7 +16,7 @@ static void iterateTestCards(const QString & root, void (*action)(const QString 
 static QString prs1OutputPath(const QString & inpath, const QString & serial, const QString & basename, const QString & suffix);
 static QString prs1OutputPath(const QString & inpath, const QString & serial, int session, const QString & suffix);
 
-void PRS1Tests::initTestCase(void)
+void PRS1Tests::initTestCase()
 {
     initializeStrings();
     qDebug() << STR_TR_OSCAR + " " + getBranchVersion();
@@ -28,7 +28,7 @@ void PRS1Tests::initTestCase(void)
     s_loader = dynamic_cast<PRS1Loader*>(lookupLoader(prs1_class_name));
 }
 
-void PRS1Tests::cleanupTestCase(void)
+void PRS1Tests::cleanupTestCase()
 {
 }
 
